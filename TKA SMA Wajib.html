@@ -1879,71 +1879,413 @@ bahas: 'Karena \\( x\\) di interval  \\((-1,1) \\) maka \\( x^2 \\) di interval\
 },
 
 
-  'Barisan_Deret': {
-    materi: `
-      <h2 class="text-xl font-bold mb-2">Barisan dan Deret</h2>
-      <p>Barisan adalah urutan bilangan yang memiliki pola tertentu. Deret adalah penjumlahan suku-suku dalam barisan tersebut.</p>
+  'Barisan & Deret': {
+   materi: `
+    <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Barisan & Deret: Rumus & Contoh Soal</h2>
 
-      <h3 class="font-semibold mt-3">1. Barisan Aritmetika</h3>
-      <p>Bentuk umum: \\( U_n = a + (n-1)d \\)</p>
-      <p>Jumlah \\( n \\) suku pertama: \\( S_n = \\dfrac{n}{2} (2a + (n-1)d) \\)</p>
+      <!-- Bagian 1: Barisan Aritmetika -->
+      <h3 class="font-semibold mt-4 text-lg md:text-xl">1. Barisan Aritmetika</h3>
 
-      <h3 class="font-semibold mt-3">2. Barisan Geometri</h3>
-      <p>Bentuk umum: \\( U_n = a \\cdot r^{n-1} \\)</p>
-      <p>Jumlah \\( n \\) suku pertama: \\( S_n = a \\cdot \\dfrac{r^n - 1}{r - 1} \\)</p>
+      <!-- Tabel untuk layar besar -->
+      <div class="hidden md:block overflow-x-auto">
+        <table class="table-auto border border-collapse border-gray-400 w-full text-sm md:text-base">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="border px-3 py-2">Rumus</th>
+              <th class="border px-3 py-2">Keterangan</th>
+              <th class="border px-3 py-2">Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-3 py-2">\\( U_n = a + (n - 1)d \\)</td>
+              <td class="border px-3 py-2">Mencari suku ke-n barisan aritmetika</td>
+              <td class="border px-3 py-2">\\( a=3, d=5, U_4 = 3 + (4-1) \\times 5 = 18 \\)</td>
+            </tr>
+            <tr>
+              <td class="border px-3 py-2">\\( S_n = \\dfrac{n}{2} \\left( 2a + (n-1)d \\right) \\)</td>
+              <td class="border px-3 py-2">Jumlah \\( n \\) suku pertama deret aritmetika</td>
+              <td class="border px-3 py-2">\\( a=2, d=3, S_5 = \\dfrac{5}{2} (2 \\times 2 + (5-1) \\times 3) = 35 \\)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <h3 class="font-semibold mt-3">3. Penerapan</h3>
-      <ul class="list-disc ml-6">
-        <li>Pertumbuhan dan peluruhan</li>
-        <li>Bunga tunggal dan majemuk</li>
-      </ul>
-    `,
-    video: "https://www.youtube.com/watch?v=F9P6w5EtFd8",
-    soal: [
-      {
-        pertanyaan: "Diketahui barisan aritmetika dengan \\( a=3 \\) dan \\( d=5 \\), maka \\( U_4 \\) adalah...",
-        opsi: ["15", "18", "20", "23"],
-        jawaban: "18"
-      },
-      {
-        pertanyaan: "Jumlah 5 suku pertama deret aritmetika \\( a=2 \\), \\( d=3 \\) adalah...",
-        opsi: ["25", "30", "35", "40"],
-        jawaban: "35"
-      },
-      {
-        pertanyaan: "Jika \\( a=2 \\), \\( r=3 \\), maka \\( U_3 \\) pada barisan geometri adalah...",
-        opsi: ["6", "9", "12", "18"],
-        jawaban: "18"
-      },
-      {
-        pertanyaan: "Rumus jumlah \\( n \\) suku pertama barisan geometri adalah...",
-        opsi: ["S_n = a+(n-1)d", "S_n= a * r^{n-1}", "S_n= a*(r^n-1)/(r-1)", "S_n = a/n"],
-        jawaban: "S_n= a*(r^n-1)/(r-1)"
-      },
-      {
-        pertanyaan: "Jika modal Rp1.000.000 diinvestasikan dengan bunga majemuk 10% per tahun, maka nilai setelah 2 tahun adalah...",
-        opsi: ["Rp1.100.000", "Rp1.200.000", "Rp1.210.000", "Rp1.250.000"],
-        jawaban: "Rp1.210.000"
-      }
-    ]
-  },
+      <!-- Kartu untuk layar kecil -->
+      <div class="grid grid-cols-1 gap-3 md:hidden mt-2">
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Rumus:</b> \\( U_n = a + (n - 1)d \\)</p>
+          <p class="text-sm"><b>Keterangan:</b> Mencari suku ke-n barisan aritmetika</p>
+          <p class="text-sm"><b>Contoh:</b> \\( a=3, d=5, U_4=18 \\)</p>
+        </div>
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Rumus:</b> \\( S_n = \\dfrac{n}{2} \\left( 2a + (n-1)d \\right) \\)</p>
+          <p class="text-sm"><b>Keterangan:</b> Jumlah \\( n \\) suku pertama deret aritmetika</p>
+          <p class="text-sm"><b>Contoh:</b> \\( a=2, d=3, S_5=35 \\)</p>
+        </div>
+      </div>
+
+      <!-- Bagian 2: Barisan Geometri -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">2. Barisan Geometri</h3>
+
+      <!-- Tabel layar besar -->
+      <div class="hidden md:block overflow-x-auto">
+        <table class="table-auto border border-collapse border-gray-400 w-full text-sm md:text-base">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="border px-3 py-2">Rumus</th>
+              <th class="border px-3 py-2">Keterangan</th>
+              <th class="border px-3 py-2">Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-3 py-2">\\( U_n = a \\cdot r^{n-1} \\)</td>
+              <td class="border px-3 py-2">Mencari suku ke-n barisan geometri</td>
+              <td class="border px-3 py-2">\\( a=2, r=3, U_3=18 \\)</td>
+            </tr>
+            <tr>
+              <td class="border px-3 py-2">\\( S_n = a \\cdot \\dfrac{r^n - 1}{r - 1} \\)</td>
+              <td class="border px-3 py-2">Jumlah \\( n \\) suku pertama deret geometri</td>
+              <td class="border px-3 py-2">\\( a=3, r=2, S_4=45 \\)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Kartu layar kecil -->
+      <div class="grid grid-cols-1 gap-3 md:hidden mt-2">
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Rumus:</b> \\( U_n = a \\cdot r^{n-1} \\)</p>
+          <p class="text-sm"><b>Keterangan:</b> Mencari suku ke-n barisan geometri</p>
+          <p class="text-sm"><b>Contoh:</b> \\( a=2, r=3, U_3=18 \\)</p>
+        </div>
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Rumus:</b> \\( S_n = a \\cdot \\dfrac{r^n - 1}{r - 1} \\)</p>
+          <p class="text-sm"><b>Keterangan:</b> Jumlah \\( n \\) suku pertama deret geometri</p>
+          <p class="text-sm"><b>Contoh:</b> \\( a=3, r=2, S_4=45 \\)</p>
+        </div>
+      </div>
+
+      <!-- Tips Rumus Cepat -->
+      <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl shadow text-center">
+        <h3 class="text-lg md:text-xl font-bold text-green-700 mb-3">💡 Tips & Rumus Cepat Barisan & Deret</h3>
+        <img 
+          src="https://learnwithalice.wordpress.com/wp-content/uploads/2013/01/barisan_rumus.jpg" 
+          alt="Rumus Cepat Barisan dan Deret" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-lg"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">
+          Klik gambar untuk memperbesar dan pelajari semua rumus penting dengan cepat.
+        </p>
+      </div>
+    </div>
+  `,
+  video: "2Y3Px6PcvXw",
+  soal: [
+    {
+      id: 'bd1',
+      tipe: 'pg',
+      tanya: 'Diketahui barisan aritmetika dengan \\( a=3 \\) dan \\( d=5 \\), maka \\( U_4 \\) adalah…',
+      opsi: ['15', '18', '20', '23'],
+      kunci: 1,
+      bahas: 'Gunakan rumus \\( U_n = a + (n-1)d \\). Substitusi: \\( U_4 = 3+(4-1)×5 = 18 \\).'
+    },
+    {
+      id: 'bd2',
+      tipe: 'pg',
+      tanya: 'Jumlah 5 suku pertama deret aritmetika \\( a=2 \\), \\( d=3 \\) adalah…',
+      opsi: ['25', '30', '35', '40'],
+      kunci: 2,
+      bahas: 'Gunakan rumus \\( S_n = \\dfrac{n}{2} (2a + (n-1)d) \\). Substitusi: \\( S_5 = (5/2)(2×2+(5-1)×3) = 35 \\).'
+    },
+    {
+      id: 'bd3',
+      tipe: 'pg',
+      tanya: 'Jika \\( a=2 \\), \\( r=3 \\), maka \\( U_3 \\) pada barisan geometri adalah…',
+      opsi: ['6', '9', '12', '18'],
+      kunci: 3,
+      bahas: 'Gunakan rumus \\( U_n = a×r^{n-1} \\). Substitusi: \\( U_3 = 2×3^{3-1} = 18 \\).'
+    },
+    {
+      id: 'bd4',
+      tipe: 'pg',
+      tanya: 'Rumus jumlah \\( n \\) suku pertama barisan geometri adalah…',
+      opsi: [
+        'Sₙ = a + (n-1)d',
+        'Sₙ = a×r^{n-1}',
+        'Sₙ = a(r^n - 1)/(r-1)',
+        'Sₙ = a/n'
+      ],
+      kunci: 2,
+      bahas: 'Rumus yang benar adalah \\( Sₙ = a × \\dfrac{r^n - 1}{r - 1} \\).'
+    },
+    {
+      id: 'bd5',
+      tipe: 'pg',
+      tanya: 'Jika modal Rp1.000.000 diinvestasikan dengan bunga majemuk 10% per tahun, maka nilai setelah 2 tahun adalah…',
+      opsi: ['Rp1.100.000', 'Rp1.200.000', 'Rp1.210.000', 'Rp1.250.000'],
+      kunci: 2,
+      bahas: 'Gunakan rumus bunga majemuk: \\( A = P(1+r)^t \\). Substitusi: \\( A = 1.000.000(1+0.1)^2 = Rp1.210.000 \\).'
+    }
+  ]
+},
       }
     },
     'Bahasa Indonesia': {
       bab: {
         'Membaca Pemahaman': {
-          materi:`
-            <h3>Ide Pokok & Gagasan Pendukung</h3>
-            <p>Identifikasi kalimat utama, kata kunci, dan hubungan antar paragraf untuk menentukan ide pokok, kemudian cek konsistensi dengan kalimat penjelas.</p>
-            <ul class="list-disc pl-6"><li>Perhatikan kata rujukan & konjungsi antarkalimat.</li><li>Gunakan skimming untuk gambaran, scanning untuk detail.</li></ul>
-          `,
-          video:'QG8gY3x2c5E',
-          soal:[
-            {id:'bi1',tipe:'pg',tanya:'Kalimat yang menyatakan ide pokok biasanya …',opsi:['Kalimat pertama','Kalimat terakhir','Kalimat yang paling panjang','Dapat berada di mana saja sesuai wacana'],kunci:3,bahas:'Ide pokok dapat berada di awal, tengah, atau akhir paragraf.'},
-            {id:'bi2',tipe:'isian',tanya:'Rujukan pronomina "mereka" merujuk pada … (jawab singkat)',kunciText:'sekelompok orang',bahas:'Pronomina merujuk pada nomina sebelumnya dalam konteks.'}
-          ]
-        }
-      }
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Membaca Pemahaman: Ide Pokok & Gagasan Pendukung</h2>
+
+    <h3 class="font-semibold mt-3">1. Mengenal Ide Pokok</h3>
+    <table class="table-auto border border-collapse border-gray-400 w-full">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-2 py-1">Aspek</th>
+          <th class="border px-2 py-1">Penjelasan</th>
+          <th class="border px-2 py-1">Contoh</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-2 py-1">Definisi</td>
+          <td class="border px-2 py-1">Ide pokok adalah gagasan utama yang menjadi inti paragraf.</td>
+          <td class="border px-2 py-1">"Pentingnya menjaga lingkungan" → ide pokoknya menjaga lingkungan.</td>
+        </tr>
+        <tr>
+          <td class="border px-2 py-1">Letak</td>
+          <td class="border px-2 py-1">Bisa berada di awal, tengah, atau akhir paragraf.</td>
+          <td class="border px-2 py-1">Awal: "Hutan adalah paru-paru dunia." → kalimat pertama.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="font-semibold mt-3">2. Gagasan Pendukung</h3>
+    <table class="table-auto border border-collapse border-gray-400 w-full">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-2 py-1">Aspek</th>
+          <th class="border px-2 py-1">Penjelasan</th>
+          <th class="border px-2 py-1">Contoh</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-2 py-1">Fungsi</td>
+          <td class="border px-2 py-1">Mendukung, menjelaskan, atau memberikan detail pada ide pokok.</td>
+          <td class="border px-2 py-1">"Hutan menghasilkan oksigen, menyerap karbon, dan menjaga iklim."</td>
+        </tr>
+        <tr>
+          <td class="border px-2 py-1">Ciri</td>
+          <td class="border px-2 py-1">Biasanya berupa kalimat penjelas, contoh, atau data pendukung.</td>
+          <td class="border px-2 py-1">"Sebanyak 30% oksigen dunia berasal dari hutan tropis."</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="font-semibold mt-3">3. Teknik Membaca Efektif</h3>
+    <table class="table-auto border border-collapse border-gray-400 w-full">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-2 py-1">Teknik</th>
+          <th class="border px-2 py-1">Tujuan</th>
+          <th class="border px-2 py-1">Cara</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-2 py-1">Skimming</td>
+          <td class="border px-2 py-1">Memahami gambaran umum teks dengan cepat.</td>
+          <td class="border px-2 py-1">Baca judul, subjudul, dan kalimat awal paragraf.</td>
+        </tr>
+        <tr>
+          <td class="border px-2 py-1">Scanning</td>
+          <td class="border px-2 py-1">Mencari informasi atau detail tertentu dengan cepat.</td>
+          <td class="border px-2 py-1">Fokus pada kata kunci dan angka penting.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Bagian Tips -->
+    <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl shadow">
+      <h3 class="text-lg font-bold text-green-700 mb-2">💡 Tips Cepat Membaca Pemahaman</h3>
+      <ul class="list-disc pl-6 text-gray-700 text-sm space-y-1">
+        <li>Identifikasi kalimat utama pada paragraf.</li>
+        <li>Perhatikan kata rujukan seperti "mereka", "ini", "tersebut".</li>
+        <li>Gunakan <b>skimming</b> untuk gambaran umum, dan <b>scanning</b> untuk detail.</li>
+        <li>Cek konsistensi ide pokok dengan kalimat pendukungnya.</li>
+        <li>Gunakan kata kunci untuk menemukan informasi penting.</li>
+      </ul>
+    </div>
+  `,
+  video: "QG8gY3x2c5E",
+  soal: [
+   {
+  id: 'bind1',
+  tipe: 'bs',
+bacaan: `Dampak Ekonomi Digital terhadap Pertumbuhan Usaha Kecil dan Menengah (UKM)
+
+Ekonomi digital telah membawa perubahan besar dalam berbagai aspek bisnis, terutama bagi Usaha Kecil dan Menengah (UKM). Dengan adanya teknologi digital, UKM kini memiliki peluang lebih besar untuk berkembang dan bersaing di pasar yang lebih luas. Transformasi ini didorong oleh beberapa faktor utama, seperti perkembangan e-commerce, sistem pembayaran digital, pemasaran berbasis data, serta pemanfaatan teknologi berbasis kecerdasan buatan (artificial intelligence).
+
+Salah satu perubahan signifikan dalam ekonomi digital adalah kemudahan akses ke platform e-commerce. UKM yang sebelumnya hanya mengandalkan toko fisik kini dapat menjual produknya melalui berbagai marketplace daring. Hal ini memungkinkan mereka menjangkau konsumen di luar wilayah lokal, bahkan hingga ke pasar internasional. Dengan biaya operasional yang lebih rendah dibandingkan toko fisik, UKM dapat mengalokasikan dana untuk inovasi dan peningkatan kualitas produk. Selain itu, sistem pengiriman yang semakin efisien memungkinkan UKM memenuhi pesanan dengan lebih cepat dan tepat waktu.
+
+Selain akses pasar yang lebih luas, sistem pembayaran digital juga telah meningkatkan efisiensi transaksi keuangan. Penggunaan dompet digital dan pembayaran nontunai tidak hanya mempermudah konsumen dalam  berbelanja,  tetapi  juga membantu UKM  dalam mencatat keuangan secara lebih akurat. Keuntungan lain dari ekonomi digital adalah strategi pemasaran berbasis data. Melalui analisis data pelanggan, UKM dapat memahami tren pasar dan perilaku konsumen dengan lebih baik. Misalnya, penggunaan iklan digital yang ditargetkan memungkinkan UKM menjangkau segmen pasar yang lebih spesifik sehingga efektivitas promosi meningkat.
+
+Meskipun menawarkan banyak manfaat, transformasi digital juga menghadirkan tantangan. UKM harus mampu beradaptasi dengan perkembangan teknologi dan meningkatkan literasi digital agar tetap kompetitif. Selain itu, keamanan data menjadi aspek penting yang harus diperhatikan dalam menjalankan bisnis secara digital untuk menghindari risiko peretasan dan penyalahgunaan informasi pelanggan. Dengan segala peluang dan tantangannya, ekonomi digital telah menjadi faktor kunci dalam mendorong pertumbuhan UKM. Jika dikelola dengan baik, digitalisasi dapat menjadi pendorong utama bagi keberlanjutan dan daya saing usaha kecil di era modern ini.
+
+(Sumber: Kementerian Koperasi dan UKM Republik Indonesia)`,
+  tanya: 'Bagaimana pola pengembangan paragraf ke-1, ke-2, dan ke-3 pada teks “Dampak Ekonomi Digital terhadap Pertumbuhan UKM”? Tentukan Benar atau Salah untuk setiap pernyataan berikut:',
+  opsi: [
+    'Paragraf pertama (1) menggunakan pola sebab-akibat karena menjelaskan bagaimana teknologi digital menyebabkan perubahan bagi UKM.',
+    'Paragraf kedua (2) menggunakan pola proses karena menjelaskan langkah-langkah bagaimana UKM memanfaatkan e-commerce.',
+    'Paragraf ketiga (3) menggunakan pola klasifikasi karena membagi sistem pembayaran UKM menjadi beberapa kategori yang berbeda.'
+  ],
+  kunci: [true, false, false],
+  bahas: 
+    'Pembahasan:\n' +
+    '1️⃣ Benar → Paragraf pertama menjelaskan bahwa teknologi digital menyebabkan perubahan besar bagi UKM. Pola ini menunjukkan hubungan sebab-akibat.\n\n' +
+    '2️⃣ Salah → Paragraf kedua tidak menggunakan pola proses, melainkan pola **perluasan** karena menjelaskan manfaat e-commerce dan sistem pengiriman, bukan langkah-langkah detail.\n\n' +
+    '3️⃣ Salah → Paragraf ketiga tidak mengklasifikasikan sistem pembayaran, melainkan menjelaskan manfaat sistem pembayaran digital dan pemasaran berbasis data. Jadi polanya adalah **pemaparan manfaat**, bukan klasifikasi.'
+},
+    {
+  id: 'bind2',
+  tipe: 'bs',
+  bacaan: 'Dampak Ekonomi Digital terhadap Pertumbuhan Usaha Kecil dan Menengah (UKM)\n\nEkonomi digital telah membawa perubahan besar dalam berbagai aspek bisnis, terutama bagi Usaha Kecil dan Menengah (UKM). Dengan adanya teknologi digital, UKM kini memiliki peluang lebih besar untuk berkembang dan bersaing di pasar yang lebih luas. Transformasi ini didorong oleh beberapa faktor utama, seperti perkembangan e-commerce, sistem pembayaran digital, pemasaran berbasis data, serta pemanfaatan teknologi berbasis kecerdasan buatan (artificial intelligence).\n\nSalah satu perubahan signifikan dalam ekonomi digital adalah kemudahan akses ke platform e-commerce. UKM yang sebelumnya hanya mengandalkan toko fisik kini dapat menjual produknya melalui berbagai marketplace daring. Hal ini memungkinkan mereka menjangkau konsumen di luar wilayah lokal, bahkan hingga ke pasar internasional. Dengan biaya operasional yang lebih rendah dibandingkan toko fisik, UKM dapat mengalokasikan dana untuk inovasi dan peningkatan kualitas produk. Selain itu, sistem pengiriman yang semakin efisien memungkinkan UKM memenuhi pesanan dengan lebih cepat dan tepat waktu.\n\nSelain akses pasar yang lebih luas, sistem pembayaran digital juga telah meningkatkan efisiensi transaksi keuangan. Penggunaan dompet digital dan pembayaran nontunai tidak hanya mempermudah konsumen dalam berbelanja, tetapi juga membantu UKM dalam mencatat keuangan secara lebih akurat. Keuntungan lain dari ekonomi digital adalah strategi pemasaran berbasis data. Melalui analisis data pelanggan, UKM dapat memahami tren pasar dan perilaku konsumen dengan lebih baik. Misalnya, penggunaan iklan digital yang ditargetkan memungkinkan UKM menjangkau segmen pasar yang lebih spesifik sehingga efektivitas promosi meningkat.\n\nMeskipun menawarkan banyak manfaat, transformasi digital juga menghadirkan tantangan. UKM harus mampu beradaptasi dengan perkembangan teknologi dan meningkatkan literasi digital agar tetap kompetitif. Selain itu, keamanan data menjadi aspek penting yang harus diperhatikan dalam menjalankan bisnis secara digital untuk menghindari risiko peretasan dan penyalahgunaan informasi pelanggan.\n\nDengan segala peluang dan tantangannya, ekonomi digital telah menjadi faktor kunci dalam mendorong pertumbuhan UKM. Jika dikelola dengan baik, digitalisasi dapat menjadi pendorong utama bagi keberlanjutan dan daya saing usaha kecil di era modern ini.\n\n(Sumber: Kementerian Koperasi dan UKM Republik Indonesia)\n\nDini : Teks tersebut sangat menarik dan bisa menambah wawasan kita, terutama jika kita berencana untuk mengembangkan suatu bisnis kecil.\nRio : Iya, pilihan katanya juga sangat mudah dimengerti sehingga orang yang awam terhadap istilah di bidang ekonomi juga mudah untuk memahami isi informasi yang disajikan.\nSena : Aku sependapat dengan kalian berdua, tetapi rasanya teks tersebut akan lebih baik jika disertai data pertumbuhan UKM dalam kurun waktu lima tahun terakhir atau pendapat ahli di bidang ekonomi.',
+  tanya: 'Berdasarkan percakapan tersebut, mengapa pendapat Sena sangat baik dalam menilai keakuratan dari informasi yang disajikan?',
+  opsi: [
+    'Sena menyoroti bahwa teks harus mudah dipahami oleh semua kalangan, termasuk yang awam terhadap ekonomi.',
+    'Sena mempertimbangkan kelengkapan dan dasar bukti dari informasi yang merupakan bagian dari menilai keakuratan teks.',
+    'Sena memiliki inisiatif untuk memperbaiki isi teks dengan pendapat pribadinya sebagai ahli ekonomi agar lebih informatif.'
+  ],
+  kunci: [false, true, false],
+  bahas: 'Pembahasan:\n' +
+    '✅ **Jawaban yang tepat adalah opsi kedua.**\n\n' +
+    'Sena menilai keakuratan informasi dengan menekankan pentingnya kelengkapan data dan dasar bukti, seperti data pertumbuhan UKM dan pendapat ahli. Hal ini menunjukkan bahwa ia mempertimbangkan **validitas dan keakuratan** isi teks.\n\n' +
+    '❌ Opsi pertama salah → Pernyataan tersebut sebenarnya diungkapkan oleh Rio, bukan Sena.\n\n' +
+    '❌ Opsi ketiga salah → Sena tidak memberikan pendapat pribadinya sebagai ahli ekonomi, melainkan menyarankan agar teks dilengkapi dengan data dan pendapat pakar agar lebih informatif.'
+},
+{
+  id: 'bind3',
+  tipe: 'pg',
+  bacaan: 'Hampir 25 tahun lalu kami berpisah karena keluarga saya harus boyongan ke kota tempat kerja Ayah yang baru di luar pulau. Tak satupun barang tertinggal di rumah lama. Begitu juga dengan sahabatku, kami harus berpisah.\n\nBertemu dengannya setelah sekian lama, mengingatkan kembali pada pengalaman kami dahulu. Pengalaman yang menjadikan dia, walau tidak setiap waktu, selalu lekat di ingatan saya. Tentu dia mengingatnya pula, bahkan saya yakin rasa yang diidapnya lebih besar efeknya. Karena sebagai seorang sahabat, dia jelas jauh lebih tulus dan setia daripada saya. Tak terasa mata saya mulai berkaca- kaca.\n\nSaat malam itu saya berada di sini, memperhatikannya belajar. Selesai belajar, dia menyuruh saya pulang karena hendak pergi mencari jangkrik. Saya langsung menyatakan ingin ikut, tapi dia keberatan. Ayah dan ibunya pun melarang. Saya sering mendengar cerita mengasyikan anak-anak beramai-ramai berangkat ke sawah selepas isya untuk mencari jangkrik. Sayang, Ayah tidak pernah membolehkan saya. Tapi malam itu saya nekat dan sahabat saya itu akhirnya tidak kuasa menolak. ”Tidak ganti baju?” tanya saya heran begitu dia langsung memimpin untuk berangkat. Itu hari Jumat. Seragam coklat Pramuka yang dikenakannya sejak pagi masih akan terpakai untuk bersekolah sehari lagi. Dia memang tidak memiliki banyak pakaian hingga seragam sekolah biasa dipakai kapan saja. Tapi memakainya untuk pergi ke sawah mencari jangkrik, rasanya sangat tidak elok.\n\nSaya mengambil alih obor dari tangannya. Rasanya belum terlalu lama kami berada di sana dan bumbung baru terisi beberapa ekor jangkrik ketika tiba-tiba angin berubah perangai. Kaget, pantat obor itu justru saya angkat tinggi-tinggi sehingga minyak mendorong sumbunya terlepas. Api dengan cepat berpindah membakar punggung saya! Terdengar teriakannya sembari melepaskan seragam coklatnya untuk dipakai menyabet punggung saya. Baju yang saya kenakan habis sepertiganya. Sahabat saya itu tanggap melingkupi tubuh saya dengan seragam coklatnya melihat saya mulai menangis dan menggigil antara kesakitan dan kedinginan. Sadar saya membutuhkan pertolongan secepatnya, dia menggendong saya lalu berlari sembari membujuk-bujuk saya untuk tetap tenang. Napasnya memburu kelelahan, tapi rasa tanggung jawab yang besar seperti memberinya kekuatan berlipat untuk tetap bersama saya.\n\n(Kutipan Cerpen *Seragam* karya Aris Kurniawan Basuki dengan penyesuaian)',
+  tanya: '“Hampir 25 tahun lalu kami berpisah karena keluarga saya harus <strong>boyongan</strong>ke kota tempat kerja Ayah yang baru di luar pulau.”\n\nPenggunaan kata serapan <strong>boyongan</strong>dapat memperjelas peristiwa yang dialami tokoh <strong>saya</strong>, yaitu ...',
+  opsi: [
+    'Peristiwa pindahan yang sering dialami pegawai suatu instansi untuk kepentingan promosi jabatan.',
+    'Peristiwa pindah rumah dari kampung halaman ke tempat yang jauh untuk jangka waktu lama.',
+    'Pindah rumah bersama seluruh anggota keluarga dengan membawa semua barang rumah tangga.',
+    'Pindah rumah untuk mengikuti tugas kedinasan orang tua di tempat baru yang letaknya sangat jauh.',
+    'Kegiatan pindah rumah untuk sementara waktu dan akan berpindah lagi ke rumah dinas yang lain.'
+  ],
+  kunci: 2,
+  bahas: 'Pembahasan:\n' +
+    '✅ **Jawaban yang tepat adalah opsi C (nomor 2 dalam array).**\n\n' +
+    'Kata *boyongan* berarti **pindah rumah bersama seluruh anggota keluarga dengan membawa semua barang-barang rumah tangga**. Hal ini diperkuat dengan kalimat pada teks: *"Tak satupun barang tertinggal di rumah lama."* Artinya, perpindahan dilakukan secara penuh dan permanen.\n\n' +
+    '❌ Opsi A salah → Tidak ada informasi tentang promosi jabatan.\n' +
+    '❌ Opsi B salah → Tidak hanya menjelaskan pindah jauh, tetapi menekankan membawa seluruh barang.\n' +
+    '❌ Opsi D salah → Tidak ada penegasan tentang pindah karena tugas kedinasan.\n' +
+    '❌ Opsi E salah → Boyongan bukan pindahan sementara, melainkan permanen.'
+},
+{
+  id: 'bind4',
+  tipe: 'bs',
+  bacaan: 'Hampir 25 tahun lalu kami berpisah karena keluarga saya harus boyongan ke kota tempat kerja Ayah yang baru di luar pulau. Tak satupun barang tertinggal di rumah lama. Begitu juga dengan sahabatku, kami harus berpisah.\n\nBertemu dengannya setelah sekian lama, mengingatkan kembali pada pengalaman kami dahulu. Pengalaman yang menjadikan dia, walau tidak setiap waktu, selalu lekat di ingatan saya. Tentu dia mengingatnya pula, bahkan saya yakin rasa yang diidapnya lebih besar efeknya. Karena sebagai seorang sahabat, dia jelas jauh lebih tulus dan setia daripada saya. Tak terasa mata saya mulai berkaca- kaca.\n\nSaat malam itu saya berada di sini, memperhatikannya belajar. Selesai belajar, dia menyuruh saya pulang karena hendak pergi mencari jangkrik. Saya langsung menyatakan ingin ikut, tapi dia keberatan. Ayah dan ibunya pun melarang. Saya sering mendengar cerita mengasyikan anak-anak beramai-ramai berangkat ke sawah selepas isya untuk mencari jangkrik. Sayang, Ayah tidak pernah membolehkan saya. Tapi malam itu saya nekat dan sahabat saya itu akhirnya tidak kuasa menolak. ”Tidak ganti baju?” tanya saya heran begitu dia langsung memimpin untuk berangkat. Itu hari Jumat. Seragam coklat Pramuka yang dikenakannya sejak pagi masih akan terpakai untuk bersekolah sehari lagi. Dia memang tidak memiliki banyak pakaian hingga seragam sekolah biasa dipakai kapan saja. Tapi memakainya untuk pergi ke sawah mencari jangkrik, rasanya sangat tidak elok.\n\nSaya mengambil alih obor dari tangannya. Rasanya belum terlalu lama kami berada di sana dan bumbung baru terisi beberapa ekor jangkrik ketika tiba-tiba angin berubah perangai. Kaget, pantat obor itu justru saya angkat tinggi-tinggi sehingga minyak mendorong sumbunya terlepas. Api dengan cepat berpindah membakar punggung saya! Terdengar teriakannya sembari melepaskan seragam coklatnya untuk dipakai menyabet punggung saya. Baju yang saya kenakan habis sepertiganya. Sahabat saya itu tanggap melingkupi tubuh saya dengan seragam coklatnya melihat saya mulai menangis dan menggigil antara kesakitan dan kedinginan. Sadar saya membutuhkan pertolongan secepatnya, dia menggendong saya lalu berlari sembari membujuk-bujuk saya untuk tetap tenang. Napasnya memburu kelelahan, tapi rasa tanggung jawab yang besar seperti memberinya kekuatan berlipat untuk tetap bersama saya.\n\n(Kutipan Cerpen *Seragam* karya Aris Kurniawan Basuki dengan penyesuaian)',
+  tanya: 'Peristiwa apa yang mungkin akan terjadi kepada sahabatnya jika tokoh **saya** tidak ikut mencari jangkrik malam itu? Tentukan **Tepat** atau **Tidak Tepat** untuk setiap pernyataan berikut!',
+  opsi: [
+    'Sahabat tokoh saya masih memiliki seragam pramuka untuk dipakai.',
+    'Punggung sahabat tokoh saya tidak akan memiliki luka bakar.',
+    'Sahabat tokoh saya akan mencari jangkrik tanpa perlu berlari.'
+  ],
+  kunci: [true, true, false],
+  bahas: 'Pembahasan:\n' +
+    'A. **Tepat** ✅ → Jika tokoh "saya" tidak ikut, sahabatnya tidak perlu melepaskan seragam pramuka untuk memadamkan api. Artinya, seragamnya akan tetap utuh.\n\n' +
+    'B. **Tepat** ✅ → Luka bakar pada sahabat tidak terjadi karena insiden kebakaran menimpa tokoh "saya", bukan sahabatnya. Tanpa kehadiran tokoh "saya", peristiwa itu kemungkinan besar tidak terjadi.\n\n' +
+    'C. **Tidak Tepat** ❌ → Walaupun tokoh "saya" tidak ikut, sahabatnya tetap harus berlari ketika berburu jangkrik di sawah. Aktivitas mencari jangkrik umumnya melibatkan banyak gerakan dan berpindah tempat.'
+},
+{
+  id: 'cb1',
+  tipe: 'cb',
+  bacaan: `Hampir 25 tahun lalu kami berpisah karena keluarga saya harus boyongan ke kota tempat kerja Ayah yang baru di luar pulau. Tak satupun barang tertinggal di rumah lama. Begitu juga dengan sahabatku, kami harus berpisah.
+
+Bertemu dengannya setelah sekian lama, mengingatkan kembali pada pengalaman kami dahulu. Pengalaman yang menjadikan dia, walau tidak setiap waktu, selalu lekat di ingatan saya. Tentu dia mengingatnya pula, bahkan saya yakin rasa yang diidapnya lebih besar efeknya. Karena sebagai seorang sahabat, dia jelas jauh lebih tulus dan setia daripada saya. Tak terasa mata saya mulai berkaca-kaca.
+
+Saat malam itu saya berada di sini, memperhatikannya belajar. Selesai belajar, dia menyuruh saya pulang karena hendak pergi mencari jangkrik. Saya langsung menyatakan ingin ikut, tapi dia keberatan. Ayah dan ibunya pun melarang. Saya sering mendengar cerita mengasyikan anak-anak beramai-ramai berangkat ke sawah selepas isya untuk mencari jangkrik. Sayang, Ayah tidak pernah membolehkan saya. Tapi malam itu saya nekat dan sahabat saya itu akhirnya tidak kuasa menolak. "Tidak ganti baju?" tanya saya heran begitu dia langsung memimpin untuk berangkat. Itu hari Jumat. Seragam coklat Pramuka yang dikenakannya sejak pagi masih akan terpakai untuk bersekolah sehari lagi. Dia memang tidak memiliki banyak pakaian hingga seragam sekolah biasa dipakai kapan saja. Tapi memakainya untuk pergi ke sawah mencari jangkrik, rasanya sangat tidak elok.
+
+Saya mengambil alih obor dari tangannya. Rasanya belum terlalu lama kami berada di sana dan bumbung baru terisi beberapa ekor jangkrik ketika tiba-tiba angin berubah perangai. Kaget, pantat obor itu justru saya angkat tinggi-tinggi sehingga minyak mendorong sumbunya terlepas. Api dengan cepat berpindah membakar punggung saya! Terdengar teriakannya sembari melepaskan seragam coklatnya untuk dipakai menyabet punggung saya. Baju yang saya kenakan habis sepertiganya. Sahabat saya itu tanggap melingkupi tubuh saya dengan seragam coklatnya melihat saya mulai menangis dan menggigil antara kesakitan dan kedinginan. Sadar saya membutuhkan pertolongan secepatnya, dia menggendong saya lalu berlari sembari membujuk-bujuk saya untuk tetap tenang. Napasnya memburu kelelahan, tapi rasa tanggung jawab yang besar seperti memberinya kekuatan berlipat untuk tetap bersama saya.`,
+  tanya: 'Kalimat mana saja dari dalam kutipan cerpen tersebut yang membuktikan karakter sahabat tokoh saya merupakan seorang yang setia kawan? Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.',
+  opsi: [
+    'Saya langsung menyatakan ingin ikut, tapi dia keberatan.',
+    'Dia memang tidak memiliki banyak pakaian hingga seragam sekolah biasa dipakai kapan saja.',
+    'Sahabat saya itu tanggap melingkupi tubuh saya dengan seragam coklatnya.',
+    'Dia menggendong saya lalu berlari sembari membujuk-bujuk saya untuk tetap tenang.',
+    'Rasa tanggung jawab yang besar seperti memberinya kekuatan berlipat untuk tetap bersama saya.'
+  ],
+  kunci: [2, 3, 4],
+  bahas: 'Kalimat yang menunjukkan sikap setia kawan adalah ketika sahabatnya sigap membantu dengan melingkupi tubuh menggunakan seragamnya, menggendong sambil menenangkan, dan tetap bersama karena rasa tanggung jawabnya yang besar.'
+},
+{
+  id: 'bind6',
+  tipe: 'pg',
+  bacaan: `Perubahan iklim yang semakin nyata dan ancaman terhadap kelestarian bumi menuntut kita untuk mencari solusi efektif dalam menjaga keseimbangan alam. Salah satu solusi yang paling menjanjikan adalah penggunaan teknologi hijau. Teknologi hijau juga dikenal sebagai teknologi ramah lingkungan. Teknologi ini merupakan inovasi yang dirancang untuk mengatasi berbagai tantangan lingkungan global, terutama terkait dengan perubahan iklim.
+
+Perubahan iklim, yang dipicu oleh peningkatan emisi gas rumah kaca akibat aktivitas manusia, menyebabkan cuaca ekstrem, suhu global yang meningkat, dan naiknya permukaan air laut. Hal tersebut juga memicu deforestasi, polusi, dan mengancam keberagaman hayati di seluruh dunia. Oleh karena itu, kita harus mengambil langkah tegas agar dampak perubahan iklim ini tidak semakin parah. Teknologi hijau seperti energi terbarukan (tenaga surya, angin) dapat mengurangi ketergantungan pada bahan bakar fosil yang menjadi penyebab utama emisi gas rumah kaca planet ini.
+
+Teknologi hijau juga sangat penting dalam upaya adaptasi terhadap dampak perubahan iklim yang sudah tidak bisa dihindari. Sistem pertanian presisi, infrastruktur tahan bencana alam, serta teknologi untuk menginvestigasi banjir dan kekeringan adalah contoh bagaimana teknologi hijau bisa membantu masyarakat beradaptasi dengan kondisi yang berubah.
+
+Dengan kondisi bumi yang semakin menghadapi tantangan besar, seperti pemanasan global, polusi, kelangkaan sumber daya, dan hilangnya keanekaragaman hayati, penerapan teknologi hijau adalah keharusan. Melalui teknologi hijau, kita dapat mengurangi dampak negatif terhadap lingkungan dan memperbaiki kualitas hidup.
+(Sumber: https://www.rri.co.id/iptek/1281411/)`,
+  tanya: 'Kalimat yang tepat untuk mengakhiri uraian pada paragraf keempat adalah …',
+  opsi: [
+    'Pada sisi lain, teknologi hijau memunculkan deforestasi dan polusi.',
+    'Sehingga dampak negatif lingkungan berdampak pula pada kualitas hidup.',
+    'Di samping itu, teknologi hijau dapat menciptakan dunia yang lebih baik untuk generasi yang akan datang.',
+    'Di samping itu, bumi yang menggunakan teknologi hijau akan semakin menghadapi tantangan besar.',
+    'Jadi, teknologi hijau berperan dalam menghilangnya keanekaragaman hayati.'
+  ],
+  kunci: 2,
+  bahas:
+    'Pembahasan:\n' +
+    '✅ Jawaban yang tepat adalah **opsi C** → "Di samping itu, teknologi hijau dapat menciptakan dunia yang lebih baik untuk generasi yang akan datang."\n\n' +
+    'Alasannya: Paragraf keempat membahas **pentingnya penerapan teknologi hijau** untuk mengurangi dampak negatif terhadap lingkungan dan meningkatkan kualitas hidup. Maka, kalimat penutup yang paling tepat adalah yang menegaskan dampak positif teknologi hijau di masa depan.\n\n' +
+    '❌ Opsi A → Salah, karena paragraf membahas manfaat teknologi hijau, bukan dampak negatifnya.\n' +
+    '❌ Opsi B → Salah, kalimatnya tidak relevan dengan konteks penutup.\n' +
+    '❌ Opsi D → Salah, bertentangan dengan isi paragraf karena teknologi hijau justru menjadi solusi, bukan penyebab masalah.\n' +
+    '❌ Opsi E → Salah, hilangnya keanekaragaman hayati dibahas pada paragraf sebelumnya, bukan di bagian penutup.'
+},
+{
+  id: 'bind7',
+  tipe: 'cb',
+  bacaan: `Perubahan iklim yang semakin nyata dan ancaman terhadap kelestarian bumi menuntut kita untuk mencari solusi efektif dalam menjaga keseimbangan alam. Salah satu solusi yang paling menjanjikan adalah penggunaan teknologi hijau. Teknologi hijau juga dikenal sebagai teknologi ramah lingkungan. Teknologi ini merupakan inovasi yang dirancang untuk mengatasi berbagai tantangan lingkungan global, terutama terkait dengan perubahan iklim.
+
+Perubahan iklim, yang dipicu oleh peningkatan emisi gas rumah kaca akibat aktivitas manusia, menyebabkan cuaca ekstrem, suhu global yang meningkat, dan naiknya permukaan air laut. Hal tersebut juga memicu deforestasi, polusi, dan mengancam keberagaman hayati di seluruh dunia. Oleh karena itu, kita harus mengambil langkah tegas agar dampak perubahan iklim ini tidak semakin parah. Teknologi hijau seperti energi terbarukan (tenaga surya, angin) dapat mengurangi ketergantungan pada bahan bakar fosil yang menjadi penyebab utama emisi gas rumah kaca planet ini.
+
+Teknologi hijau juga sangat penting dalam upaya adaptasi terhadap dampak perubahan iklim yang sudah tidak bisa dihindari. Sistem pertanian presisi, infrastruktur tahan bencana alam, serta teknologi untuk menginvestigasi banjir dan kekeringan adalah contoh bagaimana teknologi hijau bisa membantu masyarakat beradaptasi dengan kondisi yang berubah.
+
+Dengan kondisi bumi yang semakin menghadapi tantangan besar, seperti pemanasan global, polusi, kelangkaan sumber daya, dan hilangnya keanekaragaman hayati, penerapan teknologi hijau adalah keharusan. Melalui teknologi hijau, kita dapat mengurangi dampak negatif terhadap lingkungan dan memperbaiki kualitas hidup.
+(Sumber: https://www.rri.co.id/iptek/1281411/)`,
+  tanya: 'Manakah fakta-fakta yang mendukung simpulan bahwa teknologi hijau berperan dalam perubahan iklim?\n\nPilihlah jawaban yang benar! Jawaban benar lebih dari satu.',
+  opsi: [
+    'Teknologi hijau merupakan inovasi yang dirancang untuk mengatasi berbagai tantangan lingkungan global, terutama terkait dengan perubahan iklim.',
+    'Perubahan iklim, yang dipicu oleh peningkatan emisi gas rumah kaca akibat aktivitas manusia, menyebabkan cuaca ekstrem, suhu global menurun, dan naiknya permukaan air laut.',
+    'Teknologi hijau seperti energi terbarukan (tenaga surya, angin) dapat mengurangi ketergantungan pada bahan bakar fosil.',
+    'Teknologi hijau juga sangat penting dalam upaya adaptasi terhadap dampak perubahan teknologi yang sudah tidak bisa dihindari.',
+    'Melalui teknologi hijau, kita dapat mengurangi dampak negatif terhadap lingkungan dan memperbaiki kualitas hidup.'
+  ],
+  kunci: [0,2,4],
+  bahas:
+    'Pembahasan:\n' +
+    '✅ Jawaban yang benar adalah **opsi 1, 3, dan 5** karena fakta-fakta tersebut menunjukkan bahwa teknologi hijau berperan dalam mengatasi perubahan iklim.\n\n' +
+    '1️⃣ **Benar** → Teknologi hijau memang dirancang untuk mengatasi tantangan lingkungan global, termasuk perubahan iklim.\n' +
+    '2️⃣ **Salah** → Teks menyebutkan suhu global meningkat, bukan menurun, sehingga pernyataan ini keliru.\n' +
+    '3️⃣ **Benar** → Energi terbarukan mengurangi ketergantungan pada bahan bakar fosil yang menjadi penyebab utama emisi gas rumah kaca.\n' +
+    '4️⃣ **Salah** → Teks membahas adaptasi terhadap dampak **perubahan iklim**, bukan perubahan teknologi.\n' +
+    '5️⃣ **Benar** → Teknologi hijau membantu mengurangi dampak negatif terhadap lingkungan dan meningkatkan kualitas hidup.'
+}
+
+  ]
+}
+}
     },
     'Bahasa Inggris': {
   bab: {
