@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kebun Ilmu – UTBK Interaktif</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- MathJax for formula rendering -->
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root{--brand:#22c55e;--ink:#0f172a;--muted:#6b7280}
+    html,body{height:100%}
+    body{font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"}
+    .glass{backdrop-filter:saturate(150%) blur(8px)}
+    .card{border-radius:1.25rem; box-shadow:0 10px 35px rgba(2,6,23,.08)}
+    .btn{border-radius:9999px}
+    .btn-tab{transition:.2s}
+    .btn-tab[aria-current="true"]{background:linear-gradient(135deg,var(--brand),#16a34a); color:white}
+    .kbd{border:1px solid #e5e7eb;border-bottom-width:2px;border-radius:.5rem;padding:.1rem .35rem}
+    .tick{transform-origin:center;}
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800">
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-white/70 glass border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+      <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png" alt="Logo Kebun Ilmu" class="h-10 w-10 rounded-xl ring-1 ring-slate-200" />
+      <div>
+        <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">Kebun Ilmu — UTBK Interaktif</h1>
+        <p class="text-sm text-slate-500">Belajar cerdas: materi, latihan, dan simulasi dalam satu halaman.</p>
+      </div>
+      <div class="ml-auto flex gap-2">
+        <button id="btnMateri" class="btn-tab px-4 py-2 text-sm font-semibold border border-slate-200 hover:bg-slate-100" data-target="sectionMateri">Materi</button>
+        <button id="btnLatihan" class="btn-tab px-4 py-2 text-sm font-semibold border border-slate-200 hover:bg-slate-100" data-target="sectionLatihan">Latihan Soal</button>
+        <button id="btnSimulasi" class="btn-tab px-4 py-2 text-sm font-semibold border border-slate-200 hover:bg-slate-100" data-target="sectionSimulasi">Simulasi</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-6xl mx-auto px-4 py-6 space-y-6">
+    <!-- Tips strip -->
+    <div class="card p-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-emerald-100">
+      <div class="flex items-start gap-3">
+        <svg class="h-6 w-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m2-4h.01M21 12A9 9 0 1 1 3 12a9 9 0 0 1 18 0Z"/></svg>
+        <p class="text-sm text-emerald-900">Pilih <span class="font-semibold">Subtes</span> & <span class="font-semibold">Topik</span>, lalu jelajahi ringkasan, rumus, contoh soal & video. Coba latihan interaktif — ada <span class="font-semibold">PG</span>, <span class="font-semibold">Checkbox</span>, <span class="font-semibold">Benar/Salah</span>, dan <span class="font-semibold">Isian Singkat</span>. Terakhir, uji kemampuan lewat <span class="font-semibold">Simulasi UTBK</span> dengan timer.</p>
+      </div>
+    </div>
+
+    <!-- MATERI -->
+    <section id="sectionMateri" class="card bg-white border border-slate-100 p-4 sm:p-6">
+      <div class="flex flex-wrap items-center gap-3 mb-5">
+        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold">MATERI</span>
+        <div class="ml-auto"></div>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-4">
+        <div class="space-y-3">
+          <label class="text-sm font-semibold">Pilih Subtes</label>
+          <select id="materiSubtes" class="w-full border border-slate-200 rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-400"></select>
+        </div>
+        <div class="space-y-3 sm:col-span-2">
+          <label class="text-sm font-semibold">Pilih Topik</label>
+          <select id="materiTopik" class="w-full border border-slate-200 rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-400"></select>
+        </div>
+      </div>
+
+      <div class="mt-6 grid lg:grid-cols-2 gap-6">
+        <article class="p-4 rounded-2xl border border-slate-100 bg-slate-50/60">
+          <h3 class="font-bold text-lg mb-2">Rangkuman</h3>
+          <div id="materiRangkuman" class="prose prose-slate max-w-none text-sm"></div>
+        </article>
+        <article class="p-4 rounded-2xl border border-slate-100 bg-slate-50/60">
+          <h3 class="font-bold text-lg mb-2">Rumus-Rumus</h3>
+          <div id="materiRumus" class="prose prose-slate max-w-none text-sm"></div>
+        </article>
+      </div>
+
+      <div class="mt-6 grid lg:grid-cols-2 gap-6">
+        <article class="p-4 rounded-2xl border border-slate-100 bg-slate-50/60">
+          <h3 class="font-bold text-lg mb-2">Contoh Soal</h3>
+          <div id="materiContoh" class="space-y-3"></div>
+        </article>
+        <article class="p-4 rounded-2xl border border-slate-100 bg-slate-50/60">
+          <h3 class="font-bold text-lg mb-2">Video Pembahasan</h3>
+          <div id="materiVideo" class="aspect-video rounded-xl overflow-hidden bg-black/5 flex items-center justify-center text-slate-500">Pilih topik untuk menonton video.</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- LATIHAN SOAL -->
+    <section id="sectionLatihan" class="hidden card bg-white border border-slate-100 p-4 sm:p-6">
+      <div class="flex flex-wrap items-center gap-3 mb-5">
+        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold">LATIHAN SOAL</span>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-4 mb-4">
+        <div class="space-y-2">
+          <label class="text-sm font-semibold">Subtes</label>
+          <select id="latihanSubtes" class="w-full border border-slate-200 rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-400"></select>
+        </div>
+        <div class="space-y-2 sm:col-span-2">
+          <label class="text-sm font-semibold">Topik</label>
+          <select id="latihanTopik" class="w-full border border-slate-200 rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-400"></select>
+        </div>
+      </div>
+
+      <div id="latihanContainer" class="space-y-6"></div>
+    </section>
+
+    <!-- SIMULASI (QUIZ) -->
+    <section id="sectionSimulasi" class="hidden card bg-white border border-slate-100 p-4 sm:p-6">
+      <div class="flex flex-wrap items-center gap-3 mb-4">
+        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold">SIMULASI UTBK</span>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="space-y-2">
+          <label class="text-sm font-semibold">Pilih Subtes</label>
+          <select id="quizSubtes" class="w-full border border-slate-200 rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-400"></select>
+        </div>
+        <div class="md:col-span-2 flex items-end gap-2">
+          <button id="btnMulaiQuiz" class="px-5 py-2.5 btn bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">Mulai</button>
+          <div class="ml-auto text-right">
+            <div class="text-xs text-slate-500">Sisa Waktu</div>
+            <div id="quizTimer" class="font-extrabold text-2xl tabular-nums">00:00</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="quizInfo" class="mt-4 text-sm text-slate-600"></div>
+      <div id="quizArea" class="mt-4 hidden">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="px-2 py-1 rounded-lg bg-slate-100 text-xs font-semibold"><span id="quizProgress">1/1</span></div>
+          <div class="ml-auto flex gap-2">
+            <button id="btnPrev" class="px-4 py-2 btn border border-slate-200 hover:bg-slate-100" disabled>Sebelumnya</button>
+            <button id="btnNext" class="px-4 py-2 btn border border-slate-200 hover:bg-slate-100">Selanjutnya</button>
+            <button id="btnSubmit" class="px-4 py-2 btn bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">Submit</button>
+          </div>
+        </div>
+        <div id="quizQuestion" class="space-y-3"></div>
+      </div>
+
+      <div id="quizResult" class="hidden mt-6 p-4 rounded-2xl border border-emerald-100 bg-emerald-50"></div>
+    </section>
+
+    <footer class="py-8 text-center text-xs text-slate-500">
+      © <span id="year"></span> Kebun Ilmu · Dibuat dengan ❤️ untuk persiapan UTBK.
+    </footer>
+  </main>
+
+  <script>
+    /***********************\n     * DATA BANK & MAPPING *
+     ***********************/
+    const SUBTESTS = [
+      { id: 'PU', name: 'Penalaran Umum (PU)' },
+      { id: 'PPU', name: 'Pengetahuan & Pemahaman Umum (PPU)' },
+      { id: 'PBM', name: 'Pemahaman Bacaan dan Menulis(PBM)' },
+      { id: 'PK', name: 'Pengetahuan Kuantitatif (PK)' },
+      { id: 'LBI', name: 'Literasi Bahasa Indonesia' },
+      { id: 'LBE', name: 'Literasi Bahasa Inggris' },
+      { id: 'PM', name: 'Penalaran Matematika (PM)' },
+    ];
+
+    const QUIZ_RULES = {
+      PU:  { count: 30, minutes: 30 },
+      PPU: { count: 20, minutes: 15 },
+      PBM: { count: 20, minutes: 25 },
+      PK:  { count: 20, minutes: 20 },
+      LBI: { count: 30, minutes: 42.5 },
+      LBE: { count: 20, minutes: 20 },
+      PM:  { count: 20, minutes: 42.5 },
+    };
+
+    const TOPIK = {
+      PU:  ['Analogi', 'Silogisme', 'Penarikan Kesimpulan', 'Aritmetika Sosial'],
+      PPU: ['Informasi Tersurat', 'Ide Pokok', 'Simpulan', 'Kosa Kata'],
+      PBM: ['Membaca Pemahaman', 'Menulis Esai', 'Analisis Teks'],
+      PK: ['Bilangan', 'Geometri', 'Aljabar dan Fungsi', 'Statistika dan Peluang'],
+      LBI: ['Teks Eksposisi', 'Teks Narasi', 'Kaidah Bahasa'],
+      LBE: ['Reading — Main Idea', 'Reading — Inference', 'Grammar & Vocab'],
+     PM: [
+  'Fungsi',
+  'Bilangan',
+  'Himpunan',
+  'Pola Bilangan',
+  'Bangun Datar',
+  'Bangun Ruang',
+  'Bentuk Aljabar',
+  'Teori Peluang',
+  'Garis dan Sudut',
+  'Aritmetika Sosial',
+  'Aljabar dan Fungsi',
+  'Aturan Pencacahan',
+  'Statistika Desktriptif',
+  'Persamaan Garis Lurus',
+  'Data dan Ketidakpastian',
+  'Perbandingan dan Rasio',
+  'Pengukuran dan Geometri',
+  'Persamaan dan Pertidaksamaan',
+  'Bilangan (Representasi, Sifat Urutan, Operasi Hitung)'
+],
+    };
+
+    // Contoh Materi (ringkas) — edit/ tambah sesuai kebutuhan
+    const MATERI = {
+      PK: {
+  Bilangan: {
+    rangkuman: `Bilangan mencakup operasi hitung, sifat, serta penerapan pada permasalahan sehari-hari.`,
+    rumus: `Contoh: Penjumlahan (+), Pengurangan (-), Perkalian (×), Pembagian (÷), Pangkat, Akar.`,
+    contoh: [
+      { tanya: 'Hitung: 72 ÷ 8 + 5', jawab: '14' }
+    ],
+    video: 'https://www.youtube.com/embed/k2W6W0S0TxA'
+  },
+  Geometri: {
+    rangkuman: `Geometri mempelajari bangun datar, bangun ruang, sudut, serta hubungan antar bangun.`,
+    rumus: `Contoh: Luas persegi = s × s, Luas lingkaran = π × r², Volume balok = p × l × t.`,
+    contoh: [
+      { tanya: 'Hitung luas persegi dengan sisi 12 cm', jawab: '144 cm²' }
+    ],
+    video: 'https://www.youtube.com/embed/gh0pljz5FbM'
+  },
+  'Aljabar dan Fungsi': {
+    rangkuman: `Aljabar membahas persamaan, pertidaksamaan, dan bentuk aljabar. Fungsi memetakan setiap x ke satu nilai f(x).`,
+    rumus: `Contoh: f(x) = ax + b, Rumus fungsi kuadrat: f(x) = ax² + bx + c.`,
+    contoh: [
+      { tanya: 'Jika f(x) = 2x + 3, maka f(4) = …', jawab: '11' }
+    ],
+    video: 'https://www.youtube.com/embed/6I_3pZKmhGg'
+  },
+  'Statistika dan Peluang': {
+    rangkuman: `Statistika mempelajari data (mean, median, modus). Peluang mempelajari kemungkinan suatu kejadian.`,
+    rumus: `Mean = Σx / n, Peluang kejadian A = n(A) / n(S).`,
+    contoh: [
+      { tanya: 'Dari data 2, 4, 6, 8, berapakah mean?', jawab: '5' }
+    ],
+    video: 'https://www.youtube.com/embed/xZnY-uwYJMM'
+  }
+},
+
+      PBM: {
+"Membaca Pemahaman": {
+rangkuman: `Teknik memahami bacaan, menemukan ide pokok, inferensi, dan kesimpulan.`,
+rumus: `Tidak ada rumus khusus, gunakan strategi membaca kritis.`,
+contoh: [
+{ tanya: 'Apa ide pokok dari paragraf yang membahas dampak globalisasi terhadap budaya lokal?', jawab: 'Globalisasi dapat mengikis budaya lokal.' }
+],
+video: 'https://www.youtube.com/embed/56ZbQZrNj3s'
+},
+"Menulis Esai": {
+rangkuman: `Struktur esai: pendahuluan, isi, penutup. Fokus pada argumentasi yang jelas.`,
+rumus: `Gunakan pola argumentasi: klaim → alasan → bukti → kesimpulan.`,
+contoh: [
+{ tanya: 'Tuliskan kalimat pembuka untuk esai tentang pentingnya literasi digital.', jawab: 'Di era informasi, literasi digital menjadi kunci utama kesuksesan.' }
+],
+video: 'https://www.youtube.com/embed/YKgk-jlH2A0'
+},
+"Analisis Teks": {
+rangkuman: `Mengidentifikasi struktur teks, gaya bahasa, tujuan penulis.`,
+rumus: `Tidak ada rumus, gunakan kerangka analisis teks: siapa, apa, bagaimana, mengapa.`,
+contoh: [
+{ tanya: 'Analisislah tujuan penulis dalam teks iklan yang menawarkan produk kesehatan.', jawab: 'Meyakinkan pembaca untuk membeli produk kesehatan.' }
+],
+video: 'https://www.youtube.com/embed/1zG3J2XHZqM'
+}
+},
+PM: {
+  Fungsi: {
+    rangkuman: `Fungsi memetakan setiap anggota himpunan domain ke satu anggota kodomain.`,
+    rumus: `f(x) = ax + b, atau bentuk lain sesuai jenis fungsi.`,
+    contoh: [
+      { tanya: 'Jika f(x) = 2x + 3, berapakah f(5)?', jawab: '13' }
+    ],
+    video: 'https://www.youtube.com/embed/6I_3pZKmhGg'
+  },
+  Bilangan: {
+    rangkuman: `Bilangan mencakup operasi hitung, sifat urutan, dan representasi bilangan.`,
+    rumus: `Contoh: Penjumlahan, Pengurangan, Perkalian, Pembagian, Pangkat, Akar.`,
+    contoh: [
+      { tanya: 'Hitung: 72 ÷ 8 + 5', jawab: '14' }
+    ],
+    video: 'https://www.youtube.com/embed/k2W6W0S0TxA'
+  },
+  Himpunan: {
+    rangkuman: `Himpunan adalah kumpulan objek yang terdefinisi dengan jelas.`,
+    rumus: `n(A ∪ B) = n(A) + n(B) – n(A ∩ B).`,
+    contoh: [
+      { tanya: 'Jika n(A)=20, n(B)=15, n(A∩B)=5, berapakah n(A∪B)?', jawab: '30' }
+    ],
+    video: 'https://www.youtube.com/embed/4Zzq5m5dVnA'
+  },
+  "Pola Bilangan": {
+    rangkuman: `Pola bilangan adalah urutan bilangan yang membentuk pola tertentu.`,
+    rumus: `Un = a + (n-1)b (untuk barisan aritmetika).`,
+    contoh: [
+      { tanya: 'Tentukan suku ke-10 dari barisan 2, 5, 8, ...', jawab: '29' }
+    ],
+    video: 'https://www.youtube.com/embed/pD5rzSmW0Ro'
+  },
+  "Bangun Datar": {
+    rangkuman: `Bangun datar adalah bangun dua dimensi seperti persegi, segitiga, lingkaran.`,
+    rumus: `Luas lingkaran = πr², Keliling persegi = 4s.`,
+    contoh: [
+      { tanya: 'Hitung luas lingkaran dengan jari-jari 7 cm.', jawab: '154 cm²' }
+    ],
+    video: 'https://www.youtube.com/embed/gh0pljz5FbM'
+  },
+  "Bangun Ruang": {
+    rangkuman: `Bangun ruang adalah bangun tiga dimensi seperti kubus, balok, tabung.`,
+    rumus: `Volume balok = p × l × t, Volume tabung = πr²t.`,
+    contoh: [
+      { tanya: 'Hitung volume kubus dengan sisi 4 cm.', jawab: '64 cm³' }
+    ],
+    video: 'https://www.youtube.com/embed/jDqAd3phWao'
+  },
+  "Bentuk Aljabar": {
+    rangkuman: `Bentuk aljabar melibatkan variabel dan konstanta.`,
+    rumus: `(a+b)² = a² + 2ab + b².`,
+    contoh: [
+      { tanya: 'Sederhanakan (x+3)(x+2)', jawab: 'x² + 5x + 6' }
+    ],
+    video: 'https://www.youtube.com/embed/j5q6mqH6kl8'
+  },
+  "Teori Peluang": {
+    rangkuman: `Peluang adalah kemungkinan munculnya suatu kejadian.`,
+    rumus: `P(A) = n(A) / n(S).`,
+    contoh: [
+      { tanya: 'Sebuah dadu dilempar. Peluang muncul mata 5?', jawab: '1/6' }
+    ],
+    video: 'https://www.youtube.com/embed/xZnY-uwYJMM'
+  },
+  "Garis dan Sudut": {
+    rangkuman: `Garis dan sudut membahas hubungan sudut pada garis sejajar dan berpotongan.`,
+    rumus: `Jumlah sudut segitiga = 180°. Sudut berpelurus = 180°.`,
+    contoh: [
+      { tanya: 'Jika dua garis sejajar dipotong oleh transversal, maka sudut sehadap …', jawab: 'Sama besar' }
+    ],
+    video: 'https://www.youtube.com/embed/3K0Wm2UdbXc'
+  },
+  "Aritmetika Sosial": {
+    rangkuman: `Aritmetika sosial membahas untung, rugi, diskon, bunga, dan pajak.`,
+    rumus: `Untung/Rugi = Harga Jual – Harga Beli.`,
+    contoh: [
+      { tanya: 'Sebuah barang dibeli 80.000 dijual 100.000. Berapa persen untungnya?', jawab: '25%' }
+    ],
+    video: 'https://www.youtube.com/embed/ZZz9RnQp3dM'
+  },
+  "Aljabar dan Fungsi": {
+    rangkuman: `Mengkombinasikan konsep aljabar dengan pemetaan fungsi.`,
+    rumus: `f(x) = ax + b, bentuk aljabar mengikuti aturan operasi.`,
+    contoh: [
+      { tanya: 'Jika f(x) = x² – 2x + 1, berapakah f(3)?', jawab: '4' }
+    ],
+    video: 'https://www.youtube.com/embed/UoZJlVjksXM'
+  },
+  "Aturan Pencacahan": {
+    rangkuman: `Aturan pencacahan digunakan untuk menghitung banyak cara.`,
+    rumus: `Jika ada m cara dan n cara, total = m × n.`,
+    contoh: [
+      { tanya: 'Sebuah dadu dan sebuah koin dilempar. Banyak hasil mungkin?', jawab: '12' }
+    ],
+    video: 'https://www.youtube.com/embed/MaHj5R79z7w'
+  },
+  "Statistika Desktriptif": {
+    rangkuman: `Statistika deskriptif membahas penyajian data: tabel, diagram, ukuran pemusatan.`,
+    rumus: `Mean = Σx / n, Median = data tengah, Modus = data yang paling sering.`,
+    contoh: [
+      { tanya: 'Dari data 2, 4, 4, 6, 8, modusnya adalah …', jawab: '4' }
+    ],
+    video: 'https://www.youtube.com/embed/xZnY-uwYJMM'
+  },
+  "Persamaan Garis Lurus": {
+    rangkuman: `Persamaan garis lurus berbentuk y = mx + c.`,
+    rumus: `Gradien m = (y2 – y1)/(x2 – x1).`,
+    contoh: [
+      { tanya: 'Tentukan gradien garis yang melalui (2,3) dan (4,7).', jawab: '2' }
+    ],
+    video: 'https://www.youtube.com/embed/H0eMdzXpd9w'
+  },
+  "Data dan Ketidakpastian": {
+    rangkuman: `Membahas interpretasi data serta peluang kejadian tidak pasti.`,
+    rumus: `Gunakan distribusi data dan konsep probabilitas.`,
+    contoh: [
+      { tanya: 'Jika peluang hujan 0,3, maka peluang tidak hujan?', jawab: '0,7' }
+    ],
+    video: 'https://www.youtube.com/embed/bURmKUVdfA0'
+  },
+  "Perbandingan dan Rasio": {
+    rangkuman: `Perbandingan membandingkan dua besaran sejenis, rasio adalah hasil perbandingan.`,
+    rumus: `a : b = a/b.`,
+    contoh: [
+      { tanya: 'Perbandingan umur Ali dan Budi 2:5. Jika umur Ali 10, berapa umur Budi?', jawab: '25' }
+    ],
+    video: 'https://www.youtube.com/embed/LkShWyH5g8k'
+  },
+  "Pengukuran dan Geometri": {
+    rangkuman: `Pengukuran mencakup panjang, luas, volume. Geometri mempelajari bangun dan sifatnya.`,
+    rumus: `Keliling lingkaran = 2πr, Volume prisma = luas alas × tinggi.`,
+    contoh: [
+      { tanya: 'Hitung keliling lingkaran dengan jari-jari 14 cm.', jawab: '88 cm' }
+    ],
+    video: 'https://www.youtube.com/embed/Vp5aCdfDw1w'
+  },
+  "Persamaan dan Pertidaksamaan": {
+    rangkuman: `Persamaan menyatakan kesamaan dua ekspresi, pertidaksamaan menggunakan tanda <, >, ≤, ≥.`,
+    rumus: `Contoh: ax + b = 0, ax + b ≤ c.`,
+    contoh: [
+      { tanya: 'Selesaikan 2x + 5 = 11.', jawab: 'x = 3' }
+    ],
+    video: 'https://www.youtube.com/embed/1RQ88F1fOvM'
+  },
+  "Bilangan (Representasi, Sifat Urutan, Operasi Hitung)": {
+    rangkuman: `Topik bilangan mencakup representasi, sifat urutan, dan operasi hitung dasar.`,
+    rumus: `Contoh: 2³ = 8, √16 = 4.`,
+    contoh: [
+      { tanya: 'Urutkan bilangan 0, -3, 5, 2 dari kecil ke besar.', jawab: '-3, 0, 2, 5' }
+    ],
+    video: 'https://www.youtube.com/embed/qmD6KwM8bWg'
+  }
+},
+
+      LBE: {
+        'Reading — Main Idea': {
+          rangkuman: `Cari gagasan utama dengan melihat kalimat topik dan ide yang berulang.`,
+          rumus: `Strategi: skimming paragraf pertama & terakhir.`,
+          contoh: [ { tanya: 'Which sentence best states the main idea?', jawab: 'The first option that captures the overall point.' } ],
+          video: 'https://www.youtube.com/embed/5MgBikgcWnY'
+        }
+      }
+    };
+
+    // Bank Soal — campuran tipe (PG, Checkbox, Benar/Salah, Isian)
+    // Struktur soal:
+    // { id, type: 'pg'|'checkbox'|'benarsalah'|'isian', passage?, image?, question, options?, answer, explanation, statements? }
+    const BANK = {
+      PU: [
+        { id:'PU1', type:'pg', topik:'Analogi', question:'Pisau : memotong = pena : …', options:['menulis','menggambar','menghapus','mengukur'], answer:0, explanation:'Relasi fungsi: alat dan fungsi utamanya.' },
+        { id:'PU2', type:'benarsalah', topik:'Penarikan Kesimpulan', passage:'Premis: Semua atlet disiplin. Budi adalah atlet.', statements:[
+          { text:'Budi disiplin.', correct:true },
+          { text:'Semua yang disiplin adalah atlet.', correct:false }
+        ], explanation:'Dari premis, hanya dapat menyimpulkan Budi disiplin (modus ponens).' },
+        { id:'PU3', type:'isian', topik:'Silogisme', question:'Jika semua A adalah B dan tidak ada B yang C, maka … A yang C.', answer:'tidak ada', explanation:'Konversi logis: A ⊆ B dan B ∩ C = ∅ ⇒ A ∩ C = ∅.' },
+      ],
+      PPU: [
+        { id:'PPU1', type:'pg', topik:'Ide Pokok', passage:'(Paragraf) Pendidikan karakter menekankan pembiasaan nilai...', question:'Ide pokok paragraf di atas adalah …', options:['Pendidikan karakter menekankan pembiasaan nilai.','Nilai moral sulit diterapkan.','Guru adalah teladan utama.','Sekolah harus tegas.'], answer:0, explanation:'Kalimat utama menyatakan fokus pada pembiasaan nilai.' },
+        { id:'PPU2', type:'checkbox', topik:'Informasi Tersurat', passage:'(Teks) Festival dilaksanakan 12–14 Mei, di Taman Kota.', question:'Informasi yang benar menurut teks:', options:['Berlangsung 3 hari','Diadakan di Taman Kota','Bulan Juni','Gratis'], answer:[0,1], explanation:'Teks menyebut 12–14 Mei di Taman Kota.' }
+      ],
+     PBM: [
+{ id:'PBM1', type:'pg', topik:'Membaca Pemahaman', question:'Apa ide pokok dari paragraf tentang pentingnya literasi digital?', options:['Teknologi membuat malas','Literasi digital penting di era informasi','Internet hanya untuk hiburan','Masyarakat tidak butuh literasi'], answer:1, explanation:'Ide pokoknya adalah literasi digital penting di era informasi.' },
+{ id:'PBM2', type:'checkbox', topik:'Menulis Esai', question:'Ciri-ciri esai yang baik:', options:['Memiliki struktur jelas','Bahasanya berbelit-belit','Mempunyai pendahuluan, isi, penutup','Argumentasi logis'], answer:[0,2,3], explanation:'Bahasa harus ringkas, bukan berbelit-belit.' },
+{ id:'PBM3', type:'isian', topik:'Analisis Teks', question:'Apa tujuan penulis dalam teks iklan kesehatan?', answer:'Meyakinkan pembaca untuk membeli produk kesehatan', explanation:'Iklan bertujuan mempengaruhi pembaca agar membeli produk.' }
+],
+      PK: [
+  { 
+  id: 'PKb1', 
+  type: 'isian', 
+  topik: 'Bilangan', 
+  question: 'Jika \\(4 : \\frac{1}{2} = \\sqrt{t}\\), tentukan nilai t!', 
+  answer: '64',
+  explanation: '4 ÷ 1/2 = 4 × 2 = 8, sehingga \\(\\sqrt{t} = 8 \\Rightarrow t = 64\\).', 
+  video:'https://www.youtube.com/embed/-dgrcy2OkQE' // link video pembahasan
+},
+{ 
+  id:'PKb2', 
+  type:'pg', 
+  topik:'Bilangan', 
+  question:'Sembilan bilangan 2, 4, 8, 3, 6, 5, 7, 8, 4 diurutkan dari terbesar ke terkecil. Jika \\(u\\) dan \\(t\\) berturut-turut menyatakan bilangan pada posisi ke-3 dan ke-8 setelah diurutkan, nilai \\((2\\times u) - t\\) sama dengan …', 
+  options:['9','10','11','12'], 
+  answer:3, 
+  explanation:'Urut menurun: 8, 8, 7, 6, 5, 4, 4, 3, 2. Maka \\(u = 7\\) (posisi ke-3) dan \\(t = 3\\) (posisi ke-8). Hitung: \\((2\\times u) - t = 2×7 - 3 = 14 - 3 = 11\\).',
+video:'https://www.youtube.com/embed/kxrxDnz2Eqc' // link video pembahasan
+},
+{ 
+  id:'PKb3', 
+  type:'pg', 
+  topik:'Bilangan', 
+  question:'Di antara pilihan berikut yang merupakan faktor persekutuan dari \\((49^2+49)\\) dan \\((12^2-2^2)\\) adalah (1) 10, (2) 14, (3) 35, (4) 50.', 
+  options:[
+    'A. (1),(2) dan (3) saja', 
+    'B. (1),(3) saja', 
+    'C. (2),(4) saja', 
+    'D. (4) saja', 
+    'E. semua pilihan'
+  ], 
+  answer:0, 
+  explanation:'Hitung: \\(49^2+49=2450\\) dan \\(12^2-2^2=140\\). FPB(2450,140)=70. Faktor 70={1,2,5,7,10,14,35,70}. Jadi faktor persekutuan yang ada di opsi adalah 10, 14, dan 35. Maka jawaban yang benar adalah A.', 
+  video:'https://www.youtube.com/embed/QMavgVnI5Yo'
+},
+{
+id:'PKb4',
+type:'pg',
+topik:'Bilangan',
+question:'Nilai dari \\(64-16n+n^2\\) jika \\(n\\) adalah bilangan bulat positif terkecil sehingga \\(7+30n\\) bukan bilangan prima adalah …',
+options:[
+'A. 0',
+'B. 1',
+'C. 2',
+'D. 4',
+'E. 8'
+],
+answer:3,
+explanation:'Cek nilai \(7+30n\) untuk n=1,2,3,...: <br>\\(n=1:\\;37\\) prima; <br>\\(n=2:\\;67\\) prima;<br>\\(n=3:\\;97\\) prima;<br> \\(n=4:\\;127\\) prima;<br> \\(n=5:\\;157\\) prima;<br> \\(n=6:\\;187=11\\times17\\) bukan prima.<br> Jadi n terkecil adalah 6. Hitung \\(64-16n+n^2 =64-16(6)+6^2=64-96+36=4\\).'
+},
+{
+id:'PKb5',
+type:'pg',
+topik:'Bilangan',
+question:'Hasil dari \\(4^4+4^4+4^4+4^4\\) adalah …',
+options:[
+'A. \\(2^8\\)',
+'B. \\(2^{10}\\)',
+'C. \\(2^{12}\\)',
+'D. \\(2^{16}\\)',
+'E. \\(2^{20}\\)'
+],
+answer:1,
+explanation:'Hitung: \\(4^4 = (2^2)^4 = 2^8 = 256\\). Karena ada 4 suku, maka\\(4^4+4^4+4^4+4^4 = 4 \\times 2^8 = 2^2 \\times 2^8 = 2^{10}\\). Jadi jawabannya adalah B.',
+},
+  { 
+  id:'PKg1', 
+  type:'pg', 
+  topik:'Geometri', 
+  question:'Segitiga ABC merupakan segitiga sama sisi dengan panjang sisi 4. Daerah yang dibatasi ABC memiliki luas L1. Titik D merupakan titik tengah sisi AB dan titik E berada di ruas garis CD sehingga luas segitiga ABE adalah L2. Berdasarkan informasi tersebut, tentukan hubungan kuantitas P dan Q berikut:', 
+  options:[ 
+    'P > Q', 
+    'P < Q', 
+    'P = Q', 
+    'Tidak dapat ditentukan' 
+  ], 
+  table: { 
+    P: '\\[\\frac{L_2}{L_1}\\] ', 
+    Q: '\\[\\frac{1}{3}\\]' 
+  }, 
+  answer: 3, 
+  explanation:'Lihat di video',
+video: 'https://www.youtube.com/embed/mWYLCPMtgCY' 
+} ,
+  { 
+  id: 'PKa1', 
+  type: 'isian', 
+  topik: 'Aljabar dan Fungsi', 
+  question: 'Titik \\(T(2,17)\\) terletak pada grafik fungsi \\(f(x) = x^2 - r x + 33\\). Tentukan nilai \\(r\\)!', 
+  answer: '10', // karena \\  
+explanation: 'Substitusi x=2 dan f(x)=17: \\(17 = 2^2 - 2r + 33 \\Rightarrow 17 = 4 - 2r + 33 \\Rightarrow 17 = 37 - 2r \\Rightarrow 2r = 20 \\Rightarrow r = 10\\).', 
+  video: 'https://www.youtube.com/embed/0NjzGMH7t60'
+},
+{ 
+  id:'PKa2', 
+  type:'pg', 
+  topik:'Aljabar dan Fungsi', 
+  question:'Grafik fungsi \\(f(x) = 2x^2 - x - 1\\) dan \\(g(x) = x^2 - 3x + 7\\) berpotongan di dua titik berbeda, yaitu \\(K(a,b)\\) dan \\(L(c,d)\\). Garis \\(m\\) melalui kedua titik tersebut. Jika \\(b > d\\), nilai \\(a\\) adalah …', 
+  options:['-4','-2','2','4'], 
+  answer:0, 
+  explanation:'Titik potong didapat dari 2x^2 - x - 1 = x^2 - 3x + 7 → x^2 + 2x - 8 = 0 → x = 2 dan x = -4. Hitung y: f(2)=5, f(-4)=35. Karena b > d, b = 35 → titik L(-4,35) → a = -4.',
+video: 'https://www.youtube.com/embed/HOWwbpwPNQA'
+},
+{ 
+  id:'PKa3', 
+  type:'pg', 
+  topik:'Aljabar dan Fungsi', 
+  question:'Grafik fungsi \\(f(x) = 2x^2 - x - 1\\) dan \\(g(x) = x^2 - 3x + 7\\) berpotongan di dua titik berbeda, yaitu \\(K(a,b)\\) dan \\(L(c,d)\\). Garis \\(m\\) melalui kedua titik tersebut. Garis \\(y = px + q\\) tegak lurus dengan garis \\(m\\) dan melalui titik (1,1). Nilai \\(p+q\\) adalah …', 
+  options:['-1','-5','1','5'], 
+  answer:2, 
+  explanation:'Dari perhitungan sebelumnya, titik potong adalah K(2,5) dan L(-4,35). Gradien garis m: \\(m = (35-5)/(-4-2) = 30/-6 = -5\\). Maka gradien garis tegak lurusnya \\(p = 1/5\\). Persamaan garis: \\(y - 1 = (1/5)(x - 1)\\) → \\(y = (1/5)x + 4/5\\). Jadi \\(p = 1/5, q = 4/5\\) → \\(p+q = 1\\). Opsi terdekat = 10 (perkalian skala agar opsi bulat).', 
+  video: 'https://www.youtube.com/embed/QyZj69GMxg4'
+},
+
+{
+id: 'PKa4',
+type: 'pg',
+topik: 'Aljabar dan Fungsi',
+question: 'Jika \\(f\\) adalah fungsi linier dan \\(f(1)=2.000\\) serta \\(f(x+1)+12=f(x)\\) untuk setiap bilangan real \\(x\\), maka nilai \\(f(100)\\) adalah …',
+options: ['-1188','-1200','2012','812'],
+answer: 3,
+explanation: 'Misalkan \\(f(x)=ax+b\\). <br>Dari \\(f(x+1)+12=f(x)\\) diperoleh \\(a(x+1)+b+12 = ax+b\\)  \\[a+12=0\\]  \\[a=-12\\]. Karena \\(f(1)=2.000\\) (yakni 2000), maka \\(-12(1)+b=2000\\)  \\[b=2012\\]. Jadi \\(f(x)=-12x+2012\\). Maka \\(f(100)=-12(100)+2012=-1200+2012=812\\).',
+},
+{
+id: 'PKa5',
+type: 'pg',
+topik: 'Aljabar dan Fungsi',
+question: 'Tentukan titik potong kurva \\(y = x^2 - 6x + 8\\) dan \\(y = -(x-3)^2 + 1\\). Diketahui kandidat titik: (1) (1,3), (2) (2,0), (3) (1,-3), (4) (4,0). Manakah yang benar?',
+options: [
+'A. (1),(2) dan (3) Saja yang benar',
+'B. (1) dan (3) Saja yang benar',
+'C. (2) dan (4) Saja yang benar',
+'D. Hanya (4) yang benar',
+'E. Semua pilihan benar'
+],
+answer: 3,
+explanation: 'Persamaan potong: \\(x^2 - 6x + 8 = -(x-3)^2 + 1\\). Ubah kanan: \\(-(x^2 -6x +9) + 1 = -x^2 + 6x - 8\\). Maka \\[x^2 -6x + 8 = -x^2 + 6x - 8\\] \\[2x^2 - 12x + 16 = 0\\] \\[x^2 - 6x + 8 = 0\\]  \\[(x-2)(x-4)=0\\]. Jadi \\(x=2\\) atau \\(x=4\\). Substitusi: <br>jika \\(x=2\\), \\[y=2^2 - 12 + 8 = 0\\] → (2,0)<br>. Jika \\(x=4\\)\\[y=16 -24 + 8 = 0\\] → (4,0). Jadi titik potong adalah (2,0) dan (4,0). Jawaban benar: (2) dan (4).',
+},
+  { 
+  id: 'PKs1', 
+  type: 'isian', 
+  topik: 'Statistika dan Peluang', 
+  question: 'Enam bilangan bulat positif 1, 4, 7, 3, b, 8 memiliki rata-rata 5 1/3. Jika jangkauan dari keenam bilangan tersebut dikurangi rata-ratanya sama dengan Q/15, tentukan nilai Q!', 
+  answer: '40',
+  explanation: 'Jumlah keenam data = 32 sehingga b = 9. Data lengkap: 1,3,4,7,8,9. Jangkauan = 9-1=8, rata-rata = 32/6 = 16/3. Maka jangkauan dikurangi rata-rata = 8 - 16/3 = 8/3. Dengan (jangkauan - rata-rata) = Q/15, diperoleh Q = 8/3 × 15 = 40.', 
+  video: 'https://www.youtube.com/embed/XZJWaIX1iZQ'
+},
+
+
+],
+
+      LBI: [
+        { id:'LBI1', type:'pg', topik:'Teks Eksposisi', passage:'(Paragraf) Sampah plastik menumpuk di sungai...', question:'Kalimat fakta dalam paragraf adalah …', options:['Sampah plastik menumpuk di sungai','Kita harus mengurangi plastik','Pemerintah lalai','Solusi terbaik adalah daur ulang'], answer:0, explanation:'Kalimat lain berupa opini/anjuran.' },
+        { id:'LBI2', type:'benarsalah', topik:'Kaidah Bahasa', statements:[
+          { text:'Tanda titik digunakan untuk mengakhiri kalimat pernyataan.', correct:true },
+          { text:'Kata baku dari “resiko” adalah “resiko”.', correct:false }
+        ], explanation:'Bentuk baku: “risiko”.' }
+      ],
+      LBE: [
+        { id:'LBE1', type:'pg', topik:'Grammar & Vocab', passage:'Choose the correct word:', question:'She has lived here _____ 2019.', options:['since','for','in','by'], answer:0, explanation:'Present perfect + since + titik awal waktu.' },
+        { id:'LBE2', type:'checkbox', topik:'Reading — Inference', passage:'(Short text) The store closed early due to weather.', question:'Which can be inferred?', options:['There was bad weather','The store will never open again','The closure was temporary','Employees went home'], answer:[0,2], explanation:'“Closed early” → sementara; tidak menyiratkan tutup permanen.' }
+      ],
+      PM: [
+  { 
+    id:'PM1', 
+    type:'pg', 
+    topik:'Fungsi', 
+    question:'Jika f(x) = 3x + 2, maka f(4) = …', 
+    options:['12','14','15','16'], 
+    answer:2, 
+    explanation:'f(4) = 3×4 + 2 = 14.' 
+  },
+  { 
+    id:'PM2', 
+    type:'pg', 
+    topik:'Bilangan', 
+    question:'Hasil dari 72 ÷ 8 + 5 adalah …', 
+    options:['9','11','12','14'], 
+    answer:4, 
+    explanation:'72 ÷ 8 = 9, 9 + 5 = 14.' 
+  },
+  { 
+    id:'PM3', 
+    type:'benarsalah', 
+    topik:'Himpunan', 
+    statements:[
+      { text:'Jika A⊆B, maka semua anggota A juga anggota B.', correct:true },
+      { text:'Jika A∪B = A, maka B pasti kosong.', correct:false }
+    ], 
+    explanation:'Hanya anggota A dijamin ada di B; B bisa ada elemen tambahan.' 
+  },
+  { 
+    id:'PM4', 
+    type:'isian', 
+    topik:'Pola Bilangan', 
+    question:'Tentukan suku ke-10 dari barisan 2, 5, 8, …', 
+    answer:'29', 
+    explanation:'Un = a + (n-1)d → 2 + (10-1)×3 = 29.' 
+  },
+  { 
+    id:'PM5', 
+    type:'pg', 
+    topik:'Bangun Datar', 
+    question:'Luas persegi dengan sisi 12 cm adalah …', 
+    options:['120','124','144','148'], 
+    answer:3, 
+    explanation:'Luas = s×s = 12×12 = 144 cm².' 
+  }
+],
+
+    };
+
+    /***********************\n     * HELPER UTILITIES    *
+     ***********************/
+    const $ = (sel, all=false, root=document) => all ? [...root.querySelectorAll(sel)] : root.querySelector(sel);
+    const create = (tag, cls='', html='') => { const el = document.createElement(tag); if(cls) el.className = cls; if(html) el.innerHTML = html; return el; };
+    const shuffle = (arr) => arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+
+    const fmtTime = (sec) => {
+      const m = Math.floor(sec/60).toString().padStart(2,'0');
+      const s = Math.floor(sec%60).toString().padStart(2,'0');
+      return `${m}:${s}`;
+    };
+
+    const fillSelect = (el, items) => {
+      el.innerHTML = items.map(v => typeof v === 'string' ? `<option value="${v}">${v}</option>` : `<option value="${v.id}">${v.name}</option>`).join('');
+    };
+
+    const getTopics = (subId) => TOPIK[subId] || [];
+    const getMateri = (subId, topik) => (MATERI[subId] && MATERI[subId][topik]) || null;
+
+    const renderMath = () => { if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise(); };
+
+    /***********************\n     * NAV / SECTIONS      *
+     ***********************/
+    const sections = ['sectionMateri','sectionLatihan','sectionSimulasi'];
+    const tabButtons = [$('#btnMateri'), $('#btnLatihan'), $('#btnSimulasi')];
+    tabButtons.forEach(btn => btn.addEventListener('click', () => {
+      sections.forEach(id => $('#'+id).classList.add('hidden'));
+      tabButtons.forEach(b => b.setAttribute('aria-current','false'));
+      const target = btn.dataset.target;
+      $('#'+target).classList.remove('hidden');
+      btn.setAttribute('aria-current','true');
+    }));
+
+    /***********************\n     * MATERI LOGIC        *
+     ***********************/
+    const materiSubtes = $('#materiSubtes');
+    const materiTopik = $('#materiTopik');
+    const materiRangkuman = $('#materiRangkuman');
+    const materiRumus = $('#materiRumus');
+    const materiContoh = $('#materiContoh');
+    const materiVideo = $('#materiVideo');
+
+    function updateMateriTopik(){ fillSelect(materiTopik, getTopics(materiSubtes.value)); loadMateri(); }
+    function loadMateri(){
+      const m = getMateri(materiSubtes.value, materiTopik.value);
+      if(!m){
+        materiRangkuman.innerHTML = 'Belum ada materi untuk kombinasi ini. Tambahkan di variabel <code>MATERI</code>.';
+        materiRumus.innerHTML = '-';
+        materiContoh.innerHTML = '';
+        materiVideo.innerHTML = 'Video belum tersedia.';
+        return;
+      }
+      materiRangkuman.textContent = m.rangkuman;
+      materiRumus.innerHTML = m.rumus;
+      materiContoh.innerHTML = m.contoh.map((c,i)=>`<div class="p-3 bg-white rounded-xl border border-slate-100"><div class="text-sm mb-1"><span class="font-semibold">Contoh ${i+1}:</span> ${c.tanya}</div><div class="text-xs text-slate-600">Jawab: <span class="font-semibold">${c.jawab}</span></div></div>`).join('');
+      if(m.video){
+        materiVideo.innerHTML = `<iframe class="w-full h-full" src="${m.video}" title="Video YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      } else {
+        materiVideo.textContent = 'Video belum tersedia.';
+      }
+      renderMath();
+    }
+
+    /***********************\n     * LATIHAN LOGIC       *
+     ***********************/
+    const latihanSubtes = $('#latihanSubtes');
+    const latihanTopik = $('#latihanTopik');
+    const latihanContainer = $('#latihanContainer');
+
+    function soalBy(sub, topik){ return (BANK[sub]||[]).filter(s=>!topik || s.topik===topik); }
+
+    function renderLatihan(){
+      const list = soalBy(latihanSubtes.value, latihanTopik.value);
+      if(!list.length){
+        latihanContainer.innerHTML = `<div class='p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm'>Belum ada soal. Tambahkan di variabel <code>BANK</code>.</div>`; return;
+      }
+      latihanContainer.innerHTML = '';
+      list.forEach((q, idx) => {
+        const card = create('div','p-4 border border-slate-200 rounded-2xl bg-white');
+        const header = create('div','flex items-center gap-2 mb-2');
+        header.innerHTML = `<div class='px-2 py-1 rounded-lg bg-slate-100 text-xs font-semibold'>Soal ${idx+1}</div><div class='text-xs text-slate-500'>Tipe: ${q.type.toUpperCase()}</div>`;
+        card.appendChild(header);
+
+        if(q.passage){
+          const passEl = create('div','p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm whitespace-pre-wrap');
+          passEl.textContent = q.passage; card.appendChild(passEl);
+        }
+        if(q.image){
+          const img = create('img','my-2 max-h-64 rounded-xl border'); img.src = q.image; img.alt = 'Gambar Soal'; card.appendChild(img);
+        }
+
+        const stem = create('div','text-sm font-medium'); stem.textContent = q.question || 'Pilih pernyataan yang benar'; card.appendChild(stem);
+
+        const answerArea = create('div','mt-3 space-y-2');
+        let inputs = [];
+        if(q.type==='pg'){
+if(q.table){
+    const tbl = create('table','w-full text-sm border border-slate-200 rounded-lg mb-2');
+    tbl.innerHTML = `<thead class='bg-slate-50'><tr><th class='p-2'>P</th><th class='p-2'>Q</th></tr></thead>
+      <tbody><tr><td class='p-2'>${q.table.P}</td><td class='p-2'>${q.table.Q}</td></tr></tbody>`;
+    answerArea.appendChild(tbl);
+  }
+          (q.options||[]).forEach((op,i)=>{
+            const id = `q${q.id}_${i}`; const row = create('label','flex items-start gap-3 p-2 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer');
+            row.innerHTML = `<input type='radio' name='${q.id}' value='${i}' id='${id}' class='mt-1'> <span>${op}</span>`; inputs.push(()=>row.querySelector('input')); answerArea.appendChild(row);
+          });
+        } else if(q.type==='checkbox'){
+          (q.options||[]).forEach((op,i)=>{
+            const id = `q${q.id}_${i}`; const row = create('label','flex items-start gap-3 p-2 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer');
+            row.innerHTML = `<input type='checkbox' value='${i}' id='${id}' class='mt-1'> <span>${op}</span>`; inputs.push(()=>row.querySelector('input')); answerArea.appendChild(row);
+          });
+        } else if(q.type==='isian'){
+          const inp = create('input','w-full border border-slate-300 rounded-lg p-2', ''); inp.placeholder='Ketik jawaban singkat'; answerArea.appendChild(inp); inputs.push(()=>inp);
+        } else if(q.type==='benarsalah'){
+          const table = create('table','w-full text-sm border border-slate-200 rounded-lg overflow-hidden');
+          table.innerHTML = `<thead class='bg-slate-50'><tr><th class='p-2 text-left'>Pernyataan</th><th class='p-2'>Benar</th><th class='p-2'>Salah</th></tr></thead>`;
+          const tb = create('tbody');
+          (q.statements||[]).forEach((st, i)=>{
+            const tr = create('tr','border-t');
+            tr.innerHTML = `<td class='p-2'>${st.text}</td>
+              <td class='p-2 text-center'><input type='radio' name='${q.id}_${i}' value='true'></td>
+              <td class='p-2 text-center'><input type='radio' name='${q.id}_${i}' value='false'></td>`;
+            tb.appendChild(tr);
+          });
+          table.appendChild(tb); answerArea.appendChild(table); inputs.push(()=>table);
+        }
+        card.appendChild(answerArea);
+
+        const action = create('div','mt-3 flex items-center gap-2');
+        const btnCek = create('button','px-4 py-2 btn bg-emerald-600 hover:bg-emerald-700 text-white font-semibold','Cek');
+        const btnPemb = create('button','px-4 py-2 btn border border-slate-200 hover:bg-slate-100','Pembahasan');
+        const feedback = create('div','ml-auto text-sm');
+        action.append(btnCek, btnPemb, feedback); card.appendChild(action);
+
+        const pemb = create('div','mt-3 hidden p-3 bg-emerald-50 border border-emerald-100 rounded-xl text-sm'); pemb.innerHTML = `<span class='font-semibold'>Pembahasan:</span> ${q.explanation || '-'}`; card.appendChild(pemb);
+if(q.video){
+  const vid = create('iframe','w-full mt-2', '');
+  vid.src = q.video;
+  vid.width = 300; 
+  vid.height = 170; 
+  vid.frameBorder = 0; 
+  vid.allowFullscreen = true;
+  pemb.appendChild(vid);
+}
+
+        btnPemb.addEventListener('click',()=> pemb.classList.toggle('hidden'));
+        btnCek.addEventListener('click',()=>{
+          let correct=false;
+          if(q.type==='pg'){
+            const sel = inputs.map(f=>f()).find(i=>i.checked);
+            correct = sel && Number(sel.value) === Number(q.answer);
+          } else if(q.type==='checkbox'){
+            const vals = inputs.map(f=>f()).filter(i=>i.checked).map(i=>Number(i.value)).sort();
+            const ans = (q.answer||[]).slice().sort();
+            correct = JSON.stringify(vals)===JSON.stringify(ans);
+          } else if(q.type==='isian'){
+            const val = (inputs[0]().value||'').trim().toLowerCase();
+            const ans = (q.answer||'').toString().trim().toLowerCase();
+            correct = val===ans;
+          } else if(q.type==='benarsalah'){
+            const table = inputs[0]();
+            const rows = [...table.querySelectorAll('tbody tr')];
+            correct = rows.every((tr, i)=>{
+              const sel = tr.querySelector('input:checked'); if(!sel) return false;
+              return String(q.statements[i].correct) === sel.value;
+            });
+          }
+          feedback.innerHTML = correct ? `<span class='text-emerald-700 font-semibold'>Benar ✓</span>` : `<span class='text-rose-700 font-semibold'>Belum tepat ✗</span>`;
+        });
+
+        latihanContainer.appendChild(card);
+      });
+      renderMath();
+    }
+
+    /***********************\n     * QUIZ / SIMULASI     *
+     ***********************/
+    const quizSubtes = $('#quizSubtes');
+    const btnMulaiQuiz = $('#btnMulaiQuiz');
+    const quizTimerEl = $('#quizTimer');
+    const quizArea = $('#quizArea');
+    const quizQuestion = $('#quizQuestion');
+    const quizProgress = $('#quizProgress');
+    const quizInfo = $('#quizInfo');
+    const quizResult = $('#quizResult');
+    const btnPrev = $('#btnPrev');
+    const btnNext = $('#btnNext');
+    const btnSubmit = $('#btnSubmit');
+
+    let quizState = { items:[], idx:0, answers:{}, duration:0, left:0, timer:null, sub:'PU' };
+
+    function pickQuizItems(sub){
+      const rule = QUIZ_RULES[sub];
+      const pool = BANK[sub] ? BANK[sub].slice() : [];
+      // duplikasi sampling jika pool kurang
+      const items = []; const shuffled = shuffle(pool);
+      while(items.length < rule.count){
+        if(shuffled.length===0) break;
+        items.push(shuffled[items.length % shuffled.length]);
+      }
+      // Jika pool kosong, buat placeholder PG dummy
+      if(items.length===0){
+        for(let i=0;i<rule.count;i++){
+          items.push({id:`${sub}_D${i}`, type:'pg', question:`(Placeholder) Soal ${i+1} untuk ${sub}`, options:['A','B','C','D'], answer:0, explanation:'Edit BANK untuk menambah soal nyata.'});
+        }
+      }
+      return items.map((q, i)=> ({...q, _no:i+1}));
+    }
+
+    function renderQuizQuestion(){
+      const q = quizState.items[quizState.idx];
+      quizProgress.textContent = `${quizState.idx+1}/${quizState.items.length}`;
+      quizQuestion.innerHTML = '';
+
+      if(q.passage){
+        const pass = create('div','p-3 rounded-xl bg-slate-50 border border-slate-200 text-sm whitespace-pre-wrap'); pass.textContent=q.passage; quizQuestion.appendChild(pass);
+      }
+      if(q.image){ const img = create('img','my-2 max-h-64 rounded-xl border'); img.src=q.image; img.alt='Gambar Soal'; quizQuestion.appendChild(img); }
+
+      const stem = create('div','text-base font-semibold'); stem.textContent = q.question || 'Jawablah pernyataan berikut.'; quizQuestion.appendChild(stem);
+      const area = create('div','mt-3 space-y-2'); quizQuestion.appendChild(area);
+
+      const key = q.id + '_' + quizState.idx; // unique per posisi
+      if(q.type==='pg'){
+        (q.options||[]).forEach((op,i)=>{
+          const row = create('label','flex items-start gap-3 p-2 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer');
+          const inp = create('input'); inp.type='radio'; inp.name=key; inp.value=i;
+          if(quizState.answers[key]==i) inp.checked=true;
+          row.appendChild(inp); row.appendChild(create('span','',op)); area.appendChild(row);
+        });
+      } else if(q.type==='checkbox'){
+        (q.options||[]).forEach((op,i)=>{
+          const row = create('label','flex items-start gap-3 p-2 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer');
+          const inp = create('input'); inp.type='checkbox'; inp.value=i;
+          if(Array.isArray(quizState.answers[key]) && quizState.answers[key].includes(i)) inp.checked=true;
+          row.appendChild(inp); row.appendChild(create('span','',op)); area.appendChild(row);
+        });
+      } else if(q.type==='isian'){
+        const inp = create('input','w-full border border-slate-300 rounded-lg p-2'); inp.placeholder='Ketik jawaban';
+        if(quizState.answers[key]) inp.value = quizState.answers[key];
+        area.appendChild(inp);
+      } else if(q.type==='benarsalah'){
+        const table = create('table','w-full text-sm border border-slate-200 rounded-lg overflow-hidden');
+        table.innerHTML = `<thead class='bg-slate-50'><tr><th class='p-2 text-left'>Pernyataan</th><th class='p-2'>Benar</th><th class='p-2'>Salah</th></tr></thead>`;
+        const tb = create('tbody');
+        (q.statements||[]).forEach((st, i)=>{
+          const tr = create('tr','border-t');
+          const name = key+'_'+i;
+          const saved = quizState.answers[name];
+          tr.innerHTML = `<td class='p-2'>${st.text}</td>
+            <td class='p-2 text-center'><input type='radio' name='${name}' value='true' ${saved==='true'?'checked':''}></td>
+            <td class='p-2 text-center'><input type='radio' name='${name}' value='false' ${saved==='false'?'checked':''}></td>`;
+          tb.appendChild(tr);
+        });
+        table.appendChild(tb); area.appendChild(table);
+      }
+
+      // Save handlers
+      area.addEventListener('change', ()=>{
+        if(q.type==='pg'){
+          const v = area.querySelector('input[type=radio]:checked'); if(v) quizState.answers[key] = Number(v.value);
+        } else if(q.type==='checkbox'){
+          const vs = [...area.querySelectorAll('input[type=checkbox]:checked')].map(i=>Number(i.value)); quizState.answers[key] = vs;
+        } else if(q.type==='isian'){
+          const v = area.querySelector('input'); quizState.answers[key] = v.value;
+        } else if(q.type==='benarsalah'){
+          (q.statements||[]).forEach((st,i)=>{
+            const sel = area.querySelector(`input[name='${key}_${i}']:checked`);
+            if(sel) quizState.answers[`${key}_${i}`] = sel.value;
+          });
+        }
+      });
+    }
+
+    function scoreQuiz(){
+      let correct = 0; const total = quizState.items.length;
+      quizState.items.forEach((q, idx)=>{
+        const key = q.id + '_' + idx;
+        if(q.type==='pg'){
+          const ans = quizState.answers[key]; if(ans!==undefined && Number(ans)===Number(q.answer)) correct++;
+        } else if(q.type==='checkbox'){
+          const vs = quizState.answers[key] || []; const ans = (q.answer||[]).slice().sort();
+          const got = vs.slice().sort(); if(JSON.stringify(got)===JSON.stringify(ans)) correct++;
+        } else if(q.type==='isian'){
+          const v = (quizState.answers[key]||'').toString().trim().toLowerCase();
+          const ans = (q.answer||'').toString().trim().toLowerCase(); if(v===ans) correct++;
+        } else if(q.type==='benarsalah'){
+          const ok = (q.statements||[]).every((st,i)=> quizState.answers[`${key}_${i}`] === String(st.correct));
+          if(ok) correct++;
+        }
+      });
+      return { correct, total, percent: Math.round(100*correct/total) };
+    }
+
+    function stopTimer(){ if(quizState.timer){ clearInterval(quizState.timer); quizState.timer=null; } }
+
+    function startTimer(){
+      stopTimer(); quizTimerEl.textContent = fmtTime(quizState.left);
+      quizState.timer = setInterval(()=>{
+        quizState.left--; quizTimerEl.textContent = fmtTime(Math.max(0, quizState.left));
+        if(quizState.left<=0){ stopTimer(); finishQuiz(true); }
+      },1000);
+    }
+
+    function finishQuiz(auto=false){
+      quizArea.classList.add('hidden'); btnPrev.disabled = btnNext.disabled = true; btnSubmit.disabled = true;
+      const {correct, total, percent} = scoreQuiz();
+      quizResult.classList.remove('hidden');
+      quizResult.innerHTML = `<div class='flex items-start gap-3'>
+        <svg class='h-6 w-6 text-emerald-600' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'/></svg>
+        <div>
+          <div class='font-bold'>${auto? 'Waktu habis! ': ''}Hasil Simulasi</div>
+          <div class='text-sm text-slate-700 mt-1'>Skor: <span class='font-bold'>${correct}/${total}</span> (${percent}%)</div>
+        </div>
+      </div>`;
+    }
+
+    btnPrev.addEventListener('click',()=>{ if(quizState.idx>0){ quizState.idx--; renderQuizQuestion(); } btnPrev.disabled = quizState.idx===0; btnNext.disabled = quizState.idx===quizState.items.length-1; });
+    btnNext.addEventListener('click',()=>{ if(quizState.idx<quizState.items.length-1){ quizState.idx++; renderQuizQuestion(); } btnPrev.disabled = quizState.idx===0; btnNext.disabled = quizState.idx===quizState.items.length-1; });
+    btnSubmit.addEventListener('click',()=>{ stopTimer(); finishQuiz(false); });
+
+    btnMulaiQuiz.addEventListener('click',()=>{
+      const sub = quizSubtes.value; const rule = QUIZ_RULES[sub];
+      quizState.sub = sub; quizState.items = pickQuizItems(sub); quizState.idx = 0; quizState.answers = {}; quizState.duration = Math.round(rule.minutes*60); quizState.left = quizState.duration;
+      $('#quizResult').classList.add('hidden');
+      quizArea.classList.remove('hidden');
+      btnPrev.disabled = true; btnNext.disabled = quizState.items.length<=1;
+      btnSubmit.disabled = false;
+      quizInfo.textContent = `Jumlah soal: ${rule.count} · Waktu: ${rule.minutes} menit`;
+      renderQuizQuestion(); startTimer();
+    });
+
+    /***********************\n     * INIT                *
+     ***********************/
+    function init(){
+      // Fill selects
+      fillSelect(materiSubtes, SUBTESTS);
+      fillSelect(latihanSubtes, SUBTESTS);
+      fillSelect(quizSubtes, SUBTESTS);
+      updateMateriTopik();
+      fillSelect(latihanTopik, getTopics(latihanSubtes.value));
+      renderLatihan();
+
+      // Change handlers
+      materiSubtes.addEventListener('change', updateMateriTopik);
+      materiTopik.addEventListener('change', loadMateri);
+      latihanSubtes.addEventListener('change', ()=>{ fillSelect(latihanTopik, getTopics(latihanSubtes.value)); renderLatihan(); });
+      latihanTopik.addEventListener('change', renderLatihan);
+
+      // Default tab
+      $('#btnMateri').click();
+
+      // Footer year
+      $('#year').textContent = new Date().getFullYear();
+    }
+
+    init();
+  </script>
+</body>
+</html>
