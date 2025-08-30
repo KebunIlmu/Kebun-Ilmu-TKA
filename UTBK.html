@@ -441,7 +441,21 @@ PM: {
     // { id, type: 'pg'|'checkbox'|'benarsalah'|'isian', passage?, image?, question, options?, answer, explanation, statements? }
     const BANK = {
       PU: [
-        { id:'PU1', type:'pg', topik:'Analogi', question:'Pisau : memotong = pena : …', options:['menulis','menggambar','menghapus','mengukur'], answer:0, explanation:'Relasi fungsi: alat dan fungsi utamanya.' },
+        { 
+  id:'PUp1', 
+  type:'benarsalah', 
+  topik:'Penarikan Kesimpulan', 
+  passage:'Negara T adalah negara kepulauan dengan biaya logistik yang tinggi. Pakar logistik menyebutkan hal ini disebabkan tidak meratanya infrastruktur di negara T sehingga tidak semua wilayah dapat dijangkau dengan mudah.', 
+  statements:[
+    { text:'i. Pemerintah membangun banyak infrastruktur baru untuk memastikan pemerataan pembangunan.', correct:true },
+    { text:'ii. Pemerintah memberikan kebijakan insentif pajak bagi industri logistik untuk mengurangi beban biaya.', correct:false },
+    { text:'iii. Masyarakat memilih menggunakan jasa logistik saat berada pada pulau yang sama.', correct:false },
+    { text:'iv. Perusahaan logistik saat ini memastikan bahwa semua wilayah dapat dijangkau dengan mudah.', correct:true },
+    { text:'v. Konsumen memilih perusahaan logistik yang memberikan layanan jangkauan pengiriman yang luas.', correct:false }
+  ], 
+  explanation:'Pernyataan yang memperlemah pendapat pakar adalah (i) dan (iv) karena menunjukkan infrastruktur atau akses sudah merata sehingga alasan pakar tidak berlaku. Sementara (ii), (iii), dan (v) tidak berkaitan langsung dengan pemerataan infrastruktur sehingga tidak melemahkan pendapat.' 
+},
+{ id:'PU1', type:'pg', topik:'Analogi', question:'Pisau : memotong = pena : …', options:['menulis','menggambar','menghapus','mengukur'], answer:0, explanation:'Relasi fungsi: alat dan fungsi utamanya.' },
         { id:'PU2', type:'benarsalah', topik:'Penarikan Kesimpulan', passage:'Premis: Semua atlet disiplin. Budi adalah atlet.', statements:[
           { text:'Budi disiplin.', correct:true },
           { text:'Semua yang disiplin adalah atlet.', correct:false }
@@ -538,6 +552,55 @@ explanation:'Hitung: \\(4^4 = (2^2)^4 = 2^8 = 256\\). Karena ada 4 suku, maka\\(
   answer: 3,
   explanation: 'Irisan \\(A\\) dan \\(B\\) adalah bilangan asli yang merupakan kelipatan 4 sekaligus kelipatan 6. Bilangan tersebut adalah kelipatan dari KPK(4,6) = 12. Jadi \\(A \\cap B = \\{x | x \\in \\mathbb{N}, x \\text{ kelipatan 12}\\}\\). Jawaban benar: D.'
 },
+{
+id:'PKb7',
+type:'pg',
+topik:'Bilangan',
+question:'Suku tengah dari suatu deret aritmetika adalah 34, dengan suku pertama 4 dan suku keempat 22. Manakah pernyataan yang benar antara kuantitas P dan Q berikut berdasarkan informasi yang diberikan?',
+options:[
+'A. P > Q',
+'B. Q > P',
+'C. P = Q',
+'D. Informasi yang diberikan tidak cukup untuk memutuskan'
+],
+table: {
+P: '\\[\\text{Jumlah semua suku deret tersebut}\\]',
+Q: '\\[375\\]'
+},
+answer: 1,
+explanation:'Dari \\(U_1=4\\) dan \\(U_4=22\\) diperoleh  \\( 22=4+3b \\Rightarrow b=6\\). Suku ke-n:\\[ U_n=4+(n-1)\\cdot6=6n-2\\]. Suku tengah =34 berarti \\(U_k=34\\) untuk \\(U_K=\\frac{(a+U_n)}{2}\\). <br>Cari nilai n: \\[U_k=\\frac{4+6n-2}{2}\\]\\[34=\\frac{6n+2}{2}\\]\\[34\\times2=6n+2\\]\\[68=6n+2\\]\\[n=11\\], sehinggaJumlah 11 suku: \\[S_{11}=\\frac{11}{2}(a+U_{11})\\]\\[S_{11}=\\frac{11}{2}(4+6\\cdot11-2)\\]\\[=374\\] Jadi: P=374 dan Q=375 sehingga Q > P.'
+},
+{
+  id: 'PKb8',
+  type: 'pg',
+  topik: 'Bilangan',
+  question: 'Bilangan berikut yang habis dibagi 3, tetapi tidak habis dibagi 5 adalah ….',
+  options: [
+    'A. 12345',
+    'B. 13689',
+    'C. 14670',
+    'D. 15223',
+    'E. 20579'
+  ],
+  answer: 1,
+  explanation: 'Periksa masing-masing bilangan: \n- 12345: jumlah digit 15 → habis dibagi 3, tetapi juga habis dibagi 5 (salah).\n- 13689: jumlah digit 27 → habis dibagi 3, tidak habis dibagi 5 (benar).\n- 14670: jumlah digit 18 → habis dibagi 3, juga habis dibagi 5 (salah).\n- 15223: jumlah digit 13 → tidak habis dibagi 3 (salah).\n- 20579: jumlah digit 23 → tidak habis dibagi 3 (salah).\nJadi jawabannya adalah B (13689).'
+},
+{
+  id: 'PKb9',
+  type: 'pg',
+  topik: 'Bilangan',
+  question: 'Diketahui \\(b = 2c\\) dan \\(b - d = 3\\). Apakah \\(d\\) bilangan prima? Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.\\[(1) d = 2c - 3\\]\\[(2) b - 2c = 0\\]',
+  options: [
+    'A. Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.',
+    'B. Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.',
+    'C. Pernyataan (1) dan (2) cukup untuk menjawab pertanyaan, tetapi salah satu dari keduanya tidak cukup.',
+    'D. Pernyataan (1) atau pernyataan (2) SAJA sudah cukup untuk menjawab pertanyaan.',
+    'E. Pernyataan (1) dan pernyataan (2) tidak cukup untuk menjawab pertanyaan.'
+  ],
+  answer: 0,
+  explanation: 'Diketahui \\(b = 2c\\) dan \\(b - d = 3 \\Rightarrow d = b - 3 = 2c - 3\\).\n\n(1) Diberikan \\(d = 2c - 3\\). Ini sebenarnya identitas yang langsung konsisten dengan syarat awal. Tapi tanpa nilai spesifik \\(c\\), kita tidak tahu apakah \\(d\\) prima (contoh: jika \\(c=3\\), maka \\(d=3\\) → prima; jika \\(c=4\\), maka \\(d=5\\) → prima; jika \\(c=5\\), maka \\(d=7\\) → prima; jika \\(c=6\\), maka \\(d=9\\) → bukan prima). Jadi hanya dengan (1) tetap belum bisa memastikan. Namun, sebenarnya dari syarat awal saja sudah kita dapatkan hal yang sama.\n\n(2) Diberikan \\(b - 2c = 0 \\Rightarrow b = 2c\\). Ini juga hanya mengulang kondisi awal, tidak memberi informasi tambahan.\n\nKedua pernyataan tidak cukup untuk memastikan keprimaan \\(d\\), karena \\(d\\) bisa prima atau tidak tergantung nilai \\(c\\).\n\nSehingga jawaban seharusnya: E.'
+},
+
   { 
   id:'PKg1', 
   type:'pg', 
@@ -570,6 +633,48 @@ video: 'https://www.youtube.com/embed/mWYLCPMtgCY'
   ],
   answer: [1,3],
   explanation: 'Persamaan garis dengan gradien \\(m=\\tfrac{1}{3}\\) melalui titik (3,1): <br>\\(y - 1 = \\tfrac{1}{3}(x - 3)\\) → \\(y = \\tfrac{1}{3}x\\).<br><br>Cek titik:<br>(-3,0): seharusnya \\(y = -1\\), tidak cocok.<br>(0,0): seharusnya \\(y=0\\), cocok, tetapi saat substitusi persamaan lengkap ternyata hasilnya benar. (0,0) memenuhi. **(→ koreksi, 0,0 ada di garis!)**<br>(-6,4): seharusnya \\(y = -2\\), tidak cocok.<br>(6,2): seharusnya \\(y=2\\), cocok.<br><br>Jadi titik yang terletak pada garis adalah (2) dan (4).'
+},
+{
+  "id": "PKg3",
+  "type": "checkbox",
+  "topik": "Geometri",
+  "question": "Kubus ABCD.EFGH dipotong oleh bidang yang melalui diagonal HF, membentuk sudut 30° terhadap diagonal EG, dan memotong rusuk AE di P. Jika panjang rusuk kubus = 1, maka pernyataan yang benar adalah ...",
+  "options": [
+    "(1) Panjang EP = \\(\\tfrac{1}{6}\\sqrt{6}\\)",
+    "(2) Panjang AP = \\(1-\\tfrac{1}{6}\\sqrt{6}\\)",
+    "(3) Sudut EPK = 60° (dengan K = titik potong bidang dengan diagonal EG)",
+    "(4) Panjang PH = \\(\\tfrac{1}{6}\\sqrt{42}\\)"
+  ],
+  "answer": [0,1,2,3],
+  "explanation": "Letak koordinat (ambil A(0,0,0), B(1,0,0), C(1,1,0), D(0,1,0), E(0,0,1), F(1,0,1), G(1,1,1), H(0,1,1)).\n\n- Vektor HF = (1,-1,0) dan EG = (1,1,0). Agar bidang melalui HF membentuk sudut 30° dengan garis EG, normal bidang n harus memenuhi n·HF = 0 dan |(n·EG)|/(|n||EG|)=sin30°=1/2. Dari kondisi pertama diperoleh n_x = n_y. Dari kondisi kedua diperoleh n_z = ±√6 n_x. Untuk memastikan potongan pada rusuk AE (0≤z≤1) kita ambil tanda negatif: n=(1,1,-√6).\n\n- Persamaan bidang melalui H(0,1,1): (1,1,-√6)·(x,y,z-(0,1,1))=0 → x+y-√6 z = 1-√6.\n\n- Irisan dengan AE (x=0,y=0) → -√6 z = 1-√6 → z_P = 1 - 1/√6 = 1 - \\(\\tfrac{\\sqrt{6}}{6}\\). Maka\n  - EP = 1 - z_P = 1/√6 = \\(\\tfrac{\\sqrt{6}}{6}\\). (benar opsi 1)\n  - AP = z_P = 1 - 1/√6 = 1 - \\(\\tfrac{\\sqrt{6}}{6}\\). (benar opsi 2)\n\n- Titik potong bidang dengan EG: param EG: (t,t,1). Masukkan ke persamaan bidang → 2t-√6·1 = 1-√6 → t=1/2. Jadi K=(1/2,1/2,1).\n  - Vektor PE = E-P = (0,0,1/√6), PK = K-P = (1/2,1/2,1/√6).\n  - Dot(PE,PK) = (1/√6)*(1/√6)=1/6. |PE|=1/√6. |PK|=√(1/4+1/4+1/6)=√(2/3)=√6/3. Maka cos∠EPK = (1/6)/((1/√6)*(√6/3)) = (1/6)/(1/3)=1/2 ⇒ ∠EPK = 60°. (benar opsi 3)\n\n- Jarak PH: H(0,1,1), P(0,0,z_P) → PH = √(1 + (1- z_P)^2) = √(1 + (1/√6)^2) = √(7/6) = \\(\\tfrac{\\sqrt{42}}{6}\\). (benar opsi 4)\n\nKesimpulan: semua pernyataan (1), (2), (3), dan (4) **benar**."
+},
+{
+  id: 'PKg4',
+  type: 'checkbox',
+  topik: 'Geometri',
+  question: 'Titik P dan Q berturut-turut terletak pada rusuk AB dan BC kubus ABCD.EFGH dengan PA:PB = 1:2 dan BQ:QC = 1:1. Manakah dari tiga pernyataan berikut yang bernilai benar berdasarkan informasi di atas?',
+  options: [
+    '1. Perbandingan volume limas PBQ F dan volume kubus ABCD.EFGH = 1:18',
+    '2. Perbandingan luas ΔPBQ dengan luas persegi ABCD = 1:6.',
+    '3. Perbandingan luas ΔPBQ dengan luas persegi ABCD = 1:6.\n3. PQ : AC = 1 : \\(\\sqrt{2}\\).'
+  ],
+  answer: [0, 1],
+  explanation: 'Ambil rusuk kubus = s. Dari PA:PB = 1:2 → P pada AB dengan AP = s/3 (koordinat P = (s/3,0,0)). Dari BQ:QC = 1:1 → Q adalah titik tengah BC (koordinat Q = (s, s/2, 0)).\n\n1) Luas ΔPBQ = s^2/6. Volume limas dengan alas ΔPBQ dan titik puncak F (tinggi = s) adalah (1/3)×(s^2/6)×s = s^3/18. Volume kubus = s^3. Perbandingan = (s^3/18) : s^3 = 1 : 18 → BENAR.\n\n2) Perbandingan luas ΔPBQ terhadap luas persegi ABCD = (s^2/6) : s^2 = 1 : 6 → BENAR.\n\n3) PQ = s·(5/6) (dari jarak antara P dan Q); AC = s·\\(\\sqrt{2}\\). Maka PQ:AC = (5/6) : \\(\\sqrt{2}\\) = 5/(6\\sqrt{2}), bukan 1/\\(\\sqrt{2}\\) → SALAH.\n\nJadi yang benar: (1) dan (2).'
+},
+{
+  id: 'PKg5',
+  type: 'pg',
+  topik: 'Geometri',
+  question: 'Diketahui segitiga \\(ABC\\) dengan \\(\\angle B = 30^\\circ\\). Apakah segitiga \\(ABC\\) siku-siku? Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.\\[(1) \\angle A - \\angle C = 20^\\circ\\].\\[(2) \\angle C < \\angle A\\].',
+  options: [
+    'A. Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.',
+    'B. Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.',
+    'C. Pernyataan (1) dan (2) cukup untuk menjawab pertanyaan, tetapi salah satu dari keduanya tidak cukup.',
+    'D. Pernyataan (1) atau pernyataan (2) SAJA sudah cukup untuk menjawab pertanyaan.',
+    'E. Pernyataan (1) dan pernyataan (2) tidak cukup untuk menjawab pertanyaan.'
+  ],
+  answer: 0,
+  explanation: 'Karena \\(\\angle B=30^\\circ\\), maka \\(\\angle A+\\angle C=150^\\circ\\).\n\n(1) Dari \\(\\angle A-\\angle C=20^\\circ\\) dan \\(\\angle A+\\angle C=150^\\circ\\) kita peroleh 2\\(\\angle A=170^\\circ\\) → \\(\\angle A=85^\\circ\\), \\(\\angle C=65^\\circ\\). Tidak ada sudut 90^\\circ, jadi kita dapat memutuskan: **tidak siku-siku**. Jadi pernyataan (1) **cukup**.\n\n(2) Hanya tahu \\(\\angle C<\\angle A\\) dengan \\(\\angle A+\\angle C=150^\\circ\\) tidak cukup untuk menentukan apakah salah satu sudut itu 90^\\circ. Misalnya jika \\(\\angle A=90^\\circ,\\ \\angle C=60^\\circ\\) maka siku-siku; tetapi jika \\(\\angle A=80^\\circ,\\ \\angle C=70^\\circ\\) maka tidak siku-siku. Jadi pernyataan (2) **tidak cukup**.\n\nKesimpulan: (1) saja cukup, (2) saja tidak cukup → pilihan A.'
 },
 
   { 
@@ -654,7 +759,69 @@ explanation: 'Persamaan potong: \\(x^2 - 6x + 8 = -(x-3)^2 + 1\\). Ubah kanan: \
   answer: [0, 2],
   explanation: 'Diketahui: \\[(g\\circ f)(x)=g(f(x)) = \\frac{2f(x)+1}{f(x)}+1\\]. Substitusi \\(f(x)=ax+b\\):\\[g(f(x)) = \\frac{2(ax+b)+1}{ax+b}+1 = \\frac{2ax+2b+1}{ax+b}+1\\].Ubah bentuk:\\[= \\frac{2ax+2b+1}{ax+b}+1 = \\frac{2ax+2b+1 + (ax+b)}{ax+b} = \\frac{3ax+3b+1}{ax+b}.\\]Diberikan sama dengan \\[3+\\tfrac{1}{2x+1} = \\frac{6x+4}{2x+1}\\].\n\nMaka berlaku identitas:\\[\\frac{3ax+3b+1}{ax+b} = \\frac{6x+4}{2x+1}.\\]Samakan sehingga kita bisa ambil bagian bawah atau atas, misalkan ambil bagian bawah kita samakan\\[2x+1 = ax+b.\\]Maka: \\[a=2 \\quad b=1.\\]sehingga:\\[a-b = 1 \\quad a+b=3 \\]jadi jawaban yang benar (1) dan (3).'
 },
+{
+  id: 'PKa8',
+  type: 'pg',
+  topik: 'Aljabar dan Fungsi',
+  question: 'Kurva \\(y = ax^2 + 2x + 1\\) dengan \\(a \\neq 0\\) memotong sumbu-\\(x\\) di dua titik berbeda. Pernyataan yang benar adalah ….',
+  options: [
+    'A. a < 1',
+    'B. 6a < 1',
+    'C. a > 1',
+    'D. 3a > 1',
+    'E. 3a > 2'
+  ],
+  answer: 0,
+  explanation: 'Agar kurva \\(y = ax^2 + 2x + 1\\) memotong sumbu-\\(x\\) di dua titik berbeda, diskriminannya harus positif: \n\\(D = b^2 - 4ac = (2)^2 - 4(a)(1) = 4 - 4a\\).\nSyarat: \\(D > 0 \\Rightarrow 4 - 4a > 0 \\Rightarrow a < 1\\).\nJadi pernyataan yang benar adalah A.'
+},
 
+{
+  id:'PKa9',
+  type:'pg',
+  topik:'Aljabar dan Fungsi',
+  question:'Garis singgung kurva \\(y = x^3 - 3x^2 - 9x\\) di titik \\((a,b)\\) mempunyai gradien 15. Manakah pernyataan yang benar antara kuantitas P dan Q berikut berdasarkan informasi yang diberikan?',
+  options:[
+    'A. P > Q',
+    'B. Q > P',
+    'C. P = Q',
+    'D. Informasi yang diberikan tidak cukup untuk memutuskan'
+  ],
+  table: {
+    P: '\\[a+b\\]',
+    Q: '\\[-5\\]'
+  },
+  answer: 3,
+  explanation:'Turunan: \\[y\' = 3x^2 - 6x - 9\\]. Syarat gradien 15: \\[3a^2 - 6a - 9 = 15 \\]\\[ a^2 - 2a - 8 = 0 \\]\\[a= 4 \\text{ atau } a=-2.\\]Untuk \\(a=4\\): \\[b = -20 \\]\\[a+b = -16.\\]Untuk \\(a=-2\\): \\[b = -2 \\]\\[a+b = -4.\\],P>Q dan P<Q maka tidak bisa ditentukan jawabnnya D.',
+},
+{
+  id: 'PKa10',
+  type: 'pg',
+  topik: 'Aljabar dan Fungsi',
+  question: 'Kurva \\(y = ax^2 + 2x + 1\\) dengan \\(a \\neq 0\\) memotong sumbu-\\(x\\) di dua titik berbeda. Pernyataan yang benar adalah ….',
+  options: [
+    'A. kurva terbuka ke atas',
+    'B. kurva terbuka ke bawah',
+    'C. kurva memotong sumbu-\\(y\\) positif',
+    'D. kurva memotong sumbu-\\(y\\) negatif',
+    'E. titik puncak kurva berada di kuadran I'
+  ],
+  answer: 2,
+  explanation: 'Untuk \\(x=0\\), diperoleh \\(y=1\\). Artinya, kurva memotong sumbu-\\(y\\) pada titik \\((0,1)\\), yaitu pada sumbu-\\(y\\) positif. Jadi pernyataan yang benar adalah C.'
+},
+{
+  id: 'PKa11',
+  type: 'checkbox',
+  topik: 'Aljabar dan Fungsi',
+  question: 'Garis dengan persamaan mana saja yang memotong garis \\(2x + y = 4\\) dan \\(x + 2y = 2\\) di dua titik berbeda?',
+  options: [
+    '1. \\(y = -x + 5\\)',
+    '2. \\(y = x - 2\\)',
+    '3. \\(y = 3x - 1\\)',
+    '4. \\(y = -2x + 7\\)'
+  ],
+  answer: [0, 1, 2],
+  explanation: 'Persamaan garis pertama: \\(2x + y = 4 \\Rightarrow y = -2x + 4\\). Kedua: \\(x + 2y = 2 \\Rightarrow y = -\\tfrac{1}{2}x + 1\\).\n\n- (1) \\(y = -x + 5\\): gradien -1, berbeda dari -2 dan -1/2, jadi memotong keduanya.\n- (2) \\(y = x - 2\\): gradien 1, berbeda dari -2 dan -1/2, jadi memotong keduanya.\n- (3) \\(y = 3x - 1\\): gradien 3, berbeda dari -2 dan -1/2, jadi memotong keduanya.\n- (4) \\(y = -2x + 7\\): gradien -2, sejajar dengan garis pertama, tidak memotongnya.\n\nJadi yang benar adalah (1), (2), dan (3).'
+},
   { 
   id: 'PKs1', 
   type: 'isian', 
@@ -663,6 +830,72 @@ explanation: 'Persamaan potong: \\(x^2 - 6x + 8 = -(x-3)^2 + 1\\). Ubah kanan: \
   answer: '40',
   explanation: 'Jumlah keenam data = 32 sehingga b = 9. Data lengkap: 1,3,4,7,8,9. Jangkauan = 9-1=8, rata-rata = 32/6 = 16/3. Maka jangkauan dikurangi rata-rata = 8 - 16/3 = 8/3. Dengan (jangkauan - rata-rata) = Q/15, diperoleh Q = 8/3 × 15 = 40.', 
   video: 'https://www.youtube.com/embed/XZJWaIX1iZQ'
+},
+{ 
+  id:'PKs2', 
+  type:'pg', 
+  topik:'Statistika dan Peluang', 
+  question:'Suatu desa berpenduduk 5000 jiwa, terdiri atas kelompok SD, SMP, SMA, dan Perguruan Tinggi. Perbandingan jumlah penduduk berpendidikan SD : SMP : SMA adalah 2 : 6 : 4 dan persentase penduduk berpendidikan Perguruan Tinggi adalah 4% dari total penduduk desa. Manakah pernyataan yang benar antara kuantitas P dan Q berikut berdasarkan informasi yang diberikan?', 
+  options:[ 
+    'A. P > Q', 
+    'B. Q > P', 
+    'C. P = Q', 
+    'D. Informasi yang diberikan tidak cukup untuk memutuskan' 
+  ], 
+  table: { 
+    P: '\\[1000\\]', 
+    Q: '\\[\\text{Jumlah penduduk berpendidikan SD}\\]' 
+  }, 
+  answer: 0, 
+  explanation:'Jumlah penduduk Perguruan Tinggi = 4% × 5000 = 200 orang. Sisa = 5000 - 200 = 4800 orang terbagi SD:SMP:SMA = 2:6:4 (total 12 bagian). SD = 2/12 × 4800 = 800 orang. Maka P = 1000, Q = 800 → Q < P. Jadi jawaban benar: A. P > Q.'
+},
+{
+  id:'PKs3',
+  type:'pg',
+  topik:'Statistika dan Peluang',
+  question:'Pada percobaan melempar dua buah dadu sekaligus, pernyataan berikut yang benar ada sebanyak ...\\[\\text{(1) peluang munculnya jumlah mata dadu tidak lebih dari 6 adalah 5/18}\\] \\[\\text{(2)banyaknya kejadian munculnya angka kembar sebanyak 6}\\]\\[\\text{(3) banyaknya seluruh kemungkinan yang dapat terjadi adalah 12}\\]\\[\\text{(4)peluang munculnya selisih mata dadu kurang dari 2 adalah 4/9}\\]',
+  options:[
+    '0',
+    '1',
+    '2',
+    '3',
+    '4'
+  ],
+  answer: 2,
+  explanation:'(1) Salah, peluang jumlah ≤6 = 15/36=5/12, bukan 5/18. (2) Benar, ada 6 kejadian angka kembar. (3) Salah, ruang sampel 36 bukan 12. (4) Benar, peluang selisih <2 adalah 16/36=4/9. Jadi yang benar ada 2 pernyataan.'
+},
+{
+  id: 'PKs4',
+  type: 'pg',
+  topik: 'Statistika dan Peluang',
+  question: 'Diberikan kumpulan data 3, 5, 7, a. Berapakah banyaknya dari empat pernyataan berikut yang bernilai benar berdasarkan informasi di atas?\\[\\text{1. Rata-rata kumpulan data tersebut 6 bila a=9}\\]\\[\\text{2. Median kumpulan data tersebut 5 bila a=7}\\]\\[\\text{3. Jangkauan kumpulan data tersebut 4 bila a=6}\\]\\[\\text{4. Modus kumpulan data tersebut 3 bila a=5}\\]',
+  options: [
+    'A. 0',
+    'B. 1',
+    'C. 2',
+    'D. 3',
+    'E. 4'
+  ],
+  answer: 2,
+  explanation: 'Periksa pernyataan:\n1. a=9 → data = {3,5,7,9}, rata-rata = (3+5+7+9)/4 = 24/4 = 6 (benar).\n2. a=7 → data = {3,5,7,7}, median = (5+7)/2 = 6, bukan 5 (salah).\n3. a=6 → data = {3,5,6,7}, jangkauan = 7-3 = 4 (benar).\n4. a=5 → data = {3,5,5,7}, modus = 5, bukan 3 (salah).\nJadi hanya pernyataan (1) dan (3) yang benar → jumlah benar = 2. Jawaban: C.'
+},
+{ 
+  id:'PKs5', 
+  type:'pg', 
+  topik:'Statistika dan Peluang', 
+  question:'Tiga bola diambil dari sebuah kotak yang berisi 3 bola merah dan 2 bola putih. Misalkan B menyatakan kejadian terambilnya 2 bola merah dan 1 bola putih dan P(B) menyatakan peluang kejadian B. Berdasarkan informasi yang diberikan, manakah hubungan antara kuantitas P dan Q berikut yang benar?', 
+  options:[ 
+    'A. P > Q', 
+    'B. Q > P', 
+    'C. P = Q', 
+    'D. Tidak dapat ditentukan hubungan' 
+  ], 
+  table: { 
+    P: '\\[P(B)\\]', 
+    Q: '\\[\\tfrac{3}{10}\\]' 
+  }, 
+  answer: 0, 
+  explanation:'Jumlah cara mengambil 3 bola dari 5 adalah \\(\\binom{5}{3} = 10\\). Banyak cara mengambil 2 merah dari 3 dan 1 putih dari 2 adalah \\(\\binom{3}{2}\\times\\binom{2}{1} = 3\\times2 = 6\\). Jadi \\(P(B) = 6/10 = 3/5 = 0,6\\). Sementara Q = 3/10 = 0,3. Maka P > Q. Jawaban benar: A.' 
 },
 
 
