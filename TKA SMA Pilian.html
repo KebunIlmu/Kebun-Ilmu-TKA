@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- MathJax untuk tampilan rumus -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <title>Kebun Ilmu – Media Pembelajaran Interaktif</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#10b981;--brand-2:#22d3ee}
+    html,body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji"}
+    .glass{backdrop-filter:saturate(180%) blur(10px); background:linear-gradient(180deg,rgba(255,255,255,.8),rgba(255,255,255,.6))}
+    .chip{border:1px solid rgba(0,0,0,.06);}
+    .btn{transition:transform .05s ease}
+    .btn:active{transform:translateY(1px) scale(.99)}
+    details>summary{list-style:none}
+    details>summary::-webkit-details-marker{display:none}
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-sky-50 via-emerald-50 to-white text-gray-800">
+  <!-- Header / Brand -->
+  <header class="sticky top-0 z-40 border-b border-emerald-100/60 glass">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-3">
+      <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png" alt="Logo Kebun Ilmu" class="w-10 h-10 rounded-xl shadow" />
+      <div class="flex-1">
+        <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight">
+          Kebun Ilmu <span class="text-emerald-600">— Media Pembelajaran Interaktif</span>
+        </h1>
+        <p class="text-xs sm:text-sm text-gray-500">Materi · Latihan · Simulasi TKA SMA</p>
+      </div>
+      <nav class="hidden sm:flex items-center gap-2">
+        <button data-tab="materi" class="tab-btn btn px-3 py-2 rounded-xl bg-emerald-600 text-white text-sm font-medium shadow hover:shadow-md">Materi</button>
+        <button data-tab="latihan" class="tab-btn btn px-3 py-2 rounded-xl bg-white text-gray-700 text-sm font-medium border chip hover:bg-gray-50">Latihan Soal</button>
+        <button data-tab="simulasi" class="tab-btn btn px-3 py-2 rounded-xl bg-white text-gray-700 text-sm font-medium border chip hover:bg-gray-50">Simulasi TKA</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Tab Switcher -->
+  <div class="sm:hidden sticky top-[60px] z-30 bg-white/80 backdrop-blur border-b border-emerald-100/60">
+    <div class="max-w-6xl mx-auto px-4 py-2 grid grid-cols-3 gap-2">
+      <button data-tab="materi" class="tab-btn btn py-2 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Materi</button>
+      <button data-tab="latihan" class="tab-btn btn py-2 rounded-lg bg-white border chip text-xs font-semibold">Latihan</button>
+      <button data-tab="simulasi" class="tab-btn btn py-2 rounded-lg bg-white border chip text-xs font-semibold">Simulasi</button>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+    <!-- Info links to Pusmendik -->
+    <section class="mb-6">
+      <div class="p-4 sm:p-5 rounded-2xl bg-white/80 border border-emerald-100 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
+          <p class="text-sm text-gray-700">Materi & contoh soal resmi dapat diakses dari Pusmendik:</p>
+          <div class="flex flex-wrap gap-2">
+            <a class="btn inline-flex items-center gap-2 px-3 py-2 rounded-xl border chip text-xs sm:text-sm bg-white hover:bg-gray-50"
+               target="_blank" href="https://pusmendik.kemdikbud.go.id/tka/tka/view/mata-pelajaran-wajib/sma" rel="noopener">
+              📚 Materi TKA SMA (Pusmendik)
+            </a>
+            <a class="btn inline-flex items-center gap-2 px-3 py-2 rounded-xl border chip text-xs sm:text-sm bg-white hover:bg-gray-50"
+               target="_blank" href="https://pusmendik.kemdikbud.go.id/tka/simulasi_tka" rel="noopener">
+              🧪 Simulasi Resmi TKA
+            </a>
+          </div>
+        </div>
+        <p class="mt-2 text-xs text-gray-500">Catatan: beberapa situs mungkin membatasi <em>embed</em> dalam iframe. Tautan di atas akan membuka tab baru.</p>
+      </div>
+    </section>
+
+    <!-- Tabs content wrapper -->
+    <section id="tab-materi" class="tab-pane">
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="md:col-span-1 space-y-4">
+          <div class="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h2 class="font-bold text-lg">Pilih Materi</h2>
+            <label class="block mt-3 text-sm">Mata Pelajaran</label>
+            <select id="materiMapel" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300">
+              <!-- Diisi via JS -->
+            </select>
+            <label class="block mt-3 text-sm">Bab</label>
+            <select id="materiBab" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300">
+            </select>
+            <button id="btnLoadMateri" class="btn mt-4 w-full py-2 rounded-xl bg-emerald-600 text-white font-semibold">Tampilkan</button>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h3 class="font-semibold">Sumber Resmi</h3>
+            <p class="text-sm text-gray-600 mt-1">Buka ringkasan materi versi Pusmendik:</p>
+            <a target="_blank" rel="noopener" href="https://pusmendik.kemdikbud.go.id/tka/tka/view/mata-pelajaran-wajib/sma" class="inline-block mt-2 px-3 py-2 rounded-xl border chip hover:bg-gray-50 text-sm">📖 Buka Halaman Materi</a>
+          </div>
+        </div>
+
+        <div class="md:col-span-2 space-y-4">
+          <div class="p-5 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h2 class="font-bold text-xl flex items-center gap-2">📘 Ringkasan Materi</h2>
+            <div id="materiKonten" class="prose prose-sm sm:prose lg:prose-lg max-w-none mt-3"></div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h2 class="font-bold text-xl flex items-center gap-2">🎬 Video Pembelajaran</h2>
+            <div id="materiVideo" class="aspect-video w-full overflow-hidden rounded-xl bg-gray-100 flex items-center justify-center text-gray-400">
+              <span class="text-sm">Pilih materi untuk memuat video…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-latihan" class="tab-pane hidden">
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="md:col-span-1 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <h2 class="font-bold text-lg">Pengaturan Latihan</h2>
+          <label class="block mt-3 text-sm">Mata Pelajaran</label>
+          <select id="latihMapel" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300"></select>
+          <label class="block mt-3 text-sm">Bab</label>
+          <select id="latihBab" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300"></select>
+          <button id="btnLoadLatihan" class="btn mt-4 w-full py-2 rounded-xl bg-emerald-600 text-white font-semibold">Muat Soal</button>
+        </div>
+        <div class="md:col-span-2 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <div class="flex items-center justify-between">
+            <h2 class="font-bold text-xl">Latihan Soal</h2>
+            <button id="btnPeriksaSemua" class="btn px-3 py-2 rounded-xl border chip text-sm">Cek Semua</button>
+          </div>
+          <div id="latihanContainer" class="mt-3 space-y-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-simulasi" class="tab-pane hidden">
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="md:col-span-1 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <h2 class="font-bold text-lg">Pengaturan Simulasi</h2>
+          <label class="block mt-3 text-sm">Mata Pelajaran</label>
+          <select id="simMapel" class="w-full mt-1 px-3 py-2 rounded-xl border chip"></select>
+          <label class="block mt-3 text-sm">Jumlah Soal</label>
+          <input id="simJumlah" type="number" min="5" max="50" value="10" class="w-full mt-1 px-3 py-2 rounded-xl border chip" />
+          <label class="block mt-3 text-sm">Durasi (menit)</label>
+          <input id="simDurasi" type="number" min="5" max="180" value="15" class="w-full mt-1 px-3 py-2 rounded-xl border chip" />
+          <button id="btnMulaiSim" class="btn mt-4 w-full py-2 rounded-xl bg-emerald-600 text-white font-semibold">Mulai Simulasi</button>
+          <p class="text-xs text-gray-500 mt-2">Timer akan berjalan. Skor & pembahasan ditampilkan setelah selesai.</p>
+        </div>
+        <div class="md:col-span-2 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <div class="flex items-center justify-between">
+            <h2 class="font-bold text-xl">Simulasi TKA</h2>
+            <div id="simInfo" class="text-sm text-gray-600">Belum mulai</div>
+          </div>
+          <div id="simContainer" class="mt-3 space-y-4"></div>
+          <div id="simHasil" class="mt-4 hidden p-4 rounded-xl border chip bg-emerald-50"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 sm:px-6 pb-10">
+    <div class="mt-10 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm text-xs text-gray-500">
+      <p><strong>Kebun Ilmu</strong> – Aplikasi belajar mandiri. Konten ringkasan & soal di sini adalah contoh yang disusun menyerupai format TKA. Untuk rujukan resmi gunakan tautan Pusmendik di atas.</p>
+    </div>
+  </footer>
+
+  <!-- App Data & Logic -->
+  <script>
+  // ======= Dataset Contoh (DISERAGAMKAN DENGAN TKA SMA) =======
+  // Struktur: mapel -> bab[] -> materi (html), video (YT embed id), soal[]
+  const DB = {
+    'Matematika Tingkat Lanjut': {
+  bab: {
+    'Matriks': {
+      materi: `
+  <h2 class="text-xl font-bold mb-2">Matriks</h2>
+  <p>
+    Pada bab ini dipelajari konsep dasar, operasi, dan aplikasi matriks untuk menyelesaikan berbagai permasalahan dalam matematika dan kehidupan sehari-hari.
+  </p>
+  
+  <h3 class="text-lg font-semibold mt-4">1. Operasi Matriks</h3>
+  <p>
+    Operasi pada matriks meliputi penjumlahan, pengurangan, perkalian skalar, dan perkalian antar matriks.
+  </p>
+  <ul class="list-disc ml-6 mb-4">
+    <li><b>Penjumlahan/Pengurangan:</b> hanya dapat dilakukan jika ordo matriks sama.</li>
+    <li><b>Perkalian Skalar:</b> setiap elemen matriks dikalikan dengan suatu bilangan.</li>
+    <li><b>Perkalian Matriks:</b> matriks \\( A \\) (ordo \\( m \\times n \\)) dapat dikalikan dengan matriks \\( B \\) (ordo \\( n \\times p \\)), hasilnya matriks berordo \\( m \\times p \\).</li>
+  </ul>
+  <p class="mt-2"><b>Contoh:</b></p>
+  <p>
+    Jika 
+    \\( A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix} \\), 
+    \\( B = \\begin{bmatrix} 2 & 0 \\\\ 1 & 3 \\end{bmatrix} \\), 
+    maka:
+  </p>
+  <ul class="list-disc ml-6 mb-4">
+    <li>\\( A + B = \\begin{bmatrix} 3 & 2 \\\\ 4 & 7 \\end{bmatrix} \\)</li>
+    <li>\\( A - B = \\begin{bmatrix} -1 & 2 \\\\ 2 & 1 \\end{bmatrix} \\)</li>
+    <li>\\( 2A = \\begin{bmatrix} 2 & 4 \\\\ 6 & 8 \\end{bmatrix} \\)</li>
+    <li>\\( AB = \\begin{bmatrix} 4 & 6 \\\\ 10 & 12 \\end{bmatrix} \\)</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold mt-4">2. Determinan Matriks</h3>
+  <p>
+    Determinan hanya didefinisikan untuk matriks persegi (ordo \\( n \\times n \\)).
+  </p>
+  <p>
+    Untuk matriks 2×2:
+    \\( A = \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix} \\) <br>
+    maka 
+    \\( \\det(A) = ad - bc \\).
+  </p>
+  <p class="mt-2"><b>Contoh:</b></p>
+  <p>
+    Jika \\( A = \\begin{bmatrix} 2 & 3 \\\\ 1 & 4 \\end{bmatrix} \\), maka 
+    \\( \\det(A) = (2)(4) - (3)(1) = 8 - 3 = 5 \\).
+  </p>
+
+  <h3 class="text-lg font-semibold mt-4">3. Invers Matriks</h3>
+  <p>
+    Invers matriks \\( A \\) (ordo 2×2) hanya ada jika \\( \\det(A) \\neq 0 \\). Rumusnya:
+  </p>
+  <p>
+    Jika \\( A = \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix} \\), maka
+    \\( A^{-1} = \\frac{1}{ad-bc} \\begin{bmatrix} d & -b \\\\ -c & a \\end{bmatrix} \\).
+  </p>
+  <p class="mt-2"><b>Contoh:</b></p>
+  <p>
+    Jika \\( A = \\begin{bmatrix} 2 & 1 \\\\ 5 & 3 \\end{bmatrix} \\), maka:
+    <br>
+    \\( \\det(A) = (2)(3) - (1)(5) = 6 - 5 = 1 \\).
+    <br>
+    \\( A^{-1} = \\begin{bmatrix} 3 & -1 \\\\ -5 & 2 \\end{bmatrix} \\).
+  </p>
+
+  <h3 class="text-lg font-semibold mt-4">4. Aplikasi Matriks dalam Program Linear</h3>
+  <p>
+    Matriks dapat digunakan untuk menyelesaikan sistem persamaan linear (SPL) dengan metode invers matriks atau aturan Cramer.
+  </p>
+  <p class="mt-2"><b>Contoh:</b></p>
+  <p>
+    Selesaikan SPL berikut dengan metode matriks:
+    <br>
+    \\(
+      \\begin{cases}
+        2x + y = 5 \\\\
+        x + 3y = 7
+      \\end{cases}
+    \\)
+  </p>
+  <p>
+    Matriks koefisien \\( A = \\begin{bmatrix} 2 & 1 \\\\ 1 & 3 \\end{bmatrix} \\), 
+    matriks variabel \\( X = \\begin{bmatrix} x \\\\ y \\end{bmatrix} \\), 
+    matriks hasil \\( B = \\begin{bmatrix} 5 \\\\ 7 \\end{bmatrix} \\).
+  </p>
+  <p>
+    Sehingga \\( AX = B \\) → \\( X = A^{-1}B \\).
+  </p>
+  <p>
+    \\( \\det(A) = (2)(3) - (1)(1) = 6 - 1 = 5 \\).
+    <br>
+    \\( A^{-1} = \\frac{1}{5} \\begin{bmatrix} 3 & -1 \\\\ -1 & 2 \\end{bmatrix} \\).
+  </p>
+  <p>
+    Hitung: 
+    \\( X = \\frac{1}{5} \\begin{bmatrix} 3 & -1 \\\\ -1 & 2 \\end{bmatrix} \\begin{bmatrix} 5 \\\\ 7 \\end{bmatrix} \\).
+    <br>
+    \\( X = \\frac{1}{5} \\begin{bmatrix} (3)(5) + (-1)(7) \\\\ (-1)(5) + (2)(7) \\end{bmatrix} = \\frac{1}{5} \\begin{bmatrix} 15 - 7 \\\\ -5 + 14 \\end{bmatrix} = \\frac{1}{5} \\begin{bmatrix} 8 \\\\ 9 \\end{bmatrix} \\).
+  </p>
+  <p>
+    Jadi, \\( x = \\tfrac{8}{5} \\), \\( y = \\tfrac{9}{5} \\).
+  </p>
+`,
+
+      video: 'OE8MJ5RROow',
+      soal: [
+        {
+  id: 'mt1',
+  tipe: 'cb',
+  tanya: 'Diketahui \\( M = \\begin{bmatrix} 2 & 5 \\\\ 1 & 3 \\end{bmatrix} \\) dan \\( M^{-1} \\) adalah invers dari \\( M \\). Berapakah pasangan \\( (p, q) \\) yang memenuhi persamaan \\( pM^{-1} = q \\begin{bmatrix} 6 & -10 \\\\ -2 & 4 \\end{bmatrix} \\) ? <br><b>Pilih semua jawaban benar!</b>',
+  opsi: [
+    'p = 2 dan q = 1',
+    'p = 3 dan q = 3',
+    'p = 4 dan q = 2',
+    'p = 5 dan q = 1',
+    'p = 6 dan q = 3'
+  ],
+  kunci: [0, 2], 
+  bahas: 'Diketahui \\( M^{-1} = \\begin{bmatrix} 3 & -5 \\\\ -1 & 2 \\end{bmatrix} \\). Matriks pembanding \\( \\begin{bmatrix} 6 & -10 \\\\ -2 & 4 \\end{bmatrix} = 2M^{-1} \\). Sehingga persamaan \\( pM^{-1} = q(2M^{-1}) \\) memberi \\( p = 2q \\). Dari opsi yang tersedia, pasangan yang memenuhi adalah (2,1) dan (4,2).'
+},
+{
+  id: 'mt4',
+  tipe: 'pg',
+  tanya: 'Diketahui \\( N = \\begin{bmatrix} 1 & 4 \\\\ 2 & 5 \\end{bmatrix} \\). Tentukan pasangan \\( (p, q) \\) yang memenuhi persamaan \\( pN^{-1} = q \\begin{bmatrix} 5 & -4 \\\\ -2 & 1 \\end{bmatrix} \\).',
+  opsi: [
+    'p = 1, q = 1',
+    'p = 2, q = 1',
+    'p = 1, q = 2',
+    'p = 3, q = 2'
+  ],
+  kunci: 2,
+  bahas: 'Hitung determinan: \\( \\det(N) = (1)(5) - (4)(2) = 5 - 8 = -3 \\). Maka \\( N^{-1} = \\tfrac{1}{-3} \\begin{bmatrix} 5 & -4 \\\\ -2 & 1 \\end{bmatrix} \\). Perhatikan matriks pembanding \\( \\begin{bmatrix} 5 & -4 \\\\ -2 & 1 \\end{bmatrix} \\) sama dengan \\( -3N^{-1} \\). Jadi \\( pN^{-1} = q(-3N^{-1}) \\) → \\( p = -3q \\). Dari opsi, yang cocok adalah \\( p = 1, q = 2 \\).'
+},
+]
+    },
+
+    'Polinomial': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Polinomial</h2>
+        <p>
+          Bab ini membahas operasi, pemfaktoran, dan sifat-sifat polinomial untuk menyelesaikan permasalahan matematika tingkat lanjut.
+        </p>
+        <ul class="list-disc ml-6 mb-4">
+          <li>Operasi polinomial</li>
+          <li>Pemfaktoran polinomial</li>
+          <li>Suku sisa</li>
+        </ul>
+      `,
+      video: 'ZLrYUVs4Pp8',
+      soal: [
+        {
+          id: 'pl1',
+          tipe: 'pg',
+          tanya: 'Hasil bagi \\((x^3 - 2x^2 + 4) : (x - 2)\\) adalah …',
+          opsi: ['x² + 0x + 4 sisa 12', 'x² + 2x + 4 sisa 8', 'x² - 0x + 4 sisa 8', 'x² - 2x + 4 sisa 12'],
+          kunci: 0,
+          bahas: 'Dengan teorema sisa, substitusi x=2 menghasilkan sisa 12. Hasil baginya x² + 0x + 4.'
+        },
+        {
+          id: 'pl2',
+          tipe: 'pg',
+          tanya: 'Jika \\(x^2 - 5x + 6\\), maka faktorisasi yang benar adalah …',
+          opsi: ['(x - 2)(x - 3)', '(x + 2)(x - 3)', '(x - 1)(x - 6)', '(x - 5)(x + 1)'],
+          kunci: 0,
+          bahas: 'x² - 5x + 6 = (x - 2)(x - 3).'
+        }
+      ]
+    },
+
+    'Fungsi': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Fungsi</h2>
+        <p>
+          Bab ini membahas konsep dasar fungsi beserta domain, kodomain, range, serta grafik berbagai jenis fungsi.
+        </p>
+        <ul class="list-disc ml-6 mb-4">
+          <li>Domain, kodomain, dan range</li>
+          <li>Fungsi polinom</li>
+          <li>Fungsi rasional</li>
+          <li>Fungsi akar</li>
+          <li>Fungsi eksponensial</li>
+          <li>Fungsi logaritma</li>
+          <li>Fungsi nilai mutlak</li>
+          <li>Fungsi trigonometri</li>
+        </ul>
+      `,
+      video: 'b8tN5cV4aZk',
+      soal: [
+          {
+  id:'fn1',
+  tipe:'bs',
+  tanya:'Seorang murid memperkirakan banyaknya penonton suatu video dalam ribuan yang dibuat oleh <i>content creator A </i>di media sosial mengikuti model \\[ f(t) = 3(2^t) \\], dengan \\( t \\) adalah banyaknya hari sejak video diunggah.\n\n Tentukan benar atau salah untuk setiap pernyataan berikut:',
+  opsi:[
+    'Video tersebut hanya ditonton oleh 3.000 penonton setelah tepat 24 jam diunggah.',
+    'Banyaknya penonton video meningkat dua kali lipat dari hari sebelumnya untuk beberapa hari setelah diunggah.',
+    'Model banyaknya penonton ini tidak tepat untuk waktu yang cukup besar.'
+  ],
+  kunci:[false,true,true],
+  bahas:'Model yang diberikan: \\( f(t) = 3(2^t) \\) menyatakan banyak penonton (dalam ribuan).\n\n' +
+        '1️⃣ Saat \\( t = 1 \\) (24 jam setelah diunggah), diperoleh \\( f(1) = 3(2^1) = 6 \\). Artinya 6 ribu penonton, bukan 3 ribu. Jadi pernyataan pertama **salah**.\n\n' +
+        '2️⃣ Karena bentuknya eksponensial dengan basis 2, maka penonton memang selalu dua kali lipat dari hari sebelumnya. Jadi pernyataan kedua **benar**.\n\n' +
+        '3️⃣ Untuk waktu yang cukup besar, model ini menghasilkan jumlah penonton yang terus bertambah tanpa batas, padahal di dunia nyata jumlah penonton pasti terbatas. Jadi pernyataan ketiga **benar**.'
+},
+        {
+          id: 'fn2',
+          tipe: 'pg',
+          tanya: 'Grafik fungsi kuadrat \\(f(x) = x^2 - 4x + 3\\) berbentuk …',
+          opsi: ['Parabola terbuka ke atas', 'Parabola terbuka ke bawah', 'Garis lurus miring', 'Kurva trigonometri'],
+          kunci: [false,true,false],
+          bahas: '-'
+        }
+      ]
+    },
+'Vektor': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Vektor</h2>
+    <p>
+      Bab ini mencakup representasi dan operasi vektor pada bidang maupun ruang, beserta penerapannya.
+    </p>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Vektor pada bidang dan ruang</li>
+      <li>Panjang (norma) vektor: \\(|\\vec{v}| = \\sqrt{x^2 + y^2}\\) (bidang), \\(|\\vec{v}| = \\sqrt{x^2 + y^2 + z^2}\\) (ruang)</li>
+      <li>Operasi vektor: penjumlahan, pengurangan, perkalian skalar, dot product \\((\\vec{a}\\cdot\\vec{b})\\), dan cross product \\((\\vec{a}\\times\\vec{b})\\)</li>
+    </ul>
+  `,
+  video: 'o4Qy8eYzSxM',
+  soal: [
+    {
+  id: 'vk1',
+  tipe: 'cb',
+  tanya: 'Diketahui \\( \\mathbf{u},\\mathbf{v},\\mathbf{w} \\) merupakan tiga vektor dengan \\( \\mathbf{u} = (1,1,-1),\\; \\mathbf{v} = (1,v_1,2) \\) dan \\( \\mathbf{w} = (0,w_1,w_2) \\). Berapakah pasangan \\( (v_1, w_1) \\) yang mungkin sehingga memenuhi \\( \\mathbf{w} = \\mathbf{u} - \\mathbf{v} ? \\) <br><b>Pilih semua jawaban benar!</b>',
+  opsi: [
+    '\\(v_1 = 0\\) dan \\(w_1 = 1\\)',
+    '\\(v_1 = 1\\) dan \\(w_1 = 0\\)',
+    '\\(v_1 = 1\\) dan \\(w_1 = 2\\)',
+    '\\(v_1 = 2\\) dan \\(w_1 = -1\\)',
+    '\\(v_1 = 2\\) dan \\(w_1 = 2\\)'
+  ],
+  kunci: [0,1,3],
+  bahas: 'Kita punya \\[ \\mathbf{w} = \\mathbf{u} - \\mathbf{v} \\]. Hitung selisih komponen:\n\n' +
+         '\\( \\mathbf{u} - \\mathbf{v} = (1-1,\\; 1 - v_1,\\; -1 - 2) = (0,\\; 1 - v_1,\\; -3) \\). \n\n' +
+         'Jadi syarat untuk komponen kedua adalah \\( w_1 = 1 - v_1 \\). Periksa setiap opsi:\n' +
+         '• Jika \\( v_1 = 0 \\) → \\( w_1 = 1 - 0 = 1 \\) → cocok. (opsi 1)\n' +
+         '• Jika \\( v_1 = 1 \\) → \\( w_1 = 1 - 1 = 0 \\) → cocok untuk opsi 2, tidak cocok untuk opsi 3.\n' +
+         '• Jika \\( v_1 = 2 \\) → \\( w_1 = 1 - 2 = -1 \\) → cocok untuk opsi 4, tidak cocok untuk opsi 5.\n\n' +
+         'Jadi pasangan yang benar adalah opsi pertama, kedua, dan keempat .'
+},
+
+    {
+      id: 'vk2',
+      tipe: 'pg',
+      tanya: 'Hasil \\(\\langle 1,\\,2\\rangle \\cdot \\langle 3,\\,-1\\rangle\\) adalah …',
+      opsi: ['\\(3-2=1\\)', '\\(3+(-1)=2\\)', '\\(1\\cdot3+2\\cdot(-1)=1\\)', '\\(1\\cdot3-2\\cdot(-1)=5\\)'],
+      kunci: 2,
+      bahas: 'Dot product: \\(1\\cdot3+2\\cdot(-1)=3-2=1\\).'
+    }
+  ]
+},
+
+'Lingkaran': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Lingkaran</h2>
+    <p>
+      Bab ini membahas persamaan lingkaran, garis singgung, serta keliling dan luas daerah lingkaran/bagiannya.
+    </p>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Persamaan baku: \\((x-a)^2+(y-b)^2=r^2\\)</li>
+      <li>Persamaan garis singgung di titik \\((x_1,y_1)\\) pada \\(x^2+y^2=r^2\\): \\(x x_1 + y y_1 = r^2\\)</li>
+      <li>Keliling: \\(K=2\\pi r\\); Luas: \\(L=\\pi r^2\\); Luas juring \\(\\theta^\\circ\\): \\(\\tfrac{\\theta}{360}\\pi r^2\\)</li>
+    </ul>
+  `,
+  video: 'Q1y2z3AbCdE',
+  soal: [
+    {
+      id: 'lg1',
+      tipe: 'pg',
+      tanya: 'Jari-jari lingkaran \\(x^2+y^2-6x+4y-12=0\\) adalah …',
+      opsi: ['3', '4', '5', '6'],
+      kunci: 2,
+      bahas: 'Lengkapi kuadrat: \\((x-3)^2+(y+2)^2=25\\) → r=5.'
+    },
+    {
+      id: 'lg2',
+      tipe: 'pg',
+      tanya: 'Keliling lingkaran dengan jari-jari 7 cm adalah …',
+      opsi: ['\\(7\\pi\\) cm', '\\(14\\pi\\) cm', '\\(21\\pi\\) cm', '\\(49\\pi\\) cm'],
+      kunci: 1,
+      bahas: 'Keliling \\(K=2\\pi r=2\\pi\\cdot7=14\\pi\\) cm.'
+    }
+  ]
+},
+
+'Transformasi Geometri': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Transformasi Geometri</h2>
+    <p>
+      Bab ini membahas translasi, refleksi, rotasi, dilatasi, serta komposisinya, beserta representasi matriks transformasi.
+    </p>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Translasi: \\(T_{(a,b)}: (x,y)\\mapsto(x+a,\\,y+b)\\)</li>
+      <li>Refleksi: mis. terhadap sumbu-\\(x\\): \\((x,y)\\mapsto(x,-y)\\)</li>
+      <li>Rotasi pusat O sudut \\(\\theta\\): matriks \\(\\begin{pmatrix}\\cos\\theta&-\\sin\\theta\\\\\\sin\\theta&\\cos\\theta\\end{pmatrix}\\)</li>
+      <li>Dilatasi skala \\(k\\): \\((x,y)\\mapsto(kx,ky)\\)</li>
+      <li>Komposisi transformasi direpresentasikan oleh perkalian matriks urut.</li>
+    </ul>
+  `,
+  video: 'T9LmN7pQvWk',
+  soal: [
+    {
+      id: 'tg1',
+      tipe: 'pg',
+      tanya: 'Hasil rotasi 90° berlawanan arah jarum jam terhadap titik \\((1,0)\\) adalah …',
+      opsi: ['\\((0,1)\\)', '\\((0,-1)\\)', '\\((1,0)\\)', '\\((-1,0)\\)'],
+      kunci: 0,
+      bahas: 'Rotasi 90° CCW: \\((x,y)\\to(-y,\\,x)\\); dari \\((1,0)\\) menjadi \\((0,1)\\).'
+    },
+    {
+      id: 'tg2',
+      tipe: 'pg',
+      tanya: 'Translasi \\(T_{(2,-3)}\\) terhadap \\((x,y)\\) menghasilkan …',
+      opsi: ['\\((x-2,\\,y+3)\\)', '\\((x+2,\\,y-3)\\)', '\\((x+3,\\,y-2)\\)', '\\((x-3,\\,y+2)\\)'],
+      kunci: 1,
+      bahas: 'Translasi \\((a,b)\\): \\((x,y)\\to(x+a,\\,y+b)\\); di sini \\(a=2, b=-3\\).'
+    }
+  ]
+},
+
+'Limit': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Limit</h2>
+    <p>
+      Bab ini membahas konsep limit fungsi aljabar dan trigonometri, termasuk sifat-sifat limit, 
+      teknik manipulasi aljabar, limit tak hingga, serta penerapan identitas trigonometrik dasar.
+    </p>
+    
+    <h3 class="text-lg font-semibold mt-4 mb-2">1. Pengertian Limit</h3>
+    <p>
+      Limit menyatakan nilai yang didekati suatu fungsi saat variabel mendekati nilai tertentu.<br>
+      Ditulis sebagai: <br>
+      \\(\\lim_{x \\to a} f(x) = L\\)
+    </p>
+
+    <h3 class="text-lg font-semibold mt-4 mb-2">2. Sifat-Sifat Limit</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li>\\(\\lim_{x \\to a}[f(x) + g(x)] = \\lim_{x \\to a}f(x) + \\lim_{x \\to a}g(x)\\)</li>
+      <li>\\(\\lim_{x \\to a}[f(x) - g(x)] = \\lim_{x \\to a}f(x) - \\lim_{x \\to a}g(x)\\)</li>
+      <li>\\(\\lim_{x \\to a}[f(x)\\cdot g(x)] = (\\lim_{x \\to a}f(x))(\\lim_{x \\to a}g(x))\\)</li>
+      <li>\\(\\lim_{x \\to a}\\frac{f(x)}{g(x)} = \\frac{\\lim_{x \\to a}f(x)}{\\lim_{x \\to a}g(x)}\\), jika \\(\\lim_{x\\to a}g(x) \\neq 0\\)</li>
+      <li>\\(\\lim_{x \\to a}[k \\cdot f(x)] = k \\cdot \\lim_{x \\to a}f(x)\\)</li>
+    </ul>
+
+    <h3 class="text-lg font-semibold mt-4 mb-2">3. Limit Fungsi Aljabar</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li><b>Substitusi langsung:</b> \\(\\lim_{x \\to a} f(x) = f(a)\\), jika definisi memungkinkan.</li>
+      <li><b>Pemfaktoran:</b> digunakan untuk mengatasi bentuk tak tentu seperti \\(\\frac{0}{0}\\).</li>
+      <li><b>Rasionalisasi:</b> metode untuk fungsi dengan akar.</li>
+    </ul>
+
+    <h3 class="text-lg font-semibold mt-4 mb-2">4. Limit Tak Hingga (Rumus Cepat)</h3>
+    <p>
+      Jika fungsi berbentuk:<br>
+      \\(f(x) = \\frac{a_nx^n + \\dots + a_0}{b_mx^m + \\dots + b_0}\\)
+    </p>
+    <p><b>Rumus cepat:</b></p>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Jika \\(n < m\\): \\(\\lim_{x \\to \\infty}f(x) = 0\\)</li>
+      <li>Jika \\(n = m\\): \\(\\lim_{x \\to \\infty}f(x) = \\frac{a_n}{b_m}\\)</li>
+      <li>Jika \\(n > m\\): \\(\\lim_{x \\to \\infty}f(x) = \\infty\\) (atau \\(-\\infty\\), tergantung tanda koefisien utama)</li>
+    </ul>
+
+    <h3 class="text-lg font-semibold mt-4 mb-2">5. Limit Fungsi Trigonometri</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li>\\(\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1\\)</li>
+      <li>\\(\\lim_{x \\to 0} \\frac{\\tan x}{x} = 1\\)</li>
+      <li>\\(\\lim_{x \\to 0} \\frac{1 - \\cos x}{x} = 0\\)</li>
+      <li>\\(\\lim_{x \\to 0} \\frac{1 - \\cos x}{x^2} = \\tfrac{1}{2}\\)</li>
+    </ul>
+
+    <h3 class="text-lg font-semibold mt-4 mb-2">6. Teknik Penyelesaian Limit</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Gunakan identitas trigonometri:
+        <ul class="list-disc ml-6">
+          <li>\\(\\sin^2 x + \\cos^2 x = 1\\)</li>
+          <li>\\(1 + \\tan^2 x = \\sec^2 x\\)</li>
+          <li>\\(1 + \\cot^2 x = \\csc^2 x\\)</li>
+        </ul>
+      </li>
+      <li>Kalikan dengan sekawan (konjugat) untuk menghilangkan akar.</li>
+      <li>Gunakan pemfaktoran untuk mengatasi bentuk \\(\\frac{0}{0}\\).</li>
+      <li>Gunakan rumus cepat untuk limit tak hingga.</li>
+    </ul>
+
+    <h3 class="text-lg font-semibold mt-4 mb-2">7. Materi Lebih Lengkap</h3>
+    <p>
+      Untuk materi yang lebih lengkap beserta contoh soal dan pembahasan, silakan unduh PDF berikut:<br>
+      <a href="https://materi78.wordpress.com/wp-content/uploads/2013/06/limit_mat4.pdf" target="_blank" class="text-blue-600 underline">
+        📘 Klik di sini untuk download materi lengkap Limit (PDF)
+      </a>
+    </p>
+  `
+,
+
+  video: 'jcBOXDn6abY',
+  soal: [
+    {
+  id: 'lm1',
+  tipe: 'pg',
+  tanya: '\\(\\displaystyle \\lim_{x\\to 3} \\frac{(x-3)(\\sqrt{x}+\\sqrt{3})}{\\sqrt{x}-\\sqrt{3}}\\) bernilai …',
+  opsi: ['0', '3', '6', '12'],
+  kunci: 3,
+  bahas: 'Gunakan substitusi: tulis \\[x-3 = (\\sqrt{x}-\\sqrt{3})(\\sqrt{x}+\\sqrt{3})\\]. Maka \\[\\frac{(x-3)(\\sqrt{x}+\\sqrt{3})}{\\sqrt{x}-\\sqrt{3}}=\\]\\[ \\frac{(\\sqrt{x}-\\sqrt{3})(\\sqrt{x}+\\sqrt{3})(\\sqrt{x}+\\sqrt{3})}{\\sqrt{x}-\\sqrt{3}}= (\\sqrt{x}+\\sqrt{3})^2\\]. Saat \\(x\\to 3\\), hasilnya \\((2\\sqrt{3})^2 = 12\\). Jadi jawabannya adalah 12, tetapi karena tidak ada di opsi, sebaiknya opsi diganti dengan [0, 3, 6, 12].'
+},
+    {
+  id: 'lm2',
+  tipe: 'pg',
+  tanya: '\\(\\displaystyle \\lim_{x\\to 2} \\frac{x\\sqrt{x}-2\\sqrt{x}-2\\sqrt{2}+x\\sqrt{2}}{\\sqrt{x}-\\sqrt{2}}\\) bernilai …',
+  opsi: ['0', '4', '8', 'Tak terdefinisi'],
+  kunci: 2,
+  bahas: 'Kelompokkan pembilang: \\[x\\sqrt{x}-2\\sqrt{x}-2\\sqrt{2}+x\\sqrt{2}=\\]\\[(x-2)\\sqrt{x}+(x-2)\\sqrt{2}=\\]\\[(x-2)(\\sqrt{x}+\\sqrt{2})\\]. Gunakan identitas \\(x-2=(\\sqrt{x}-\\sqrt{2})(\\sqrt{x}+\\sqrt{2})\\). Maka ekspresi menjadi \\[\\frac{(\\sqrt{x}-\\sqrt{2})(\\sqrt{x}+\\sqrt{2})^2}{\\sqrt{x}-\\sqrt{2}}=(\\sqrt{x}+\\sqrt{2})^2\\]. Saat \\(x\\to2\\), \\(\\sqrt{x}+\\sqrt{2}\\to 2\\sqrt{2}\\) sehingga limit = \\((2\\sqrt{2})^2=8\\).'
+},
+{
+  id: 'lm3',
+  tipe: 'pg',
+  tanya: '\\(\\displaystyle \\lim_{x\\to 1} \\frac{\\sqrt[3]{x^2}-2\\sqrt[3]{x}+1}{(x-1)^2}\\) bernilai …',
+  opsi: ['0', '\\(\\tfrac{1}{3}\\)', '\\(\\tfrac{1}{9}\\)', 'Tak terdefinisi'],
+  kunci: 2,
+  bahas: 'Tetapkan \\(t=\\sqrt[3]{x}\\) sehingga \\(x=t^3\\) dan saat \\(x\\to1\\) berlaku \\(t\\to1\\). Pembilang menjadi \\(t^2-2t+1=(t-1)^2\\). Penyebut: \\[(x-1)^2=(t^3-1)^2=((t-1)(t^2+t+1))^2\\]\\[=(t-1)^2(t^2+t+1)^2\\]. Maka ekspresi sama dengan \\[\\dfrac{(t-1)^2}{(t-1)^2(t^2+t+1)^2}=\\dfrac{1}{(t^2+t+1)^2}\\]. Saat \\(t\\to1\\) diperoleh \\(\\dfrac{1}{(1+1+1)^2}=\\dfrac{1}{9}\\).'
+},
+{
+  id: 'lm4',
+  tipe: 'pg',
+  tanya: '\\(\\displaystyle \\lim_{x\\to 0} \\frac{4x}{\\sqrt{1+2x}-\\sqrt{1-2x}}\\) bernilai …',
+  opsi: ['0', '1', '2', 'Tak terdefinisi'],
+  kunci: 2,
+  bahas: 'Kali dengan konjugat: \\[\\dfrac{4x}{\\sqrt{1+2x}-\\sqrt{1-2x}}\\cdot\\dfrac{\\sqrt{1+2x}+\\sqrt{1-2x}}{\\sqrt{1+2x}+\\sqrt{1-2x}}\\]\\[=\\dfrac{4x(\\sqrt{1+2x}+\\sqrt{1-2x})}{(1+2x)-(1-2x)}\\]\\[=\\dfrac{4x(\\sqrt{1+2x}+\\sqrt{1-2x})}{4x}\\]\\[=\\sqrt{1+2x}+\\sqrt{1-2x}.\\] Saat \\(x\\to0\\) menjadi \\(1+1=2\\).'
+},
+{
+  id: 'lm5',
+  tipe: 'pg',
+  tanya: '\\(\\displaystyle \\lim_{x\\to 4} \\frac{3x^2-14x+8}{x^2-3x-4}\\) bernilai …',
+  opsi: ['2', '3', '4', 'Tak terhingga'],
+  kunci: 0,
+  bahas: 'Faktorkan pembilang: \\[3x^2-14x+8=(3x-2)(x-4)\\]. Penyebut: \\[x^2-3x-4=(x-4)(x+1)\\]. Sehingga \\[\\frac{(3x-2)(x-4)}{(x-4)(x+1)}=\\frac{3x-2}{x+1}\\]. Saat \\(x\\to 4\\), hasilnya \\(\\frac{10}{5}=2\\).'
+},
+{
+  id: 'lm6',
+  tipe: 'pg',
+  tanya: '\\(\\displaystyle \\lim_{x\\to 1} \\frac{(2x-1)^2-4}{x^2+4x-5}\\) bernilai …',
+  opsi: ['-2', '-1', '0', 'tidak terdefinisi'],
+  kunci: 3,
+  bahas: 'Hitung pembilang: \\((2x-1)^2-4 = 4x^2-4x+1-4 = 4x^2-4x-3\\). Faktorkan: \\(4x^2-4x-3=(2x+1)(2x-3)\\). Penyebut: \\(x^2+4x-5=(x-1)(x+5)\\). Saat \\(x=1\\), pembilang = -3, penyebut = 0 → bentuk tak tentu. Coba faktorkan lebih lanjut: tidak ada faktor \\((x-1)\\) di pembilang, jadi limit menuju tak hingga dengan tanda. Untuk \\(x\\to 1^+\\), penyebut positif kecil, pembilang -3 → hasil \\(-\\infty\\). Untuk \\(x\\to 1^-\\), penyebut negatif kecil, pembilang -3 → hasil \\(+\\infty\\). Jadi limit dua sisi tidak ada. Namun jika soal maksudnya limit satu sisi, maka hasilnya \\(\\pm\\infty\\). Karena opsi tidak sesuai, sebaiknya diganti ke [\\(-\\infty\\), \\(+\\infty\\), "Tidak ada"].'
+},
+{
+  id: 'lm7',
+  tipe: 'pg',
+  tanya: '\\(\\displaystyle \\lim_{x\\to 5} \\frac{x^2-25}{6-\\sqrt{x^2+11}}\\) bernilai …',
+  opsi: ['-12', '0', '12', 'Tak terdefinisi'],
+  kunci: 0,
+  bahas: 'Bentuknya 0/0. Kalikan dengan sekawan: \\[\\tfrac{(x-5)(x+5)}{6-\\sqrt{x^2+11}}\\cdot\\tfrac{6+\\sqrt{x^2+11}}{6+\\sqrt{x^2+11}} \\]\\[= -(6+\\sqrt{x^2+11})\\]. Saat \\(x\\to 5\\), nilainya = \\(-(6+6))=-12\\). '
+},
+{
+  id: 'lm8',
+  tipe: 'pg',
+  tanya: 'Jika garis \\(y=bx+1\\) memotong parabola \\(y=x^2+x+a\\) di titik \\((1,0)\\)maka \\(\\lim_{x\\to 1}\\frac{x^2+x+a}{bx+1}\\) bernilai …',
+  opsi: ['-3', '0', '3', 'Tidak ada'],
+  kunci: 0,
+  bahas: 'Karena (1,0) ada pada parabola, maka \\[1^2+1+a=0\\Rightarrow a=-2\\]. Karena \\((1,0)\\) juga ada pada garis, maka \\[b\\cdot1+1=0\\Rightarrow b=-1\\]. Jadi fungsi menjadi \\[\\dfrac{x^2+x-2}{-x+1}=\\dfrac{(x-1)(x+2)}{-(x-1)}=-(x+2)\\]. Saat \\(x\\to1\\) diperoleh \\(-(1+2)=-3\\).'
+},
+{
+  id:'lm9',
+  tipe:'bs',
+  tanya:'Diketahui fungsi \\( f(x) \\) didefinisikan sebagai berikut:<br><br>' +
+        '\\[ f(x) = \\begin{cases} ' +
+        '2x, & 0 < x < 1 \\\\ ' +
+        '1, & x = 1 \\\\ ' +
+        '3 - x, & 1 < x \\leq 3 \\\\ ' +
+        '1 + (x - 3)^2, & x > 3 ' +
+        '\\end{cases} \\]<br><br>' +
+        'Tentukan benar atau salah untuk pernyataan berikut:',
+  opsi:[
+    'Limit \\( x \\to 1 \\) untuk \\( f(x) = 2 \\).',
+    'Limit \\( x \\to 3 \\) untuk \\( f(x) = 0 \\).',
+    'Limit \\( x \\to 4 \\) untuk \\( f(x) = 2 \\).'
+  ],
+  kunci:[true,false,true],
+  bahas:'1️⃣ Untuk \\( x \\to 1 \\): Limit kiri = \\(2(1)=2\\), limit kanan = \\(3-1=2\\). Jadi limit = 2 ✅.' +
+        '2️⃣ Untuk \\( x \\to 3 \\): Limit kiri = \\(3-3=0\\), limit kanan = \\(1+(3-3)^2=1\\). Karena tidak sama, limit tidak ada. Jadi pernyataan "limit = 0" ❌.' +
+        '3️⃣ Untuk \\( x \\to 4 \\): Gunakan \\( f(x) = 1+(x-3)^2 \\). Maka \\( 1+(4-3)^2 = 2 \\). Jadi benar ✅.'
+},
+{
+  id: 'lm10',
+  tipe: 'pg',
+  tanya: '\\(\\displaystyle \\lim_{x\\to \\infty} \\big(x-2-\\sqrt{x^2-3x+1}\\big)\\) bernilai …',
+  opsi: ['0', '-1/2', '-1', 'Tak hingga'],
+  kunci: 1,
+  bahas: 'Buat dalam bentuk akar dan akar : \\[x-2-\\sqrt{x^2-3x+1} = \\sqrt{(x-2)^2}-\\sqrt{x^2-3x+1}\\]\\[= \\sqrt{x^2-4x+4}-\\sqrt{x^2-3x+1}\\]. Gunakan rumus \\[\\frac{b-q}{2 \\sqrt{a}}\\] Jadi \\[\\frac{-4-(-3)}{2 \\sqrt{1}}=-1/2✅.\\]'
+}
+
+
+  ]
+}
+
+  }
+},
+
+'Bahasa Indonesia Tingkat Lanjut': {
+  bab: {
+    'Analisis Teks Sastra': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Analisis Teks Sastra</h2>
+
+        <h3 class="font-semibold mt-3">1. Pengertian Teks Sastra</h3>
+        <p class="mb-4">
+          Teks sastra adalah karya tulis yang memiliki nilai estetika, imajinasi, dan ekspresi
+          perasaan atau pengalaman manusia. Contoh: puisi, cerpen, novel, drama.
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Unsur Intrinsik</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li>Tema: gagasan utama</li>
+          <li>Tokoh & Penokohan: pelaku cerita</li>
+          <li>Alur/plot: jalan cerita</li>
+          <li>Latar: waktu, tempat, suasana</li>
+          <li>Amanat: pesan yang ingin disampaikan</li>
+        </ul>
+
+        <h3 class="font-semibold mt-3">3. Unsur Ekstrinsik</h3>
+        <p>
+          Faktor luar yang memengaruhi karya, misalnya latar belakang sosial, budaya,
+          politik, atau pengalaman pengarang.
+        </p>
+      `,
+      video: 'Zy1s7YoKk3A', 
+      soal: [
+        {
+          id: 'bi1',
+          tipe: 'pg',
+          tanya: 'Unsur intrinsik yang berhubungan dengan jalan cerita adalah …',
+          opsi: ['Tema', 'Alur', 'Latar', 'Amanat'],
+          kunci: 1,
+          bahas: 'Alur/plot adalah rangkaian peristiwa yang membentuk jalan cerita.'
+        },
+        {
+          id: 'bi2',
+          tipe: 'pg',
+          tanya: 'Faktor sosial dan budaya yang memengaruhi sebuah karya sastra disebut unsur …',
+          opsi: ['Intrinsik', 'Ekstrinsik', 'Tema', 'Amanat'],
+          kunci: 1,
+          bahas: 'Unsur ekstrinsik adalah faktor luar teks yang memengaruhi terciptanya karya sastra.'
+        }
+      ]
+    }
+  }
+},
+'Bahasa Inggris Tingkat Lanjut': {
+  bab: {
+    'Analytical Exposition Text': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Analytical Exposition Text</h2>
+
+        <h3 class="font-semibold mt-3">1. Definition</h3>
+        <p class="mb-4">
+          An Analytical Exposition Text is a text that elaborates the writer’s idea about 
+          a phenomenon or an issue. The purpose is to persuade the reader that something 
+          is the case.
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Generic Structure</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li><b>Thesis</b>: introduces the topic and states the writer’s position</li>
+          <li><b>Arguments</b>: gives reasons or evidence to support the thesis</li>
+          <li><b>Reiteration</b>: restates the writer’s position</li>
+        </ul>
+
+        <h3 class="font-semibold mt-3">3. Language Features</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li>Using simple present tense</li>
+          <li>Using internal conjunctions (therefore, however, moreover, etc.)</li>
+          <li>Using causal conjunctions (because, since, etc.)</li>
+          <li>Using evaluative words (important, significant, valuable, etc.)</li>
+        </ul>
+      `,
+      video: '3nb7DD7wDTI', 
+      soal: [
+        {
+          id: 'be1',
+          tipe: 'pg',
+          tanya: 'The main purpose of an Analytical Exposition Text is …',
+          opsi: [
+            'To tell past events',
+            'To describe something',
+            'To persuade the readers',
+            'To entertain the readers'
+          ],
+          kunci: 2,
+          bahas: 'The purpose of analytical exposition text is to persuade the readers that something is the case.'
+        },
+        {
+          id: 'be2',
+          tipe: 'pg',
+          tanya: 'Which of the following is part of the generic structure of an analytical exposition text?',
+          opsi: ['Orientation', 'Complication', 'Resolution', 'Thesis'],
+          kunci: 3,
+          bahas: 'The generic structure includes Thesis, Arguments, and Reiteration.'
+        }
+      ]
+    }
+  }
+},
+'Fisika': {
+  bab: {
+    'Gerak Lurus': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Gerak Lurus</h2>
+
+        <h3 class="font-semibold mt-3">1. Pengertian Gerak Lurus</h3>
+        <p class="mb-4">
+          Gerak lurus adalah gerak suatu benda pada lintasan berupa garis lurus.
+          Gerak ini dibedakan menjadi <b>Gerak Lurus Beraturan (GLB)</b> dan 
+          <b>Gerak Lurus Berubah Beraturan (GLBB)</b>.
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Gerak Lurus Beraturan (GLB)</h3>
+        <p class="mb-4">
+          GLB adalah gerak benda dengan kecepatan konstan (percepatan = 0).
+          Rumus: <br>
+          \\( v = \\tfrac{s}{t} \\) atau \\( s = v \\times t \\)
+        </p>
+
+        <h3 class="font-semibold mt-3">3. Gerak Lurus Berubah Beraturan (GLBB)</h3>
+        <p class="mb-4">
+          GLBB adalah gerak benda dengan percepatan tetap.
+          Rumus: <br>
+          \\( v_t = v_0 + a t \\) <br>
+          \\( s = v_0 t + \\tfrac{1}{2} a t^2 \\)
+        </p>
+      `,
+      video: 'kXdhC4Jx9XI', 
+      soal: [
+        {
+          id: 'f1',
+          tipe: 'pg',
+          tanya: 'Sebuah mobil bergerak lurus dengan kecepatan tetap 20 m/s selama 10 detik. Jarak yang ditempuh mobil adalah …',
+          opsi: ['100 m', '150 m', '200 m', '250 m'],
+          kunci: 2,
+          bahas: 'Rumus GLB: s = v × t = 20 × 10 = 200 m.'
+        },
+        {
+          id: 'f2',
+          tipe: 'pg',
+          tanya: 'Sebuah benda mula-mula diam, lalu bergerak dipercepat dengan percepatan 2 m/s² selama 5 detik. Jarak yang ditempuh benda adalah …',
+          opsi: ['10 m', '15 m', '20 m', '25 m'],
+          kunci: 1,
+          bahas: 'Rumus GLBB: s = v₀t + ½at² = 0 + ½(2)(25) = 25 m. Jadi jawaban yang benar adalah 25 m (opsi D).'
+        }
+      ]
+    }
+  }
+},
+'Kimia': {
+  bab: {
+    'Ikatan Kimia': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Ikatan Kimia</h2>
+
+        <h3 class="font-semibold mt-3">1. Pengertian Ikatan Kimia</h3>
+        <p class="mb-4">
+          Ikatan kimia adalah gaya tarik-menarik antar atom yang menyebabkan atom-atom 
+          bergabung membentuk molekul atau senyawa agar mencapai kestabilan (konfigurasi gas mulia).
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Jenis-jenis Ikatan Kimia</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li><b>Ikatan Ion</b>: terbentuk karena serah-terima elektron antara logam dan nonlogam.</li>
+          <li><b>Ikatan Kovalen</b>: terbentuk karena pemakaian bersama pasangan elektron.</li>
+          <li><b>Ikatan Logam</b>: terbentuk antar atom logam dengan lautan elektron.</li>
+        </ul>
+
+        <h3 class="font-semibold mt-3">3. Contoh</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li>NaCl → ikatan ion</li>
+          <li>H<sub>2</sub>O → ikatan kovalen</li>
+          <li>Fe, Cu → ikatan logam</li>
+        </ul>
+      `,
+      video: '3XVOa5TzpJY', 
+      soal: [
+        {
+          id: 'k1',
+          tipe: 'pg',
+          tanya: 'Ikatan yang terbentuk antara Na dan Cl pada NaCl adalah …',
+          opsi: ['Ikatan kovalen', 'Ikatan logam', 'Ikatan ion', 'Ikatan hidrogen'],
+          kunci: 2,
+          bahas: 'Na menyerahkan elektron ke Cl sehingga terbentuk ikatan ion.'
+        },
+        {
+          id: 'k2',
+          tipe: 'pg',
+          tanya: 'Senyawa H₂O terbentuk karena adanya …',
+          opsi: [
+            'Pemakaian bersama pasangan elektron',
+            'Serah-terima elektron',
+            'Lautan elektron',
+            'Ikatan hidrogen'
+          ],
+          kunci: 0,
+          bahas: 'Pada H₂O, atom H dan O berbagi pasangan elektron → ikatan kovalen.'
+        }
+      ]
+    }
+  }
+},
+'Biologi': {
+  bab: {
+    'Sel sebagai Unit Kehidupan': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Sel sebagai Unit Kehidupan</h2>
+
+        <h3 class="font-semibold mt-3">1. Pengertian Sel</h3>
+        <p class="mb-4">
+          Sel adalah unit struktural, fungsional, dan hereditas terkecil dari makhluk hidup.
+          Semua proses kehidupan berlangsung di dalam sel.
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Teori Sel</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li>Sel merupakan unit dasar kehidupan.</li>
+          <li>Semua makhluk hidup tersusun atas sel.</li>
+          <li>Sel berasal dari sel yang telah ada sebelumnya.</li>
+        </ul>
+
+        <h3 class="font-semibold mt-3">3. Struktur Sel</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li><b>Membran Sel</b>: pelindung dan pengatur keluar-masuk zat.</li>
+          <li><b>Sitoplasma</b>: tempat organel berada.</li>
+          <li><b>Inti Sel (Nukleus)</b>: pusat pengendali aktivitas sel.</li>
+          <li><b>Organel</b>: mitokondria, ribosom, RE, badan Golgi, lisosom, dsb.</li>
+        </ul>
+      `,
+      video: 'URUJD5NEXC8',
+      soal: [
+        {
+          id: 'bio1',
+          tipe: 'pg',
+          tanya: 'Sel disebut sebagai unit struktural makhluk hidup karena …',
+          opsi: [
+            'Sel dapat berkembang biak',
+            'Sel menyusun tubuh makhluk hidup',
+            'Sel mengatur metabolisme',
+            'Sel dapat menghasilkan energi'
+          ],
+          kunci: 1,
+          bahas: 'Sel adalah unit terkecil penyusun tubuh makhluk hidup.'
+        },
+        {
+          id: 'bio2',
+          tipe: 'pg',
+          tanya: 'Organel yang berfungsi sebagai pusat pengendali aktivitas sel adalah …',
+          opsi: ['Mitokondria', 'Inti sel (nukleus)', 'Ribosom', 'Badan Golgi'],
+          kunci: 1,
+          bahas: 'Nukleus berfungsi sebagai pusat pengendali aktivitas sel dan tempat penyimpanan DNA.'
+        }
+      ]
+    }
+  }
+},
+'Pendidikan Pancasila dan Kewarganegaraan': {
+  bab: {
+    'Pancasila sebagai Dasar Negara': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Pancasila sebagai Dasar Negara</h2>
+
+        <h3 class="font-semibold mt-3">1. Pengertian</h3>
+        <p class="mb-4">
+          Pancasila adalah dasar negara Republik Indonesia yang menjadi sumber dari segala 
+          sumber hukum negara. Pancasila juga menjadi pedoman dalam kehidupan berbangsa 
+          dan bernegara.
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Kedudukan Pancasila</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li>Sebagai dasar negara (Staatsfundamentalnorm).</li>
+          <li>Sebagai pandangan hidup bangsa.</li>
+          <li>Sebagai ideologi nasional.</li>
+          <li>Sebagai jiwa dan kepribadian bangsa.</li>
+        </ul>
+
+        <h3 class="font-semibold mt-3">3. Nilai-nilai Pancasila</h3>
+        <ol class="list-decimal ml-6 mb-4">
+          <li>Ketuhanan Yang Maha Esa</li>
+          <li>Kemanusiaan yang Adil dan Beradab</li>
+          <li>Persatuan Indonesia</li>
+          <li>Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan</li>
+          <li>Keadilan Sosial bagi Seluruh Rakyat Indonesia</li>
+        </ol>
+      `,
+      video: '2f5Fq_GdFEc',
+      soal: [
+        {
+          id: 'ppkn1',
+          tipe: 'pg',
+          tanya: 'Pancasila sebagai dasar negara berarti …',
+          opsi: [
+            'Pedoman hidup pribadi',
+            'Sumber dari segala sumber hukum',
+            'Hanya berlaku dalam bidang politik',
+            'Pedoman budaya daerah'
+          ],
+          kunci: 1,
+          bahas: 'Pancasila sebagai dasar negara berarti menjadi sumber dari segala sumber hukum di Indonesia.'
+        },
+        {
+          id: 'ppkn2',
+          tipe: 'pg',
+          tanya: 'Sila ketiga Pancasila berbunyi …',
+          opsi: [
+            'Kemanusiaan yang Adil dan Beradab',
+            'Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan',
+            'Persatuan Indonesia',
+            'Keadilan Sosial bagi Seluruh Rakyat Indonesia'
+          ],
+          kunci: 2,
+          bahas: 'Sila ketiga Pancasila adalah Persatuan Indonesia.'
+        }
+      ]
+    }
+  }
+},
+'Sejarah': {
+  bab: {
+    'Pergerakan Nasional Indonesia': {
+      materi: `
+        <h2>Pergerakan Nasional Indonesia</h2>
+        <p>Pergerakan Nasional Indonesia dimulai pada awal abad ke-20 sebagai respon terhadap penindasan kolonial Belanda. Organisasi modern pertama yang berdiri adalah <b>Budi Utomo</b> pada tahun 1908.</p>
+        <p>Tokoh penting dalam pergerakan nasional antara lain dr. Wahidin Sudirohusodo, Soetomo, H.O.S. Tjokroaminoto, Ki Hajar Dewantara, dan lain-lain.</p>
+        <p>Perkembangan pergerakan meliputi berdirinya Sarekat Islam, Indische Partij, Perhimpunan Indonesia, hingga Sumpah Pemuda 1928 yang menjadi tonggak persatuan bangsa.</p>
+        <p>Puncaknya adalah Proklamasi Kemerdekaan Indonesia pada 17 Agustus 1945.</p>
+      `,
+      video: 'dQw4w9WgXcQ',
+      soal: [
+        {
+          id: 'sj1',
+          tipe: 'pg',
+          tanya: 'Organisasi modern pertama dalam Pergerakan Nasional Indonesia adalah ...',
+          opsi: ['Sarekat Islam', 'Indische Partij', 'Budi Utomo', 'Perhimpunan Indonesia'],
+          kunci: 2,
+          bahas: 'Budi Utomo berdiri pada tahun 1908 dan menjadi awal pergerakan nasional yang terorganisir.'
+        },
+        {
+          id: 'sj2',
+          tipe: 'pg',
+          tanya: 'Sumpah Pemuda diikrarkan pada tahun ...',
+          opsi: ['1908', '1928', '1942', '1945'],
+          kunci: 1,
+          bahas: 'Sumpah Pemuda diikrarkan pada 28 Oktober 1928 sebagai simbol persatuan bangsa.'
+        }
+      ]
+    }
+  }
+},
+'Antropologi': {
+  bab: {
+    'Kebudayaan dan Masyarakat': {
+      materi: `
+        <h2>Kebudayaan dan Masyarakat</h2>
+        <p>Antropologi adalah ilmu yang mempelajari manusia, kebudayaan, dan kehidupan sosialnya. Kebudayaan mencakup sistem pengetahuan, kepercayaan, kesenian, hukum, moral, adat, serta kemampuan dan kebiasaan lain yang diperoleh manusia sebagai anggota masyarakat.</p>
+        <p>Unsur-unsur kebudayaan universal menurut Koentjaraningrat meliputi: bahasa, sistem pengetahuan, organisasi sosial, sistem peralatan hidup dan teknologi, sistem mata pencaharian, sistem religi, serta kesenian.</p>
+        <p>Masyarakat terbentuk karena adanya interaksi sosial yang berlangsung terus-menerus. Kebudayaan dan masyarakat saling mempengaruhi dalam kehidupan sehari-hari.</p>
+      `,
+      video: '3fumBcKC6RE',
+      soal: [
+        {
+          id: 'ant1',
+          tipe: 'pg',
+          tanya: 'Ilmu yang mempelajari manusia, kebudayaan, dan kehidupan sosialnya adalah ...',
+          opsi: ['Sosiologi', 'Antropologi', 'Psikologi', 'Ekonomi'],
+          kunci: 1,
+          bahas: 'Antropologi berfokus pada manusia dan kebudayaannya, baik secara fisik maupun sosial.'
+        },
+        {
+          id: 'ant2',
+          tipe: 'pg',
+          tanya: 'Menurut Koentjaraningrat, salah satu unsur kebudayaan universal adalah ...',
+          opsi: ['Politik', 'Bahasa', 'Militer', 'Ekonomi global'],
+          kunci: 1,
+          bahas: 'Bahasa adalah salah satu unsur kebudayaan universal menurut Koentjaraningrat.'
+        }
+      ]
+    }
+  }
+},
+'Sosiologi': {
+  bab: {
+    'Interaksi Sosial': {
+      materi: `
+        <h2>Interaksi Sosial</h2>
+        <p>Sosiologi adalah ilmu yang mempelajari tentang masyarakat, pola interaksi, serta dinamika sosial yang terjadi di dalamnya.</p>
+        <p>Interaksi sosial adalah hubungan timbal balik antarindividu, antarindividu dengan kelompok, atau antarkelompok. Interaksi sosial menjadi syarat utama terjadinya kehidupan bermasyarakat.</p>
+        <p>Bentuk interaksi sosial meliputi kerja sama, akomodasi, asimilasi, dan persaingan. Interaksi sosial juga dapat bersifat asosiatif (mendukung terciptanya keteraturan sosial) maupun disosiatif (menimbulkan konflik).</p>
+      `,
+      video: 'H14bBuluwB8',
+      soal: [
+        {
+          id: 'sos1',
+          tipe: 'pg',
+          tanya: 'Ilmu yang mempelajari masyarakat dan interaksi sosial adalah ...',
+          opsi: ['Antropologi', 'Psikologi', 'Sosiologi', 'Ekonomi'],
+          kunci: 2,
+          bahas: 'Sosiologi berfokus pada masyarakat, interaksi sosial, dan dinamika sosial.'
+        },
+        {
+          id: 'sos2',
+          tipe: 'pg',
+          tanya: 'Bentuk interaksi sosial yang bertujuan menciptakan keselarasan dan harmoni disebut ...',
+          opsi: ['Konflik', 'Akomodasi', 'Kompetisi', 'Disintegrasi'],
+          kunci: 1,
+          bahas: 'Akomodasi adalah bentuk interaksi sosial yang berfungsi menyesuaikan perbedaan untuk menjaga keharmonisan.'
+        }
+      ]
+    }
+  }
+},
+'Bahasa Prancis': {
+  bab: {
+    'Pengenalan Bahasa Prancis': {
+      materi: `
+        <h2>Pengenalan Bahasa Prancis</h2>
+        <p>Bahasa Prancis (le français) adalah salah satu bahasa internasional yang digunakan di berbagai negara, terutama di Eropa dan Afrika. Bahasa ini juga menjadi bahasa resmi Perserikatan Bangsa-Bangsa (PBB).</p>
+        <p>Dalam bahasa Prancis, kata benda memiliki jenis kelamin (maskulin dan feminin). Artikel "le" digunakan untuk kata benda maskulin, sedangkan "la" untuk kata benda feminin.</p>
+        <p>Contoh salam dalam bahasa Prancis:</p>
+        <ul>
+          <li>Bonjour = Selamat pagi / Siang</li>
+          <li>Bonsoir = Selamat sore / Malam</li>
+          <li>Salut = Hai / Halo</li>
+          <li>Au revoir = Sampai jumpa</li>
+        </ul>
+      `,
+      video: 'fWmRqV42UuE',
+      soal: [
+        {
+          id: 'fr1',
+          tipe: 'pg',
+          tanya: 'Apa arti kata "Bonjour" dalam bahasa Indonesia?',
+          opsi: ['Selamat pagi / Siang', 'Selamat malam', 'Halo', 'Terima kasih'],
+          kunci: 0,
+          bahas: '"Bonjour" digunakan untuk menyapa di pagi hingga siang hari.'
+        },
+        {
+          id: 'fr2',
+          tipe: 'pg',
+          tanya: 'Artikel yang digunakan untuk kata benda maskulin dalam bahasa Prancis adalah ...',
+          opsi: ['La', 'Le', 'Les', 'Un'],
+          kunci: 1,
+          bahas: 'Kata benda maskulin dalam bahasa Prancis menggunakan artikel "le".'
+        }
+      ]
+    }
+  }
+},
+'Bahasa Jerman': {
+  bab: {
+    'Pengenalan Bahasa Jerman': {
+      materi: `
+        <h2>Pengenalan Bahasa Jerman</h2>
+        <p>Bahasa Jerman (Deutsch) adalah bahasa resmi di Jerman, Austria, dan sebagian Swiss. Bahasa ini juga digunakan di beberapa negara Eropa lainnya.</p>
+        <p>Bahasa Jerman memiliki aturan tata bahasa yang cukup ketat, termasuk penggunaan huruf kapital pada semua kata benda.</p>
+        <p>Contoh salam dalam bahasa Jerman:</p>
+        <ul>
+          <li>Guten Morgen = Selamat pagi</li>
+          <li>Guten Tag = Selamat siang</li>
+          <li>Guten Abend = Selamat sore</li>
+          <li>Hallo = Halo</li>
+          <li>Tschüss = Sampai jumpa</li>
+        </ul>
+      `,
+      video: 'gR8d8wt3-Dw',
+      soal: [
+        {
+          id: 'de1',
+          tipe: 'pg',
+          tanya: 'Apa arti "Guten Morgen" dalam bahasa Indonesia?',
+          opsi: ['Selamat pagi', 'Selamat siang', 'Selamat sore', 'Selamat malam'],
+          kunci: 0,
+          bahas: '"Guten Morgen" digunakan untuk menyapa di pagi hari.'
+        },
+        {
+          id: 'de2',
+          tipe: 'pg',
+          tanya: 'Dalam bahasa Jerman, semua kata benda ditulis ...',
+          opsi: ['Dengan huruf kecil', 'Dengan huruf kapital', 'Dengan garis bawah', 'Dengan huruf miring'],
+          kunci: 1,
+          bahas: 'Ciri khas bahasa Jerman adalah semua kata benda ditulis dengan huruf kapital.'
+        }
+      ]
+    }
+  }
+},
+'Bahasa Jepang': {
+  bab: {
+    'Pengenalan Bahasa Jepang': {
+      materi: `
+        <h2>Pengenalan Bahasa Jepang</h2>
+        <p>Bahasa Jepang (日本語 / Nihongo) adalah bahasa resmi di Jepang dan digunakan oleh lebih dari 125 juta orang.</p>
+        <p>Bahasa Jepang menggunakan tiga sistem penulisan utama:</p>
+        <ul>
+          <li><b>Hiragana (ひらがな)</b> – digunakan untuk kata asli Jepang dan tata bahasa.</li>
+          <li><b>Katakana (カタカナ)</b> – digunakan untuk kata serapan atau nama asing.</li>
+          <li><b>Kanji (漢字)</b> – berasal dari huruf Cina, digunakan untuk kata benda, kata kerja, dan kata sifat.</li>
+        </ul>
+        <p>Contoh salam dalam bahasa Jepang:</p>
+        <ul>
+          <li>Ohayou gozaimasu (おはようございます) = Selamat pagi</li>
+          <li>Konnichiwa (こんにちは) = Selamat siang / Halo</li>
+          <li>Konbanwa (こんばんは) = Selamat malam</li>
+          <li>Sayonara (さようなら) = Selamat tinggal</li>
+        </ul>
+      `,
+      video: 'g7H1eWwQJts',
+      soal: [
+        {
+          id: 'jp1',
+          tipe: 'pg',
+          tanya: 'Sistem penulisan apa yang digunakan untuk kata serapan asing dalam bahasa Jepang?',
+          opsi: ['Hiragana', 'Katakana', 'Kanji', 'Romaji'],
+          kunci: 1,
+          bahas: 'Katakana digunakan untuk menulis kata serapan asing dan nama asing.'
+        },
+        {
+          id: 'jp2',
+          tipe: 'pg',
+          tanya: 'Apa arti "Konnichiwa" dalam bahasa Indonesia?',
+          opsi: ['Selamat pagi', 'Selamat siang / Halo', 'Selamat malam', 'Selamat tinggal'],
+          kunci: 1,
+          bahas: '"Konnichiwa" adalah salam yang digunakan pada siang hari atau sebagai sapaan umum.'
+        }
+      ]
+    }
+  }
+},
+'Bahasa Mandarin': {
+  bab: {
+    'Pengenalan Bahasa Mandarin': {
+      materi: `
+        <h2>Pengenalan Bahasa Mandarin</h2>
+        <p>Bahasa Mandarin (中文 / Zhōngwén atau 普通话 / Pǔtōnghuà) adalah bahasa resmi Tiongkok dan digunakan oleh lebih dari 1 miliar orang.</p>
+        <p>Mandarin menggunakan sistem penulisan huruf <b>Hanzi (汉字)</b>. Setiap karakter mewakili satu kata atau suku kata.</p>
+        <p>Selain itu, ada sistem <b>Pinyin</b> yang digunakan untuk menuliskan lafal Mandarin dengan huruf Latin.</p>
+        <p>Contoh salam dalam bahasa Mandarin:</p>
+        <ul>
+          <li>Nǐ hǎo (你好) = Halo</li>
+          <li>Zǎoshang hǎo (早上好) = Selamat pagi</li>
+          <li>Wǎnshang hǎo (晚上好) = Selamat malam</li>
+          <li>Zàijiàn (再见) = Selamat tinggal</li>
+        </ul>
+      `,
+      video: 'dMHZ6JwE7wA',
+      soal: [
+        {
+          id: 'cn1',
+          tipe: 'pg',
+          tanya: 'Sistem penulisan apa yang digunakan dalam bahasa Mandarin?',
+          opsi: ['Hiragana', 'Katakana', 'Hanzi', 'Hangul'],
+          kunci: 2,
+          bahas: 'Bahasa Mandarin menggunakan sistem penulisan Hanzi (karakter Cina).'
+        },
+        {
+          id: 'cn2',
+          tipe: 'pg',
+          tanya: 'Apa arti "Nǐ hǎo" dalam bahasa Indonesia?',
+          opsi: ['Selamat pagi', 'Halo', 'Selamat malam', 'Selamat tinggal'],
+          kunci: 1,
+          bahas: '"Nǐ hǎo" adalah salam umum yang berarti "Halo".'
+        }
+      ]
+    }
+  }
+},
+'Bahasa Korea': {
+  bab: {
+    'Pengenalan Bahasa Korea': {
+      materi: `
+        <h2>Pengenalan Bahasa Korea</h2>
+        <p>Bahasa Korea (한국어 / Hangugeo) adalah bahasa resmi di Korea Selatan dan Korea Utara.</p>
+        <p>Sistem penulisan yang digunakan adalah <b>Hangul (한글)</b>, diciptakan pada abad ke-15 oleh Raja Sejong.</p>
+        <p>Hangul terdiri dari 14 konsonan dasar dan 10 vokal dasar yang dapat digabung menjadi suku kata.</p>
+        <p>Contoh salam dalam bahasa Korea:</p>
+        <ul>
+          <li>안녕하세요 (Annyeonghaseyo) = Halo / Apa kabar</li>
+          <li>좋은 아침 (Joeun achim) = Selamat pagi</li>
+          <li>안녕히 주무세요 (Annyeonghi jumuseyo) = Selamat tidur</li>
+          <li>안녕히 가세요 (Annyeonghi gaseyo) = Selamat jalan</li>
+        </ul>
+      `,
+      video: 'ZAZwXzduFQo',
+      soal: [
+        {
+          id: 'kr1',
+          tipe: 'pg',
+          tanya: 'Apa nama sistem penulisan bahasa Korea?',
+          opsi: ['Hanzi', 'Hangul', 'Katakana', 'Cyrillic'],
+          kunci: 1,
+          bahas: 'Bahasa Korea ditulis dengan Hangul (한글), bukan Hanzi atau Katakana.'
+        },
+        {
+          id: 'kr2',
+          tipe: 'pg',
+          tanya: 'Apa arti "Annyeonghaseyo" dalam bahasa Indonesia?',
+          opsi: ['Selamat tidur', 'Halo', 'Selamat pagi', 'Selamat jalan'],
+          kunci: 1,
+          bahas: '"Annyeonghaseyo" adalah salam umum yang berarti "Halo".'
+        }
+      ]
+    }
+  }
+},
+'Bahasa Arab': {
+  bab: {
+    'Pengenalan Bahasa Arab': {
+      materi: `
+        <h2>Pengenalan Bahasa Arab</h2>
+        <p>Bahasa Arab (العربية / Al-‘Arabiyyah) adalah bahasa Semitik yang digunakan lebih dari 400 juta orang di dunia.</p>
+        <p>Bahasa Arab juga merupakan bahasa resmi di lebih dari 20 negara dan bahasa Al-Qur’an.</p>
+        <p>Sistem penulisan bahasa Arab menggunakan huruf <b>Hijaiyah</b> yang ditulis dari kanan ke kiri.</p>
+        <p>Contoh salam dalam bahasa Arab:</p>
+        <ul>
+          <li>السلام عليكم (As-salāmu ‘alaikum) = Semoga keselamatan atasmu</li>
+          <li>صباح الخير (Sabāḥ al-khayr) = Selamat pagi</li>
+          <li>مساء الخير (Masā’ al-khayr) = Selamat sore</li>
+          <li>مع السلامة (Ma‘a as-salāmah) = Selamat jalan</li>
+        </ul>
+      `,
+      video: 'NUV5UZXhjaU',
+      soal: [
+        {
+          id: 'ar1',
+          tipe: 'pg',
+          tanya: 'Arah penulisan huruf Arab adalah …',
+          opsi: ['Kiri ke kanan', 'Atas ke bawah', 'Kanan ke kiri', 'Melingkar'],
+          kunci: 2,
+          bahas: 'Huruf Arab ditulis dari kanan ke kiri, berbeda dengan huruf Latin.'
+        },
+        {
+          id: 'ar2',
+          tipe: 'pg',
+          tanya: 'Apa arti "As-salāmu ‘alaikum"?',
+          opsi: ['Selamat pagi', 'Halo', 'Semoga keselamatan atasmu', 'Selamat jalan'],
+          kunci: 2,
+          bahas: '"As-salāmu ‘alaikum" berarti "Semoga keselamatan atasmu".'
+        }
+      ]
+    }
+  }
+},
+'Produk Kreatif dan Kewirausahaan': {
+  bab: {
+    'Pengenalan PKK': {
+      materi: `
+        <h2>Pengenalan Produk Kreatif dan Kewirausahaan (PKK)</h2>
+        <p>Mata pelajaran Produk Kreatif dan Kewirausahaan (PKK) bertujuan membekali siswa SMK/MAK dengan kemampuan berwirausaha dan menghasilkan produk yang bermanfaat.</p>
+        <p>PKK mengajarkan siswa untuk:</p>
+        <ul>
+          <li>Mengidentifikasi peluang usaha.</li>
+          <li>Mengembangkan ide menjadi produk kreatif.</li>
+          <li>Menyusun rencana usaha.</li>
+          <li>Melaksanakan pemasaran produk.</li>
+        </ul>
+        <p>Dengan mempelajari PKK, siswa diharapkan mampu menjadi wirausaha muda yang mandiri dan inovatif.</p>
+      `,
+      video: 'i3K3U7lN3xE', 
+      soal: [
+        {
+          id: 'pkk1',
+          tipe: 'pg',
+          tanya: 'Apa tujuan utama mata pelajaran PKK di SMK/MAK?',
+          opsi: [
+            'Menghafal teori kewirausahaan',
+            'Membekali siswa dengan kemampuan berwirausaha',
+            'Menjadi karyawan di perusahaan',
+            'Belajar sejarah wirausaha'
+          ],
+          kunci: 1,
+          bahas: 'Tujuan utama PKK adalah membekali siswa dengan kemampuan berwirausaha dan menghasilkan produk kreatif.'
+        },
+        {
+          id: 'pkk2',
+          tipe: 'pg',
+          tanya: 'Salah satu kompetensi dalam PKK adalah …',
+          opsi: [
+            'Mempelajari tata negara',
+            'Menyusun rencana usaha',
+            'Menghafal nama pengusaha sukses',
+            'Menulis puisi tentang wirausaha'
+          ],
+          kunci: 1,
+          bahas: 'Kompetensi dalam PKK mencakup menyusun rencana usaha, mengembangkan ide produk, dan memasarkan produk.'
+        }
+      ]
+    }
+  }
+},
+
+  };
+
+  // ======= Helpers =======
+  const $ = (sel, par=document) => par.querySelector(sel);
+  const $$ = (sel, par=document) => Array.from(par.querySelectorAll(sel));
+  function setTab(name){
+    $$('.tab-pane').forEach(p => p.classList.add('hidden'));
+    $('#tab-'+name).classList.remove('hidden');
+    $$('.tab-btn').forEach(b=>{
+      const active = b.dataset.tab===name;
+      b.classList.toggle('bg-emerald-600', active);
+      b.classList.toggle('text-white', active);
+      b.classList.toggle('border', !active);
+      b.classList.toggle('chip', !active);
+      b.classList.toggle('bg-white', !active);
+      b.classList.toggle('text-gray-700', !active);
+    })
+  }
+
+  function populateSelect(sel, list){
+    sel.innerHTML = '';
+    list.forEach(v=>{
+      const opt=document.createElement('option');
+      opt.value=v; opt.textContent=v; sel.appendChild(opt);
+    })
+  }
+
+  function renderMateri(mapel, bab){
+    const item = DB[mapel]?.bab?.[bab];
+    if(!item){
+      $('#materiKonten').innerHTML = '<p class="text-gray-500">Materi belum tersedia.</p>';
+      $('#materiVideo').innerHTML = '<span class="text-sm">Video belum tersedia.</span>';
+      return;
+    }
+    $('#materiKonten').innerHTML = item.materi;
+    if(item.video){
+      $('#materiVideo').innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${item.video}" title="Video pembelajaran" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+    } else {
+      $('#materiVideo').innerHTML = '<span class="text-sm">Video belum tersedia.</span>';
+    }
+if(window.MathJax){
+    MathJax.typesetPromise([$('#materiKonten')]);
+  }
+  }
+
+  function buildSoalCard(q, idx, prefix){
+  const wrap = document.createElement('div');
+  wrap.className = 'p-4 rounded-xl border chip';
+  wrap.dataset.id = q.id;
+
+  const head = document.createElement('div');
+  head.className = 'flex items-start justify-between gap-3';
+  head.innerHTML = `<div class="font-semibold">${idx+1}. ${q.tanya.replace(/\n/g,'<br>')}</div>`;
+  wrap.appendChild(head);
+
+  const body = document.createElement('div');
+  body.className = 'mt-3 space-y-2';
+if(q.gambar){
+  const img = document.createElement('img');
+  img.src = q.gambar;
+  img.alt = 'Gambar soal';
+  img.className = 'my-3 w-full max-w-md rounded-lg border';
+  body.appendChild(img);
+}
+if(q.bacaan){
+  const teks = document.createElement('div');
+  teks.className = 'mb-4 p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm whitespace-pre-line';
+  teks.innerText = q.bacaan;
+  body.appendChild(teks);
+}
+  // ====== PILIHAN GANDA ======
+  if(q.tipe === 'pg'){
+    q.opsi.forEach((o,i)=>{
+      const row = document.createElement('label');
+      row.className = 'flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 border border-transparent';
+      row.innerHTML = `<input type="radio" name="${prefix}-${q.id}" value="${i}" class="accent-emerald-600"> <span>${String.fromCharCode(65+i)}. ${o}</span>`;
+      body.appendChild(row);
+    });
+  }
+
+  // ====== CHECKBOX ======
+  if(q.tipe === 'cb'){
+    q.opsi.forEach((o,i)=>{
+      const row = document.createElement('label');
+      row.className = 'flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 border border-transparent';
+      row.innerHTML = `<input type="checkbox" name="${prefix}-${q.id}" value="${i}" class="accent-emerald-600"> <span>${String.fromCharCode(65+i)}. ${o}</span>`;
+      body.appendChild(row);
+    });
+  }
+  // ====== CONSERVATION & RELAXATION ======
+  if(q.tipe === 'cr'){
+    const table = document.createElement('table');
+    table.className = 'w-full border border-gray-200 rounded-lg';
+
+    // Header tabel
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+      <tr class="bg-gray-100 text-center">
+        <th class="p-2 border">places</th>
+        <th class="p-2 border w-28">Conservation</th>
+        <th class="p-2 border w-28">Relaxation</th>
+      </tr>`;
+    table.appendChild(thead);
+
+    // Body tabel
+    const tbody = document.createElement('tbody');
+    q.opsi.forEach((o,i)=>{
+      const idCon = `${prefix}-${q.id}-cr-${i}-con`;
+      const idRel = `${prefix}-${q.id}-cr-${i}-rel`;
+
+      const row = document.createElement('tr');
+      row.className = 'border-t';
+      row.innerHTML = `
+        <td class="p-2 border">${o}</td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idCon}" name="${prefix}-${q.id}-cr-${i}" value="conservation" class="accent-emerald-600">
+        </td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idRel}" name="${prefix}-${q.id}-cr-${i}" value="relaxation" class="accent-rose-600">
+        </td>`;
+      tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+    body.appendChild(table);
+  }
+
+  // ====== BENAR / SALAH ======
+  if(q.tipe === 'bs'){
+    const table = document.createElement('table');
+    table.className = 'w-full border border-gray-200 rounded-lg';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+      <tr class="bg-gray-100 text-center">
+        <th class="p-2 border">Pernyataan</th>
+        <th class="p-2 border w-20">Benar</th>
+        <th class="p-2 border w-20">Salah</th>
+      </tr>`;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    q.opsi.forEach((o,i)=>{
+      const idBenar = `${prefix}-${q.id}-bs-${i}-benar`;
+      const idSalah = `${prefix}-${q.id}-bs-${i}-salah`;
+
+      const row = document.createElement('tr');
+      row.className = 'border-t';
+      row.innerHTML = `
+        <td class="p-2 border">${o}</td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idBenar}" name="${prefix}-${q.id}-bs-${i}" value="true" class="accent-emerald-600">
+        </td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idSalah}" name="${prefix}-${q.id}-bs-${i}" value="false" class="accent-rose-600">
+        </td>`;
+      tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+    body.appendChild(table);
+  }
+
+  // ====== ISIAN ======
+  if(q.tipe === 'isian'){
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Ketik jawaban singkat…';
+    inp.className = 'w-full px-3 py-2 rounded-lg border chip focus:outline-none focus:ring-2 focus:ring-emerald-300';
+    inp.name = `${prefix}-${q.id}-isian`;
+    body.appendChild(inp);
+  }
+
+  // ====== AKSI ======
+  const actions = document.createElement('div');
+  actions.className = 'mt-3 flex flex-wrap items-center gap-2';
+
+  const btnCek = document.createElement('button');
+  btnCek.className = 'btn px-3 py-2 rounded-lg bg-emerald-600 text-white text-sm';
+  btnCek.textContent = 'Cek Jawaban';
+
+  const btnBahas = document.createElement('button');
+  btnBahas.className = 'btn px-3 py-2 rounded-lg border chip text-sm';
+  btnBahas.textContent = 'Pembahasan';
+
+  const status = document.createElement('span');
+  status.className = 'ml-auto text-sm';
+
+  const bahas = document.createElement('div');
+  bahas.className = 'mt-3 hidden p-3 rounded-lg bg-emerald-50 border border-emerald-100 text-sm';
+  bahas.textContent = q.bahas || 'Belum ada pembahasan.';
+
+  // ====== EVENT CEK JAWABAN ======
+  btnCek.addEventListener('click',()=>{
+    let benar = false;
+
+    if(q.tipe === 'pg'){
+      const v = (document.querySelector(`input[name='${prefix}-${q.id}']:checked`)||{}).value;
+      benar = Number(v) === Number(q.kunci);
+    }
+    else if(q.tipe === 'cb'){
+      const checked = [...document.querySelectorAll(`input[name='${prefix}-${q.id}']:checked`)].map(el=>Number(el.value));
+      const kunci = Array.isArray(q.kunci) ? q.kunci.slice().sort() : [q.kunci];
+      benar = checked.slice().sort().toString() === kunci.toString();
+    }
+    else if(q.tipe === 'bs'){
+      const jawabanUser = q.opsi.map((o,i)=>{
+        const el = document.querySelector(`input[name='${prefix}-${q.id}-bs-${i}']:checked`);
+        return el ? el.value === 'true' : null;
+      });
+
+      if(jawabanUser.includes(null)){
+        alert('Pilih jawaban untuk semua pernyataan!');
+        return;
+      }
+      benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+    }
+    else if(q.tipe === 'cr'){
+      const jawabanUser = q.opsi.map((o,i)=>{
+        const el = document.querySelector(`input[name='${prefix}-${q.id}-cr-${i}']:checked`);
+        return el ? el.value : null;
+      });
+
+      if(jawabanUser.includes(null)){
+        alert('Pilih jawaban Conservation / Relaxation untuk semua pernyataan!');
+        return;
+      }
+      benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+    }
+    else {
+      const v = (document.querySelector(`input[name='${prefix}-${q.id}-isian']`)||{}).value||'';
+      benar = v.trim().toLowerCase() === String(q.kunciText||'').trim().toLowerCase();
+    }
+
+    status.textContent = benar ? '✅ Benar' : '❌ Salah';
+    status.classList.toggle('text-emerald-600', benar);
+    status.classList.toggle('text-rose-600', !benar);
+  });
+
+  btnBahas.addEventListener('click',()=> bahas.classList.toggle('hidden'));
+
+  actions.append(btnCek, btnBahas, status);
+  wrap.append(body, actions, bahas);
+  return wrap;
+}
+
+  function loadLatihan(mapel,bab){
+    const item = DB[mapel]?.bab?.[bab];
+    const box = $('#latihanContainer');
+    box.innerHTML='';
+    if(!item){ 
+        box.innerHTML = '<p class="text-gray-500">Soal belum tersedia.</p>'; 
+        return; 
+    }
+    item.soal.forEach((q,i)=> box.appendChild(buildSoalCard(q,i,'lat')) );
+
+    // Tambahkan ini agar MathJax render ulang rumus pada soal latihan
+    if(window.MathJax){
+        MathJax.typesetPromise([box]);
+    }
+}
+
+
+  // ======= SIMULASI =======
+  let simState = {timer:null, endAt: null, daftar: [], mapel:'', durasi: 0};
+
+  function startSimulasi(mapel, jumlah, durasiMenit){
+    const pools = Object.values(DB[mapel]?.bab || {}).flatMap(x=>x.soal||[]);
+    if(pools.length===0){
+      $('#simContainer').innerHTML = '<p class="text-gray-500">Bank soal untuk mapel ini belum tersedia.</p>';
+      return;
+    }
+    const shuffled=[...pools].sort(()=>Math.random()-0.5).slice(0, Math.min(jumlah,pools.length));
+    simState = {timer:null, endAt: Date.now()+durasiMenit*60*1000, daftar: shuffled, mapel, durasi:durasiMenit};
+    renderSimulasi();
+    runTimer();
+  }
+
+  function renderSimulasi(){
+    const box = $('#simContainer');
+    box.innerHTML='';
+    simState.daftar.forEach((q,i)=> box.appendChild(buildSoalCard(q,i,'sim')) );
+    $('#simHasil').classList.add('hidden');
+
+    // Tambahkan ini agar MathJax render ulang rumus pada soal simulasi
+    if(window.MathJax){
+        MathJax.typesetPromise([box]);
+    }
+}
+
+
+  function runTimer(){
+    clearInterval(simState.timer);
+    const info = $('#simInfo');
+    const tick = ()=>{
+      const remain = Math.max(0, simState.endAt - Date.now());
+      const mm = String(Math.floor(remain/60000)).padStart(2,'0');
+      const ss = String(Math.floor((remain%60000)/1000)).padStart(2,'0');
+      info.textContent = `Mapel: ${simState.mapel} • Sisa waktu ${mm}:${ss}`;
+      if(remain===0){
+        clearInterval(simState.timer);
+        selesaiSimulasi();
+      }
+    };
+    tick();
+    simState.timer = setInterval(tick, 250);
+  }
+
+  function nilaiPG(q){
+    const v = (document.querySelector(`input[name='sim-${q.id}']:checked`)||{}).value;
+    return Number(v)===Number(q.kunci);
+  }
+  function nilaiIsian(q){
+    const v = (document.querySelector(`input[name='sim-${q.id}-isian']`)||{}).value||'';
+    return v.trim().toLowerCase() === String(q.kunciText||'').trim().toLowerCase();
+  }
+
+  function selesaiSimulasi(){
+    const total = simState.daftar.length;
+    let benar = 0;
+    simState.daftar.forEach(q=>{
+      benar += (q.tipe==='pg') ? (nilaiPG(q)?1:0) : (nilaiIsian(q)?1:0);
+    });
+    const skor = Math.round((benar/total)*100);
+    const hasil = $('#simHasil');
+    hasil.classList.remove('hidden');
+    hasil.innerHTML = `<div class="font-semibold">Hasil Simulasi</div>
+      <div class="mt-1 text-sm">Benar: <strong>${benar}</strong> dari ${total} soal • Skor: <strong>${skor}</strong></div>
+      <button id="btnReview" class="btn mt-3 px-3 py-2 rounded-lg border chip text-sm">Tampilkan Pembahasan</button>`;
+    $('#simInfo').textContent = `Selesai • Mapel: ${simState.mapel}`;
+
+    $('#btnReview').addEventListener('click',()=>{
+      // Tampilkan semua pembahasan
+      $$('#simContainer .p-4').forEach(card=>{
+        const pemb = card.querySelector('div.mt-3.hidden');
+        if(pemb) pemb.classList.remove('hidden');
+      })
+    })
+  }
+
+  // ======= INIT =======
+  function initSelectors(){
+    const mapels = Object.keys(DB);
+    populateSelect($('#materiMapel'), mapels);
+    populateSelect($('#latihMapel'), mapels);
+    populateSelect($('#simMapel'), mapels);
+
+    const firstBab = (mapel)=> Object.keys(DB[mapel].bab);
+
+    // Materi default
+    const m0 = mapels[0];
+    populateSelect($('#materiBab'), firstBab(m0));
+    // Latihan default
+    populateSelect($('#latihBab'), firstBab(mapels[0]));
+
+    $('#materiMapel').addEventListener('change', e=>{
+      populateSelect($('#materiBab'), firstBab(e.target.value));
+    });
+    $('#latihMapel').addEventListener('change', e=>{
+      populateSelect($('#latihBab'), firstBab(e.target.value));
+    });
+
+    $('#btnLoadMateri').addEventListener('click',()=>{
+      renderMateri($('#materiMapel').value, $('#materiBab').value);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    $('#btnLoadLatihan').addEventListener('click',()=>{
+      loadLatihan($('#latihMapel').value, $('#latihBab').value);
+    });
+
+    $('#btnPeriksaSemua').addEventListener('click',()=>{
+      $$('#latihanContainer .p-4').forEach(card=>{
+        const cek = card.querySelector('button');
+        cek?.click();
+      });
+    });
+
+    $('#btnMulaiSim').addEventListener('click',()=>{
+      const map = $('#simMapel').value;
+      const j = Math.max(5, Math.min(50, Number($('#simJumlah').value||10)));
+      const d = Math.max(5, Math.min(180, Number($('#simDurasi').value||15)));
+      startSimulasi(map, j, d);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    // Muat awal
+    renderMateri($('#materiMapel').value, $('#materiBab').value);
+    loadLatihan($('#latihMapel').value, $('#latihBab').value);
+  }
+
+  // Tab switching
+  $$('.tab-btn').forEach(b=> b.addEventListener('click',()=> setTab(b.dataset.tab)) );
+
+  // Start
+  setTab('materi');
+  initSelectors();
+  </script>
+</body>
+</html>
