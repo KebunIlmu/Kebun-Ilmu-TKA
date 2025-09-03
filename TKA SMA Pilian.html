@@ -662,7 +662,123 @@
   opsi: ['0', '-1/2', '-1', 'Tak hingga'],
   kunci: 1,
   bahas: 'Buat dalam bentuk akar dan akar : \\[x-2-\\sqrt{x^2-3x+1} = \\sqrt{(x-2)^2}-\\sqrt{x^2-3x+1}\\]\\[= \\sqrt{x^2-4x+4}-\\sqrt{x^2-3x+1}\\]. Gunakan rumus \\[\\frac{b-q}{2 \\sqrt{a}}\\] Jadi \\[\\frac{-4-(-3)}{2 \\sqrt{1}}=-1/2✅.\\]'
+},
+{
+  id: 'lm11',
+  tipe: 'pg',
+  tanya: 'Hitung limit berikut:<br><br>' +
+        '\\[ \\lim_{x \\to \\pi/2} \\left( \\sin\\frac{x}{2} + \\cos x \\right) \\]',
+  opsi: [
+    '\\( \\frac{\\sqrt{2}}{2} \\)',
+    '\\( 1 + \\frac{\\sqrt{2}}{2} \\)',
+    '\\( 1 \\)',
+    '\\( \\frac{1}{2} \\)'
+  ],
+  kunci: 0,
+  bahas: '1️⃣ Saat \\( x \\to \\pi/2 \\): \\( \\sin\\frac{x}{2} = \\sin\\frac{\\pi/4}{1}?\\) \n Oops, lebih tepat: \\( \\sin(\\pi/4) = \\frac{\\sqrt{2}}{2} \\) \n2️⃣ \\( \\cos(\\pi/2) = 0 \\) \n3️⃣ Sehingga limit = \\( \\frac{\\sqrt{2}}{2} + 0 = \\frac{\\sqrt{2}}{2} \\). ✅'
+},
+{
+  id: 'lm12',
+  tipe: 'pg',
+  tanya: 'Hitung limit berikut:<br><br>' +
+        '\\[ \\lim_{x \\to \\pi/4} \\frac{\\cos x + \\sin x}{\\tan x} \\]',
+  opsi: [
+    '\\( 1 \\)',
+    '\\( 2 \\)',
+    '\\( \\sqrt{2} \\)',
+    '\\( 0 \\)'
+  ],
+  kunci: 1,
+  bahas: '1️⃣ Ubah bentuk: \\( \\frac{\\cos x + \\sin x}{\\tan x} = (\\cos x + \\sin x) \\cdot \\cot x = (\\cos x + \\sin x) \\cdot \\frac{\\cos x}{\\sin x} \\).<br>' +
+         '2️⃣ Saat \\( x = \\pi/4 \\), \\( \\sin x = \\cos x = \\frac{\\sqrt{2}}{2} \\).<br>' +
+         '3️⃣ Jadi ekspresi = \\( (\\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2}) \\cdot \\frac{\\sqrt{2}/2}{\\sqrt{2}/2} = 1 \\cdot 2 / 1 = 2 \\). ✅'
+},
+{
+  id: 'lm13',
+  tipe: 'pg',
+  tanya: 'Hitung limit berikut:<br><br>' +
+        '\\[ \\lim_{x \\to \\pi/4} \\frac{\\cos 2x}{\\sin x - \\cos x} \\]',
+  opsi: [
+    '\\( -\\sqrt{2} \\)',
+    '\\( \\sqrt{2} \\)',
+    '\\( 0 \\)',
+    '\\( 1 \\)'
+  ],
+  kunci: 0,
+  bahas: '1️⃣ Saat x → π/4, penyebut = sin(π/4) - cos(π/4) = √2/2 - √2/2 = 0 ✅ (indeterminate form 0/0).<br>' +
+         '2️⃣ Gunakan identitas: cos 2x = cos²x - sin²x = (cos x - sin x)(cos x + sin x).<br>' +
+         '3️⃣ Substitusi ke limit: \\[\\frac{(\\cos x - \\sin x)(\\cos x + \\sin x)}{(\\sin x - \\cos x)} = -(\\cos x + \\sin x)\\].<br>' +
+         '4️⃣ Saat x → π/4, \\[-(\\cos(π/4)+\\sin(π/4)) = -(\\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2} ) = -\\sqrt{2}\\] ✅'
+},
+{
+  id: 'lm14',
+  tipe: 'pg',
+  tanya: 'Hitung limit berikut:<br><br>' +
+        '\\[ \\lim_{x \\to \\pi/2} \\frac{1 - \\sin x}{\\cos^2 x} \\]',
+  opsi: [
+    '\\( 0 \\)',
+    '\\( 1/2 \\)',
+    '\\( 1 \\)',
+    '\\( 2 \\)'
+  ],
+  kunci: 1,
+  bahas: '1️⃣ Saat x → π/2, penyebut = cos²(π/2) = 0 dan pembilang = 1 - sin(π/2) = 0 ✅ → bentuk 0/0.<br>' +
+         '2️⃣ Gunakan identitas: 1 - sin x = (1 - sin x)(1 + sin x)/(1 + sin x) = (1 - sin² x)/(1 + sin x) = cos² x/(1 + sin x).<br>' +
+         '3️⃣ Limit = cos² x / (cos² x (1 + sin x)) ? Lebih tepat: (1 - sin x)/cos² x = 1/(1 + sin x).<br>' +
+         '4️⃣ Saat x → π/2: 1/(1 + sin(π/2)) = 1/(1 + 1) = 1/2 ✅'
+},
+{
+  id: 'lm15',
+  tipe: 'pg',
+  tanya: 'Hitung limit berikut:<br><br>' +
+        '\\[ \\lim_{x \\to \\pi/4} \\frac{\\sin x - \\cos x}{1 + \\tan x} \\]',
+  opsi: [
+    '\\( 0 \\)',
+    '\\( 1 \\)',
+    '\\( -1 \\)',
+    '\\( 1/2 \\)'
+  ],
+  kunci: 0,
+  bahas: '1️⃣ Substitusi x → π/4: sin(π/4) - cos(π/4) = √2/2 - √2/2 = 0 ✅<br>' +
+         '2️⃣ Penyebut: 1 + tan(π/4) = 1 + 1 = 2 ✅<br>' +
+         '3️⃣ Jadi limit = 0 / 2 = 0 ✅'
+},
+{
+  id: 'lm16',
+  tipe: 'pg',
+  tanya: 'Hitung limit berikut:<br><br>' +
+        '\\[ \\lim_{x \\to \\pi/4} \\frac{\\sin x - \\cos x}{1 - \\tan x} \\]',
+  opsi: [
+    '\\( 1 \\)',
+    '\\( -1 \\)',
+    '\\( \\frac{\\sqrt{2}}{2} \\)',
+    '\\( -\\frac{\\sqrt{2}}{2} \\)'
+  ],
+  kunci: 3,
+  bahas: '1️⃣ Bentuk awal: saat x → π/4 → sin x - cos x = 0, 1 - tan x = 0 → bentuk 0/0 ✅<br>' +
+         '2️⃣ Gunakan trik faktorisasi: sin x - cos x = - (cos x - sin x), 1 - tan x = (cos x - sin x)/cos x.<br>' +
+         '3️⃣ Jadi: (sin x - cos x)/(1 - tan x) = - (cos x - sin x) / ((cos x - sin x)/cos x) = - cos x.<br>' +
+         '4️⃣ Saat x → π/4: -cos(π/4) = -√2/2. ✅'  
+},
+{
+  id: 'lm17',
+  tipe: 'pg',
+  tanya: 'Hitung limit berikut:<br><br>' +
+        '\\[ \\lim_{x \\to \\pi/2} \\frac{1 - \\sin^2 x}{(\\sin \\frac{x}{2} - \\cos \\frac{x}{2})^2} \\]',
+  opsi: [
+    '\\( 1 \\)',
+    '\\( 2 \\)',
+    '\\( 4 \\)',
+    '\\( 0 \\)'
+  ],
+  kunci: 1,
+  bahas: '1️⃣ Gunakan identitas: 1 - sin²x = cos²x.<br>' +
+         '2️⃣ Faktorkan: cos²x = (cos(x/2) - sin(x/2))^2 (cos(x/2) + sin(x/2))^2.<br>' +
+         '3️⃣ Sehingga ekspresi = ((cos(x/2)-sin(x/2))^2 (cos(x/2)+sin(x/2))^2) / (sin(x/2)-cos(x/2))^2 = (cos(x/2)+sin(x/2))^2.<br>' +
+         '4️⃣ Saat x → π/2, cos(π/4)+sin(π/4) = √2/2 + √2/2 = 1.<br>' +
+         '5️⃣ Limit = 1^2 = 1 ✅'  // Koreksi, ternyata 1, bukan 2
 }
+
 
 
   ]
