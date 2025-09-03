@@ -304,34 +304,124 @@
 
     'Polinomial': {
       materi: `
-        <h2 class="text-xl font-bold mb-2">Polinomial</h2>
-        <p>
-          Bab ini membahas operasi, pemfaktoran, dan sifat-sifat polinomial untuk menyelesaikan permasalahan matematika tingkat lanjut.
-        </p>
-        <ul class="list-disc ml-6 mb-4">
-          <li>Operasi polinomial</li>
-          <li>Pemfaktoran polinomial</li>
-          <li>Suku sisa</li>
-        </ul>
+        <h3 class="text-lg font-semibold mt-4 mb-2">1. Pengertian Polinomial</h3>
+<p>
+  Polinomial dalam variabel \\(x\\) ditulis sebagai: <br>
+  \\(P(x)=a_nx^n+a_{n-1}x^{n-1}+\\dots + a_1x + a_0\\), dengan \\(a_n\\neq 0\\).<br>
+  Derajat (degree) polinomial adalah nilai \\(n\\).
+</p>
+
+<h3 class="text-lg font-semibold mt-4 mb-2">2. Operasi pada Polinomial</h3>
+<ul class="list-disc ml-6 mb-4">
+  <li><b>Penjumlahan / Pengurangan:</b> jumlahkan koefisien suku sejenis.</li>
+  <li><b>Perkalian:</b> kalikan setiap suku dari satu polinomial dengan setiap suku polinomial lain lalu gabungkan suku sejenis.</li>
+  <li><b>Pembagian</b> (pembagian panjang atau sintetik) menghasilkan hasil bagi dan sisa: \\(P(x)=Q(x)\\cdot D(x)+R(x)\\) dengan \\(\\deg R < \\deg D\\).</li>
+</ul>
+
+<h3 class="text-lg font-semibold mt-4 mb-2">3. Teorema Sisa dan Teorema Faktor</h3>
+<ul class="list-disc ml-6 mb-4">
+  <li><b>Teorema sisa:</b> sisa pembagian \\(P(x)\\) oleh \\(x-a\\) adalah \\(P(a)\\).</li>
+  <li><b>Teorema faktor:</b> \\(x-a\\) adalah faktor dari \\(P(x)\\) jika dan hanya jika \\(P(a)=0\\).</li>
+</ul>
+
+<h3 class="text-lg font-semibold mt-4 mb-2">4. Pembagian Sintetik (Cara Cepat untuk Pembagian oleh \\(x-a\\))</h3>
+<p>
+  Untuk membagi \\(P(x)\\) oleh \\(x-a\\), gunakan koefisien \\(P(x)\\) dan bilangan \\(a\\) untuk mendapatkan koefisien hasil bagi dan sisa secara efisien.
+</p>
+
+<h3 class="text-lg font-semibold mt-4 mb-2">5. Akar, Multiplicitas, dan Bentuk Faktor</h3>
+<ul class="list-disc ml-6 mb-4">
+  <li>Jika \\(r\\) adalah akar dari \\(P(x)\\), maka \\(x-r\\) adalah faktor.</li>
+  <li>Multiplicitas: jika \\((x-r)^k\\) membagi \\(P(x)\\) tetapi \\((x-r)^{k+1}\\) tidak, maka akar \\(r\\) memiliki multiplicitas \\(k\\).</li>
+  <li>Jumlah akar (dihitung dengan multiplicitas) sama dengan derajat polinomial (termasuk akar kompleks).</li>
+</ul>
+
+<h3 class="text-lg font-semibold mt-4 mb-2">6. Perilaku Ujung (End Behavior)</h3>
+<p>
+  Perilaku ketika \\(x\\to \\pm\\infty\\) ditentukan oleh koefisien utama \\(a_n\\) dan derajat \\(n\\):
+  <ul class="list-disc ml-6">
+    <li>Jika \\(n\\) genap dan \\(a_n>0\\): \\(P(x)\\to +\\infty\\) untuk \\(x\\to \\pm\\infty\\).</li>
+    <li>Jika \\(n\\) genap dan \\(a_n<0\\): \\(P(x)\\to -\\infty\\) untuk \\(x\\to \\pm\\infty\\).</li>
+    <li>Jika \\(n\\) ganjil dan \\(a_n>0\\): \\(P(x)\\to -\\infty\\) saat \\(x\\to -\\infty\\) dan \\(+\\infty\\) saat \\(x\\to +\\infty\\).</li>
+  </ul>
+</p>
+
+<h3 class="text-lg font-semibold mt-4 mb-2">7. Teknik Penyelesaian Masalah</h3>
+<ul class="list-disc ml-6 mb-4">
+  <li>Gunakan teorema sisa untuk mengecek nilai \\(P(a)\\) dan mencari sisa.</li>
+  <li>Gunakan faktorisasi (kelompok, rasional root test) untuk menemukan faktor linear atau kuadrat.</li>
+  <li>Gunakan pembagian sintetik untuk mempercepat pembagian oleh \\(x-a\\).</li>
+</ul>
+
+<h3 class="text-lg font-semibold mt-4 mb-2">8. Contoh Singkat</h3>
+<p>
+  Contoh: bagi \\(P(x)=2x^3-3x^2+4x-5\\) oleh \\(x-1\\). Menurut teorema sisa, sisa = \\(P(1)=2-3+4-5=-2\\).
+</p>
+
+<h3 class="text-lg font-semibold mt-4 mb-2">9. Materi Lengkap</h3>
+<p>
+  Untuk materi lebih lengkap beserta contoh dan latihan, unduh PDF berikut:<br>
+  <a href="https://materi78.wordpress.com/wp-content/uploads/2013/06/polin_mat4.pdf" target="_blank" class="text-blue-600 underline">
+    📘 Klik di sini untuk download materi lengkap Polinomial (PDF)
+  </a>
+</p>
+
       `,
-      video: 'ZLrYUVs4Pp8',
+      video: 'WyPHgAaa37E',
       soal: [
+{
+  id: 'pl1',
+  tipe: 'cb',
+  tanya: 'Fungsi polinomial berderajat 3 \\(f(x)=x^3+2x^2+ax+b\\) memenuhi:\n- sisa pembagian \\(f(x)\\) oleh \\(x+1\\) adalah 6,\n- sisa pembagian \\(f(x)\\) oleh \\(x-1\\) adalah 2.\nBerdasarkan informasi tersebut, pilihlah semua pernyataan yang benar.',
+  opsi: [
+    'a = 2',
+    'f(-1) = 4',
+    'f(0) = 2',
+    'Sisa pembagian f(x) oleh x-2 adalah 20',
+    'Sisa pembagian f(x) oleh x+3 adalah -2'
+  ],
+  kunci: [2],
+  bahas: 'Gunakan teorema sisa:1) \\[f(-1) = (-1)^3 + 2(-1)^2 + a(-1) + b \\]\\[= -1 + 2 - a + b \\]\\[= -a + b +1 = 6 \\]\\[ -a + b +1 =6 \\]\\[b - a =5\\]2) \\[f(1) = 1 + 2 + a + b \\]\\[= a + b +3 = 2 \\]\\[a + b = -1\\]Dari dua persamaan: a + b = -1 dan b - a = 5 ⇒ a = -3, b = 2.Cek opsi: a = 2 → Salah (a=-3)\\[f(-1) = (-1)^3 + 2 + (-3)(-1) + 2 \\]\\[= -1 +2 +3 +2=6\\] → Salah\\[f(0) = 0+0+(-3)\\cdot 0 +2=2\\] ✅ benar. sisa f(x) oleh x-2 \\[f(2)=2^3+2\\cdot 4+(-3)\\cdot 2+2=8+8-6+2=12\\] → seharusnya 12, bukan 20, jadi opsi salah.\n- sisa f(x) oleh x+3 \\[f(-3) = (-27)+18+9+2=2\\] salah.\n\nJadi jawaban benar: f(0)=2'
+},
+
         {
-          id: 'pl1',
-          tipe: 'pg',
-          tanya: 'Hasil bagi \\((x^3 - 2x^2 + 4) : (x - 2)\\) adalah …',
-          opsi: ['x² + 0x + 4 sisa 12', 'x² + 2x + 4 sisa 8', 'x² - 0x + 4 sisa 8', 'x² - 2x + 4 sisa 12'],
-          kunci: 0,
-          bahas: 'Dengan teorema sisa, substitusi x=2 menghasilkan sisa 12. Hasil baginya x² + 0x + 4.'
-        },
+  id: 'pl2',
+  tipe: 'pg',
+  tanya: 'Jika \\(p(x)=x^3+ax^2+4x+2b+1\\) dan sisa pembagian \\(p(x)\\) oleh \\(x^2+4\\) adalah \\(b-3a\\). Jika \\(p(x)\\) habis dibagi \\(x+1\\), maka nilai \\(a^2+b\\) adalah …',
+  opsi: ['3', '5', '7', '9'],
+  kunci: 1,
+  bahas: 'Misal sisa pembagian oleh \\(x^2+4\\) adalah konstanta \\(r=b-3a\\). Karena \\(x^2+4\\) memiliki akar \\(x=2i\\) dan \\(x=-2i\\), maka \\(p(2i)=r\\). Hitung \\(p(2i)\\): \n\n\\(p(2i)=(2i)^3+a(2i)^2+4(2i)+2b+1=-8i-4a+8i+2b+1=-4a+2b+1.\\)\n\nKarena \\(p(2i)=b-3a\\), diperoleh \\(-4a+2b+1=b-3a\\). Sederhanakan: \\(-a+b+1=0\\) sehingga \\(b=a-1\\). \n\nSelanjutnya \\(p(x)\\) habis dibagi \\(x+1\\) berarti \\(p(-1)=0\\). Hitung \\(p(-1)\\): \n\n\\(p(-1)=-1+a-4+2b+1=a+2b-4=0\\). Dengan \\(b=a-1\\) didapat \\(a+2(a-1)-4=0\\Rightarrow3a-6=0\\Rightarrow a=2\\). Maka \\(b=1\\). \n\nJadi \\(a^2+b=2^2+1=4+1=5\\).'
+},
         {
-          id: 'pl2',
-          tipe: 'pg',
-          tanya: 'Jika \\(x^2 - 5x + 6\\), maka faktorisasi yang benar adalah …',
-          opsi: ['(x - 2)(x - 3)', '(x + 2)(x - 3)', '(x - 1)(x - 6)', '(x - 5)(x + 1)'],
-          kunci: 0,
-          bahas: 'x² - 5x + 6 = (x - 2)(x - 3).'
-        }
+  id: 'pl3',
+  tipe: 'pg',
+  tanya: 'Jika \\(p(x)=ax^3+bx^2+2x-3\\) habis dibagi \\(x^2+1\\), maka nilai \\(3a-b\\) adalah …',
+  opsi: ['-9', '-3', '3', '9'],
+  kunci: 3,
+  bahas: 'Karena \\(p(x)\\) habis dibagi \\(x^2+1\\), maka sisa pembagiannya = 0. Artinya \\(p(x) = (x^2+1)Q(x)\\) dan teorema sisa untuk akar \\(x=i\\) dan \\(x=-i\\) berlaku.\n\nSubstitusi \\(x=i\\): \n\n\\[p(i) = a(i)^3 + b(i)^2 + 2i -3 \\]\\[= ai^3 + b i^2 + 2i -3 \\]\\[= a(-i) + b(-1) + 2i -3 \\]\\[= (-a+2)i - b -3 = 0\\]\n\nSehingga bagian imajiner = 0: \\[-a+2=0 \\Rightarrow a=2\\]\n\nBagian real = 0: \\(-b-3=0 \\Rightarrow b=-3\\)\n\nJadi \\(3a - b = 3*2 - (-3) = 6 + 3 = 9\\).'
+},
+{
+  id: 'pl4',
+  tipe: 'pg',
+  tanya: 'Jika sisa pembagian \\(p(x) = A x^{2014} - B x^{2015} + 2x + 1\\) oleh \\(x^2-1\\) adalah \\(x+2\\), maka nilai \\(A+B\\) adalah …',
+  opsi: ['0', '1', '2', '3'],
+  kunci: 2,
+  bahas: 'Karena sisa pembagian oleh \\(x^2-1\\) adalah linear, gunakan teorema sisa untuk \\(x=1\\) dan \\(x=-1\\): 1)Substitusi x=1: \\[A\\cdot 1^{2014} - B\\cdot 1^{2015} + 2\\cdot 1 + 1\\]\\[ = A - B + 3 \\]\\[= \\text{sisa} = 1 + 2 = 3\\] ✅ Benar.\n\nSehingga persamaan pertama: \\[A - B + 3 = 3 \\Rightarrow A - B = 0 \\Rightarrow A = B\\]2) Substitusi x=-1:\\[A\\cdot (-1)^{2014} - B\\cdot(-1)^{2015} + 2*(-1) + 1 \\]\\[= A - (-B) -2 +1 = A + B -1\\] Sisa di x=-1: \\[-1 + 2 = 1\\]\nSehingga \\[A + B -1 = 1 \\Rightarrow A + B = 2\\].\n\nJadi jawabannya: 2.'
+},
+{
+  id: 'pl5',
+  tipe: 'bs',
+  tanya: 'Jika sisa pembagian \\(f(x)\\) oleh \\(x^2-1\\) adalah \\(-x+3\\) dan sisa pembagian \\(f(x)\\) oleh \\(x^2-4\\) adalah \\(x+1\\), tentukan sisa pembagian yang sesuai dari opsi berikut:',
+  opsi: [
+    'Sisa pembagian \\((x-2)f(x)\\) oleh \\(x^2-x-2\\) adalah 4x-7',
+    'Sisa pembagian \\(x^2f(x)\\) oleh \\(x^2-x-2\\) adalah -2x',
+    'Sisa pembagian \\(f(-x)\\) oleh \\(x^2-3x+2\\) adalah -5x+9',
+    'Sisa pembagian \\(-f(x)\\) oleh \\(x^2+3x+2\\) adalah -5x-9'
+  ],
+  kunci: [false,false, false,true],
+  bahas: 'Gunakan sifat sisa polinomial: jika f(x) dibagi oleh (x-a)(x-b), sisa linear R(x) = px + q dapat ditentukan dari nilai f(a) dan f(b). Dengan substitusi dan kombinasi linear, sisa dari operasi polinomial seperti (x-2)f(x), x^2 f(x), f(-x), atau -f(x) terhadap polinomial baru dapat dihitung. Pilih opsi yang sesuai dengan hasil perhitungan sisa polinomial.'
+},
+
       ]
     },
 
@@ -777,7 +867,25 @@
          '3️⃣ Sehingga ekspresi = ((cos(x/2)-sin(x/2))^2 (cos(x/2)+sin(x/2))^2) / (sin(x/2)-cos(x/2))^2 = (cos(x/2)+sin(x/2))^2.<br>' +
          '4️⃣ Saat x → π/2, cos(π/4)+sin(π/4) = √2/2 + √2/2 = 1.<br>' +
          '5️⃣ Limit = 1^2 = 1 ✅'  // Koreksi, ternyata 1, bukan 2
-}
+},
+{
+  id: 'lm18',
+  tipe: 'pg',
+  tanya: 'Hitung limit berikut:<br><br>' +
+         '\\[ \\lim_{x \\to \\pi} \\frac{\\sin(x-\\pi)}{3(\\pi - x)\\cos4x} \\]',
+  opsi: [
+    '\\( -\\dfrac{1}{3\\cos4\\pi} \\)',
+    '\\( \\dfrac{1}{3\\cos4\\pi} \\)',
+    '\\( -\\dfrac{1}{3} \\)',
+    '\\( 0 \\)'
+  ],
+  kunci: 2,
+  bahas: '1️⃣ Misalkan \\(h = x-\\pi\\). Saat \\(x \\to \\pi\\) maka \\(h \\to 0\\).<br>' +
+         '2️⃣ Pembilang: \\(\\sin(x-\\pi)=\\sin h \\sim h\\) untuk \\(h\\to0\\).<br>' +
+         '3️⃣ Penyebut: \\(3(\\pi-x)\\cos4x = 3(-h)\\cos(4x)\\to 3(-h)\\cos4\\pi\\).<br>' +
+         '4️⃣ Karena \\(\\cos4\\pi=\\cos(0)=1\\), maka limit = \\(\\dfrac{h}{-3h\\cdot1} = -\\dfrac{1}{3}\\).<br>' +
+         '5️⃣ Jadi limit = \\( -\\dfrac{1}{3} \\) ✅'
+},
 
 
 
