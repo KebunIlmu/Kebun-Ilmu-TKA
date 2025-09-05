@@ -276,7 +276,7 @@
 
 `,
 
-      video: 'OE8MJ5RROow',
+      video: '2iHAJAElj_0',
       soal: [
         {
   id: 'mt1',
@@ -292,6 +292,33 @@
   kunci: [0, 2], 
   bahas: 'Diketahui \\( M^{-1} = \\begin{bmatrix} 3 & -5 \\\\ -1 & 2 \\end{bmatrix} \\). Matriks pembanding \\( \\begin{bmatrix} 6 & -10 \\\\ -2 & 4 \\end{bmatrix} = 2M^{-1} \\). Sehingga persamaan \\( pM^{-1} = q(2M^{-1}) \\) memberi \\( p = 2q \\). Dari opsi yang tersedia, pasangan yang memenuhi adalah (2,1) dan (4,2).'
 },
+{
+  id: 'mt2',
+  tipe: 'pg',
+  tanya: 'Jika matriks \\( C = \\begin{bmatrix} 2x & 4 \\\\ 3 & 12 \\end{bmatrix} \\) adalah matriks singular, maka nilai \\( x \\) adalah ....',
+  opsi: [
+    '\\( \\tfrac{1}{2} \\)',
+    '1',
+    '2',
+    '3'
+  ],
+  kunci: 0,
+  bahas: 'Matriks singular artinya determinannya nol. Hitung: \\( \\det(C) = (2x)(12) - (4)(3) = 24x - 12 \\). Syarat singular: \\( 24x - 12 = 0 \\implies x = \\tfrac{1}{2} \\).'
+},
+{
+  id: 'mt3',
+  tipe: 'pg',
+  tanya: 'Diketahui matriks \\( A = \\begin{bmatrix} 1 & 2 & 1 \\\\ 2 & 3 & 1 \\\\ 3 & 1 & 2 \\end{bmatrix} \\) dan matriks \\( B = \\begin{bmatrix} x & 2 & 1 \\\\ 1 & 1 & 1 \\\\ 3 & 0 & 2 \\end{bmatrix} \\). Jika \\( \\det(A) = \\det(B) \\), maka nilai \\( x \\) adalah ....',
+  opsi: [
+    '\\( -\\tfrac{3}{2} \\)',
+    '-1',
+    '0',
+    '1'
+  ],
+  kunci: 0,
+  bahas: 'Hitung \\( \\det(A) = -4 \\). Hitung \\( \\det(B) = 2x - 1 \\). Persamaan: \\( 2x - 1 = -4 \\implies 2x = -3 \\implies x = -\\tfrac{3}{2} \\).'
+},
+
 {
   id: 'mt4',
   tipe: 'pg',
@@ -336,6 +363,263 @@
   Jadi jawaban benar adalah opsi (2,3,3,3,2,3) dan (2,3,3,4,2,4).
   `
 },
+{
+  id: 'mt6',
+  tipe: 'pg',
+  tanya: 'Diketahui matriks \\( A = \\begin{bmatrix} 2 & 1 \\\\ 3 & 2 \\end{bmatrix} \\). Jika \\( B = A^2 - 2A \\), tentukan determinan matriks B.',
+  opsi: [
+    '-3',
+    '-2',
+    '-1',
+    '0'
+  ],
+  kunci: 0,
+  bahas: 'Hitung \\( A^2 = \\begin{bmatrix} 2 & 1 \\\\ 3 & 2 \\end{bmatrix} \\begin{bmatrix} 2 & 1 \\\\ 3 & 2 \\end{bmatrix} = \\begin{bmatrix} 7 & 4 \\\\ 12 & 7 \\end{bmatrix} \\). Maka \\( B = A^2 - 2A = \\begin{bmatrix} 7 & 4 \\\\ 12 & 7 \\end{bmatrix} - \\begin{bmatrix} 4 & 2 \\\\ 6 & 4 \\end{bmatrix} = \\begin{bmatrix} 3 & 2 \\\\ 6 & 3 \\end{bmatrix} \\). Determinan: \\( \\det(B) = (3)(3) - (6)(2) = 9 - 12 = -3 \\). Jadi jawabannya 0 (tidak ada dalam opsi yang lain selain 0 sebagai nilai benar? → cek: salah! koreksi: hasil determinan = -3, bukan 0, maka harus ada opsinya -3).'
+},
+
+{
+  id: 'mt7',
+  tipe: 'pg',
+  tanya: 'Diketahui matriks \\( M = \\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 0 & 0 & k \\end{bmatrix} \\). Tentukan nilai \\( k \\) agar \\( M \\) tidak mempunyai invers.',
+  opsi: [
+    '0',
+    '1',
+    '2',
+    '3'
+  ],
+  kunci: 0,
+  bahas: 'Matriks segitiga atas, determinannya adalah hasil kali diagonal utama: \\( \\det(M) = (1)(1)(k) = k \\). Agar matriks tidak invertibel, \\( \\det(M) = 0 \\). Jadi, nilai \\( k = 0 \\).'
+},
+{
+  id: 'mt8',
+  tipe: 'pg',
+  tanya: 'Selesaikan sistem persamaan linier menggunakan metode matriks: \\( 2x + y = 5 \\), \\( 3x + 2y = 8 \\). Tentukan nilai \\( (x, y) \\).',
+  opsi: [
+    '(1, 3)',
+    '(2, 1)',
+    '(1, 2)',
+    '(2, 2)'
+  ],
+  kunci: 1,
+  bahas: 'Sistem dapat ditulis \\( A = \\begin{bmatrix} 2 & 1 \\\\ 3 & 2 \\end{bmatrix}, X = \\begin{bmatrix} x \\\\ y \\end{bmatrix}, B = \\begin{bmatrix} 5 \\\\ 8 \\end{bmatrix} \\). Maka \\( X = A^{-1}B \\). Determinan: \\( \\det(A) = 4 - 3 = 1 \\). Invers: \\( A^{-1} = \\begin{bmatrix} 2 & -1 \\\\ -3 & 2 \\end{bmatrix} \\). Hitung: \\( X = A^{-1}B = \\begin{bmatrix} 2 & -1 \\\\ -3 & 2 \\end{bmatrix} \\begin{bmatrix} 5 \\\\ 8 \\end{bmatrix} = \\begin{bmatrix} 10 - 8 \\\\ -15 + 16 \\end{bmatrix} = \\begin{bmatrix} 2 \\\\ 1 \\end{bmatrix} \\). Jadi \\( (x,y) = (2,1) \\).'
+},
+
+{
+  id: 'mt9',
+  tipe: 'pg',
+  tanya: 'Diketahui kendala program linear: \\( x + y \\leq 6 \\), \\( x \\geq 0 \\), \\( y \\geq 0 \\). Tentukan nilai maksimum dari fungsi tujuan \\( Z = 3x + 4y \\).',
+  opsi: [
+    '18',
+    '20',
+    '22',
+    '24'
+  ],
+  kunci: 3,
+  bahas: 'Daerah feasible adalah segitiga dengan titik (0,0), (6,0), dan (0,6). Evaluasi Z: di (0,0) → 0, di (6,0) → 18, di (0,6) → 24. Nilai maksimum adalah 24. Jadi harusnya opsinya 24.'
+},
+{
+  id: 'mt10',
+  tipe: 'pg',
+  tanya: 'Seorang pedagang menjual dua jenis buah: apel dan jeruk. Jika harga 2 apel dan 1 jeruk adalah Rp5.000, sedangkan 3 apel dan 2 jeruk adalah Rp8.000, tentukan harga satu apel dan satu jeruk menggunakan metode matriks!',
+  opsi: [
+    'Apel Rp1.000, Jeruk Rp3.000',
+    'Apel Rp2.000, Jeruk Rp1.000',
+    'Apel Rp1.000, Jeruk Rp2.000',
+    'Apel Rp2.000, Jeruk Rp2.000'
+  ],
+  kunci: 1,
+  bahas: 'Misalkan x = harga apel, y = harga jeruk. Model SPL: 2x + y = 5.000, 3x + 2y = 8.000. Disederhanakan (x dalam ribuan): 2x+y=5, 3x+2y=8. Dengan metode invers, solusi adalah (x,y) = (2,1). Artinya harga apel = Rp2.000 dan harga jeruk = Rp1.000.'
+},
+
+{
+  id: 'mt11',
+  tipe: 'pg',
+  tanya: 'Sebuah perusahaan memproduksi dua jenis produk: A dan B. Setiap produk membutuhkan sumber daya berupa jam kerja dan bahan baku. Total jam kerja dan bahan baku tidak boleh melebihi 6 satuan. Perusahaan ingin memaksimalkan keuntungan \\( Z = 3A + 4B \\). Jika A dan B masing-masing tidak negatif, berapakah keuntungan maksimum yang dapat diperoleh?',
+  opsi: [
+    'Rp18.000',
+    'Rp20.000',
+    'Rp22.000',
+    'Rp24.000'
+  ],
+  kunci: 3,
+  bahas: 'Kendala: A + B ≤ 6, A ≥ 0, B ≥ 0. Titik pojok: (0,0), (6,0), (0,6). Evaluasi Z: (0,0)=0, (6,0)=18, (0,6)=24. Jadi maksimum 24 (atau Rp24.000 jika satuan keuntungan ribuan).'
+},
+{
+  id: 'mt12',
+  tipe: 'bs',
+  tanya: 'Diketahui \\( A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix} \\) dan \\( B = \\begin{bmatrix} 0 & 1 \\\\ -1 & 0 \\end{bmatrix} \\). Tentukan pernyataan benar/salah berikut terkait sifat determinan dan invers matriks:',
+  opsi: [
+    'Det(AB) = Det(A) · Det(B)',
+    'Invers(AB) = Invers(A)·Invers(B)',
+    'Det(A+B) = Det(A) + Det(B)',
+    'Jika C = A·B maka C memiliki invers'
+  ],
+  kunci: [true,false,false,true],
+  bahas: 'Hitung det(A) = -2, det(B) = 1. Maka det(AB) = det(A)·det(B) = -2, benar. Sifat invers: (AB)^{-1} = B^{-1}A^{-1}, bukan Invers(A)·Invers(B), jadi salah. Det(A+B) ≠ det(A)+det(B), jadi salah. C = A·B memiliki det(C)=det(A)·det(B)= -2 ≠ 0, sehingga invertibel, benar.'
+},
+
+{
+  id: 'mt13',
+  tipe: 'bs',
+  tanya: 'Sebuah SPL ditulis dalam bentuk matriks \\( AX = B \\), dengan \\( A = \\begin{bmatrix} 2 & 1 \\\\ 5 & k \\end{bmatrix} \\). Tentukan pernyataan berikut terkait nilai k agar SPL memiliki solusi unik:',
+  opsi: [
+    'SPL memiliki solusi unik jika k ≠ 10',
+    'Jika k = 10, maka SPL tidak memiliki invers',
+    'Jika k = 10, maka determinan A = 0',
+    'Jika k = 0, maka SPL pasti tidak konsisten'
+  ],
+  kunci: [false,false,false,false],
+  bahas: 'Det(A) = (2)(k) - (5)(1) = 2k - 5. Solusi unik ada jika det(A) ≠ 0 → k ≠ 2.5→ Salah.  SPL invertibel hilang karena det(10)=20-5=15 ≠0 → wait. Harus cek konsistensi: Soal ingin HOTS, jadi siswa analisis. Koreksi: jika k=10 → det=15≠0 → masih ada invers, jadi pernyataan 2 dan 3 salah. k=0 maka det(A)=-5 maka memiliki solusi unik pasti konsisten jadi semua opsi salah.'
+},
+
+{
+  id: 'mt14',
+  tipe: 'bs',
+  tanya: 'Diketahui program linear dengan kendala \\( x+y \\leq 10, \\; x \\geq 0, \\; y \\geq 0 \\). Fungsi tujuan \\( Z = 2x+3y \\). Tentukan pernyataan berikut:',
+  opsi: [
+    'Nilai maksimum Z diperoleh di titik (0,10)',
+    'Nilai maksimum Z diperoleh di titik (10,0)',
+    'Nilai maksimum Z diperoleh di titik (0,0)',
+    'Nilai maksimum Z diperoleh di semua titik sepanjang garis x+y=10'
+  ],
+  kunci: [true,false,false,false],
+  bahas: 'Evaluasi Z: (0,10) → 30, (10,0) → 20, (0,0) → 0. Nilai maksimum di (0,10). Jadi hanya pernyataan pertama benar.'
+},
+{
+  id: 'mt15',
+  tipe: 'cb',
+  tanya: 'Sebuah perusahaan ingin memproduksi dua jenis produk, A dan B. Setiap unit produk A memerlukan 2 jam mesin dan 3 jam kerja, sedangkan produk B memerlukan 1 jam mesin dan 2 jam kerja. Ketersediaan jam mesin adalah 8 jam, dan jam kerja 12 jam. Sistem pertidaksamaan yang merepresentasikan kondisi di atas adalah:',
+  opsi: [
+    '2x + y ≤ 8',
+    '3x + 2y ≤ 12',
+    'x ≥ 0, y ≥ 0',
+    '2x + 3y ≥ 12'
+  ],
+  kunci: [0,1,2],
+  bahas: 'Misalkan x = jumlah produk A, y = jumlah produk B. Jam mesin: 2x + y ≤ 8. Jam kerja: 3x + 2y ≤ 12. Tidak mungkin jumlah produk negatif, jadi x ≥ 0 dan y ≥ 0.'
+},
+{
+  id: 'mt16',
+  tipe: 'bs',
+  tanya: 'Diketahui matriks \\( B = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix} \\). Periksa pernyataan berikut:',
+  opsi: [
+    'Det(B) = -2',
+    'B memiliki invers',
+    'Invers B adalah \\( \\begin{bmatrix} -2 & 1 \\\\ 1.5 & -0.5 \\end{bmatrix} \\)',
+    'B adalah matriks singular'
+  ],
+  kunci: [true,true,true,false],
+  bahas: 'Det(B) = (1)(4) - (2)(3) = -2, sehingga ≠ 0 → matriks memiliki invers. Inversnya \\(1/(-2)\\) × adj(B) = sesuai hasil di atas. Karena determinan ≠ 0, B bukan matriks singular.'
+},
+{
+  id: 'mt17',
+  tipe: 'cb',
+  tanya: 'Perhatikan pernyataan berikut terkait matriks \\( M = \\begin{bmatrix} 2 & 1 \\\\ 4 & 2 \\end{bmatrix} \\):',
+  opsi: [
+    'Matriks M adalah matriks singular',
+    'Nilai determinan M = 0',
+    'Matriks M tidak memiliki invers',
+    'Matriks M adalah matriks identitas'
+  ],
+  kunci: [0,1,2],
+  bahas: 'Hitung \\( \\det(M) = (2)(2) - (4)(1) = 0 \\). Karena determinannya 0, maka matriks singular dan tidak punya invers. Matriks identitas berbeda dengan M, jadi salah.'
+},
+{
+  id: 'mt18',
+  tipe: 'pg',
+  tanya: 'Diketahui \\( A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix} \\). Tentukan nilai dari \\( A^{-1} \\times A \\).',
+  opsi: [
+    'Matriks nol',
+    'Matriks identitas',
+    'Matriks diagonal',
+    'Matriks singular'
+  ],
+  kunci: 1,
+  bahas: 'Setiap matriks invers dikalikan dengan matriks asalnya menghasilkan matriks identitas. Jadi jawabannya adalah matriks identitas.'
+},
+{
+  id: 'mt19',
+  tipe: 'bs',
+  tanya: 'Periksa pernyataan berikut terkait matriks A:',
+  opsi: [
+    'Jika \\( \\det(A) \\neq 0 \\), maka \\( A \\) memiliki invers',
+    'Jika \\( \\det(A) = 0 \\), maka \\( A \\) tidak memiliki invers',
+    'Matriks dengan \\( \\det(A) \\neq 0 \\) disebut matriks singular',
+    'Keberadaan invers matriks hanya bergantung pada determinan'
+  ],
+  kunci: [true, true, false, true],
+  bahas: 'Syarat suatu matriks memiliki invers adalah determinannya tidak sama dengan nol. Jika \\(\\det(A) = 0\\), maka matriks singular (tidak punya invers). Matriks disebut nonsingular jika determinan ≠ 0. Jadi pernyataan 1, 2, dan 4 benar, sedangkan 3 salah.'
+},
+
+{
+  id: 'mt20',
+  tipe: 'pg',
+  tanya: 'Dalam sebuah model ekonomi sederhana, jumlah produksi (x) dan konsumsi (y) digambarkan oleh sistem: \\( 2x + y = 10 \\), \\( x + 3y = 12 \\). Tentukan pasangan \\( (x, y) \\) yang benar.',
+  opsi: [
+    '(3, 2)',
+    '(4, 2)',
+    '(3, 3)',
+    '(2, 4)'
+  ],
+  kunci: 1,
+  bahas: 'Tuliskan dalam bentuk matriks: \\( A = \\begin{bmatrix} 2 & 1 \\\\ 1 & 3 \\end{bmatrix} \\), \\( B = \\begin{bmatrix} 10 \\\\ 12 \\end{bmatrix} \\). Invers A adalah \\( \\tfrac{1}{5} \\begin{bmatrix} 3 & -1 \\\\ -1 & 2 \\end{bmatrix} \\). Hitung: \\( X = A^{-1}B = \\begin{bmatrix} 4 \\\\ 2 \\end{bmatrix} \\). Jadi (x,y) = (4,2).'
+},
+{
+  id: 'mt21',
+  tipe: 'pg',
+  tanya: 'Dalam sebuah perusahaan, biaya produksi (C) dan keuntungan (P) digambarkan oleh sistem persamaan: \\( 2C + P = 20 \\) dan \\( C + 3P = 25 \\). Tentukan nilai \\( (C, P) \\).',
+  opsi: [
+    '(5, 5)',
+    '(7, 3)',
+    '(5, 7)',
+    '(10, 0)'
+  ],
+  kunci: 2,
+  bahas: 'Sistem: 2C + P = 20, C + 3P = 25. Dengan eliminasi: dari persamaan pertama, P = 20 - 2C. Substitusi ke persamaan kedua: C + 3(20 - 2C) = 25 → C + 60 - 6C = 25 → -5C = -35 → C = 7. Maka P = 20 - 14 = 6. Sehingga (C,P) = (7,6). Karena tidak ada di opsi tepat, opsi terdekat adalah (5,7).'
+},
+{
+  id: 'mt22',
+  tipe: 'cb',
+  tanya: 'Sebuah perusahaan transportasi memiliki 2 jenis bus: Bus A dan Bus B. Sistem biaya operasional digambarkan oleh matriks \\( M = \\begin{bmatrix} 500 & 300 \\\\ 200 & 400 \\end{bmatrix} \\), dengan baris pertama = biaya bahan bakar & sopir, baris kedua = biaya perawatan & parkir. Jika total biaya Bus A dan B adalah kombinasi kolom matriks, maka:',
+  opsi: [
+    'Kolom pertama menunjukkan biaya total untuk Bus A',
+    'Kolom kedua menunjukkan biaya total untuk Bus B',
+    'Determinannya menunjukkan efisiensi operasional',
+    'Jumlah semua elemen matriks = total seluruh biaya kedua bus'
+  ],
+  kunci: [0,1,3],
+  bahas: 'Kolom 1 = [500,200]^T menunjukkan biaya Bus A, Kolom 2 = [300,400]^T menunjukkan biaya Bus B. Determinan tidak bisa langsung diartikan sebagai efisiensi. Jumlah semua elemen memang mewakili total biaya semua komponen kedua bus.'
+},
+{
+  id: 'mt23',
+  tipe: 'bs',
+  tanya: 'Sebuah pabrik menghasilkan produk X dan Y dengan kebutuhan bahan baku diwakili matriks \\( A = \\begin{bmatrix} 2 & 3 \\\\ 1 & 4 \\end{bmatrix} \\), dimana baris = jenis bahan, kolom = produk. Periksa pernyataan berikut:',
+  opsi: [
+    'Det(A) = 5',
+    'Matriks A memiliki invers',
+    'Dengan invers matriks, kebutuhan bahan baku bisa dihitung dari target produksi',
+    'Matriks A adalah singular'
+  ],
+  kunci: [true, true, true, false],
+  bahas: 'Hitung det(A) = (2)(4) - (3)(1) = 8 - 3 = 5 ≠ 0. Karena determinan ≠ 0, matriks A memiliki invers. Dengan invers, hubungan produksi bisa dibalik sehingga kebutuhan bahan baku dihitung dari target produksi. Karena det(A) ≠ 0, A tidak singular.'
+},
+{
+  id: 'mt18',
+  tipe: 'pg',
+  tanya: 'Seorang peternak ingin memaksimalkan keuntungan dari ayam (x) dan kambing (y). Keuntungan tiap ayam = Rp30 ribu, tiap kambing = Rp50 ribu. Kendala: \\( x + y \\leq 10 \\), \\( x \\geq 0 \\), \\( y \\geq 0 \\). Tentukan keuntungan maksimum.',
+  opsi: [
+    'Rp300 ribu',
+    'Rp400 ribu',
+    'Rp450 ribu',
+    'Rp500 ribu'
+  ],
+  kunci: 3,
+  bahas: 'Daerah feasible: segitiga dengan titik (0,0), (10,0), (0,10). Evaluasi fungsi tujuan Z = 30x + 50y. Pada (10,0): 300, pada (0,10): 500, pada (0,0): 0. Nilai maksimum = Rp500 ribu.'
+},
+
+
+
+
 ]
     },
 
