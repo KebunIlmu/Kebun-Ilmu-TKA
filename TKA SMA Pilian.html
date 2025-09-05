@@ -336,7 +336,6 @@
   Jadi jawaban benar adalah opsi (2,3,3,3,2,3) dan (2,3,3,4,2,4).
   `
 },
-
 ]
     },
 
@@ -1186,7 +1185,56 @@
 },
 'Biologi': {
   bab: {
-    'Sel sebagai Unit Kehidupan': {
+    'Keanekaragaman Hayati': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Keanekaragaman Hayati</h2>
+
+        <h3 class="font-semibold mt-3">1. Pengertian Keanekaragaman Hayati</h3>
+        <p class="mb-4">
+          Keanekaragaman hayati adalah variasi makhluk hidup yang mencakup tingkat gen, jenis, dan ekosistem.
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Tingkatan Keanekaragaman</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li><b>Tingkat gen</b>: perbedaan sifat dalam satu spesies.</li>
+          <li><b>Tingkat jenis</b>: perbedaan antarspesies.</li>
+          <li><b>Tingkat ekosistem</b>: perbedaan komunitas dan lingkungan tempat hidupnya.</li>
+        </ul>
+
+        <h3 class="font-semibold mt-3">3. Manfaat Keanekaragaman Hayati</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li>Sumber pangan, obat, dan sandang.</li>
+          <li>Menjaga keseimbangan ekosistem.</li>
+          <li>Nilai ekonomi, budaya, dan rekreasi.</li>
+        </ul>
+      `,
+      video: 'NfmnNwWDPhM',
+      soal: [
+        {
+          id: 'bio_kh1',
+          tipe: 'pg',
+          tanya: 'Keanekaragaman hayati yang terjadi karena perbedaan bentuk jagung, padi, dan gandum termasuk tingkat …',
+          opsi: ['Gen', 'Jenis', 'Ekosistem', 'Populasi'],
+          kunci: 1,
+          bahas: 'Jagung, padi, dan gandum adalah spesies berbeda, sehingga termasuk keanekaragaman tingkat jenis.'
+        },
+        {
+          id: 'bio_kh2',
+          tipe: 'pg',
+          tanya: 'Manfaat keanekaragaman hayati bagi manusia salah satunya adalah …',
+          opsi: [
+            'Menambah luas wilayah',
+            'Sebagai sumber pangan dan obat',
+            'Mengurangi curah hujan',
+            'Menghasilkan energi listrik'
+          ],
+          kunci: 1,
+          bahas: 'Keanekaragaman hayati menyediakan sumber pangan, obat, sandang, dan kebutuhan hidup lainnya.'
+        }
+      ]
+    },
+
+    'Sel': {
       materi: `
         <h2 class="text-xl font-bold mb-2">Sel sebagai Unit Kehidupan</h2>
 
@@ -1233,6 +1281,56 @@
           opsi: ['Mitokondria', 'Inti sel (nukleus)', 'Ribosom', 'Badan Golgi'],
           kunci: 1,
           bahas: 'Nukleus berfungsi sebagai pusat pengendali aktivitas sel dan tempat penyimpanan DNA.'
+        }
+      ]
+    },
+
+    'Proses-proses pada Makhluk Hidup': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Proses-proses pada Makhluk Hidup</h2>
+
+        <h3 class="font-semibold mt-3">1. Respirasi</h3>
+        <p class="mb-4">
+          Proses penguraian glukosa untuk menghasilkan energi dalam bentuk ATP.
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Fotosintesis</h3>
+        <p class="mb-4">
+          Proses tumbuhan hijau menggunakan cahaya matahari untuk menghasilkan glukosa dan oksigen dari CO₂ dan H₂O.
+        </p>
+
+        <h3 class="font-semibold mt-3">3. Ekskresi</h3>
+        <p class="mb-4">
+          Proses pengeluaran sisa metabolisme dari dalam tubuh, misalnya urine, keringat, dan karbon dioksida.
+        </p>
+
+        <h3 class="font-semibold mt-3">4. Reproduksi</h3>
+        <p class="mb-4">
+          Proses perkembangbiakan untuk melestarikan keturunan, baik secara generatif (seksual) maupun vegetatif (aseksual).
+        </p>
+      `,
+      video: 'h5oUwnmS6g8',
+      soal: [
+        {
+          id: 'bio_ph1',
+          tipe: 'pg',
+          tanya: 'Proses fotosintesis pada tumbuhan menghasilkan …',
+          opsi: ['CO₂ dan air', 'Oksigen dan glukosa', 'Energi panas', 'ATP dan asam laktat'],
+          kunci: 1,
+          bahas: 'Fotosintesis menghasilkan glukosa dan oksigen sebagai produk utama.'
+        },
+        {
+          id: 'bio_ph2',
+          tipe: 'pg',
+          tanya: 'Fungsi utama respirasi seluler adalah …',
+          opsi: [
+            'Menghasilkan energi dalam bentuk ATP',
+            'Mengubah cahaya menjadi energi kimia',
+            'Mengeluarkan zat sisa',
+            'Membentuk sel baru'
+          ],
+          kunci: 0,
+          bahas: 'Respirasi berfungsi untuk menghasilkan energi dalam bentuk ATP yang digunakan sel untuk aktivitas.'
         }
       ]
     }
@@ -1300,6 +1398,255 @@
     }
   }
 },
+'Ekonomi': {
+  bab: {
+    'Konsep Dasar Ilmu Ekonomi': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Konsep Dasar Ilmu Ekonomi</h2>
+
+        <h3 class="font-semibold mt-3">1. Pengertian Ilmu Ekonomi</h3>
+        <p class="mb-4">
+          Ilmu Ekonomi adalah ilmu yang mempelajari bagaimana manusia menggunakan sumber daya yang terbatas untuk memenuhi kebutuhan yang tidak terbatas.
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Masalah Pokok Ekonomi</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li>Apa yang akan diproduksi?</li>
+          <li>Bagaimana cara memproduksi?</li>
+          <li>Untuk siapa barang/jasa diproduksi?</li>
+        </ul>
+
+        <h3 class="font-semibold mt-3">3. Kelangkaan</h3>
+        <p class="mb-4">
+          Kelangkaan adalah kondisi dimana kebutuhan manusia yang tidak terbatas tidak sebanding dengan ketersediaan sumber daya yang terbatas. 
+          Kelangkaan memaksa manusia untuk membuat pilihan dan prioritas dalam pemenuhan kebutuhan.
+        </p>
+
+        <h3 class="font-semibold mt-3">4. Biaya Peluang (Opportunity Cost)</h3>
+        <p class="mb-4">
+          Biaya peluang adalah nilai dari pilihan terbaik yang dikorbankan ketika seseorang memilih suatu alternatif. 
+          Contoh: jika seseorang memilih bekerja daripada kuliah, maka biaya peluangnya adalah manfaat yang hilang dari tidak kuliah.
+        </p>
+
+        <h3 class="font-semibold mt-3">5. Kegiatan Ekonomi</h3>
+        <p class="mb-2">
+          Kegiatan ekonomi utama yang dilakukan manusia meliputi:
+        </p>
+        <ul class="list-disc ml-6 mb-4">
+          <li><b>Kegiatan Produksi:</b> menghasilkan barang dan jasa.</li>
+          <li><b>Kegiatan Distribusi:</b> menyalurkan barang/jasa dari produsen ke konsumen.</li>
+          <li><b>Kegiatan Konsumsi:</b> menggunakan barang/jasa untuk memenuhi kebutuhan.</li>
+        </ul>
+
+        <h3 class="font-semibold mt-3">6. Prinsip Ekonomi</h3>
+        <p class="mb-4">
+          Prinsip ekonomi adalah usaha memperoleh hasil maksimal dengan pengorbanan seminimal mungkin, 
+          baik dalam kegiatan produksi, distribusi, maupun konsumsi.
+        </p>
+<p>
+      Untuk materi yang lebih lengkap beserta contoh soal dan pembahasan, silakan unduh PDF berikut:<br>
+      <a href="https://materi78.wordpress.com/wp-content/uploads/2013/06/butuh_eko1_2.pdf" target="_blank" class="text-blue-600 underline">
+        📘 Klik di sini untuk download materi lengkap Konsep Dasar Ekonomi(PDF)
+      </a>
+    </p>
+      `,
+
+      video: '7AFBe9MFh64',
+      soal: [
+       {
+  id: 'eko2',
+  tipe: 'cb',
+  bacaan: `
+    Kota Maju sedang menghadapi masalah serius terkait kelangkaan air bersih akibat musim kemarau panjang selama 5 bulan berturut-turut. 
+    Data dari Dinas Lingkungan Hidup menunjukkan bahwa ketersediaan air bersih turun 25% dibanding tahun sebelumnya, sementara konsumsi air per kapita meningkat 10% karena pertumbuhan penduduk dan aktivitas ekonomi. 
+    Sebagian besar rumah tangga masih menggunakan metode pengambilan air konvensional, sedangkan infrastruktur penyediaan air belum mampu memenuhi kebutuhan masyarakat secara optimal. 
+    
+    Pemerintah kota mempertimbangkan beberapa opsi: 
+    (1) Membatasi penggunaan air dan menaikkan tarif air, 
+    (2) Mengedukasi masyarakat tentang konservasi air, 
+    (3) Membangun fasilitas pengolahan air baru. 
+  `,
+  tanya: 'Berdasarkan kasus kelangkaan air bersih di Kota Maju, solusi yang sebaiknya diterapkan dan dievaluasi oleh pemerintah adalah …',
+  opsi: [
+    'Pembatasan penggunaan air dan peningkatan tarif menjadi salah satu cara untuk mengendalikan permintaan air secara langsung.',
+    'Mengedukasi masyarakat tentang konservasi air dapat membantu menurunkan konsumsi air jangka panjang.',
+    'Membangun fasilitas baru adalah solusi terbaik dan paling cepat untuk mengatasi kelangkaan air saat ini.',
+    'Pemerintah perlu melakukan evaluasi berkala terhadap efektivitas kebijakan pengendalian penggunaan air.',
+    'Pendekatan teknologi hemat air tidak tepat karena masyarakat belum terbiasa menggunakannya.'
+  ],
+  kunci: [0, 1, 3],
+  bahas: `
+    Benar: Pembatasan penggunaan air dan peningkatan tarif dapat mengendalikan permintaan secara langsung.  
+    Benar: Edukasi konservasi air sangat penting untuk mengubah perilaku konsumsi masyarakat dalam jangka panjang.  
+    Salah: Membangun fasilitas baru memang penting, tetapi tidak bisa menjadi solusi tercepat karena memerlukan biaya besar dan waktu lama.  
+    Benar: Evaluasi berkala wajib dilakukan agar kebijakan tetap efektif dan dapat disesuaikan dengan kondisi.  
+    Salah: Teknologi hemat air justru dapat membantu, meski masyarakat perlu dibiasakan dalam penggunaannya.
+  `
+},
+
+        {
+          id: 'eko2',
+          tipe: 'pg',
+          tanya: 'Prinsip ekonomi adalah …',
+          opsi: [
+            'Mengorbankan hasil untuk biaya',
+            'Mengutamakan kebutuhan sekunder',
+            'Hasil maksimal dengan pengorbanan minimal',
+            'Pengorbanan maksimal untuk hasil minimal'
+          ],
+          kunci: 2,
+          bahas: 'Prinsip ekonomi adalah usaha mendapatkan hasil maksimal dengan pengorbanan minimal.'
+        }
+      ]
+    },
+
+    'Ekonomi Mikro dan Makro': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Ekonomi Mikro dan Makro</h2>
+
+        <h3 class="font-semibold mt-3">1. Ekonomi Mikro</h3>
+        <p class="mb-4">
+          Ekonomi mikro adalah cabang ilmu ekonomi yang mempelajari perilaku individu, rumah tangga, dan perusahaan dalam mengambil keputusan ekonomi.
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Ekonomi Makro</h3>
+        <p class="mb-4">
+          Ekonomi makro adalah cabang ilmu ekonomi yang mempelajari kegiatan ekonomi secara keseluruhan, termasuk pendapatan nasional, inflasi, pengangguran, dan kebijakan pemerintah.
+        </p>
+      `,
+      video: 'rLbVh-QkzdU',
+      soal: [
+        {
+          id: 'eko3',
+          tipe: 'pg',
+          tanya: 'Ekonomi mikro mempelajari …',
+          opsi: [
+            'Inflasi dan pertumbuhan ekonomi',
+            'Perilaku konsumen dan produsen',
+            'Pendapatan nasional',
+            'Kebijakan fiskal dan moneter'
+          ],
+          kunci: 1,
+          bahas: 'Ekonomi mikro fokus pada perilaku individu, konsumen, dan produsen.'
+        },
+        {
+          id: 'eko4',
+          tipe: 'pg',
+          tanya: 'Yang termasuk kajian ekonomi makro adalah …',
+          opsi: [
+            'Harga beras di pasar lokal',
+            'Keputusan membeli motor oleh keluarga',
+            'Inflasi dan pengangguran',
+            'Tingkat keuntungan perusahaan'
+          ],
+          kunci: 2,
+          bahas: 'Ekonomi makro membahas fenomena ekonomi secara agregat seperti inflasi, pengangguran, dan pendapatan nasional.'
+        }
+      ]
+    },
+
+    'Ekonomi Internasional': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Ekonomi Internasional</h2>
+
+        <h3 class="font-semibold mt-3">1. Pengertian</h3>
+        <p class="mb-4">
+          Ekonomi internasional mempelajari hubungan ekonomi antarnegara, termasuk perdagangan internasional, investasi, dan kebijakan perdagangan.
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Manfaat Perdagangan Internasional</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li>Memperluas pasar</li>
+          <li>Memperoleh barang/jasa yang tidak bisa diproduksi sendiri</li>
+          <li>Meningkatkan pendapatan nasional</li>
+          <li>Transfer teknologi</li>
+        </ul>
+      `,
+      video: 'HqVZkqTtE4s',
+      soal: [
+        {
+          id: 'eko5',
+          tipe: 'pg',
+          tanya: 'Salah satu manfaat perdagangan internasional adalah …',
+          opsi: [
+            'Membatasi ekspor barang',
+            'Meningkatkan pendapatan nasional',
+            'Mengurangi kesempatan kerja',
+            'Membuat barang lebih mahal'
+          ],
+          kunci: 1,
+          bahas: 'Perdagangan internasional membuka pasar yang lebih luas sehingga dapat meningkatkan pendapatan nasional.'
+        },
+        {
+          id: 'eko6',
+          tipe: 'pg',
+          tanya: 'Ekonomi internasional membahas …',
+          opsi: [
+            'Perilaku rumah tangga',
+            'Hubungan ekonomi antarnegara',
+            'Harga barang dalam negeri',
+            'Pajak daerah'
+          ],
+          kunci: 1,
+          bahas: 'Ekonomi internasional mempelajari hubungan ekonomi antarnegara, termasuk perdagangan, investasi, dan kebijakan ekonomi.'
+        }
+      ]
+    },
+
+    'Akuntansi Keuangan Dasar': {
+      materi: `
+        <h2 class="text-xl font-bold mb-2">Akuntansi Keuangan Dasar</h2>
+
+        <h3 class="font-semibold mt-3">1. Pengertian</h3>
+        <p class="mb-4">
+          Akuntansi adalah proses pencatatan, pengklasifikasian, peringkasan, dan pelaporan transaksi keuangan suatu organisasi.
+        </p>
+
+        <h3 class="font-semibold mt-3">2. Fungsi Akuntansi</h3>
+        <ul class="list-disc ml-6 mb-4">
+          <li>Mencatat transaksi keuangan</li>
+          <li>Menyediakan informasi bagi manajemen</li>
+          <li>Menjadi dasar pengambilan keputusan</li>
+        </ul>
+
+        <h3 class="font-semibold mt-3">3. Persamaan Dasar Akuntansi</h3>
+        <p class="mb-4">
+          Aset = Liabilitas + Ekuitas
+        </p>
+      `,
+      video: 's0n_4Q5_y-U',
+      soal: [
+        {
+          id: 'eko7',
+          tipe: 'pg',
+          tanya: 'Persamaan dasar akuntansi adalah …',
+          opsi: [
+            'Aset = Ekuitas - Liabilitas',
+            'Aset = Liabilitas + Ekuitas',
+            'Aset = Pendapatan - Beban',
+            'Ekuitas = Aset - Utang'
+          ],
+          kunci: 1,
+          bahas: 'Persamaan dasar akuntansi yang benar adalah Aset = Liabilitas + Ekuitas.'
+        },
+        {
+          id: 'eko8',
+          tipe: 'pg',
+          tanya: 'Fungsi utama akuntansi adalah …',
+          opsi: [
+            'Menghitung pajak',
+            'Mencatat dan melaporkan transaksi keuangan',
+            'Mengendalikan harga pasar',
+            'Membatasi pengeluaran'
+          ],
+          kunci: 1,
+          bahas: 'Fungsi utama akuntansi adalah mencatat, mengklasifikasi, dan melaporkan transaksi keuangan.'
+        }
+      ]
+    }
+  }
+},
+
 'Sejarah': {
   bab: {
     'Pergerakan Nasional Indonesia': {
