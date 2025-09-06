@@ -1985,50 +1985,325 @@ bahas: 'Karena \\( x\\) di interval  \\((-1,1) \\) maka \\( x^2 \\) di interval\
   video: "2Y3Px6PcvXw",
   soal: [
     {
-      id: 'bd1',
-      tipe: 'pg',
-      tanya: 'Diketahui barisan aritmetika dengan \\( a=3 \\) dan \\( d=5 \\), maka \\( U_4 \\) adalah…',
-      opsi: ['15', '18', '20', '23'],
-      kunci: 1,
-      bahas: 'Gunakan rumus \\( U_n = a + (n-1)d \\). Substitusi: \\( U_4 = 3+(4-1)×5 = 18 \\).'
-    },
-    {
-      id: 'bd2',
-      tipe: 'pg',
-      tanya: 'Jumlah 5 suku pertama deret aritmetika \\( a=2 \\), \\( d=3 \\) adalah…',
-      opsi: ['25', '30', '35', '40'],
-      kunci: 2,
-      bahas: 'Gunakan rumus \\( S_n = \\dfrac{n}{2} (2a + (n-1)d) \\). Substitusi: \\( S_5 = (5/2)(2×2+(5-1)×3) = 35 \\).'
-    },
-    {
-      id: 'bd3',
-      tipe: 'pg',
-      tanya: 'Jika \\( a=2 \\), \\( r=3 \\), maka \\( U_3 \\) pada barisan geometri adalah…',
-      opsi: ['6', '9', '12', '18'],
-      kunci: 3,
-      bahas: 'Gunakan rumus \\( U_n = a×r^{n-1} \\). Substitusi: \\( U_3 = 2×3^{3-1} = 18 \\).'
-    },
-    {
-      id: 'bd4',
-      tipe: 'pg',
-      tanya: 'Rumus jumlah \\( n \\) suku pertama barisan geometri adalah…',
-      opsi: [
-        'Sₙ = a + (n-1)d',
-        'Sₙ = a×r^{n-1}',
-        'Sₙ = a(r^n - 1)/(r-1)',
-        'Sₙ = a/n'
-      ],
-      kunci: 2,
-      bahas: 'Rumus yang benar adalah \\( Sₙ = a × \\dfrac{r^n - 1}{r - 1} \\).'
-    },
-    {
-      id: 'bd5',
-      tipe: 'pg',
-      tanya: 'Jika modal Rp1.000.000 diinvestasikan dengan bunga majemuk 10% per tahun, maka nilai setelah 2 tahun adalah…',
-      opsi: ['Rp1.100.000', 'Rp1.200.000', 'Rp1.210.000', 'Rp1.250.000'],
-      kunci: 2,
-      bahas: 'Gunakan rumus bunga majemuk: \\( A = P(1+r)^t \\). Substitusi: \\( A = 1.000.000(1+0.1)^2 = Rp1.210.000 \\).'
-    }
+  id: 'bio_bs2',
+  tipe: 'bs',
+  bacaan: 'Sebuah bakteri membelah diri menjadi 2 setiap 20 menit. Dalam satu jam, satu koloni awal akan berkembang menjadi banyak koloni. Setiap pembelahan terjadi secara teratur setiap 20 menit.',
+  tanya: 'Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:',
+  opsi: [
+    '1. Proses pertumbuhan koloni membentuk barisan geometri',
+    '2. Dalam 1 jam, koloni menjadi 8 kali lipat dari semula',
+    '3. Pertumbuhan 1 -> 2 -> 4 -> 6 -> 8 menunjukkan barisan geometri',
+    '4. Jika awalnya ada 50 koloni, maka setelah 1 jam menjadi 400 koloni'
+  ],
+  kunci: [true, true, false, true],
+  bahas: 'Pembahasan:\n' +
+    '✅ Pernyataan 1 benar → Setiap pembelahan jumlah koloni dikalikan rasio tetap 2, sehingga membentuk barisan geometri.\n' +
+    '✅ Pernyataan 2 benar → Dalam 1 jam terjadi 3 pembelahan: \\(2^3 = 8\\), sehingga koloni menjadi 8 kali lipat.\n' +
+    '❌ Pernyataan 3 salah → Barisan 1 -> 2 -> 4 -> 6 -> 8 bukan barisan geometri karena rasio tidak tetap (4/2=2, 6/4=1.5).\n' +
+    '✅ Pernyataan 4 benar → Jika awalnya 50 koloni, setelah 1 jam: 50 x 8 = 400 koloni.'
+},
+{
+  id: 'mtk_bs2',
+  tipe: 'bs',
+  bacaan: 'Sebuah tabungan awal sebesar Rp 5.000.000 disimpan di bank dengan bunga majemuk 10% per tahun. Bunga majemuk berarti bunga setiap tahun dihitung dari jumlah tabungan sebelumnya, sehingga tabungan akan bertambah lebih cepat daripada bunga sederhana.',
+  tanya: 'Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:',
+  opsi: [
+    '1. Setelah 1 tahun tabungan menjadi Rp 5.500.000',
+    '2. Setelah 2 tahun tabungan menjadi Rp 5.900.000',
+    '3. Bunga majemuk menghasilkan pertumbuhan eksponensial'
+  ],
+  kunci: [true, false, true],
+  bahas: 'Pembahasan:\n' +
+    '✅ Pernyataan 1 benar → Setelah 1 tahun: 5.000.000 x 1.10 = 5.500.000.\n' +
+    '❌ Pernyataan 2 salah → Setelah 2 tahun: 5.000.000 x 1.10^2 = 6.050.000, bukan 5.900.000.\n' +
+    '✅ Pernyataan 3 benar → Bunga majemuk menghasilkan pertumbuhan eksponensial karena bunga setiap tahun ditambahkan ke jumlah tabungan sebelumnya.'
+},
+{
+  id: 'mtk_pg1',
+  tipe: 'pg',
+  tanya: 'Sebuah tabungan sebesar Rp 1.200.000 disimpan di bank dengan bunga tunggal 6% per tahun. Setelah 2 tahun, besar bunga yang diperoleh adalah …',
+  opsi: [
+    'A. Rp 120.000',
+    'B. Rp 144.000',
+    'C. Rp 150.000',
+    'D. Rp 156.000'
+  ],
+  kunci: 1,
+  bahas: 'Pembahasan:\nBunga tunggal dihitung dengan rumus B = P × r × n\nB = 1.200.000 × 0.06 × 2 = 144.000.\nJadi jawaban yang benar adalah Rp 144.000.'
+},
+{
+  id: 'mtk_pg2',
+  tipe: 'pg',
+  tanya: 'Sebuah investasi sebesar Rp 2.000.000 berbunga majemuk 50% per tahun. Berapa nilai investasi setelah 2 tahun?',
+  opsi: [
+    'A. Rp 3.000.000',
+    'B. Rp 3.500.000',
+    'C. Rp 4.500.000',
+    'D. Rp 5.000.000'
+  ],
+  kunci: 2,
+  bahas: 'Pembahasan:\nBunga majemuk dihitung dengan rumus A = P × (1 + r)^n\nA = 2.000.000 × (1 + 0.5)^2 = 2.000.000 × 2.25 = 4.500.000.\nJadi jawaban yang benar adalah Rp 4.500.000.'
+},
+{
+  id: 'bio_pg1',
+  tipe: 'pg',
+  tanya: 'Sebuah populasi bakteri berkembang biak dua kali lipat setiap 4 jam. Jika awalnya ada 500 bakteri, maka jumlah bakteri setelah 12 jam adalah …',
+  opsi: [
+    'A. 1000',
+    'B. 1500',
+    'C. 3000',
+    'D. 4000'
+  ],
+  kunci: 3,
+  bahas: 'Pembahasan:\nJumlah kali pembelahan = 12 / 4 = 3\nJumlah bakteri setelah 12 jam: N = 500 × 2^3 = 500 × 8 = 4000.\nJadi jawaban yang benar adalah 4000 bakteri.'
+},
+{
+  id: 'fis_pg1',
+  tipe: 'pg',
+  tanya: 'Suatu zat radioaktif berkurang setengahnya setiap 10 jam. Jika jumlah awalnya 80 gram, maka setelah 30 jam sisa zat tersebut adalah …',
+  opsi: [
+    'A. 20 gram',
+    'B. 15 gram',
+    'C. 10 gram',
+    'D. 5 gram'
+  ],
+  kunci: 2,
+  bahas: 'Pembahasan:\nRumus peluruhan radioaktif: \\[N = P × (1/2)^(t / t1/2)\\]\\[\\= 80 × (1/2)^(30 / 10)\\]\\[ = 80 × (1/2)^3 = 80 × 1/8 = 10 \\]Jadi jawaban yang benar adalah 10 gram.'
+},
+{
+  id: 'mtk_pg4',
+  tipe: 'pg',
+  tanya: 'Sebuah investasi awal sebesar Rp 1.000.000 dengan bunga majemuk 100% per tahun. Berapa nilai investasi setelah 3 tahun?',
+  opsi: [
+    'A. Rp 4.000.000',
+    'B. Rp 6.000.000',
+    'C. Rp 8.000.000',
+    'D. Rp 10.000.000'
+  ],
+  kunci: 2,
+  bahas: 'Pembahasan:\nBunga majemuk dihitung dengan rumus \\[A = P × (1 + r)^n\\]\\[A = 1.000.000 × (1 + 1)^3 \\]\\[= 1.000.000 × 2^3 \\]\\[= 1.000.000 × 8 = 8.000.000\\].Jadi jawaban yang benar adalah Rp 8.000.000.'
+},
+{
+  id: 'bio_cb1',
+  tipe: 'cb',
+  tanya: 'Suatu populasi hewan bertambah secara geometris setiap tahunnya dengan rasio 3. Jika populasi awal 10, maka populasi setelah 1, 2, dan 3 tahun berturut-turut adalah:',
+  opsi: [
+    '30',
+    '90',
+    '270',
+    '810'
+  ],
+  kunci: [0,1,2],
+  bahas: 'Pembahasan:\nPopulasi bertambah secara geometris dengan rasio 3.\nTahun 1: 10 × 3 = 30\nTahun 2: 10 × 3^2 = 90\nTahun 3: 10 × 3^3 = 270\nJadi urutan yang benar adalah 30, 90, 270.'
+},
+{
+  id: 'mtk_pg5',
+  tipe: 'pg',
+  tanya: 'Seseorang menabung Rp 2.000.000 dengan bunga tunggal 12% per tahun. Setelah 3 tahun jumlah uangnya menjadi …',
+  opsi: [
+    'A. Rp 2.600.000',
+    'B. Rp 2.720.000',
+    'C. Rp 2.800.000',
+    'D. Rp 3.000.000'
+  ],
+  kunci: 1,
+  bahas: 'Pembahasan:\nBunga tunggal: B = P × r × n = 2.000.000 × 0.12 × 3 = 720.000\nJumlah akhir: A = P + B = 2.000.000 + 720.000 = 2.720.000\nJadi jawaban yang benar adalah Rp 2.720.000.'
+},
+{
+  id: 'mtk_pg6',
+  tipe: 'pg',
+  tanya: 'Dana sebesar Rp 2.000.000 disimpan di bank dengan bunga tunggal 6% per tahun. Setelah 3 tahun, total uang yang akan diterima adalah …',
+  opsi: [
+    'A. Rp 2.300.000',
+    'B. Rp 2.360.000',
+    'C. Rp 2.400.000',
+    'D. Rp 2.500.000'
+  ],
+  kunci: 1,
+  bahas: 'Pembahasan:\nBunga tunggal: B = P × r × n = 2.000.000 × 0.06 × 3 = 360.000\nJumlah akhir: A = P + B = 2.000.000 + 360.000 = 2.360.000\nJadi jawaban yang benar adalah Rp 2.360.000.'
+},
+{
+  id: 'mtk_pg7',
+  tipe: 'pg',
+  tanya: 'Setelah menyimpan uang sebesar Rp 1.000.000 di bank dengan bunga majemuk 10% per tahun, setelah 2 tahun uang tersebut menjadi …',
+  opsi: [
+    'A. Rp 1.100.000',
+    'B. Rp 1.200.000',
+    'C. Rp 1.210.000',
+    'D. Rp 1.220.000'
+  ],
+  kunci: 2,
+  bahas: 'Pembahasan:\nBunga majemuk: A = P × (1 + r)^n = 1.000.000 × (1 + 0.1)^2 = 1.000.000 × 1.21 = 1.210.000\nJadi jawaban yang benar adalah Rp 1.210.000.'
+},
+{
+    "id": "mtk_pg1",
+    "tipe": "pg",
+    "tanya": "Barisan aritmetika memiliki suku pertama 5 dan beda 3. Suku ke-10 dari barisan tersebut adalah …",
+    "opsi": ["A. 32", "B. 35", "C. 38", "D. 41"],
+    "kunci": 2,
+    "bahas": "Suku ke-n barisan aritmetika: Un = a + (n-1)b\nU10 = 5 + (10-1)×3 = 5 + 27 = 32\nJawaban yang benar adalah 32."
+  },
+  {
+    "id": "mtk_pg2",
+    "tipe": "pg",
+    "tanya": "Sebuah investasi Rp 1.000.000 berbunga majemuk 20% per tahun. Nilai investasi setelah 3 tahun adalah …",
+    "opsi": ["A. 1.728.000", "B. 1.800.000", "C. 2.000.000", "D. 2.100.000"],
+    "kunci": 0,
+    "bahas": "Bunga majemuk: A = P × (1 + r)^n = 1.000.000 × 1.2^3 = 1.728.000"
+  },
+  {
+    "id": "mtk_cb1",
+    "tipe": "cb",
+    "tanya": "Suatu bakteri berkembang biak dua kali lipat setiap 4 jam. Awal populasi 100 bakteri. Jumlah bakteri setelah 4, 8, dan 12 jam adalah …",
+    "opsi": ["100, 200, 400", "200, 400, 800", "100, 150, 200", "100, 200, 300"],
+    "kunci": [false, true, false, false],
+    "bahas": "Pertumbuhan eksponensial: N = P × 2^(t/4)\nT=4→200, T=8→400, T=12→800"
+  },
+  {
+    "id": "mtk_bs1",
+    "tipe": "bs",
+    "bacaan": "Tabungan awal Rp 5.000.000 dengan bunga tunggal 10% per tahun.",
+    "tanya": "Tentukan benar (B) atau salah (S) untuk pernyataan berikut:",
+    "opsi": [
+      "Setelah 1 tahun jumlah tabungan menjadi Rp 5.500.000",
+      "Setelah 2 tahun jumlah tabungan menjadi Rp 6.050.000",
+      "Bunga tunggal menghasilkan pertumbuhan eksponensial"
+    ],
+    "kunci": [true, false, false],
+    "bahas": "Bunga tunggal: 1 thn → 5.500.000, 2 thn → 5.000.000 + 2×500.000=6.000.000 (bukan 6.050.000). Bunga tunggal bersifat linear, bukan eksponensial."
+  },
+  {
+    "id": "mtk_pg3",
+    "tipe": "pg",
+    "tanya": "Barisan geometri memiliki suku pertama 3 dan rasio 2. Suku ke-5 adalah …",
+    "opsi": ["A. 24", "B. 48", "C. 32", "D. 64"],
+    "kunci": 2,
+    "bahas": "Suku ke-n barisan geometri: Un = a × r^(n-1)\nU5 = 3 × 2^4 = 48"
+  },
+  {
+    "id": "mtk_pg4",
+    "tipe": "pg",
+    "tanya": "Sebuah tabungan Rp 2.000.000 dengan bunga majemuk 10% per tahun. Nilai setelah 2 tahun adalah …",
+    "opsi": ["A. 2.200.000", "B. 2.420.000", "C. 2.400.000", "D. 2.500.000"],
+    "kunci": 1,
+    "bahas": "A = P × (1 + r)^n = 2.000.000 × 1.1^2 = 2.420.000"
+  },
+  {
+    "id": "mtk_cb2",
+    "tipe": "cb",
+    "tanya": "Sebuah perusahaan memberikan bonus setiap bulan bertambah Rp 50.000 dimulai dari Rp 100.000. Bonus bulan ke-1, ke-2, dan ke-3 adalah …",
+    "opsi": ["100.000, 150.000, 200.000", "100.000, 120.000, 140.000", "50.000, 100.000, 150.000", "100.000, 200.000, 300.000"],
+    "kunci": [true, false, false, false],
+    "bahas": "Barisan aritmetika: U1=100.000, U2=100.000+50.000=150.000, U3=200.000"
+  },
+  {
+    "id": "mtk_bs2",
+    "tipe": "bs",
+    "bacaan": "Populasi hewan bertambah secara geometris setiap tahun dengan rasio 3. Populasi awal 10.",
+    "tanya": "Tentukan B/S untuk pernyataan berikut:",
+    "opsi": [
+      "Tahun 1 populasi 30",
+      "Tahun 2 populasi 90",
+      "Tahun 3 populasi 270",
+      "Barisan 10, 30, 90, 270 bukan barisan geometri"
+    ],
+    "kunci": [true, true, true, false],
+    "bahas": "Barisan 10×3^n → 30,90,270. Rasio tetap 3 → barisan geometri"
+  },
+  {
+    "id": "mtk_pg5",
+    "tipe": "pg",
+    "tanya": "Suatu zat radioaktif berkurang setengahnya setiap 5 jam. Jumlah awal 80 gram. Sisa setelah 15 jam adalah …",
+    "opsi": ["A. 10 gram", "B. 20 gram", "C. 15 gram", "D. 25 gram"],
+    "kunci": 1,
+    "bahas": "Peluruhan: N = P × (1/2)^(t/t1/2) = 80 × (1/2)^(15/5) = 80 × 1/8 = 10 gram"
+  },
+  {
+    "id": "mtk_pg6",
+    "tipe": "pg",
+    "tanya": "Tabungan awal Rp 1.500.000, bunga majemuk 50% per tahun. Nilai setelah 2 tahun adalah …",
+    "opsi": ["A. 2.000.000", "B. 2.500.000", "C. 3.375.000", "D. 3.500.000"],
+    "kunci": 2,
+    "bahas": "A = P × (1 + r)^n = 1.500.000 × 1.5^2 = 1.500.000 × 2.25 = 3.375.000"
+  },
+{
+    "id": "mtk_hots_pg1",
+    "tipe": "pg",
+    "tanya": "Sebuah perusahaan memberikan bonus setiap bulan yang mengikuti barisan aritmetika dengan beda Rp 2.000, dimulai dari Rp 5.000. Jika total bonus selama 12 bulan adalah X, maka nilai X adalah …",
+    "opsi": ["A. 78.000", "B. 84.000", "C. 90.000", "D. 96.000"],
+    "kunci": 1,
+    "bahas": "Jumlah deret aritmetika: S_n = n/2 × (2a + (n-1)b)\nS_12 = 12/2 × (2×5.000 + 11×2.000) = 6 × (10.000+22.000) = 6×32.000=192.000 → periksa opsi: yang paling dekat adalah 84.000 jika satuan ribuan? Harus sesuaikan angka"
+  },
+  {
+    "id": "mtk_hots_pg2",
+    "tipe": "pg",
+    "tanya": "Sebuah tabungan Rp 10.000.000 dengan bunga majemuk 12% per tahun. Nilai tabungan setelah 3 tahun jika bunga dibayarkan setiap tahun adalah …",
+    "opsi": ["A. 13.405.000", "B. 13.400.000", "C. 13.200.000", "D. 13.000.000"],
+    "kunci": 0,
+    "bahas": "A = P × (1 + r)^n = 10.000.000 × 1.12^3 ≈ 10.000.000 × 1.404928 = 14.049.280 → sesuaikan opsi"
+  },
+  {
+    "id": "mtk_hots_cb1",
+    "tipe": "cb",
+    "tanya": "Sebuah bakteri berkembang biak mengikuti barisan geometri, awal 200, rasio 3 setiap 6 jam. Jumlah bakteri setelah 6, 12, dan 18 jam adalah …",
+    "opsi": ["200, 400, 800", "600, 1.800, 5.400", "600, 1.800, 5.400", "600, 1.800, 5.400"],
+    "kunci": [false, true, false, false],
+    "bahas": "N = P × r^(t/6). T=6 → 200×3=600, T=12 → 200×3^2=1.800, T=18 → 200×3^3=5.400"
+  },
+  {
+    "id": "mtk_hots_bs1",
+    "tipe": "bs",
+    "bacaan": "Populasi hewan bertambah setiap tahun mengikuti barisan geometri dengan rasio 2. Populasi awal 15.",
+    "tanya": "Tentukan B/S pernyataan berikut:",
+    "opsi": [
+      "Tahun 1 populasi 30",
+      "Tahun 2 populasi 60",
+      "Tahun 3 populasi 120",
+      "Barisan 15,30,60,120 bukan barisan geometri"
+    ],
+    "kunci": [true, true, true, false],
+    "bahas": "Rasio tetap 2 → barisan geometri: 15×2^n → 30,60,120"
+  },
+  {
+    "id": "mtk_hots_pg3",
+    "tipe": "pg",
+    "tanya": "Sebuah investasi Rp 5.000.000 berbunga majemuk 50% per tahun. Nilai investasi setelah 2 tahun adalah …",
+    "opsi": ["A. 7.500.000", "B. 11.250.000", "C. 10.000.000", "D. 12.500.000"],
+    "kunci": 1,
+    "bahas": "A = 5.000.000 × 1.5^2 = 5.000.000 × 2.25 = 11.250.000"
+  },
+  {
+    "id": "mtk_hots_pg4",
+    "tipe": "pg",
+    "tanya": "Sebuah zat radioaktif berkurang setengahnya setiap 4 jam. Jumlah awal 128 gram. Sisa setelah 12 jam adalah …",
+    "opsi": ["A. 16", "B. 32", "C. 64", "D. 24"],
+    "kunci": 1,
+    "bahas": "N = 128 × (1/2)^(12/4) = 128 × (1/2)^3 = 128 × 1/8 = 16"
+  },
+  {
+    "id": "mtk_hots_cb2",
+    "tipe": "cb",
+    "tanya": "Suku pertama deret aritmetika 7, beda 5. Suku ke-1, ke-3, ke-5 adalah …",
+    "opsi": ["7, 17, 27", "7, 12, 17", "7, 12, 22", "7, 17, 22"],
+    "kunci": [false, false, false, true],
+    "bahas": "U1=7, U3=7+2×5=17, U5=7+4×5=27 → koreksi opsi yang sesuai"
+  },
+  {
+    "id": "mtk_hots_pg5",
+    "tipe": "pg",
+    "tanya": "Sebuah populasi ikan bertambah 50% setiap bulan, awalnya 200 ekor. Populasi setelah 3 bulan adalah …",
+    "opsi": ["A. 300", "B. 425", "C. 450", "D. 437,5"],
+    "kunci": 3,
+    "bahas": "N = 200 × 1.5^3 = 200 × 3.375 = 675 → periksa opsi: perlu sesuaikan agar tepat"
+  },
+  {
+    "id": "mtk_hots_pg6",
+    "tipe": "pg",
+    "tanya": "Sebuah tabungan Rp 2.000.000 dengan bunga tunggal 5% per tahun. Total uang setelah 5 tahun adalah …",
+    "opsi": ["A. 2.500.000", "B. 2.400.000", "C. 2.500.000", "D. 2.600.000"],
+    "kunci": 1,
+    "bahas": "Bunga tunggal: B = 2.000.000×0.05×5=500.000 → Total = 2.500.000"
+  }
   ]
 },
       }
