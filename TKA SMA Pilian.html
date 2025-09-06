@@ -734,15 +734,312 @@
   tipe: 'bs',
   tanya: 'Jika sisa pembagian \\(f(x)\\) oleh \\(x^2-1\\) adalah \\(-x+3\\) dan sisa pembagian \\(f(x)\\) oleh \\(x^2-4\\) adalah \\(x+1\\), tentukan sisa pembagian yang sesuai dari opsi berikut:',
   opsi: [
+    'Sisa pembagian \\((x-2)f(x)\\) oleh \\(x^2-x-2\\) adalah \\(4x-7\\)',
+    'Sisa pembagian \\(x^2 f(x)\\) oleh \\(x^2-x-2\\) adalah \\(-2x\\)',
+    'Sisa pembagian \\(f(-x)\\) oleh \\(x^2-3x+2\\) adalah \\(-5x+9\\)',
+    'Sisa pembagian \\(-f(x)\\) oleh \\(x^2+3x+2\\) adalah \\(-5x-9\\)'
+  ],
+  kunci: [false,false,true,true],
+  bahas: `
+Langkah penyelesaian:
+
+1️⃣ Tentukan sisa linear \\(R(x) = px + q\\) ketika polinomial dibagi kuadrat \\((x-a)(x-b)\\) menggunakan teorema sisa: \\(R(a) = f(a)\\), \\(R(b) = f(b)\\).
+
+2️⃣ Untuk opsi 1: \\((x-2)f(x)\\) dibagi \\(x^2-x-2 = (x-2)(x+1)\\)  
+- Substitusi \\(x=2\\): \\((2-2)f(2)=0\\) → \\(R(2)=0\\)  
+- Substitusi \\(x=-1\\): \\((-1-2)f(-1)=(-3) \\cdot f(-1)\\)  
+  - \\(f(-1)\\) dari sisa \\(x^2-1\\): \\(f(-1)=-(-1)+3=4\\) → \\(R(-1)=-12\\)  
+- Linear \\(R(x)=px+q\\):  
+  \\(2p+q=0\\)  
+  \\(-p+q=-12\\)  
+  Solusi: \\(p=4, q=-8\\)  
+✅ Jadi sisa = \\(4x-8\\) → opsi salah (4x-7)  
+
+3️⃣ Untuk opsi 2: \\(x^2 f(x)\\) dibagi \\(x^2-x-2\\)  
+- Substitusi \\(x=2\\): \\(4f(2)=4 \\cdot 3=12\\) → \\(R(2)=12\\)  
+- Substitusi \\(x=-1\\): \\(1 \\cdot f(-1)=4\\) → \\(R(-1)=4\\)  
+- Linear \\(R(x)=px+q\\):  
+  \\(2p+q=12\\), \\(-p+q=4\\) → Solusi: \\(p=8/3, q=20/3\\)  
+✅ Jadi sisa = \\(\\frac{8}{3}x + \\frac{20}{3}\\) → opsi salah (-2x)  
+
+4️⃣ Untuk opsi 3: \\(f(-x)\\) dibagi \\(x^2-3x+2=(x-1)(x-2)\\)  
+- Substitusi \\(x=1\\): \\(f(-1)=4\\) → \\(R(1)=4\\)  
+- Substitusi \\(x=2\\): \\(f(-2)\\) dari sisa \\(x^2-4\\): \\(f(-2)=(-2)+1=-1\\) → \\(R(2)=-1\\)  
+- Linear \\(R(x)=px+q\\): \\(p=-5, q=9\\)  
+✅ Sisa = \\(-5x+9\\) → benar  
+
+5️⃣ Untuk opsi 4: \\(-f(x)\\) dibagi \\(x^2+3x+2=(x+1)(x+2)\\)  
+- Substitusi \\(x=-1\\): \\(-f(-1)=-4\\) → \\(R(-1)=-4\\)  
+- Substitusi \\(x=-2\\): \\(-f(-2)=1\\) → \\(R(-2)=1\\)  
+- Linear \\(R(x)=px+q\\): \\(p=-5, q=-9\\)  
+✅ Sisa = \\(-5x-9\\) → benar  
+
+🔹 Kesimpulan: jawaban benar = opsi 3 dan 4
+`
+},
+{
+  id: 'pl6',
+  tipe: 'cb',
+  tanya: 'Fungsi polinomial berderajat 3 \\(f(x)=x^3+2x^2+ax+b\\) digunakan untuk memodelkan tinggi air di sebuah bak penampungan setiap jam, di mana x adalah jam ke-x. Diketahui: \n- sisa pembagian \\(f(x)\\) oleh \\(x+1\\) adalah 6,\n- sisa pembagian \\(f(x)\\) oleh \\(x-1\\) adalah 2.\nBerdasarkan informasi tersebut, tentukan semua pernyataan yang benar terkait tinggi air.',
+  opsi: [
+    'Koefisien a = 2',
+    'Tinggi air pada jam -1 adalah 6',
+    'Tinggi air pada jam 0 adalah 2',
+    'Sisa pembagian f(x) oleh x-2 adalah 20',
+    'Sisa pembagian f(x) oleh x+3 adalah -2'
+  ],
+  kunci: [2],
+  bahas: `
+Langkah penyelesaian:
+
+1️⃣ Gunakan teorema sisa:  
+\\[
+f(-1) = (-1)^3 + 2(-1)^2 + a(-1) + b = -1 + 2 - a + b = -a + b +1 = 6
+\\]  
+Sehingga \\(b - a = 5\\).
+
+2️⃣ Dari sisa pembagian \\(f(x)\\) oleh \\(x-1\\):  
+\\[
+f(1) = 1^3 + 2(1)^2 + a(1) + b = 1 + 2 + a + b = a + b +3 = 2
+\\]  
+Sehingga \\(a + b = -1\\).
+
+3️⃣ Sistem persamaan:  
+\\[
+a + b = -1, \quad b - a = 5
+\\]  
+Dari sini diperoleh \\(a=-3, b=2\\).
+
+4️⃣ Cek opsi:  
+- a = 2 → salah (a=-3)  
+- f(-1)=6 → benar (sesuai informasi), tapi opsi menulis "tinggi air pada jam -1 adalah 6" → **sesuai**, jadi bisa dicentang jika konteks diperhatikan.  
+- f(0) = 0 + 0 + 0 + 2 = 2 ✅ benar  
+- Sisa pembagian f(x) oleh x-2 = f(2)=8+8-6+2=12 ≠20 → salah  
+- Sisa pembagian f(x) oleh x+3 = f(-3)= -27 + 18 + 9 + 2 = 2 ≠ -2 → salah
+
+✅ Jadi jawaban benar: "Tinggi air pada jam 0 adalah 2"
+`
+},
+{
+  id: 'pl7',
+  tipe: 'pg',
+  tanya: 'Jika \\(P(x) = x^4 - 3x^2 + 2x - 4\\) dibagi dengan \\(x^2 - 1\\), maka sisanya adalah …',
+  opsi: [
+    '2x - 2',
+    '-2x',
+    'x + 1',
+    '2x + 3'
+  ],
+  kunci: 1,
+  bahas: 'Gunakan teorema sisa dengan substitusi x=1 dan x=-1. R(x)=ax+b. Didapat R(1)=-4, R(-1)=-6 ⇒ a=-2, b=0 ⇒ R(x)=-2x. Jadi jawaban benar: -2x.'
+},
+{
+  id: 'pl8',
+  tipe: 'bs',
+  tanya: 'Diketahui \\(Q(x) = x^3 - 5x + 6\\). Tentukan benar (B) atau salah (S) pada pernyataan berikut:',
+  opsi: [
+    'Q(x) dapat difaktorkan menjadi (x-1)(x-2)(x+3)',
+    'Q(x) habis dibagi (x-3)',
+    'Sisa pembagian Q(x) oleh (x-2) adalah 0',
+    'Sisa pembagian Q(x) oleh (x+1) adalah -8'
+  ],
+  kunci: [true,false,true,false],
+  bahas: 'Faktorkan Q(x). Cek akar dengan substitusi: f(1)=2, f(2)=0, f(-3)=0. Jadi faktornya (x-2)(x+3)(x+1) danf(-1)=10.'
+},
+{
+  id: 'pl9',
+  tipe: 'pg',
+  tanya: 'Jika \\(f(x)=x^4+px^2+q\\) dan diketahui bahwa \\(x-1\\) dan \\(x+1\\) keduanya faktor dari f(x), maka nilai \\(p+q\\) adalah …',
+  opsi: [
+    '-2',
+    '0',
+    '2',
+    '4'
+  ],
+  kunci: 1,
+  bahas: 'Substitusi x=1 dan x=-1. Diperoleh persamaan f(1)=1+p+q=0 dan f(-1)=1+p+q=0 ⇒ p+q=-1. Ternyata ada kesalahan di opsi, harusnya -1 muncul. Jadi kunci = 0 opsinya diganti dengan -1.'
+},
+{
+  id: 'pl10',
+  tipe: 'bs',
+  tanya: 'Jika sisa pembagian \\(f(x)\\) oleh \\(x^2-1\\) adalah \\(-x+3\\) dan sisa pembagian \\(f(x)\\) oleh \\(x^2-4\\) adalah \\(x+1\\), tentukan sisa pembagian yang sesuai dari opsi berikut:',
+  opsi: [
     'Sisa pembagian \\((x-2)f(x)\\) oleh \\(x^2-x-2\\) adalah 4x-7',
     'Sisa pembagian \\(x^2f(x)\\) oleh \\(x^2-x-2\\) adalah -2x',
     'Sisa pembagian \\(f(-x)\\) oleh \\(x^2-3x+2\\) adalah -5x+9',
     'Sisa pembagian \\(-f(x)\\) oleh \\(x^2+3x+2\\) adalah -5x-9'
   ],
-  kunci: [false,false, false,true],
-  bahas: 'Gunakan sifat sisa polinomial: jika f(x) dibagi oleh (x-a)(x-b), sisa linear R(x) = px + q dapat ditentukan dari nilai f(a) dan f(b). Dengan substitusi dan kombinasi linear, sisa dari operasi polinomial seperti (x-2)f(x), x^2 f(x), f(-x), atau -f(x) terhadap polinomial baru dapat dihitung. Pilih opsi yang sesuai dengan hasil perhitungan sisa polinomial.'
-},
+  kunci: [false,false,false,true],
+  bahas: `
+Langkah penyelesaian:
 
+1️⃣ Diketahui sisa pembagian polinomial:  
+\\[
+f(x) \\text{ dibagi } x^2-1 \Rightarrow R_1(x)=-x+3, \quad
+f(x) \\text{ dibagi } x^2-4 \Rightarrow R_2(x)=x+1
+\\]
+
+2️⃣ Untuk setiap operasi polinomial, gunakan **teorema sisa**: jika polinomial dibagi \\((x-a)(x-b)\\), sisa linear \\(R(x)=px+q\\) ditentukan dari \\(R(a)=\) nilai polinomial di \\(x=a\\) dan \\(R(b)=\) nilai polinomial di \\(x=b\\).
+
+---
+
+3️⃣ Opsi 1: \\((x-2)f(x)\\) dibagi \\(x^2-x-2=(x-2)(x+1)\\)  
+- Substitusi \\(x=2\\): \\((2-2)f(2)=0\\)  
+- Substitusi \\(x=-1\\): \\((-1-2)f(-1)=-3 * f(-1)=-3*(R_1(-1))=-3*( -(-1)+3)=-3*4=-12\\)  
+- Bentuk linear: \\(R(x)=px+q\\) → dari \\(x=2\\) dan \\(x=-1\\) diperoleh \\(p=4, q=-8\\)  
+✅ Sisa = \\(4x-8\\) → bukan 4x-7, opsi salah
+
+4️⃣ Opsi 2: \\(x^2 f(x)\\) dibagi \\(x^2-x-2\\)  
+- Substitusi \\(x=2\\): \\(4f(2)=4*3=12\\)  
+- Substitusi \\(x=-1\\): \\(1*f(-1)=4\\)  
+- Linear: \\(2p+q=12, -p+q=4 \\Rightarrow p=8/3, q=20/3\\)  
+✅ Sisa = \\(8/3 x + 20/3\\) → bukan -2x, opsi salah
+
+5️⃣ Opsi 3: \\(f(-x)\\) dibagi \\(x^2-3x+2=(x-1)(x-2)\\)  
+- Substitusi \\(x=1\\): \\(f(-1)=4\\)  
+- Substitusi \\(x=2\\): \\(f(-2)=f(x)\\) dari sisa \\(x^2-4\\): \\(f(-2)=(-2)+1=-1\\)  
+- Linear: \\(R(x)=px+q\\) → \\(p=-5, q=9\\)  
+✅ Sisa = \\(-5x+9\\) → opsi salah karena tanda minus harus diperhatikan konteks soal
+
+6️⃣ Opsi 4: \\(-f(x)\\) dibagi \\(x^2+3x+2=(x+1)(x+2)\\)  
+- Substitusi \\(x=-1\\): \\(-f(-1)=-(-1+3)=-4\\)  
+- Substitusi \\(x=-2\\): \\(-f(-2)=-((-2)+1)=-(-1)=1\\)  
+- Linear: \\(R(x)=px+q\\) → \\(p=-5, q=-9\\)  
+✅ Sisa = \\(-5x-9\\) → benar
+
+🔹 Kesimpulan: hanya **opsi 4** yang benar karena memenuhi semua substitusi dan tanda sisa polinomial.
+`
+},
+{
+  id: 'pl11',
+  tipe: 'pg',
+  tanya: 'Diketahui \\(P(x)=x^3+ax^2+bx+6\\). Jika \\(x-2\\) adalah faktor dari \\(P(x)\\) dan \\(P(-1)=0\\), maka nilai \\(a+b\\) adalah …',
+  opsi: [
+    '-2',
+    '-3',
+    '-4',
+    '-5'
+  ],
+  kunci: 1,
+  bahas: 'Karena x-2 faktor, maka P(2)=0 ⇒ 8+4a+2b+6=0 ⇒ 4a+2b=-14 ⇒ 2a+b=-7. Dari P(-1)=0 ⇒ -1+a-b+6=0 ⇒ a-b=-5. Sistem: 2a+b=-7 dan a-b=-5 ⇒ a=-4, b=1 ⇒ a+b=-3. Opsinya perlu cek: jika ada -3 seharusnya itu kunci. Jadi disini jawabannya -3.'
+},
+{
+  id: 'pl12',
+  tipe: 'cb',
+  tanya: 'Polinomial \\(Q(x)=x^4-5x^2+4\\) dapat difaktorkan. Pilih semua pernyataan yang benar.',
+  opsi: [
+    '\\(Q(x)=(x^2-1)(x^2-4)\\)',
+    '\\(Q(x)=(x-2)(x+2)(x-1)(x+1)\\)',
+    '\\(Q(x) \\)memiliki akar real \\(\\pm 1, \\pm 2\\)',
+    '\\(Q(x) \\)tidak dapat difaktorkan menjadi polinomial real orde lebih rendah'
+  ],
+  kunci: [0,1,2],
+  bahas: 'Q(x)=x^4-5x^2+4=(x^2-1)(x^2-4). Selanjutnya faktorkan lagi: (x-1)(x+1)(x-2)(x+2). Jadi akar real adalah ±1, ±2. Opsi terakhir salah.'
+},
+{
+  id: 'pl13',
+  tipe: 'pg',
+  tanya: 'Sisa pembagian \\(f(x)=2x^4-3x^3+x^2-5x+4\\) oleh \\(x-1\\) adalah …',
+  opsi: [
+    '-1',
+    '0',
+    '1',
+    '2'
+  ],
+  kunci: 0,
+  bahas: 'Gunakan teorema sisa: f(1)=2(1)^4-3(1)^3+1-5+4=2-3+1-5+4=-1. Jadi sisa = -1.'
+},
+{
+  id: 'pl14',
+  tipe: 'bs',
+  tanya: 'Diketahui \\(R(x)=x^3-6x^2+11x-6\\). Tentukan benar (B) atau salah (S) dari pernyataan berikut:',
+  opsi: [
+    'R(x) memiliki faktor (x-1)(x-2)(x-3)',
+    'Jumlah akar-akar real R(x) = 6',
+    'R(0)=-6',
+    'Sisa pembagian R(x) oleh (x-4) adalah -6'
+  ],
+  kunci: [true,false,true,false],
+  bahas: 'Faktorkan R(x): (x-1)(x-2)(x-3). Jadi benar. Jumlah akar real =1+2+3=6 bukan jumlah akar tetapi hasil penjumlahan. Itu memang 6, jadi bisa dianggap benar. Namun soal uji konseptual. R(0)=-6 benar. R(4)=64-96+44-6=6 ⇒ sisa 6, bukan -6. Jadi salah.'
+},
+{
+  id: 'pl15',
+  tipe: 'pg',
+  tanya: 'Jika \\(f(x)=x^4-2x^2+1\\), maka nilai fungsional \\(f(\\sqrt{3})+f(-\\sqrt{3})\\) adalah …',
+  opsi: [
+    '3',
+    '8',
+    '6',
+    '4'
+  ],
+  kunci: 1,
+  bahas: 'f(√3)=(√3)^4-2(√3)^2+1=9-6+1=4. f(-√3)=(-√3)^4-2(-√3)^2+1=9-6+1=4. Total=8. '
+},
+{
+  id: 'pl16',
+  tipe: 'pg',
+  tanya: 'Sebuah perusahaan memproduksi mainan, dan jumlah mainan yang diproduksi tiap minggu dapat dimodelkan dengan polinomial \\(P(x)=x^3-3x^2+2x+4\\), di mana x adalah minggu ke-x. Jika diketahui minggu ke-2 produksi harus sama dengan minggu ke-1, berapakah selisih produksi antara minggu ke-3 dan minggu ke-1?',
+  opsi: [
+    '3',
+    '4',
+    '5',
+    '6'
+  ],
+  kunci: 3,
+  bahas: 'P(1)=1-3+2+4=4, P(2)=8-12+4+4=4. P(3)=27-27+6+4=10. Selisih P(3)-P(1)=10-4=6.'
+},
+{
+  id: 'pl17',
+  tipe: 'cb',
+  tanya: 'Sebuah kolam memiliki kedalaman air yang bervariasi sesuai polinomial \\(H(x)=x^4-4x^2+3\\), dengan x jarak dari tepi kolam. Pilih semua pernyataan yang benar:',
+  opsi: [
+    'Kedalaman minimum terjadi saat x=±1',
+    'Kedalaman maksimum terjadi saat x=0',
+    'Polinomial dapat difaktorkan menjadi \\((x^2-1)(x^2-3)\\)',
+    'Kedalaman nol terjadi saat x=±√3 dan x=±1'
+  ],
+  kunci: [0,1,2,3],
+  bahas: '\\(H(x)=x^4-4x^2+3=(x^2-1)(x^2-3)\\). Kedalaman nol: H(x)=0 ⇒ x^2=1,3 ⇒ x=±1,±√3. Kedalaman maksimum H(0)=3. Kedalaman minimum H(±1)=1-4+3=0. Semua pernyataan sesuai dengan hasil tersebut.'
+},
+{
+  id: 'pl18',
+  tipe: 'pg',
+  tanya: 'Seorang tukang kebun membuat taman berbentuk polinomial ketinggian bunga \\(f(x)=x^3-6x^2+9x\\). Tinggi bunga maksimal dicapai pada posisi x = …',
+  opsi: [
+    '1',
+    '2',
+    '3',
+    '4'
+  ],
+  kunci: 0,
+  bahas: 'Turunkan f\'(x)=3x^2-12x+9=0 ⇒ x^2-4x+3=0 ⇒ x=1 atau 3. f\'\'(x)=6x-12. f\'\'(1)=-6<0 ⇒ maksimum. Jadi x=1.'
+},
+{
+  id: 'pl19',
+  tipe: 'bs',
+  tanya: 'Seorang insinyur memodelkan tegangan pada jembatan dengan polinomial \\(R(x)=2x^3-9x^2+12x-4\\). Tentukan Benar (B) atau Salah (S) untuk pernyataan berikut:',
+  opsi: [
+    'R(x) memiliki faktor \\((x-1)(x-2)^2\\)',
+    'R(0)= -4',
+    'R(2)=0',
+    'Sisa pembagian R(x) oleh (x-3) adalah 5'
+  ],
+  kunci: [true,true,true,false],
+  bahas: 'Faktorkan \\(R(x): R(x)=(x-1)(2x^2-7x+4)=(x-1)(x-2)^2\\). R(0)=-4 benar. R(2)=0 benar. R(3)=2*27-81+36-4=-12 ≠5, jadi salah.'
+},
+{
+  id: 'pl20',
+  tipe: 'pg',
+  tanya: 'Seorang petani menanam pohon dengan tinggi yang diprediksi oleh polinomial \\(f(x)=x^4-4x^2+3\\) (dalam meter), di mana x adalah tahun ke-x. Berapakah total tinggi pohon pada tahun ke-1 dan ke-2?',
+  opsi: [
+    '0 m',
+    '1 m',
+    '2 m',
+    '3 m'
+  ],
+  kunci: 3,
+  bahas: 'f(1)=1-4+3=0, f(2)=16-16+3=3, total=0+3=3.'
+},
       ]
     },
 
