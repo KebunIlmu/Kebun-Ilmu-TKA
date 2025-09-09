@@ -5740,26 +5740,43 @@ if(window.MathJax){
   wrap.className = 'p-4 rounded-xl border chip';
   wrap.dataset.id = q.id;
 
+  // ===== HEAD: hanya nomor & tipe soal =====
   const head = document.createElement('div');
   head.className = 'flex items-start justify-between gap-3';
-  head.innerHTML = `<div class="font-semibold">${idx+1}. ${q.tanya.replace(/\n/g,'<br>')}</div>`;
+  head.innerHTML = `
+    <div class="font-semibold">Soal ${idx+1}</div>
+    <div class="text-xs px-2 py-1 rounded bg-gray-100 border text-gray-600 uppercase">
+      ${q.tipe}
+    </div>`;
   wrap.appendChild(head);
 
+  // ===== BODY: tanya, bacaan, gambar, opsi =====
   const body = document.createElement('div');
   body.className = 'mt-3 space-y-2';
-if(q.gambar){
-  const img = document.createElement('img');
-  img.src = q.gambar;
-  img.alt = 'Gambar soal';
-  img.className = 'my-3 w-full max-w-md rounded-lg border';
-  body.appendChild(img);
-}
-if(q.bacaan){
-  const teks = document.createElement('div');
-  teks.className = 'mb-4 p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm whitespace-pre-line text-justify';
-  teks.innerText = q.bacaan;
-  body.appendChild(teks);
-}
+
+  // tampilkan pertanyaan
+  
+
+  if(q.gambar){
+    const img = document.createElement('img');
+    img.src = q.gambar;
+    img.alt = 'Gambar soal';
+    img.className = 'my-3 w-full max-w-md rounded-lg border';
+    body.appendChild(img);
+  }
+
+  if(q.bacaan){
+    const teks = document.createElement('div');
+    teks.className = 'mb-4 p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm whitespace-pre-line text-justify';
+    teks.innerText = q.bacaan;
+    body.appendChild(teks);
+  }
+if(q.tanya){
+    const pertanyaan = document.createElement('div');
+    pertanyaan.className = 'text-base font-medium';
+    pertanyaan.innerHTML = q.tanya.replace(/\n/g,'<br>');
+    body.appendChild(pertanyaan);
+  }
   // ====== PILIHAN GANDA ======
   if(q.tipe === 'pg'){
     q.opsi.forEach((o,i)=>{
@@ -6177,3 +6194,4 @@ if(q.tipe==='matching'){
   </script>
 </body>
 </html>
+
