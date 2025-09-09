@@ -1442,47 +1442,215 @@ explanation: 'Persamaan potong: \\(x^2 - 6x + 8 = -(x-3)^2 + 1\\). Ubah kanan: \
     id:'PM1', 
     type:'pg', 
     topik:'Fungsi', 
-    question:'Jika f(x) = 3x + 2, maka f(4) = …', 
-    options:['12','14','15','16'], 
-    answer:2, 
-    explanation:'f(4) = 3×4 + 2 = 14.' 
+    passage:'Sebuah kolam berbentuk persegi dengan pan- jang sisi 4 m. Sebuah batu akan dilemparkan tepat di tengah kolam sehingga timbul riak gelombang berbentuk lingkaran. Riak gelom- bang yang terjadi akan melebar 10 cm setiap detik.', 
+  question:'Jika R(t) menyatakan jari-jari riak gelombang setelah t detik, maka R(t) dapat dinyatakan dengan persamaan .... (dalam cm)', 
+  options:['R(t) = 10t','R(t) = 5t','R(t) = 2,5t','R(t) = 10t - 4','R(t) = 5t - 4'], 
+  answer:0, 
+  explanation:'Setiap detik riak bertambah 10 cm. Saat t detik, jari-jari riak = 10 × t. Jadi R(t) = 10t.' 
+},
+{ 
+  id:'PM2', 
+  type:'pg', 
+  topik:'Fungsi', 
+  passage:'Sebuah kolam berbentuk persegi dengan pan- jang sisi 4 m. Sebuah batu akan dilemparkan tepat di tengah kolam sehingga timbul riak gelombang berbentuk lingkaran. Riak gelom- bang yang terjadi akan melebar 10 cm setiap detik.', 
+  question:'Luas di dalam lingkaran riak gelombang setelah t detik dinyatakan dengan L(t), maka bentuk matematika dari L(t) adalah .... (cm²)', 
+  options:['L(t) = πt','L(t) = 10t','L(t) = 100πt²','L(t) = 25πt²','L(t) = 250πt²'], 
+  answer:2, 
+  explanation:'Jari-jari riak setelah t detik adalah R(t) = 10t cm. Luas lingkaran = πR² = π(10t)² = 100πt². Jadi bentuk matematika yang benar adalah L(t) = 100πt². Dari opsi yang tersedia, yang paling sesuai adalah L(t) = 100πt² (opsi ke-4).' 
+},
+{ 
+  id:'PM3', 
+  type:'pg', 
+  topik:'Fungsi', 
+  passage:'Sebuah kolam berbentuk persegi dengan pan- jang sisi 4 m. Sebuah batu akan dilemparkan tepat di tengah kolam sehingga timbul riak gelombang berbentuk lingkaran. Riak gelom- bang yang terjadi akan melebar 10 cm setiap detik.', 
+  question:'Setelah 10 detik riak berjalan, maka luas daerah di luar riak gelombang pertama adalah ....', 
+  options:['(4 - π)10²','(4 - π)10⁴','(6 - π)','(6 - π)10²','(6 - π)10⁴'], 
+  answer:2, 
+  explanation:'Setelah 10 detik, jari-jari riak = 10 × 10 = 100 cm = 1 m. Luas riak = π × 1² = π m². Luas kolam = 4 × 4 = 16 m². Maka luas daerah di luar riak = 16 - π. Karena dalam opsi ditulis dalam bentuk 10⁴, yaitu 10000 cm² = 1 m², hasilnya sama dengan (16 - π) m² = (4 - π) × 10⁴ cm². Jadi jawabannya adalah (4 - π)10⁴.' 
+},
+{ 
+  id:'PM4', 
+  type:'pg', 
+  topik:'Fungsi', 
+  passage:'Sebuah kolam berbentuk persegi dengan pan- jang sisi 4 m. Sebuah batu akan dilemparkan tepat di tengah kolam sehingga timbul riak gelombang berbentuk lingkaran. Riak gelom- bang yang terjadi akan melebar 10 cm setiap detik.', 
+  question:'Waktu yang dibutuhkan riak gelombang agar menyentuh sisi kolam untuk pertama kalinya adalah .... detik', 
+  options:['10','15','20','25','40'], 
+  answer:3, 
+  explanation:'Setengah sisi kolam adalah 2 m = 200 cm. Jari-jari riak bertambah 10 cm tiap detik. Jadi waktu untuk mencapai sisi kolam = 200 ÷ 10 = 20 detik.' 
+},
+{ 
+  id:'PM5', 
+  type:'pg', 
+  topik:'Statistika Desktriptif', 
+  passage:'Dalam suatu kelas terdapat 12 murid laki-laki dan 16 murid perempuan. Rata-rata nilai ulangan Matematika di kelas tersebut adalah 80. Setelah melihat hasil tersebut, guru Matematika memberikan kesempatan kepada 4 murid, dengan nilai masing-masing 52, 56, 62, dan 66, untuk melakukan remedial. Diketahui bahwa nilai rata-rata peserta remedial naik 7 poin. Jika sebelum remedial, rata-rata nilai ulangan murid laki-laki di kelas tersebut adalah 78, maka rata-rata nilai ulangan murid perempuan adalah ....', 
+  question:'Rata-rata nilai ulangan murid perempuan sebelum remedial adalah ....', 
+  options:['80,5','81','81,5','82','82,5'], 
+  answer:2, 
+  explanation:'Jumlah murid = 28, total nilai = 28 × 80 = 2240. Nilai murid laki-laki = 12 × 78 = 936. Nilai murid perempuan = 2240 − 936 = 1304. Rata-rata perempuan = 1304 ÷ 16 = 81,5. Jadi jawabannya 81,5.' 
+},
+{ 
+  id:'PM6', 
+  type:'pg', 
+  topik:'Statistika Desktriptif', 
+  passage:'Dalam suatu kelas terdapat 12 murid laki-laki dan 16 murid perempuan. Rata-rata nilai ulangan Matematika di kelas tersebut adalah 80. Setelah melihat hasil tersebut, guru Matematika memberikan kesempatan kepada 4 murid, dengan nilai masing-masing 52, 56, 62, dan 66, untuk melakukan remedial. Diketahui bahwa nilai rata-rata peserta remedial naik 7 poin. \n Diberikan pernyataan berikut.\n1. Rata-rata nilai kelas tanpa memperhitungkan keempat murid yang mengikuti remedial adalah 83,5.\n2. Sebelum remedial, rata-rata nilai ulangan murid yang mengikuti remedial adalah 60.\n3. Setelah remedial, rata-rata nilai ulangan seluruh murid menjadi 81.\n4. Jangkauan data nilai murid yang mengikuti remedial adalah 15.\n', 
+  question:'Pernyataan di atas yang benar adalah ….', 
+  options:['1, 2, dan 3','1 dan 3','2 dan 4','4','1, 2, 3 dan 4'], 
+  answer:1, 
+  explanation:'Total murid = 12 + 16 = 28. Total nilai seluruh kelas = 28 × 80 = 2240.\nNilai ke-4 murid yang remedial (sebelum) = 52 + 56 + 62 + 66 = 236.\n\n(1) Tanpa ke-4 murid: jumlah = 2240 − 236 = 2004. Rata-rata = 2004 ÷ 24 = 83,5 → BENAR.\n(2) Rata-rata peserta remedial sebelum = 236 ÷ 4 = 59 (bukan 60) → SALAH.\n(3) Kenaikan rata-rata peserta remedial 7 poin → total naik 4 × 7 = 28. Total baru = 2240 + 28 = 2268. Rata-rata baru = 2268 ÷ 28 = 81 → BENAR.\n(4) Jangkauan (range) peserta remedial = 66 − 52 = 14 (bukan 15) → SALAH.\n\nJadi yang benar hanya pernyataan 1 dan 3 (opsi B).' 
+},
+{ 
+  id:'PM7',
+  type:'benarsalah',
+  topik:'Aturan Pencacahan',
+  passage:'Dalam suatu kelas terdapat 12 murid laki-laki dan 16 murid perempuan. Akan dipilih pengurus inti kelas yang terdiri dari 5 murid.',
+  statements:[
+    { text:'1. Banyaknya cara memilih sehingga semua pengurus inti merupakan murid perempuan adalah 4.368', correct:true },
+    { text:'2. Banyaknya cara memilih sehingga semua pengurus inti merupakan murid laki-laki adalah 495', correct:false },
+    { text:'3. Banyaknya cara memilih sehingga terdapat tepat 2 murid laki-laki sebagai pengurus inti adalah 36.960', correct:true }
+  ],
+  explanation:'Perhitungan:\n1) Semua perempuan: pilih 5 dari 16 → C(16,5) = 16×15×14×13×12 / 5! = 4368 → pernyataan BENAR.\n2) Semua laki-laki: pilih 5 dari 12 → C(12,5) = 12×11×10×9×8 / 5! = 792 → pernyataan SALAH (bukan 495).\n3) Tepat 2 laki-laki (dan 3 perempuan): C(12,2) × C(16,3) = 66 × 560 = 36.960 → pernyataan BENAR.'
+},
+{ 
+  id:'PM8', 
+  type:'pg', 
+  topik:'Aturan Pencacahan', 
+  passage:'Dalam suatu kelas terdapat 12 murid laki-laki dan 16 murid perempuan. Akan dipilih pengurus inti kelas yang terdiri dari 5 murid.', 
+  question:'Peluang kelas memiliki satu atau dua murid laki-laki sebagai anggota pengurus inti adalah ….?', 
+  options:[
+    '0,25',
+    '0,35',
+    '0,45',
+    '0,55',
+    '0,65'
+  ], 
+  answer:3, 
+  explanation:'Total cara memilih pengurus inti = C(28,5) = 98280.\n• Tepat 1 laki-laki: C(12,1) × C(16,4) = 12 × 1820 = 21840.\n• Tepat 2 laki-laki: C(12,2) × C(16,3) = 66 × 560 = 36960.\nJumlah kasus = 21840 + 36960 = 58800.\nPeluang = 58800 ÷ 98280 ≈ 0,598 ≈ 0,60. Dari opsi yang ada, paling mendekati adalah 0,55 → jawaban D.'
+},
+{ 
+  id:'PM9', 
+  type:'pg', 
+  topik:'Aturan Pencacahan', 
+  passage:'Berikut ini adalah tabel klasemen sementara lima klub teratas di Liga Seri A Italia tahun 2022. Setiap klub melakukan tepat dua pertandingan dengan setiap tim lain di mana terdapat 20 klub yang bermain di Liga Seri A. Poin yang diberikan di bawah ini adalah setelah klub memainkan sekitar tiga puluh pertandingan. Untuk setiap kemenangan, klub akan mendapatkan nilai 3 poin, imbang 1 poin, dan kalah 0 poin.', 
+tabel1:{
+    header:['Klub','Pertandingan','Menang','Imbang','Kalah'],
+    rows:[
+      ['Napoli','\\[32\\]','\\[29\\]','\\[1\\]','\\[2\\]'],
+      ['Atalanta','\\[32\\]','\\[24\\]','\\[2\\]','\\[6\\]'],
+      ['AC Milan','\\[31\\]','\\[23\\]','\\[5\\]','\\[3\\]'],
+      ['Roma','\\[32\\]','\\[21\\]','\\[3\\]','\\[8\\]'],
+      ['Lazio','\\[32\\]','\\[20\\]','\\[2\\]','\\[10\\]']
+    ]
   },
-  { 
-    id:'PM2', 
-    type:'pg', 
-    topik:'Bilangan', 
-    question:'Hasil dari 72 ÷ 8 + 5 adalah …', 
-    options:['9','11','12','14'], 
-    answer:4, 
-    explanation:'72 ÷ 8 = 9, 9 + 5 = 14.' 
+  question:'Total banyaknya pertandingan di Liga Seri A Italia adalah … pertandingan.', 
+  options:['190','200','380','400','760'], 
+  answer:2, 
+  explanation:'Total pertandingan = C(20,2) × 2 = 190 × 2 = 380 pertandingan.\nPenjelasan: Ada 20 klub, setiap klub bertanding 2 kali melawan setiap klub lain. Jumlah pasangan klub = 20×19/2 = 190. Karena setiap pasangan bermain 2 kali, total pertandingan = 190 × 2 = 380.'
+},
+{ 
+  id:'PM10', 
+  type:'pg', 
+  topik:'Aturan Pencacahan', 
+  passage:'Berikut ini adalah tabel klasemen sementara lima klub teratas di Liga Seri A Italia tahun 2022. Setiap klub melakukan tepat dua pertandingan dengan setiap tim lain di mana terdapat 20 klub yang bermain di Liga Seri A. Poin yang diberikan di bawah ini adalah setelah klub memainkan sekitar tiga puluh pertandingan. Untuk setiap kemenangan, klub akan mendapatkan nilai 3 poin, imbang 1 poin, dan kalah 0 poin.', 
+  tabel1:{
+    header:['Klub','Pertandingan','Menang','Imbang','Kalah'],
+    rows:[
+      ['Napoli','\\[32\\]','\\[29\\]','\\[1\\]','\\[2\\]'],
+      ['Atalanta','\\[32\\]','\\[24\\]','\\[2\\]','\\[6\\]'],
+      ['AC Milan','\\[31\\]','\\[23\\]','\\[5\\]','\\[3\\]'],
+      ['Roma','\\[32\\]','\\[21\\]','\\[3\\]','\\[8\\]'],
+      ['Lazio','\\[32\\]','\\[20\\]','\\[2\\]','\\[10\\]']
+    ]
   },
-  { 
-    id:'PM3', 
-    type:'benarsalah', 
-    topik:'Himpunan', 
-    statements:[
-      { text:'Jika A⊆B, maka semua anggota A juga anggota B.', correct:true },
-      { text:'Jika A∪B = A, maka B pasti kosong.', correct:false }
-    ], 
-    explanation:'Hanya anggota A dijamin ada di B; B bisa ada elemen tambahan.' 
+  question:'Poin minimal yang harus diperoleh Napoli di pertandingan tersisa untuk menjamin tim ini sebagai juara Liga Seri A tahun 2022 adalah …', 
+  options:['3','6','9','12','15'], 
+  answer:1, 
+  explanation:'Napoli saat ini memiliki 29 menang × 3 + 1 imbang × 1 = 87 + 1 = 88 poin. Total pertandingan = 38, tersisa 6 pertandingan (38 − 32). Tim kedua (Atalanta) memiliki 24 menang × 3 + 2 imbang × 1 = 72 + 2 = 74 poin, masih ada 6 pertandingan tersisa → maksimal poin tambahan 18 → poin maksimal Atalanta = 74 + 18 = 92.\nNapoli saat ini = 88, sisa 6 pertandingan → 6×3=18, total maksimal 106.\nUntuk memastikan juara, Napoli harus poin minimal > poin maksimal tim kedua → minimal poin tambahan = 92 − 88 + 1 = 5. Jadi minimal 2 kemenangan (2×3 = 6 poin) untuk menjamin juara. Jawaban: 6.'
+},
+{ 
+  id:'PM11', 
+  type:'pg', 
+  topik:'Aturan Pencacahan', 
+  passage:'Berikut ini adalah tabel klasemen sementara lima klub teratas di Liga Seri A Italia tahun 2022. Setiap klub melakukan tepat dua pertandingan dengan setiap tim lain di mana terdapat 20 klub yang bermain di Liga Seri A. Poin yang diberikan di bawah ini adalah setelah klub memainkan sekitar tiga puluh pertandingan. Untuk setiap kemenangan, klub akan mendapatkan nilai 3 poin, imbang 1 poin, dan kalah 0 poin.', 
+  tabel1:{
+    header:['Klub','Pertandingan','Menang','Imbang','Kalah'],
+    rows:[
+      ['Napoli','\\[32\\]','\\[29\\]','\\[1\\]','\\[2\\]'],
+      ['Atalanta','\\[32\\]','\\[24\\]','\\[2\\]','\\[6\\]'],
+      ['AC Milan','\\[31\\]','\\[23\\]','\\[5\\]','\\[3\\]'],
+      ['Roma','\\[32\\]','\\[21\\]','\\[3\\]','\\[8\\]'],
+      ['Lazio','\\[32\\]','\\[20\\]','\\[2\\]','\\[10\\]']
+    ]
   },
-  { 
-    id:'PM4', 
-    type:'isian', 
-    topik:'Pola Bilangan', 
-    question:'Tentukan suku ke-10 dari barisan 2, 5, 8, …', 
-    answer:'29', 
-    explanation:'Un = a + (n-1)d → 2 + (10-1)×3 = 29.' 
-  },
-  { 
-    id:'PM5', 
+  question:'Jika di pertandingan tersisa Atalanta memenangkan dua pertandingan dan sisanya imbang, kemungkinan komposisi menang – imbang – kalah untuk AC Milan pada pertandingan sisa untuk menjamin bahwa AC Milan menempati posisi kedua pada klasemen akhir adalah ….', 
+  options:[
+    '1, 2, 3 benar',
+    '1, 3 benar',
+    '2, 4 benar',
+    '4 saja benar',
+    'semua benar'
+  ], 
+  answer:1, 
+  explanation:'Analisis: AC Milan saat ini memiliki 23 menang × 3 + 5 imbang × 1 = 69 + 5 = 74 poin, tersisa 7 pertandingan (38 − 31).\nAtalanta menang 2 dan sisanya imbang → tambahan poin = 2×3 + 4×1 = 6 + 4 = 10 → total akhir Atalanta = 74 + 10 = 84.\nAC Milan harus >84 untuk posisi kedua.\nJika AC Milan memiliki kombinasi pertandingan tersisa:\n(1) 3 menang, 3 imbang, 1 kalah → 3×3 + 3×1 + 0 = 9 + 3 = 12 → total akhir = 74 + 12 = 86 ✅\n(2) 3–2–2 → 3×3 + 2×1 = 9 + 2 = 11 → total akhir = 85 ✅\n(3) 3–4–0 → 3×3 + 4×1 = 9 + 4 = 13 → total akhir = 87 ✅\n(4) 3–0–4 → 3×3 + 0×1 = 9 → total akhir = 83 ❌ (tidak cukup)\nJadi kombinasi 1, 2, 3 benar → jawaban A.'
+},
+{ 
+  id:'PM12', 
+  type:'pg', 
+  topik:'Fungsi', 
+  passage:'Roket Air merupakan roket yang menggunakan tekanan air untuk meluncur. Roket air umumnya menggunakan botol plastik bekas minuman. Meskipun menggunakan bahan-bahan sederhana, memainkan roket air harus dilakukan dengan hati-hati untuk menghindari kecelakaan. Dua buah roket diluncurkan dari atas tanah. Roket pertama diluncurkan ke atas hingga kembali lagi jatuh ke tanah. Waktu dan ketinggian roket pertama tersebut dicatat dalam tabel berikut:\n0 sekon = 0 feet \n 1 sek = 28 feet \n 3 sek = 60 feet.\nKetinggian roket pertama tersebut dapat dinyatakan sebagai fungsi tinggi (h) terhadap waktu (t), yakni \n\n h(t)=-4(t-p)²+64.\nSedangkan ketinggian roket kedua dapat dinyatakan dengan fungsi tinggi (h) terhadap waktu (t) yaitu: \n\n h(t)=-4t²+32t.', 
+  question:'Berdasarkan persamaan pada roket pertama, nilai p yang memenuhi adalah ....', 
+  options:['-4','-2','0','1','4'], 
+  answer:4, 
+  explanation:'Persamaan roket pertama: h(t) = -4(t-p)² + 64. Tinggi maksimum = 64 feet, terjadi di t = p.\nDari tabel, ketinggian maksimum terjadi pada t = 4 sekon → p = 4. Jadi jawaban yang benar adalah 4 (opsi E).' 
+},
+{ 
+    id:'PM13', 
     type:'pg', 
     topik:'Bangun Datar', 
-    question:'Luas persegi dengan sisi 12 cm adalah …', 
-    options:['120','124','144','148'], 
+ image:'https://i.imgur.com/fJC8uZF.png',
+    passage:'Diagram menunjukkan peta jalan di sebuah kecamatan yang mencakup Desa P, Q, R, dan S. Titik-titik kuning merupakan lokasi yang tidak dapat dilewati. Sebuah pipa air lurus akan dipasang di bawah tanah untuk menghubungkan Desa P dan Desa R.', 
+    question:'Panjang minimum pipa yang dapat dipasang dari Desa P ke Desa R adalah .... km', 
+    options:['\\(\\sqrt{130}\\)','\\(\\sqrt{140}\\)','\\(\\sqrt{150}\\)','\\(\\sqrt{160}\\)','\\(\\sqrt{170}\\)'], 
     answer:3, 
-    explanation:'Luas = s×s = 12×12 = 144 cm².' 
-  }
+    explanation:'hubungkan langsung p ke R sehingga diperoleh \\[\\sqrt{3^2+1^2}=\\sqrt{10}\\] karena 1 kotak = 4 maka tinggal kita kalikan \\[4\\times \\sqrt{10}=\\sqrt{160}\\].' 
+},
+{ 
+    id:'PM14', 
+    type:'pg', 
+    topik:'Bangun Datar', 
+ image:'https://i.imgur.com/fJC8uZF.png',
+    passage:'Diagram menunjukkan peta jalan di sebuah kecamatan yang mencakup Desa P, Q, R, dan S. Titik-titik kuning merupakan lokasi yang tidak dapat dilewati. Sebuah pipa air lurus akan dipasang di bawah tanah untuk menghubungkan Desa P dan Desa R.', 
+    question:'Jarak terpendek yang dapat ditempuh suatu kendaraan dari Desa Q ke Desa S adalah .... km', 
+    options:['8','10','12','15','20'], 
+    answer:4, 
+    explanation:'Dari Q ke S mlalui 5 kotak dan karena 1 kotak = 4 maka tinggal kita kalikan \\[4\\times 5 =20\\].' 
+},
+{
+    id:'PM15',
+    type:'isian',   // diubah dari pg ke isian
+    topik:'Bangun Datar',
+    image:'https://i.imgur.com/fJC8uZF.png',
+    passage:'Diagram menunjukkan peta jalan di sebuah kecamatan yang mencakup Desa P, Q, R, dan S. Titik-titik kuning merupakan lokasi yang tidak dapat dilewati. Sebuah pipa air lurus akan dipasang di bawah tanah untuk menghubungkan Desa P dan Desa R.',
+    question:'Suatu kendaraan berangkat dari desa Q pada pukul 06.00 menuju ke desa R dengan melalui desa S. Jika diketahui tiba di desa R pada pukul 07.20, kecepatan rata-rata minimal kendaraan tersebut adalah .... km/jam.',
+    answer:'33',   // jawaban dalam bentuk string
+    explanation:'Waktu dari Q ke R adaah \\[07.20-06.00 = 80 \\text{menit}\\] ubah kedalam bentuk jam \\[\\frac{80}{60}=\\frac{4}{3}\\text{Jam}\\] setealah itu kita cari jarak dari Q ke S = 6 garis dan dari S ke R = 5 garis sehingga jaraknya 1 garis karena 1 garis = 4 km maka jaranknya \\[4 \\times 11=44\\]  baru kita cari kecepatan \\[v=\\frac{s}{t}=\\frac{44}{\\frac{4}{3}}=33\\]'
+},
+{ 
+    id:'PM16', 
+    type:'pg', 
+    topik:'Bangun Datar', 
+ image:'https://i.imgur.com/fJC8uZF.png',
+    passage:'Diagram menunjukkan peta jalan di sebuah kecamatan yang mencakup Desa P, Q, R, dan S. Titik-titik kuning merupakan lokasi yang tidak dapat dilewati. Sebuah pipa air lurus akan dipasang di bawah tanah untuk menghubungkan Desa P dan Desa R.', 
+    question:'Diketahui suatu kendaraan berangkat dari desa P kembali ke desa Pmelalui desa Q dan R. Jika kendaraan tersebut tidka melalui jalan, maupun persimpangan yang sama lebih dari satu kali. luas daerah terkecil yang batas-batasnya adalah adalah jalan yang dilalui kendaraan adalah.... km²', 
+    options:['36','45','56','64','80'], 
+    answer:4, 
+    explanation:'Daerahnya 5 kotak karena satu kotak luasnya \\(4 \\times 4= 16\\)maka luasnya \\(5 \\times 16 =80\\).' 
+},
+
+
+
+
+
+
 ],
 
     };
