@@ -2922,9 +2922,10 @@ gambar:'https://i.imgur.com/z6DQXA0.png',
     bahas: 'Keliling = 3 sisi persegi (3·14) + setengah keliling lingkaran (π·7). Luas = persegi (14²) + luas setengah lingkaran (½ π·7²).'
   },
 {
-  id: "spl42",
+  id: "geo25",
   tipe: "cb",
-  tanya: "Sebuah pusat olahraga memiliki dua kolam renang, yaitu kolam untuk dewasa dan kolam untuk anak-anak. Kedua kolam saling tumpang tindih sebagian di area tengah (zona peralihan). Panjang kolam anak-anak (EFGH) = 20 m dan lebar = 16 m. Luas kedua kolam di luar zona peralihan = 865 m². Berdasarkan informasi tersebut, manakah pernyataan berikut yang benar? (Jawaban lebih dari satu)",
+bacaan:"Sebuah pusat olahraga memiliki dua kolam renang, yaitu kolam untuk dewasa dan kolam untuk anak-anak. Kedua kolam saling tumpang tindih sebagian di area tengah (zona peralihan). Panjang kolam anak-anak (EFGH) = 20 m dan lebar = 16 m. Luas kedua kolam di luar zona peralihan = 865 m². ",
+  tanya: "Berdasarkan informasi tersebut, manakah pernyataan berikut yang benar? (Jawaban lebih dari satu)",
   opsi: [
     "Luas kolam untuk dewasa 625 m².",
     "Luas kolam untuk anak-anak 320 m².",
@@ -2947,7 +2948,29 @@ gambar:'https://i.imgur.com/z6DQXA0.png',
     "\\(A = 545 + 2\\cdot40 = 545 + 80 = 625\\) m². Dengan demikian pilihan \"Luas kolam dewasa 625 m²\", \"Luas kolam anak-anak 320 m²\", dan \"Luas kolam zona peralihan 40 m²\" konsisten dengan data → **benar**.\n\n" +
     "Selanjutnya, jika zona peralihan dianggap berbentuk persegi panjang yang menutupi seluruh lebar kolam anak-anak (lebar = 16 m), maka panjang zona peralihan\n" +
     "\\(= O / 16 = 40 / 16 = 2{,}5\\) m. Jadi pernyataan \"panjang zona = 16 m\" **salah**, dan pernyataan \"lebar zona = 2 m\" juga **salah** (lebar yang sesuai bila salah tafsir). \n\nKesimpulan: jawaban benar adalah opsi ke-1, ke-2, dan ke-3."
-}
+},
+{
+  id: "geo26",
+  tipe: "cb",
+bacaan:"Kubus ABCD.EFGH mempunyai panjang rusuk 10 cm. Titik P terletak di tengah-tengah CD. ",
+  tanya: "Berdasarkan informasi tersebut, tentukan pernyataan berikut yang benar! (Jawaban benar lebih dari satu.)",
+  opsi: [
+    "Jarak antara titik P dan D adalah \\(5\\sqrt{2}\\) cm.",
+    "Jarak antara titik P dan E adalah 10 cm.",
+    "Bangun datar EDP siku-siku di titik D.",
+    "Nilai sinus sudut antara EP dan GH adalah \\(\\dfrac{2\\sqrt{2}}{5}\\).",
+    "Nilai sinus sudut antara EP dan GH adalah \\(\\dfrac{2\\sqrt{2}}{3}\\)."
+  ],
+  kunci: [2,4],
+   bahas:
+    "Sederhana & singkat:\n\n" +
+    "Diketahui rusuk = 10. Titik P tengah CD ⇒ \\(DP=\\tfrac{1}{2}CD=5\\).\n\n" +
+    "1) PD = 5 (P dan D hanya beda 5 pada satu sumbu) ⇒ opsi \"\\(5\\sqrt2\\)\" salah.\n\n" +
+    "2) PE = \\(\\sqrt{5^2+10^2+10^2}=\\sqrt{225}=15\\) ⇒ opsi \"10 cm\" salah.\n\n" +
+    "3) Cek siku-siku di D: \\(DE=10\\sqrt2,\\; DP=5,\\; EP=15\\). Karena \\((10\\sqrt2)^2+5^2=200+25=225=15^2\\), segitiga EDP siku-siku di D ⇒ opsi ketiga benar.\n\n" +
+    "4) Sudut antara EP dan GH: GH sejajar sumbu-x, komponen-x EP = 5, panjang EP = 15 ⇒ \\(\\cos\\theta=5/15=1/3\\) dan \\(\\sin\\theta=\\sqrt{1-(1/3)^2}=\\dfrac{2\\sqrt2}{3}\\). " +
+    "Kesimpulan singkat: hanya pernyataan ke-3 dan ke-5  yang benar. )"
+},
 
   ]
 },
@@ -3379,6 +3402,40 @@ gambar:'https://i.imgur.com/ybHnp8R.png',
   kunci: 0,
   bahas: 'Refleksi terhadap \\( y = 3 \\): \\((x, y) \\mapsto (x, 6 - y)\\).\nMisal \\( P(a, b) \\mapsto P\'(-2, 7) \\), maka:\n- Dari sumbu-\\(X\\): \\( a = -2 \\).\n- Dari sumbu-\\(Y\\): \\( 6 - b = 7 \\implies b = -1 \\).\nSehingga koordinat titik \\( P \\) adalah \\((-2, -1)\\).'
 },
+{
+  id: "trans26",
+  tipe: "bs",
+  tanya: "Titik \\(B(a,b)\\) direfleksikan terhadap garis \\(x=3\\) menghasilkan \\(B'(2,-4)\\). Berdasarkan ketentuan refleksi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+  opsi: [
+    "Nilai \\(a = 4\\).",
+    "Nilai \\(b = 4\\).",
+    "Titik B dan B' berjarak sama terhadap garis \\(x = 3\\)."
+  ],
+  kunci: [true, false, true],
+  bahas:
+    "Refleksi terhadap garis vertikal \\(x=3\\): jika titik \\((x,y)\\) direfleksi, hasilnya \\((x',y')\\) dengan \\(x+x'=6\\) dan \\(y'=y\\).\n\n" +
+    "Diketahui \\(B'(2,-4)\\) ⇒ maka \\(a+2=6 \\Rightarrow a=4\\). Nilai benar.\n\n" +
+    "Koordinat y: \\(b = y' = -4\\), jadi pernyataan \\(b=4\\) salah.\n\n" +
+    "Refleksi menjamin kedua titik berjarak sama dari garis cermin, jadi pernyataan ketiga benar."
+},
+{
+  id: "trans27",
+  tipe: "pg",
+  tanya: "Titik \\(C(-1,3)\\) direfleksikan terhadap sumbu Y, lalu dilanjutkan translasi oleh \\(T = (-3,2)\\). Hasil komposisi transformasi titik C adalah....",
+  opsi: [
+    "(-4,5)",
+    "(-4,-1)",
+    "(-2,-3)",
+    "(-2,5)",
+    "(-2,-1)"
+  ],
+  kunci: 0,
+  bahas:
+    "Langkah 1: Refleksi terhadap sumbu Y mengubah \\((x,y) \\to (-x,y)\\). Jadi \\((-1,3) \\to (1,3)\\).\n\n" +
+    "Langkah 2: Translasi dengan \\(T=(-3,2)\\) berarti geser \\(x\\) dikurangi 3 dan \\(y\\) ditambah 2. Jadi \\((1,3) \\to (1-3, 3+2) = (-2,5)\\).\n\n" +
+    "Maka hasil akhirnya adalah \\((-2,5)\\). Jawaban yang benar: D."
+},
+
   ]
 },
 'Pengukuran': {
@@ -4145,6 +4202,42 @@ gambar:'https://i.imgur.com/xeJ7ACG.png',
     kunci: [0,1,2,3],
     bahas: 'Semua identitas tersebut sesuai dengan definisi perbandingan sisi pada segitiga siku-siku.'
   },
+{
+  id: 'trig27',
+  tipe: 'bs',
+  bacaan: 'Diketahui \\(a = \\tfrac{7\\pi}{6}\\).',
+  tanya: 'Benar atau salah:',
+  opsi: [
+    '\\(\\sin a = \\cos a\\)',
+    '\\(\\sin a - \\cos a = 0\\)',
+    '\\(\\sin a + \\cos a = -\\tfrac{1+\\sqrt{3}}{2}\\)'
+  ],
+  kunci: [false, false, true],
+  bahas: '1) \\(\\sin a \\neq \\cos a\\) → Salah.\n2) \\(\\sin a - \\cos a = (\\sqrt{3}-1)/2 \\neq 0\\) → Salah.\n3) \\(\\sin a + \\cos a = -(1+\\sqrt{3})/2\\),→ Benar.'
+},
+{
+  id: "trig28",
+  tipe: "cb",
+bacaan:"iko berada di puncak menara setinggi 20 m di atas permukaan tanah. Ia mengamati sebuah mobil yang diparkir sejauh 50 m secara horizontal dari kaki menara dengan sudut depresi \\(22^\\circ\\)",
+  tanya: "N. Berdasarkan informasi tersebut, tentukan pernyataan berikut yang benar! (Jawaban benar lebih dari satu.)",
+  opsi: [
+    "Jarak vertikal antara puncak menara dan mobil adalah \\(50\\times\\tan 22^\\circ\\).",
+    "Posisi mobil berada lebih rendah dari dasar menara.",
+    "Jarak miring antara puncak menara dan mobil lebih dari 50 meter.",
+    "Jika jarak horizontal mobil 100 meter, sudut depresi akan lebih besar.",
+    "Jika tinggi menara kurang dari 20 meter, sudut depresi ke mobil akan tetap sama."
+  ],
+  kunci: [2],
+  bahas:
+    "Gunakan trigonometri sederhana (tan dan teorema Pythagoras).\n\n" +
+    "1) Jika sudut depresi \\(\\theta=22^\\circ\\) dan jarak horizontal \\(=50\\), maka vertical yang sesuai dengan sudut itu adalah \\(50\\tan22^\\circ\\approx20{,}20\\) m. Karena tinggi menara diberikan \\(=20\\) m (sedikit lebih kecil), pernyataan bahwa jarak vertikal = \\(50\\tan22^\\circ\\) **tidak** tepat pada data ini → **Salah**.\n\n" +
+    "2) 'Lebih rendah dari dasar menara' berarti mobil berada di bawah ketinggian dasar menara (tidak mungkin karena dasar menara di permukaan tanah dan mobil juga di permukaan tanah) → **Salah**.\n\n" +
+    "3) Jarak miring (garis dari puncak ke mobil) adalah hipotenusa: \\(\\sqrt{50^2+20^2}=\\sqrt{2900}\\approx53{,}85\\) m, tentu lebih dari 50 → **Benar**.\n\n" +
+    "4) Jika jarak horizontal bertambah (mis. 100 m) dengan tinggi tetap, maka \\(\\tan\\theta=\\dfrac{20}{\\text{hor}}\\) mengecil, sehingga sudut depresi **menurun**, bukan meningkat → **Salah**.\n\n" +
+    "5) Jika tinggi menara berubah (lebih kecil dari 20 m) dengan jarak horizontal tetap, maka \\(\\tan\\theta=\\dfrac{h}{50}\\) berubah juga, sehingga sudut depresi **tidak tetap** → **Salah**.\n\n" +
+    "Kesimpulan: hanya pernyataan ke-3 yang benar."
+},
+
   ]
 },
 
@@ -4550,7 +4643,50 @@ gambar:'https://i.imgur.com/xeJ7ACG.png',
     opsi: ['70', '75', '80', '85'],
     kunci: 2,
     bahas: 'Batas = mean + SD = 70+10=80.'
-  }
+  },
+{
+  id: "data28",
+  tipe: "pg",
+bacaan:"Data berat badan (dalam kg) dari 30 balita disajikan dalam tabel berikut.",
+  tanya: " Median berat badan balita adalah ....",
+  tabel: [
+    ["Berat Badan (kg)", "Frekuensi"],
+    ["3–5", "2"],
+    ["6–8", "7"],
+    ["9–11", "12"],
+    ["12–14", "6"],
+    ["15–17", "3"]
+  ],
+  opsi: [
+    "8,5 kg",
+    "9 kg",
+    "10 kg",
+    "10,5 kg",
+    "11 kg"
+  ],
+  kunci: 3,
+  bahas: 
+    "Jumlah data = 30, sehingga data median berada di \\(n/2 = 15\\) dan ke-16.\n\n" +
+    "Distribusi frekuensi kumulatif:\n" +
+    "- 3–5 : 2 (kumulatif 2)\n" +
+    "- 6–8 : 7 (kumulatif 9)\n" +
+    "- 9–11 : 12 (kumulatif 21)\n" +
+    "- 12–14 : 6 (kumulatif 27)\n" +
+    "- 15–17 : 3 (kumulatif 30)\n\n" +
+    "Data ke-15 dan ke-16 jatuh pada kelas 9–11.\n\n" +
+    "Rumus median data berkelompok:\n" +
+    "\\[Me = L + \\left(\\frac{\\tfrac{n}{2} - F}{f}\\right) \\times c\\]\n\n" +
+    "Dengan:\n" +
+    "- \\(L = 8,5\\) (batas bawah kelas median)\n" +
+    "- \\(n = 30\\)\n" +
+    "- \\(F = 9\\) (frekuensi kumulatif sebelum kelas median)\n" +
+    "- \\(f = 12\\) (frekuensi kelas median)\n" +
+    "- \\(c = 3\\) (panjang kelas)\n\n" +
+    "Hitung:\n" +
+    "\\[Me = 8,5 + \\left(\\frac{15 - 9}{12}\\right) \\times 3 = 8,5 + 1,5 = 10\\]\n\n" +
+    "Jadi median = **10 kg**."
+},
+
   ]
 }
 
@@ -5926,6 +6062,25 @@ if(window.MathJax){
     teks.innerText = q.bacaan;
     body.appendChild(teks);
   }
+if (q.tabel) {
+  const table = document.createElement('table');
+  table.className = 'my-3 border-collapse border border-gray-400 w-full max-w-md text-center';
+
+  q.tabel.forEach((row, i) => {
+    const tr = document.createElement('tr');
+    row.forEach((cell, j) => {
+      const el = i === 0 ? 'th' : 'td'; // baris pertama = header
+      const td = document.createElement(el);
+      td.textContent = cell;
+      td.className = 'border border-gray-400 px-2 py-1';
+      tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  });
+
+  body.appendChild(table);
+}
+
 if(q.tanya){
     const pertanyaan = document.createElement('div');
     pertanyaan.className = 'text-base font-medium';
