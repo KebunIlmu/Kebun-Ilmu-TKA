@@ -1469,7 +1469,55 @@ Langkah per langkah:
 2. Batas biaya: 200jt*x + 150jt*y ≤ 800 miliar ✅.
 3. Fungsi tujuan: meminimalkan biaya produksi ✅.
 4. Jika hanya pabrik Y: 150jt*y ≤ 800 miliar → y ≤ 5333 ✅.`
-}
+},
+{
+  id: "spl46",
+  tipe: "cb",
+  tanya: "Pak Rudi mempunyai tanah seluas 200 m² untuk memelihara sapi dan kambing. Setiap sapi membutuhkan 10 m², setiap kambing 5 m². Target minimal: 8 sapi dan 6 kambing. Manakah pernyataan berikut yang benar terkait masalah tersebut?",
+  opsi: [
+    "Daerah penyelesaian SPtLDV berbentuk segitiga sama sisi.",
+    "Luas daerah penyelesaian SPtLDV adalah 81 satuan luas.",
+    "Pak Rudi dapat memelihara 15 ekor sapi dan 12 ekor kambing.",
+    "Banyak sapi maksimum yang mungkin dapat dipelihara adalah 18 ekor.",
+    "Banyak kambing maksimum yang mungkin dapat dipelihara adalah 24 ekor."
+  ],
+  kunci: [1, 4],
+ bahas: "Batasan masalah: \\(10S + 5K \\le 200\\), \\(S \\ge 8\\), \\(K \\ge 6\\).\n\n- Banyak sapi maksimum terjadi saat \\(K\\) minimum (\\(K=6\\)): \\(10S + 5\\cdot6 \\le 200 \\Rightarrow 10S \\le 170 \\Rightarrow S \\le 17\\). Jadi banyak sapi maksimum = \\(17\\) ekor.\n\n- Banyak kambing maksimum terjadi saat \\(S\\) minimum (\\(S=8\\)): \\(10\\cdot8 + 5K \\le 200 \\Rightarrow 5K \\le 120 \\Rightarrow K \\le 24\\). Jadi banyak kambing maksimum = \\(24\\) ekor.\n\n- Kombinasi \\((S,K) = (15,12)\\): \\(10\\cdot15 + 5\\cdot12 = 210 > 200\\). Tidak memenuhi batasan lahan, sehingga salah.\n\n- Daerah penyelesaian (dengan verteks pada \\((8,6),(8,24),(17,6)\\)) membentuk segitiga dengan alas \\(9\\) dan tinggi \\(18\\), sehingga luas = \\(\\tfrac{1}{2}\\times9\\times18 = 81\\) satuan luas. Namun segitiga itu bukan segitiga sama sisi.\n\nKesimpulan: pernyataan yang benar adalah pilihan \\(2\\) (Luas = 81) dan \\(5\\) (kambing maksimum = 24)."
+},
+{
+  id: "spl47",
+  tipe: "pg",
+  tanya: "Bu Rina akan membuat \\(x\\) kue bika dan \\(y\\) kue putri salju. Ia memiliki persediaan terigu 5 kg, gula 3 kg, dan margarin 1 kg. Untuk membuat kue bika memerlukan 3 kg terigu, 1 kg gula, dan 0,5 kg margarin. Untuk membuat kue putri salju memerlukan 2 kg terigu, 2 kg gula, dan 0,5 kg margarin. Model matematika yang sesuai permasalahan adalah ....",
+  opsi: [
+    "x+2y ≤ 3; 3x + 2y ≤ 5; x + y ≤ 2; x ≥ 0; y ≥ 0",
+    "x+2y ≥ 3; 3x + 2y ≥ 5; x + y ≤ 2; x = 0; y ≥ 0",
+    "x+2y ≤ 3; 3x + 2y = 5; x + y ≥ 2; x = 0; y ≥ 0",
+    "x + 2y ≥ 3; 3x + 2y ≤ 5; x + y ≥ 2; x ≥ 0; y ≥ 0",
+    "x+2y ≤ 3; 3x + 2y ≤ 5; x + y = 2; x ≥ 0; y ≥ 0"
+  ],
+  kunci: 0,
+  bahas: "Batasan masalah:\n- Terigu: \\(3x + 2y \\le 5\\)\n- Gula: \\(x + 2y \\le 3\\)\n- Margarin: \\(0,5x + 0,5y \\le 1 \\Rightarrow x + y \\le 2\\)\n- Syarat non-negatif: \\(x \\ge 0, y \\ge 0\\)\n\nSehingga model matematikanya: \\(x+2y \\le 3; 3x+2y \\le 5; x+y \\le 2; x \\ge 0; y \\ge 0\\). Jadi jawaban yang benar adalah **A**."
+},
+{
+  id:'spl48',
+  tipe:'bs',
+  tanya:'Bu Lastri menjual dua jenis minyak goreng kemasan yaitu minyak goreng Lezat seharga Rp14.000,00 per bungkus dan minyak goreng Gurih seharga Rp15.000,00 per bungkus. Penjualan harian minyak goreng Lezat tidak pernah lebih dari 60 bungkus. Penjualan minyak goreng Gurih tidak pernah kurang dari 40 bungkus. Total penjualan harian kedua jenis minyak tidak pernah lebih dari 120 bungkus.\n\nBerdasarkan informasi di atas, tentukan Benar atau Salah untuk setiap pernyataan berikut!',
+  opsi:[
+    'Apabila Bu Lastri hanya menjual minyak goreng Gurih, ia akan memperoleh pendapatan minimum sebesar Rp600.000,00 per hari.',
+    'Dengan hanya menjual 120 bungkus minyak goreng Gurih, Bu Lastri memperoleh pendapatan sebesar Rp1.800.000,00 per hari.',
+    'Dengan menjual 60 bungkus minyak goreng Lezat dan 60 bungkus minyak goreng Gurih, Bu Lastri akan memperoleh pendapatan terbesar per hari.'
+  ],
+  kunci:[true,true,false],
+  bahas:
+    'Misalkan L = jumlah bungkus Lezat, G = jumlah bungkus Gurih. Harga: PL = 14.000, PG = 15.000.\n\n' +
+    'Batasan: L ≤ 60, G ≥ 40, L + G ≤ 120, L ≥ 0, G ≥ 0.\n\n' +
+    'Fungsi pendapatan: R = 14.000L + 15.000G.\n\n' +
+    '1) Jika hanya Gurih: L=0, G minimal =40 → R=15.000×40=600.000 → Benar.\n\n' +
+    '2) Jika G=120, L=0 → R=15.000×120=1.800.000 → Benar.\n\n' +
+    '3) Kombinasi (60,60): R=14.000×60 + 15.000×60=1.740.000. Sedangkan maksimum tercapai di (0,120) sebesar 1.800.000 → Jadi pernyataan salah.'
+},
+
+
   ]
 },
 
@@ -1889,7 +1937,44 @@ opsi: [
 ],
 kunci: 2,
 bahas: 'Karena \\( x\\) di interval  \\((-1,1) \\) maka \\( x^2 \\) di interval\\( [0,1) \\) (nilai nol tercakup karena \\(x=0\\) mungkin; nilai 1 tidak tercakup karena \\(|x|<1\\)). Dengan \\( y=3 \\), diperoleh \\( x^2 + 3y = x^2 + 9 \\)pad interval\\( [0,1) + 9 = [9,10)\\). Jadi himpunan nilai adalah \\([9,10)\\).'
+},
+{
+  id:'fn24',
+  tipe:'yn',
+  tanya:'Diketahui fungsi \\(f(x) = \\sqrt{x^2 - 4x - 5}\\). Berdasarkan fungsi tersebut, tentukan Ya atau Tidak untuk setiap pertanyaan berikut!',
+  opsi:[
+    'Apakah fungsi \\(f(x)\\) terdefinisi jika \\(x^2 - 4x - 5 \\ge 0\\)?',
+    'Apakah domain fungsi \\(f(x)\\) adalah \\(\\{x | x \\le -1 \\text{ atau } x \\ge 5, x \\in \\mathbb{R}\\}\\)?',
+    'Apakah fungsi terdefinisi untuk semua bilangan real?'
+  ],
+  kunci:[true,true,false],
+  bahas:
+    'Syarat fungsi akar: bagian dalam akar \\(x^2 - 4x - 5 \\ge 0\\).\n\n' +
+    '1) Benar, fungsi terdefinisi jika \\(x^2 - 4x - 5 \\ge 0\\).\n\n' +
+    '2) Faktorkan: \\(x^2 - 4x - 5 = (x-5)(x+1)\\). Pertidaksamaan \\((x-5)(x+1) \\ge 0\\) berlaku untuk \\(x \\le -1\\) atau \\(x \\ge 5\\). Jadi domainnya adalah \\(\\{x| x \\le -1 \\text{ atau } x \\ge 5, x \\in \\mathbb{R}\\}\\). → Benar.\n\n' +
+    '3) Tidak semua bilangan real memenuhi syarat, misalnya \\(x=0\\) memberi nilai negatif dalam akar. → Salah.'
+},
+{
+  id:'fn25',
+  tipe:'cb',
+  tanya:'Sebuah ponsel terisi daya baterai sebesar 45%. Saat digunakan untuk berselancar di internet, kapasitas baterai berkurang dengan rumus \\(f(x)=x-32\\). Setelah itu, ponsel diisi daya kembali selama 1 jam dengan rumus \\(g(x)=x+55\\), dengan \\(x\\) adalah kapasitas awal baterai. Tentukan pernyataan yang benar! (Jawaban bisa lebih dari satu)',
+  opsi:[
+    'Setelah ponsel digunakan, kapasitas daya baterai menjadi 23%.',
+    'Kapasitas daya baterai akhir adalah 68%.',
+    'Jika ponsel langsung dicas tanpa digunakan, daya baterai menjadi 100%.',
+    'Jika kapasitas awal daya baterai ternyata 62%, daya baterai akhir menjadi 85%.',
+    'Jika kapasitas awal daya baterai ternyata 75%, daya baterai akhir menjadi 100%.'
+  ],
+  kunci:[1,2,3],
+  bahas:
+    'Diketahui \\(f(x) = x-32\\), \\(g(x)=x+55\\).\n\n' +
+    '- Untuk \\(x=45\\): setelah digunakan → \\(f(45)=13\\). Lalu dicas → \\(g(13)=68\\). Jadi pernyataan benar: baterai akhir 68%.\n' +
+    '- Pernyataan 23% salah, karena hasilnya 13%, bukan 23%.\n' +
+    '- Jika langsung dicas dari 45%: \\(g(45)=100\\). Benar.\n' +
+    '- Jika \\(x=62\\): setelah digunakan → \\(f(62)=30\\). Lalu dicas → \\(g(30)=85\\). Benar.\n' +
+    '- Jika \\(x=75\\): setelah digunakan → \\(f(75)=43\\). Lalu dicas → \\(g(43)=98\\), bukan 100%. Jadi salah.'
 }
+
 ]
 },
 
@@ -2318,7 +2403,45 @@ bahas: 'Karena \\( x\\) di interval  \\((-1,1) \\) maka \\( x^2 \\) di interval\
     "opsi": ["A. 2.500.000", "B. 2.400.000", "C. 2.500.000", "D. 2.600.000"],
     "kunci": 1,
     "bahas": "Bunga tunggal: B = 2.000.000×0.05×5=500.000 → Total = 2.500.000"
-  }
+  },
+{
+  id:'bd31',
+  tipe:'pg',
+  tanya:'Diketahui suatu barisan aritmetika memiliki suku ke-3 adalah 17 dan suku ke-6 adalah 29. Suku ke-5 barisan tersebut adalah....',
+  opsi:[
+    '21',
+    '23',
+    '25',
+    '26',
+    '33'
+  ],
+  kunci:2,
+  bahas:
+    'Misal suku pertama \\(a\\), beda \\(b\\).\n' +
+    'Suku ke-3: \\(a+2b=17\\).\n' +
+    'Suku ke-6: \\(a+5b=29\\).\n' +
+    'Kurangkan persamaan → \\((a+5b)-(a+2b)=29-17\\) → \\(3b=12\\) → \\(b=4\\).\n' +
+    'Substitusi ke \\(a+2b=17\\) → \\(a+8=17\\) → \\(a=9\\).\n' +
+    'Suku ke-5 = \\(a+4b=9+16=25\\).\n' +
+    'Jadi jawabannya adalah **25**.'
+},
+{
+  id:'bd32',
+  tipe:'bs',
+  tanya:'Suatu barisan geometri dengan suku ke-3 adalah 36 dan rasionya 2. Berdasarkan barisan geometri tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!',
+  opsi:[
+    'Suku pertama adalah 9.',
+    'Suku ke-4 adalah 72.',
+    'Jumlah 4 suku pertama adalah 135.'
+  ],
+  kunci:[true,true,true],
+  bahas:
+    'Diketahui \\(U_3 = ar^2 = 36\\) dengan \\(r = 2\\).\n' +
+    'Maka \\(a = 36/4 = 9\\) → pernyataan pertama **Benar**.\n\n' +
+    'Suku ke-4: \\(U_4 = ar^3 = 9 \\times 8 = 72\\) → pernyataan kedua **Benar**.\n\n' +
+    'Jumlah 4 suku pertama: \\(S_4 = a( r^4 - 1 ) / (r - 1) = 9(16 - 1)/1 = 135\\).\n' +
+    'Jadi jumlahnya benar 135 → pernyataan ketiga **Benar**, bukan salah.'
+}
   ]
 },
 'Objek Geometri': {
@@ -2798,6 +2921,34 @@ gambar:'https://i.imgur.com/z6DQXA0.png',
     kunci: [1,2],
     bahas: 'Keliling = 3 sisi persegi (3·14) + setengah keliling lingkaran (π·7). Luas = persegi (14²) + luas setengah lingkaran (½ π·7²).'
   },
+{
+  id: "spl42",
+  tipe: "cb",
+  tanya: "Sebuah pusat olahraga memiliki dua kolam renang, yaitu kolam untuk dewasa dan kolam untuk anak-anak. Kedua kolam saling tumpang tindih sebagian di area tengah (zona peralihan). Panjang kolam anak-anak (EFGH) = 20 m dan lebar = 16 m. Luas kedua kolam di luar zona peralihan = 865 m². Berdasarkan informasi tersebut, manakah pernyataan berikut yang benar? (Jawaban lebih dari satu)",
+  opsi: [
+    "Luas kolam untuk dewasa 625 m².",
+    "Luas kolam untuk anak-anak 320 m².",
+    "Luas kolam zona peralihan 40 m².",
+    "Ukuran panjang kolam zona peralihan 16 m.",
+    "Ukuran lebar kolam zona peralihan 2 m."
+  ],
+  kunci: [0, 1, 2],
+  gambar: "https://i.imgur.com/UQKehEr.png",
+  bahas:
+    "Diketahui: kolam anak-anak memiliki panjang = 20 m dan lebar = 16 m, sehingga luas kolam anak-anak\n" +
+    "\\(C = 20 \\times 16 = 320\\) m².\n\n" +
+    "Misalkan luas kolam dewasa = \\(A\\) dan luas zona peralihan (tumpang tindih) = \\(O\\). Pernyataan \"luas kolam di luar zona peralihan = 865 m²\" berarti jumlah bagian kedua kolam yang **tidak** termasuk zona peralihan adalah 865, yaitu\n" +
+    "\\((A - O) + (C - O) = 865\\).\n\n" +
+    "Jadi\n" +
+    "\\(A + C - 2O = 865.\\)\n\n" +
+    "Substitusi \\(C=320\\):\n" +
+    "\\(A - 2O = 865 - 320 = 545.\\)\n\n" +
+    "Jika kita ambil \\(O = 40\\), maka\n" +
+    "\\(A = 545 + 2\\cdot40 = 545 + 80 = 625\\) m². Dengan demikian pilihan \"Luas kolam dewasa 625 m²\", \"Luas kolam anak-anak 320 m²\", dan \"Luas kolam zona peralihan 40 m²\" konsisten dengan data → **benar**.\n\n" +
+    "Selanjutnya, jika zona peralihan dianggap berbentuk persegi panjang yang menutupi seluruh lebar kolam anak-anak (lebar = 16 m), maka panjang zona peralihan\n" +
+    "\\(= O / 16 = 40 / 16 = 2{,}5\\) m. Jadi pernyataan \"panjang zona = 16 m\" **salah**, dan pernyataan \"lebar zona = 2 m\" juga **salah** (lebar yang sesuai bila salah tafsir). \n\nKesimpulan: jawaban benar adalah opsi ke-1, ke-2, dan ke-3."
+}
+
   ]
 },
 'Transformasi Geometri': {
@@ -5837,6 +5988,41 @@ if(q.tanya){
     table.appendChild(tbody);
     body.appendChild(table);
   }
+// ====== YA / TIDAK ======
+if(q.tipe === 'yn'){
+  const table = document.createElement('table');
+  table.className = 'w-full border border-gray-200 rounded-lg';
+
+  const thead = document.createElement('thead');
+  thead.innerHTML = `
+    <tr class="bg-gray-100 text-center">
+      <th class="p-2 border">Pertanyaan</th>
+      <th class="p-2 border w-20">Ya</th>
+      <th class="p-2 border w-20">Tidak</th>
+    </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  q.opsi.forEach((o,i)=>{
+    const idYa = `${prefix}-${q.id}-yn-${i}-ya`;
+    const idTidak = `${prefix}-${q.id}-yn-${i}-tidak`;
+
+    const row = document.createElement('tr');
+    row.className = 'border-t';
+    row.innerHTML = `
+      <td class="p-2 border">${o}</td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idYa}" name="${prefix}-${q.id}-yn-${i}" value="true" class="accent-emerald-600">
+      </td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idTidak}" name="${prefix}-${q.id}-yn-${i}" value="false" class="accent-rose-600">
+      </td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  body.appendChild(table);
+}
 
   // ====== BENAR / SALAH ======
   if(q.tipe === 'bs'){
@@ -5999,6 +6185,19 @@ if(q.tanya){
       const kunci = Array.isArray(q.kunci) ? q.kunci.slice().sort() : [q.kunci];
       benar = checked.slice().sort().toString() === kunci.toString();
     }
+else if(q.tipe === 'yn'){
+  const jawabanUser = q.opsi.map((o,i)=>{
+    const el = document.querySelector(`input[name='${prefix}-${q.id}-yn-${i}']:checked`);
+    return el ? el.value === 'true' : null;
+  });
+
+  if(jawabanUser.includes(null)){
+    alert('Pilih jawaban Ya/Tidak untuk semua pertanyaan!');
+    return;
+  }
+  benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+}
+
     else if(q.tipe === 'bs'){
       const jawabanUser = q.opsi.map((o,i)=>{
         const el = document.querySelector(`input[name='${prefix}-${q.id}-bs-${i}']:checked`);
