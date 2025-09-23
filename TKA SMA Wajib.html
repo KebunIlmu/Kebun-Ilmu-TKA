@@ -660,10 +660,10 @@ Jadi bilangan terbesar: 0.55 ✅
   tipe: 'pg',
   tanya: 'Hitung hasil dari \\( (2/3 + 2/4) + 7 - 2(2 - 1/2) \\) …',
   opsi: [
-    '4 1/12',
-    '5 1/12',
-    '6 1/12',
-    '7 1/12'
+    '4 1/6',
+    '5 1/6',
+    '6 1/6',
+    '7 1/6'
   ],
   kunci: 1,
   bahas: `
@@ -1641,7 +1641,7 @@ Langkah per langkah:
       '55'
     ],
     kunci: 2,
-    bahas: 'Komposisi fungsi: \\( (g \\circ f)(x) = g(f(x)) = (3x-2)^2 +1 \\). Substitusi x=2: \\( (3*2-2)^2 +1 = 4^2 +1 = 16+1 = 17 \\). Ternyata opsi salah, koreksi: jawaban yang benar 17.'
+    bahas: 'Komposisi fungsi: \\( (g \\circ f)(x) = g(f(x)) = (3x-2)^2 +1 \\). Substitusi x=2: \\( (3\\times 2-2)^2 +1 = 4^2 +1 = 16+1 = 17 \\). Ternyata opsi salah, koreksi: jawaban yang benar 17.'
   },
   {
     id: 'fn2',
@@ -1719,7 +1719,7 @@ Langkah per langkah:
       '6'
     ],
     kunci: 1,
-    bahas: 'y = 4x-7 ⇒ x = (y+7)/4, f^{-1}(9)=(9+7)/4=16/4=4.'
+    bahas: '\\(y = 4x-7 ⇒ x = \\frac{y+7}{4}\\), \\(f^{-1}(9)=\\frac{9+7}{4}=16/4=4\\).'
   },
   {
     id: 'fn8',
@@ -1831,7 +1831,7 @@ Andi merupakan salah satu penghuni apartemen tersebut yang menerima tagihan pemb
         '3',
         '4'
     ],
-    kunci: 2,
+    kunci: 0,
     bahas: 'Langkah-langkah:\n1. Misalkan f^-1(x) = y, sehingga f(y) = x.\n2. f(y) = 2y + 5 = 7\n3. 2y = 7 - 5 = 2\n4. y = 1\nJadi, \\( f^{-1}(7) = 1 \\).'
 },
 {
@@ -1839,12 +1839,12 @@ Andi merupakan salah satu penghuni apartemen tersebut yang menerima tagihan pemb
     tipe: 'pg',
     tanya: 'Diberikan \\( f(x) = 5x - 4 \\) dan \\( f \\circ f(x) = ax + b \\). Tentukan nilai \\( a + b \\).',
     opsi: [
-        '21',
-        '22',
-        '23',
-        '24'
+        '1',
+        '2',
+        '3',
+        '4'
     ],
-    kunci: 2,
+    kunci: 0,
     bahas: 'Langkah-langkah:\n1. Hitung f(f(x)) = f(5x - 4) = 5*(5x - 4) - 4 = 25x - 20 - 4 = 25x - 24\n2. Bandingkan dengan bentuk ax + b: a = 25, b = -24\n3. a + b = 25 + (-24) = 1\nJadi, nilai \\( a + b = 1 \\).'
 },
 {
@@ -1852,12 +1852,12 @@ Andi merupakan salah satu penghuni apartemen tersebut yang menerima tagihan pemb
     tipe: 'pg',
     tanya: 'Diberikan fungsi rasional \\( f(x) = \\frac{2x+1}{x-3}, x \\neq 3 \\). Nilai dari \\( f^{-1}(1) \\) adalah …',
     opsi: [
-        '1',
-        '2',
-        '3',
-        '4'
+        '-1',
+        '-2',
+        '-3',
+        '-4'
     ],
-    kunci: 4,
+    kunci: 3,
     bahas: 'Langkah-langkah:\n1. Misalkan f^{-1}(1) = y, maka f(y) = 1\n2. f(y) = (2y + 1)/(y - 3) = 1\n3. 2y + 1 = y - 3\n4. 2y - y = -3 - 1\n5. y = -4\nJadi, \\( f^{-1}(1) = -4 \\).'
 },
 {
@@ -1883,7 +1883,7 @@ Andi merupakan salah satu penghuni apartemen tersebut yang menerima tagihan pemb
         '3x + 1',
         '3x + 2'
     ],
-    kunci: 2,
+    kunci: 1,
     bahas: 'Langkah-langkah:\n1. Diketahui g(f(x)) = 3x + 1 dan g(x) = x - 2\n2. Misal f(x) = y, maka g(y) = y - 2\n3. g(f(x)) = f(x) - 2 = 3x + 1\n4. f(x) = 3x + 1 + 2 = 3x + 3\nJadi, \\( f(x) = 3x + 3 \\).'
 },
 {
@@ -1896,7 +1896,7 @@ Andi merupakan salah satu penghuni apartemen tersebut yang menerima tagihan pemb
         '11',
         '12'
     ],
-    kunci: 2,
+    kunci: 0,
     bahas: 'Langkah-langkah:\n1. Hitung h(2) = 2^2 = 4\n2. Hitung g(h(2)) = g(4) = 2*4 = 8\n3. Hitung f(g(h(2))) = f(8) = 8 + 1 = 9\nJadi, \\( (f \\circ g \\circ h)(2) = 9 \\).'
 },
 {
@@ -1906,10 +1906,10 @@ Andi merupakan salah satu penghuni apartemen tersebut yang menerima tagihan pemb
     opsi: [
         '-1/2',
         '1/3',
-        '2/3',
+        '-2/3',
         '3/2'
     ],
-    kunci: 3,
+    kunci: 2,
     bahas: 'Langkah-langkah:\n1. Misal f(x) = y = x + 2\n2. g(f(x)) = g(y) = (x - 6)/(x + 4)\n3. Substitusi x = y - 2 → g(y) = ((y-2)-6)/((y-2)+4) = (y-8)/(y+2)\n4. Hitung g(4) = (4-8)/(4+2) = -4/6 = -2/3\nJadi, \\( g(4) = -2/3 \\).'
 },
 {
@@ -1918,9 +1918,9 @@ Andi merupakan salah satu penghuni apartemen tersebut yang menerima tagihan pemb
     tanya: 'Diberikan \\( f(x) = \\frac{4x+5}{x+3}, x \\neq -3 \\). Jika \\( f^{-1}(x) \\) adalah fungsi invers dari \\( f(x) \\), maka \\( f^{-1}(x+1) \\) adalah …',
     opsi: [
         '\\( \\frac{3x-5}{4-x} \\)',
-        '\\( \\frac{3x+5}{4-x} \\)',
+        '\\( \\frac{-3x+2}{x-3} \\)',
         '\\( \\frac{3x-2}{4-x} \\)',
-        '\\( \\frac{3x+2}{4-x} \\)'
+        '\\( \\frac{3x+2}{x-3} \\)'
     ],
     kunci: 1,
     bahas: 'Langkah-langkah:\n1. Misalkan y = f(x) = (4x+5)/(x+3)\n2. Tukar x dan y untuk invers: x = (4y+5)/(y+3)\n3. Kalikan: x(y+3) = 4y + 5 → xy + 3x = 4y + 5\n4. Pindahkan: xy - 4y = 5 - 3x → y(x-4) = 5 - 3x → y = (5 - 3x)/(x-4)\n5. Jadi f^{-1}(x) = (5 - 3x)/(x-4)\n6. Hitung f^{-1}(x+1) = (5 - 3(x+1))/((x+1)-4) = (5-3x-3)/(x-3) = (2-3x)/(x-3) = (-3x+2)/(x-3)\nJadi, \\( f^{-1}(x+1) = \\frac{-3x+2}{x-3} \\).'
@@ -1932,7 +1932,7 @@ tanya: 'Diketahui \\( x\\) di interval  \\((-1,1) \\) dan \\( y = 3 \\). Nilai h
 opsi: [
 '\\((9,10)\\)',
 '\\((9,10)\\)',
-'\\([9,10]\\)',
+'\\([9,10)\\)',
 '\\([0,1)\\)'
 ],
 kunci: 2,
@@ -1965,7 +1965,7 @@ bahas: 'Karena \\( x\\) di interval  \\((-1,1) \\) maka \\( x^2 \\) di interval\
     'Jika kapasitas awal daya baterai ternyata 62%, daya baterai akhir menjadi 85%.',
     'Jika kapasitas awal daya baterai ternyata 75%, daya baterai akhir menjadi 100%.'
   ],
-  kunci:[1,2,3],
+  kunci:[1,2],
   bahas:
     'Diketahui \\(f(x) = x-32\\), \\(g(x)=x+55\\).\n\n' +
     '- Untuk \\(x=45\\): setelah digunakan → \\(f(45)=13\\). Lalu dicas → \\(g(13)=68\\). Jadi pernyataan benar: baterai akhir 68%.\n' +
@@ -3910,6 +3910,12 @@ gambar:'https://i.imgur.com/ybHnp8R.png',
         Trigonometri digunakan untuk mengukur tinggi gedung, jarak kapal di laut, sudut elevasi atau depresi, dan perhitungan astronomi.
       </p>
     </div>
+<div class="text-center mt-6">
+  <a href="https://materi78.wordpress.com/wp-content/uploads/2013/06/trig1_mat3.pdf" 
+     class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow-md inline-block">
+    📥 Download Materi Lengkap (PDF)
+  </a>
+</div>
   `,
   video: "4W0ehd6Z7hM",
   soal: [
@@ -4108,8 +4114,8 @@ gambar:'https://i.imgur.com/xeJ7ACG.png',
       'tan A = 3/4',
       'csc B = 5/4'
     ],
-    kunci: [true, false, true, true],
-    bahas: 'Dengan pitagoras, BC = 8. sin B = 8/10 = 4/5 (benar), cos A = 6/10 = 3/5 (salah), tan A = 8/6 = 4/3 (salah, tapi tan B = 3/4), csc B = 1/sin B = 5/4 (benar).'
+    kunci: [false, false, true, false],
+    bahas: 'Dengan pitagoras, BC = 8. sin B = 6/10 = 3/5 (salah), cos A = 6/10 = 3/5 (salah), tan A = 8/6 = 4/3 (salah, tapi tan B = 3/4), csc B = 1/sin B = 5/3 (salah).'
   },
   {
     id: 'trig18',
