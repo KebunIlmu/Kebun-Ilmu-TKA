@@ -671,7 +671,226 @@ Langkah per langkah:
 1. 2/3 + 2/4 = 2/3 + 1/2 = 4/6 + 3/6 = 7/6  
 2. 2 - 1/2 = 3/2 → dikali 2 → 3  
 3. (2/3 + 2/4) + 7 - 2(2 - 1/2) = 7/6 + 7 - 3 = 7/6 + 4 = 4 + 7/6 = 5 1/6 ✅  `
-}
+},
+{
+  id: 'b21',
+  tipe: 'pg',
+  tanya: 'Jika \\(a=\\frac{1}{2}, b=2, \\text{dan } c=1\\), maka nilai dari \\(\\frac{a^{-2}bc^3}{ab^2c^{-1}}\\) adalah …',
+  opsi: [
+    '1',
+    '2',
+    '4',
+    '8'
+  ],
+  kunci: 2, // C
+  bahas: `
+Langkah perhitungan:
+
+\\[
+\\frac{a^{-2} b c^3}{a b^2 c^{-1}} = a^{-2-1} \\cdot b^{1-2} \\cdot c^{3-(-1)} = a^{-3} \\cdot b^{-1} \\cdot c^{4}
+\\]
+
+Substitusi nilai \\(a=\\frac{1}{2}, b=2, c=1\\):
+
+\\[
+a^{-3} = (1/2)^{-3} = 2^3 = 8  
+b^{-1} = 2^{-1} = 1/2  
+c^4 = 1^4 = 1
+\\]
+
+Sehingga:
+
+\\[
+8 \\cdot \\frac{1}{2} \\cdot 1 = 4
+\\]
+
+Jadi jawabannya adalah C. ✅
+  `
+},
+{
+  id: 'b22',
+  tipe: 'pg',
+  tanya: 'Nilai dari \\(\\sqrt{1+\\sqrt{3+\\sqrt{13+4\\sqrt{3}}}}\\) adalah …',
+  opsi: [
+    '\\(\\frac{1}{6}\\sqrt{2}+\\frac{1}{2}\\sqrt{2}\\)',
+    '\\(\\frac{1}{2}\\sqrt{2}+\\frac{1}{2}\\sqrt{6}\\)',
+    '\\(\\frac{1}{6}\\sqrt{2}-\\frac{1}{2}\\sqrt{2}\\)',
+    '\\(\\frac{1}{2}\\sqrt{6}-\\frac{1}{2}\\sqrt{2}\\)',
+    '\\(\\frac{1}{2}\\sqrt{2}-\\frac{1}{6}\\sqrt{2}\\)'
+  ],
+  kunci: 1, // B
+  bahas: `
+Langkah perhitungan:
+
+Perhatikan ekspresi di dalam akar:
+
+\\[
+\\sqrt{13 + 4\\sqrt{3}} = a + b\\sqrt{3} 
+\\]
+
+Dengan asumsi \\(a, b \\in \\mathbb{Z}^+\\), kita kuadratkan:
+
+\\[
+(a + b\\sqrt{3})^2 = a^2 + 2ab\\sqrt{3} + 3b^2 = (a^2 + 3b^2) + 2ab\\sqrt{3}
+\\]
+
+Bandingkan dengan \\(13 + 4\\sqrt{3}\\):
+
+\\[
+a^2 + 3b^2 = 13, \\quad 2ab = 4 \\implies ab = 2
+\\]
+
+Dari \\(ab = 2\\), coba pasangan positif: \\((a,b)=(1,2)\\) atau \\((2,1)\\):
+
+- Cek (a,b) = (2,1): \\(a^2+3b^2 = 4 + 3 = 7 \\neq 13\\)
+- Cek (a,b) = (1,2): \\(1 + 12 = 13 ✅\\)
+
+Jadi:
+
+\\[
+\\sqrt{13 + 4\\sqrt{3}} = 1 + 2\\sqrt{3}
+\\]
+
+Selanjutnya:
+
+\\[
+\\sqrt{3 + \\sqrt{13 + 4\\sqrt{3}}} = \\sqrt{3 + 1 + 2\\sqrt{3}} = \\sqrt{4 + 2\\sqrt{3}}
+\\]
+
+Ekspresikan \\(4 + 2\\sqrt{3} = (1 + \\sqrt{3})^2\\), karena:
+
+\\[
+(1 + \\sqrt{3})^2 = 1 + 2\\sqrt{3} + 3 = 4 + 2\\sqrt{3}
+\\]
+
+Sehingga:
+
+\\[
+\\sqrt{3 + \\sqrt{13 + 4\\sqrt{3}}} = 1 + \\sqrt{3}
+\\]
+
+Terakhir:
+
+\\[
+\\sqrt{1 + \\sqrt{3 + \\sqrt{13 + 4\\sqrt{3}}}} = \\sqrt{1 + (1 + \\sqrt{3})} = \\sqrt{2 + \\sqrt{3}}
+\\]
+\\[
+\\sqrt{2 + \\sqrt{3}}=\\sqrt{2 + 2\\cdot \\frac{1}{2}\\sqrt{3}}
+\\]
+\\[
+=\\sqrt{2 + 2\\cdot \\sqrt{(\\frac{1}{2})^2\\times 3}}=\\sqrt{2 + 2\\sqrt{\\frac{3}{4}}}
+\\]
+\\[
+=\\sqrt{1/2 +3/2+ 2\\sqrt{\\frac{3}{2}\\times \\frac{1}{2}}}=\\sqrt{\\frac{1}{2}}+\\sqrt{\\frac{3}{2}}
+\\]
+\\[
+=\\frac{1}{2}\\sqrt{2}+\\frac{1}{2}\\sqrt{6}
+\\]
+
+
+Jadi jawabannya adalah B. ✅
+  `
+},
+{
+  id: 'b23',
+  tipe: 'pg',
+bacaan:'Santi memiliki 11 \\(\\frac{5}{6}\\) kg gula pasir. Sebanyak 2 \\(\\frac{1}{3}\\) kg gula pasir disimpan di dapur untuk digunakan sendiri, sedangkan sisanya akan digunakan untuk membuat sirop. Gula pasir yang akan digunakan untuk membuat sirop dimasukkan ke dalam kantong plastik. Tiap 1/2 kg gula pasir dimasukkan ke dalam kantong plastik. Santi hanya mempunyai 15 kantong plastik. ',
+  tanya: "Berdasarkan informasi yang diberikan, pernyataan berikut yang bernilai benar adalah …",
+  opsi: [
+    "Gula pasir yang akan digunakan untuk membuat sirop tidak lebih dari 9 kg",
+    "Banyak kantong plastik yang dimiliki Santi cukup untuk mengemas gula pasir",
+    "Jumlah kantong plastik yang digunakan Santi tidak kurang dari 20 kantong",
+    "Kekurangan kantong plastik Santi sebanyak 4 kantong",
+    "Sisa kantong plastik Santi setelah digunakan untuk membungkus gula sebanyak 4 kantong"
+  ],
+  kunci: 3, // D
+  bahas: `
+Langkah perhitungan:
+
+1️⃣ Hitung gula pasir yang akan digunakan untuk membuat sirop:
+
+\\[
+11\\frac{5}{6} - 2\\frac{1}{3} = \\frac{71}{6} - \\frac{7}{3} = \\frac{71}{6} - \\frac{14}{6} = \\frac{57}{6} = 9\\frac{1}{2} \\text{ kg}
+\\]
+
+2️⃣ Hitung jumlah kantong plastik yang dibutuhkan (1 kantong untuk 1/2 kg):
+
+\\[
+\\frac{9\\frac{1}{2}}{1/2} = \\frac{19/2}{1/2} = 19 \\text{ kantong}
+\\]
+
+3️⃣ Santi hanya memiliki 15 kantong, sehingga:
+
+\\[
+19 - 15 = 4 \\text{ kantong kurang}
+\\]
+
+Jadi, pernyataan yang benar adalah: "Kekurangan kantong plastik Santi sebanyak 4 kantong" ✅
+`
+},
+{
+  id: 'spl53',
+  tipe: 'pg',
+bacaan:'Bu Fitri membuat minuman dengan bahan 4 \\(\\frac{1}{4}\\) liter air mineral, 1 \\(\\frac{1}{2}\\) liter air kelapa muda, 0,5 liter sirop, dan 1,25 liter air es. Semua bahan dicampur, lalu dimasukkan ke dalam gelas-gelas bervolume 0,25 liter. ',
+  tanya: "Banyaknya gelas yang dibutuhkan adalah …",
+  opsi: [
+    "28 gelas",
+    "30 gelas",
+    "32 gelas",
+    "33 gelas",
+    "34 gelas"
+  ],
+  kunci: 1, // B
+  bahas: `
+Langkah perhitungan:
+
+1️⃣ Jumlah semua bahan:
+
+\\[
+4\\frac{1}{4} + 1\\frac{1}{2} + 0,5 + 1,25
+\\]
+
+Ubah pecahan campuran menjadi desimal:  
+
+- 4 1/4 = 4,25  
+- 1 1/2 = 1,5  
+
+Sehingga total volume:  
+
+\\[
+4,25 + 1,5 + 0,5 + 1,25 = 7,5 \\text{ liter}
+\\]
+
+2️⃣ Volume tiap gelas = 0,25 liter  
+
+Banyak gelas yang dibutuhkan:
+
+\\[
+\\frac{7,5}{0,25} = 30
+\\]
+
+✅ Jadi banyaknya gelas = 30 gelas
+`
+},
+{
+  id: 'b25',
+  tipe: 'bs',
+  tanya: 'Tentukan benar atau salah pernyataan berikut:',
+  opsi: [
+    '\\(4\\sqrt{12} - 3\\sqrt{2} = 4\\sqrt{3}\\)',
+    '\\((\\sqrt{50} - 3\\sqrt{2}) \\cdot \\sqrt{160} = 16\\sqrt{5}\\)',
+    '\\(\\frac{\\sqrt{63}}{\\sqrt{28}} \\cdot (2\\sqrt{7} + \\sqrt{112}) = 6\\sqrt{7}\\)'
+  ],
+  kunci: [false, true, false],
+  bahas: '1️⃣ \\(4\\sqrt{12} - 3\\sqrt{2} = 4\\cdot2\\sqrt{3} - 3\\sqrt{2} = 8\\sqrt{3} - 3\\sqrt{2} \\neq 4\\sqrt{3}\\) → Salah\n\n' +
+         '2️⃣ \\(\\sqrt{50} - 3\\sqrt{2} = 5\\sqrt{2} - 3\\sqrt{2} = 2\\sqrt{2}\\)\n' +
+         'Kemudian \\(2\\sqrt{2} \\cdot \\sqrt{160} = 2\\sqrt{2} \\cdot 4\\sqrt{10} = 8\\sqrt{20} = 8 \\cdot 2\\sqrt{5} = 16\\sqrt{5}\\) → Benar\n\n' +
+         '3️⃣ \\(\\frac{\\sqrt{63}}{\\sqrt{28}} = \\sqrt{\\frac{63}{28}} = \\sqrt{\\frac{9\\cdot7}{4\\cdot7}} = \\sqrt{\\frac{9}{4}} = \\frac{3}{2}\\)\n' +
+         'Kemudian \\((2\\sqrt{7} + \\sqrt{112}) = 2\\sqrt{7} + 4\\sqrt{7} = 6\\sqrt{7}\\)\n' +
+         'Sehingga \\(\\frac{3}{2} \\cdot 6\\sqrt{7} = 9\\sqrt{7}\\) → Sebenarnya hasilnya 9√7, bukan 6√7 → Salah'
+},
+
+
   ]
 },
 'SPLDV & SPLTV': {
@@ -1523,7 +1742,286 @@ Langkah per langkah:
     '2) Jika G=120, L=0 → R=15.000×120=1.800.000 → Benar.\n\n' +
     '3) Kombinasi (60,60): R=14.000×60 + 15.000×60=1.740.000. Sedangkan maksimum tercapai di (0,120) sebesar 1.800.000 → Jadi pernyataan salah.'
 },
+{
+  id: 'spl49',
+  tipe: 'cb',
+  tanya: "Diketahui bahwa \\(3^{y-x} \\cdot (x+y) = 1\\) dan \\((x+y)^{x-y} = 3\\). Pilih semua nilai \\(x^{3y}\\) yang mungkin.",
+  opsi: [
+    "1/9",
+    "-1/9",
+    "2",
+    "8"
+  ],
+  kunci: [0, 3],
+  bahas: `
+Langkah perhitungan:
 
+1️⃣ Misalkan \\(a = x + y\\) dan \\(b = x - y\\). Dari soal:
+
+\\[
+3^{y-x} \\cdot (x+y) = 3^{-b} \\cdot a = 1 \\implies a = 3^b
+\\]
+
+\\[
+(x+y)^{x-y} = a^b = 3 \\implies (3^b)^b = 3 \\implies 3^{b^2} = 3 \\implies b^2 = 1 \\implies b = \\pm 1
+\\]
+
+2️⃣ Kasus \\(b = 1\\):
+
+\\[
+x + y = a = 3^1 = 3, \\quad x - y = 1
+\\]
+
+Sehingga:
+
+\\[
+x = \\frac{3 + 1}{2} = 2, \\quad y = \\frac{3 - 1}{2} = 1
+\\]
+
+Nilai \\(x^{3y} = 2^{3*1} = 2^3 = 8\\) ✅
+
+3️⃣ Kasus \\(b = -1\\):
+
+\\[
+x + y = a = 3^{-1} = 1/3, \\quad x - y = -1
+\\]
+
+Sehingga:
+
+\\[
+x = \\frac{1/3 + (-1)}{2} = -1/3, \\quad y = \\frac{1/3 - (-1)}{2} = 2/3
+\\]
+
+Nilai \\(x^{3y} = (-1/3)^{3*(2/3)} = (-1/3)^2 \\)= 1/9 ✅
+
+
+4️⃣ Karena eksponen genap, tanda negatif tidak mengubah hasil, 
+Jadi nilai \\(x^{3y}\\) yang mungkin dari opsi: 1/9,dan 8 ✅
+`
+},
+{
+  id: 'spl50',
+  tipe: 'pg',
+  tanya: "Suatu tangki berisi penuh dengan minyak mempunyai berat 80 kg. Jika tangki tersebut berisi minyak setengah maka beratnya 46 kg. Berat tangki tersebut jika kosong adalah .... kg?",
+  opsi: [
+    "6",
+    "12",
+    "23",
+    "24",
+    "34"
+  ],
+  kunci: 1, // B
+  bahas: `
+Langkah perhitungan:
+
+1️⃣ Misalkan:  
+- Berat tangki kosong = \\(T\\) kg  
+- Berat minyak penuh = \\(M\\) kg  
+
+Diketahui:  
+\\[
+T + M = 80 \\quad \\text{(tangki penuh)}
+\\]  
+\\[
+T + \\frac{1}{2}M = 46 \\quad \\text{(tangki setengah)}
+\\]
+
+2️⃣ Kurangkan persamaan kedua dari yang pertama:
+
+\\[
+(T + M) - (T + 1/2 M) = 80 - 46
+\\]  
+\\[
+M - 1/2 M = 34 \\implies 1/2 M = 34 \\implies M = 68
+\\]
+
+3️⃣ Berat tangki kosong:
+
+\\[
+T = 80 - M = 80 - 68 = 12
+\\]
+
+
+ Jadi berat tangki kosong adalah 12 kg opsi B.✅
+`
+},
+{
+  id: 'spl51',
+  tipe: 'pg',
+  tanya: "Jika \\(p = (x^{\\frac{3}{2}} + x^{\\frac{1}{2})(x^{1/3}} - x^{\\frac{-1}{3}})\\) dan \\(q = (x^{\\frac{1}{2}} + x^{\\frac{-1}{2}})(x - x^{\\frac{1}{3}})\\), maka nilai \\(\\frac{p}{q}\\) adalah …",
+  opsi: [
+    "\\(\\sqrt[3]{x}\\)",
+    "\\(\\sqrt[3]{x^2}\\)",
+    "\\(x\\)",
+    "\\(x\\sqrt[3]{x}\\)",
+    "\\(x\\sqrt[3]{x^2}\\)"
+  ],
+  kunci: 0, // A
+  bahas: `
+Langkah perhitungan:
+
+1️⃣ Ekspresikan semua pangkat sebagai eksponen:  
+
+\\[
+p = (x^{3/2} + x^{1/2})(x^{1/3} - x^{-1/3})
+\\]  
+\\[
+q = (x^{1/2} + x^{-1/2})(x - x^{1/3})
+\\]
+
+2️⃣ Faktorkan pangkat x untuk menyederhanakan:
+
+- Untuk \\(p\\):  
+\\[
+x^{1/2}(x + 1)(x^{1/3} - x^{-1/3}) = x^{1/2} (x + 1)(x^{-1/3}(x^{2/3} - 1)) = x^{1/6}(x + 1)(x^{2/3} - 1)
+\\]
+
+- Untuk \\(q\\):  
+\\[
+x^{-1/2}(x + 1)(x - x^{1/3}) = x^{-1/2}(x + 1)(x^{1/3}(x^{2/3} - 1)) = x^{-1/6}(x + 1)(x^{2/3} - 1)
+\\]
+
+3️⃣ Bagi p/q:
+
+\\[
+\\frac{p}{q} = \\frac{x^{1/6}(x + 1)(x^{2/3}-1)}{x^{-1/6}(x + 1)(x^{2/3}-1)} = x^{1/6 - (-1/6)} = x^{1/3}=\\sqrt[3]{x}
+\\]
+
+✅ Jadi nilai \\(p/q = \\sqrt[3]{x}\\) opsi A
+`
+},
+{
+  id: 'spl52',
+  tipe: 'pg',
+bacaan:'Diberikan perbandingan berat badan 4 siswa sebagai berikut:\n- Berat badan Priska 3 kg lebih berat dibanding berat badan Sukma.\n- Berat badan Kiara 6 kg lebih ringan dibanding berat badan Rinda.\n- Berat badan Sukma 2 kg lebih berat dibanding berat badan Kiara.\n',
+  tanya: "Jika diketahui berat badan Sukma adalah 40 kg, pernyataan berikut yang bernilai benar adalah …",
+  opsi: [
+    "Berat badan Priska lebih besar dibanding berat badan Rinda",
+    "Berat badan Sukma lebih besar dibanding berat badan Rinda",
+    "Berat badan Rinda lebih besar dibanding berat badan Priska",
+    "Berat badan Kiara lebih besar dibanding berat badan Priska",
+    "Berat badan Sukma lebih besar dibanding berat badan Priska"
+  ],
+  kunci: 2, // C
+  bahas: `
+Langkah perhitungan:
+
+1️⃣ Diketahui berat Sukma = 40 kg.  
+
+- Berat Priska = Sukma + 3 = 40 + 3 = 43 kg  
+- Berat Kiara = Sukma - 2 = 40 - 2 = 38 kg  
+- Berat Rinda = Kiara + 6 = 38 + 6 = 44 kg  
+
+2️⃣ Bandingkan berat badan siswa:
+
+- Priska = 43 kg  
+- Rinda = 44 kg  
+
+✅ Pernyataan yang benar dari opsi adalah: "Berat badan Priska lebih kecil dibanding berat badan Rinda"  
+
+Tapi karena opsi yang ada adalah: "Berat badan Priska lebih besar dibanding berat badan Rinda", ini **salah**.  
+
+Cek opsi lain:  
+
+- Sukma (40) < Rinda (44) ✅ Salah  
+- Rinda (44) > Priska (43) ✅ Benar ✅ Pilihan C  
+
+Jadi jawaban yang benar adalah **C. Berat badan Rinda lebih besar dibanding berat badan Priska**
+`
+},
+{
+  id: 'spl53',
+  tipe: 'cb',
+bacaan:'Harga sepasang sepatu dua kali harga sepasang sandal. Ardi membeli 2 pasang sepatu dan 3 pasang sandal seharga Rp420.000,00. ',
+  tanya: 'Tentukan semua pernyataan berikut yang benar!',
+  opsi: [
+    'Bentuk persamaan dari soal tersebut: \\(x = 2y\\) dan \\(2x + 3y = 420.000\\)',
+    'Harga sepasang sandal Rp50.000,00',
+    'Harga sepasang sepatu Rp100.000,00',
+    'Harga 3 pasang sepatu dan 2 pasang sandal adalah Rp480.000,00',
+    'Harga 4 pasang sandal lebih mahal dari harga 2 pasang sepatu'
+  ],
+  kunci: [0,3],
+  bahas: 'Misalkan harga sepatu = x dan harga sandal = y.\n' +
+         'Diketahui sepatu dua kali sandal → x = 2y\n' +
+         'Ardi membeli 2 sepatu + 3 sandal = 2x + 3y = 420.000\n\n' +
+         'Substitusi x = 2y → 2(2y) + 3y = 4y + 3y = 7y = 420.000 → y = 60.000\n' +
+         'Maka x = 2y = 120.000\n\n' +
+         'Cek pernyataan:\n' +
+         '1️⃣ Benar → bentuk persamaan sudah sesuai\n' +
+         '2️⃣ Salah → harga sandal = Rp60.000, bukan Rp50.000\n' +
+         '3️⃣ Salah→ harga sepatu = Rp120.000 bukan Rp100.000\n' +
+         '4️⃣ Benar → 3x + 2y = 3(120.000) + 2(60.000) = 360.000 + 120.000 = 480.000\n' +
+         '5️⃣ Salah → 4y = 240.000, 2x = 240.000 → sama, tidak lebih mahal'
+},
+{
+  id: 'spl54',
+  tipe: 'bs',
+bacaan:'Hadi, Yuda, dan Toni menabung di bank. Jumlah uang tabungan Yuda dan dua kali uang tabungan Toni, Rp150.000,00 lebih banyak dari uang Hadi. Jumlah uang tabungan Hadi dan Toni sebesar Rp1.450.000,00. Jumlah uang tabungan mereka bertiga sebesar Rp2.000.000,00. ',
+  tanya: 'Tentukan Benar atau Salah untuk setiap pernyataan berikut!',
+  opsi: [
+    'Banyak uang tabungan Yuda Rp550.000,00',
+    'Tabungan Yuda lebih banyak dari tabungan Toni',
+    'Selisih antara tabungan Yuda dan Hadi Rp100.000,00'
+  ],
+  kunci: [true, true, false],
+  bahas: 'Misalkan tabungan Hadi = H, Yuda = Y, Toni = T.\n' +
+         'Diketahui:\n' +
+         '1) Y + 2T = H + 150.000 → Y - H + 2T = 150.000\n' +
+         '2) H + T = 1.450.000\n' +
+         '3) H + Y + T = 2.000.000\n\n' +
+         'Dari 3) → Y = 2.000.000 - H - T\n' +
+         'Substitusi ke 1): (2.000.000 - H - T) - H + 2T = 150.000 → 2.000.000 - 2H + T = 150.000 → 2H - T = 1.850.000\n' +
+         'Dari 2) H + T = 1.450.000 → T = 1.450.000 - H\n' +
+         'Substitusi ke 2H - T = 1.850.000 → 2H - (1.450.000 - H) = 1.850.000 → 3H - 1.450.000 = 1.850.000 → 3H = 3.300.000 → H = 1.100.000\n' +
+         'T = 1.450.000 - H = 350.000\n' +
+         'Y = 2.000.000 - H - T = 2.000.000 - 1.100.000 - 350.000 = 550.000\n\n' +
+         'Pengecekan pernyataan:\n' +
+         '1️⃣ Benar → Y = 550.000\n' +
+         '2️⃣ Benar → Y = 550.000 > T = 350.000\n' +
+         '3️⃣ Benar → Y - H = 550.000 - 1.100.000 = -550.000 → Jika maksud selisih absolut, |Y - H| = 550.000, bukan 100.000, jadi salah .\n'
+},
+
+{
+  id: 'spl55',
+  tipe: 'pg',
+  tanya: 'Daerah penyelesaian sistem pertidaksamaan berikut yang membentuk persegi panjang adalah …',
+  opsi: [
+  "\\(-2x + y \\le 4, \\ -2x + y \\ge -2, \\ 0 \\le y \\le 4\\)",
+  "\\(x - y \\ge -1, \\ x + y \\le 5, \\ x + 2y \\ge 2, \\ x - 2y \\le 2\\)",
+  "\\(x + 2y \\le 7, \\ x + 2y \\ge 2, \\ 2x - y \\ge -6, \\ 2x - y \\ge 4\\)",
+  "\\(x + 2y \\le 7, \\ x + 2y \\ge 2, \\ 2x - y \\le 4, \\ 2x - y \\ge -1\\)",
+  "\\(x - y \\ge -3, \\ 2x + y \\le 4, \\ 0 \\le y \\le 2\\)"
+  ],
+  kunci: 3,
+  bahas: 'Kita periksa masing-masing opsi dengan mencari titik potong dan bentuk daerah:\n\n' +
+         'A. -2x + y <= 4, -2x + y >= -2, 0 <= y <= 4 → membentuk daerah berbentuk jajaran genjang, bukan persegi panjang.\n\n' +
+         'B. x - y >= -1, x + y <= 5, x + 2y >= 2, x - 2y <= 2 → daerah berbentuk trapesium, bukan persegi panjang.\n\n' +
+         'C. x + 2y <= 7, x + 2y >= 2, 2x - y >= -6, 2x - y >= 4 → beberapa garis sejajar yang tidak membentuk persegi panjang.\n\n' +
+         'D. x + 2y <= 7, x + 2y >= 2, 2x - y <= 4, 2x - y >= -1 → empat garis membentuk daerah persegi panjang.\n\n' +
+         'E. x - y >= -3, 2x + y <= 4, 0 <= y <= 2 → daerah berbentuk segitiga atau trapesium, bukan persegi panjang.'
+},
+{
+  id: 'spl56',
+  tipe: 'pg',
+bacaan:'Pak Budi mempunyai modal Rp30.000.000. Ia membeli sepeda lipat dengan harga Rp1.500.000 per unit dan sepeda mini dengan harga Rp1.350.000 per unit. Kios hanya dapat menampung 16 unit. ',
+  tanya: 'Jika Pak Budi membeli x unit sepeda lipat dan y unit sepeda mini, model matematika dari persoalan tersebut yang sudah disederhanakan adalah …',
+  opsi: [
+    '10x + 9y ≤ 200 dan x + y ≤ 16, x ≥ 0, y ≥ 0',
+    '9x +10y = 2000 dan x + y = 16, x ≥ 0, y ≥ 0',
+    '10x + 9y ≥ 200 dan x + y ≤ 16, x ≥ 0, y ≥ 0',
+    '10x + 9y ≤ 200 dan x + y ≥ 16, x ≥ 0, y ≥ 0',
+    '10x + 9y ≥ 200 dan x + y ≥ 16, x ≥ 0, y ≥ 0'
+  ],
+  kunci: 0,
+  bahas: 'Misalkan x = jumlah sepeda lipat, y = jumlah sepeda mini.\n' +
+         'Modal Pak Budi tidak boleh melebihi Rp30.000.000 → 1.500.000x + 1.350.000y ≤ 30.000.000\n' +
+         'Bagi semua koefisien dengan 75.000: (1.500.000 ÷ 75.000)x + (1.350.000 ÷ 75.000)y ≤ 30.000.000 ÷ 75.000 → 20x + 18y ≤ 400\n' +
+         'Kapasitas kios maksimum 16 unit → x + y ≤ 16\n' +
+         'Tambahkan batas non-negatif → x ≥ 0, y ≥ 0\n\n' +
+         'Sehingga model matematikanya yang sudah disederhanakan adalah:\n' +
+         '10x + 9y ≤ 200, x + y ≤ 16, x ≥ 0, y ≥ 0'
+},
 
   ]
 },
@@ -1993,7 +2491,35 @@ bahas: 'Karena \\( x\\) di interval  \\((-1,1) \\) maka \\( x^2 \\) di interval\
     '- Jika langsung dicas dari 45%: \\(g(45)=100\\). Benar.\n' +
     '- Jika \\(x=62\\): setelah digunakan → \\(f(62)=30\\). Lalu dicas → \\(g(30)=85\\). Benar.\n' +
     '- Jika \\(x=75\\): setelah digunakan → \\(f(75)=43\\). Lalu dicas → \\(g(43)=98\\), bukan 100%. Jadi salah.'
-}
+},
+{
+  "id": "fn26",
+  "tipe": "cb",
+  "tanya": "Diketahui \\(f(x)=\\sqrt{\\dfrac{x+2}{x+1}}\\). Tentukan semua pernyataan berikut yang benar! (Jawaban lebih dari satu)",
+  "opsi": [
+    "\\(\\) fungsi f(x) terdefinisi untuk \\(x \\ge 1\\)",
+    "\\(\\) fungsi f(x) tidak terdefinisi untuk \\(x = 1\\)",
+    "\\(\\) jika \\(x = 0\\), nilai \\(f(x)\\) tidak terdefinisi",
+    "\\(\\) jika \\(x = 2\\), nilai \\(f(x)\\) terdefinisi",
+    "\\(\\) jika \\(x = -2\\), nilai \\(f(x)\\) tidak terdefinisi"
+  ],
+  "kunci": [0, 3],
+  "bahas": "Untuk \\(f(x)=\\sqrt{\\dfrac{x+2}{x+1}}\\) perlu \\(\\dfrac{x+2}{x+1} \\ge 0\\) dan \\(x \\neq -1\\).\n\nTanda nol/pemisah pada pembilang/penyebut: \\(x=-2\\) dan \\(x=-1\\).\n\nUji interval:\n• \\(( -\\infty, -2 )\\): ambil \\(x=-3\\) → \\(\\dfrac{-1}{-2}=0{,}5>0\\) → berlaku.\n• \\(x=-2\\): pembilang nol → hasil 0 → berlaku (terdefinisi).\n• \\((-2,-1)\\): ambil \\(x=-1{,}5\\) → hasil negatif → tidak berlaku.\n• \\((-1,\\infty)\\): ambil \\(x=0\\) → \\(\\dfrac{2}{1}=2>0\\) → berlaku.\n\nJadi domain: \\(( -\\infty, -2 ] \\cup (-1, \\infty)\\).\n\nPemeriksaan pernyataan:\n1) Benar — semua \\(x\\ge1\\) termasuk dalam \\((-1,\\infty)\\). \n2) Salah — \\(x=1\\) ada di domain, jadi terdefinisi.\n3) Salah — \\(x=0\\) ada di domain (contoh di atas), jadi terdefinisi.\n4) Benar — \\(x=2\\) ada di domain.\n5) Salah — \\(x=-2\\) membuat pembilang nol sehingga \\(f(-2)=0\\), terdefinisi."
+},
+{
+  "id": "fn27",
+  "tipe": "bs",
+  "tanya": "Diketahui \\(f(x) = x^2 + 3x - 4\\) dan \\(g(x) = \\dfrac{x+3}{2}\\). Berdasarkan fungsi tersebut, tentukan benar atau salah untuk setiap pernyataan berikut!",
+  "opsi": [
+    "Nilai \\((f+g)(1) = 2\\)",
+    "Nilai \\((f \\circ g)(1) = 6\\)",
+    "Nilai \\((g \\circ f)(1) = 3\\)"
+  ],
+  "kunci": [true, true, false],
+  "bahas": "Hitung masing-masing:\n\n1️⃣ \\((f+g)(1) = f(1) + g(1)\\).\n\\(f(1) = 1^2 + 3(1) - 4 = 0\\).\n\\(g(1) = (1+3)/2 = 2\\).\nSehingga \\((f+g)(1) = 0 + 2 = 2\\). Jadi pernyataan pertama benar, .\n\n2️⃣ \\((f \\circ g)(1) = f(g(1))\\).→ \n\\(g(1) = 2\\).→ \n\\(f(2) = 2^2 + 3(2) - 4 = 4 + 6 - 4 = 6\\).\nSehingga \\((f \\circ g)(1) = 6\\) → benar.\n\n3️⃣ \\((g \\circ f)(1) = g(f(1))\\).\n\\(f(1) = 0\\).\n\\(g(0) = (0+3)/2 = 1.5\\).\nSehingga hasil = 1,5, bukan 3 → salah."
+},
+
+
 
 ]
 },
@@ -2468,7 +2994,38 @@ bahas: 'Karena \\( x\\) di interval  \\((-1,1) \\) maka \\( x^2 \\) di interval\
     'Suku ke-4: \\(U_4 = ar^3 = 9 \\times 8 = 72\\) → pernyataan kedua **Benar**.\n\n' +
     'Jumlah 4 suku pertama: \\(S_4 = a( r^4 - 1 ) / (r - 1) = 9(16 - 1)/1 = 135\\).\n' +
     'Jadi jumlahnya benar 135 → pernyataan ketiga **Benar**, bukan salah.'
-}
+},
+{
+  "id": "bd33",
+  "tipe": "pg",
+bacaan:'Rehan menabung setiap minggu dengan pola tetap. Pada minggu pertama ia menabung Rp10.000, minggu kedua Rp12.000, minggu ketiga Rp14.000, dan seterusnya. ',
+  "tanya": "Jumlah tabungan Rehan selama 6 minggu adalah …",
+  "opsi": [
+    "Rp66.000",
+    "Rp72.000",
+    "Rp78.000",
+    "Rp84.000",
+    "Rp90.000"
+  ],
+  "kunci": 4,
+  "bahas": "Tabungan Rehan membentuk barisan aritmetika dengan suku pertama \\(a = 10.000\\), beda \\(d = 2.000\\), dan banyak suku \\(n = 6\\). Rumus jumlah \\(n\\) suku pertama: \\(S_n = \\tfrac{n}{2}(2a + (n-1)d)\\).\n\nSubstitusi: \\(S_6 = \\tfrac{6}{2}(2(10.000) + 5(2.000)) = 3(20.000 + 10.000) = 3(30.000) = 90.000\\).\n\nPerhitungan ulang langsung: 10.000 + 12.000 + 14.000 + 16.000 + 18.000 + 20.000 = 90.000.\n\nJadi jumlah tabungan Rehan selama 6 minggu adalah Rp90.000."
+},
+{
+  "id": "bd34",
+  "tipe": "cb",
+bacaan:'Diketahui barisan geometri berikut: \\[8 + 4 + 2 + 1 + \\dots\\] ',
+  "tanya": "Tentukan semua pernyataan berikut yang benar terkait deret geometri tersebut! (Jawaban lebih dari satu)",
+  "opsi": [
+    "\\(\\) Deret tersebut memiliki rasio \\(2\\).",
+    "\\(\\) Deret tersebut termasuk deret konvergen.",
+    "\\(\\) Suku ke-5 adalah \\(\\tfrac{1}{2}\\).",
+    "\\(\\) Jumlah 5 suku pertama adalah \\(15\\).",
+    "\\(\\) Jumlah deret tak hingga dari deret tersebut adalah \\(19\\)."
+  ],
+  "kunci": [1,2],
+  "bahas": "Barisan geometri dengan suku pertama \\(a_1=8\\) dan suku-suku berikutnya = 4, 2, 1, ... memiliki rasio \\(r=\\dfrac{4}{8}=\\dfrac{1}{2}\\).\n\n• Pernyataan 1: Salah. Rasio adalah \\(\\tfrac{1}{2}\\), bukan 2.\n\n• Pernyataan 2: Benar. Karena \\(|r|=\\tfrac{1}{2}<1\\), deret tak hingga konvergen (memiliki jumlah hingga).\n\n• Pernyataan 3: Benar. Suku ke-5: \\(a_5 = a_1 r^{4} = 8\\left(\\tfrac{1}{2}\\right)^{4} = 8 \\cdot \\tfrac{1}{16} = \\tfrac{1}{2}.\\)\n\n• Pernyataan 4: Salah. Jumlah 5 suku pertama:\n\\(S_5 = a_1\\dfrac{1-r^{5}}{1-r} = 8\\dfrac{1-(\\tfrac{1}{2})^{5}}{1-\\tfrac{1}{2}} = 8\\dfrac{1-\\tfrac{1}{32}}{\\tfrac{1}{2}} = 16\\cdot \\dfrac{31}{32} = \\dfrac{31}{2} = 15{,}5.\\)\nJadi bukan 15.\n\n• Pernyataan 5: Salah. Jumlah deret tak hingga adalah\n\\(S_{\\infty} = \\dfrac{a_1}{1-r} = \\dfrac{8}{1-\\tfrac{1}{2}} = \\dfrac{8}{\\tfrac{1}{2}} = 16,\\)\nbukan 19."
+},
+
   ]
 },
 'Objek Geometri': {
