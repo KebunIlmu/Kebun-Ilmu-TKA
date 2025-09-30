@@ -42,6 +42,34 @@
       </div>
     </div>
   </header>
+<!-- LOGIN BOX -->
+<div id="loginForm" class="flex items-center justify-center min-h-screen bg-gradient-to-br from-emerald-100 to-cyan-100">
+  <div class="w-full max-w-sm p-6 rounded-2xl shadow-lg bg-white/70 backdrop-blur-md">
+    <h2 class="text-2xl font-bold text-emerald-700 text-center mb-5">Login</h2>
+    
+    <input type="text" id="username" placeholder="Username"
+      class="w-full px-4 py-2 mb-3 border rounded-lg focus:ring-2 focus:ring-emerald-400 focus:outline-none" />
+    
+    <input type="password" id="password" placeholder="Password"
+      class="w-full px-4 py-2 mb-3 border rounded-lg focus:ring-2 focus:ring-emerald-400 focus:outline-none" />
+    
+    <button onclick="checkLogin()" 
+      class="w-full py-2 mt-2 font-semibold text-white rounded-lg bg-emerald-500 hover:bg-emerald-600 active:scale-95 transition">
+      Masuk
+    </button>
+    
+    <p id="errorMsg" class="text-sm text-red-500 mt-2 text-center"></p>
+  </div>
+</div>
+
+<!-- CONTENT SETELAH LOGIN -->
+<div id="content22" class="hidden">
+  <!-- Tombol Sidebar -->
+  <div class="p-4">
+    <button class="text-emerald-600 text-2xl" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
 
   <!-- Main -->
   <main class="max-w-6xl mx-auto px-4 py-6 space-y-6">
@@ -2257,5 +2285,71 @@ renderMath();
 
     init();
   </script>
+</div>
+<script>
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "2137-08-24T23:59:59" },
+  { username: "dzafi",  password: "dz132",  expire: "2025-10-20T23:59:59" },
+  { username: "nadira", password: "nad322", expire: "2025-11-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-10-20T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-10-28T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  // cari akun
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+
+  if (!found) {
+    document.getElementById("errorMsg").innerText = "Username atau password salah!";
+    return;
+  }
+
+  // cek expired
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    document.getElementById("errorMsg").innerText = `Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  // login berhasil
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+}
+
+// Jalankan cek saat halaman dimuat
+checkSession();
+</script>
+
+
 </body>
 </html>
