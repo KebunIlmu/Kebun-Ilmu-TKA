@@ -50,6 +50,34 @@
       <button data-tab="simulasi" class="tab-btn btn py-2 rounded-lg bg-white border chip text-xs font-semibold">Simulasi</button>
     </div>
   </div>
+<!-- LOGIN BOX -->
+<div id="loginForm" class="flex items-center justify-center min-h-screen bg-gradient-to-br from-emerald-100 to-cyan-100">
+  <div class="w-full max-w-sm p-6 rounded-2xl shadow-lg bg-white/70 backdrop-blur-md">
+    <h2 class="text-2xl font-bold text-emerald-700 text-center mb-5">Login</h2>
+    
+    <input type="text" id="username" placeholder="Username"
+      class="w-full px-4 py-2 mb-3 border rounded-lg focus:ring-2 focus:ring-emerald-400 focus:outline-none" />
+    
+    <input type="password" id="password" placeholder="Password"
+      class="w-full px-4 py-2 mb-3 border rounded-lg focus:ring-2 focus:ring-emerald-400 focus:outline-none" />
+    
+    <button onclick="checkLogin()" 
+      class="w-full py-2 mt-2 font-semibold text-white rounded-lg bg-emerald-500 hover:bg-emerald-600 active:scale-95 transition">
+      Masuk
+    </button>
+    
+    <p id="errorMsg" class="text-sm text-red-500 mt-2 text-center"></p>
+  </div>
+</div>
+
+<!-- CONTENT SETELAH LOGIN -->
+<div id="content22" class="hidden">
+  <!-- Tombol Sidebar -->
+  <div class="p-4">
+    <button class="text-emerald-600 text-2xl" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6">
     <!-- Info links to Pusmendik -->
@@ -4449,6 +4477,89 @@ bacaan:'Pak Bima membuat peta area evakuasi berbentuk persegi panjang dengan tit
     kunci: 0,
     bahas: 'Vbalok=8×6×4=192. Vkubus=s³=192 → s≈5,8 ≈ 6 cm.'
   },
+{
+  id: 'ukur26',
+  tipe: 'bs',
+  bacaan: 'Sebuah prisma segitiga ABC.DEF dengan alas segitiga ABC adalah sama sisi dengan panjang sisi 6 cm, dan tinggi prisma (jarak antara alas dan tutup) 10 cm. Diketahui titik D, E, F adalah titik-titik pada tutup prisma yang sejajar dengan A, B, C masing-masing.',
+  gambar: 'https://imgix2.ruangguru.com/assets/miscellaneous/png_udiwpd_2403.png',
+  tanya: 'Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut terkait volume dan luas permukaan prisma segitiga ABC.DEF:',
+  opsi: [
+    '1. Volume prisma = 60√3 cm³',
+    '2. Luas alas prisma = 9√3 cm²',
+    '3. Luas permukaan prisma = 192 cm²'
+  ],
+  kunci: [true, true, false],
+  bahas:
+    'Langkah penyelesaian:\n' +
+    '1) Luas alas segitiga sama sisi: L = (√3/4) × sisi² = (√3/4) × 6² = (√3/4) × 36 = 9√3 cm² → **Benar**.\n' +
+    '2) Volume prisma = luas alas × tinggi = 9√3 × 10 = 90√3 cm³ → Seharusnya volume = 90√3 cm³, bukan 60√3. Jika soal menyatakan 60√3 → **Salah**. (Bisa disesuaikan jawaban untuk tantangan bernalar, misal pengurangan tinggi secara sengaja)\n' +
+    '3) Luas permukaan prisma = 2 × luas alas + keliling alas × tinggi. Keliling alas = 3 × 6 = 18 cm, tinggi = 10 cm → luas selimut = 18 × 10 = 180 cm², total luas permukaan = 2 × 9√3 + 180 ≈ 2 × 15,588 + 180 ≈ 211,176 cm² → Jika soal menyatakan 192 cm² → **Salah**.\n' +
+    '\nKesimpulan singkat: 1 = Salah (atau bisa disesuaikan jika ingin tantangan), 2 = Benar, 3 = Salah.'
+},
+{
+  id: 'ukur27',
+  tipe: 'pg',
+    bacaan: 'Sebuah tabung dengan jari-jari alas 7 cm dan tinggi 15 cm. Pertanyaan: Apakah volume tabung lebih dari 2200 cm³? Tentukan apakah dengan tambahan informasi Pernyataan (1) dan Pernyataan (2) berikut cukup untuk menjawab pertanyaan tersebut!\n' +
+          '(1) Luas alas tabung = 154 cm².\n' +
+          '(2) Tinggi tabung = 15 cm.',
+  tanya: 'Pilih satu jawaban:',
+  opsi: [
+    'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi Pernyataan (2) SAJA tidak cukup.',
+    'Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi Pernyataan (1) SAJA tidak cukup.',
+    'DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.',
+    'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan dan Pernyataan (2) SAJA cukup.',
+    'Pernyataan (1) dan Pernyataan (2) tidak cukup untuk menjawab pertanyaan.'
+  ],
+  kunci: 2,
+  bahas:
+    'Pembahasan singkat:\n\n' +
+    'Volume tabung = luas alas × tinggi.\n\n' +
+    'Pernyataan (1): Luas alas = 154 cm². Tanpa mengetahui tinggi, volume = 154 × ? → Tidak cukup untuk menentukan apakah >2200 cm³.\n\n' +
+    'Pernyataan (2): Tinggi = 15 cm. Tanpa mengetahui luas alas, volume = ? × 15 → Tidak cukup.\n\n' +
+    'DUA pernyataan bersama: Volume = 154 × 15 = 2310 cm³ → jelas >2200 cm³.\n\nKesimpulan: Dua pernyataan BERSAMA-SAMA cukup, tetapi satu pernyataan SAJA tidak cukup.'
+},
+{
+  id: 'ukur28',
+  tipe: 'bs',
+  bacaan: 'Diketahui segitiga siku-siku PQR dengan ∠P = 90°, PQ = 6 cm, PR = 8 cm. Titik S berada di garis QR sehingga PS tegak lurus QR (PS adalah tinggi dari P ke QR).',
+    tanya: 'Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut terkait jarak titik P ke sisi QR dan jarak antar titik pada segitiga PQR:',
+  opsi: [
+    '1. Panjang QR = 10 cm.',
+    '2. Jarak titik P ke sisi QR (PS) = 4,8 cm.',
+    '3. Jarak titik Q ke S = 5,76 cm.'
+  ],
+  kunci: [true, true, false],
+  bahas:
+    'Langkah penyelesaian:\n' +
+    '1) Panjang sisi QR (hipotenusa segitiga siku-siku) = √(PQ² + PR²) = √(6² + 8²) = √(36+64) = √100 = 10 cm → **Benar**.\n' +
+    '2) Tinggi PS dari P ke QR: luas segitiga = 1/2 × alas × tinggi = 1/2 × PQ × PR = 1/2 × 6 × 8 = 24 cm².\n' +
+    '   Tapi luas juga = 1/2 × QR × PS ⇒ 24 = 1/2 × 10 × PS ⇒ PS = 24 ÷ 5 = 4,8 cm → **Benar**.\n' +
+    '3) Jarak Q ke S: QS = √(PQ² − PS²) = √(6² − 4,8²) = √(36 − 23,04) = √12,96 ≈ 3,6 cm → Jika soal menyatakan 5,76 cm → **Salah**.\n' +
+    '\nKesimpulan singkat: 1 = Benar, 2 = Benar, 3 = Salah.'
+},
+{
+  id: 'ukur29',
+  tipe: 'pg',
+    bacaan: 'Diketahui segitiga siku-siku ABC dengan ∠A = 90°, AB = 6 cm, AC = 8 cm. Titik D berada pada garis BC sehingga AD tegak lurus BC. Pertanyaan: Apakah jarak AD lebih dari 5 cm? Tentukan apakah dengan tambahan informasi Pernyataan (1) dan Pernyataan (2) berikut cukup untuk menjawab pertanyaan tersebut!\n' +
+          '(1) Panjang sisi BC = 10 cm.\n' +
+          '(2) Luas segitiga ABC = 24 cm².',
+  tanya: 'Pilih satu jawaban:',
+  opsi: [
+    'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi Pernyataan (2) SAJA tidak cukup.',
+    'Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi Pernyataan (1) SAJA tidak cukup.',
+    'DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.',
+    'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan dan Pernyataan (2) SAJA cukup.',
+    'Pernyataan (1) dan Pernyataan (2) tidak cukup untuk menjawab pertanyaan.'
+  ],
+  kunci: 2,
+  bahas:
+    'Pembahasan singkat:\n\n' +
+    'Jarak AD adalah tinggi dari A ke sisi BC.\n\n' +
+    'Pernyataan (1) saja: BC = 10 cm. Tanpa mengetahui luas segitiga atau panjang sisi lain, tidak bisa menghitung tinggi AD → tidak cukup.\n\n' +
+    'Pernyataan (2) saja: Luas segitiga = 24 cm². Tanpa mengetahui panjang alas BC, tidak bisa menentukan tinggi AD → tidak cukup.\n\n' +
+    'DUA pernyataan bersama: Luas = 1/2 × BC × AD → 24 = 1/2 × 10 × AD ⇒ AD = 24 ÷ 5 = 4,8 cm → jelas < 5 cm.\n\nKesimpulan: Dua pernyataan BERSAMA-SAMA cukup, tetapi satu saja tidak cukup.'
+},
+
   ]
 },
 'Trigonometri': {
@@ -5473,8 +5584,76 @@ bacaan:'Diketahui data: \\[4, 7, 6, 8, 9, 6\\] ',
   "kunci": 0,
   "bahas": "Urutkan data: 4, 6, 6, 7, 8, 9. Banyak data n = 6.\\[\\]Q1 = data ke-2 = 6 dan Q3 data ke-5=8 gunakan Rumus \\[Q_d=\\frac{Q_3-Q_1}{2}=\\frac{8-6}{2}=1\\]jadi jawabannya adalah 1."
 },
-
-
+{
+  id: 'data35',
+  tipe: 'bs',
+  bacaan: 'Sebuah rombongan keluarga berjumlah 6 orang akan pergi berlibur menggunakan mobil berkapasitas 6 penumpang. Dari 6 anggota keluarga tersebut, hanya ayah, ibu, paman, dan kakak yang memiliki SIM A. Tentukan benar atau salah untuk setiap pernyataan berikut:',
+  tanya: 'Tentukan benar atau salah pernyataan berikut:',
+  opsi: [
+    'Total banyaknya susunan keenam anggota keluarga di dalam mobil adalah 480 cara.',
+    'Jika hanya ayah dan ibu yang memiliki SIM A, banyaknya susunan duduk yang mungkin menjadi 240 cara.',
+    'Jika kursi penumpang hanya tersisa 4, banyaknya cara menyusun duduk kelima anggota keluarga lainnya adalah 120 cara.'
+  ],
+  kunci: [true, true, true],
+  bahas:
+    'Penjelasan:\n\n' +
+    '1️⃣ Pernyataan 1 — BENAR.\n' +
+    'Karena kursi sopir hanya boleh diisi oleh anggota yang punya SIM A (ada 4 orang: ayah, ibu, paman, kakak), pilihan untuk sopir = 4. Setelah sopir terpilih, sisa 5 orang dapat duduk di 5 kursi tersisa dalam 5! = 120 susunan. Jadi total susunan = 4 × 120 = 480 cara.\n\n' +
+    '2️⃣ Pernyataan 2 — BENAR.\n' +
+    'Jika hanya ayah dan ibu yang memiliki SIM A, pilihan sopir = 2. Setelah sopir dipilih, susunan 5 orang lainnya di 5 kursi tersisa = 5! = 120. Jadi total = 2 × 120 = 240 cara.\n\n' +
+    '3️⃣ Pernyataan 3 — BENAR.\n' +
+    'Jika kursi penumpang hanya tersisa 4, maka dari 5 anggota keluarga lain yang tersisa, kita pilih 4 untuk duduk dan menyusunnya. Banyaknya cara = P(5,4) = 5 × 4 × 3 × 2 = 120 cara.'
+},
+{
+  id: 'data36',
+  tipe: 'cb',
+  bacaan: 'Dinas Pariwisata Kabupaten "Makmur Jaya" sedang melakukan survei untuk mengevaluasi popularitas destinasi wisata unggulan mereka. Dalam sepekan terakhir, mereka mencatat 200 kunjungan ke empat destinasi utama dengan rincian sebagai berikut:',
+  tabel: [
+    ['Destinasi Wisata', 'Jumlah Kunjungan'],
+    ['Telaga Bening', 80],
+    ['Benteng Kuno Rajawali', 60],
+    ['Desa Adat Lestari', 40],
+    ['Pusat Kerajinan Mutiara', 20]
+  ],
+  tanya: 'Untuk analisis lebih lanjut, dinas pariwisata memilih satu data kunjungan secara acak dari seluruh catatan survei sepekan terakhir. Tentukan pernyataan berikut yang BENAR:',
+  opsi: [
+    'Peluang terpilihnya data kunjungan ke Telaga Bening adalah 2/5.',
+    'Peluang terpilihnya data kunjungan ke Desa Adat Lestari adalah 0,20.',
+    'Peluang terpilihnya data kunjungan ke salah satu yang bukan Benteng Kuno Rajawali adalah 3/4.',
+    'Peluang terpilihnya data kunjungan ke Benteng Kuno Rajawali lebih kecil daripada ke Pusat Kerajinan Mutiara.',
+    'Jika 10 kunjungan ke Telaga Bening dan 10 kunjungan ke Benteng Kuno Rajawali dihapus dari data karena teridentifikasi kunjungan ganda, maka peluang terpilihnya kunjungan ke Telaga Bening akan meningkat.'
+  ],
+  kunci: [0,1],
+  bahas:
+    'Penjelasan:\n\n' +
+    '1️⃣ Peluang ke Telaga Bening = 80/200 = 2/5 → BENAR\n' +
+    '2️⃣ Peluang ke Desa Adat Lestari = 40/200 = 0,20 → BENAR\n' +
+    '3️⃣ Peluang bukan Benteng Kuno Rajawali = (200-60)/200 = 140/200 = 7/10 ≈ 0,7 → Bukan 3/4 (0,75) → SALAH\n' +
+    '4️⃣ Peluang ke Benteng Kuno Rajawali = 60/200 = 0,30, peluang ke Pusat Kerajinan Mutiara = 20/200 = 0,10 → 0,30 > 0,10 → SALAH\n' +
+    '5️⃣ Setelah 10 kunjungan Telaga Bening dan 10 Benteng dihapus: data tersisa Telaga Bening = 70, total = 180 → peluang baru = 70/180 ≈ 0,389 < 0,4 → SALAH'
+},
+{
+  id: 'data37',
+  tipe: 'cb',
+  bacaan: 'Dua atlet bulu tangkis dari sebuah klub lokal, Bintang dan Candra, mengikuti turnamen seleksi tingkat daerah. Mereka akan menghadapi lawan yang berbeda di babak semifinal. Berdasarkan data pertandingan sebelumnya, peluang Bintang lolos ke babak semifinal adalah 70%, sedangkan peluang Candra lolos ke babak semifinal adalah 40%.',
+  tanya: 'Pilihlah pernyataan berikut yang benar terkait peluang lolosnya Bintang dan Candra ke babak semifinal:',
+  opsi: [
+    'Peluang Bintang dan Candra sama-sama lolos ke babak semifinal adalah 0,28.',
+    'Peluang hanya salah satu dari mereka yang lolos ke babak semifinal adalah 0,58.',
+    'Peluang tidak ada satu pun dari mereka yang lolos ke babak semifinal adalah 0,42.',
+    'Peluang setidaknya salah satu dari mereka lolos ke babak semifinal adalah 0,82.',
+    'Jika peluang Bintang lolos turun menjadi 60% dan peluang Candra lolos naik menjadi 50%, peluang keduanya sama-sama lolos akan menjadi lebih rendah dari kondisi awal.'
+  ],
+  kunci: [0,3],
+  bahas:
+    'Penjelasan:\n\n' +
+    'Diketahui: P(Bintang) = 0,7, P(Candra) = 0,4\n' +
+    '1️⃣ Peluang keduanya lolos = P(Bintang) × P(Candra) = 0,7 × 0,4 = 0,28 → BENAR\n' +
+    '2️⃣ Peluang hanya salah satu lolos = P(Bintang dan tidak Candra) + P(Candra dan tidak Bintang) = (0,7×0,6) + (0,4×0,3) = 0,42 + 0,12 = 0,54 → Soal menyatakan 0,58 → Tidak tepat, jadi SALAH. (Koreksi: sebenarnya 0,54, bukan 0,58)\n' +
+    '3️⃣ Peluang tidak ada satu pun lolos = P(tidak Bintang) × P(tidak Candra) = 0,3 × 0,6 = 0,18 → Soal menyatakan 0,42 → SALAH\n' +
+    '4️⃣ Peluang setidaknya salah satu lolos = 1 - peluang tidak ada satu pun = 1 - 0,18 = 0,82 → BENAR\n' +
+    '5️⃣ Jika P(Bintang) turun ke 0,6 dan P(Candra) naik ke 0,5, peluang keduanya lolos = 0,6 × 0,5 = 0,3. Kondisi awal 0,28 → peluang baru lebih tinggi, bukan lebih rendah → SALAH'
+},
   ]
 }
 
@@ -7338,6 +7517,33 @@ if(q.tipe==='matching'){
   setTab('materi');
   initSelectors();
   </script>
+</div>
+<script>
+  function checkLogin() {
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
+
+    // Akun yang sudah disediakan
+    const validAccounts = [
+      { username: "zahwan", password: "132611" },
+      { username: "dzafi", password: "dz132" },
+      { username: "nadira", password: "nad322" },
+      { username: "silva", password: "sil345" },
+   { username: "nisa", password: "nis223" },
+   { username: "faiq", password: "fa3456" },
+
+    ];
+
+    const found = validAccounts.find(acc => acc.username === user && acc.password === pass);
+
+    if (found) {
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("content22").classList.remove("hidden");
+    } else {
+      document.getElementById("errorMsg").innerText = "Username atau password salah!";
+    }
+  }
+</script>
 </body>
 </html>
 
