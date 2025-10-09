@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Matematika Wajib- Kebun Ilmu</title>
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+  </style>
+</head>
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+<header>
+  <h2>Try Out TKA Matematika Wajib - Kebun Ilmu</h2>
+  <div>
+    <button id="fullscreenBtn" class="menu-button">Fullscreen</button>
+    <span class="timer" id="timer">50:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "tryout1",  password: "2025",  expire: "2025-10-11T23:59:59" },
+  { username: "nadira", password: "nad322", expire: "2025-10-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(50 * 60);
+}
+
+  const questions = [
+{
+  "type": "mc",
+  "text": "Diketahui \\( f(x) = \\frac{2x+1}{3x+4} \\), dengan \\( x \\neq -\\tfrac{4}{3} \\). Jika \\( f^{-1} \\) adalah invers dari \\( f \\), maka nilai \\( f^{-1}(3) \\) adalah …",
+  "options": [
+    "\\(\\tfrac{11}{7}\\)",
+    "\\(\\tfrac{7}{11}\\)",
+    "\\(-\\tfrac{7}{11}\\)",
+    "\\(-1\\)",
+    "\\(-\\tfrac{11}{7}\\)"
+  ],
+  "correct": 4
+},
+{
+  "type": "mc",
+  "text": `
+    Daerah yang memenuhi sistem pertidaksamaan 
+    \\(5x+3y\\le 15,\\; x+3y\\ge 6,\\; x\\ge 0,\\; y\\ge 0\\) ditunjukkan oleh nomor …<br><br>
+    <img src="https://i.imgur.com/63cvWcq.png" 
+         alt="Grafik daerah pertidaksamaan" style="max-width:400px; border:1px solid #ccc; border-radius:6px;">
+  `,
+  "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+  ],
+  "correct": 0
+},
+
+ {
+  "type": "mc",
+  "text": "Harga 2 buah buku dan 2 buah pensil Rp8.800,00. Jika harga sebuah buku Rp600,00 lebih murah daripada harga sebuah pensil, maka harga sebuah buku adalah …",
+  "options": [
+    "Rp1.400,00",
+    "Rp1.600,00",
+    "Rp1.900,00",
+    "Rp2.000,00",
+    "Rp2.500,00"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    Diketahui \\( g(2x-1) = x - 2 \\) dan \\((f \\circ g)(2x-1) = x^{2} + x - 6\\).<br>
+    Nilai \\( f(-1) \\) adalah … 
+  `,
+  "options": [
+    "-6",
+    "-4",
+    "0",
+    "4",
+    "6"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": "Seorang peneliti mengamati bakteri tertentu. Setiap 1/2 hari, bakteri membelah diri menjadi dua. Pada awal pengamatan terdapat 2 bakteri. Jika setiap 2 hari 1/4 dari jumlah bakteri mati, banyaknya bakteri setelah 3 hari adalah …",
+  "options": [
+    "48 bakteri",
+    "64 bakteri",
+    "96 bakteri",
+    "128 bakteri",
+    "192 bakteri"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    Sebuah lapangan berbentuk persegi panjang. Diketahui panjangnya dua kali dari lebarnya. 
+    Pada tepi sebelah luar tiga sisi lapangan dibuat jalan yang lebarnya 2 meter. 
+    Jika luas seluruh jalan (yang diarsir pada gambar) adalah 128 m², maka luas lapangan tersebut adalah …<br><br>
+    <img src="https://mathcyber1997.com/wp-content/uploads/2018/12/blog9.png" 
+         alt="Lapangan dengan jalan" style="max-width:400px; border:1px solid #ccc; border-radius:6px;">
+  `,
+  "options": [
+    "748 m²",
+    "512 m²",
+    "480,5 m²",
+    "450 m²",
+    "200 m²"
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": "Diketahui \\(\\tan A = t\\) dengan \\(A\\) sudut lancip. Tentukan \\(\\sin A\\) dalam bentuk \\(t\\).<br><br>Jika \\(\\tan A = t\\), maka \\(\\sin A\\) sama dengan …",
+  "options": [
+    "\\(1 + t^2\\)",
+    "\\(1 - t^2\\)",
+    "\\(\\sqrt{\\tfrac{1}{t^2 + 1}}\\)",
+    "\\(\\sqrt{t^2 + 1}\\)",
+    "\\(\\sqrt{\\tfrac{t^2}{t^2 + 1}}\\)"
+  ],
+  "correct": 4
+},
+{
+  "type": "mc",
+  "text": `
+    Diagram batang berikut menunjukkan pekerjaan kepala keluarga pada suatu daerah.<br><br>
+    <img src="https://imgix3.ruangguru.com/assets/miscellaneous/png_kftpav_8510.PNG" 
+         alt="Diagram batang pekerjaan kepala keluarga" style="max-width:400px; border:1px solid #ccc; border-radius:6px;"><br>
+    Jika banyaknya seluruh kepala keluarga adalah 75 orang, banyaknya kepala keluarga yang bekerja sebagai pedagang adalah … 
+  `,
+  "options": [
+    "10 orang",
+    "11 orang",
+    "12 orang",
+    "13 orang",
+    "14 orang"
+  ],
+  "correct": 3
+},
+
+{
+  "type": "mc",
+  "text": `
+    Distribusi nilai ulangan matematika di kelas XIIA diberikan pada tabel berikut:<br><br>
+    <table style="border-collapse: collapse; width: 320px; text-align: center; font-family: sans-serif; font-size: 14px;">
+      <thead style="background-color: #f2f2f2;">
+        <tr>
+          <th style="border: 1px solid #999; padding: 6px;">Nilai</th>
+          <th style="border: 1px solid #999; padding: 6px;">Frekuensi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="border: 1px solid #999; padding: 6px;">50–54</td><td style="border: 1px solid #999; padding: 6px;">2</td></tr>
+        <tr><td style="border: 1px solid #999; padding: 6px;">55–59</td><td style="border: 1px solid #999; padding: 6px;">4</td></tr>
+        <tr><td style="border: 1px solid #999; padding: 6px;">60–64</td><td style="border: 1px solid #999; padding: 6px;">8</td></tr>
+        <tr><td style="border: 1px solid #999; padding: 6px;">65–69</td><td style="border: 1px solid #999; padding: 6px;">16</td></tr>
+        <tr><td style="border: 1px solid #999; padding: 6px;">70–74</td><td style="border: 1px solid #999; padding: 6px;">10</td></tr>
+        <tr><td style="border: 1px solid #999; padding: 6px;">75–79</td><td style="border: 1px solid #999; padding: 6px;">2</td></tr>
+      </tbody>
+    </table><br>
+    Modus dari data pada tabel tersebut adalah ...
+  `,
+  "options": [
+    "\\(64,5 + 6 \\cdot \\tfrac{8}{6}\\)",
+    "\\(64,5 + 5 \\cdot \\tfrac{8}{6}\\)",
+    "\\(64,5 + 5 \\cdot \\tfrac{8}{8+6}\\)",
+    "\\(64,5 - 6 \\cdot \\tfrac{8}{8+6}\\)",
+    "\\(64,5 - 5 \\cdot \\tfrac{8}{8+6}\\)"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    Sebuah kotak berisi 4 kelereng merah dan 6 kelereng kuning. 
+    Diambil 2 kelereng satu per satu dan tidak dikembalikan lagi.<br><br>
+    Peluang kedua kelereng yang terambil berturut-turut adalah kuning yaitu ...
+  `,
+  "options": [
+    "\\(\\tfrac{1}{3}\\)",
+    "\\(\\tfrac{1}{5}\\)",
+    "\\(\\tfrac{1}{2}\\)",
+    "\\(\\tfrac{1}{6}\\)",
+    "\\(\\tfrac{1}{4}\\)"
+  ],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    Diketahui \\(a = 27\\) dan \\(b = 32\\).<br>
+    Nilai dari \\(3(a^{-\\tfrac{1}{3}}) \\times 4(b^{\\tfrac{2}{5}})\\) adalah ...
+  `,
+  "options": [
+    "-25",
+    "-16",
+    "0",
+    "16",
+    "25"
+  ],
+  "correct": 3
+},
+{
+  "type": "true_false",
+  "text": `
+    Segitiga ABC siku-siku sama kaki dengan \\(\\angle B = 90^\\circ\\) dan panjang \\(AB = BC = 3\\) cm.<br>
+    Titik D terletak pada BC sehingga AD adalah garis bagi sudut \\(\\angle A\\).<br><br>
+    <img src="https://mathcyber1997.com/wp-content/uploads/2019/04/sebangun4.png"
+         alt="Gambar segitiga ABC siku-siku sama kaki"
+         style="max-width:320px; border:1px solid #ccc; border-radius:8px; margin-top:6px;"><br><br>
+    Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+  `,
+  "statements": [
+    "Segitiga \\(ABD\\) dan segitiga \\(ADE\\) kongruen.",
+    "Panjang \\(AC = 3\\sqrt{2}\\).",
+    "Panjang \\(BD = 3\\sqrt{2} - 3\\)."
+  ],
+  "correct": [true, true, true]
+},
+{
+  type: "mc_multiple",
+  text: `
+    Limas tegak T.ABCD mempunyai alas berbentuk persegi panjang dengan \\(AB = 4\\) cm dan \\(BC = 3\\) cm.<br>
+    Diketahui \\(TA = TB = TC = TD = 6{,}5\\) cm (titik T berjarak sama ke keempat titik sudut alas).<br><br>
+    <img src="https://i.imgur.com/oybnBN6.png" alt="Limas T.ABCD" style="max-width:280px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;"><br><br>
+    Pilihlah jawaban yang benar! (Jawaban benar lebih dari satu)
+  `,
+  options: [
+    "Panjang \\(AC = 5\\) cm.",
+    "Jarak titik puncak T ke bidang alas (tinggi limas) \\(= 6\\) cm.",
+    "Panjang \\(AC = 6\\) cm.",
+    "Jarak titik puncak T ke bidang alas \\(= 2{,}5\\) cm."
+  ],
+  correct: [0, 1]
+},
+{
+  "type": "true_false",
+  "text": `
+   <p style="text-align: justify;">
+      Seorang anak diharuskan minum dua jenis tablet setiap hari. 
+      Tablet jenis I mengandung 5 unit vitamin A dan 3 unit vitamin B. 
+      Tablet jenis II mengandung 10 unit vitamin A dan 1 unit vitamin B. 
+      Dalam 1 hari, anak tersebut memerlukan 25 unit vitamin A dan 5 unit vitamin B. 
+      Harga tablet I adalah Rp4.000,00 per biji dan tablet II Rp8.000,00 per biji.
+    </p><br><br>
+    Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+  `,
+  "statements": [
+    "Kombinasi 1 tablet jenis I dan 2 tablet jenis II memenuhi kebutuhan vitamin harian.",
+    "Kombinasi 0 tablet jenis I dan 5 tablet jenis II adalah solusi dengan biaya minimum.",
+    "Biaya minimum yang harus dikeluarkan per hari untuk memenuhi kebutuhan vitamin adalah Rp20.000,00."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "true_false",
+  "text": "Pada gambar di bawah ini, M adalah puncak sebuah menara tegak. Dari titik A, puncak M mempunyai sudut elevasi \\(20^\\circ\\). Dari titik B, puncak M mempunyai sudut elevasi \\(41^\\circ\\). Jarak AB = 10 m. (Titik B lebih dekat ke menara daripada A). Jika tinggi menara adalah \\(h\\).<br><br><img src=\"https://i.imgur.com/UfYB2mY.png\" alt=\"Gambar menara dengan titik A dan B\" style=\"max-width:320px; border:1px solid #ccc; border-radius:8px; margin-top:6px;\"><br><br>Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:",
+  "statements": [
+    "Jarak AM = \\(\\sqrt{h^2 + \\left(\\dfrac{h}{\\tan 20^\\circ}\\right)^2}\\)",
+    "Jarak BM = \\(\\sqrt{h^2 + \\left(\\dfrac{h}{\\tan 41^\\circ}\\right)^2}\\)",
+    "Tinggi menara = \\(\\dfrac{AB}{\\cot 20^\\circ - \\cot 41^\\circ}\\)"
+  ],
+  "correct": [true, true, true]
+},
+{
+  "type": "mc",
+  "text": `
+    Sebuah segitiga PQR siku-siku di P. 
+    Apakah panjang sisi miring QR lebih dari 20 cm?
+    <br><br>
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKTeP7L6lsEpKMWEOyyFPTwaeh-sAhg0tl0qzsQiSqOidC3O02SsLWN35cks7WuN1vzSzMZ45Zs4y6DRyUSNGo5mANcb-gBZP5e_bLVV78nfC-Z_-RY5CH-p3HG4kIcgPN7Zezfo-E3rFSqkUXaBiAVl2ZvyqN2TWO26cZYgJ4N4ISf0FfYA500KGM/w186-h200/Screenshot%202023-05-29%20at%2021.10.13.png" 
+         alt="Segitiga PQR" style="max-width:200px; border:1px solid #ccc; border-radius:6px;">
+<br><br>
+
+    (1) Luas segitiga PQR = 96 cm² dan panjang PR = ¾ PQ. <br>
+    (2) Selisih antara sisi miring QR dan sisi terpendek adalah 8 cm.
+    <br><br>
+    Putuskan apakah dengan tambahan informasi Pernyataan (1) dan
+    Pernyataan (2) berikut cukup untuk menjawab pertanyaan tersebut!
+     `,
+  "options": [
+    "Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi Pernyataan (2) SAJA tidak cukup.",
+    "Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi Pernyataan (1) SAJA tidak cukup.",
+    "DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.",
+    "Pernyataan (1) SAJA cukup untuk menjawab pertanyaan dan Pernyataan (2) SAJA cukup.",
+    "Pernyataan (1) dan Pernyataan (2) tidak cukup untuk menjawab pertanyaan."
+  ],
+  "correct": 0
+},
+{
+  type: "mc_multiple",
+  text: "Nilai rata-rata tes matematika dari 10 siswa adalah 55 dan jika digabung lagi dengan 5 siswa nilai rata-rata menjadi 53.<br><br>Pilihlah pernyataan yang benar! (Jawaban benar lebih dari satu)",
+  options: [
+    "Jumlah nilai kelima siswa yang ditambahkan adalah 245.",
+    "Nilai rata-rata dari 5 siswa yang ditambahkan adalah 49.",
+    "Jika salah satu dari 5 siswa nilainya 60, maka rata-rata keempat siswa lainnya = 46.",
+    "Selisih rata-rata 10 siswa pertama dan rata-rata 5 siswa yang ditambahkan sama dengan 6.",
+    "Jumlah nilai seluruh 15 siswa adalah 800."
+  ],
+  correct: [0, 1, 3]
+},
+{
+  "type": "true_false",
+  "text": `
+    Diketahui fungsi kuadrat \\(f(x) = x^2 - 4x + k - 2\\).<br><br>
+    Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+  `,
+  "statements": [
+    "Fungsi \\(f(x)\\) terbuka ke atas.",
+    "Fungsi \\(f(x)\\) memotong sumbu x di 2 titik berbeda jika \\(k < 6\\).",
+    "Fungsi \\(f(x)\\) menyinggung sumbu x jika \\(k = 6\\)."
+  ],
+  "correct": [true, true, true]
+},
+{
+  "type": "true_false",
+  "text": `
+    Suatu pabrik kertas berbahan dasar kayu memproduksi kertas melalui dua tahap.<br>
+    Tahap pertama menggunakan mesin I yang menghasilkan bahan setengah jadi dengan fungsi \\(f(x) = 2x - 1\\).<br>
+    Tahap kedua menggunakan mesin II yang menghasilkan kertas jadi dengan fungsi \\(g(x) = x^2 - 3x\\),<br>
+    dengan \\(x\\) merupakan banyak bahan dasar kayu dalam satuan ton.<br><br>
+    Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+  `,
+  "statements": [
+    "Jika kayu sebanyak \\(x\\) ton diproses terlebih dahulu oleh mesin I lalu hasilnya diproses oleh mesin II, maka jumlah kertas jadi yang dihasilkan dinyatakan oleh \\(g(f(x)) = (2x - 1)^2 - 3(2x - 1)\\).",
+    "Jika mesin II memproses langsung \\(x\\) ton kayu (tanpa melewati mesin I), maka kertas jadi yang dihasilkan adalah \\(g(x) = x^2 - 3x\\).",
+    "Pemrosesan berurutan mesin I lalu mesin II menghasilkan jumlah kertas jadi yang sama dengan jika proses dibalik (mesin II lalu mesin I), yaitu \\(g(f(x)) = f(g(x))\\)."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    Salah satu ciri makhluk hidup adalah dapat berkembang biak. Pada perkembangbiakan makhluk hidup, terjadi pewarisan sifat dari induk terhadap keturunannya. Ilmu yang mempelajari tentang pewarisan sifat dinamakan genetika. Tokoh terkenal yang sudah tidak asing lagi adalah Gregor Johann Mendel yang dikenal sebagai Bapak Genetika.<br><br>
+    Mendel menemukan bahwa pewarisan sifat dari induk kepada keturunannya mengikuti suatu pola tertentu yang disebut <i>Hukum Pewarisan Sifat</i> (Hereditas). Hukum Mendel terdiri atas dua, yaitu Hukum I Mendel dan Hukum II Mendel.<br><br>
+    Hukum I Mendel berkaitan dengan pemisahan gen sealel (segregation of allelic genes), sedangkan Hukum II Mendel menyatakan bahwa pada pembentukan gamet, alel mengadakan kombinasi secara bebas (independent assortment).<br><br>
+    Berikut contoh persilangan dihibrid, yaitu persilangan antara kacang ercis biji bulat warna kuning dengan biji keriput warna hijau. Bulat dominan terhadap keriput, sedangkan kuning dominan terhadap hijau.<br><br>
+    \\(P_2 :\\quad \\text{Biji bulat warna kuning} \\times \\text{Biji bulat warna kuning}\\)<br>
+    \\(BbKk \\times BbKk\\)<br><br>
+    Gamet yang dihasilkan: BK, Bk, bK, bk<br><br>
+    Jika gamet <b>bk</b> tidak diikutsertakan, pilihlah pernyataan yang benar! (Jawaban benar lebih dari satu)<br><br>
+
+    <table border="1" cellspacing="0" cellpadding="4" style="border-collapse:collapse; text-align:center;">
+      <tr>
+        <th></th><th>BK</th><th>Bk</th><th>bK</th>
+      </tr>
+      <tr>
+        <td><b>BK</b></td>
+        <td>\\([BBKK]\\)<br>(bulat kuning)</td>
+        <td>\\([BBKk]\\)<br>(bulat kuning)</td>
+        <td>\\([BbKK]\\)<br>(bulat kuning)</td>
+      </tr>
+      <tr>
+        <td><b>Bk</b></td>
+        <td>\\([BBKk]\\)<br>(bulat kuning)</td>
+        <td>\\([BBkk]\\)<br>(bulat hijau)</td>
+        <td>\\([BbKk]\\)<br>(bulat kuning)</td>
+      </tr>
+      <tr>
+        <td><b>bK</b></td>
+        <td>\\([BbKK]\\)<br>(bulat kuning)</td>
+        <td>\\([BbKk]\\)<br>(bulat kuning)</td>
+        <td>\\([bbKK]\\)<br>(keriput kuning)</td>
+      </tr>
+    </table>
+  `,
+  "options": [
+    "Peluang munculnya genotipe \\(BBKk\\) adalah 2/9.",
+    "Peluang munculnya genotipe \\(BbKk\\) adalah 1/9.",
+    "Peluang munculnya fenotipe bulat kuning adalah 4/9.",
+    "Peluang munculnya fenotipe bulat hijau adalah 5/9.",
+    "Peluang tidak muncul fenotip keriput kuning adalah 8/9."
+  ],
+  "correct": [0, 4]
+},
+{
+  "type": "mc",
+  "text": "Jakarta umumnya plat mobil taksi terdiri dari 1 huruf di depan yaitu B diikuti dengan 4 angka dan dua huruf. Huruf terakhir selalu menggunakan huruf X, angka pertama selalu menggunakan angka 1 atau 2, misalnya B 2634 KX. Dengan demikian, banyak plat mobil taksi yang dapat dibuat di Jakarta adalah …",
+  "options": [
+    "520000",
+    "260000",
+    "52000",
+    "26000",
+    "520"
+  ],
+  "correct": 2
+},
+{
+  "type": "true_false",
+  "text": `
+    Suatu pabrik kertas berbahan dasar kayu memproduksi kertas melalui dua tahap.<br>
+    Tahap pertama menggunakan mesin I yang menghasilkan bahan setengah jadi dengan fungsi \\(f(x) = 2x - 1\\).<br>
+    Tahap kedua menggunakan mesin II yang menghasilkan kertas jadi dengan fungsi \\(g(x) = x^2 - 3x\\),<br>
+    dengan \\(x\\) merupakan banyak bahan dasar kayu dalam satuan ton.<br><br>
+    Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+  `,
+  "statements": [
+    "1. Transformasi oleh matriks \\(A=\\begin{pmatrix}2 & 1\\\\4 & 3\\end{pmatrix}\\) mengubah luas gambar sebesar faktor \\(|\\det A| = 2\\).",
+    "2. Dilatasi dengan faktor skala 3 (pusat di (0,0)) mengubah luas gambar menjadi 9 kali luas semula.",
+    "3. Jika gambar dikenai transformasi oleh \\(A\\) lalu dilatasi faktor 3, maka luas akhir menjadi 18 kali luas awal."
+  ],
+  "correct": [true, true, true]
+},
+{
+  "type": "mc",
+  "text": "Seutas tali dipotong menjadi 9 bagian. Panjang potongan-potongan tali tersebut membentuk barisan geometri. Diketahui potongan terpendek panjangnya 4 cm dan potongan terpanjang panjangnya 1.024 cm. Panjang tali semula adalah …",
+  "options": [
+    "10,24 m",
+    "10,44 m",
+    "120,44 m",
+    "20,44 m",
+    "20,52 m"
+  ],
+  "correct": 3
+},
+{
+  type: "mc_multiple",
+  text: `
+    Diketahui \\(2x\\), \\(4x + 1\\), dan \\(14\\) merupakan tiga suku pertama dari suatu barisan aritmetika.<br><br>
+    Pilihlah pernyataan yang benar! (Jawaban benar lebih dari satu)
+  `,
+  options: [
+    "Nilai \\(x = 2\\).",
+    "Beda barisan tersebut adalah 5.",
+    "Suku ke-10 barisan tersebut adalah 49.",
+    "Suku pertama barisan tersebut adalah 4.",
+"Suku ke-10 barisan tersebut adalah 45"
+
+  ],
+  correct: [0, 1, 2, 3]
+},
+{
+  "type": "mc",
+  "text": "Diketahui fungsi \\( f(x) = \\tfrac{9x + 17}{x + 2} \\), dengan \\( x \\neq -2 \\). Jika \\( f^{-1} \\) adalah invers dari \\( f \\), maka nilai dari \\( f^{-1}(10) \\) adalah …",
+  "options": [
+    "-16",
+    "-3",
+    "-2",
+    "2",
+    "12"
+  ],
+  "correct": 1
+}
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  return null;
+});
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk tipe mc_multiple
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', e => {
+        const val = parseInt(e.target.value);
+        if (e.target.checked) {
+          if (!answers[index].includes(val)) answers[index].push(val);
+        } else {
+          answers[index] = answers[index].filter(v => v !== val);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  // Hitung skor 0–100
+  const percentage = Math.round((score / questions.length) * 100);
+
+  // Tampilkan hanya skor akhir dalam bentuk nilai
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+}
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  const interval = setInterval(() => {
+    if (!timerRunning) { clearInterval(interval); return; }
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    if (--timer < 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+  }, 1000);
+}
+
+renderQuestionButtons();
+renderQuestion(currentQuestion);
+startTimer(50 * 60);
+
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+fullscreenBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      alert(`Gagal masuk fullscreen: ${err.message}`);
+    });
+    fullscreenBtn.textContent = "Exit Fullscreen";
+  } else {
+    document.exitFullscreen();
+    fullscreenBtn.textContent = "Fullscreen";
+  }
+});
+checkSession();
+  </script>
+</body>
+</html>

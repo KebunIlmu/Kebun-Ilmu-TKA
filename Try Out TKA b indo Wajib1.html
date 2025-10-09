@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Bahasa Indonesia Wajib- Kebun Ilmu</title>
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+
+  </style>
+</head>
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+
+<header>
+  <h2>Try Out TKA Bahasa Indonesia Wajib - Kebun Ilmu</h2>
+  <div>
+    <button id="fullscreenBtn" class="menu-button">Fullscreen</button>
+    <span class="timer" id="timer">45:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "tryout1",  password: "2025",  expire: "2025-10-11T23:59:59" },
+  { username: "nadira", password: "nad322", expire: "2025-10-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(45 * 60);
+}
+  const questions = [
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://www.kelaspintar.id/_next/image?url=https%3A%2F%2Fblog2.kelaspintar.id%2Fblog%2Fwp-content%2Fuploads%2F2021%2F03%2FInilah-Berbagai-Negara-Dengan-Hutan-Hujan-Tropis-Terbesar-Di-Dunia.jpg&w=1080&q=75" 
+      alt="Hutan Hujan Tropis" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+
+      Hutan hujan tropis merupakan salah satu ekosistem paling beragam di dunia. Namun, saat ini keberadaannya semakin terancam akibat aktivitas manusia. Penebangan liar, pembakaran hutan, dan perluasan lahan pertanian menjadi penyebab utama hilangnya jutaan hektar hutan setiap tahun. Padahal, hutan memiliki peran penting sebagai penyerap karbon yang membantu menstabilkan iklim global.
+      <br><br>
+      Kerusakan hutan juga berdampak langsung terhadap kehidupan masyarakat sekitar. Banyak spesies tumbuhan dan hewan kehilangan habitatnya, sementara masyarakat adat kehilangan sumber mata pencaharian mereka. Akibatnya, keseimbangan ekosistem terganggu, dan bencana seperti banjir serta tanah longsor semakin sering terjadi.
+      <br><br>
+      Upaya pelestarian hutan membutuhkan kerja sama dari berbagai pihak. Pemerintah perlu memperkuat penegakan hukum terhadap pelaku perusakan hutan, sementara perusahaan harus menerapkan prinsip keberlanjutan dalam kegiatan produksinya. Selain itu, masyarakat dapat berperan dengan mengurangi penggunaan produk yang berasal dari eksploitasi hutan secara berlebihan.
+      <br><br>
+      Pelestarian hutan bukan hanya tanggung jawab pemerintah atau organisasi lingkungan, melainkan tanggung jawab kita semua sebagai warga dunia. Jika hutan terus hilang, kita akan kehilangan salah satu benteng alami terakhir yang menjaga kehidupan di bumi.
+      <br><br>
+      <b>Question:</b> Makna istilah <i>eksploitasi</i> pada paragraf ketiga teks tersebut adalah ....
+    </div>
+  `,
+  "options": [
+    "Pemanfaatan secara berlebihan.",
+    "Kegiatan yang menguntungkan semua pihak.",
+    "Perlindungan terhadap sumber daya alam.",
+    "Penanaman kembali hutan gundul.",
+    "Pembatasan penggunaan hasil hutan."
+  ],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://www.kelaspintar.id/_next/image?url=https%3A%2F%2Fblog2.kelaspintar.id%2Fblog%2Fwp-content%2Fuploads%2F2021%2F03%2FInilah-Berbagai-Negara-Dengan-Hutan-Hujan-Tropis-Terbesar-Di-Dunia.jpg&w=1080&q=75" 
+      alt="Hutan Hujan Tropis" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+
+      Hutan hujan tropis merupakan salah satu ekosistem paling beragam di dunia. Namun, saat ini keberadaannya semakin terancam akibat aktivitas manusia. Penebangan liar, pembakaran hutan, dan perluasan lahan pertanian menjadi penyebab utama hilangnya jutaan hektar hutan setiap tahun. Padahal, hutan memiliki peran penting sebagai penyerap karbon yang membantu menstabilkan iklim global.
+      <br><br>
+      Kerusakan hutan juga berdampak langsung terhadap kehidupan masyarakat sekitar. Banyak spesies tumbuhan dan hewan kehilangan habitatnya, sementara masyarakat adat kehilangan sumber mata pencaharian mereka. Akibatnya, keseimbangan ekosistem terganggu, dan bencana seperti banjir serta tanah longsor semakin sering terjadi.
+      <br><br>
+      Upaya pelestarian hutan membutuhkan kerja sama dari berbagai pihak. Pemerintah perlu memperkuat penegakan hukum terhadap pelaku perusakan hutan, sementara perusahaan harus menerapkan prinsip keberlanjutan dalam kegiatan produksinya. Selain itu, masyarakat dapat berperan dengan mengurangi penggunaan produk yang berasal dari eksploitasi hutan secara berlebihan.
+      <br><br>
+      Pelestarian hutan bukan hanya tanggung jawab pemerintah atau organisasi lingkungan, melainkan tanggung jawab kita semua sebagai warga dunia. Jika hutan terus hilang, kita akan kehilangan salah satu benteng alami terakhir yang menjaga kehidupan di bumi.
+      <br><br>
+      <b>Question:</b> Gagasan utama paragraf kedua teks tersebut adalah ....
+    </div>
+  `,
+  "options": [
+    "Hilangnya hutan menyebabkan banyak bencana alam dan kerugian bagi manusia serta makhluk hidup lainnya.",
+    "Pembakaran hutan menjadi penyebab utama rusaknya ekosistem hutan hujan tropis.",
+    "Kehidupan masyarakat adat sangat bergantung pada hasil hutan untuk bertahan hidup.",
+    "Kerusakan hutan dapat diatasi dengan kerja sama antara masyarakat dan pemerintah.",
+    "Banjir dan tanah longsor terjadi karena tidak adanya penegakan hukum terhadap pelaku perusakan hutan."
+  ],
+  "correct": 0
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://www.kelaspintar.id/_next/image?url=https%3A%2F%2Fblog2.kelaspintar.id%2Fblog%2Fwp-content%2Fuploads%2F2021%2F03%2FInilah-Berbagai-Negara-Dengan-Hutan-Hujan-Tropis-Terbesar-Di-Dunia.jpg&w=1080&q=75" 
+      alt="Hutan Hujan Tropis" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+
+      Hutan hujan tropis merupakan salah satu ekosistem paling beragam di dunia. Namun, saat ini keberadaannya semakin terancam akibat aktivitas manusia. 
+      Penebangan liar, pembakaran hutan, dan perluasan lahan pertanian menjadi penyebab utama hilangnya jutaan hektar hutan setiap tahun. 
+      Padahal, hutan memiliki peran penting sebagai penyerap karbon yang membantu menstabilkan iklim global.
+      <br><br>
+      Kerusakan hutan juga berdampak langsung terhadap kehidupan masyarakat sekitar. 
+      Banyak spesies tumbuhan dan hewan kehilangan habitatnya, sementara masyarakat adat kehilangan sumber mata pencaharian mereka. 
+      Akibatnya, keseimbangan ekosistem terganggu, dan bencana seperti banjir serta tanah longsor semakin sering terjadi.
+      <br><br>
+      Upaya pelestarian hutan membutuhkan kerja sama dari berbagai pihak. 
+      Pemerintah perlu memperkuat penegakan hukum terhadap pelaku perusakan hutan, 
+      sementara perusahaan harus menerapkan prinsip keberlanjutan dalam kegiatan produksinya. 
+      Selain itu, masyarakat dapat berperan dengan mengurangi penggunaan produk yang berasal dari eksploitasi hutan secara berlebihan.
+      <br><br>
+      Pelestarian hutan bukan hanya tanggung jawab pemerintah atau organisasi lingkungan, melainkan tanggung jawab kita semua sebagai warga dunia. 
+      Jika hutan terus hilang, kita akan kehilangan salah satu benteng alami terakhir yang menjaga kehidupan di bumi.
+      <br><br>
+      <b>Question:</b> Apa saja upaya yang disebutkan dalam teks untuk melestarikan hutan?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Pemerintah memperkuat penegakan hukum terhadap pelaku perusakan hutan.",
+    "Perusahaan menerapkan prinsip keberlanjutan dalam produksinya.",
+    "Masyarakat adat kembali bermukim di dalam kawasan hutan.",
+    "Masyarakat mengurangi penggunaan produk hasil eksploitasi hutan.",
+    "Organisasi lingkungan melakukan penebangan pohon secara selektif."
+  ],
+  "correct": [0, 1, 3]
+},
+{
+  "type": "true_false",
+  "text": `
+<div style="text-align: justify;">
+      <img src="https://www.kelaspintar.id/_next/image?url=https%3A%2F%2Fblog2.kelaspintar.id%2Fblog%2Fwp-content%2Fuploads%2F2021%2F03%2FInilah-Berbagai-Negara-Dengan-Hutan-Hujan-Tropis-Terbesar-Di-Dunia.jpg&w=1080&q=75" 
+      alt="Hutan Hujan Tropis" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+
+    Hutan hujan tropis merupakan salah satu ekosistem paling beragam di dunia. Namun, saat ini keberadaannya semakin terancam akibat aktivitas manusia. Penebangan liar, pembakaran hutan, dan perluasan lahan pertanian menjadi penyebab utama hilangnya jutaan hektar hutan setiap tahun. Padahal, hutan memiliki peran penting sebagai penyerap karbon yang membantu menstabilkan iklim global.<br><br>
+
+    Kerusakan hutan juga berdampak langsung terhadap kehidupan masyarakat sekitar. Banyak spesies tumbuhan dan hewan kehilangan habitatnya, sementara masyarakat adat kehilangan sumber mata pencaharian mereka. Akibatnya, keseimbangan ekosistem terganggu, dan bencana seperti banjir serta tanah longsor semakin sering terjadi.<br><br>
+
+    Upaya pelestarian hutan membutuhkan kerja sama dari berbagai pihak. Pemerintah perlu memperkuat penegakan hukum terhadap pelaku perusakan hutan, sementara perusahaan harus menerapkan prinsip keberlanjutan dalam kegiatan produksinya. Selain itu, masyarakat dapat berperan dengan mengurangi penggunaan produk yang berasal dari eksploitasi hutan secara berlebihan.<br><br>
+
+    Pelestarian hutan bukan hanya tanggung jawab pemerintah atau organisasi lingkungan, melainkan tanggung jawab kita semua sebagai warga dunia. Jika hutan terus hilang, kita akan kehilangan salah satu benteng alami terakhir yang menjaga kehidupan di bumi.<br><br>
+
+    
+    Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+  `,
+  "statements": [
+    "Kalimat tersebut menunjukkan bahwa menjaga kelestarian hutan adalah tugas bersama seluruh masyarakat dunia.",
+    "Kalimat tersebut menjelaskan bahwa pemerintah telah gagal mengatasi perusakan hutan.",
+    "Kalimat tersebut menegaskan bahwa peran individu sama pentingnya dengan peran lembaga dalam pelestarian hutan."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "true_false",
+  "text": `
+    “Bu, besok sekolah mengadakan latihan untuk lomba cerdas cermat. Aku sudah terpilih jadi wakil kelas,” kataku pelan saat Ibu sibuk menjemur padi di halaman rumah.<br><br>
+
+    Ibu menatapku sebentar, lalu menghela napas. “Nak, kamu tahu sendiri, ayahmu sedang sakit. Kalau kamu pergi latihan, siapa yang bantu Ibu menjemur dan menumbuk padi? Besok itu panen terakhir sebelum musim hujan.”<br><br>
+
+    Aku terdiam. Antara rasa bangga karena dipercaya sekolah dan rasa bersalah karena tidak bisa membantu keluarga. “Tapi, Bu... lombanya tinggal seminggu lagi. Aku sudah janji sama teman-teman buat latihan tiap hari,” ucapku lirih.<br><br>
+
+    Ibu menatapku dengan wajah lembut tapi tegas. “Sekolah memang penting, Nak, tapi keluarga juga perlu kamu.”<br><br>
+
+    Malamnya, aku duduk termenung di teras, memandangi sawah yang mulai menguning. Aku tahu Ibu tidak bermaksud melarangku, tapi aku juga tahu kalau aku pergi latihan, pekerjaan di rumah akan terbengkalai. Setelah berpikir lama, aku memutuskan meminta bantuan Pak RT untuk mencari tetangga yang bisa membantu Ibu sementara aku berlatih.<br><br>
+
+    Keesokan harinya, setelah semua beres, aku berangkat ke sekolah dengan perasaan lega.<br><br>
+
+    Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+  `,
+  "statements": [
+    "Tokoh “aku” merasa bingung antara membantu ibunya di rumah atau mengikuti latihan lomba di sekolah.",
+    "Tokoh “aku” kecewa karena ibunya tidak mengizinkannya bersekolah sama sekali demi membantu di sawah.",
+    "Tokoh “aku” merasa bersalah karena harus meninggalkan pekerjaan rumah demi memenuhi tanggung jawabnya di sekolah."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      “Bu, besok sekolah mengadakan latihan untuk lomba cerdas cermat. Aku sudah terpilih jadi wakil kelas,” kataku pelan saat Ibu sibuk menjemur padi di halaman rumah.<br><br>
+
+      Ibu menatapku sebentar, lalu menghela napas. “Nak, kamu tahu sendiri, ayahmu sedang sakit. Kalau kamu pergi latihan, siapa yang bantu Ibu menjemur dan menumbuk padi? Besok itu panen terakhir sebelum musim hujan.”<br><br>
+
+      Aku terdiam. Antara rasa bangga karena dipercaya sekolah dan rasa bersalah karena tidak bisa membantu keluarga. “Tapi, Bu... lombanya tinggal seminggu lagi. Aku sudah janji sama teman-teman buat latihan tiap hari,” ucapku lirih.<br><br>
+
+      Ibu menatapku dengan wajah lembut tapi tegas. “Sekolah memang penting, Nak, tapi keluarga juga perlu kamu.”<br><br>
+
+      Malamnya, aku duduk termenung di teras, memandangi sawah yang mulai menguning. Aku tahu Ibu tidak bermaksud melarangku, tapi aku juga tahu kalau aku pergi latihan, pekerjaan di rumah akan terbengkalai. Setelah berpikir lama, aku memutuskan meminta bantuan Pak RT untuk mencari tetangga yang bisa membantu Ibu sementara aku berlatih.<br><br>
+
+      Keesokan harinya, setelah semua beres, aku berangkat ke sekolah dengan perasaan lega.<br><br>
+
+      <b>Question:</b> Apa yang akan terjadi jika tokoh “aku” tidak meminta bantuan Pak RT untuk mencari tetangga yang bisa membantu Ibu?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Tokoh aku akan tetap membantu Ibu dan tidak sempat mengikuti latihan lomba.",
+    "Ibu akan kewalahan mengurus pekerjaan rumah dan sawah sendirian.",
+    "Tokoh aku akan merasa bersalah karena meninggalkan Ibu tanpa bantuan.",
+    "Permasalahan antara tanggung jawab keluarga dan sekolah tidak akan terselesaikan.",
+    "Lomba cerdas cermat kemungkinan besar tetap diikuti oleh tokoh aku dengan lancar."
+  ],
+  "correct": [0, 1, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      “Bu, besok sekolah mengadakan latihan untuk lomba cerdas cermat. Aku sudah terpilih jadi wakil kelas,” kataku pelan saat Ibu sibuk menjemur padi di halaman rumah.<br><br>
+
+      Ibu menatapku sebentar, lalu menghela napas. “Nak, kamu tahu sendiri, ayahmu sedang sakit. Kalau kamu pergi latihan, siapa yang bantu Ibu menjemur dan menumbuk padi? Besok itu panen terakhir sebelum musim hujan.”<br><br>
+
+      Aku terdiam. Antara rasa bangga karena dipercaya sekolah dan rasa bersalah karena tidak bisa membantu keluarga. “Tapi, Bu... lombanya tinggal seminggu lagi. Aku sudah janji sama teman-teman buat latihan tiap hari,” ucapku lirih.<br><br>
+
+      Ibu menatapku dengan wajah lembut tapi tegas. “Sekolah memang penting, Nak, tapi keluarga juga perlu kamu.”<br><br>
+
+      Malamnya, aku duduk termenung di teras, memandangi sawah yang mulai menguning. Aku tahu Ibu tidak bermaksud melarangku, tapi aku juga tahu kalau aku pergi latihan, pekerjaan di rumah akan terbengkalai. Setelah berpikir lama, aku memutuskan meminta bantuan Pak RT untuk mencari tetangga yang bisa membantu Ibu sementara aku berlatih.<br><br>
+
+      Keesokan harinya, setelah semua beres, aku berangkat ke sekolah dengan perasaan lega.<br><br>
+
+      <b>Question:</b> Keterkaitan nilai sosial dalam kutipan cerpen tersebut dengan kehidupan sehari-hari adalah …<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Masih ditemukan orang tua yang tidak memedulikan pendidikan anaknya demi membantu pekerjaan mereka.",
+    "Terbenturnya cita-cita anak karena tradisi sebuah keluarga yang mengutamakan anak mampu bekerja mandiri.",
+    "Asumsi bahwa bekerja lebih bermanfaat daripada sekolah yang dianggap tidak menghasilkan apa-apa untuk keluarga.",
+    "Kebiasaan anak-anak tidak sekolah di musim panen demi membantu orang tua di sawah.",
+    "Orang tua mengarahkan anak-anak untuk rajin bekerja membantu mereka di sawah agar bisa melanjutkan kehidupannya kelak."
+  ],
+  "correct": 4
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Teks 1</b><br><br>
+      Vanilin sintetis adalah zat kimia yang digunakan sebagai pemberi aroma dan rasa vanila pada makanan dan minuman. 
+      Zat ini banyak digunakan karena harganya jauh lebih murah dibandingkan vanila alami yang berasal dari biji tanaman <i>Vanilla planifolia</i>. 
+      Vanilin sintetis memberikan aroma manis dan lembut yang disukai konsumen, sehingga sering ditemukan pada roti, kue, cokelat, minuman instan, dan es krim. 
+      Namun, penggunaan vanilin sintetis secara berlebihan dapat menimbulkan efek negatif bagi kesehatan, seperti sakit kepala, gangguan pencernaan, serta iritasi pada saluran pernapasan. 
+      Beberapa produsen nakal juga mencampurkan bahan kimia tambahan untuk memperkuat aroma vanilin, yang justru menambah risiko keracunan bila dikonsumsi terus-menerus.
+      <br><br>
+      <b>Teks 2</b><br><br>
+      Secara kimiawi, vanilin sintetis memiliki rumus \\( C_8H_8O_3 \\) dan umumnya dibuat dari bahan dasar guaiacol atau lignin hasil samping industri kayu. 
+      Zat ini berbentuk kristal putih, mudah larut dalam alkohol, dan sedikit larut dalam air. 
+      Dalam kondisi murni, vanilin sintetis bersifat stabil pada suhu ruang, tetapi bila bereaksi dengan udara lembap dapat mengalami oksidasi yang menghasilkan senyawa berbau tajam. 
+      Dalam dosis kecil, zat ini relatif aman, tetapi bila digunakan berlebihan atau dicampur dengan bahan kimia lain yang tidak sesuai standar pangan, dapat menimbulkan efek toksik pada hati dan sistem saraf. 
+      Oleh karena itu, penggunaan vanilin sintetis dalam produk pangan diatur dengan ketat oleh BPOM dan badan kesehatan dunia (WHO).
+      <br><br>
+      <b>Question:</b> Tujuan penulis sesuai teks 1 adalah ...<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Menjelaskan proses pembuatan vanilin sintetis dari lignin dan guaiacol.",
+    "Menguraikan sifat kimia dan reaksi vanilin sintetis terhadap udara lembap.",
+    "Menginformasikan bahaya penggunaan vanilin sintetis secara berlebihan pada makanan dan minuman.",
+    "Menganalisis manfaat vanilin sintetis bagi industri makanan dan minuman.",
+    "Menjelaskan alasan mengapa vanilin alami lebih mahal dibandingkan vanilin sintetis."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Teks 1</b><br><br>
+      Vanilin sintetis adalah zat kimia yang digunakan sebagai pemberi aroma dan rasa vanila pada makanan dan minuman. 
+      Zat ini banyak digunakan karena harganya jauh lebih murah dibandingkan vanila alami yang berasal dari biji tanaman <i>Vanilla planifolia</i>. 
+      Vanilin sintetis memberikan aroma manis dan lembut yang disukai konsumen, sehingga sering ditemukan pada roti, kue, cokelat, minuman instan, dan es krim. 
+      Namun, penggunaan vanilin sintetis secara berlebihan dapat menimbulkan efek negatif bagi kesehatan, seperti sakit kepala, gangguan pencernaan, serta iritasi pada saluran pernapasan. 
+      Beberapa produsen nakal juga mencampurkan bahan kimia tambahan untuk memperkuat aroma vanilin, yang justru menambah risiko keracunan bila dikonsumsi terus-menerus.
+      <br><br>
+      <b>Teks 2</b><br><br>
+      Secara kimiawi, vanilin sintetis memiliki rumus \\( C_8H_8O_3 \\) dan umumnya dibuat dari bahan dasar guaiacol atau lignin hasil samping industri kayu. 
+      Zat ini berbentuk kristal putih, mudah larut dalam alkohol, dan sedikit larut dalam air. 
+      Dalam kondisi murni, vanilin sintetis bersifat stabil pada suhu ruang, tetapi bila bereaksi dengan udara lembap dapat mengalami oksidasi yang menghasilkan senyawa berbau tajam. 
+      Dalam dosis kecil, zat ini relatif aman, tetapi bila digunakan berlebihan atau dicampur dengan bahan kimia lain yang tidak sesuai standar pangan, dapat menimbulkan efek toksik pada hati dan sistem saraf. 
+      Oleh karena itu, penggunaan vanilin sintetis dalam produk pangan diatur dengan ketat oleh BPOM dan badan kesehatan dunia (WHO).
+      <br><br>
+      <b>Question:</b> Pernyataan yang tepat sesuai isi kedua teks tersebut berkaitan dengan vanilin sintetis adalah ...<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Vanilin sintetis aman dikonsumsi dalam jumlah berapa pun karena bersifat stabil pada suhu ruang.",
+    "Vanilin sintetis berasal dari tanaman <i>Vanilla planifolia</i> yang telah diolah secara kimia.",
+    "Vanilin sintetis bersifat aman bila digunakan sesuai takaran dan standar kesehatan pangan.",
+    "Vanilin sintetis tidak memiliki dampak apa pun terhadap kesehatan manusia.",
+    "Vanilin sintetis lebih mahal dibandingkan vanila alami karena proses pembuatannya rumit."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Teks 1</b><br><br>
+      Vanilin sintetis adalah zat kimia yang digunakan sebagai pemberi aroma dan rasa vanila pada makanan dan minuman. 
+      Zat ini banyak digunakan karena harganya jauh lebih murah dibandingkan vanila alami yang berasal dari biji tanaman <i>Vanilla planifolia</i>. 
+      Vanilin sintetis memberikan aroma manis dan lembut yang disukai konsumen, sehingga sering ditemukan pada roti, kue, cokelat, minuman instan, dan es krim. 
+      Namun, penggunaan vanilin sintetis secara berlebihan dapat menimbulkan efek negatif bagi kesehatan, seperti sakit kepala, gangguan pencernaan, serta iritasi pada saluran pernapasan. 
+      Beberapa produsen nakal juga mencampurkan bahan kimia tambahan untuk memperkuat aroma vanilin, yang justru menambah risiko keracunan bila dikonsumsi terus-menerus.
+      <br><br>
+      <b>Teks 2</b><br><br>
+      Secara kimiawi, vanilin sintetis memiliki rumus \\( C_8H_8O_3 \\) dan umumnya dibuat dari bahan dasar guaiacol atau lignin hasil samping industri kayu. 
+      Zat ini berbentuk kristal putih, mudah larut dalam alkohol, dan sedikit larut dalam air. 
+      Dalam kondisi murni, vanilin sintetis bersifat stabil pada suhu ruang, tetapi bila bereaksi dengan udara lembap dapat mengalami oksidasi yang menghasilkan senyawa berbau tajam. 
+      Dalam dosis kecil, zat ini relatif aman, tetapi bila digunakan berlebihan atau dicampur dengan bahan kimia lain yang tidak sesuai standar pangan, dapat menimbulkan efek toksik pada hati dan sistem saraf. 
+      Oleh karena itu, penggunaan vanilin sintetis dalam produk pangan diatur dengan ketat oleh BPOM dan badan kesehatan dunia (WHO).
+      <br><br>
+      <b>Question:</b> Mengapa kedua teks tersebut menyebutkan dampak kesehatan yang timbul dari penggunaan vanilin sintetis?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Mendorong masyarakat untuk tidak menggunakan vanilin sintetis secara berlebihan.",
+    "Meningkatkan kesadaran masyarakat tentang potensi bahaya vanilin sintetis dalam makanan.",
+    "Menunjukkan bahwa vanilin sintetis aman digunakan dalam industri makanan tanpa batasan dosis.",
+    "Menjelaskan bahwa vanilin sintetis dapat menimbulkan efek berbahaya bila dikonsumsi berlebihan.",
+    "Memperingatkan masyarakat agar lebih berhati-hati memilih produk beraroma vanila yang mencurigakan."
+  ],
+  "correct": [0, 1, 4]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Kemajuan teknologi finansial atau <i>financial technology</i> (fintech) telah memberikan dampak besar terhadap cara masyarakat dan pelaku usaha mengelola keuangan. 
+      Fintech mencakup berbagai layanan seperti pembayaran digital, pinjaman daring (<i>online lending</i>), investasi berbasis aplikasi, serta layanan perencanaan keuangan otomatis. 
+      Kehadiran fintech tidak hanya mengubah sistem transaksi, tetapi juga membuka akses ke layanan keuangan bagi masyarakat yang sebelumnya sulit dijangkau oleh lembaga perbankan konvensional.
+      <br><br>
+      Salah satu peran penting fintech adalah meningkatkan inklusi ekonomi bagi pelaku Usaha Mikro, Kecil, dan Menengah (UMKM). 
+      Melalui platform pinjaman daring, pelaku UMKM dapat memperoleh modal usaha dengan proses yang cepat dan persyaratan yang lebih sederhana. 
+      Hal ini sangat membantu mereka yang tidak memiliki jaminan atau riwayat kredit formal untuk memperoleh pinjaman dari bank. 
+      Selain itu, sistem pembayaran digital yang terintegrasi memungkinkan pelaku usaha menerima pembayaran secara instan, mencatat transaksi secara otomatis, dan memantau arus kas dengan lebih akurat.
+      <br><br>
+      Tidak hanya bagi pelaku usaha, fintech juga memberikan manfaat besar bagi masyarakat umum. 
+      Aplikasi dompet digital seperti GoPay, OVO, dan DANA, misalnya, mempermudah transaksi sehari-hari tanpa perlu membawa uang tunai. 
+      Selain efisien, metode ini juga dinilai lebih aman karena mengurangi risiko kehilangan uang fisik. 
+      Layanan investasi berbasis aplikasi pun memungkinkan masyarakat untuk mulai berinvestasi dengan modal kecil, sehingga mendorong kebiasaan pengelolaan keuangan yang lebih cerdas.
+      <br><br>
+      Namun, di balik berbagai kemudahan tersebut, fintech juga membawa tantangan tersendiri. 
+      Keamanan data dan privasi pengguna menjadi isu utama yang harus diperhatikan. 
+      Maraknya kasus penipuan digital dan penyalahgunaan data pribadi menunjukkan perlunya regulasi yang kuat serta literasi digital yang memadai di kalangan masyarakat. 
+      Selain itu, ketergantungan terhadap teknologi menuntut infrastruktur digital yang andal, terutama di daerah terpencil yang masih memiliki keterbatasan jaringan internet.
+      <br><br>
+      Secara keseluruhan, fintech telah menjadi katalis penting dalam mempercepat transformasi ekonomi digital Indonesia. 
+      Jika dimanfaatkan dengan bijak dan diimbangi dengan regulasi yang tepat, fintech dapat memperkuat fondasi inklusi keuangan nasional sekaligus mendorong pertumbuhan ekonomi yang lebih merata dan berkelanjutan.
+      <br><br>
+      <b>Question:</b> Bagan yang tepat untuk menggambarkan bagian-bagian penting dalam teks tersebut adalah ....<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Pernyataan umum → Deretan penjelas → Simpulan",
+    "Masalah utama → Argumen pendukung → Rekomendasi",
+    "Orientasi → Komplikasi → Resolusi",
+    "Tesis → Argumentasi → Reiterasi",
+    "Identifikasi → Deskripsi bagian → Penutup"
+  ],
+  "correct": 0
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      Kemajuan teknologi finansial atau <i>financial technology</i> (fintech) telah memberikan dampak besar terhadap cara masyarakat dan pelaku usaha mengelola keuangan. 
+      Fintech mencakup berbagai layanan seperti pembayaran digital, pinjaman daring (<i>online lending</i>), investasi berbasis aplikasi, serta layanan perencanaan keuangan otomatis. 
+      Kehadiran fintech tidak hanya mengubah sistem transaksi, tetapi juga membuka akses ke layanan keuangan bagi masyarakat yang sebelumnya sulit dijangkau oleh lembaga perbankan konvensional.
+      <br><br>
+      Salah satu peran penting fintech adalah meningkatkan inklusi ekonomi bagi pelaku Usaha Mikro, Kecil, dan Menengah (UMKM). 
+      Melalui platform pinjaman daring, pelaku UMKM dapat memperoleh modal usaha dengan proses yang cepat dan persyaratan yang lebih sederhana. 
+      Hal ini sangat membantu mereka yang tidak memiliki jaminan atau riwayat kredit formal untuk memperoleh pinjaman dari bank. 
+      Selain itu, sistem pembayaran digital yang terintegrasi memungkinkan pelaku usaha menerima pembayaran secara instan, mencatat transaksi secara otomatis, dan memantau arus kas dengan lebih akurat.
+      <br><br>
+      Tidak hanya bagi pelaku usaha, fintech juga memberikan manfaat besar bagi masyarakat umum. 
+      Aplikasi dompet digital seperti GoPay, OVO, dan DANA, misalnya, mempermudah transaksi sehari-hari tanpa perlu membawa uang tunai. 
+      Selain efisien, metode ini juga dinilai lebih aman karena mengurangi risiko kehilangan uang fisik. 
+      Layanan investasi berbasis aplikasi pun memungkinkan masyarakat untuk mulai berinvestasi dengan modal kecil, sehingga mendorong kebiasaan pengelolaan keuangan yang lebih cerdas.
+      <br><br>
+      <b>Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:</b>
+    </div>
+  `,
+  "statements": [
+    "Paragraf pertama menggunakan pola sebab-akibat karena menjelaskan pengaruh fintech terhadap perilaku keuangan masyarakat.",
+    "Paragraf kedua menggunakan pola proses karena menguraikan langkah-langkah penggunaan pinjaman daring oleh pelaku UMKM.",
+    "Paragraf ketiga menggunakan pola ilustrasi karena memberikan contoh manfaat fintech bagi masyarakat umum."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "true_false",
+  "text": `
+    Kemajuan teknologi finansial atau *financial technology* (fintech) telah memberikan dampak besar terhadap cara masyarakat dan pelaku usaha mengelola keuangan. Fintech mencakup berbagai layanan seperti pembayaran digital, pinjaman daring (*online lending*), investasi berbasis aplikasi, serta layanan perencanaan keuangan otomatis. Kehadiran fintech tidak hanya mengubah sistem transaksi, tetapi juga membuka akses ke layanan keuangan bagi masyarakat yang sebelumnya sulit dijangkau oleh lembaga perbankan konvensional.<br><br>
+    Salah satu peran penting fintech adalah meningkatkan inklusi ekonomi bagi pelaku Usaha Mikro, Kecil, dan Menengah (UMKM). Melalui platform pinjaman daring, pelaku UMKM dapat memperoleh modal usaha dengan proses yang cepat dan persyaratan yang lebih sederhana. Hal ini sangat membantu mereka yang tidak memiliki jaminan atau riwayat kredit formal untuk memperoleh pinjaman dari bank. Selain itu, sistem pembayaran digital yang terintegrasi memungkinkan pelaku usaha menerima pembayaran secara instan, mencatat transaksi secara otomatis, dan memantau arus kas dengan lebih akurat.<br><br>
+    Tidak hanya bagi pelaku usaha, fintech juga memberikan manfaat besar bagi masyarakat umum. Aplikasi dompet digital seperti GoPay, OVO, dan DANA, misalnya, mempermudah transaksi sehari-hari tanpa perlu membawa uang tunai. Selain efisien, metode ini juga dinilai lebih aman karena mengurangi risiko kehilangan uang fisik. Layanan investasi berbasis aplikasi pun memungkinkan masyarakat untuk mulai berinvestasi dengan modal kecil, sehingga mendorong kebiasaan pengelolaan keuangan yang lebih cerdas.<br><br>
+    Raka : Menurutku teks ini menjelaskan dengan jelas manfaat fintech bagi UMKM dan masyarakat.<br>
+    Lina : Iya, tapi aku rasa ada informasi yang kurang, misalnya risiko penggunaan fintech seperti penipuan atau masalah keamanan data.<br>
+    Bima : Betul. Kalau teks juga menambahkan tantangan atau risiko, pembaca bisa memahami dampak fintech secara lebih lengkap dan seimbang.<br><br>
+    Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+  `,
+  "statements": [
+    "Pendapat Lina dan Bima penting karena mereka menyoroti manfaat fintech bagi masyarakat dan UMKM.",
+    "Pendapat Lina dan Bima penting karena mereka menekankan perlunya mencantumkan risiko agar pembaca mendapat informasi yang seimbang.",
+    "Pendapat Lina dan Bima penting karena mereka membahas struktur dan bahasa teks yang mudah dipahami."
+  ],
+  "correct": [false, true, false]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Hampir dua puluh tahun lalu, keluarga saya terpaksa meninggalkan desa asal untuk menetap di tempat yang terpencil, jauh dari keramaian, karena Ayah ditugaskan menjadi guru di sana. 
+      Tidak ada satu pun benda yang tertinggal di rumah lama; semua harus dibawa, seakan meninggalkan seluruh masa kecil saya yang tersimpan dalam tiap sudut rumah itu. 
+      Bersamaan dengan itu, saya harus berpisah dari sahabat masa kecil saya, yang selama ini selalu menjadi saksi tawa dan rahasia saya. 
+      Pertemuan kembali setelah sekian lama memunculkan <b>gelombang kenangan</b> yang begitu intens, membuat saya tersadar betapa besar pengaruhnya dalam hidup saya, lebih tulus dan setia daripada saya sendiri. 
+      <br><br>
+      Malam itu, ketika saya menatapnya menata buku-buku di meja kecil, ketenangan yang terpancar darinya kontras dengan kegelisahan saya. 
+      Dia menolak ajakan saya untuk ikut ke kebun belakang mencari jangkrik, dan orang tuanya pun memperingatkan agar saya tetap tinggal. 
+      Namun dorongan rasa penasaran dan keinginan mengulang kenangan masa kecil membuat saya memberanikan diri. 
+      Akhirnya, dia tak mampu menolak, dan tanpa sepatah kata pun, kami melangkah menuju sawah yang mulai gelap diterpa angin malam. 
+      <br><br>
+      Begitu kami sampai, saya memegang obor yang tadinya digenggamnya. 
+      Belum sempat lama, api dari obor menyambar tangan saya karena angin kencang yang tiba-tiba berubah arah. 
+      Teman saya segera menutupi tubuh saya dengan seragamnya, melingkupi saya dengan cepat, sementara saya menjerit, gemetar antara rasa sakit dan dingin yang menusuk. 
+      Napasnya terengah, namun langkah dan matanya menunjukkan tekad yang tak tergoyahkan, memampukannya menggendong saya hingga rumah, menuntun saya melalui gelap dan dingin malam itu. 
+      Dari pengalaman itu, saya merasakan betapa dalamnya arti persahabatan sejati, yang muncul bukan hanya dari tawa bersama, tapi dari keberanian, tanggung jawab, dan kepedulian yang tulus.
+      <br><br>
+      <b>Question:</b> Penggunaan frasa <b>gelombang kenangan</b> dalam teks tersebut menekankan …<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Ingatan yang muncul sedikit-sedikit dan tidak berpengaruh",
+    "Kenangan yang datang bertubi-tubi dan membangkitkan perasaan yang kuat",
+    "Kenangan yang terlupakan dan tidak berarti",
+    "Perasaan senang tanpa ingatan masa lalu",
+    "Kenangan yang hanya bersifat fisik dan nyata"
+  ],
+  "correct": 1
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      Hampir dua puluh tahun lalu, keluarga saya terpaksa meninggalkan desa asal untuk menetap di tempat yang terpencil, jauh dari keramaian, karena Ayah ditugaskan menjadi guru di sana. 
+      Tidak ada satu pun benda yang tertinggal di rumah lama; semua harus dibawa, seakan meninggalkan seluruh masa kecil saya yang tersimpan dalam tiap sudut rumah itu. 
+      Bersamaan dengan itu, saya harus berpisah dari sahabat masa kecil saya, yang selama ini selalu menjadi saksi tawa dan rahasia saya. 
+      Pertemuan kembali setelah sekian lama memunculkan gelombang kenangan yang begitu intens, membuat saya tersadar betapa besar pengaruhnya dalam hidup saya, lebih tulus dan setia daripada saya sendiri. 
+      <br><br>
+      Malam itu, ketika saya menatapnya menata buku-buku di meja kecil, ketenangan yang terpancar darinya kontras dengan kegelisahan saya. 
+      Dia menolak ajakan saya untuk ikut ke kebun belakang mencari jangkrik, dan orang tuanya pun memperingatkan agar saya tetap tinggal. 
+      Namun dorongan rasa penasaran dan keinginan mengulang kenangan masa kecil membuat saya memberanikan diri. 
+      Akhirnya, dia tak mampu menolak, dan tanpa sepatah kata pun, kami melangkah menuju sawah yang mulai gelap diterpa angin malam. 
+      <br><br>
+      Begitu kami sampai, saya memegang obor yang tadinya digenggamnya. 
+      Belum sempat lama, api dari obor menyambar tangan saya karena angin kencang yang tiba-tiba berubah arah. 
+      Teman saya segera menutupi tubuh saya dengan seragamnya, melingkupi saya dengan cepat, sementara saya menjerit, gemetar antara rasa sakit dan dingin yang menusuk. 
+      Napasnya terengah, namun langkah dan matanya menunjukkan tekad yang tak tergoyahkan, memampukannya menggendong saya hingga rumah, menuntun saya melalui gelap dan dingin malam itu. 
+      Dari pengalaman itu, saya merasakan betapa dalamnya arti persahabatan sejati, yang muncul bukan hanya dari tawa bersama, tapi dari keberanian, tanggung jawab, dan kepedulian yang tulus.
+      <br><br>
+      <b>Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut jika tokoh saya tidak ikut mencari jangkrik malam itu:</b>
+    </div>
+  `,
+  "statements": [
+    "Sahabat tokoh saya masih memiliki seragam pramuka untuk dipakai.",
+    "Punggung sahabat tokoh saya tidak akan memiliki luka bakar.",
+    "Sahabat tokoh saya akan mencari jangkrik tanpa perlu berlari."
+  ],
+  "correct": [true, true, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Hampir dua puluh tahun lalu, keluarga saya terpaksa meninggalkan desa asal untuk menetap di tempat yang terpencil, jauh dari keramaian, karena Ayah ditugaskan menjadi guru di sana. 
+      Tidak ada satu pun benda yang tertinggal di rumah lama; semua harus dibawa, seakan meninggalkan seluruh masa kecil saya yang tersimpan dalam tiap sudut rumah itu. 
+      Bersamaan dengan itu, saya harus berpisah dari sahabat masa kecil saya, yang selama ini selalu menjadi saksi tawa dan rahasia saya. 
+      Pertemuan kembali setelah sekian lama memunculkan gelombang kenangan yang begitu intens, membuat saya tersadar betapa besar pengaruhnya dalam hidup saya, lebih tulus dan setia daripada saya sendiri. 
+      <br><br>
+      Malam itu, ketika saya menatapnya menata buku-buku di meja kecil, ketenangan yang terpancar darinya kontras dengan kegelisahan saya. 
+      Dia menolak ajakan saya untuk ikut ke kebun belakang mencari jangkrik, dan orang tuanya pun memperingatkan agar saya tetap tinggal. 
+      Namun dorongan rasa penasaran dan keinginan mengulang kenangan masa kecil membuat saya memberanikan diri. 
+      Akhirnya, dia tak mampu menolak, dan tanpa sepatah kata pun, kami melangkah menuju sawah yang mulai gelap diterpa angin malam. 
+      <br><br>
+      Begitu kami sampai, saya memegang obor yang tadinya digenggamnya. 
+      Belum sempat lama, api dari obor menyambar tangan saya karena angin kencang yang tiba-tiba berubah arah. 
+      Teman saya segera menutupi tubuh saya dengan seragamnya, melingkupi saya dengan cepat, sementara saya menjerit, gemetar antara rasa sakit dan dingin yang menusuk. 
+      Napasnya terengah, namun langkah dan matanya menunjukkan tekad yang tak tergoyahkan, memampukannya menggendong saya hingga rumah, menuntun saya melalui gelap dan dingin malam itu. 
+      Dari pengalaman itu, saya merasakan betapa dalamnya arti persahabatan sejati, yang muncul bukan hanya dari tawa bersama, tapi dari keberanian, tanggung jawab, dan kepedulian yang tulus.
+      <br><br>
+      <b>Question:</b> Kalimat mana saja dalam kutipan cerpen tersebut yang menunjukkan bahwa sahabat tokoh saya adalah seorang yang setia kawan?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Dia menolak ajakan saya untuk ikut ke kebun belakang mencari jangkrik.",
+    "Teman saya segera menutupi tubuh saya dengan seragamnya, melingkupi saya dengan cepat.",
+    "Napasnya terengah, namun langkah dan matanya menunjukkan tekad yang tak tergoyahkan.",
+    "Memampukannya menggendong saya hingga rumah, menuntun saya melalui gelap dan dingin malam itu.",
+    "Dorongan rasa penasaran dan keinginan mengulang kenangan masa kecil membuat saya memberanikan diri."
+  ],
+  "correct": [1, 2, 3]
+},
+
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Bacalah teks berikut!</b><br><br>
+      (1) Di era globalisasi, teknologi komunikasi berkembang sangat pesat. (2) Berbagai inovasi seperti media sosial, aplikasi pesan instan, dan konferensi daring memudahkan manusia untuk berinteraksi lintas negara. (3) Namun, perkembangan ini juga memunculkan tantangan baru terkait penyebaran informasi yang tidak valid dan hoaks. (4) Oleh karena itu, literasi digital menjadi hal yang sangat penting agar masyarakat dapat menyaring informasi dengan bijak.<br><br>
+      (1) Peneliti dan praktisi teknologi sering menggunakan algoritma untuk menyesuaikan konten dengan preferensi pengguna. (2) Algoritma ini membantu menyaring informasi, tetapi kadang menimbulkan efek bubble di mana seseorang hanya melihat informasi yang sejalan dengan pandangannya. (3) Untuk mengatasi masalah ini, masyarakat perlu mengamati penggunaan media digital secara kritis. (4) Beberapa penulis menyatakan bahwa mereka akan mengobservasi tren informasi online untuk analisis lebih lanjut.<br><br>
+      (1) Dalam dunia pendidikan, inovasi teknologi memungkinkan pembelajaran jarak jauh melalui video conference, webinar, dan platform daring lainnya. (2) Namun, beberapa istilah seperti “streaming” dan “upload” masih terdengar asing bagi sebagian guru dan siswa yang kurang familiar dengan dunia digital. (3) Penerapan teknologi ini tetap harus disertai panduan agar tidak terjadi penyalahgunaan. (4) Beberapa lembaga pendidikan juga menyebutkan bahwa mereka akan menginvestigasi efektivitas metode pembelajaran daring tersebut.<br><br>
+      (1) Penting bagi setiap individu untuk memahami etika digital dan keamanan siber. (2) Dengan literasi digital yang baik, masyarakat dapat menggunakan teknologi dengan aman, bijak, dan produktif. (3) Upaya ini juga mendorong kolaborasi global dalam berbagai bidang, termasuk sains dan ekonomi. (4) Masyarakat perlu menyesuaikan diri dengan cepat agar tidak tertinggal dalam kemajuan teknologi global.<br><br>
+      <b>Petunjuk:</b> Tentukan apakah penggunaan kata serapan berikut <i>tepat</i> atau <i>tidak tepat</i>!
+    </div>
+  `,
+  "statements": [
+    "A. Kata “inovasi” pada kalimat (2) paragraf pertama.",
+    "B. Kata “algoritma” pada kalimat (1) paragraf kedua.",
+    "C. Kata “mengobservasi” pada kalimat (4) paragraf kedua.",
+    "D. Kata “menginvestigasi” pada kalimat (4) paragraf ketiga."
+  ],
+  "correct": [true, true, false, false]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      (1) Di era globalisasi, teknologi komunikasi berkembang sangat pesat. 
+      (2) Berbagai inovasi seperti media sosial, aplikasi pesan instan, dan konferensi daring memudahkan manusia untuk berinteraksi lintas negara. 
+      (3) Namun, perkembangan ini juga memunculkan tantangan baru terkait penyebaran informasi yang tidak valid dan hoaks. 
+      (4) Oleh karena itu, literasi digital menjadi hal yang sangat penting agar masyarakat dapat menyaring informasi dengan bijak.
+      <br><br>
+      (1) Peneliti dan praktisi teknologi sering menggunakan algoritma untuk menyesuaikan konten dengan preferensi pengguna. 
+      (2) Algoritma ini membantu menyaring informasi, tetapi kadang menimbulkan efek <i>bubble</i> di mana seseorang hanya melihat informasi yang sejalan dengan pandangannya. 
+      (3) Untuk mengatasi masalah ini, masyarakat perlu mengamati penggunaan media digital secara kritis. 
+      (4) Beberapa penulis menyatakan bahwa mereka akan mengobservasi tren informasi online untuk analisis lebih lanjut.
+      <br><br>
+      <b>Question:</b> Hubungan makna antara kalimat (2) dan (3) pada paragraf kedua adalah …<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Akibat-sebab yang diperkuat dengan contoh bubble effect.",
+    "Sebab-akibat yang mengajak pembaca untuk bersikap kritis terhadap media digital.",
+    "Penegasan yang diperinci dengan contoh konkret yang bisa diaplikasikan pembaca.",
+    "Perbandingan dari dua pandangan terkait dampak algoritma digital.",
+    "Penyimpulan bahwa literasi digital merupakan solusi terhadap informasi yang menyesatkan."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      (1) Di era globalisasi, teknologi komunikasi berkembang sangat pesat. 
+      (2) Berbagai inovasi seperti media sosial, aplikasi pesan instan, dan konferensi daring memudahkan manusia untuk berinteraksi lintas negara. 
+      (3) Namun, perkembangan ini juga memunculkan tantangan baru terkait penyebaran informasi yang tidak valid dan hoaks. 
+      (4) Oleh karena itu, literasi digital menjadi hal yang sangat penting agar masyarakat dapat menyaring informasi dengan bijak.
+      <br><br>
+      (1) Peneliti dan praktisi teknologi sering menggunakan algoritma untuk menyesuaikan konten dengan preferensi pengguna. 
+      (2) Algoritma ini membantu menyaring informasi, tetapi kadang menimbulkan efek <i>bubble</i> di mana seseorang hanya melihat informasi yang sejalan dengan pandangannya. 
+      (3) Untuk mengatasi masalah ini, masyarakat perlu mengamati penggunaan media digital secara kritis. 
+      (4) Beberapa penulis menyatakan bahwa mereka akan mengobservasi tren informasi online untuk analisis lebih lanjut.
+      <br><br>
+      (1) Dalam dunia pendidikan, inovasi teknologi memungkinkan pembelajaran jarak jauh melalui video conference, webinar, dan platform daring lainnya. 
+      (2) Namun, beberapa istilah seperti “streaming” dan “upload” masih terdengar asing bagi sebagian guru dan siswa yang kurang familiar dengan dunia digital. 
+      (3) Penerapan teknologi ini tetap harus disertai panduan agar tidak terjadi penyalahgunaan. 
+      (4) Beberapa lembaga pendidikan juga menyebutkan bahwa mereka akan menginvestigasi efektivitas metode pembelajaran daring tersebut.
+      <br><br>
+      (1) Penting bagi setiap individu untuk memahami etika digital dan keamanan siber. 
+      (2) Dengan literasi digital yang baik, masyarakat dapat menggunakan teknologi dengan aman, bijak, dan produktif. 
+      (3) Upaya ini juga mendorong kolaborasi global dalam berbagai bidang, termasuk sains dan ekonomi. 
+      (4) Masyarakat perlu menyesuaikan diri dengan cepat agar tidak tertinggal dalam kemajuan teknologi global.
+      <br><br>
+      <b>Question:</b> Kalimat yang tepat untuk mengakhiri uraian pada paragraf keempat adalah …<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Literasi digital adalah kunci agar masyarakat dapat menggunakan teknologi dengan aman.",
+    "Setiap individu harus mengikuti perkembangan teknologi global tanpa terkecuali.",
+    "Dengan pemahaman etika digital, kolaborasi global akan lebih efektif dan aman.",
+    "Penting bagi masyarakat untuk menyesuaikan diri dengan cepat agar tidak tertinggal dalam kemajuan teknologi.",
+    "Teknologi komunikasi terus berkembang pesat di era globalisasi."
+  ],
+  "correct": 3
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      (1) Perubahan iklim yang semakin nyata dan ancaman terhadap kelestarian bumi menuntut kita untuk mencari solusi efektif dalam menjaga keseimbangan alam. (2) Salah satu solusi yang paling menjanjikan adalah penggunaan teknologi hijau. (3) Teknologi hijau juga dikenal sebagai teknologi ramah lingkungan. (4) Teknologi ini merupakan inovasi yang dirancang untuk mengatasi berbagai tantangan lingkungan global, terutama terkait dengan perubahan iklim.
+      <br><br>
+      (1) Perubahan iklim, yang dipicu oleh peningkatan emisi gas rumah kaca akibat aktivitas manusia, menyebabkan cuaca ekstrem, suhu global yang meningkat, dan naiknya permukaan air laut. (2) Hal tersebut juga memicu deforestasi, polusi, dan mengancam keberagaman hayati di seluruh dunia. (3) Oleh karena itu, kita harus mengambil langkah tegas agar dampak perubahan iklim ini tidak semakin parah. (4) Teknologi hijau seperti energi terbarukan (tenaga surya, angin) dapat mengurangi ketergantungan pada bahan bakar fosil yang menjadi penyebab utama emisi gas rumah kaca planet ini.
+      <br><br>
+      (1) Teknologi hijau juga sangat penting dalam upaya adaptasi terhadap dampak perubahan iklim yang sudah tidak bisa dihindari. (2) Sistem pertanian presisi, infrastruktur tahan bencana alam, serta teknologi untuk menginvestigasi banjir dan kekeringan adalah contoh bagaimana teknologi hijau bisa membantu masyarakat beradaptasi dengan kondisi yang berubah.
+      <br><br>
+      (1) Dengan kondisi bumi yang semakin menghadapi tantangan besar, seperti pemanasan global, polusi, kelangkaan sumber daya, dan hilangnya keanekaragaman hayati, penerapan teknologi hijau adalah keharusan. (2) Melalui teknologi hijau, kita dapat mengurangi dampak negatif terhadap lingkungan dan memperbaiki kualitas hidup.
+      <br><br>
+      <b>Question:</b> Manakah fakta-fakta yang mendukung simpulan bahwa teknologi hijau berperan dalam perubahan iklim?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Teknologi ini merupakan inovasi yang dirancang untuk mengatasi berbagai tantangan lingkungan global, terutama terkait dengan perubahan iklim.",
+    "Perubahan iklim, yang dipicu oleh peningkatan emisi gas rumah kaca akibat aktivitas manusia, menyebabkan cuaca ekstrem, suhu global yang meningkat, dan naiknya permukaan air laut.",
+    "Teknologi hijau seperti energi terbarukan (tenaga surya, angin) dapat mengurangi ketergantungan pada bahan bakar fosil yang menjadi penyebab utama emisi gas rumah kaca planet ini.",
+    "Teknologi hijau juga sangat penting dalam upaya adaptasi terhadap dampak perubahan iklim yang sudah tidak bisa dihindari.",
+    "Melalui teknologi hijau, kita dapat mengurangi dampak negatif terhadap lingkungan dan memperbaiki kualitas hidup."
+  ],
+  "correct": [0, 2, 3, 4]
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      Energi terbarukan kini menjadi fokus utama dalam upaya mitigasi perubahan iklim. Sumber energi ini, seperti tenaga surya, angin, dan biomassa, menawarkan alternatif yang lebih ramah lingkungan dibandingkan bahan bakar fosil. Namun, meskipun potensinya besar, implementasi energi terbarukan masih menghadapi berbagai hambatan teknis dan ekonomi. 
+      <br><br>
+      Teknologi pembangkit listrik tenaga surya memerlukan panel efisiensi tinggi serta sistem penyimpanan energi yang canggih. Tenaga angin sangat bergantung pada kondisi geografis dan kecepatan angin yang stabil. Hal ini menyebabkan beberapa proyek energi terbarukan tidak dapat beroperasi optimal, sehingga memerlukan kombinasi dengan energi konvensional untuk menjamin kontinuitas pasokan listrik. 
+      <br><br>
+      Selain aspek teknis, faktor sosial dan kebijakan juga memengaruhi keberhasilan energi terbarukan. Regulasi pemerintah yang jelas, insentif fiskal, dan prosedur yang efisien dapat meningkatkan investasi swasta. Sebaliknya, keterlambatan regulasi atau prosedur birokrasi yang rumit menunda pengembangan proyek, walaupun sumber daya tersedia melimpah. 
+      <br><br>
+      Kesadaran masyarakat juga menjadi faktor penting, melalui penghematan energi dan penggunaan teknologi hemat listrik. Integrasi antara inovasi teknologi, kebijakan adaptif, dan partisipasi publik menghasilkan sistem energi terbarukan yang efektif, berkelanjutan, serta berdampak positif pada lingkungan global.
+      <br><br>
+      <b>Tentukan Benar (B) atau Salah (S) untuk pernyataan berikut terkait keberhasilan energi terbarukan:</b>
+    </div>
+  `,
+  "statements": [
+    "Efisiensi panel surya dan kondisi geografis yang optimal merupakan faktor teknis utama yang memengaruhi operasional energi terbarukan.",
+    "Investor swasta selalu dapat meningkatkan kapasitas produksi tanpa dukungan regulasi pemerintah dan insentif fiskal.",
+    "Keterlambatan regulasi atau prosedur birokrasi yang rumit dapat menunda proyek meskipun sumber daya alam tersedia melimpah.",
+    "Partisipasi publik tidak berdampak signifikan terhadap efektivitas sistem energi terbarukan, karena faktor teknis lebih menentukan.",
+    "Integrasi antara inovasi teknologi, kebijakan adaptif, dan kesadaran masyarakat menghasilkan sistem energi yang berkelanjutan dan berdampak positif."
+  ],
+  "correct": [true, false, true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Energi terbarukan kini menjadi fokus utama dalam upaya mitigasi perubahan iklim. 
+      Sumber energi ini, seperti tenaga surya, angin, dan biomassa, menawarkan alternatif yang lebih ramah lingkungan dibandingkan bahan bakar fosil. 
+      Namun, meskipun potensinya besar, implementasi energi terbarukan masih menghadapi berbagai hambatan teknis dan ekonomi. 
+      <br><br>
+      Teknologi pembangkit listrik tenaga surya memerlukan panel efisiensi tinggi serta sistem penyimpanan energi yang canggih. 
+      Tenaga angin sangat bergantung pada kondisi geografis dan kecepatan angin yang stabil. 
+      Hal ini menyebabkan beberapa proyek energi terbarukan tidak dapat beroperasi optimal, 
+      sehingga memerlukan kombinasi dengan energi konvensional untuk menjamin kontinuitas pasokan listrik. 
+      <br><br>
+      Selain aspek teknis, faktor sosial dan kebijakan juga memengaruhi keberhasilan energi terbarukan. 
+      Regulasi pemerintah yang jelas, insentif fiskal, dan prosedur yang efisien dapat meningkatkan investasi swasta. 
+      Sebaliknya, keterlambatan regulasi atau prosedur birokrasi yang rumit menunda pengembangan proyek, 
+      walaupun sumber daya tersedia melimpah. 
+      <br><br>
+      Kesadaran masyarakat juga menjadi faktor penting, melalui penghematan energi dan penggunaan teknologi hemat listrik. 
+      Integrasi antara inovasi teknologi, kebijakan adaptif, dan partisipasi publik menghasilkan sistem energi terbarukan 
+      yang efektif, berkelanjutan, serta berdampak positif pada lingkungan global.
+      <br><br>
+      <b>Question:</b> Berdasarkan teks di atas, manakah kesimpulan yang paling tepat tentang keberhasilan energi terbarukan?<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Keberhasilan energi terbarukan hanya ditentukan oleh faktor teknis.",
+    "Keberhasilan energi terbarukan sangat bergantung pada integrasi faktor teknis, kebijakan, dan partisipasi masyarakat.",
+    "Partisipasi masyarakat tidak memengaruhi efektivitas sistem energi terbarukan.",
+    "Kombinasi energi konvensional tidak diperlukan karena energi terbarukan selalu optimal.",
+    "Regulasi pemerintah dan insentif fiskal hanya bersifat tambahan dan tidak memengaruhi investasi swasta."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Energi terbarukan menjadi fokus utama dalam mengurangi dampak perubahan iklim. 
+      Sumber energi seperti tenaga surya, angin, dan biomassa lebih ramah lingkungan dibandingkan bahan bakar fosil. 
+      Meskipun potensinya besar, implementasi energi terbarukan menghadapi hambatan teknis, ekonomi, dan sosial. 
+      <br><br>
+      Panel surya memerlukan efisiensi tinggi dan sistem penyimpanan canggih, sementara tenaga angin tergantung pada lokasi dan kecepatan angin. 
+      Hambatan ini membuat beberapa proyek memerlukan kombinasi dengan energi konvensional untuk menjaga kontinuitas pasokan listrik. 
+      <br><br>
+      Faktor sosial dan kebijakan juga penting. 
+      Regulasi jelas dan insentif fiskal mendorong investasi swasta, sedangkan prosedur birokrasi yang rumit menunda pengembangan proyek. 
+      <br><br>
+      Kesadaran masyarakat melalui penghematan energi dan penggunaan teknologi hemat listrik turut mendukung keberhasilan energi terbarukan. 
+      Integrasi antara teknologi, kebijakan, dan partisipasi publik menghasilkan sistem yang berkelanjutan dan berdampak positif pada lingkungan global.
+      <br><br>
+      <b>Question:</b> Hubungan makna antara paragraf kedua dan ketiga dalam teks adalah …<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Paragraf ketiga menjelaskan contoh spesifik dari masalah teknis yang disebutkan di paragraf kedua.",
+    "Paragraf ketiga menunjukkan akibat dari hambatan teknis yang dibahas di paragraf kedua.",
+    "Paragraf ketiga menekankan faktor tambahan (sosial dan kebijakan) yang juga memengaruhi keberhasilan energi terbarukan, melengkapi informasi paragraf kedua.",
+    "Paragraf ketiga membantah informasi di paragraf kedua tentang keterbatasan energi terbarukan.",
+    "Paragraf ketiga menyimpulkan keseluruhan isi paragraf kedua menjadi satu pernyataan singkat."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Energi terbarukan menjadi fokus utama dalam mengurangi dampak perubahan iklim. 
+      Sumber energi seperti tenaga surya, angin, dan biomassa lebih ramah lingkungan dibandingkan bahan bakar fosil. 
+      Meskipun potensinya besar, implementasi energi terbarukan menghadapi hambatan teknis, ekonomi, dan sosial. 
+      <br><br>
+      Panel surya memerlukan efisiensi tinggi dan sistem penyimpanan canggih, sementara tenaga angin tergantung pada lokasi dan kecepatan angin. 
+      Hambatan ini membuat beberapa proyek memerlukan kombinasi dengan energi konvensional untuk menjaga kontinuitas pasokan listrik. 
+      <br><br>
+      Faktor sosial dan kebijakan juga penting. 
+      Regulasi jelas dan insentif fiskal mendorong investasi swasta, sedangkan prosedur birokrasi yang rumit menunda pengembangan proyek. 
+      <br><br>
+      Kesadaran masyarakat melalui penghematan energi dan penggunaan teknologi hemat listrik turut mendukung keberhasilan energi terbarukan. 
+      Integrasi antara teknologi, kebijakan, dan partisipasi publik menghasilkan sistem yang berkelanjutan dan berdampak positif pada lingkungan global.
+      <br><br>
+      <b>Question:</b> Manakah pernyataan berikut yang paling akurat dan sesuai dengan informasi dalam teks?<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Semua hambatan energi terbarukan berasal dari masalah teknis pada panel surya dan turbin angin.",
+    "Keberhasilan energi terbarukan bergantung pada integrasi teknologi, kebijakan, dan partisipasi masyarakat.",
+    "Partisipasi masyarakat tidak berpengaruh signifikan terhadap keberhasilan energi terbarukan.",
+    "Energi terbarukan selalu dapat beroperasi optimal tanpa bantuan energi konvensional.",
+    "Regulasi pemerintah tidak memiliki dampak pada investasi swasta dalam proyek energi terbarukan."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Malam itu, Hendra menatap langit yang gelap, mencoba memahami suara hujan yang jatuh tanpa henti. 
+      Kota yang biasanya riuh, kini hening, seakan menunggu sesuatu yang tak terucapkan. 
+      Di apartemennya, tumpukan buku-buku menumpuk rapi, namun beberapa halaman terbuka begitu saja, 
+      seolah ada tangan tak terlihat yang membaliknya. 
+      Hendra mendekat, membaca kata-kata yang sebelumnya tak pernah ia tulis. 
+      Kata-kata itu tentang kehilangan, harapan, dan rasa ingin bertahan meski dunia terasa abstrak. 
+      Ia tersadar bahwa ia bukan sekadar pengamat; ia bagian dari cerita yang sedang membentuk dirinya sendiri.
+      <br><br>
+      Ketika telepon berdering, Hendra ragu menjawab. 
+      Suara di seberang sana terdengar asing namun akrab. 
+      Pembicaraan itu sejenak membingungkan, tetapi mengungkapkan fakta bahwa ia harus memilih antara keheningan 
+      atau keberanian menghadapi ketidakpastian. 
+      Hendra menutup telepon, menatap hujan yang menetes di jendela, dan menyadari bahwa keputusan itu tidak akan mudah. 
+      Dunia nyata dan imajinasinya saling bertaut dalam setiap detik yang berlalu.
+      <br><br>
+      <b>Question:</b> Berdasarkan teks, karakter Hendra dapat digambarkan sebagai …<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Tokoh yang pasif dan tidak pernah menghadapi konflik.",
+    "Tokoh yang reflektif, penuh pertimbangan, dan menghadapi ketidakpastian.",
+    "Tokoh yang ceria, mudah beradaptasi tanpa rasa gelisah.",
+    "Tokoh antagonis yang menyebabkan konflik pada tokoh lain.",
+    "Tokoh yang hanya menjadi pengamat tanpa terlibat dalam cerita."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Malam itu, Hendra menatap langit yang gelap, mencoba memahami suara hujan yang jatuh tanpa henti. 
+      Kota yang biasanya riuh, kini hening, seakan menunggu sesuatu yang tak terucapkan. 
+      Di apartemennya, tumpukan buku-buku menumpuk rapi, namun beberapa halaman terbuka begitu saja, 
+      seolah ada tangan tak terlihat yang membaliknya. 
+      Hendra mendekat, membaca kata-kata yang sebelumnya tak pernah ia tulis. 
+      Kata-kata itu tentang kehilangan, harapan, dan rasa ingin bertahan meski dunia terasa abstrak. 
+      Ia tersadar bahwa ia bukan sekadar pengamat; ia bagian dari cerita yang sedang membentuk dirinya sendiri.
+      <br><br>
+      Ketika telepon berdering, Hendra ragu menjawab. 
+      Suara di seberang sana terdengar asing namun akrab. 
+      Pembicaraan itu sejenak membingungkan, tetapi mengungkapkan fakta bahwa ia harus memilih antara keheningan 
+      atau keberanian menghadapi ketidakpastian. 
+      Hendra menutup telepon, menatap hujan yang menetes di jendela, dan menyadari bahwa keputusan itu tidak akan mudah. 
+      Dunia nyata dan imajinasinya saling bertaut dalam setiap detik yang berlalu.
+      <br><br>
+      Di pagi hari, Hendra keluar dari apartemen. 
+      Jalanan basah memantulkan cahaya lampu kota, menciptakan permainan bayangan yang menyesatkan mata. 
+      Ia menyadari, konflik yang ia rasakan bukan hanya tentang pilihan, tetapi tentang memahami dirinya sendiri. 
+      Dan meski belum menemukan jawaban, langkahnya mantap menuju kota yang diam dan penuh kemungkinan, 
+      meninggalkan pertanyaan yang masih menggantung di udara.
+      <br><br>
+      <b>Question:</b> Pilihlah semua konflik yang dialami Hendra berdasarkan teks:<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Konflik internal terkait kebimbangan menghadapi ketidakpastian.",
+    "Konflik eksternal dengan wanita tua di jalan.",
+    "Konflik internal terkait refleksi diri dan pemahaman diri sendiri.",
+    "Konflik eksternal dengan hujan yang menghalangi aktivitas.",
+    "Konflik sosial dengan masyarakat kota yang hening."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      Malam itu, Hendra menatap langit yang gelap, mencoba memahami suara hujan yang jatuh tanpa henti. 
+      Kota yang biasanya riuh, kini hening, seakan menunggu sesuatu yang tak terucapkan. 
+      Di apartemennya, tumpukan buku-buku menumpuk rapi, namun beberapa halaman terbuka begitu saja, 
+      seolah ada tangan tak terlihat yang membaliknya. 
+      Hendra mendekat, membaca kata-kata yang sebelumnya tak pernah ia tulis. 
+      Kata-kata itu tentang kehilangan, harapan, dan rasa ingin bertahan meski dunia terasa abstrak. 
+      Ia tersadar bahwa ia bukan sekadar pengamat; ia bagian dari cerita yang sedang membentuk dirinya sendiri.
+      <br><br>
+      Ketika telepon berdering, Hendra ragu menjawab. 
+      Suara di seberang sana terdengar asing namun akrab. 
+      Pembicaraan itu sejenak membingungkan, tetapi mengungkapkan fakta bahwa ia harus memilih antara keheningan 
+      atau keberanian menghadapi ketidakpastian. 
+      Hendra menutup telepon, menatap hujan yang menetes di jendela, dan menyadari bahwa keputusan itu tidak akan mudah. 
+      Dunia nyata dan imajinasinya saling bertaut dalam setiap detik yang berlalu.
+      <br><br>
+      Di pagi hari, Hendra keluar dari apartemen. 
+      Jalanan basah memantulkan cahaya lampu kota, menciptakan permainan bayangan yang menyesatkan mata. 
+      Ia menyadari, konflik yang ia rasakan bukan hanya tentang pilihan, tetapi tentang memahami dirinya sendiri. 
+      Dan meski belum menemukan jawaban, langkahnya mantap menuju kota yang diam dan penuh kemungkinan, 
+      meninggalkan pertanyaan yang masih menggantung di udara.
+      <br><br>
+      <b>Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut mengenai nilai-nilai yang tercermin dari Hendra:</b>
+    </div>
+  `,
+  "statements": [
+    "Hendra menunjukkan keberanian dalam menghadapi ketidakpastian.",
+    "Hendra melakukan refleksi diri dan introspeksi pribadi.",
+    "Hendra terlibat dalam persaingan sosial dengan tetangga dan warga kota.",
+    "Hendra menunjukkan ketekunan dan tanggung jawab terhadap keputusan pribadinya."
+  ],
+  "correct": [true, true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Malam itu, Hendra menatap langit yang gelap, mencoba memahami suara hujan yang jatuh tanpa henti. 
+      Kota yang biasanya riuh, kini hening, seakan menunggu sesuatu yang tak terucapkan. 
+      Di apartemennya, tumpukan buku-buku menumpuk rapi, namun beberapa halaman terbuka begitu saja, 
+      seolah ada tangan tak terlihat yang membaliknya. 
+      Hendra mendekat, membaca kata-kata yang sebelumnya tak pernah ia tulis. 
+      Kata-kata itu tentang kehilangan, harapan, dan rasa ingin bertahan meski dunia terasa abstrak. 
+      Ia tersadar bahwa ia bukan sekadar pengamat; ia bagian dari cerita yang sedang membentuk dirinya sendiri.
+      <br><br>
+      Ketika telepon berdering, Hendra ragu menjawab. 
+      Suara di seberang sana terdengar asing namun akrab. 
+      Pembicaraan itu sejenak membingungkan, tetapi mengungkapkan fakta bahwa ia harus memilih antara keheningan 
+      atau keberanian menghadapi ketidakpastian. 
+      Hendra menutup telepon, menatap hujan yang menetes di jendela, dan menyadari bahwa keputusan itu tidak akan mudah. 
+      Dunia nyata dan imajinasinya saling bertaut dalam setiap detik yang berlalu.
+      <br><br>
+      Di pagi hari, Hendra keluar dari apartemen. 
+      Jalanan basah memantulkan cahaya lampu kota, menciptakan permainan bayangan yang menyesatkan mata. 
+      Ia menyadari, konflik yang ia rasakan bukan hanya tentang pilihan, tetapi tentang memahami dirinya sendiri. 
+      Dan meski belum menemukan jawaban, langkahnya mantap menuju kota yang diam dan penuh kemungkinan, 
+      meninggalkan pertanyaan yang masih menggantung di udara.
+      <br><br>
+      <b>Pertanyaan:</b> Bagian teks manakah yang paling tepat menggambarkan karakter Hendra sebagai seorang reflektif dan introspektif?<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Hendra menatap langit yang gelap, mencoba memahami suara hujan yang jatuh tanpa henti.",
+    "Tumpukan buku-buku menumpuk rapi, namun beberapa halaman terbuka begitu saja, seolah ada tangan tak terlihat yang membaliknya.",
+    "Hendra menutup telepon, menatap hujan yang menetes di jendela, dan menyadari bahwa keputusan itu tidak akan mudah.",
+    "Jalanan basah memantulkan cahaya lampu kota, menciptakan permainan bayangan yang menyesatkan mata."
+  ],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Malam itu, Hendra menatap langit yang gelap, mencoba memahami suara hujan yang jatuh tanpa henti. 
+      Kota yang biasanya riuh, kini hening, seakan menunggu sesuatu yang <b>tak terucapkan</b>. 
+      Di apartemennya, tumpukan buku-buku menumpuk rapi, namun beberapa halaman terbuka begitu saja, 
+      seolah ada tangan tak terlihat yang membaliknya. 
+      Hendra mendekat, membaca kata-kata yang sebelumnya tak pernah ia tulis. 
+      Kata-kata itu tentang kehilangan, harapan, dan rasa ingin bertahan meski dunia terasa abstrak. 
+      Ia tersadar bahwa ia bukan sekadar pengamat; ia bagian dari cerita yang sedang membentuk dirinya sendiri.
+      <br><br>
+      Ketika telepon berdering, Hendra ragu menjawab. 
+      Suara di seberang sana terdengar asing namun akrab. 
+      Pembicaraan itu sejenak membingungkan, tetapi mengungkapkan fakta bahwa ia harus memilih antara keheningan 
+      atau keberanian menghadapi ketidakpastian. 
+      Hendra menutup telepon, menatap hujan yang menetes di jendela, dan menyadari bahwa keputusan itu tidak akan mudah. 
+      Dunia nyata dan imajinasinya saling bertaut dalam setiap detik yang berlalu.
+      <br><br>
+      <b>Pertanyaan:</b> Makna kata <i>"tak terucapkan"</i> dalam konteks kalimat tersebut adalah …<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Sesuatu yang tidak dapat diungkapkan dengan kata-kata",
+    "Sesuatu yang belum sempat diucapkan",
+    "Sesuatu yang hanya bisa dirasakan, bukan diucapkan",
+    "Sesuatu yang diucapkan dengan suara lirih"
+  ],
+  "correct": 0,
+  },
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <i>
+      Malam menebar gelapnya di langit beton,<br>
+      Lampu-lampu jalan menari di genangan,<br>
+      Setiap tetes hujan adalah bisik yang jatuh,<br>
+      Menyentuh jiwa-jiwa yang tersesat di trotoar.<br><br>
+      Aku menatap jendela apartemen yang sunyi,<br>
+      Buku-buku tersusun rapi, halaman menoleh,<br>
+      Seolah kata-kata lama memanggilku kembali,<br>
+      Mengingatkan tentang kehilangan, harapan, dan keteguhan.<br><br>
+      </i>
+      <b>Pertanyaan:</b> Bait berikut mengekspresikan emosi apa?<br><br>
+      "Aku menatap jendela apartemen yang sunyi,<br>
+      Buku-buku tersusun rapi, halaman menoleh."<br><br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Kesedihan dan harapan",
+    "Kegembiraan dan semangat",
+    "Ketakutan dan panik",
+    "Kebingungan dan kemarahan"
+  ],
+  "correct": 0,
+  }
+
+
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (['true_false', 'true_false_en', 'fact_opinion', 'benefit_challenge', 'tepat_tidak'].includes(q.type)) {
+    return Array(q.statements.length).fill(null);
+  }
+  return null;
+});
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+// ====== TEPAT / TIDAK TEPAT ======
+else if (q.type === 'tepat_tidak') {
+  html += `<table class="true-false">
+    <tr><th>Pernyataan</th><th>Tepat</th><th>Tidak Tepat</th></tr>`;
+  q.statements.forEach((stmt, i) => {
+    const tepatChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td><input type="radio" name="tt_${i}" value="true" ${tepatChecked}></td>
+      <td><input type="radio" name="tt_${i}" value="false" ${tidakChecked}></td>
+    </tr>`;
+  });
+  html += `</table>`;
+}
+
+  // ====== BENEFIT / CHALLENGE ======
+  else if (q.type === 'benefit_challenge') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Benefit</th><th>Challenge</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benChecked = answers[index][i] === 'benefit' ? 'checked' : '';
+      const chalChecked = answers[index][i] === 'challenge' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="bc_${i}" value="benefit" ${benChecked}></td>
+        <td><input type="radio" name="bc_${i}" value="challenge" ${chalChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== TRUE / FALSE (English version) ======
+  else if (q.type === 'true_false_en') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>True</th><th>False</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const trueChecked = answers[index][i] === true ? 'checked' : '';
+      const falseChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tfe_${i}" value="true" ${trueChecked}></td>
+        <td><input type="radio" name="tfe_${i}" value="false" ${falseChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== FACT / OPINION ======
+  else if (q.type === 'fact_opinion') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Fact</th><th>Opinion</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const factChecked = answers[index][i] === 'fact' ? 'checked' : '';
+      const opChecked = answers[index][i] === 'opinion' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="fo_${i}" value="fact" ${factChecked}></td>
+        <td><input type="radio" name="fo_${i}" value="opinion" ${opChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk Benefit/Challenge
+  if (q.type === 'benefit_challenge') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="bc_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+// Event listener untuk TEPAT/TIDAK TEPAT
+if (q.type === 'tepat_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="tt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+
+  // Event listener untuk True/False English
+  if (q.type === 'true_false_en') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tfe_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk Fact/Opinion
+  if (q.type === 'fact_opinion') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="fo_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk tipe mc_multiple
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', e => {
+        const val = parseInt(e.target.value);
+        if (e.target.checked) {
+          if (!answers[index].includes(val)) answers[index].push(val);
+        } else {
+          answers[index] = answers[index].filter(v => v !== val);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  // Hitung skor 0–100
+  const percentage = Math.round((score / questions.length) * 100);
+
+  // Tampilkan hanya skor akhir dalam bentuk nilai
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+}
+
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  const interval = setInterval(() => {
+    if (!timerRunning) { clearInterval(interval); return; }
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    if (--timer < 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+  }, 1000);
+}
+
+renderQuestionButtons();
+renderQuestion(currentQuestion);
+startTimer(45 * 60);
+
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+fullscreenBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      alert(`Gagal masuk fullscreen: ${err.message}`);
+    });
+    fullscreenBtn.textContent = "Exit Fullscreen";
+  } else {
+    document.exitFullscreen();
+    fullscreenBtn.textContent = "Fullscreen";
+  }
+});
+  </script>
+</body>
+</html>

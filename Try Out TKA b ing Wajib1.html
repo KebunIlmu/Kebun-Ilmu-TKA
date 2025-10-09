@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Bahasa Inggris Wajib- Kebun Ilmu</title>
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+
+  </style>
+</head>
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+
+<header>
+  <h2>Try Out TKA bahasa Inggris Wajib - Kebun Ilmu</h2>
+  <div>
+    <button id="fullscreenBtn" class="menu-button">Fullscreen</button>
+    <span class="timer" id="timer">45:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "tryout1",  password: "2025",  expire: "2025-10-11T23:59:59" },
+  { username: "nadira", password: "nad322", expire: "2025-10-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(45 * 60);
+}
+  const questions = [
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgU2eEu5ebkdpQ1phIhIl1uULagTGJsYvFLqRUsptjRmdbKg3TEdfmosx0PwZiPsDNqkBHTdbBNSkGAsRrIGZChJKAO8FWcePFmPc_THLMApEpnplhrw4tzo8N3-ys3WoVKWxC6pQvly7ZrdKHCQxqs4-gRTGQrG394YmVshzLQORevQydX9yiw42Lyyxr7/s1600/soal-tka-sma-bahasa-inggris-wajib.jpg" 
+      alt="Komodo Dragon" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+      
+      The Komodo dragon, or <i>Varanus komodoensis</i>, is a remarkable species of lizard found only in the Indonesian islands of Komodo, Rinca, Flores, and Gili Motang. As the world's largest living lizard, it is a true relic of a prehistoric age, fascinating scientists and tourists alike. An adult Komodo dragon can grow up to 3 meters in length and weigh over 70 kilograms, making it the apex predator in its habitat.
+      <br><br>
+      Their survival strategy is a combination of brute force and sophisticated biological weaponry. Komodo dragons are carnivores, and their diet is varied, including deer, pigs, smaller dragons, and even large water buffalo. They are patient hunters, often waiting for hours for prey to cross their path. A Komodo's bite is its most formidable weapon. For a long time, scientists believed that bacteria in their saliva were responsible for killing their prey. However, recent research has revealed that the dragons possess venom glands. This venom, delivered with a powerful bite, causes a severe drop in blood pressure, shock, and prevents blood clotting, quickly incapacitating their victim.
+      <br><br>
+      The conservation status of the Komodo dragon is listed as Endangered. The primary threats to their existence are human activities, including habitat loss due to land clearing and a decrease in their natural prey. Volcanic activity and other natural disasters on their native islands also pose a significant risk. Conservation efforts are crucial and are primarily focused on protecting their habitats within Komodo National Park. These programs involve monitoring the dragon population, working with local communities to prevent poaching, and managing tourism to minimize its impact on the ecosystem.
+      <br><br>
+      The future of this magnificent species depends on a delicate balance between human interests and wildlife preservation. Protecting the Komodo dragon means preserving a unique piece of Earth's natural heritage for future generations to marvel at.
+      <br><br>
+      <b>Question:</b> According to the text, what is the most recent scientific finding about the Komodo dragon's bite?
+    </div>
+  `,
+  "options": [
+    "Their saliva contains deadly bacteria that infect the prey.",
+    "They possess venom glands that incapacitate their victims.",
+    "Their bite is dangerous mainly due to its powerful jaw strength.",
+    "They hunt by patiently waiting for their prey to die of exhaustion.",
+    "The bacteria in their mouth are harmless to larger animals."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgU2eEu5ebkdpQ1phIhIl1uULagTGJsYvFLqRUsptjRmdbKg3TEdfmosx0PwZiPsDNqkBHTdbBNSkGAsRrIGZChJKAO8FWcePFmPc_THLMApEpnplhrw4tzo8N3-ys3WoVKWxC6pQvly7ZrdKHCQxqs4-gRTGQrG394YmVshzLQORevQydX9yiw42Lyyxr7/s1600/soal-tka-sma-bahasa-inggris-wajib.jpg" 
+      alt="Komodo Dragon" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+      
+      The Komodo dragon, or <i>Varanus komodoensis</i>, is a remarkable species of lizard found only in the Indonesian islands of Komodo, Rinca, Flores, and Gili Motang. As the world's largest living lizard, it is a true relic of a prehistoric age, fascinating scientists and tourists alike. An adult Komodo dragon can grow up to 3 meters in length and weigh over 70 kilograms, making it the apex predator in its habitat.
+      <br><br>
+      Their survival strategy is a combination of brute force and sophisticated biological weaponry. Komodo dragons are carnivores, and their diet is varied, including deer, pigs, smaller dragons, and even large water buffalo. They are patient hunters, often waiting for hours for prey to cross their path. A Komodo's bite is its most formidable weapon. For a long time, scientists believed that bacteria in their saliva were responsible for killing their prey. However, recent research has revealed that the dragons possess venom glands. This venom, delivered with a powerful bite, causes a severe drop in blood pressure, shock, and prevents blood clotting, quickly incapacitating their victim.
+      <br><br>
+      The conservation status of the Komodo dragon is listed as Endangered. The primary threats to their existence are human activities, including habitat loss due to land clearing and a decrease in their natural prey. Volcanic activity and other natural disasters on their native islands also pose a significant risk. Conservation efforts are crucial and are primarily focused on protecting their habitats within Komodo National Park. These programs involve monitoring the dragon population, working with local communities to prevent poaching, and managing tourism to minimize its impact on the ecosystem.
+      <br><br>
+      The future of this magnificent species depends on a delicate balance between human interests and wildlife preservation. Protecting the Komodo dragon means preserving a unique piece of Earth's natural heritage for future generations to marvel at.
+      <br><br>
+      <b>Question:</b> What is the main purpose of the author in writing this text?
+    </div>
+  `,
+  "options": [
+    "To persuade tourists to visit Komodo National Park.",
+    "To criticize the lack of government effort in conservation.",
+    "To provide a comprehensive overview of the Komodo dragon, including its characteristics, hunting methods, and conservation status.",
+    "To compare the Komodo dragon with other prehistoric predators.",
+    "To focus solely on the scientific debate about the dragon's saliva."
+  ],
+  "correct": 2
+},
+
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgU2eEu5ebkdpQ1phIhIl1uULagTGJsYvFLqRUsptjRmdbKg3TEdfmosx0PwZiPsDNqkBHTdbBNSkGAsRrIGZChJKAO8FWcePFmPc_THLMApEpnplhrw4tzo8N3-ys3WoVKWxC6pQvly7ZrdKHCQxqs4-gRTGQrG394YmVshzLQORevQydX9yiw42Lyyxr7/s1600/soal-tka-sma-bahasa-inggris-wajib.jpg" 
+      alt="Komodo Dragon" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+      
+      The Komodo dragon, or <i>Varanus komodoensis</i>, is a remarkable species of lizard found only in the Indonesian islands of Komodo, Rinca, Flores, and Gili Motang. 
+      As the world's largest living lizard, it is a true relic of a prehistoric age, fascinating scientists and tourists alike. 
+      An adult Komodo dragon can grow up to 3 meters in length and weigh over 70 kilograms, making it the apex predator in its habitat.
+      <br><br>
+      Their survival strategy is a combination of brute force and sophisticated biological weaponry. 
+      Komodo dragons are carnivores, and their diet is varied, including deer, pigs, smaller dragons, and even large water buffalo. 
+      They are patient hunters, often waiting for hours for prey to cross their path. 
+      A Komodo's bite is its most formidable weapon. 
+      For a long time, scientists believed that bacteria in their saliva were responsible for killing their prey. 
+      However, recent research has revealed that the dragons possess venom glands. 
+      This venom, delivered with a powerful bite, causes a severe drop in blood pressure, shock, and prevents blood clotting, quickly incapacitating their victim.
+      <br><br>
+      The conservation status of the Komodo dragon is listed as Endangered. 
+      The primary threats to their existence are human activities, including habitat loss due to land clearing and a decrease in their natural prey. 
+      Volcanic activity and other natural disasters on their native islands also pose a significant risk. 
+      Conservation efforts are crucial and are primarily focused on protecting their habitats within Komodo National Park. 
+      These programs involve monitoring the dragon population, working with local communities to prevent poaching, 
+      and managing tourism to minimize its impact on the ecosystem.
+      <br><br>
+      The future of this magnificent species depends on a delicate balance between human interests and wildlife preservation. 
+      Protecting the Komodo dragon means preserving a unique piece of Earth's natural heritage for future generations to marvel at.
+      <br><br>
+      <b>Question:</b> Which of the following statements best illustrate the Komodo dragon's status as an "apex predator"?<br>
+      <i>Choose the correct answers!</i>
+    </div>
+  `,
+  "options": [
+    "An adult Komodo dragon can grow up to 3 meters in length.",
+    "Their diet is varied, including deer, pigs, ... and even large water buffalo.",
+    "Volcanic activity and other natural disasters ... also pose a significant risk.",
+    "This venom, delivered with a powerful bite, ... quickly incapacitating their victim."
+  ],
+  "correct": [1, 3]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgU2eEu5ebkdpQ1phIhIl1uULagTGJsYvFLqRUsptjRmdbKg3TEdfmosx0PwZiPsDNqkBHTdbBNSkGAsRrIGZChJKAO8FWcePFmPc_THLMApEpnplhrw4tzo8N3-ys3WoVKWxC6pQvly7ZrdKHCQxqs4-gRTGQrG394YmVshzLQORevQydX9yiw42Lyyxr7/s1600/soal-tka-sma-bahasa-inggris-wajib.jpg" 
+      alt="Komodo Dragon" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+      
+      The Komodo dragon, or <i>Varanus komodoensis</i>, is a remarkable species of lizard found only in the Indonesian islands of Komodo, Rinca, Flores, and Gili Motang. As the world's largest living lizard, it is a true relic of a prehistoric age, fascinating scientists and tourists alike. An adult Komodo dragon can grow up to 3 meters in length and weigh over 70 kilograms, making it the apex predator in its habitat.
+      <br><br>
+      Their survival strategy is a combination of brute force and sophisticated biological weaponry. Komodo dragons are carnivores, and their diet is varied, including deer, pigs, smaller dragons, and even large water buffalo. They are patient hunters, often waiting for hours for prey to cross their path. A Komodo's bite is its most formidable weapon. For a long time, scientists believed that bacteria in their saliva were responsible for killing their prey. However, recent research has revealed that the dragons possess venom glands. This venom, delivered with a powerful bite, causes a severe drop in blood pressure, shock, and prevents blood clotting, quickly incapacitating their victim.
+      <br><br>
+      The conservation status of the Komodo dragon is listed as Endangered. The primary threats to their existence are human activities, including habitat loss due to land clearing and a decrease in their natural prey. Volcanic activity and other natural disasters on their native islands also pose a significant risk. Conservation efforts are crucial and are primarily focused on protecting their habitats within Komodo National Park. These programs involve monitoring the dragon population, working with local communities to prevent poaching, and managing tourism to minimize its impact on the ecosystem.
+      <br><br>
+      The future of this magnificent species depends on a delicate balance between human interests and wildlife preservation. Protecting the Komodo dragon means preserving a unique piece of Earth's natural heritage for future generations to marvel at.
+      <br><br>
+      <b>Question:</b> What can be inferred as the primary cause for the Komodo dragon's "Endangered" status?
+    </div>
+  `,
+  "options": [
+    "The volcanic activity on their native islands.",
+    "The scientific research that disturbs their natural behavior.",
+    "The impact of human activities on their habitat and food source.",
+    "The presence of venom glands which makes them a target for hunters.",
+    "Their inability to compete with other predators in the area."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Last year, I decided to step out of my comfort zone and join a three-day volunteer program to clean a remote beach. The journey itself was an adventure, involving a long bus ride and a short boat trip. When we arrived, I was shocked to see the amount of plastic waste washed ashore, covering the beautiful white sand. It was a disheartening sight, but it also fueled my determination.
+      <br><br>
+      Our team, consisting of twenty volunteers from different cities, was divided into smaller groups. My first task was to collect plastic bottles and sort them into large bags. The sun was scorching, and the work was physically demanding. Within a few hours, my back ached, and I was drenched in sweat. There was a moment when I felt overwhelmed, thinking our efforts were just a drop in the ocean. However, seeing the enthusiasm of the other volunteers, some of whom were much older than me, inspired me to push on.
+      <br><br>
+      The most memorable moment happened on the final day. After working tirelessly, we managed to clear a significant portion of the beach. Standing there, looking at the clean shoreline with the sun setting in the background, I felt an incredible sense of accomplishment and pride. We didn't just clean a beach; we made a small but tangible difference. The experience taught me about the severity of plastic pollution and the power of collective action. I returned home not just with sore muscles, but with a renewed commitment to reducing my own plastic use.
+      <br><br>
+      <b>Question:</b> What was the writer's initial feeling upon arriving at the beach?
+    </div>
+  `,
+  "options": [
+    "Excited to start the cleaning process immediately.",
+    "Disappointed by the long and tiring journey.",
+    "Shocked and disheartened by the amount of plastic waste.",
+    "Overwhelmed by the heat and physical work ahead.",
+    "Inspired by the enthusiasm of the other volunteers."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Last year, I decided to step out of my comfort zone and join a three-day volunteer program to clean a remote beach. The journey itself was an adventure, involving a long bus ride and a short boat trip. When we arrived, I was shocked to see the amount of plastic waste washed ashore, covering the beautiful white sand. It was a disheartening sight, but it also fueled my determination.
+      <br><br>
+      Our team, consisting of twenty volunteers from different cities, was divided into smaller groups. My first task was to collect plastic bottles and sort them into large bags. The sun was scorching, and the work was physically demanding. Within a few hours, my back ached, and I was drenched in sweat. There was a moment when I felt overwhelmed, thinking our efforts were just a drop in the ocean. However, seeing the enthusiasm of the other volunteers, some of whom were much older than me, inspired me to push on.
+      <br><br>
+      The most memorable moment happened on the final day. After working tirelessly, we managed to clear a significant portion of the beach. Standing there, looking at the clean shoreline with the sun setting in the background, I felt an incredible sense of accomplishment and pride. We didn't just clean a beach; we made a small but tangible difference. The experience taught me about the severity of plastic pollution and the power of collective action. I returned home not just with sore muscles, but with a renewed commitment to reducing my own plastic use.
+      <br><br>
+      <b>Question:</b> Which character traits best describe the writer during the volunteer program?<br>
+      <i>(Choose the correct answers!)</i>
+    </div>
+  `,
+  "options": [
+    "Easily discouraged",
+    "Determined",
+    "Reflective",
+    "Lazy"
+  ],
+  "correct": [1, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Last year, I decided to step out of my comfort zone and join a three-day volunteer program to clean a remote beach. The journey itself was an adventure, involving a long bus ride and a short boat trip. When we arrived, I was shocked to see the amount of plastic waste washed ashore, covering the beautiful white sand. It was a disheartening sight, but it also fueled my determination.
+      <br><br>
+      Our team, consisting of twenty volunteers from different cities, was divided into smaller groups. My first task was to collect plastic bottles and sort them into large bags. The sun was scorching, and the work was physically demanding. Within a few hours, my back ached, and I was drenched in sweat. There was a moment when I felt overwhelmed, thinking our efforts were just a drop in the ocean. However, seeing the enthusiasm of the other volunteers, some of whom were much older than me, inspired me to push on.
+      <br><br>
+      The most memorable moment happened on the final day. After working tirelessly, we managed to clear a significant portion of the beach. Standing there, looking at the clean shoreline with the sun setting in the background, I felt an incredible sense of accomplishment and pride. We didn't just clean a beach; we made a small but tangible difference. The experience taught me about the severity of plastic pollution and the power of collective action. I returned home not just with sore muscles, but with a renewed commitment to reducing my own plastic use.
+      <br><br>
+      <b>Question:</b> The phrase <i>"our efforts were just a drop in the ocean"</i> in the second paragraph is used to express the writer's feeling of…
+    </div>
+  `,
+  "options": [
+    "Satisfaction that they had started the work.",
+    "Certainty that they could clean the entire beach.",
+    "Frustration that their hard work seemed insignificant compared to the scale of the problem.",
+    "Joy from working together with other volunteers.",
+    "Anger towards the people who polluted the beach."
+  ],
+  "correct": 2
+},
+
+{
+  type: "benefit_challenge",
+  text: `
+    <div style="text-align: justify;">
+      The concept of a "smart city" is no longer science fiction; it is a rapidly developing reality. 
+      At its core, a smart city uses technology, particularly the Internet of Things (IoT), 
+      to improve the quality of life for its citizens. This involves a network of connected sensors, 
+      cameras, and devices that collect data in real-time. This data is then analyzed to manage assets, 
+      resources, and services efficiently.
+      <br><br>
+      There are several key areas where smart city technology is applied. One is transportation. 
+      Smart traffic lights can adjust their timing based on actual traffic flow, reducing congestion 
+      and cutting down on commute times. Smart parking systems guide drivers to available spots, 
+      saving time and fuel. Another area is energy management. Smart grids can distribute electricity 
+      more efficiently, reducing waste and preventing blackouts. Smart streetlights dim when no one 
+      is around and brighten when they detect motion, saving a significant amount of energy.
+      <br><br>
+      However, the implementation of smart cities also raises important challenges. 
+      The most significant concern is data privacy and security. With a vast network collecting data 
+      on citizens' movements and habits, there is a risk of this information being misused or hacked. 
+      Ensuring that this data is secure and used ethically is paramount. Another challenge is the high 
+      initial cost of installing the necessary infrastructure, which can be a major barrier for many cities. 
+      Finally, there is the risk of creating a "digital divide," where citizens who are less tech-savvy are left 
+      behind and cannot access the benefits of a smart city. Addressing these issues is crucial for creating 
+      smart cities that are not only efficient but also equitable and secure.
+      <br><br>
+      Determine whether each statement about smart cities is a benefit or a challenge.
+    </div>
+  `,
+  statements: [
+    "Reduced traffic congestion",
+    "Potential misuse of personal data",
+    "High cost of infrastructure"
+  ],
+  correct: ["benefit", "challenge", "challenge"]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      The concept of a "smart city" is no longer science fiction; it is a rapidly developing reality. At its core, a smart city uses technology, particularly the Internet of Things (IoT), to improve the quality of life for its citizens. This involves a network of connected sensors, cameras, and devices that collect data in real-time. This data is then analyzed to manage assets, resources, and services efficiently.
+      <br><br>
+      There are several key areas where smart city technology is applied. One is transportation. Smart traffic lights can adjust their timing based on actual traffic flow, reducing congestion and cutting down on commute times. Smart parking systems guide drivers to available spots, saving time and fuel. Another area is energy management. Smart grids can distribute electricity more efficiently, reducing waste and preventing blackouts. Smart streetlights dim when no one is around and brighten when they detect motion, saving a significant amount of energy.
+      <br><br>
+      However, the implementation of smart cities also raises important challenges. The most significant concern is data privacy and security. With a vast network collecting data on citizens' movements and habits, there is a risk of this information being misused or hacked. Ensuring that this data is secure and used ethically is paramount. Another challenge is the high initial cost of installing the necessary infrastructure, which can be a major barrier for many cities. Finally, there is the risk of creating a "digital divide," where citizens who are less tech-savvy are left behind and cannot access the benefits of a smart city. Addressing these issues is crucial for creating smart cities that are not only efficient but also equitable and secure.
+      <br><br>
+      <b>Question:</b> If the author were to add another paragraph to the text, what would be the most likely topic?
+    </div>
+  `,
+  "options": [
+    "A detailed history of the first smart city.",
+    "A technical explanation of how IoT sensors are manufactured.",
+    "A list of cities that have failed to become smart.",
+    "An exploration of potential solutions to address the challenges of privacy, cost, and digital divide.",
+    "A comparison of smart cities and traditional rural villages."
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      The concept of a "smart city" is no longer science fiction; it is a rapidly developing reality. At its core, a smart city uses technology, particularly the Internet of Things (IoT), to improve the quality of life for its citizens. This involves a network of connected sensors, cameras, and devices that collect data in real-time. This data is then analyzed to manage assets, resources, and services efficiently.
+      <br><br>
+      There are several key areas where smart city technology is applied. One is transportation. Smart traffic lights can adjust their timing based on actual traffic flow, reducing congestion and cutting down on commute times. Smart parking systems guide drivers to available spots, saving time and fuel. Another area is energy management. Smart grids can distribute electricity more efficiently, reducing waste and preventing blackouts. Smart streetlights dim when no one is around and brighten when they detect motion, saving a significant amount of energy.
+      <br><br>
+      However, the implementation of smart cities also raises important challenges. The most significant concern is data privacy and security. With a vast network collecting data on citizens' movements and habits, there is a risk of this information being misused or hacked. Ensuring that this data is secure and used ethically is paramount. Another challenge is the high initial cost of installing the necessary infrastructure, which can be a major barrier for many cities. Finally, there is the risk of creating a "digital divide," where citizens who are less tech-savvy are left behind and cannot access the benefits of a smart city. Addressing these issues is crucial for creating smart cities that are not only efficient but also equitable and secure.
+      <br><br>
+      <b>Question:</b> The author presents the information in the text with the primary goal of…
+    </div>
+  `,
+  "options": [
+    "Persuading city mayors to invest in smart technology immediately.",
+    "Warning citizens about the unavoidable dangers of living in a smart city.",
+    "Providing a balanced overview of the smart city concept, covering both its advantages and disadvantages.",
+    "Promoting specific technology companies that build smart city infrastructure.",
+    "Arguing that the challenges of smart cities outweigh their potential benefits."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      In a small, sun-baked village, fresh water was a luxury. The only source was a distant well, and the water often carried dirt, making people sick. A young girl named Elara, who loved to read science books, watched with a heavy heart as her younger brother fell ill. While others saw it as a problem with no solution, Elara saw a challenge. She spent weeks in a small shed, surrounded by sketches and discarded parts, trying to build a simple, low-cost water filter.
+      <br><br>
+      Her first few attempts were failures. One device leaked, another clogged instantly. Some villagers mocked her, saying she was wasting her time on a childish dream. "You should be helping with chores, not playing with junk," an elder told her. Discouraged but not defeated, Elara remembered a chapter in her book about charcoal and sand acting as natural purifiers. This spark of knowledge reignited her determination. She decided to combine these natural materials with a simple mechanical system.
+      <br><br>
+      After many sleepless nights, she finally created a working prototype. It was an odd-looking contraption made of bamboo, cloth, sand, and charcoal, but it worked. When she poured the murky well water into it, a slow but steady drip of clean, clear water emerged from the other end. She presented her invention to the village elders. Initially skeptical, they were astonished when they saw the result. Her simple device began to provide safe drinking water for the entire community, and her brother’s health improved. Elara's story became a local legend, a testament to how knowledge, when combined with persistence, could bring about real change.
+      <br><br>
+      <b>Question:</b> What was the main problem faced by Elara's village?
+    </div>
+  `,
+  "options": [
+    "The village was located in a hot and dry area.",
+    "The villagers did not have enough science books to read.",
+    "The only water source was far away and the water was unsafe to drink.",
+    "The village elders did not support new inventions from young people.",
+    "There were no materials like bamboo and charcoal available in the village."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      In a small, sun-baked village, fresh water was a luxury. The only source was a distant well, and the water often carried dirt, making people sick. A young girl named Elara, who loved to read science books, watched with a heavy heart as her younger brother fell ill. While others saw it as a problem with no solution, Elara saw a challenge. She spent weeks in a small shed, surrounded by sketches and discarded parts, trying to build a simple, low-cost water filter.
+      <br><br>
+      Her first few attempts were failures. One device leaked, another clogged instantly. Some villagers mocked her, saying she was wasting her time on a childish dream. "You should be helping with chores, not playing with junk," an elder told her. Discouraged but not defeated, Elara remembered a chapter in her book about charcoal and sand acting as natural purifiers. This spark of knowledge reignited her determination. She decided to combine these natural materials with a simple mechanical system.
+      <br><br>
+      After many sleepless nights, she finally created a working prototype. It was an odd-looking contraption made of bamboo, cloth, sand, and charcoal, but it worked. When she poured the murky well water into it, a slow but steady drip of clean, clear water emerged from the other end. She presented her invention to the village elders. Initially skeptical, they were astonished when they saw the result. Her simple device began to provide safe drinking water for the entire community, and her brother’s health improved. Elara's story became a local legend, a testament to how knowledge, when combined with persistence, could bring about real change.
+      <br><br>
+      <b>Question:</b> Based on the story, Elara can be best described as…
+    </div>
+  `,
+  "options": [
+    "Stubborn and lonely.",
+    "Creative and persistent.",
+    "Lucky and ambitious.",
+    "Obedient and traditional.",
+    "Shy and hesitant."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      In a small, sun-baked village, fresh water was a luxury. The only source was a distant well, and the water often carried dirt, making people sick. A young girl named Elara, who loved to read science books, watched with a heavy heart as her younger brother fell ill. While others saw it as a problem with no solution, Elara saw a challenge. She spent weeks in a small shed, surrounded by sketches and discarded parts, trying to build a simple, low-cost water filter.
+      <br><br>
+      Her first few attempts were failures. One device leaked, another clogged instantly. Some villagers mocked her, saying she was wasting her time on a childish dream. "You should be helping with chores, not playing with junk," an elder told her. Discouraged but not defeated, Elara remembered a chapter in her book about charcoal and sand acting as natural purifiers. This spark of knowledge reignited her determination. She decided to combine these natural materials with a simple mechanical system.
+      <br><br>
+      After many sleepless nights, she finally created a working prototype. It was an odd-looking contraption made of bamboo, cloth, sand, and charcoal, but it worked. When she poured the murky well water into it, a slow but steady drip of clean, clear water emerged from the other end. She presented her invention to the village elders. Initially skeptical, they were astonished when they saw the result. Her simple device began to provide safe drinking water for the entire community, and her brother’s health improved. Elara's story became a local legend, a testament to how knowledge, when combined with persistence, could bring about real change.
+      <br><br>
+      <b>Question:</b> Which sentences from the text are most effective in showing Elara's determination?<br>Choose the correct answers!
+    </div>
+  `,
+  "options": [
+    "A young girl named Elara, who loved to read science books, watched with a heavy heart.",
+    "Her first few attempts were failures.",
+    "Discouraged but not defeated, Elara remembered a chapter in her book.",
+    "After many sleepless nights, she finally created a working prototype."
+  ],
+  "correct": [2, 3]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      In a small, sun-baked village, fresh water was a luxury. The only source was a distant well, and the water often carried dirt, making people sick. A young girl named Elara, who loved to read science books, watched with a heavy heart as her younger brother fell ill. While others saw it as a problem with no solution, Elara saw a challenge. She spent weeks in a small shed, surrounded by sketches and discarded parts, trying to build a simple, low-cost water filter.
+      <br><br>
+      Her first few attempts were failures. One device leaked, another clogged instantly. Some villagers mocked her, saying she was wasting her time on a childish dream. "You should be helping with chores, not playing with junk," an elder told her. Discouraged but not defeated, Elara remembered a chapter in her book about charcoal and sand acting as natural purifiers. This spark of knowledge reignited her determination. She decided to combine these natural materials with a simple mechanical system.
+      <br><br>
+      After many sleepless nights, she finally created a working prototype. It was an odd-looking contraption made of bamboo, cloth, sand, and charcoal, but it worked. When she poured the murky well water into it, a slow but steady drip of clean, clear water emerged from the other end. She presented her invention to the village elders. Initially skeptical, they were astonished when they saw the result. Her simple device began to provide safe drinking water for the entire community, and her brother’s health improved. Elara's story became a local legend, a testament to how knowledge, when combined with persistence, could bring about real change.
+      <br><br>
+      <b>Question:</b> What is the main message the story conveys?
+    </div>
+  `,
+  "options": [
+    "Scientific knowledge is only useful if it is written in books.",
+    "Traditional communities are always resistant to new ideas.",
+    "It is more important to perform chores than to pursue dreams.",
+    "Persistence and knowledge can overcome significant challenges.",
+    "Success can only be achieved by working alone."
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      In an era dominated by non-fiction and the quick consumption of online articles, many argue that reading fiction is a mere form of escapism with little practical benefit. However, this view overlooks the profound cognitive and emotional advantages that engaging with narrative fiction provides. Reading fiction is not just a hobby; it is a vital exercise for the mind that cultivates skills essential for navigating the complexities of the real world.
+      <br><br>
+      Firstly, reading fiction significantly enhances empathy. When we read a story, we step into a character's shoes, experiencing their joys, sorrows, and dilemmas from their perspective. This process of emotional simulation helps us understand and connect with people who are different from us. A 2013 study published in the journal Science found that participants who read literary fiction showed a marked improvement in their ability to infer the thoughts and feelings of others—a skill known as Theory of Mind. This heightened empathy translates into better social relationships and more compassionate behavior.
+      <br><br>
+      Furthermore, fiction is a powerful tool for improving critical thinking and creativity. Unlike nonfiction, which often presents information directly, fiction requires readers to make inferences, understand subtext, and analyze complex character motivations. The narrative structure, with its plot twists and unresolved questions, trains the brain to recognize patterns, deal with ambiguity, and think flexibly. This mental workout sharpens our analytical abilities and encourages us to approach problems from novel perspectives, thereby fostering creativity. Therefore, instead of dismissing fiction as trivial, we should recognize it as a fundamental tool for personal and intellectual development.
+      <br><br>
+      <b>Question:</b> According to the text, what is one of the key benefits of reading fiction?
+    </div>
+  `,
+  "options": [
+    "It provides factual information more directly than non-fiction.",
+    "It improves a reader's ability to understand others' feelings.",
+    "It is the fastest way to consume a large amount of information.",
+    "It helps readers escape from their real-world problems permanently.",
+    "It is primarily beneficial for developing writing skills."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      In an era dominated by non-fiction and the quick consumption of online articles, many argue that reading fiction is a mere form of escapism with little practical benefit. However, this view overlooks the profound cognitive and emotional advantages that engaging with narrative fiction provides. Reading fiction is not just a hobby; it is a vital exercise for the mind that cultivates skills essential for navigating the complexities of the real world.
+      <br><br>
+      Firstly, reading fiction significantly enhances empathy. When we read a story, we step into a character's shoes, experiencing their joys, sorrows, and dilemmas from their perspective. This process of emotional simulation helps us understand and connect with people who are different from us. A 2013 study published in the journal Science found that participants who read literary fiction showed a marked improvement in their ability to infer the thoughts and feelings of others—a skill known as Theory of Mind. This heightened empathy translates into better social relationships and more compassionate behavior.
+      <br><br>
+      Furthermore, fiction is a powerful tool for improving critical thinking and creativity. Unlike nonfiction, which often presents information directly, fiction requires readers to make inferences, understand subtext, and analyze complex character motivations. The narrative structure, with its plot twists and unresolved questions, trains the brain to recognize patterns, deal with ambiguity, and think flexibly. This mental workout sharpens our analytical abilities and encourages us to approach problems from novel perspectives, thereby fostering creativity. Therefore, instead of dismissing fiction as trivial, we should recognize it as a fundamental tool for personal and intellectual development.
+      <br><br>
+      <b>Question:</b> The author's primary purpose in writing the text is to...
+    </div>
+  `,
+  "options": [
+    "review a scientific study published in the journal Science.",
+    "entertain the reader with interesting stories about fiction.",
+    "argue that reading fiction offers significant mental and emotional benefits.",
+    "compare the sales of fiction and non-fiction books.",
+    "teach readers how to become more creative."
+  ],
+  "correct": 2
+},
+{
+  type: "fact_opinion",
+  text: `
+    <div style="text-align: justify;">
+      In an era dominated by non-fiction and the quick consumption of online articles, many argue that reading fiction is a mere form of escapism with little practical benefit. However, this view overlooks the profound cognitive and emotional advantages that engaging with narrative fiction provides. Reading fiction is not just a hobby; it is a vital exercise for the mind that cultivates skills essential for navigating the complexities of the real world.
+      <br><br>
+      Firstly, reading fiction significantly enhances empathy. When we read a story, we step into a character's shoes, experiencing their joys, sorrows, and dilemmas from their perspective. This process of emotional simulation helps us understand and connect with people who are different from us. A 2013 study published in the journal Science found that participants who read literary fiction showed a marked improvement in their ability to infer the thoughts and feelings of others—a skill known as Theory of Mind. This heightened empathy translates into better social relationships and more compassionate behavior.
+      <br><br>
+      Furthermore, fiction is a powerful tool for improving critical thinking and creativity. Unlike nonfiction, which often presents information directly, fiction requires readers to make inferences, understand subtext, and analyze complex character motivations. The narrative structure, with its plot twists and unresolved questions, trains the brain to recognize patterns, deal with ambiguity, and think flexibly. This mental workout sharpens our analytical abilities and encourages us to approach problems from novel perspectives, thereby fostering creativity. Therefore, instead of dismissing fiction as trivial, we should recognize it as a fundamental tool for personal and intellectual development.
+      <br><br>
+      <b>Question:</b> Determine whether each statement is a "Fact" presented in the text or an "Opinion" of the author.
+    </div>
+  `,
+  statements: [
+    "A 2013 study found that reading fiction improves Theory of Mind.",
+    "We should recognize fiction as a fundamental tool for development.",
+    "Many argue that reading fiction is a mere form of escapism."
+  ],
+  correct: ["fact", "opinion", "fact"]
+},
+{
+  type: "mc",
+  text: `
+    <div style="text-align: justify;">
+      In an era dominated by non-fiction and the quick consumption of online articles, many argue that reading fiction is a mere form of escapism with little practical benefit. However, this view overlooks the profound cognitive and emotional advantages that engaging with narrative fiction provides. Reading fiction is not just a hobby; it is a vital exercise for the mind that cultivates skills essential for navigating the complexities of the real world.
+      <br><br>
+      Firstly, reading fiction significantly enhances empathy. When we read a story, we step into a character's shoes, experiencing their joys, sorrows, and dilemmas from their perspective. This process of emotional simulation helps us understand and connect with people who are different from us. A 2013 study published in the journal Science found that participants who read literary fiction showed a marked improvement in their ability to infer the thoughts and feelings of others—a skill known as Theory of Mind. This heightened empathy translates into better social relationships and more compassionate behavior.
+      <br><br>
+      Furthermore, fiction is a powerful tool for improving critical thinking and creativity. Unlike nonfiction, which often presents information directly, fiction requires readers to make inferences, understand subtext, and analyze complex character motivations. The narrative structure, with its plot twists and unresolved questions, trains the brain to recognize patterns, deal with ambiguity, and think flexibly. This mental workout sharpens our analytical abilities and encourages us to approach problems from novel perspectives, thereby fostering creativity. Therefore, instead of dismissing fiction as trivial, we should recognize it as a fundamental tool for personal and intellectual development.
+      <br><br>
+      <b>Question:</b> Which of the following best outlines the structure of the text?
+    </div>
+  `,
+  options: [
+    "Introduction of a problem → Proposed solution → Examples of the solution",
+    "A common misconception → First argument against it (empathy) → Second argument against it (critical thinking) → Concluding statement",
+    "Historical overview of fiction → Analysis of modern fiction → Prediction for the future",
+    "Definition of empathy → Explanation of critical thinking → Synthesis of both concepts",
+    "Author's personal experience with fiction → Generalization → Call to action"
+  ],
+  correct: 1
+},
+{
+  type: "mc",
+  text: `
+    <div style="text-align: justify;">
+      In an era dominated by non-fiction and the quick consumption of online articles, many argue that reading fiction is a mere form of escapism with little practical benefit. However, this view overlooks the profound cognitive and emotional advantages that engaging with narrative fiction provides. Reading fiction is not just a hobby; it is a vital exercise for the mind that cultivates skills essential for navigating the complexities of the real world.
+      <br><br>
+      Firstly, reading fiction significantly enhances empathy. When we read a story, we step into a character's shoes, experiencing their joys, sorrows, and dilemmas from their perspective. This process of emotional simulation helps us understand and connect with people who are different from us. A 2013 study published in the journal Science found that participants who read literary fiction showed a marked improvement in their ability to infer the thoughts and feelings of others—a skill known as Theory of Mind. This heightened empathy translates into better social relationships and more compassionate behavior.
+      <br><br>
+      Furthermore, fiction is a powerful tool for improving critical thinking and creativity. Unlike nonfiction, which often presents information directly, fiction requires readers to make inferences, understand subtext, and analyze complex character motivations. The narrative structure, with its plot twists and unresolved questions, trains the brain to recognize patterns, deal with ambiguity, and think flexibly. This mental workout sharpens our analytical abilities and encourages us to approach problems from novel perspectives, thereby fostering creativity. Therefore, instead of dismissing fiction as trivial, we should recognize it as a fundamental tool for personal and intellectual development.
+      <br><br>
+      <b>Question:</b> According to the text, what is a direct result of developing greater empathy through reading fiction?
+    </div>
+  `,
+  options: [
+    "A preference for fiction over non-fiction.",
+    "Better social relationships and more compassionate behavior.",
+    "An improvement in writing and vocabulary skills.",
+    "The ability to read and understand complex texts faster.",
+    "A tendency to deal with ambiguity and think flexibly."
+  ],
+  correct: 1
+},
+{
+  type: "mc",
+  text: `
+    <div style="text-align: justify;">
+      In an era dominated by non-fiction and the quick consumption of online articles, many argue that reading fiction is a mere form of escapism with little practical benefit. However, this view overlooks the profound cognitive and emotional advantages that engaging with narrative fiction provides. Reading fiction is not just a hobby; it is a vital exercise for the mind that cultivates skills essential for navigating the complexities of the real world.
+      <br><br>
+      Firstly, reading fiction significantly enhances empathy. When we read a story, we step into a character's shoes, experiencing their joys, sorrows, and dilemmas from their perspective. This process of emotional simulation helps us understand and connect with people who are different from us. A 2013 study published in the journal Science found that participants who read literary fiction showed a marked improvement in their ability to infer the thoughts and feelings of others—a skill known as Theory of Mind. This heightened empathy translates into better social relationships and more compassionate behavior.
+      <br><br>
+      Furthermore, fiction is a powerful tool for improving critical thinking and creativity. Unlike nonfiction, which often presents information directly, fiction requires readers to make inferences, understand subtext, and analyze complex character motivations. The narrative structure, with its plot twists and unresolved questions, trains the brain to recognize patterns, deal with ambiguity, and think flexibly. This mental workout sharpens our analytical abilities and encourages us to approach problems from novel perspectives, thereby fostering creativity. Therefore, instead of dismissing fiction as trivial, we should recognize it as a fundamental tool for personal and intellectual development.
+      <br><br>
+      <b>Question:</b> How can a student best apply the main message of this text to their academic life?
+    </div>
+  `,
+  options: [
+    "By replacing all their textbook reading with novels.",
+    "By arguing with their teachers that fiction is superior to non-fiction.",
+    "By dedicating some of their leisure time to reading novels to improve their analytical and social understanding skills.",
+    "By only reading non-fiction to gather as many facts as possible.",
+    "By memorizing plot summaries of famous literary works."
+  ],
+  correct: 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhleDmGDbARzIXBuTUfrWNJrBP_1UjEwXFIn7shedh5XRT9osTfYkdb6M68RkByzCtcYHWvCZt2BcU4ZpE66Xnoro8b-wC4Ff5KwmQd7JtlG1ChULwhBcmhGrQWahvMRQCqIRbt-elZVPpkL_ACLpe6WYjLoc4uG3eYOReymhgN1r6zDuny0RnfY0xZC15D/s1600/soal-tka-sma-bahasa-inggris-wajib.jpg" alt="Vertical Farming" style="width:100%; max-width:600px; display:block; margin:auto;">
+      <br>
+      Vertical farming is an innovative agricultural method that involves growing crops in vertically stacked layers, often indoors in a controlled environment. Instead of sprawling fields, picture a skyscraper filled with layers of lettuce, herbs, and strawberries growing under artificial LED lights. This approach is rapidly gaining popularity as a solution to the challenges of traditional agriculture, especially in urban areas where land is scarce and expensive. By moving farms from rural areas into cities, vertical farming aims to create a more sustainable and efficient food system.
+      <br><br>
+      The benefits of this method are numerous. Firstly, it significantly reduces land and water usage. A vertical farm can produce hundreds of times more food per square meter than a traditional farm, and many systems use up to 95% less water through recycling and targeted irrigation. Secondly, because the environment is controlled, crops can be grown year-round without being affected by weather, seasons, or pests. This eliminates the need for pesticides, resulting in healthier and cleaner produce. Furthermore, by locating farms within cities, transportation costs and carbon emissions are drastically cut, as the food travels a much shorter distance from farm to table.
+      <br><br>
+      Despite its advantages, vertical farming faces several hurdles. The most significant challenge is the high energy consumption. The LED lights, climate control systems, and water pumps require a substantial amount of electricity, which can be costly and environmentally unfriendly if sourced from fossil fuels. The initial setup cost for a high-tech vertical farm is also extremely high, making it a difficult investment for many. Finally, the variety of crops that can be grown economically is currently limited, with leafy greens and herbs being the most common, while staple crops like wheat and rice remain impractical. Overcoming these challenges will be key to unlocking the full potential of vertical farming.
+      <br><br>
+      <b>Question:</b> According to the text, what are the advantages of vertical farming?<br>Choose the correct answers!
+    </div>
+  `,
+  "options": [
+    "It uses significantly less water compared to traditional farming.",
+    "It requires a very low amount of energy to operate.",
+    "It allows crops to be grown throughout the year, regardless of the season.",
+    "It can be set up with a very low initial investment."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhleDmGDbARzIXBuTUfrWNJrBP_1UjEwXFIn7shedh5XRT9osTfYkdb6M68RkByzCtcYHWvCZt2BcU4ZpE66Xnoro8b-wC4Ff5KwmQd7JtlG1ChULwhBcmhGrQWahvMRQCqIRbt-elZVPpkL_ACLpe6WYjLoc4uG3eYOReymhgN1r6zDuny0RnfY0xZC15D/s1600/soal-tka-sma-bahasa-inggris-wajib.jpg" alt="Vertical Farming" style="width:100%; max-width:600px; display:block; margin:auto;">
+      <br>
+      Vertical farming is an innovative agricultural method that involves growing crops in vertically stacked layers, often indoors in a controlled environment. Instead of sprawling fields, picture a skyscraper filled with layers of lettuce, herbs, and strawberries growing under artificial LED lights. This approach is rapidly gaining popularity as a solution to the challenges of traditional agriculture, especially in urban areas where land is scarce and expensive. By moving farms from rural areas into cities, vertical farming aims to create a more sustainable and efficient food system.
+      <br><br>
+      The benefits of this method are numerous. Firstly, it significantly reduces land and water usage. A vertical farm can produce hundreds of times more food per square meter than a traditional farm, and many systems use up to 95% less water through recycling and targeted irrigation. Secondly, because the environment is controlled, crops can be grown year-round without being affected by weather, seasons, or pests. This eliminates the need for pesticides, resulting in healthier and cleaner produce. Furthermore, by locating farms within cities, transportation costs and carbon emissions are drastically cut, as the food travels a much shorter distance from farm to table.
+      <br><br>
+      Despite its advantages, vertical farming faces several hurdles. The most significant challenge is the high energy consumption. The LED lights, climate control systems, and water pumps require a substantial amount of electricity, which can be costly and environmentally unfriendly if sourced from fossil fuels. The initial setup cost for a high-tech vertical farm is also extremely high, making it a difficult investment for many. Finally, the variety of crops that can be grown economically is currently limited, with leafy greens and herbs being the most common, while staple crops like wheat and rice remain impractical. Overcoming these challenges will be key to unlocking the full potential of vertical farming.
+      <br><br>
+      <b>Question:</b> What can be inferred from the text as the primary reason for the development of vertical farming?
+    </div>
+  `,
+  "options": [
+    "The desire to grow a wider variety of crops like wheat and rice.",
+    "The decreasing popularity of traditional farming methods.",
+    "The need to produce food more efficiently in urban areas with limited space.",
+    "The goal of reducing the need for artificial LED lights in agriculture.",
+    "The high cost of transporting food from farms to cities."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhleDmGDbARzIXBuTUfrWNJrBP_1UjEwXFIn7shedh5XRT9osTfYkdb6M68RkByzCtcYHWvCZt2BcU4ZpE66Xnoro8b-wC4Ff5KwmQd7JtlG1ChULwhBcmhGrQWahvMRQCqIRbt-elZVPpkL_ACLpe6WYjLoc4uG3eYOReymhgN1r6zDuny0RnfY0xZC15D/s1600/soal-tka-sma-bahasa-inggris-wajib.jpg" alt="Vertical Farming" style="width:100%; max-width:600px; display:block; margin:auto;">
+      <br>
+      Vertical farming is an innovative agricultural method that involves growing crops in vertically stacked layers, often indoors in a controlled environment. Instead of sprawling fields, picture a skyscraper filled with layers of lettuce, herbs, and strawberries growing under artificial LED lights. This approach is rapidly gaining popularity as a solution to the challenges of traditional agriculture, especially in urban areas where land is scarce and expensive. By moving farms from rural areas into cities, vertical farming aims to create a more sustainable and efficient food system.
+      <br><br>
+      The benefits of this method are numerous. Firstly, it significantly reduces land and water usage. A vertical farm can produce hundreds of times more food per square meter than a traditional farm, and many systems use up to 95% less water through recycling and targeted irrigation. Secondly, because the environment is controlled, crops can be grown year-round without being affected by weather, seasons, or pests. This eliminates the need for pesticides, resulting in healthier and cleaner produce. Furthermore, by locating farms within cities, transportation costs and carbon emissions are drastically cut, as the food travels a much shorter distance from farm to table.
+      <br><br>
+      Despite its advantages, vertical farming faces several hurdles. The most significant challenge is the high energy consumption. The LED lights, climate control systems, and water pumps require a substantial amount of electricity, which can be costly and environmentally unfriendly if sourced from fossil fuels. The initial setup cost for a high-tech vertical farm is also extremely high, making it a difficult investment for many. Finally, the variety of crops that can be grown economically is currently limited, with leafy greens and herbs being the most common, while staple crops like wheat and rice remain impractical. Overcoming these challenges will be key to unlocking the full potential of vertical farming.
+      <br><br>
+      <b>Question:</b> What is the author's overall tone towards the subject of vertical farming?
+    </div>
+  `,
+  "options": [
+    "Skeptical and dismissive.",
+    "Purely critical and negative.",
+    "Cautiously optimistic and balanced.",
+    "Overly enthusiastic and biased.",
+    "Neutral and indifferent."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhleDmGDbARzIXBuTUfrWNJrBP_1UjEwXFIn7shedh5XRT9osTfYkdb6M68RkByzCtcYHWvCZt2BcU4ZpE66Xnoro8b-wC4Ff5KwmQd7JtlG1ChULwhBcmhGrQWahvMRQCqIRbt-elZVPpkL_ACLpe6WYjLoc4uG3eYOReymhgN1r6zDuny0RnfY0xZC15D/s1600/soal-tka-sma-bahasa-inggris-wajib.jpg" alt="Vertical Farming" style="width:100%; max-width:600px; display:block; margin:auto;">
+      <br>
+      Vertical farming is an innovative agricultural method that involves growing crops in vertically stacked layers, often indoors in a controlled environment. Instead of sprawling fields, picture a skyscraper filled with layers of lettuce, herbs, and strawberries growing under artificial LED lights. This approach is rapidly gaining popularity as a solution to the challenges of traditional agriculture, especially in urban areas where land is scarce and expensive. By moving farms from rural areas into cities, vertical farming aims to create a more sustainable and efficient food system.
+      <br><br>
+      The benefits of this method are numerous. Firstly, it significantly reduces land and water usage. A vertical farm can produce hundreds of times more food per square meter than a traditional farm, and many systems use up to 95% less water through recycling and targeted irrigation. Secondly, because the environment is controlled, crops can be grown year-round without being affected by weather, seasons, or pests. This eliminates the need for pesticides, resulting in healthier and cleaner produce. Furthermore, by locating farms within cities, transportation costs and carbon emissions are drastically cut, as the food travels a much shorter distance from farm to table.
+      <br><br>
+      Despite its advantages, vertical farming faces several hurdles. The most significant challenge is the high energy consumption. The LED lights, climate control systems, and water pumps require a substantial amount of electricity, which can be costly and environmentally unfriendly if sourced from fossil fuels. The initial setup cost for a high-tech vertical farm is also extremely high, making it a difficult investment for many. Finally, the variety of crops that can be grown economically is currently limited, with leafy greens and herbs being the most common, while staple crops like wheat and rice remain impractical. Overcoming these challenges will be key to unlocking the full potential of vertical farming.
+      <br><br>
+      <b>Question:</b> What is mentioned in the text as the most significant challenge for vertical farming?
+    </div>
+  `,
+  "options": [
+    "The limited variety of crops that can be grown.",
+    "The need for a large amount of land.",
+    "The high consumption of electrical energy.",
+    "The constant threat of pests and bad weather.",
+    "The difficulty in recycling water efficiently."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      I had always been terrified of public speaking. The mere thought of standing in front of a crowd made my palms sweat and my heart race. So, when my teacher announced a mandatory schoolwide speech competition, I felt a sense of dread. For weeks, I practiced my speech in front of a mirror, my voice trembling. The night before the competition, I barely slept, convinced I would forget all my lines and embarrass myself.
+      <br><br>
+      On the day of the competition, as I waited backstage, my anxiety was at its peak. I watched other students deliver their speeches with confidence and style, which only made me feel more inadequate. When my name was called, my legs felt like jelly as I walked to the podium. I took a deep breath, looked at the audience, and saw a sea of expectant faces.
+      <br><br>
+      I started speaking, and to my surprise, the words came out. My voice was shaky at first, but as I got into my topic—the importance of kindness—I began to feel more comfortable. I focused on my message instead of my fear. The moment I finished, the auditorium filled with applause. I hadn't won the first prize, but it didn't matter. The real victory was facing my fear. The experience taught me that courage isn't the absence of fear, but the willingness to act in spite of it. It was a terrifying, yet incredibly rewarding, experience.
+      <br><br>
+      <b>Question:</b> What was the writer's primary emotion while waiting backstage before the speech?
+    </div>
+  `,
+  "options": [
+    "Excitement",
+    "Confidence",
+    "Indifference",
+    "Extreme anxiety",
+    "Disappointment"
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      I had always been terrified of public speaking. The mere thought of standing in front of a crowd made my palms sweat and my heart race. So, when my teacher announced a mandatory schoolwide speech competition, I felt a sense of dread. For weeks, I practiced my speech in front of a mirror, my voice trembling. The night before the competition, I barely slept, convinced I would forget all my lines and embarrass myself.
+      <br><br>
+      On the day of the competition, as I waited backstage, my anxiety was at its peak. I watched other students deliver their speeches with confidence and style, which only made me feel more inadequate. When my name was called, my legs felt like jelly as I walked to the podium. I took a deep breath, looked at the audience, and saw a sea of expectant faces.
+      <br><br>
+      I started speaking, and to my surprise, the words came out. My voice was shaky at first, but as I got into my topic—the importance of kindness—I began to feel more comfortable. I focused on my message instead of my fear. The moment I finished, the auditorium filled with applause. I hadn't won the first prize, but it didn't matter. The real victory was facing my fear. The experience taught me that courage isn't the absence of fear, but the willingness to act in spite of it. It was a terrifying, yet incredibly rewarding, experience.
+      <br><br>
+      <b>Question:</b> Why did the writer start to feel more comfortable during the speech?
+    </div>
+  `,
+  "options": [
+    "Because the audience started to laugh.",
+    "Because the teacher gave a reassuring signal.",
+    "Because the writer shifted focus from fear to the speech's message.",
+    "Because the writer suddenly remembered winning was not important.",
+    "Because the writer realized the speech was almost over."
+  ],
+  "correct": 2
+},
+
+
+{
+  "type": "true_false_en",
+  "text": `
+    <div style="text-align: justify;">
+      I had always been terrified of public speaking. The mere thought of standing in front of a crowd made my palms sweat and my heart race. So, when my teacher announced a mandatory schoolwide speech competition, I felt a sense of dread. For weeks, I practiced my speech in front of a mirror, my voice trembling. The night before the competition, I barely slept, convinced I would forget all my lines and embarrass myself.
+      <br><br>
+      On the day of the competition, as I waited backstage, my anxiety was at its peak. I watched other students deliver their speeches with confidence and style, which only made me feel more inadequate. When my name was called, my legs felt like jelly as I walked to the podium. I took a deep breath, looked at the audience, and saw a sea of expectant faces.
+      <br><br>
+      I started speaking, and to my surprise, the words came out. My voice was shaky at first, but as I got into my topic—the importance of kindness—I began to feel more comfortable. I focused on my message instead of my fear. The moment I finished, the auditorium filled with applause. I hadn't won the first prize, but it didn't matter. The real victory was facing my fear. The experience taught me that courage isn't the absence of fear, but the willingness to act in spite of it. It was a terrifying, yet incredibly rewarding, experience.
+      <br><br>
+      <b>Question:</b> Evaluate the following statements about the writer's journey. Determine if each statement is True (T) or False (F) based on the text:
+    </div>
+  `,
+
+  "statements": [
+    "The writer won the first prize in the competition.",
+    "The writer felt that conquering fear was a more significant achievement than winning.",
+    "The writer was confident about public speaking from the very beginning."
+  ],
+  "correct": [false, true, false]
+},
+
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      For many students, pulling an "all-nighter" to study for an exam is seen as a badge of honor. However, scientific research overwhelmingly shows that sacrificing sleep for study time is not only ineffective but also detrimental to academic performance. Sleep is not a passive state of rest; it is an active and crucial period for memory consolidation, a process where the brain strengthens and organizes memories from the day.
+      <br><br>
+      During deep sleep, the brain replays neural patterns from learning activities, transferring short-term memories from the hippocampus to the prefrontal cortex for long-term storage. Without adequate sleep, this vital transfer is disrupted. This means that even if you spend hours cramming information, much of it will not be retained effectively. A study from Harvard Medical School demonstrated that students who had a good night's sleep after learning a task performed significantly better on a memory test than those who were sleep-deprived.
+      <br><br>
+      Furthermore, a lack of sleep impairs higher-level cognitive functions essential for academic success. These include problem-solving, critical thinking, and creativity. A tired brain struggles to focus, making it difficult to comprehend complex material or think analytically during an exam.
+      <br><br>
+      Therefore, a consistent sleep schedule is one of the most powerful study tools available. Prioritizing 7-9 hours of quality sleep per night is an investment that pays significant dividends in the classroom.
+      <br><br>
+      <b>Question:</b> What is the author's main purpose in writing this text?
+    </div>
+  `,
+  "options": [
+    "To analyze the different stages of deep sleep.",
+    "To review the latest findings from Harvard Medical School.",
+    "To promote specific techniques for studying all night.",
+    "To persuade students that prioritizing sleep is essential for academic success.",
+    "To describe how the hippocampus and prefrontal cortex function."
+  ],
+  "correct": 3
+},
+
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      For many students, pulling an "all-nighter" to study for an exam is seen as a badge of honor. However, scientific research overwhelmingly shows that sacrificing sleep for study time is not only ineffective but also detrimental to academic performance. Sleep is not a passive state of rest; it is an active and crucial period for memory consolidation, a process where the brain strengthens and organizes memories from the day.
+      <br><br>
+      During deep sleep, the brain replays neural patterns from learning activities, transferring short-term memories from the hippocampus to the prefrontal cortex for long-term storage. Without adequate sleep, this vital transfer is disrupted. This means that even if you spend hours cramming information, much of it will not be retained effectively. A study from Harvard Medical School demonstrated that students who had a good night's sleep after learning a task performed significantly better on a memory test than those who were sleep-deprived.
+      <br><br>
+      Furthermore, a lack of sleep impairs higher-level cognitive functions essential for academic success. These include problem-solving, critical thinking, and creativity. A tired brain struggles to focus, making it difficult to comprehend complex material or think analytically during an exam.
+      <br><br>
+      Therefore, a consistent sleep schedule is one of the most powerful study tools available. Prioritizing 7-9 hours of quality sleep per night is an investment that pays significant dividends in the classroom.
+      <br><br>
+      <b>Question:</b> Based on the text, what are the likely consequences of sleep deprivation for a student?<br><i>Choose the correct answers!</i>
+    </div>
+  `,
+  "options": [
+    "Improved ability to remember facts for an exam.",
+    "Difficulty in focusing while reading complex material.",
+    "Enhanced creative problem-solving skills.",
+    "Ineffective retention of studied information."
+  ],
+  "correct": [1, 3]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      For many students, pulling an "all-nighter" to study for an exam is seen as a badge of honor. However, scientific research overwhelmingly shows that sacrificing sleep for study time is not only ineffective but also detrimental to academic performance. Sleep is not a passive state of rest; it is an active and crucial period for memory consolidation, a process where the brain strengthens and organizes memories from the day.
+      <br><br>
+      During deep sleep, the brain replays neural patterns from learning activities, transferring short-term memories from the hippocampus to the prefrontal cortex for long-term storage. Without adequate sleep, this vital transfer is disrupted. This means that even if you spend hours cramming information, much of it will not be retained effectively. A study from Harvard Medical School demonstrated that students who had a good night's sleep after learning a task performed significantly better on a memory test than those who were sleep-deprived.
+      <br><br>
+      Furthermore, a lack of sleep impairs higher-level cognitive functions essential for academic success. These include problem-solving, critical thinking, and creativity. A tired brain struggles to focus, making it difficult to comprehend complex material or think analytically during an exam.
+      <br><br>
+      Therefore, a consistent sleep schedule is one of the most powerful study tools available. Prioritizing 7-9 hours of quality sleep per night is an investment that pays significant dividends in the classroom.
+      <br><br>
+      <b>Question:</b> What is the author's main purpose in writing this text?
+    </div>
+  `,
+  "options": [
+    "To analyze the different stages of deep sleep.",
+    "To review the latest findings from Harvard Medical School.",
+    "To promote specific techniques for studying all night.",
+    "To persuade students that prioritizing sleep is essential for academic success.",
+    "To describe how the hippocampus and prefrontal cortex function."
+  ],
+  "correct": 3
+},
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (['true_false', 'true_false_en', 'fact_opinion', 'benefit_challenge'].includes(q.type)) {
+    return Array(q.statements.length).fill(null);
+  }
+  return null;
+});
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+  // ====== BENEFIT / CHALLENGE ======
+  else if (q.type === 'benefit_challenge') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Benefit</th><th>Challenge</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benChecked = answers[index][i] === 'benefit' ? 'checked' : '';
+      const chalChecked = answers[index][i] === 'challenge' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="bc_${i}" value="benefit" ${benChecked}></td>
+        <td><input type="radio" name="bc_${i}" value="challenge" ${chalChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== TRUE / FALSE (English version) ======
+  else if (q.type === 'true_false_en') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>True</th><th>False</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const trueChecked = answers[index][i] === true ? 'checked' : '';
+      const falseChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tfe_${i}" value="true" ${trueChecked}></td>
+        <td><input type="radio" name="tfe_${i}" value="false" ${falseChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== FACT / OPINION ======
+  else if (q.type === 'fact_opinion') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Fact</th><th>Opinion</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const factChecked = answers[index][i] === 'fact' ? 'checked' : '';
+      const opChecked = answers[index][i] === 'opinion' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="fo_${i}" value="fact" ${factChecked}></td>
+        <td><input type="radio" name="fo_${i}" value="opinion" ${opChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk Benefit/Challenge
+  if (q.type === 'benefit_challenge') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="bc_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk True/False English
+  if (q.type === 'true_false_en') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tfe_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk Fact/Opinion
+  if (q.type === 'fact_opinion') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="fo_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk tipe mc_multiple
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', e => {
+        const val = parseInt(e.target.value);
+        if (e.target.checked) {
+          if (!answers[index].includes(val)) answers[index].push(val);
+        } else {
+          answers[index] = answers[index].filter(v => v !== val);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  // Hitung skor 0–100
+  const percentage = Math.round((score / questions.length) * 100);
+
+  // Tampilkan hanya skor akhir dalam bentuk nilai
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+}
+
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  const interval = setInterval(() => {
+    if (!timerRunning) { clearInterval(interval); return; }
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    if (--timer < 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+  }, 1000);
+}
+
+renderQuestionButtons();
+renderQuestion(currentQuestion);
+startTimer(45 * 60);
+
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+fullscreenBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      alert(`Gagal masuk fullscreen: ${err.message}`);
+    });
+    fullscreenBtn.textContent = "Exit Fullscreen";
+  } else {
+    document.exitFullscreen();
+    fullscreenBtn.textContent = "Fullscreen";
+  }
+});
+checkSession();
+
+  </script>
+</body>
+</html>
