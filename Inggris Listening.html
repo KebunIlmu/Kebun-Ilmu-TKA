@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- MathJax untuk tampilan rumus -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <title>Kebun Ilmu – Media Pembelajaran Interaktif</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#10b981;--brand-2:#22d3ee}
+    html,body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji"}
+    .glass{backdrop-filter:saturate(180%) blur(10px); background:linear-gradient(180deg,rgba(255,255,255,.8),rgba(255,255,255,.6))}
+    .chip{border:1px solid rgba(0,0,0,.06);}
+    .btn{transition:transform .05s ease}
+    .btn:active{transform:translateY(1px) scale(.99)}
+    details>summary{list-style:none}
+    details>summary::-webkit-details-marker{display:none}
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-sky-50 via-emerald-50 to-white text-gray-800">
+  <!-- Header / Brand -->
+  <header class="sticky top-0 z-40 border-b border-emerald-100/60 glass">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-3">
+      <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png" alt="Logo Kebun Ilmu" class="w-10 h-10 rounded-xl shadow" />
+      <div class="flex-1">
+        <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight">
+          Kebun Ilmu <span class="text-emerald-600">— Media Pembelajaran Interaktif</span>
+        </h1>
+        <p class="text-xs sm:text-sm text-gray-500">Materi · Latihan · Simulasi TKA SD</p>
+      </div>
+      <nav class="hidden sm:flex items-center gap-2">
+        <button data-tab="materi" class="tab-btn btn px-3 py-2 rounded-xl bg-emerald-600 text-white text-sm font-medium shadow hover:shadow-md">Materi</button>
+        <button data-tab="latihan" class="tab-btn btn px-3 py-2 rounded-xl bg-white text-gray-700 text-sm font-medium border chip hover:bg-gray-50">Latihan Soal</button>
+        <button data-tab="simulasi" class="tab-btn btn px-3 py-2 rounded-xl bg-white text-gray-700 text-sm font-medium border chip hover:bg-gray-50">Simulasi TKA</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Tab Switcher -->
+  <div class="sm:hidden sticky top-[60px] z-30 bg-white/80 backdrop-blur border-b border-emerald-100/60">
+    <div class="max-w-6xl mx-auto px-4 py-2 grid grid-cols-3 gap-2">
+      <button data-tab="materi" class="tab-btn btn py-2 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Materi</button>
+      <button data-tab="latihan" class="tab-btn btn py-2 rounded-lg bg-white border chip text-xs font-semibold">Latihan</button>
+      <button data-tab="simulasi" class="tab-btn btn py-2 rounded-lg bg-white border chip text-xs font-semibold">Simulasi</button>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+    <!-- Info links to Pusmendik -->
+    
+    <!-- Tabs content wrapper -->
+    <section id="tab-materi" class="tab-pane">
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="md:col-span-1 space-y-4">
+          <div class="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h2 class="font-bold text-lg">Pilih Materi</h2>
+            <label class="block mt-3 text-sm">Mata Pelajaran</label>
+            <select id="materiMapel" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300">
+              <!-- Diisi via JS -->
+            </select>
+            <label class="block mt-3 text-sm">Bab</label>
+            <select id="materiBab" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300">
+            </select>
+            <button id="btnLoadMateri" class="btn mt-4 w-full py-2 rounded-xl bg-emerald-600 text-white font-semibold">Tampilkan</button>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h3 class="font-semibold">Sumber Resmi</h3>
+            <p class="text-sm text-gray-600 mt-1">Buka ringkasan materi versi Pusmendik:</p>
+            <a target="_blank" rel="noopener" href="https://pusmendik.kemdikbud.go.id/tka/tka/view/mata-pelajaran-wajib/sma" class="inline-block mt-2 px-3 py-2 rounded-xl border chip hover:bg-gray-50 text-sm">📖 Buka Halaman Materi</a>
+          </div>
+        </div>
+
+        <div class="md:col-span-2 space-y-4">
+          <div class="p-5 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h2 class="font-bold text-xl flex items-center gap-2">📘 Ringkasan Materi</h2>
+            <div id="materiKonten" class="prose prose-sm sm:prose lg:prose-lg max-w-none mt-3"></div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h2 class="font-bold text-xl flex items-center gap-2">🎬 Video Pembelajaran</h2>
+            <div id="materiVideo" class="aspect-video w-full overflow-hidden rounded-xl bg-gray-100 flex items-center justify-center text-gray-400">
+              <span class="text-sm">Pilih materi untuk memuat video…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-latihan" class="tab-pane hidden">
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="md:col-span-1 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <h2 class="font-bold text-lg">Pengaturan Latihan</h2>
+          <label class="block mt-3 text-sm">Mata Pelajaran</label>
+          <select id="latihMapel" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300"></select>
+          <label class="block mt-3 text-sm">Bab</label>
+          <select id="latihBab" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300"></select>
+          <button id="btnLoadLatihan" class="btn mt-4 w-full py-2 rounded-xl bg-emerald-600 text-white font-semibold">Muat Soal</button>
+        </div>
+        <div class="md:col-span-2 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <div class="flex items-center justify-between">
+            <h2 class="font-bold text-xl">Latihan Soal</h2>
+            <button id="btnPeriksaSemua" class="btn px-3 py-2 rounded-xl border chip text-sm">Cek Semua</button>
+          </div>
+          <div id="latihanContainer" class="mt-3 space-y-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-simulasi" class="tab-pane hidden">
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="md:col-span-1 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <h2 class="font-bold text-lg">Pengaturan Simulasi</h2>
+          <label class="block mt-3 text-sm">Mata Pelajaran</label>
+          <select id="simMapel" class="w-full mt-1 px-3 py-2 rounded-xl border chip"></select>
+          <label class="block mt-3 text-sm">Jumlah Soal</label>
+          <input id="simJumlah" type="number" min="5" max="50" value="10" class="w-full mt-1 px-3 py-2 rounded-xl border chip" />
+          <label class="block mt-3 text-sm">Durasi (menit)</label>
+          <input id="simDurasi" type="number" min="5" max="180" value="15" class="w-full mt-1 px-3 py-2 rounded-xl border chip" />
+          <button id="btnMulaiSim" class="btn mt-4 w-full py-2 rounded-xl bg-emerald-600 text-white font-semibold">Mulai Simulasi</button>
+          <p class="text-xs text-gray-500 mt-2">Timer akan berjalan. Skor & pembahasan ditampilkan setelah selesai.</p>
+        </div>
+        <div class="md:col-span-2 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <div class="flex items-center justify-between">
+            <h2 class="font-bold text-xl">Simulasi TKA</h2>
+            <div id="simInfo" class="text-sm text-gray-600">Belum mulai</div>
+          </div>
+          <div id="simContainer" class="mt-3 space-y-4"></div>
+          <div id="simHasil" class="mt-4 hidden p-4 rounded-xl border chip bg-emerald-50"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 sm:px-6 pb-10">
+    <div class="mt-10 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm text-xs text-gray-500">
+      <p><strong>Kebun Ilmu</strong> – Aplikasi belajar mandiri. Konten ringkasan & soal di sini adalah contoh yang disusun menyerupai format TKA. Untuk rujukan resmi gunakan tautan Pusmendik di atas.</p>
+    </div>
+  </footer>
+
+  <!-- App Data & Logic -->
+  <script>
+  // ======= Dataset Contoh (DISERAGAMKAN DENGAN TKA SMA) =======
+  // Struktur: mapel -> bab[] -> materi (html), video (YT embed id), soal[]
+  const DB = {
+    'English': {
+      bab: {
+                
+'Greetings': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">🗨️ Materi 1: Greetings and Introduction (Salam & Perkenalan)</h2>
+
+    <h3 class="font-semibold mt-3">1. Kosakata Penting (Vocabulary)</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li><b>Hello / Hi</b> = Halo</li>
+      <li><b>Good morning</b> = Selamat pagi</li>
+      <li><b>Good afternoon</b> = Selamat siang</li>
+      <li><b>Good evening</b> = Selamat sore/malam</li>
+      <li><b>Goodbye / See you</b> = Selamat tinggal / Sampai jumpa</li>
+      <li><b>How are you?</b> = Apa kabar?</li>
+      <li><b>I'm fine, thank you.</b> = Aku baik, terima kasih.</li>
+      <li><b>Nice to meet you.</b> = Senang bertemu denganmu.</li>
+    </ul>
+
+    <h3 class="font-semibold mt-3">2. Kalimat Umum (Common Sentences)</h3>
+    <p class="mb-4">
+      <b>Contoh percakapan perkenalan sederhana:</b><br>
+      A: Hello! How are you?<br>
+      B: I’m fine, thank you. And you?<br>
+      A: I’m fine too. What’s your name?<br>
+      B: My name is Dika. What’s your name?<br>
+      A: I’m Rina. Nice to meet you!<br>
+      B: Nice to meet you too!
+    </p>
+
+    <h3 class="font-semibold mt-3">3. Struktur Kalimat Perkenalan (Sentence Structure)</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li><b>My name is...</b> → Nama saya...</li>
+      <li><b>I am from...</b> → Saya dari...</li>
+      <li><b>I am a student.</b> → Saya seorang pelajar.</li>
+      <li><b>I live in...</b> → Saya tinggal di...</li>
+    </ul>
+
+    <h3 class="font-semibold mt-3">4. Latihan Speaking (Roleplay)</h3>
+    <p class="mb-4">
+      <b>Practice with a friend:</b><br>
+      Rina: Hello, what’s your name?<br>
+      Dika: My name is Dika. Nice to meet you.<br>
+      Rina: Nice to meet you too.
+    </p>
+
+    <h3 class="font-semibold mt-3">5. Listening Practice</h3>
+    <p class="mb-4">
+      Dengarkan percakapan berikut dan jawab pertanyaan:<br>
+      A: Hello, good morning!<br>
+      B: Good morning! How are you?<br>
+      A: I’m fine, thank you. What about you?<br>
+      B: I’m fine too.<br><br>
+      <b>Pertanyaan:</b><br>
+      1. What time of day is it?<br>
+      2. How are both speakers feeling?
+    </p>
+
+    <h3 class="font-semibold mt-3">6. Speaking Practice (Perkenalan Diri)</h3>
+    <p class="mb-4">
+      Cobalah perkenalkan diri kamu sendiri dengan bahasa Inggris:<br><br>
+      <b>Contoh:</b><br>
+      Hello, my name is Andi.<br>
+      I am 13 years old.<br>
+      I am from Brebes.<br>
+      I am a student at SMP Kebun Ilmu.<br>
+      Nice to meet you!
+    </p>
+
+    <h3 class="font-semibold mt-3">7. Rangkuman</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Gunakan <b>Hello / Hi</b> untuk menyapa.</li>
+      <li>Gunakan <b>Good morning / afternoon / evening</b> sesuai waktu.</li>
+      <li>Gunakan <b>Nice to meet you</b> saat berkenalan pertama kali.</li>
+      <li>Jawaban umum untuk “How are you?” adalah “I’m fine, thank you.”</li>
+    </ul>
+
+    <h3 class="font-semibold mt-3">8. Latihan Soal (Practice Questions)</h3>
+  `,
+  video: 'tVlcKp3bWH8', 
+  soal: [
+
+{
+  id: 'aud1',
+  tipe: 'audio',
+  tanya: 'Say this greeting correctly.',
+  kunciText: 'Hello, how are you?',
+  bahas: 'Ucapkan dengan intonasi ramah dan jelas. Perhatikan pelafalan kata "hello" dan "are".',
+},
+{
+  id: 'aud2',
+  tipe: 'audio',
+  tanya: 'Pronounce this sentence correctly.',
+  kunciText: 'Good morning, everyone.',
+  bahas: 'Pastikan kata "morning" diucapkan dengan jelas, bukan "moning".',
+},
+{
+  id: 'aud3',
+  tipe: 'audio',
+  tanya: 'Say this greeting correctly.',
+  kunciText: 'Good afternoon, teacher.',
+  bahas: 'Perhatikan pelafalan “afternoon” dengan tekanan di suku kata terakhir.',
+},
+{
+  id: 'aud4',
+  tipe: 'audio',
+  tanya: 'Pronounce this sentence correctly.',
+  kunciText: 'Good evening, my friend.',
+  bahas: 'Ucapkan "evening" dengan dua suku kata, bukan tiga.',
+},
+{
+  id: 'aud5',
+  tipe: 'audio',
+  tanya: 'Say this farewell correctly.',
+  kunciText: 'Goodbye, see you later.',
+  bahas: 'Perhatikan pelafalan “goodbye” dan intonasi naik di akhir kalimat.',
+},
+{
+  id: 'aud6',
+  tipe: 'audio',
+  tanya: 'Say this short greeting.',
+  kunciText: 'Hi, what’s up?',
+  bahas: 'Gunakan nada santai seperti percakapan sehari-hari.',
+},
+{
+  id: 'aud7',
+  tipe: 'audio',
+  tanya: 'Say this greeting politely.',
+  kunciText: 'Nice to meet you.',
+  bahas: 'Pastikan pelafalan “meet” jelas, bukan “meat”.',
+},
+{
+  id: 'aud8',
+  tipe: 'audio',
+  tanya: 'Say this sentence correctly.',
+  kunciText: 'Have a nice day!',
+  bahas: 'Gunakan nada ceria saat mengucapkan kalimat ini.',
+},
+{
+  id: 'aud9',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue with the correct response.',
+  kunciText: 'I’m fine, thank you.',
+  bahas: 'Biasanya digunakan untuk menjawab sapaan “How are you?”. Pastikan pengucapan “thank you” jelas.',
+},
+{
+  id: 'aud10',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue correctly: “Good morning, how are you today?”',
+  kunciText: 'I’m great, how about you?',
+  bahas: 'Gunakan nada ramah dan intonasi naik pada “how about you?”.',
+},
+{
+  id: 'aud11',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Hi! Long time no see!”',
+  kunciText: 'Yeah, it’s been a while!',
+  bahas: 'Pastikan pelafalan “been” seperti /bɪn/, bukan “bean”.',
+},
+{
+  id: 'aud12',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Good afternoon, Mr. John.”',
+  kunciText: 'Good afternoon, how are you?',
+  bahas: 'Balas dengan sapaan sopan. Perhatikan pelafalan “afternoon”.',
+},
+{
+  id: 'aud13',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Hello, my name is Sarah.”',
+  kunciText: 'Nice to meet you, Sarah.',
+  bahas: 'Biasakan merespons perkenalan dengan “Nice to meet you.”',
+},
+{
+  id: 'aud14',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Have a nice day!”',
+  kunciText: 'You too!',
+  bahas: 'Ucapkan “You too!” dengan nada ceria dan singkat.',
+},
+{
+  id: 'aud15',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “See you tomorrow!”',
+  kunciText: 'See you!',
+  bahas: 'Balasan yang umum dan santai. Pastikan pelafalan “see” panjang.',
+},
+{
+  id: 'aud16',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Good night, sleep well.”',
+  kunciText: 'Good night.',
+  bahas: 'Balasan singkat dan sopan. Ucapkan “night” dengan jelas.',
+},
+{
+  id: 'aud17',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Hi, where are you going?”',
+  kunciText: 'I’m going to school.',
+  bahas: 'Gunakan nada natural dan pelafalan “going to” bisa disingkat jadi “gonna” dalam percakapan santai.',
+},
+{
+  id: 'aud18',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “How’s your day?”',
+  kunciText: 'It’s good, thanks for asking.',
+  bahas: 'Pastikan intonasi ramah dan pengucapan “asking” jelas di akhir.',
+},
+{
+  id: 'aud19',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Hey, what’s new?”',
+  kunciText: 'Not much, just relaxing at home.',
+  bahas: 'Ucapkan “not much” dengan ringan, bukan “noth much”.',
+},
+{
+  id: 'aud20',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Good evening! How was your trip?”',
+  kunciText: 'It was great, thank you.',
+  bahas: 'Pelafalan “great” harus jelas dengan bunyi /greɪt/.',
+},
+{
+  id: 'aud21',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Hello, can I help you?”',
+  kunciText: 'Yes, I’m looking for my friend.',
+  bahas: 'Perhatikan pelafalan “looking for” agar terdengar alami.',
+},
+{
+  id: 'aud22',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Hi, nice to see you again.”',
+  kunciText: 'Nice to see you too.',
+  bahas: 'Pastikan intonasi naik di kata “too” agar terdengar hangat.',
+},
+{
+  id: 'aud23',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Good morning! Did you sleep well?”',
+  kunciText: 'Yes, I did. Thank you.',
+  bahas: 'Gunakan nada lembut saat menjawab pertanyaan sopan seperti ini.',
+},
+{
+  id: 'aud24',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “How’s it going?”',
+  kunciText: 'Pretty good, thanks!',
+  bahas: '“Pretty good” berarti “lumayan baik”. Ucapkan dengan nada santai.',
+},
+{
+  id: 'aud25',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “Hey, good to see you!”',
+  kunciText: 'Good to see you too!',
+  bahas: 'Ucapkan “too” dengan jelas dan senyum saat latihan agar terdengar natural.',
+},
+{
+  id: 'aud26',
+  tipe: 'audio',
+  tanya: 'Continue this dialogue: “How’s everything?”',
+  kunciText: 'Everything’s fine, thank you.',
+  bahas: 'Pelafalan “everything’s” sering disingkat, tapi pastikan tetap jelas.',
+},
+{
+  id: 'sp1',
+  tipe: 'speech',
+  tanya: 'Say this greeting clearly.',
+  kunciText: 'Good morning',
+  bahas: 'Pastikan kamu mengucapkan “Good morning” dengan jelas, terutama pengucapan “mor-ning”.',
+},
+
+{
+  id: 'sp2',
+  tipe: 'speech',
+  tanya: 'Say this greeting naturally.',
+  kunciText: 'How are you?',
+  bahas: 'Latih intonasi naik di akhir kalimat, seperti saat bertanya: “How are you?”',
+},
+
+{
+  id: 'sp3',
+  tipe: 'speech',
+  tanya: 'Say this sentence correctly.',
+  kunciText: 'Nice to meet you',
+  bahas: 'Ucapkan dengan nada ramah dan jelas, bukan terlalu cepat.',
+},
+
+{
+  id: 'sp4',
+  tipe: 'speech',
+  tanya: 'Say this farewell politely.',
+  kunciText: 'See you later',
+  bahas: 'Perhatikan pengucapan “see-yuh”, bukan “si-u”.',
+},
+
+{
+  id: 'sp5',
+  tipe: 'speech',
+  tanya: 'Say this greeting.',
+  kunciText: 'Good afternoon',
+  bahas: 'Tekankan pada pengucapan “af-ter-noon”, jangan terlalu cepat di tengah.',
+},
+{
+  id: 'sp6',
+  tipe: 'speech',
+  tanya: 'A: Hello! How are you today?',
+  kunciText: 'I am fine, thank you.',
+  bahas: 'Jawaban umum untuk “How are you today?” adalah “I am fine, thank you.” Ucapkan dengan intonasi ramah.',
+},
+
+{
+  id: 'sp7',
+  tipe: 'speech',
+  tanya: 'A: Good morning! Nice to see you.',
+  kunciText: 'Good morning! Nice to see you too.',
+  bahas: 'Tambahkan kata “too” untuk membalas dengan sopan dan bersahabat.',
+},
+
+{
+  id: 'sp8',
+  tipe: 'speech',
+  tanya: 'A: Hi, what’s your name?',
+  kunciText: 'My name is Anna.',
+  bahas: 'Gunakan pola “My name is …” dengan penekanan lembut di nama kamu.',
+},
+
+{
+  id: 'sp9',
+  tipe: 'speech',
+  tanya: 'A: See you tomorrow!',
+  kunciText: 'See you!',
+  bahas: 'Jawaban sederhana tapi sopan. Ucapkan dengan nada ceria, bukan datar.',
+},
+
+{
+  id: 'sp10',
+  tipe: 'speech',
+  tanya: 'A: Good evening! How do you do?',
+  kunciText: 'How do you do?',
+  bahas: 'Untuk “How do you do?”, jawaban formalnya sama, yaitu “How do you do?” dengan nada sopan.',
+},
+
+    {
+      id: 'g1',
+      tipe: 'pg',
+      tanya: 'What do you say when you meet someone for the first time?',
+      opsi: [
+        'Goodbye!',
+        'Nice to meet you!',
+        'See you later!',
+        'Good night!'
+      ],
+      kunci: 1,
+      bahas: 'Saat pertama kali berkenalan, kita mengucapkan “Nice to meet you.”'
+    },
+
+    {
+      id: 'g2',
+      tipe: 'pg',
+      tanya: 'How do you respond to “How are you?”',
+      opsi: [
+        'I’m fine, thank you.',
+        'Good morning.',
+        'See you soon.',
+        'Goodbye.'
+      ],
+      kunci: 0,
+      bahas: 'Jawaban umum untuk pertanyaan “How are you?” adalah “I’m fine, thank you.”'
+    },
+    {
+      id: 'g3',
+      tipe: 'pg',
+      tanya: 'Which one is a greeting used in the evening?',
+      opsi: [
+        'Good morning',
+        'Good afternoon',
+        'Good evening',
+        'Good night'
+      ],
+      kunci: 2,
+      bahas: '“Good evening” digunakan untuk menyapa di sore atau malam hari, sebelum tidur.'
+    },
+    {
+      id: 'g4',
+      tipe: 'pg',
+      tanya: 'Complete the sentence: “Hello, ___ your name?”',
+      opsi: [
+        'How is',
+        'What’s',
+        'Who',
+        'Where'
+      ],
+      kunci: 1,
+      bahas: 'Kalimat yang benar adalah “Hello, what’s your name?” artinya “Halo, siapa namamu?”'
+    },
+    {
+      id: 'g5',
+      tipe: 'pg',
+      tanya: 'Choose the correct response:<br>“Nice to meet you.”',
+      opsi: [
+        'Goodbye!',
+        'I’m fine, thank you.',
+        'Nice to meet you too.',
+        'Good morning.'
+      ],
+      kunci: 2,
+      bahas: 'Balasan untuk “Nice to meet you” adalah “Nice to meet you too.”'
+    },
+
+  ]
+}
+
+}
+    },
+      };
+
+  // ======= Helpers =======
+  const $ = (sel, par=document) => par.querySelector(sel);
+  const $$ = (sel, par=document) => Array.from(par.querySelectorAll(sel));
+  function setTab(name){
+    $$('.tab-pane').forEach(p => p.classList.add('hidden'));
+    $('#tab-'+name).classList.remove('hidden');
+    $$('.tab-btn').forEach(b=>{
+      const active = b.dataset.tab===name;
+      b.classList.toggle('bg-emerald-600', active);
+      b.classList.toggle('text-white', active);
+      b.classList.toggle('border', !active);
+      b.classList.toggle('chip', !active);
+      b.classList.toggle('bg-white', !active);
+      b.classList.toggle('text-gray-700', !active);
+    })
+  }
+
+  function populateSelect(sel, list){
+    sel.innerHTML = '';
+    list.forEach(v=>{
+      const opt=document.createElement('option');
+      opt.value=v; opt.textContent=v; sel.appendChild(opt);
+    })
+  }
+
+  function renderMateri(mapel, bab){
+    const item = DB[mapel]?.bab?.[bab];
+    if(!item){
+      $('#materiKonten').innerHTML = '<p class="text-gray-500">Materi belum tersedia.</p>';
+      $('#materiVideo').innerHTML = '<span class="text-sm">Video belum tersedia.</span>';
+      return;
+    }
+    $('#materiKonten').innerHTML = item.materi;
+    if(item.video){
+      $('#materiVideo').innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${item.video}" title="Video pembelajaran" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+    } else {
+      $('#materiVideo').innerHTML = '<span class="text-sm">Video belum tersedia.</span>';
+    }
+if(window.MathJax){
+    MathJax.typesetPromise([$('#materiKonten')]);
+  }
+  }
+
+  function buildSoalCard(q, idx, prefix){
+  const wrap = document.createElement('div');
+  wrap.className = 'p-4 rounded-xl border chip';
+  wrap.dataset.id = q.id;
+
+  // ===== HEAD: hanya nomor & tipe soal =====
+  const head = document.createElement('div');
+  head.className = 'flex items-start justify-between gap-3';
+  head.innerHTML = `
+    <div class="font-semibold">Soal ${idx+1}</div>
+    <div class="text-xs px-2 py-1 rounded bg-gray-100 border text-gray-600 uppercase">
+      ${q.tipe}
+    </div>`;
+  wrap.appendChild(head);
+
+  // ===== BODY: tanya, bacaan, gambar, opsi =====
+  const body = document.createElement('div');
+  body.className = 'mt-3 space-y-2';
+
+  // tampilkan pertanyaan
+  
+
+  if(q.gambar){
+    const img = document.createElement('img');
+    img.src = q.gambar;
+    img.alt = 'Gambar soal';
+    img.className = 'my-3 w-full max-w-md rounded-lg border';
+    body.appendChild(img);
+  }
+
+  if(q.bacaan){
+    const teks = document.createElement('div');
+    teks.className = 'mb-4 p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm whitespace-pre-line text-justify';
+    teks.innerText = q.bacaan;
+    body.appendChild(teks);
+  }
+if(q.tanya){
+    const pertanyaan = document.createElement('div');
+    pertanyaan.className = 'text-base font-medium';
+    pertanyaan.innerHTML = q.tanya.replace(/\n/g,'<br>');
+    body.appendChild(pertanyaan);
+  }
+  // ====== PILIHAN GANDA ======
+  if(q.tipe === 'pg'){
+    q.opsi.forEach((o,i)=>{
+      const row = document.createElement('label');
+      row.className = 'flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 border border-transparent';
+      row.innerHTML = `<input type="radio" name="${prefix}-${q.id}" value="${i}" class="accent-emerald-600"> <span>${String.fromCharCode(65+i)}. ${o}</span>`;
+      body.appendChild(row);
+    });
+  }
+
+  // ====== CHECKBOX ======
+  if(q.tipe === 'cb'){
+    q.opsi.forEach((o,i)=>{
+      const row = document.createElement('label');
+      row.className = 'flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 border border-transparent';
+      row.innerHTML = `<input type="checkbox" name="${prefix}-${q.id}" value="${i}" class="accent-emerald-600"> <span>${String.fromCharCode(65+i)}. ${o}</span>`;
+      body.appendChild(row);
+    });
+  }
+  // ====== CONSERVATION & RELAXATION ======
+  if(q.tipe === 'cr'){
+    const table = document.createElement('table');
+    table.className = 'w-full border border-gray-200 rounded-lg';
+
+    // Header tabel
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+      <tr class="bg-gray-100 text-center">
+        <th class="p-2 border">places</th>
+        <th class="p-2 border w-28">Conservation</th>
+        <th class="p-2 border w-28">Relaxation</th>
+      </tr>`;
+    table.appendChild(thead);
+
+    // Body tabel
+    const tbody = document.createElement('tbody');
+    q.opsi.forEach((o,i)=>{
+      const idCon = `${prefix}-${q.id}-cr-${i}-con`;
+      const idRel = `${prefix}-${q.id}-cr-${i}-rel`;
+
+      const row = document.createElement('tr');
+      row.className = 'border-t';
+      row.innerHTML = `
+        <td class="p-2 border">${o}</td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idCon}" name="${prefix}-${q.id}-cr-${i}" value="conservation" class="accent-emerald-600">
+        </td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idRel}" name="${prefix}-${q.id}-cr-${i}" value="relaxation" class="accent-rose-600">
+        </td>`;
+      tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+    body.appendChild(table);
+  }
+
+  // ====== BENAR / SALAH ======
+  if(q.tipe === 'bs'){
+    const table = document.createElement('table');
+    table.className = 'w-full border border-gray-200 rounded-lg';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+      <tr class="bg-gray-100 text-center">
+        <th class="p-2 border">Pernyataan</th>
+        <th class="p-2 border w-20">Benar</th>
+        <th class="p-2 border w-20">Salah</th>
+      </tr>`;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    q.opsi.forEach((o,i)=>{
+      const idBenar = `${prefix}-${q.id}-bs-${i}-benar`;
+      const idSalah = `${prefix}-${q.id}-bs-${i}-salah`;
+
+      const row = document.createElement('tr');
+      row.className = 'border-t';
+      row.innerHTML = `
+        <td class="p-2 border">${o}</td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idBenar}" name="${prefix}-${q.id}-bs-${i}" value="true" class="accent-emerald-600">
+        </td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idSalah}" name="${prefix}-${q.id}-bs-${i}" value="false" class="accent-rose-600">
+        </td>`;
+      tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+    body.appendChild(table);
+  }
+
+  // ====== ISIAN ======
+  if(q.tipe === 'isian'){
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Ketik jawaban singkat…';
+    inp.className = 'w-full px-3 py-2 rounded-lg border chip focus:outline-none focus:ring-2 focus:ring-emerald-300';
+    inp.name = `${prefix}-${q.id}-isian`;
+    body.appendChild(inp);
+  }
+// ====== SPEECH (Text-to-Speech + Speech Recognition) ======
+if(q.tipe === 'speech'){
+  const container = document.createElement('div');
+  container.className = 'flex flex-col gap-3';
+
+  const targetText = (q.kunciText || '').trim().toLowerCase();
+
+  const pertanyaan = document.createElement('div');
+  pertanyaan.className = 'p-3 rounded-lg bg-gray-50 border text-sm';
+  pertanyaan.innerHTML = `<strong>Soal:</strong> ${q.tanya || ''}`;
+
+  const btnPlay = document.createElement('button');
+  btnPlay.className = 'px-3 py-2 rounded-lg bg-blue-600 text-white text-sm';
+  btnPlay.textContent = '🔊 Dengarkan Soal';
+
+  const btnSpeak = document.createElement('button');
+  btnSpeak.className = 'px-3 py-2 rounded-lg bg-emerald-600 text-white text-sm';
+  btnSpeak.textContent = '🎤 Jawab dengan Suara';
+
+  const status = document.createElement('div');
+  status.className = 'text-sm text-gray-500';
+  status.textContent = 'Klik tombol untuk mendengarkan, lalu jawab dengan suara.';
+
+  container.append(pertanyaan, btnPlay, btnSpeak, status);
+  body.appendChild(container);
+
+  // ====== Text-to-Speech (membacakan soal) ======
+  btnPlay.addEventListener('click', ()=>{
+    const synth = window.speechSynthesis;
+    const utter = new SpeechSynthesisUtterance(q.kunciText || q.tanya);
+    utter.lang = 'en-US'; // ubah ke 'id-ID' kalau soal Bahasa Indonesia
+    synth.cancel(); // hentikan suara sebelumnya
+    synth.speak(utter);
+  });
+
+  // ====== Speech Recognition (jawaban siswa) ======
+  let recognizing = false;
+  let recognition;
+
+  if('webkitSpeechRecognition' in window){
+    recognition = new webkitSpeechRecognition();
+    recognition.lang = 'en-US'; // ubah ke 'id-ID' kalau Bahasa Indonesia
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onstart = ()=>{
+      recognizing = true;
+      btnSpeak.textContent = '🎙️ Sedang mendengarkan...';
+      btnSpeak.disabled = true;
+      status.textContent = 'Silakan ucapkan jawabanmu.';
+      status.className = 'text-sm text-amber-600';
+    };
+
+    recognition.onresult = (e)=>{
+      const transcript = e.results[0][0].transcript.trim().toLowerCase();
+      q._recognizedText = transcript;
+      btnSpeak.textContent = '🎤 Jawab Lagi';
+      btnSpeak.disabled = false;
+
+      if(transcript === targetText){
+        status.textContent = `✅ Benar! Kamu mengucapkan: "${transcript}"`;
+        status.className = 'text-sm text-emerald-600 font-semibold';
+      } else {
+        status.textContent = `❌ Salah. Kamu mengucapkan: "${transcript}"`;
+        status.className = 'text-sm text-rose-600 font-semibold';
+      }
+    };
+
+    recognition.onerror = (err)=>{
+      btnSpeak.textContent = '🎤 Jawab dengan Suara';
+      btnSpeak.disabled = false;
+      status.textContent = 'Terjadi kesalahan: ' + err.error;
+      status.className = 'text-sm text-rose-600';
+    };
+
+    recognition.onend = ()=>{
+      recognizing = false;
+      btnSpeak.disabled = false;
+    };
+
+    btnSpeak.addEventListener('click', ()=>{
+      if(recognizing){
+        recognition.stop();
+        return;
+      }
+      recognition.start();
+    });
+  } else {
+    status.textContent = '❌ Browser kamu belum mendukung Speech Recognition.';
+    status.className = 'text-sm text-rose-600';
+    btnSpeak.disabled = true;
+  }
+}
+
+// ====== AUDIO RECOGNITION ======
+if(q.tipe === 'audio'){
+  const container = document.createElement('div');
+  container.className = 'flex flex-col gap-3';
+
+  const targetText = (q.kunciText || '').trim().toLowerCase();
+
+  const displayTarget = document.createElement('div');
+  displayTarget.className = 'p-3 rounded-lg bg-gray-50 border text-sm';
+  displayTarget.innerHTML = `<strong>Ucapkan kalimat berikut:</strong><br>"${q.kunciText}"`;
+
+  const btnSpeak = document.createElement('button');
+  btnSpeak.className = 'px-3 py-2 rounded-lg bg-emerald-600 text-white text-sm';
+  btnSpeak.textContent = '🎤 Mulai Bicara';
+
+  const status = document.createElement('div');
+  status.className = 'text-sm text-gray-500';
+  status.textContent = 'Tekan tombol dan ucapkan kalimat dengan jelas.';
+
+  container.append(displayTarget, btnSpeak, status);
+  body.appendChild(container);
+
+  // === Speech Recognition ===
+  let recognizing = false;
+  let recognition;
+  if('webkitSpeechRecognition' in window){
+    recognition = new webkitSpeechRecognition();
+    recognition.lang = 'en-US'; // Ganti ke 'id-ID' kalau soal Bahasa Indonesia
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onstart = ()=>{
+      recognizing = true;
+      btnSpeak.textContent = '🎙️ Sedang mendengarkan...';
+      btnSpeak.disabled = true;
+      status.textContent = 'Sedang mendengarkan... silakan bicara.';
+      status.className = 'text-sm text-amber-600';
+    };
+
+    recognition.onresult = (e)=>{
+      const transcript = e.results[0][0].transcript.trim().toLowerCase();
+      q._recognizedText = transcript;
+      btnSpeak.textContent = '🎤 Mulai Bicara Lagi';
+      btnSpeak.disabled = false;
+
+      // tampilkan hasil pengenalan
+      if(transcript === targetText){
+        status.textContent = `✅ Benar! Kamu mengucapkan: "${transcript}"`;
+        status.className = 'text-sm text-emerald-600 font-semibold';
+      } else {
+        status.textContent = `❌ Salah. Kamu mengucapkan: "${transcript}"`;
+        status.className = 'text-sm text-rose-600 font-semibold';
+      }
+    };
+
+    recognition.onerror = (err)=>{
+      btnSpeak.textContent = '🎤 Mulai Bicara';
+      btnSpeak.disabled = false;
+      status.textContent = 'Terjadi kesalahan: ' + err.error;
+      status.className = 'text-sm text-rose-600';
+    };
+
+    recognition.onend = ()=>{
+      recognizing = false;
+      btnSpeak.disabled = false;
+    };
+
+    btnSpeak.addEventListener('click', ()=>{
+      if(recognizing){
+        recognition.stop();
+        return;
+      }
+      recognition.start();
+    });
+  } else {
+    status.textContent = '❌ Browser kamu belum mendukung Speech Recognition.';
+    status.className = 'text-sm text-rose-600';
+    btnSpeak.disabled = true;
+  }
+}
+
+// ====== MATCHING ======
+    if(q.tipe === 'matching'){
+      const container = document.createElement('div');
+      container.className = 'relative flex gap-12 min-h-[150px]';
+
+      const leftCol = document.createElement('div');
+      leftCol.className = 'flex flex-col gap-3 z-10';
+      const rightCol = document.createElement('div');
+      rightCol.className = 'flex flex-col gap-3 z-10';
+
+      const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+      svg.setAttribute("class","absolute inset-0 w-full h-full pointer-events-none");
+      container.append(leftCol, rightCol, svg);
+      body.appendChild(container);
+
+      let startIdx = null;
+      const pairs = [];
+
+      q.opsi.kiri.forEach((o,i)=>{
+        const btn = document.createElement('button');
+        btn.className = 'px-3 py-2 border rounded bg-white hover:bg-gray-50';
+        btn.textContent = o;
+        btn.dataset.side = "left";
+        btn.dataset.idx = i;
+        leftCol.appendChild(btn);
+      });
+      q.opsi.kanan.forEach((o,i)=>{
+        const btn = document.createElement('button');
+        btn.className = 'px-3 py-2 border rounded bg-white hover:bg-gray-50';
+        btn.textContent = o;
+        btn.dataset.side = "right";
+        btn.dataset.idx = i;
+        rightCol.appendChild(btn);
+      });
+
+      container.addEventListener('click',e=>{
+        if(e.target.tagName!=='BUTTON') return;
+        const btn = e.target;
+        const side = btn.dataset.side;
+        const idx = Number(btn.dataset.idx);
+
+        if(side==="left"){
+          startIdx = idx;
+        } else if(side==="right" && startIdx!==null){
+          pairs.push([startIdx, idx]);
+          drawLine(startIdx, idx);
+
+          // highlight tombol kiri & kanan
+          leftCol.children[startIdx].classList.add("bg-emerald-100","border-emerald-500");
+          rightCol.children[idx].classList.add("bg-emerald-100","border-emerald-500");
+
+          // disable tombol biar gak dipakai ulang
+          leftCol.children[startIdx].disabled = true;
+          rightCol.children[idx].disabled = true;
+
+          startIdx = null;
+        }
+      });
+
+      function drawLine(li,ri){
+        const lbtn = leftCol.children[li];
+        const rbtn = rightCol.children[ri];
+        const lbox = lbtn.getBoundingClientRect();
+        const rbox = rbtn.getBoundingClientRect();
+        const cbox = container.getBoundingClientRect();
+
+        const x1 = lbox.right - cbox.left;
+        const y1 = lbox.top + lbox.height/2 - cbox.top;
+        const x2 = rbox.left - cbox.left;
+        const y2 = rbox.top + rbox.height/2 - cbox.top;
+
+        const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+        line.setAttribute("x1",x1);
+        line.setAttribute("y1",y1);
+        line.setAttribute("x2",x2);
+        line.setAttribute("y2",y2);
+        line.setAttribute("stroke","#10b981");
+        line.setAttribute("stroke-width","2");
+        svg.appendChild(line);
+      }
+
+      // simpan untuk cek jawaban
+      q._pairs = pairs;
+    }
+  // ====== AKSI ======
+  const actions = document.createElement('div');
+  actions.className = 'mt-3 flex flex-wrap items-center gap-2';
+
+  const btnCek = document.createElement('button');
+  btnCek.className = 'btn px-3 py-2 rounded-lg bg-emerald-600 text-white text-sm';
+  btnCek.textContent = 'Cek Jawaban';
+
+  const btnBahas = document.createElement('button');
+  btnBahas.className = 'btn px-3 py-2 rounded-lg border chip text-sm';
+  btnBahas.textContent = 'Pembahasan';
+
+  const status = document.createElement('span');
+  status.className = 'ml-auto text-sm';
+
+  const bahas = document.createElement('div');
+  bahas.className = 'mt-3 hidden p-3 rounded-lg bg-emerald-50 border border-emerald-100 text-sm';
+  bahas.textContent = q.bahas || 'Belum ada pembahasan.';
+
+  // ====== EVENT CEK JAWABAN ======
+  btnCek.addEventListener('click',()=>{
+    let benar = false;
+
+    if(q.tipe === 'pg'){
+      const v = (document.querySelector(`input[name='${prefix}-${q.id}']:checked`)||{}).value;
+      benar = Number(v) === Number(q.kunci);
+    }
+    else if(q.tipe === 'cb'){
+      const checked = [...document.querySelectorAll(`input[name='${prefix}-${q.id}']:checked`)].map(el=>Number(el.value));
+      const kunci = Array.isArray(q.kunci) ? q.kunci.slice().sort() : [q.kunci];
+      benar = checked.slice().sort().toString() === kunci.toString();
+    }
+else if(q.tipe === 'audio'){
+  if(q._audioBlob){
+    benar = true; // Anggap benar jika sudah merekam
+  } else {
+    alert('Silakan rekam jawaban terlebih dahulu!');
+    return;
+  }
+}
+
+    else if(q.tipe === 'bs'){
+      const jawabanUser = q.opsi.map((o,i)=>{
+        const el = document.querySelector(`input[name='${prefix}-${q.id}-bs-${i}']:checked`);
+        return el ? el.value === 'true' : null;
+      });
+
+      if(jawabanUser.includes(null)){
+        alert('Pilih jawaban untuk semua pernyataan!');
+        return;
+      }
+      benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+    }
+    else if(q.tipe === 'cr'){
+      const jawabanUser = q.opsi.map((o,i)=>{
+        const el = document.querySelector(`input[name='${prefix}-${q.id}-cr-${i}']:checked`);
+        return el ? el.value : null;
+      });
+
+      if(jawabanUser.includes(null)){
+        alert('Pilih jawaban Conservation / Relaxation untuk semua pernyataan!');
+        return;
+      }
+      benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+    }
+    else {
+      const v = (document.querySelector(`input[name='${prefix}-${q.id}-isian']`)||{}).value||'';
+      benar = v.trim().toLowerCase() === String(q.kunciText||'').trim().toLowerCase();
+    }
+if(q.tipe==='matching'){
+        const pairs = q._pairs||[];
+        benar = JSON.stringify(pairs.sort())===JSON.stringify(q.kunci.sort());
+      }
+
+    status.textContent = benar ? '✅ Benar' : '❌ Salah';
+    status.classList.toggle('text-emerald-600', benar);
+    status.classList.toggle('text-rose-600', !benar);
+  });
+
+  btnBahas.addEventListener('click',()=> bahas.classList.toggle('hidden'));
+
+  actions.append(btnCek, btnBahas, status);
+  wrap.append(body, actions, bahas);
+  return wrap;
+}
+
+  function loadLatihan(mapel,bab){
+    const item = DB[mapel]?.bab?.[bab];
+    const box = $('#latihanContainer');
+    box.innerHTML='';
+    if(!item){ 
+        box.innerHTML = '<p class="text-gray-500">Soal belum tersedia.</p>'; 
+        return; 
+    }
+    item.soal.forEach((q,i)=> box.appendChild(buildSoalCard(q,i,'lat')) );
+
+    // Tambahkan ini agar MathJax render ulang rumus pada soal latihan
+    if(window.MathJax){
+        MathJax.typesetPromise([box]);
+    }
+}
+
+
+  // ======= SIMULASI =======
+  let simState = {timer:null, endAt: null, daftar: [], mapel:'', durasi: 0};
+
+  function startSimulasi(mapel, jumlah, durasiMenit){
+    const pools = Object.values(DB[mapel]?.bab || {}).flatMap(x=>x.soal||[]);
+    if(pools.length===0){
+      $('#simContainer').innerHTML = '<p class="text-gray-500">Bank soal untuk mapel ini belum tersedia.</p>';
+      return;
+    }
+    const shuffled=[...pools].sort(()=>Math.random()-0.5).slice(0, Math.min(jumlah,pools.length));
+    simState = {timer:null, endAt: Date.now()+durasiMenit*60*1000, daftar: shuffled, mapel, durasi:durasiMenit};
+    renderSimulasi();
+    runTimer();
+  }
+
+  function renderSimulasi(){
+    const box = $('#simContainer');
+    box.innerHTML='';
+    simState.daftar.forEach((q,i)=> box.appendChild(buildSoalCard(q,i,'sim')) );
+    $('#simHasil').classList.add('hidden');
+
+    // Tambahkan ini agar MathJax render ulang rumus pada soal simulasi
+    if(window.MathJax){
+        MathJax.typesetPromise([box]);
+    }
+}
+
+
+  function runTimer(){
+    clearInterval(simState.timer);
+    const info = $('#simInfo');
+    const tick = ()=>{
+      const remain = Math.max(0, simState.endAt - Date.now());
+      const mm = String(Math.floor(remain/60000)).padStart(2,'0');
+      const ss = String(Math.floor((remain%60000)/1000)).padStart(2,'0');
+      info.textContent = `Mapel: ${simState.mapel} • Sisa waktu ${mm}:${ss}`;
+      if(remain===0){
+        clearInterval(simState.timer);
+        selesaiSimulasi();
+      }
+    };
+    tick();
+    simState.timer = setInterval(tick, 250);
+  }
+
+  function nilaiPG(q){
+    const v = (document.querySelector(`input[name='sim-${q.id}']:checked`)||{}).value;
+    return Number(v)===Number(q.kunci);
+  }
+  function nilaiIsian(q){
+    const v = (document.querySelector(`input[name='sim-${q.id}-isian']`)||{}).value||'';
+    return v.trim().toLowerCase() === String(q.kunciText||'').trim().toLowerCase();
+  }
+
+  function selesaiSimulasi(){
+    const total = simState.daftar.length;
+    let benar = 0;
+    simState.daftar.forEach(q=>{
+      benar += (q.tipe==='pg') ? (nilaiPG(q)?1:0) : (nilaiIsian(q)?1:0);
+    });
+    const skor = Math.round((benar/total)*100);
+    const hasil = $('#simHasil');
+    hasil.classList.remove('hidden');
+    hasil.innerHTML = `<div class="font-semibold">Hasil Simulasi</div>
+      <div class="mt-1 text-sm">Benar: <strong>${benar}</strong> dari ${total} soal • Skor: <strong>${skor}</strong></div>
+      <button id="btnReview" class="btn mt-3 px-3 py-2 rounded-lg border chip text-sm">Tampilkan Pembahasan</button>`;
+    $('#simInfo').textContent = `Selesai • Mapel: ${simState.mapel}`;
+
+    $('#btnReview').addEventListener('click',()=>{
+      // Tampilkan semua pembahasan
+      $$('#simContainer .p-4').forEach(card=>{
+        const pemb = card.querySelector('div.mt-3.hidden');
+        if(pemb) pemb.classList.remove('hidden');
+      })
+    })
+  }
+
+  // ======= INIT =======
+  function initSelectors(){
+    const mapels = Object.keys(DB);
+    populateSelect($('#materiMapel'), mapels);
+    populateSelect($('#latihMapel'), mapels);
+    populateSelect($('#simMapel'), mapels);
+
+    const firstBab = (mapel)=> Object.keys(DB[mapel].bab);
+
+    // Materi default
+    const m0 = mapels[0];
+    populateSelect($('#materiBab'), firstBab(m0));
+    // Latihan default
+    populateSelect($('#latihBab'), firstBab(mapels[0]));
+
+    $('#materiMapel').addEventListener('change', e=>{
+      populateSelect($('#materiBab'), firstBab(e.target.value));
+    });
+    $('#latihMapel').addEventListener('change', e=>{
+      populateSelect($('#latihBab'), firstBab(e.target.value));
+    });
+
+    $('#btnLoadMateri').addEventListener('click',()=>{
+      renderMateri($('#materiMapel').value, $('#materiBab').value);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    $('#btnLoadLatihan').addEventListener('click',()=>{
+      loadLatihan($('#latihMapel').value, $('#latihBab').value);
+    });
+
+    $('#btnPeriksaSemua').addEventListener('click',()=>{
+      $$('#latihanContainer .p-4').forEach(card=>{
+        const cek = card.querySelector('button');
+        cek?.click();
+      });
+    });
+
+    $('#btnMulaiSim').addEventListener('click',()=>{
+      const map = $('#simMapel').value;
+      const j = Math.max(5, Math.min(50, Number($('#simJumlah').value||10)));
+      const d = Math.max(5, Math.min(180, Number($('#simDurasi').value||15)));
+      startSimulasi(map, j, d);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    // Muat awal
+    renderMateri($('#materiMapel').value, $('#materiBab').value);
+    loadLatihan($('#latihMapel').value, $('#latihBab').value);
+  }
+
+  // Tab switching
+  $$('.tab-btn').forEach(b=> b.addEventListener('click',()=> setTab(b.dataset.tab)) );
+
+  // Start
+  setTab('materi');
+  initSelectors();
+  </script>
+</body>
+</html>
+
