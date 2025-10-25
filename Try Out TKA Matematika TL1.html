@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Matematika Tingkat Lanjut- Kebun Ilmu</title>
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+
+  </style>
+</head>
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+
+<header>
+  <h2>Try Out TKA Matematika Tingkat Lanjut- Kebun Ilmu</h2>
+  <div>
+    <button id="fullscreenBtn" class="menu-button">Fullscreen</button>
+    <span class="timer" id="timer">60:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "tryout1",  password: "2025",  expire: "2025-11-11T23:59:59" },
+  { username: "nadira", password: "nad322", expire: "2025-11-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-11-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-11-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-11-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(60 * 60);
+}
+  const questions = [
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Diketahui matriks 
+        \\( P = \\begin{pmatrix} 1 & 2 \\\\ -1 & -4 \\end{pmatrix} \\) dan 
+        \\( Q = \\begin{pmatrix} 2 & 5 \\\\ -1 & 2 \\end{pmatrix} \\).
+      </p>
+      <p><b>Pertanyaan:</b> Berapakah nilai determinan dari \\( (P + Q) \\)?</p>
+    </div>
+  `,
+  "options": [
+    "9",
+    "8",
+    "5",
+    "-8",
+    "-20"
+  ],
+  "correct": 1,
+},
+{
+  type: "mc",
+  text: `
+    <div style="text-align: justify;">
+      <p>
+        Diketahui matriks  
+        \\[
+        A = \\begin{pmatrix} -1 & 2 \\\\ 3 & 4 \\end{pmatrix}, 
+        \\quad 
+        B = \\begin{pmatrix} -2 & 0 \\\\ 3 & 3 \\end{pmatrix}, 
+        \\quad 
+        C = \\begin{pmatrix} -4 & 4 \\\\ -3 & 2 \\end{pmatrix}.
+        \\]
+      </p>
+      <p><b>Pertanyaan:</b> Berapakah invers dari matriks \\( 3A - 4B + C^{T} \\)?</p>
+    </div>
+  `,
+  options: [
+    "\\( \\begin{pmatrix} \\tfrac{2}{5} & -\\tfrac{3}{5} \\\\ -\\tfrac{1}{5} & \\tfrac{1}{5} \\end{pmatrix} \\)",
+    "\\( \\begin{pmatrix} -\\tfrac{2}{5} & \\tfrac{3}{5} \\\\ \\tfrac{1}{5} & -\\tfrac{1}{5} \\end{pmatrix} \\)",
+    "\\( \\begin{pmatrix} -2 & 3 \\\\ 1 & -1 \\end{pmatrix} \\)",
+    "\\( \\begin{pmatrix} 2 & -3 \\\\ -1 & 1 \\end{pmatrix} \\)",
+    "\\( \\begin{pmatrix} -1 & 1 \\\\ 2 & -3 \\end{pmatrix} \\)"
+  ],
+  correct: 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Diketahui matriks  
+        \\[
+        A = \\begin{pmatrix} 3 & 0 \\\\ 2 & 5 \\end{pmatrix}, 
+        \\quad 
+        B = \\begin{pmatrix} x & -1 \\\\ y & 1 \\end{pmatrix}, 
+        \\quad 
+        C = \\begin{pmatrix} 0 & 3 \\\\ 1 & 11 \\end{pmatrix}.
+        \\]
+        Diketahui pula bahwa \\( A^T \\) adalah transpose dari matriks \\( A \\). 
+        Jika \\( 2A^T + B = C \\)
+      </p>
+      <p><b>Pertanyaan:</b> Nilai dari \\( x - y \\) adalah ....</p>
+    </div>
+  `,
+  "options": ["5", "1", "-1", "-4", "-7"],
+  "correct": 4
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Diketahui fungsi trigonometri  
+        \\( f(x) = -3 \\sin(2x - 30°) + 4 \\).  
+      </p>
+      <p><b>Pertanyaan:</b> Tentukan periode fungsi \\( f(x) \\)!</p>
+    </div>
+  `,
+  "options": ["90°", "120°", "150°", "180°", "720°"],
+  "correct": 3
+},
+
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p><b>Pertanyaan:</b> Grafik manakah yang sesuai dengan fungsi \\( y = \\sin(2x) - \\tfrac{1}{2} \\)?</p>
+    </div>
+  `,
+  "options": [
+    "<img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/78190_c970a6dfdf7222b64bda620c8955444b.png' width='200' />",
+    "<img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/78190_d6bcdcda605b823ea3e2bb59794ff8b0.png' width='200' />",
+    "<img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/78190_98bf748b4e43770feefa2a9798b57cd6.png' width='200' />",
+    "<img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/78190_98bf748b4e43770feefa2a9798b57cd6.png' width='200' />",
+    "<img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/78190_ae9e80dc0920be0b817d8b12d5797ee7.png' width='200' />"
+  ],
+  "correct": 4
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Suatu perahu akan menyeberangi sungai selebar \\(50\\) meter dari titik \\(A\\) di pinggir sungai.  
+        Kecepatan arus sungai \\(10\\) meter/menit sejajar dengan pinggiran sungai dan arah arus ke hulu.  
+        Kecepatan perahu \\(20\\) meter/menit dengan arah tegak lurus terhadap arus sungai.  
+      </p>
+      <p><b>Pertanyaan:</b> Jika titik \\(B\\) berada tepat di seberang sungai dan berjarak terdekat dengan posisi \\(A\\), maka jarak antara titik perahu pada saat sampai di seberang sungai dan titik \\(B\\) adalah … meter.</p>
+    </div>
+  `,
+  "options": ["10", "15", "20", "25", "30"],
+  "correct": 3
+},
+
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Diketahui persamaan lingkaran  
+        \\(x^2 + y^2 - 6x - 2y - 26 = 0\\).  
+      </p>
+      <p><b>Pertanyaan:</b> Di antara lima pernyataan berikut, tentukan pernyataan yang benar!  
+      <br><br><i>Pilih semua jawaban benar! Jawaban benar lebih dari satu</i></p>
+    </div>
+  `,
+  "options": [
+    "Lingkaran tersebut berpusat di (3, 1).",
+    "Panjang jari-jari lingkaran tersebut 6 satuan panjang.",
+    "Jarak pusat lingkaran dengan sumbu-x adalah 3.",
+    "Jarak pusat lingkaran dengan sumbu-y adalah 1.",
+    "Garis y = 0 memotong lingkaran di dua titik."
+  ],
+  "correct": [1,4]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Bayangan dari kurva \\(y = 2x^2 - 5\\) ditranslasikan oleh matriks 
+        \\(\\begin{bmatrix} -3 \\\\ 2 \\end{bmatrix}\\) kemudian didilatasi terhadap titik pusat O(0,0) 
+        dengan faktor skala 2.
+      </p>
+      <p><b>Pertanyaan:</b> Persamaan bayangan kurva setelah transformasi adalah ...</p>
+    </div>
+  `,
+  "options": [
+    "\\(y = \\tfrac{1}{4}x^2 + 3x + \\tfrac{15}{2}\\)",
+    "\\(y = \\tfrac{1}{4}x^2 + 3x + \\tfrac{11}{2}\\)",
+    "\\(y = x^2 + 12x + 30\\)",
+    "\\(y = x^2 - 12x + 22\\)",
+    "\\(y = 4x^2 + 12x + 15\\)"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Hitung nilai dari limit berikut:
+        \\[
+          \\lim_{x \\to 2} \\frac{x^2 + 5x - 14}{4 - \\sqrt{x^2 + 12}}
+        \\]
+      </p>
+      <p><b>Pertanyaan:</b> Nilai limit tersebut adalah ....</p>
+    </div>
+  `,
+  "options": ["-18", "-9", "0", "9", "18"],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Hitung nilai dari limit berikut:
+        \\[
+          \\lim_{x \\to \\infty} \\Big( (\\sqrt{3x} - \\sqrt{3x-4})\\,\\sqrt{3x+2} \\Big)
+        \\]
+      </p>
+      <p><b>Pertanyaan:</b> Nilai limit tersebut adalah ....</p>
+    </div>
+  `,
+  "options": [
+    "\\(-\\tfrac{4}{3}\\sqrt{3}\\)",
+    "\\(-2\\)",
+    "0",
+    "2",
+    "\\(\\tfrac{4}{3}\\sqrt{3}\\)"
+  ],
+  "correct": 3
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Diketahui matriks \\( M = \\begin{bmatrix} 2 & 5 \\\\ 1 & 3 \\end{bmatrix} \\) dan \\( M^{-1} \\) melambangkan invers dari \\( M \\).  
+      </p>
+      <p><b>Pertanyaan:</b> Berapakah nilai \\( p \\) dan \\( q \\) yang tepat memenuhi 
+      \\( pM^{-1} = q \\begin{bmatrix} 6 & -10 \\\\ -2 & 4 \\end{bmatrix} \\)?  
+      <br><br><i>Pilih semua jawaban benar! Jawaban benar lebih dari satu</i></p>
+    </div>
+  `,
+  "options": [
+    "p = 2 dan q = 1",
+    "p = 3 dan q = 3",
+    "p = 4 dan q = 2",
+    "p = 5 dan q = 1",
+    "p = 6 dan q = 3"
+  ],
+  "correct": [0, 2, 4]
+},
+
+{
+  "type": "true_false",
+  "text": `
+    Seorang murid memperkirakan banyaknya penonton suatu video (dalam ribuan) yang dibuat oleh content creator A di media sosial mengikuti model 
+    \\[
+      f(t) = 3(2^t)
+    \\], dengan \\( t \\) adalah banyaknya hari sejak video diunggah.<br><br>
+
+    Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+  `,
+  "statements": [
+    "A. Video tersebut hanya ditonton oleh 3.000 penonton setelah tepat 24 jam diunggah.",
+    "B. Banyaknya penonton video meningkat dua kali lipat dari hari sebelumnya untuk beberapa hari setelah diunggah.",
+    "C. Model banyaknya penonton ini tidak tepat untuk waktu yang cukup besar."
+  ],
+  "correct": [true, true, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Diketahui \\( \\vec{u}, \\vec{v}, \\text{ dan } \\vec{w} \\) merupakan tiga vektor dengan 
+        \\( \\vec{u} = (1,1,-1) \\), \\( \\vec{v} = (1, v_1, 2) \\), dan \\( \\vec{w} = (0, w_1, w_2) \\).  
+      </p>
+      <p><b>Pertanyaan:</b> Berapakah nilai \\( v_1 \\) dan \\( w_1 \\) yang mungkin sehingga memenuhi 
+      \\( \\vec{w} = \\vec{u} - \\vec{v} \\)?  
+      <br><br><i>Pilih semua jawaban benar! Jawaban benar lebih dari satu</i></p>
+    </div>
+  `,
+  "options": [
+    "v₁ = 0 dan w₁ = 1",
+    "v₁ = 1 dan w₁ = 0",
+    "v₁ = 1 dan w₁ = 2",
+    "v₁ = 2 dan w₁ = −1",
+    "v₁ = 2 dan w₁ = 2"
+  ],
+  "correct": [0, 1, 3]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Segitiga \\( PQR \\) dengan titik \\( P(-1,3) \\), \\( Q(3,3) \\), dan \\( R(1,-2) \\) didilatasi dengan pusat di titik \\( (0,0) \\) dan faktor skala \\( k = 3 \\).
+      </p>
+      <p><b>Pertanyaan:</b> Tentukan luas segitiga \\( P'Q'R' \\) setelah dilatasi. Luas tersebut adalah … satuan luas.</p>
+    </div>
+  `,
+  "options": ["10", "30", "90", "120", "180"],
+  "correct": 2
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      Diketahui fungsi \\( f(x) \\) didefinisikan sebagai berikut:
+      \\[
+        f(x) = 
+        \\begin{cases} 
+          2x, & 0 < x < 1 \\\\
+          1, & x = 1 \\\\
+          3 - x, & 1 < x \\le 3 \\\\
+          1 + (x - 3)^2, & x > 3
+        \\end{cases}
+      \\]
+      <br><br>
+      Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+    </div>
+  `,
+  "statements": [
+    "A. \\( \\lim_{x \\to 1} f(x) = 2 \\)",
+    "B. \\( \\lim_{x \\to 3} f(x) = 0 \\)",
+    "C. \\( \\lim_{x \\to 4} f(x) = 2 \\)"
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Hitung nilai dari limit berikut:
+      \\[
+        \\lim_{x \\to \\pi} \\frac{\\sin(x - \\pi)}{3(\\pi - x)\\cos(4x)}
+      \\]
+      <br><br>
+      <b>Pertanyaan:</b> Nilai limit tersebut adalah .... 
+    </div>
+  `,
+  "options": [
+    "\\(-\\tfrac{1}{3}\\)",
+    "0",
+    "\\(\\tfrac{1}{3}\\)",
+    "1",
+    "3"
+  ],
+  "correct": 0
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Diketahui matriks \\( A, B, C, \\) dan \\( D \\) berturut-turut berukuran 
+      \\( p \\times 3 \\), \\( 2 \\times q \\), \\( r \\times s \\), dan \\( t \\times u \\).  
+      <br><br>
+      Tentukan semua pasangan nilai \\((p, q, r, s, t, u)\\) yang dapat memenuhi persamaan:
+      \\[
+        (2A + B) \\times 4C = 5D
+      \\]
+      <br><br>
+      <i>Pilih semua jawaban benar! Jawaban benar lebih dari satu</i>
+    </div>
+  `,
+  "options": [
+    "(1) (1, 2, 2, 3, 2, 3)",
+    "(2) (2, 2, 3, 3, 3, 3)",
+    "(3) (2, 3, 3, 3, 2, 2)",
+    "(4) (2, 3, 3, 3, 2, 3)",
+    "(5) (2, 3, 3, 4, 2, 4)"
+  ],
+  "correct": [3, 4]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Diketahui fungsi polinomial \\( f(x) = x^3 + 2x^2 + ax + b \\) memenuhi kondisi:
+      <ul>
+        <li>Sisa pembagian \\( f(x) \\) oleh \\( x + 1 \\) adalah 2.</li>
+        <li>Sisa pembagian \\( f(x) \\) oleh \\( x - 1 \\) adalah 6.</li>
+      </ul>
+      <br>
+      <b>Pertanyaan:</b> Berdasarkan informasi tersebut, pilihlah semua pernyataan berikut yang benar!  
+      <br><br><i>Jawaban benar lebih dari satu</i>
+    </div>
+  `,
+  "options": [
+    "a = 2",
+    "f(-2) = 4",
+    "f(0) = 2",
+    "Sisa pembagian f(x) oleh x - 2 adalah 20",
+    "Sisa pembagian f(x) oleh x + 3 adalah -2"
+  ],
+  "correct": [2, 3]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        PQRS merupakan segiempat sembarang. Jika titik T terletak pada ruas garis PR dan titik U terletak pada ruas garis SQ dengan 2PT = TR dan 2SU = UQ, diperoleh persamaan vektor:
+        \\[
+          2\\overrightarrow{PQ} + 2\\overrightarrow{PS} + \\overrightarrow{RQ} + \\overrightarrow{RS} = a\\overrightarrow{SQ} + b\\overrightarrow{TU}
+        \\]
+      </p>
+      <p><b>Pertanyaan:</b> Nilai dari \\((10\\times a) + b\\) adalah ....</p>
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/14291_8e0230cc6ed3986c851ae85246fb2070.png" alt="Diagram segiempat PQRS" style="max-width:100%; height:auto;">
+    </div>
+  `,
+  "options": [
+    "16",
+    "32",
+    "36",
+    "42",
+    "61"
+  ],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Tentukan persamaan lingkaran yang berpusat di A(-2, 1) dan menyinggung garis 
+        \\(4x + 3y - 20 = 0\\) di titik B(2, 4).
+      </p>
+      <p><b>Pertanyaan:</b> Persamaan lingkaran tersebut adalah ....</p>
+    </div>
+  `,
+  "options": [
+    "\\(x^2 + y^2 + 4x - 2y - 11 = 0\\)",
+    "\\(x^2 + y^2 + 4x + 2y - 11 = 0\\)",
+    "\\(x^2 + y^2 + 4x - 2y - 19 = 0\\)",
+    "\\(x^2 + y^2 + 4x + 2y - 19 = 0\\)",
+    "\\(x^2 + y^2 - 4x - 2y - 19 = 0\\)"
+  ],
+  "correct": 0
+}
+
+
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (['true_false', 'true_false_en', 'fact_opinion', 'benefit_challenge', 'tepat_tidak'].includes(q.type)) {
+    return Array(q.statements.length).fill(null);
+  }
+  return null;
+});
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+// ====== TEPAT / TIDAK TEPAT ======
+else if (q.type === 'tepat_tidak') {
+  html += `<table class="true-false">
+    <tr><th>Pernyataan</th><th>Tepat</th><th>Tidak Tepat</th></tr>`;
+  q.statements.forEach((stmt, i) => {
+    const tepatChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td><input type="radio" name="tt_${i}" value="true" ${tepatChecked}></td>
+      <td><input type="radio" name="tt_${i}" value="false" ${tidakChecked}></td>
+    </tr>`;
+  });
+  html += `</table>`;
+}
+
+  // ====== BENEFIT / CHALLENGE ======
+  else if (q.type === 'benefit_challenge') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Benefit</th><th>Challenge</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benChecked = answers[index][i] === 'benefit' ? 'checked' : '';
+      const chalChecked = answers[index][i] === 'challenge' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="bc_${i}" value="benefit" ${benChecked}></td>
+        <td><input type="radio" name="bc_${i}" value="challenge" ${chalChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== TRUE / FALSE (English version) ======
+  else if (q.type === 'true_false_en') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>True</th><th>False</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const trueChecked = answers[index][i] === true ? 'checked' : '';
+      const falseChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tfe_${i}" value="true" ${trueChecked}></td>
+        <td><input type="radio" name="tfe_${i}" value="false" ${falseChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== FACT / OPINION ======
+  else if (q.type === 'fact_opinion') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Fact</th><th>Opinion</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const factChecked = answers[index][i] === 'fact' ? 'checked' : '';
+      const opChecked = answers[index][i] === 'opinion' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="fo_${i}" value="fact" ${factChecked}></td>
+        <td><input type="radio" name="fo_${i}" value="opinion" ${opChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk Benefit/Challenge
+  if (q.type === 'benefit_challenge') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="bc_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+// Event listener untuk TEPAT/TIDAK TEPAT
+if (q.type === 'tepat_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="tt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+
+  // Event listener untuk True/False English
+  if (q.type === 'true_false_en') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tfe_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk Fact/Opinion
+  if (q.type === 'fact_opinion') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="fo_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk tipe mc_multiple
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', e => {
+        const val = parseInt(e.target.value);
+        if (e.target.checked) {
+          if (!answers[index].includes(val)) answers[index].push(val);
+        } else {
+          answers[index] = answers[index].filter(v => v !== val);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  // Hitung skor 0–100
+  const percentage = Math.round((score / questions.length) * 100);
+
+  // Tampilkan hanya skor akhir dalam bentuk nilai
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+}
+
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  const interval = setInterval(() => {
+    if (!timerRunning) { clearInterval(interval); return; }
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    if (--timer < 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+  }, 1000);
+}
+
+renderQuestionButtons();
+renderQuestion(currentQuestion);
+startTimer(60 * 60);
+
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+fullscreenBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      alert(`Gagal masuk fullscreen: ${err.message}`);
+    });
+    fullscreenBtn.textContent = "Exit Fullscreen";
+  } else {
+    document.exitFullscreen();
+    fullscreenBtn.textContent = "Fullscreen";
+  }
+});
+checkSession();
+
+  </script>
+</body>
+</html>
