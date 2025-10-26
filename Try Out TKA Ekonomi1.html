@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Ekonomi - Kebun Ilmu</title>
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+
+  </style>
+</head>
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+
+<header>
+  <h2>Try Out TKA Ekonomi - Kebun Ilmu</h2>
+  <div>
+    <button id="fullscreenBtn" class="menu-button">Fullscreen</button>
+    <span class="timer" id="timer">60:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "tryout1",  password: "2025",  expire: "2025-11-11T23:59:59" },
+  { username: "nadira", password: "nad322", expire: "2025-11-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-11-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-11-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-11-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(60 * 60);
+}
+  const questions = [
+
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Di sebuah kota kecil terjadi perkembangan ekonomi yang pesat akibat meningkatnya kegiatan ekonomi di industri manufaktur. 
+      Fenomena ini berdampak pada beberapa aspek kehidupan industri, di antaranya:
+      <ol>
+        <li>Meningkatnya jumlah tenaga kerja yang terserap di sektor industri.</li>
+        <li>Berkembangnya sektor perdagangan akibat meningkatnya daya beli.</li>
+        <li>Terjadinya kemacetan dan peningkatan polusi akibat meningkatnya transportasi industri.</li>
+        <li>Meningkatnya harga tanah dan biaya hidup akibat tingginya permintaan akan hunian.</li>
+      </ol>
+      <br>
+      <b>Question:</b> Berdasarkan kondisi tersebut, bagaimana hubungan antara kegiatan ekonomi dan dampak positif terhadap kehidupan industri?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Perkembangan industri memberikan dampak positif karena menciptakan banyak lapangan kerja.",
+    "Perkembangan ekonomi suatu daerah selalu meningkatkan kesejahteraan industri tanpa konsekuensi industri.",
+    "Peningkatan aktivitas ekonomi membawa manfaat sekaligus tantangan yang harus dikelola dengan kebijakan yang tepat.",
+    "Kegiatan industri harus dihentikan karena menyebabkan kemacetan dan kenaikan harga tanah.",
+    "Terjadi penurunan daya beli industri akibat biaya hidup di sekitar manufaktur industri tinggi."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Perhatikan kurva permintaan dan penawaran barang berikut!  
+      <br>
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/41254_e97702c06716fdf454c7a81d7f40036d.png" 
+      alt="Kurva Permintaan dan Penawaran" style="display:block; margin:10px auto; max-width:100%; border-radius:8px;">
+      <br>
+      <b>Question:</b> Berdasarkan kurva tersebut, bentuk kurva fungsi permintaan yang benar adalah ....<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Qd = 10P – 500",
+    "Qd = -10P + 3500",
+    "Qd = 0,1P + 500",
+    "Qd = -0,1P + 4.000",
+    "Qd = -0,1P + 3.500"
+  ],
+  "correct": 4
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Daftar harga tomat di pasar tradisional di Kota B bulan Januari tahun 2024 adalah sebagai berikut:
+      <br><br>
+      <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 50%; margin:0 auto; text-align:center;">
+        <tr>
+          <th>Harga (Rp)</th>
+          <th>Permintaan (Kg)</th>
+          <th>Penawaran (Kg)</th>
+        </tr>
+        <tr>
+          <td>9.000</td>
+          <td>800</td>
+          <td>1.000</td>
+        </tr>
+        <tr>
+          <td>10.000</td>
+          <td>600</td>
+          <td>1.200</td>
+        </tr>
+      </table>
+      <br>
+      <b>Question:</b> Dari data tersebut, titik keseimbangan pasar dengan kuantitas (Q) dan harga (P) yang benar adalah ....<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "600; 10.000",
+    "800; 9.000",
+    "900; 8.500",
+    "1.800; 9.000",
+    "1.800; 10.000"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Tabel pendapatan Negara Astina, Negara Alengka, dan Negara Amarta selama tahun 2022 dan 2023:
+      <br><br>
+      <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 80%; margin:0 auto; text-align:center;">
+        <tr>
+          <th>Negara</th>
+          <th>Pendapatan Nasional 2022 (Juta Rp)</th>
+          <th>Pendapatan Nasional 2023 (Juta Rp)</th>
+          <th>Penduduk 2022 (Juta)</th>
+          <th>Penduduk 2023 (Juta)</th>
+        </tr>
+        <tr>
+          <td>Astina</td>
+          <td>274.700</td>
+          <td>283.300</td>
+          <td>50</td>
+          <td>51</td>
+        </tr>
+        <tr>
+          <td>Alengka</td>
+          <td>305.000</td>
+          <td>326.600</td>
+          <td>30</td>
+          <td>31</td>
+        </tr>
+        <tr>
+          <td>Amarta</td>
+          <td>878.040</td>
+          <td>917.700</td>
+          <td>250</td>
+          <td>255,5</td>
+        </tr>
+      </table>
+      <br>
+      <b>Question:</b> Berdasarkan data tersebut, kesimpulan yang dapat diambil adalah ....<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Urutan pendapatan perkapita dari yang tertinggi pada tahun 2022 yaitu Negara Astina, Negara Alengka, dan Negara Amarta.",
+    "Urutan pendapatan perkapita dari yang tertinggi tahun 2023 yaitu Negara Alengka, Negara Amarta, dan Negara Astina.",
+    "Urutan pendapatan perkapita dari yang terendah tahun 2023 yaitu Negara Amarta, Negara Alengka, dan Negara Astina.",
+    "Negara yang mempunyai kenaikan pendapatan perkapita tertinggi tahun 2022 Negara Amarta.",
+    "Negara yang mempunyai pendapatan perkapita tertinggi pada tahun 2022 dan 2023 yaitu Negara Alengka."
+  ],
+  "correct": 4
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Tahun ini pemerintah mulai membangun banyak infrastruktur. Salah satunya adalah pembangunan 13 waduk baru. 
+      Waduk tersebut tersebar di seluruh wilayah Indonesia. Sekarang dari 7,2 juta hektare (Ha) luas irigasi pertanian di Indonesia, 
+      baru sekitar 11% yang memanfaatkan air tampungan waduk. Sisanya masih memanfaatkan air hujan, sehingga selalu terancam kekeringan saat musim kemarau tiba. 
+      Apabila 13 waduk baru tersebut terealisasi, lahan irigasi waduk dapat meningkat dua kali lipat menjadi 1,45 juta Ha.
+      <br><br>
+      <b>Question:</b> Berdasar ilustrasi tersebut, yang merupakan kebijakan pembangunan pemerintah Indonesia dalam hal ….<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "penguatan kelembagaan masyarakat dan usaha kecil rumahan",
+    "penguatan ketahanan pangan dan stabilisasi produksi pangan nasional",
+    "pemanfaatan sumber daya alam dan manusia agar lebih bermanfaat",
+    "penguatan sinergi antara SDM, IPTEK dengan industri pangan",
+    "pengembangan sektor pertanian dan infrastruktur pedesaan"
+  ],
+  "correct": 4
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Berikut data Produk Domestik Bruto (PDB) Negara Nusa Harapan pada 4 tahun terakhir:
+      <br><br>
+      <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 50%; margin:0 auto; text-align:center;">
+        <tr>
+          <th>Tahun</th>
+          <th>PDB (dalam triliun rupiah)</th>
+        </tr>
+        <tr>
+          <td>2021</td>
+          <td>7.500</td>
+        </tr>
+        <tr>
+          <td>2022</td>
+          <td>7.600</td>
+        </tr>
+        <tr>
+          <td>2023</td>
+          <td>7.800</td>
+        </tr>
+        <tr>
+          <td>2024</td>
+          <td>8.000</td>
+        </tr>
+      </table>
+      <br>
+      <b>Question:</b> Berdasarkan data tersebut, laju pertumbuhan ekonomi Negara Nusa Harapan pada periode 2023–2024 adalah …. <br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "1,33%",
+    "2,56%",
+    "2,63%",
+    "5,23%",
+    "6,6%"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Banyak masalah yang terdapat pada perbankan, baik internal maupun eksternal. 
+      Salah satu masalah eksternal di antaranya adalah kredit macet. 
+      Jika tidak segera diatasi, dikhawatirkan kerugian perbankan akan semakin besar.
+      <br><br>
+      <b>Question:</b> Cara yang paling tepat yang dilakukan agar masalah tersebut tidak terulang kembali adalah …. <br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "memperhatikan perencanaan yang telah dibuat sebagai panduan kegiatan perbankan",
+    "meningkatkan transparansi, sistem pengendalian, audit, dan manajemen risiko perbankan",
+    "menyerahkan penyelesaian masalah kepada pemerintah melalui Otoritas Jasa Keuangan",
+    "melakukan kerjasama dengan aparat berwenang untuk melakukan penindakan secara hukum",
+    "memperketat aturan dalam pemberian kredit dan memberlakukan sanksi bagi yang melanggar"
+  ],
+  "correct": 4
+},
+
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      PT Mentari bergerak sebagai produsen makanan ringan berbahan dasar buah-buahan asli Indonesia, seperti keripik nangka dan keripik salak.  
+      Dalam rangka peningkatan kualitas produk dan efisiensi kerja, perusahaan mulai menerapkan sistem manajemen produksi modern, seperti penggunaan mesin modern, pengawasan kualitas produk secara ketat, dan pengelolaan bahan baku yang lebih higienis.  
+      Selain itu, perusahaan juga membangun sistem informasi terkait jadwal produksi agar pesanan konsumen dapat selesai tepat waktu.
+      <br><br>
+      <b>Question:</b> Berdasarkan ilustrasi tersebut, manakah yang sesuai dengan sistem manajemen produksi?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Peningkatkan efisiensi dengan penggunaan mesin modern.",
+    "Memanfaatkan media sosial untuk pemasaran produk.",
+    "Penentuan harga jual berdasarkan harga pesaing.",
+    "Pengelolaan dan proses bahan baku yang efisien.",
+    "Pengawasan kualitas secara berkesinambungan."
+  ],
+  "correct": [0, 3, 4]
+},
+
+
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      Indonesia adalah negara dengan kekayaan sumber daya alam yang melimpah, seperti batu bara, kelapa sawit, karet, dan produk perikanan. 
+      Untuk meningkatkan pertumbuhan ekonomi, pemerintah aktif menjalin kerja sama dagang dengan negara-negara ASEAN, Jepang, dan Uni Eropa.
+      <br><br>
+      Meskipun menghadapi tantangan seperti fluktuasi nilai tukar, hambatan impor, dan rendahnya daya saing produk lokal, kerja sama internasional tetap memberi manfaat berupa peningkatan devisa, transfer teknologi, serta pembukaan lapangan kerja baru.
+      <br><br>
+      <b>Tentukan Benar (B) atau Salah (S)</b> untuk setiap pernyataan berikut terkait hambatan perdagangan internasional:
+    </div>
+  `,
+  "statements": [
+    "A. Proteksi negara mitra.",
+    "B. Kurangnya kualitas produk lokal.",
+    "C. Kesepakatan dagang bebas."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      Transaksi yang terjadi pada perusahaan jasa “Langit Biru” milik Pak Anton di bulan Maret Tahun 2025. 
+      Transaksi berpengaruh terhadap persamaan dasar akuntansi (Aset = Kewajiban + Ekuitas).
+      <br><br>
+      <b>Tentukan Benar (B) atau Salah (S)</b> untuk setiap transaksi berdasarkan persamaan akuntansi berikut:
+    </div>
+  `,
+  "statements": [
+    "A. Pak Anton menyetorkan uang tunai sebesar Rp60.000.000,00 sebagai modal awal akan menambah aset dan ekuitas.",
+    "B. Perusahaan menyewa kantor untuk 6 bulan ke depan dengan membayar lunas sebesar Rp12.000.000,00 akan menambah aset dan kewajiban.",
+    "C. Perusahaan menerima pendapatan jasa secara tunai sebesar Rp7.000.000,00 menambah aset dan ekuitas."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Kota Maju sedang menghadapi masalah serius terkait kelangkaan air bersih akibat musim kemarau panjang selama 5 bulan berturut-turut. 
+      Data dari Dinas Lingkungan Hidup menunjukkan:
+      <ul>
+        <li>Ketersediaan air bersih turun 25% dibanding tahun sebelumnya.</li>
+        <li>Konsumsi air per kapita meningkat sebesar 10% karena pertumbuhan penduduk dan aktivitas ekonomi.</li>
+        <li>Sebagian besar rumah tangga masih menggunakan metode pengambilan air konvensional.</li>
+        <li>Infrastruktur penyediaan air saat ini belum mampu memenuhi kebutuhan masyarakat secara optimal.</li>
+      </ul>
+      Pemerintah kota mempertimbangkan beberapa opsi solusi untuk jangka pendek dan menengah:
+      <ol>
+        <li>Membatasi penggunaan air dan menaikkan tarif air untuk mendorong masyarakat menghemat penggunaan.</li>
+        <li>Mengedukasi masyarakat tentang pentingnya konservasi dan penggunaan teknologi hemat air.</li>
+        <li>Membangun fasilitas pengolahan air bersih baru namun memerlukan waktu dan biaya besar.</li>
+      </ol>
+      <br>
+      <b>Question:</b> Berdasarkan informasi tersebut, manakah solusi yang sebaiknya diterapkan dan dievaluasi oleh pemerintah untuk mengatasi kelangkaan air bersih di Kota Maju?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Pembatasan penggunaan air dan peningkatan tarif menjadi salah satu cara untuk mengendalikan permintaan air secara langsung.",
+    "Mengedukasi masyarakat tentang konservasi air dapat membantu menurunkan konsumsi air jangka panjang.",
+    "Membangun fasilitas baru adalah solusi terbaik dan paling cepat untuk mengatasi kelangkaan air saat ini.",
+    "Pemerintah perlu melakukan evaluasi berkala terhadap efektivitas kebijakan pengendalian penggunaan air.",
+    "Pendekatan teknologi hemat air tidak tepat karena masyarakat belum terbiasa menggunakannya."
+  ],
+  "correct": [0, 1, 3]
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      Pengangguran merupakan salah satu permasalahan krusial yang terjadi di Indonesia. 
+      Beberapa wilayah dengan tingkat pengangguran tertinggi berdasarkan data Badan Pusat Statistik (BPS) pada Agustus 2024 di antaranya Provinsi Jawa Barat (6,75%), Banten (6,68%), Papua (6,48%), Papua Barat Daya (6,48%), dan Kepulauan Riau (6,39%).
+      <br><br>
+      Pengangguran terjadi disebabkan oleh berbagai faktor, antara lain kesenjangan antara keterampilan pencari kerja dengan kebutuhan pasar, keterbatasan lapangan kerja, serta faktor ekonomi makro.
+      <br><br>
+      <b>Tentukan Benar (B) atau Salah (S)</b> untuk setiap pernyataan berikut terkait solusi pengangguran:
+    </div>
+  `,
+  "statements": [
+    "A. Peningkatan upah bagi tenaga kerja.",
+    "B. Mendorong investasi daerah melalui insentif pajak dan kemudahan perizinan.",
+    "C. Menyediakan akses pembiayaan, pelatihan, dan pendampingan bagi pelaku UMKM."
+  ],
+  "correct": [false, true, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Pada akhir tahun 2024, inflasi di Indonesia mulai menunjukkan tren peningkatan yang cukup signifikan. 
+      Untuk merespons hal tersebut, Bank Indonesia memutuskan menaikkan suku bunga acuan (BI Rate). 
+      Kebijakan ini diambil agar masyarakat mengurangi konsumsi dan menahan laju inflasi.
+      <br><br>
+      <b>Question:</b> Berdasarkan ilustrasi di atas, Bank Indonesia sedang menjalankan fungsi sebagai .... <br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "penyelamat likuiditas bank",
+    "pengawasan sistem keuangan",
+    "penjaga stabilitas sistem pembayaran",
+    "pelaksana kebijakan moneter",
+    "pengelola cadangan devisa"
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Selama tiga bulan pertama tahun 2024, ekspor Indonesia turun 15% karena permintaan dunia terhadap komoditas utama seperti batu bara dan minyak sawit menurun. 
+      Sementara itu, impor barang konsumsi naik 10%. Akibatnya, neraca perdagangan Indonesia mengalami defisit sebesar USD 1,2 miliar. 
+      Pemerintah berencana mengambil langkah strategis untuk meningkatkan ekspor dan mengendalikan impor.
+      <br><br>
+      <b>Question:</b> Berdasarkan informasi, kebijakan apa yang dapat diterapkan pemerintah untuk memperbaiki neraca perdagangan tersebut? <br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Memberikan insentif ekspor untuk sektor industri strategis dan mengenakan tarif tinggi untuk semua barang impor.",
+    "Meningkatkan ekspor produk manufaktur dan mengurangi ketergantungan pada ekspor komoditas mentah.",
+    "Menurunkan suku bunga agar masyarakat lebih konsumtif sehingga meningkatkan impor.",
+    "Meningkatkan belanja negara produk manufaktur agar mendorong lebih banyak konsumsi barang impor.",
+    "Menghentikan semua impor barang modal untuk mengurangi pengeluaran devisa."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Berikut adalah data keuangan PT Sejahtera Makmur per 31 Desember 2023:
+      <br><br>
+      <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 60%; margin:0 auto; text-align:center;">
+        <tr>
+          <th>Keterangan</th>
+          <th>Jumlah (Rp)</th>
+        </tr>
+        <tr><td>Pendapatan Usaha</td><td>120.000.000</td></tr>
+        <tr><td>Beban Gaji Karyawan</td><td>25.000.000</td></tr>
+        <tr><td>Beban Listrik dan Air</td><td>5.000.000</td></tr>
+        <tr><td>Beban Penyusutan Peralatan</td><td>10.000.000</td></tr>
+        <tr><td>Beban Sewa Gedung</td><td>15.000.000</td></tr>
+      </table>
+      <br>
+      <b>Question:</b> Berdasarkan data tersebut, berapakah laba bersih yang diperoleh perusahaan? <br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "50.000.000",
+    "58.000.000",
+    "65.000.000",
+    "72.000.000",
+    "80.000.000"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Berikut ini data permintaan kopi di Kafe Milenial pada Bulan Juni 2024. Data menunjukkan harga awal dan harga promo beserta jumlah permintaan.
+      <br><br>
+      <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 80%; margin:0 auto; text-align:center;">
+        <tr>
+          <th>Menu Kopi</th>
+          <th>Harga Awal (Rp)</th>
+          <th>Jumlah Awal (cup)</th>
+          <th>Harga Promo (Rp)</th>
+          <th>Jumlah Promo (cup)</th>
+        </tr>
+        <tr><td>Kopi Nusantara</td><td>22.000</td><td>500</td><td>20.000</td><td>700</td></tr>
+        <tr><td>Kopi Mantap</td><td>22.000</td><td>600</td><td>19.000</td><td>700</td></tr>
+        <tr><td>Kopi Sejuk</td><td>20.000</td><td>700</td><td>18.000</td><td>850</td></tr>
+        <tr><td>Kopi Rakyat</td><td>18.000</td><td>850</td><td>16.000</td><td>1.100</td></tr>
+        <tr><td>Kopi Hemat</td><td>16.000</td><td>1.000</td><td>14.000</td><td>1.200</td></tr>
+      </table>
+      <br>
+      <b>Question:</b> Berdasarkan data tersebut, tentukan pernyataan berikut ini yang benar berdasarkan prinsip ekonomi!<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Penurunan harga kopi meningkatkan jumlah permintaan karena permintaan bersifat elastis terhadap harga.",
+    "Penurunan harga selalu menurunkan pendapatan total produsen, karena harga per unit turun.",
+    "Adanya penurunan harga kopi dapat meningkatkan loyalitas konsumen dan volume penjualan.",
+    "Pendapatan Kafe Milenial menurun karena permintaan kopi bersifat inelastis terhadap harga.",
+    "Adanya promo menyebabkan jumlah permintaan kopi meningkat, sehingga tidak sesuai dengan hukum permintaan."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Berdasarkan data Badan Pusat Statistik, Indeks Harga Konsumen (IHK) di suatu wilayah tercatat sebesar 112 pada tahun 2022 dan meningkat menjadi 118 pada tahun 2023. Di sisi lain, IHK pada tahun 2024 naik kembali menjadi 125.
+      <br><br>
+      <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 40%; margin:0 auto; text-align:center;">
+        <tr><th>Tahun</th><th>IHK</th></tr>
+        <tr><td>2022</td><td>112</td></tr>
+        <tr><td>2023</td><td>118</td></tr>
+        <tr><td>2024</td><td>125</td></tr>
+      </table>
+      <br>
+      <b>Question:</b> Berdasarkan data tersebut, manakah pernyataan berikut yang paling tepat mengenai perkembangan laju inflasi dari tahun ke tahun? <br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Inflasi tahun 2023 lebih tinggi dibandingkan tahun 2024.",
+    "Inflasi tahun 2023 dan 2024 menunjukkan tren penurunan.",
+    "Inflasi tahun 2024 lebih tinggi dibandingkan tahun 2023.",
+    "Inflasi pada tahun 2023 mencapai tertinggi adalah 7%.",
+    "Tingkat inflasi tahun 2024 yaitu 5% lebih rendah dari tahun sebelumnya."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Pada triwulan kedua tahun 2024, tingkat inflasi nasional melonjak menjadi 7,5% year-on-year, jauh melampaui target inflasi 3%. Kenaikan inflasi disebabkan oleh kombinasi dari:
+      <ul>
+        <li>Gangguan distribusi pangan domestik akibat cuaca ekstrem dan konflik logistik.</li>
+        <li>Depresiasi nilai tukar rupiah terhadap dolar AS sebesar 12% dalam tiga bulan terakhir.</li>
+        <li>Lonjakan harga energi global akibat ketegangan geopolitik.</li>
+        <li>Ekspektasi inflasi yang meningkat di kalangan pelaku usaha dan konsumen, yang tercermin dari kenaikan upah dan harga-harga secara luas.</li>
+      </ul>
+      Di sisi lain, pertumbuhan ekonomi nasional pada saat yang sama melambat ke level 4,2% (di bawah target 5,5%), dan angka pengangguran terbuka naik menjadi 6,8%.
+      <br><br>
+      <b>Question:</b> Berdasarkan ilustrasi tersebut, manakah kebijakan moneter yang tepat untuk mengatasi masalah tersebut?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Menaikkan suku bunga acuan (BI Rate).",
+    "Menurunkan Giro Wajib Minimum (GWM) perbankan.",
+    "Menjual Surat Berharga Negara (SBN) di pasar terbuka.",
+    "Melakukan intervensi di pasar valas untuk menstabilkan rupiah.",
+    "Meningkatkan jumlah uang beredar untuk menjaga konsumsi masyarakat."
+  ],
+  "correct": [0, 2, 3]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      PT Perkebunan Nusantara (PTPN) merupakan sebuah Badan Usaha Milik Negara (BUMN) di sektor perkebunan, melakukan ekspansi usaha dengan membuka lahan baru dan membangun pabrik pengolahan sawit di beberapa daerah tertinggal. 
+      Langkah ini menciptakan lapangan kerja baru bagi masyarakat sekitar, meningkatkan pendapatan petani lokal melalui kemitraan, serta meningkatkan ekspor hasil perkebunan ke mancanegara.
+      <br><br>
+      <b>Question:</b> Berdasarkan ilustrasi tersebut, manakah dampak dari peran badan usaha PTPN terhadap perekonomian Indonesia?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Meningkatkan kesempatan kerja di wilayah tertinggal.",
+    "Meningkatkan potensi impor hasil perkebunan.",
+    "Mendorong pemerataan pembangunan antarwilayah.",
+    "Meningkatkan penerimaan devisa negara dari ekspor.",
+    "Melemahkan daya saing petani lokal dalam jangka panjang."
+  ],
+  "correct": [0, 2, 3]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Perusahaan dagang “Toko Berkah” milik Bapak Rahmat melakukan beberapa transaksi selama minggu pertama bulan Februari 2025.
+      <br><br>
+      <b>Question:</b> Manakah transaksi-transaksi yang mempengaruhi komponen ekuitas dalam persamaan dasar akuntansi?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Menyetorkan modal awal ke rekening perusahaan sebesar Rp75.000.000,00.",
+    "Membeli persediaan barang dagang secara kredit senilai Rp30.000.000,00.",
+    "Membayar sewa toko bulan Februari sebesar Rp5.000.000,00.",
+    "Menjual barang dagangan senilai Rp15.000.000,00 secara tunai (harga pokok penjualan: Rp9.000.000,00).",
+    "Membayar utang usaha sebesar Rp10.000.000,00."
+  ],
+  "correct": [0, 2, 3]
+}
+
+
+
+
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (['true_false', 'true_false_en', 'fact_opinion', 'benefit_challenge', 'tepat_tidak'].includes(q.type)) {
+    return Array(q.statements.length).fill(null);
+  }
+  return null;
+});
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+// ====== TEPAT / TIDAK TEPAT ======
+else if (q.type === 'tepat_tidak') {
+  html += `<table class="true-false">
+    <tr><th>Pernyataan</th><th>Tepat</th><th>Tidak Tepat</th></tr>`;
+  q.statements.forEach((stmt, i) => {
+    const tepatChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td><input type="radio" name="tt_${i}" value="true" ${tepatChecked}></td>
+      <td><input type="radio" name="tt_${i}" value="false" ${tidakChecked}></td>
+    </tr>`;
+  });
+  html += `</table>`;
+}
+
+  // ====== BENEFIT / CHALLENGE ======
+  else if (q.type === 'benefit_challenge') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Benefit</th><th>Challenge</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benChecked = answers[index][i] === 'benefit' ? 'checked' : '';
+      const chalChecked = answers[index][i] === 'challenge' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="bc_${i}" value="benefit" ${benChecked}></td>
+        <td><input type="radio" name="bc_${i}" value="challenge" ${chalChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== TRUE / FALSE (English version) ======
+  else if (q.type === 'true_false_en') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>True</th><th>False</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const trueChecked = answers[index][i] === true ? 'checked' : '';
+      const falseChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tfe_${i}" value="true" ${trueChecked}></td>
+        <td><input type="radio" name="tfe_${i}" value="false" ${falseChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== FACT / OPINION ======
+  else if (q.type === 'fact_opinion') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Fact</th><th>Opinion</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const factChecked = answers[index][i] === 'fact' ? 'checked' : '';
+      const opChecked = answers[index][i] === 'opinion' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="fo_${i}" value="fact" ${factChecked}></td>
+        <td><input type="radio" name="fo_${i}" value="opinion" ${opChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk Benefit/Challenge
+  if (q.type === 'benefit_challenge') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="bc_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+// Event listener untuk TEPAT/TIDAK TEPAT
+if (q.type === 'tepat_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="tt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+
+  // Event listener untuk True/False English
+  if (q.type === 'true_false_en') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tfe_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk Fact/Opinion
+  if (q.type === 'fact_opinion') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="fo_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk tipe mc_multiple
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', e => {
+        const val = parseInt(e.target.value);
+        if (e.target.checked) {
+          if (!answers[index].includes(val)) answers[index].push(val);
+        } else {
+          answers[index] = answers[index].filter(v => v !== val);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  // Hitung skor 0–100
+  const percentage = Math.round((score / questions.length) * 100);
+
+  // Tampilkan hanya skor akhir dalam bentuk nilai
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+}
+
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  const interval = setInterval(() => {
+    if (!timerRunning) { clearInterval(interval); return; }
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    if (--timer < 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+  }, 1000);
+}
+
+renderQuestionButtons();
+renderQuestion(currentQuestion);
+startTimer(60 * 60);
+
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+fullscreenBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      alert(`Gagal masuk fullscreen: ${err.message}`);
+    });
+    fullscreenBtn.textContent = "Exit Fullscreen";
+  } else {
+    document.exitFullscreen();
+    fullscreenBtn.textContent = "Fullscreen";
+  }
+});
+checkSession();
+
+  </script>
+</body>
+</html>
