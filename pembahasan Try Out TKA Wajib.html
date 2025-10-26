@@ -3647,7 +3647,7 @@ gambar:'https://i.imgur.com/NDScZC5.png',
   "bacaan": `
     Seorang atlet mengalami kelelahan otot setelah latihan intensif. 
     Pelatihnya menjelaskan bahwa sel-sel otot sedang mengalami peningkatan aktivitas metabolik untuk memenuhi kebutuhan energi. 
-    Salah satu mekanisme utama yang terjadi dalam sel otot tersebut adalah proses <b>katabolisme</b>, yaitu proses pemecahan molekul kompleks menjadi molekul yang lebih sederhana untuk menghasilkan energi.
+    Salah satu mekanisme utama yang terjadi dalam sel otot tersebut adalah proses katabolisme, yaitu proses pemecahan molekul kompleks menjadi molekul yang lebih sederhana untuk menghasilkan energi.
   `,
   "tanya": "Berdasarkan situasi tersebut, proses manakah yang paling tepat dikategorikan sebagai katabolisme?",
   "opsi": [
@@ -4800,6 +4800,853 @@ bacaan:`PQRS merupakan segiempat sembarang. Jika titik T terletak pada ruas gari
     <p><b>Jadi, jawaban benar adalah opsi (1).</b></p>
   `
 }
+
+  ]
+},
+'Ekonomi': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Matriks Asesmen</h2>
+    <p class="mb-2">Muatan dan kompetensi yang diukur TKA Ekonomi terangkum dalam tabel berikut:</p>
+
+    <table class="table-auto border border-collapse border-gray-400 w-full text-sm">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-2 py-1">No.</th>
+          <th class="border px-2 py-1">Elemen / Materi</th>
+          <th class="border px-2 py-1">Sub-elemen / Submateri</th>
+          <th class="border px-2 py-1">Kompetensi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Konsep Dasar Ilmu Ekonomi -->
+        <tr>
+          <td class="border px-2 py-1">1</td>
+          <td class="border px-2 py-1">Konsep Dasar Ilmu Ekonomi</td>
+          <td class="border px-2 py-1">
+            Konsep dasar ilmu ekonomi: kelangkaan, biaya peluang, dan kegiatan ekonomi
+          </td>
+          <td class="border px-2 py-1">
+            Menganalisis konsep dasar ilmu ekonomi mencakup kelangkaan, biaya peluang, dan kegiatan ekonomi
+          </td>
+        </tr>
+
+        <!-- Ekonomi Mikro dan Makro -->
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1" rowspan="7">2</td>
+          <td class="border px-2 py-1" rowspan="7">Ekonomi Mikro dan Makro</td>
+          <td class="border px-2 py-1">Permintaan, penawaran, dan keseimbangan pasar</td>
+          <td class="border px-2 py-1">Menganalisis permintaan, penawaran, dan keseimbangan pasar</td>
+        </tr>
+
+        <tr>
+          <td class="border px-2 py-1">Pendapatan nasional, pertumbuhan ekonomi, dan pembangunan ekonomi</td>
+          <td class="border px-2 py-1">
+            Menganalisis konsep pendapatan nasional, pertumbuhan ekonomi, dan pembangunan ekonomi
+          </td>
+        </tr>
+
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Ketenagakerjaan</td>
+          <td class="border px-2 py-1">Menganalisis konsep ketenagakerjaan dan permasalahannya</td>
+        </tr>
+
+        <tr>
+          <td class="border px-2 py-1">Indeks harga dan inflasi</td>
+          <td class="border px-2 py-1">Mengevaluasi indeks harga dan inflasi</td>
+        </tr>
+
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Bank sentral dan kebijakan moneter</td>
+          <td class="border px-2 py-1">Mengidentifikasi peran bank sentral dan menganalisis kebijakan moneter</td>
+        </tr>
+
+        <tr>
+          <td class="border px-2 py-1">Kebijakan fiskal dan perpajakan</td>
+          <td class="border px-2 py-1">Menerapkan konsep perpajakan dan menganalisis kebijakan fiskal</td>
+        </tr>
+
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Manajemen badan usaha dalam perekonomian Indonesia (BUMN, BUMD, BUMS, dan Koperasi)</td>
+          <td class="border px-2 py-1">
+            Mendeskripsikan konsep manajemen badan usaha dalam perekonomian Indonesia
+          </td>
+        </tr>
+
+        <!-- Ekonomi Internasional -->
+        <tr>
+          <td class="border px-2 py-1">3</td>
+          <td class="border px-2 py-1">Ekonomi Internasional</td>
+          <td class="border px-2 py-1">Kerja sama ekonomi dan perdagangan internasional</td>
+          <td class="border px-2 py-1">
+            Menganalisis kerja sama ekonomi dan perdagangan internasional
+          </td>
+        </tr>
+
+        <!-- Akuntansi Keuangan Dasar -->
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">4</td>
+          <td class="border px-2 py-1">Akuntansi Keuangan Dasar</td>
+          <td class="border px-2 py-1">Persamaan dasar akuntansi dan laporan keuangan</td>
+          <td class="border px-2 py-1">
+            Menerapkan persamaan dasar akuntansi dan laporan keuangan
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  `,
+  video: 'pR6NfBKKD3Q', // placeholder video pembelajaran ekonomi dasar
+  soal: [
+   {
+  "id": "eko1",
+  "tipe": "cb",
+  "bacaan": `Di sebuah kota kecil terjadi perkembangan ekonomi yang pesat akibat meningkatnya kegiatan ekonomi di industri manufaktur. Fenomena ini berdampak pada beberapa aspek kehidupan industri, di antaranya: 
+1. Meningkatnya jumlah tenaga kerja yang terserap di sektor industri.
+2. Berkembangnya sektor perdagangan akibat meningkatnya daya beli.
+3. Terjadinya kemacetan dan peningkatan polusi akibat meningkatnya transportasi industri.
+4. Meningkatnya harga tanah dan biaya hidup akibat tingginya permintaan akan hunian.`,
+  "tanya": "Berdasarkan kondisi tersebut, bagaimana hubungan antara kegiatan ekonomi dan dampak positif terhadap kehidupan industri? <br><br>Pilih semua jawaban benar! Jawaban benar lebih dari satu.",
+  "opsi": [
+    "Perkembangan industri memberikan dampak positif karena menciptakan banyak lapangan kerja.",
+    "Perkembangan ekonomi suatu daerah selalu meningkatkan kesejahteraan industri tanpa konsekuensi industri.",
+    "Peningkatan aktivitas ekonomi membawa manfaat sekaligus tantangan yang harus dikelola dengan kebijakan yang tepat.",
+    "Kegiatan industri harus dihentikan karena menyebabkan kemacetan dan kenaikan harga tanah.",
+    "Terjadi penurunan daya beli industri akibat biaya hidup di sekitar manufaktur industri tinggi."
+  ],
+  "kunci": [0, 2],
+  "bahas": `
+    <p><b>Pembahasan:</b></p>
+
+    <ul>
+      <li><b>A.</b> Benar ✅ — Perkembangan industri meningkatkan permintaan tenaga kerja sehingga membuka banyak lapangan pekerjaan.</li>
+      <li><b>B.</b> Salah — Pertumbuhan ekonomi tidak selalu tanpa dampak; sering muncul masalah lingkungan dan sosial yang perlu penanganan.</li>
+      <li><b>C.</b> Benar ✅ — Aktivitas ekonomi membawa manfaat besar sekaligus tantangan yang perlu diatur dengan kebijakan publik yang baik.</li>
+      <li><b>D.</b> Salah — Kegiatan industri tidak harus dihentikan, tetapi dampaknya harus dikelola agar tidak menimbulkan masalah berat.</li>
+      <li><b>E.</b> Salah — Biaya hidup tinggi tidak langsung menurunkan daya beli industri; biasanya industri menyesuaikan upah dan produktivitas.</li>
+    </ul>
+
+    <p><b>Jadi, jawaban yang benar adalah: A dan C.</b></p>
+  `
+},
+{
+  "id": "eko2",
+  "tipe": "pg",
+  "gambar": "https://pusmendik.kemdikbud.go.id/tka/cbt_images/41254_e97702c06716fdf454c7a81d7f40036d.png",
+  "bacaan": `
+    Perhatikan kurva permintaan dan penawaran barang berikut!  
+    
+  `,
+  "tanya": "Berdasarkan kurva tersebut, bentuk kurva fungsi permintaan yang benar adalah ....",
+  "opsi": [
+    "Qd = 10P – 500",
+    "Qd = -10P + 3500",
+    "Qd = 0,1P + 500",
+    "Qd = -0,1P + 4.000",
+    "Qd = -0,1P + 3.500"
+  ],
+  "kunci": 4,
+  "bahas": `
+    <p><b>Pembahasan:</b></p>
+    <p>Dari gambar kurva permintaan terlihat dua titik pada garis permintaan:</p>
+    <ul>
+      <li>Pada harga Rp25.000, jumlah diminta = 1.000 unit</li>
+      <li>Pada harga Rp20.000, jumlah diminta = 1.500 unit</li>
+    </ul>
+
+    <p>Bentuk umum fungsi permintaan adalah \\( Q_d = a + bP \\).</p>
+    <p>Gradiennya:</p>
+    <p>
+      \\[
+      b = \\frac{Q_2 - Q_1}{P_2 - P_1} = \\frac{1.000 - 1.500}{25.000 - 20.000} = -0{,}1
+      \\]
+    </p>
+    <p>Substitusi ke titik (20.000, 1.500):</p>
+    <p>
+      \\[
+      1.500 = a - 0{,}1(20.000) \\Rightarrow a = 3.500
+      \\]
+    </p>
+    <p>Jadi fungsi permintaannya:</p>
+    <p>
+      \\[
+      Q_d = -0{,}1P + 3.500
+      \\]
+    </p>
+    <p><b>Jawaban benar:</b> \\( Q_d = -0{,}1P + 3{,}500 \\)</p>
+  `
+},
+{
+  "id": "eko3",
+  "tipe": "pg",
+  "bacaan": `
+    Daftar harga tomat di pasar tradisional di Kota B bulan Januari tahun 2024 sebagai berikut:
+  `,
+  "tabel": [
+    ["Harga (Rp)", "Permintaan (Kg)", "Penawaran (Kg)"],
+    ["9.000", "800", "1.000"],
+    ["10.000", "600", "1.200"]
+  ],
+  "tanya": "Dari data tersebut, titik keseimbangan pasar dengan kuantitas (Q) dan harga (P) yang benar adalah ....",
+  "opsi": [
+    "600; 10.000",
+    "800; 9.000",
+    "900; 8.500",
+    "1.800; 9.000",
+    "1.800; 10.000"
+  ],
+  "kunci": 2,
+  "bahas": `
+    <p><b>Pembahasan:</b></p>
+    <p>Untuk mencari titik keseimbangan pasar, digunakan fungsi permintaan dan penawaran yang linier.</p>
+    <p>Dari data:</p>
+    <ul>
+      <li>Pada P = 9.000, Qd = 800 dan Qs = 1.000</li>
+      <li>Pada P = 10.000, Qd = 600 dan Qs = 1.200</li>
+    </ul>
+    <p>Bentuk umum fungsi permintaan: \\( Q_d = a - bP \\)</p>
+    <p>Diketahui dua titik permintaan (P, Qd): (9000, 800) dan (10000, 600).</p>
+    <p>Hitung gradien (b):</p>
+    <p>\\( b = \\frac{800 - 600}{9000 - 10000} = \\frac{200}{-1000} = -0,2 \\)</p>
+    <p>Substitusi ke salah satu titik untuk mencari a:</p>
+    <p>\\( 800 = a - 0,2(9000) \\Rightarrow a = 800 + 1800 = 2600 \\)</p>
+    <p>Sehingga \\( Q_d = 2600 - 0,2P \\)</p>
+
+    <p>Bentuk umum fungsi penawaran: \\( Q_s = c + dP \\)</p>
+    <p>Dari dua titik penawaran (9000, 1000) dan (10000, 1200):</p>
+    <p>\\( d = \\frac{1200 - 1000}{10000 - 9000} = \\frac{200}{1000} = 0,2 \\)</p>
+    <p>\\( 1000 = c + 0,2(9000) \\Rightarrow c = 1000 - 1800 = -800 \\)</p>
+    <p>Sehingga \\( Q_s = -800 + 0,2P \\)</p>
+
+    <p>Pada titik keseimbangan, \\( Q_d = Q_s \\):</p>
+    <p>
+      \\[
+      2600 - 0,2P = -800 + 0,2P
+      \\]
+    </p>
+    <p>
+      \\[
+      3400 = 0,4P \\Rightarrow P = 8500
+      \\]
+    </p>
+    <p>Substitusi ke fungsi permintaan:</p>
+    <p>
+      \\[
+      Q = 2600 - 0,2(8500) = 900
+      \\]
+    </p>
+    <p><b>Jadi, titik keseimbangan pasar adalah (Q = 900; P = 8.500).</b></p>
+  `
+},
+{
+  "id": "eko4",
+  "tipe": "pg",
+  "bacaan": `
+    Tabel pendapatan Negara Astina, Negara Alengka, dan Negara Amarta selama tahun 2022 dan 2023:
+  `,
+  "tabel": [
+    ["Negara", "Pendapatan Nasional 2022 (Juta Rp)", "Pendapatan Nasional 2023 (Juta Rp)", "Penduduk 2022 (Juta)", "Penduduk 2023 (Juta)"],
+    ["Astina", "274.700", "283.300", "50", "51"],
+    ["Alengka", "305.000", "326.600", "30", "31"],
+    ["Amarta", "878.040", "917.700", "250", "255,5"]
+  ],
+  "tanya": "Berdasarkan data tersebut, kesimpulan yang dapat diambil adalah ....",
+  "opsi": [
+    "Urutan pendapatan perkapita dari yang tertinggi pada tahun 2022 yaitu Negara Astina, Negara Alengka, dan Negara Amarta.",
+    "Urutan pendapatan perkapita dari yang tertinggi tahun 2023 yaitu Negara Alengka, Negara Amarta, dan Negara Astina.",
+    "Urutan pendapatan perkapita dari yang terendah tahun 2023 yaitu Negara Amarta, Negara Alengka, dan Negara Astina.",
+    "Negara yang mempunyai kenaikan pendapatan perkapita tertinggi tahun 2022 Negara Amarta.",
+    "Negara yang mempunyai pendapatan perkapita tertinggi pada tahun 2022 dan 2023 yaitu Negara Alengka."
+  ],
+  "kunci": 4,
+  "bahas": `
+    <p><b>Pembahasan:</b></p>
+    <p>Untuk menentukan pendapatan per kapita, digunakan rumus:</p>
+    <p>\\( \\text{Pendapatan Per Kapita} = \\frac{\\text{Pendapatan Nasional}}{\\text{Jumlah Penduduk}} \\)</p>
+
+    <p><b>Tahun 2022:</b></p>
+    <ul>
+      <li>Astina: \\( \\frac{274.700}{50} = 5.494 \\)</li>
+      <li>Alengka: \\( \\frac{305.000}{30} = 10.167 \\)</li>
+      <li>Amarta: \\( \\frac{878.040}{250} = 3.512 \\)</li>
+    </ul>
+    <p>Urutan tertinggi tahun 2022: Alengka > Astina > Amarta</p>
+
+    <p><b>Tahun 2023:</b></p>
+    <ul>
+      <li>Astina: \\( \\frac{283.300}{51} ≈ 5.555 \\)</li>
+      <li>Alengka: \\( \\frac{326.600}{31} ≈ 10.535 \\)</li>
+      <li>Amarta: \\( \\frac{917.700}{255,5} ≈ 3.594 \\)</li>
+    </ul>
+    <p>Urutan tertinggi tahun 2023: Alengka > Astina > Amarta</p>
+
+    <p><b>Kesimpulan:</b></p>
+    <p>Negara Alengka memiliki pendapatan per kapita tertinggi baik pada tahun 2022 maupun 2023.</p>
+    <p><b>Jawaban yang benar:</b> Negara yang mempunyai pendapatan perkapita tertinggi pada tahun 2022 dan 2023 yaitu Negara Alengka.</p>
+  `
+},
+{
+  "id": "eko5",
+  "tipe": "pg",
+  "bacaan": `
+    Tahun ini pemerintah mulai membangun banyak infrastruktur. Salah satunya adalah pembangunan 13 waduk baru. Waduk tersebut tersebar di seluruh wilayah Indonesia. Sekarang dari 7,2 juta hektare (Ha) luas irigasi pertanian di Indonesia, baru sekitar 11% yang memanfaatkan air tampungan waduk. Sisanya masih memanfaatkan air hujan, sehingga selalu terancam kekeringan saat musim kemarau tiba. Apabila 13 waduk baru tersebut terealisasi, lahan irigasi waduk dapat meningkat dua kali lipat menjadi 1,45 juta Ha.
+  `,
+  "tanya": "Berdasar ilustrasi tersebut, yang merupakan kebijakan pembangunan pemerintah Indonesia dalam hal ….",
+  "opsi": [
+    "penguatan kelembagaan masyarakat dan usaha kecil rumahan",
+    "penguatan ketahanan pangan dan stabilisasi produksi pangan nasional",
+    "pemanfaatan sumber daya alam dan manusia agar lebih bermanfaat",
+    "penguatan sinergi antara SDM, IPTEK dengan industri pangan",
+    "pengembangan sektor pertanian dan infrastruktur pedesaan"
+  ],
+  "kunci": 4,
+  "bahas": `
+    <p><b>Pembahasan:</b></p>
+    <p>Pembangunan 13 waduk baru merupakan upaya pemerintah dalam menyediakan sarana dan prasarana yang menunjang kegiatan pertanian, khususnya irigasi. Langkah ini termasuk ke dalam kebijakan <b>pengembangan sektor pertanian</b> dan <b>pembangunan infrastruktur pedesaan</b>, karena infrastruktur air sangat penting untuk meningkatkan produktivitas lahan pertanian dan kesejahteraan masyarakat desa.</p>
+
+    <p><b>Pembahasan tiap opsi:</b></p>
+    <ul>
+      <li><b>Opsi 1 – Penguatan kelembagaan masyarakat dan usaha kecil rumahan:</b> Tidak tepat, karena konteksnya bukan tentang pemberdayaan kelembagaan masyarakat atau UMKM, melainkan pembangunan waduk untuk pertanian.</li>
+      <li><b>Opsi 2 – Penguatan ketahanan pangan dan stabilisasi produksi pangan nasional:</b> Sebagian benar, karena waduk memang mendukung ketahanan pangan. Namun fokus utama kebijakan ini adalah pembangunan infrastruktur untuk pertanian, bukan langsung pada stabilisasi produksi pangan.</li>
+      <li><b>Opsi 3 – Pemanfaatan sumber daya alam dan manusia agar lebih bermanfaat:</b> Kurang tepat, sebab ilustrasi menitikberatkan pada pembangunan fisik waduk, bukan optimalisasi SDM atau SDA secara umum.</li>
+      <li><b>Opsi 4 – Penguatan sinergi antara SDM, IPTEK dengan industri pangan:</b> Tidak sesuai, karena tidak ada pembahasan tentang inovasi teknologi atau industri pangan.</li>
+      <li><b>Opsi 5 – Pengembangan sektor pertanian dan infrastruktur pedesaan:</b> Tepat, karena pembangunan waduk merupakan bentuk nyata dari pembangunan infrastruktur yang mendukung pertanian dan kesejahteraan masyarakat di pedesaan.</li>
+    </ul>
+
+    <p><b>Kesimpulan:</b> Jawaban yang benar adalah <b>pengembangan sektor pertanian dan infrastruktur pedesaan</b>.</p>
+  `
+},
+{
+  "id": "eko6",
+  "tipe": "pg",
+bacaan: `Berikut data Produk Domestik Bruto (PDB) Negara Nusa Harapan pada 4 tahun terakhir.`,
+  "tabel": [
+    ["Tahun", "PDB (dalam triliun rupiah)"],
+    ["2021", "7.500"],
+    ["2022", "7.600"],
+    ["2023", "7.800"],
+    ["2024", "8.000"]
+  ],
+  "tanya": "Berdasarkan data tersebut, laju pertumbuhan ekonomi Negara Nusa Harapan pada periode 2023–2024 adalah ….",
+  "opsi": [
+    "1,33%",
+    "2,56%",
+    "2,63%",
+    "5,23%",
+    "6,6%"
+  ],
+  "kunci": 1,
+  "bahas": `
+    <p><b>Pembahasan:</b></p>
+    <p>Rumus pertumbuhan ekonomi:</p>
+    <p>\\( \\text{Pertumbuhan} = \\frac{PDB_t - PDB_{t-1}}{PDB_{t-1}} \\times 100\\% \\)</p>
+    <p>Substitusi nilai:</p>
+    <p>\\( \\frac{8.000 - 7.800}{7.800} \\times 100\\% = \\frac{200}{7.800} \\times 100\\% = 2{,}56\\% \\)</p>
+
+    <p><b>Penjelasan tiap opsi:</b></p>
+    <ul>
+      <li><b>1,33%</b> — Salah, terlalu kecil untuk selisih PDB 200 triliun.</li>
+      <li><b>2,56%</b> — <b>Benar</b>, sesuai hasil perhitungan.</li>
+      <li><b>2,63%</b> — Hampir benar, mungkin hasil pembulatan yang kurang tepat.</li>
+      <li><b>5,23%</b> — Salah, itu dua kali lipat dari nilai sebenarnya.</li>
+      <li><b>6,6%</b> — Salah, pertumbuhan sebesar ini tidak sesuai dengan data PDB.</li>
+    </ul>
+    <p><b>Jadi, laju pertumbuhan ekonomi tahun 2023–2024 adalah 2,56%.</b></p>
+  `
+},
+{
+  "id": "eko7",
+  "tipe": "pg",
+  "bacaan": `
+    Banyak masalah yang terdapat pada perbankan, baik internal maupun eksternal. Salah satu masalah eksternal di antaranya adalah kredit macet. Jika tidak segera diatasi, dikhawatirkan kerugian perbankan akan semakin besar.
+  `,
+  "tanya": "Cara yang paling tepat yang dilakukan agar masalah tersebut tidak terulang kembali adalah ….",
+  "opsi": [
+    "memperhatikan perencanaan yang telah dibuat sebagai panduan kegiatan perbankan",
+    "meningkatkan transparansi, sistem pengendalian, audit, dan manajemen risiko perbankan",
+    "menyerahkan penyelesaian masalah kepada pemerintah melalui Otoritas Jasa Keuangan",
+    "melakukan kerjasama dengan aparat berwenang untuk melakukan penindakan secara hukum",
+    "memperketat aturan dalam pemberian kredit dan memberlakukan sanksi bagi yang melanggar"
+  ],
+  "kunci": 4,
+  "bahas": `
+    <p><b>Pembahasan:</b></p>
+    <p>Kredit macet terjadi ketika nasabah tidak mampu mengembalikan pinjaman sesuai waktu yang disepakati. Hal ini dapat disebabkan oleh lemahnya analisis kelayakan kredit, kurangnya pengawasan, atau tidak tegasnya aturan dalam pemberian kredit.</p>
+
+    <p>Langkah paling efektif untuk mencegah masalah ini terulang adalah dengan memperketat aturan dalam proses pemberian kredit serta memberikan sanksi kepada pihak yang melanggar kebijakan internal perbankan. Dengan demikian, bank dapat menyeleksi calon debitur lebih hati-hati dan menjaga kualitas portofolio kreditnya.</p>
+
+    <p><b>Analisis tiap opsi:</b></p>
+    <ul>
+      <li><b>Opsi 1:</b> Memperhatikan perencanaan penting, tetapi tidak langsung berkaitan dengan pencegahan kredit macet. ❌</li>
+      <li><b>Opsi 2:</b> Peningkatan pengendalian internal memang penting, namun belum menyentuh akar masalah yaitu seleksi dan aturan kredit. ❌</li>
+      <li><b>Opsi 3:</b> Menyerahkan penyelesaian pada OJK hanya bersifat reaktif, bukan pencegahan. ❌</li>
+      <li><b>Opsi 4:</b> Penindakan hukum dilakukan jika pelanggaran telah terjadi, bukan untuk mencegah. ❌</li>
+      <li><b>Opsi 5:</b> <b>Memperketat aturan dalam pemberian kredit dan memberlakukan sanksi bagi yang melanggar</b> adalah langkah <b>paling tepat</b> untuk mencegah terulangnya kredit macet. ✅</li>
+    </ul>
+
+    <p><b>Jadi, jawaban yang benar adalah:</b> memperketat aturan dalam pemberian kredit dan memberlakukan sanksi bagi yang melanggar.</p>
+  `
+},
+{
+  "id": "eko8",
+  "tipe": "cb",
+  "bacaan": `
+    PT Mentari bergerak sebagai produsen makanan ringan berbahan dasar buah-buahan asli Indonesia, seperti keripik nangka dan keripik salak.  
+    Dalam rangka peningkatan kualitas produk dan efisiensi kerja, perusahaan mulai menerapkan sistem manajemen produksi modern, seperti penggunaan mesin modern, pengawasan kualitas produk secara ketat, dan pengelolaan bahan baku yang lebih higienis.  
+    Selain itu, perusahaan juga membangun sistem informasi terkait jadwal produksi agar pesanan konsumen dapat selesai tepat waktu.
+  `,
+  "tanya": "Berdasarkan ilustrasi tersebut, manakah yang sesuai dengan sistem manajemen produksi?<br><i>Klik semua jawaban benar. Jawaban benar lebih dari satu.</i>",
+  "opsi": [
+    "Peningkatkan efisiensi dengan penggunaan mesin modern.",
+    "Memanfaatkan media sosial untuk pemasaran produk.",
+    "Penentuan harga jual berdasarkan harga pesaing.",
+    "Pengelolaan dan proses bahan baku yang efisien.",
+    "Pengawasan kualitas secara berkesinambungan."
+  ],
+  "kunci": [0, 3, 4],
+  "bahas": `
+    <p><b>Pembahasan:</b></p>
+    <p>Sistem manajemen produksi berfokus pada kegiatan yang berkaitan langsung dengan proses produksi, mulai dari pengelolaan bahan baku hingga pengawasan hasil akhir agar efisien dan berkualitas tinggi.</p>
+
+    <p><b>Analisis tiap opsi:</b></p>
+    <ul>
+      <li><b>Opsi 1:</b> <b>Peningkatan efisiensi dengan penggunaan mesin modern</b> merupakan bagian dari penerapan sistem manajemen produksi untuk meningkatkan produktivitas dan kualitas. ✅</li>
+      <li><b>Opsi 2:</b> <b>Memanfaatkan media sosial untuk pemasaran</b> termasuk kegiatan promosi dan pemasaran, bukan bagian dari manajemen produksi. ❌</li>
+      <li><b>Opsi 3:</b> <b>Penentuan harga jual</b> termasuk dalam manajemen pemasaran, bukan produksi. ❌</li>
+      <li><b>Opsi 4:</b> <b>Pengelolaan dan proses bahan baku yang efisien</b> adalah bagian penting dari manajemen produksi karena berkaitan dengan efisiensi dan kualitas hasil. ✅</li>
+      <li><b>Opsi 5:</b> <b>Pengawasan kualitas secara berkesinambungan</b> juga merupakan elemen utama dalam sistem manajemen produksi modern. ✅</li>
+    </ul>
+
+    <p><b>Jadi, jawaban yang benar adalah:</b>  
+    <b>Peningkatan efisiensi dengan penggunaan mesin modern, Pengelolaan dan proses bahan baku yang efisien,</b> dan <b>Pengawasan kualitas secara berkesinambungan.</b></p>
+  `
+},
+{
+  id: 'eko9',
+  tipe: 'bs',
+  bacaan: `Indonesia adalah negara dengan kekayaan sumber daya alam yang melimpah, seperti batu bara, kelapa sawit, karet, dan produk perikanan. Untuk meningkatkan pertumbuhan ekonomi, pemerintah aktif menjalin kerja sama dagang dengan negara-negara ASEAN, Jepang, dan Uni Eropa.
+
+Meskipun menghadapi tantangan seperti fluktuasi nilai tukar, hambatan impor, dan rendahnya daya saing produk lokal, kerja sama internasional tetap memberi manfaat berupa peningkatan devisa, transfer teknologi, serta pembukaan lapangan kerja baru.`,
+  
+  tanya: 'Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut terkait hambatan perdagangan internasional:',
+  
+  opsi: [
+    'A. Proteksi negara mitra.',
+    'B. Kurangnya kualitas produk lokal.',
+    'C. Kesepakatan dagang bebas.'
+  ],
+  
+  kunci: [true, true, false],
+  
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p><b>Pernyataan A: Benar.</b> Proteksi negara mitra seperti tarif, kuota, atau subsidi domestik dapat menghambat ekspor Indonesia. Ini merupakan salah satu bentuk hambatan perdagangan internasional.</p>
+
+    <p><b>Pernyataan B: Benar.</b> Kurangnya kualitas produk lokal menyebabkan produk Indonesia sulit bersaing di pasar global, sehingga menjadi hambatan dalam perdagangan internasional.</p>
+
+    <p><b>Pernyataan C: Salah.</b> Kesepakatan dagang bebas justru bertujuan menghapus hambatan perdagangan antarnegara, bukan menambah hambatan.</p>
+
+    <p><b>Kesimpulan:</b> Jawaban = [B, B, S]</p>
+  `
+},
+{
+  id: 'eko10',
+  tipe: 'bs',
+  bacaan: `Transaksi yang terjadi pada perusahaan jasa “Langit Biru” milik Pak Anton di bulan Maret Tahun 2025. Transaksi berpengaruh terhadap persamaan dasar akuntansi (Aset = Kewajiban + Ekuitas).`,
+
+  tanya: 'Tentukan benar (B) atau salah (S) untuk setiap transaksi berdasarkan persamaan akuntansi berikut:',
+
+  opsi: [
+    'A. Pak Anton menyetorkan uang tunai sebesar Rp60.000.000,00 sebagai modal awal akan menambah aset dan ekuitas.',
+    'B. Perusahaan menyewa kantor untuk 6 bulan ke depan dengan membayar lunas sebesar Rp12.000.000,00 akan menambah aset dan kewajiban.',
+    'C. Perusahaan menerima pendapatan jasa secara tunai sebesar Rp7.000.000,00 menambah aset dan ekuitas.'
+  ],
+
+  kunci: [true, false, true],
+
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p><b>Pernyataan A: Benar.</b> Setoran uang tunai dari pemilik menambah kas (aset) dan juga menambah modal (ekuitas), sehingga keduanya bertambah.</p>
+
+    <p><b>Pernyataan B: Salah.</b> Pembayaran sewa untuk 6 bulan ke depan berarti perusahaan menukar kas (aset berkurang) dengan sewa dibayar di muka (aset lain bertambah). Tidak ada kewajiban yang timbul, jadi transaksi ini hanya memengaruhi akun aset.</p>
+
+    <p><b>Pernyataan C: Benar.</b> Pendapatan jasa yang diterima tunai menambah kas (aset) dan juga menambah laba yang termasuk dalam ekuitas. Jadi kedua sisi bertambah.</p>
+
+    <p><b>Kesimpulan:</b> Jawaban = [B, S, B]</p>
+  `
+},
+{
+  id: 'eko11',
+  tipe: 'cb',
+  bacaan: `Kota Maju sedang menghadapi masalah serius terkait kelangkaan air bersih akibat musim kemarau panjang selama 5 bulan berturut-turut. Data dari Dinas Lingkungan Hidup menunjukkan:
+
+- Ketersediaan air bersih turun 25% dibanding tahun sebelumnya.  
+- Konsumsi air per kapita justru meningkat sebesar 10% karena pertumbuhan penduduk dan aktivitas ekonomi.  
+- Sebagian besar rumah tangga masih menggunakan metode pengambilan air konvensional.  
+- Infrastruktur penyediaan air saat ini belum mampu memenuhi kebutuhan masyarakat secara optimal.
+
+Pemerintah kota mempertimbangkan beberapa opsi solusi untuk jangka pendek dan menengah:
+1. Membatasi penggunaan air dan menaikkan tarif air untuk mendorong masyarakat menghemat penggunaan.  
+2. Mengedukasi masyarakat tentang pentingnya konservasi dan penggunaan teknologi hemat air.  
+3. Membangun fasilitas pengolahan air bersih baru namun memerlukan waktu dan biaya besar.`,
+
+  tanya: 'Berdasarkan informasi tersebut, manakah solusi yang sebaiknya diterapkan dan dievaluasi oleh pemerintah untuk mengatasi kelangkaan air bersih di Kota Maju? <br><br><i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>',
+
+  opsi: [
+    'Pembatasan penggunaan air dan peningkatan tarif menjadi salah satu cara untuk mengendalikan permintaan air secara langsung.',
+    'Mengedukasi masyarakat tentang konservasi air dapat membantu menurunkan konsumsi air jangka panjang.',
+    'Membangun fasilitas baru adalah solusi terbaik dan paling cepat untuk mengatasi kelangkaan air saat ini.',
+    'Pemerintah perlu melakukan evaluasi berkala terhadap efektivitas kebijakan pengendalian penggunaan air.',
+    'Pendekatan teknologi hemat air tidak tepat karena masyarakat belum terbiasa menggunakannya.'
+  ],
+
+  kunci: [0, 1, 3],
+
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p><b>Pernyataan 1: Benar.</b> Pembatasan dan kenaikan tarif air merupakan kebijakan <i>demand management</i> yang dapat langsung menekan konsumsi air di jangka pendek.</p>
+
+    <p><b>Pernyataan 2: Benar.</b> Edukasi dan promosi konservasi air efektif dalam jangka panjang karena meningkatkan kesadaran masyarakat terhadap penggunaan air secara bijak.</p>
+
+    <p><b>Pernyataan 3: Salah.</b> Membangun fasilitas baru memang penting, tetapi bukan solusi tercepat karena memerlukan biaya besar dan waktu lama untuk pembangunan serta pengoperasiannya.</p>
+
+    <p><b>Pernyataan 4: Benar.</b> Evaluasi berkala terhadap kebijakan air sangat penting agar pemerintah dapat menyesuaikan strategi sesuai efektivitas di lapangan.</p>
+
+    <p><b>Pernyataan 5: Salah.</b> Pendekatan teknologi hemat air justru relevan dan perlu dikenalkan agar masyarakat mulai terbiasa, bukan dihindari.</p>
+
+    <p><b>Kesimpulan:</b> Jawaban = <b>A, B dan D</b></p>
+  `
+},
+{
+  id: 'eko12',
+  tipe: 'bs',
+  bacaan: `Pengangguran merupakan salah satu permasalahan krusial yang terjadi di Indonesia. Beberapa wilayah dengan tingkat pengangguran tertinggi berdasarkan data Badan Pusat Statistik (BPS) pada Agustus 2024 di antaranya Provinsi Jawa Barat (6,75%), Banten (6,68%), Papua (6,48%), Papua Barat Daya (6,48%), dan Kepulauan Riau (6,39%). 
+
+Pengangguran terjadi disebabkan oleh berbagai faktor, di antaranya kesenjangan antara keterampilan pencari kerja dengan kebutuhan pasar, keterbatasan lapangan kerja, serta faktor ekonomi makro.`,
+
+  tanya: 'Manakah solusi yang dapat diterapkan untuk menyelesaikan permasalahan tersebut? <br><br><i>Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!</i>',
+
+  opsi: [
+    'A. Peningkatan upah bagi tenaga kerja.',
+    'B. Mendorong investasi daerah melalui insentif pajak dan kemudahan perizinan.',
+    'C. Menyediakan akses pembiayaan, pelatihan, dan pendampingan bagi pelaku UMKM.'
+  ],
+
+  kunci: [false, true, true],
+
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p><b>A. Salah.</b> Peningkatan upah bagi tenaga kerja tidak secara langsung mengurangi pengangguran. Bahkan, jika upah terlalu tinggi tanpa peningkatan produktivitas, perusahaan dapat mengurangi jumlah pekerja.</p>
+
+    <p><b>B. Benar.</b> Mendorong investasi daerah melalui insentif pajak dan kemudahan perizinan akan memperluas lapangan kerja baru dan menurunkan tingkat pengangguran.</p>
+
+    <p><b>C. Benar.</b> Menyediakan akses pembiayaan, pelatihan, dan pendampingan bagi pelaku UMKM dapat meningkatkan kewirausahaan dan penyerapan tenaga kerja di sektor informal.</p>
+
+    <p><b>Kesimpulan:</b> Jawaban = [S, B, B]</p>
+  `
+},
+{
+  id: 'eko13',
+  tipe: 'pg',
+  bacaan: `
+    Pada akhir tahun 2024, inflasi di Indonesia mulai menunjukkan tren peningkatan yang cukup signifikan. 
+    Untuk merespons hal tersebut, Bank Indonesia memutuskan menaikkan suku bunga acuan (BI Rate). 
+    Kebijakan ini diambil agar masyarakat mengurangi konsumsi dan menahan laju inflasi.
+  `,
+  tanya: 'Berdasarkan ilustrasi di atas, Bank Indonesia sedang menjalankan fungsi sebagai ....',
+  opsi: [
+    'penyelamat likuiditas bank',
+    'pengawasan sistem keuangan',
+    'penjaga stabilitas sistem pembayaran',
+    'pelaksana kebijakan moneter',
+    'pengelola cadangan devisa'
+  ],
+  kunci: 3,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Kebijakan menaikkan suku bunga acuan (BI Rate) merupakan bagian dari <i>kebijakan moneter</i> yang dilakukan oleh Bank Indonesia untuk mengendalikan inflasi.</p>
+    <p>Tujuan dari kebijakan ini adalah mengurangi jumlah uang yang beredar, menekan konsumsi, dan menjaga stabilitas harga di pasar.</p>
+    <ul>
+      <li><b>Pilihan A:</b> Salah — penyelamat likuiditas bank berkaitan dengan fungsi lender of last resort.</li>
+      <li><b>Pilihan B:</b> Salah — pengawasan sistem keuangan dilakukan melalui OJK, bukan BI secara langsung.</li>
+      <li><b>Pilihan C:</b> Salah — penjaga stabilitas sistem pembayaran berkaitan dengan kelancaran transaksi keuangan.</li>
+      <li><b>Pilihan D:</b> <b>Benar</b> — menaikkan suku bunga adalah tindakan <b>pelaksana kebijakan moneter</b>.</li>
+      <li><b>Pilihan E:</b> Salah — pengelolaan cadangan devisa berhubungan dengan perdagangan internasional dan nilai tukar.</li>
+    </ul>
+    <p><b>Jadi, fungsi yang dijalankan Bank Indonesia adalah pelaksana kebijakan moneter.</b></p>
+  `
+},
+{
+  id: 'eko14',
+  tipe: 'pg',
+  bacaan: `
+    Selama tiga bulan pertama tahun 2024, ekspor Indonesia turun 15% karena permintaan dunia terhadap komoditas utama seperti batu bara dan minyak sawit menurun. 
+    Sementara itu, impor barang konsumsi naik 10%. Akibatnya, neraca perdagangan Indonesia mengalami defisit sebesar USD 1,2 miliar. 
+    Pemerintah berencana mengambil langkah strategis untuk meningkatkan ekspor dan mengendalikan impor.
+  `,
+  tanya: 'Berdasarkan informasi, kebijakan apa yang dapat diterapkan pemerintah untuk memperbaiki neraca perdagangan tersebut?',
+  opsi: [
+    'Memberikan insentif ekspor untuk sektor industri strategis dan mengenakan tarif tinggi untuk semua barang impor.',
+    'Meningkatkan ekspor produk manufaktur dan mengurangi ketergantungan pada ekspor komoditas mentah.',
+    'Menurunkan suku bunga agar masyarakat lebih konsumtif sehingga meningkatkan impor.',
+    'Meningkatkan belanja negara produk manufaktur agar mendorong lebih banyak konsumsi barang impor.',
+    'Menghentikan semua impor barang modal untuk mengurangi pengeluaran devisa.'
+  ],
+  kunci: 1,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Defisit neraca perdagangan terjadi karena nilai impor lebih besar daripada ekspor. Untuk memperbaikinya, pemerintah perlu <b>meningkatkan ekspor</b> dan <b>mengendalikan impor</b>.</p>
+
+    <ul>
+      <li><b>Pilihan A:</b> Sebagian benar, tetapi menaikkan tarif untuk semua barang impor dapat memicu konflik dagang dan inflasi, sehingga tidak efektif secara keseluruhan.</li>
+      <li><b>Pilihan B:</b> <b>Benar.</b> Diversifikasi ekspor dengan memperkuat sektor manufaktur dapat menambah nilai tambah dan mengurangi ketergantungan pada komoditas mentah yang harganya fluktuatif.</li>
+      <li><b>Pilihan C:</b> Salah, karena menurunkan suku bunga justru meningkatkan konsumsi dan impor, memperburuk defisit perdagangan.</li>
+      <li><b>Pilihan D:</b> Salah, karena meningkatkan konsumsi barang impor justru memperbesar defisit.</li>
+      <li><b>Pilihan E:</b> Salah, menghentikan impor barang modal bisa menghambat investasi dan pertumbuhan ekonomi.</li>
+    </ul>
+
+    <p><b>Kesimpulan:</b> Kebijakan yang paling tepat adalah <b>meningkatkan ekspor produk manufaktur dan mengurangi ketergantungan pada ekspor komoditas mentah.</b></p>
+  `
+},
+{
+  "id": "eko15",
+  "tipe": "pg",
+  "bacaan": `
+    Berikut adalah data keuangan PT Sejahtera Makmur per 31 Desember 2023:
+  `,
+  "tabel": [
+    ["Keterangan", "Jumlah (Rp)"],
+    ["Pendapatan Usaha", "120.000.000"],
+    ["Beban Gaji Karyawan", "25.000.000"],
+    ["Beban Listrik dan Air", "5.000.000"],
+    ["Beban Penyusutan Peralatan", "10.000.000"],
+    ["Beban Sewa Gedung", "15.000.000"],
+    ["Aset Lancar", "80.000.000"],
+    ["Aset Tetap", "150.000.000"],
+    ["Utang Jangka Pendek", "30.000.000"],
+    ["Utang Jangka Panjang", "50.000.000"],
+    ["Modal Awal Pemilik", "100.000.000"]
+  ],
+  "tanya": "Berdasarkan data tersebut, berapakah laba bersih yang diperoleh perusahaan?",
+  "opsi": [
+    "50.000.000",
+    "58.000.000",
+    "65.000.000",
+    "72.000.000",
+    "80.000.000"
+  ],
+  "kunci": 2,
+  "bahas": `
+    <p><b>Pembahasan:</b></p>
+    <p>Untuk menghitung laba bersih, digunakan rumus:</p>
+    <p>\\( \\text{Laba Bersih} = \\text{Pendapatan Usaha} - \\text{Total Beban} \\)</p>
+    <p>Total beban dihitung sebagai:</p>
+    <ul>
+      <li>Beban Gaji Karyawan = 25.000.000</li>
+      <li>Beban Listrik dan Air = 5.000.000</li>
+      <li>Beban Penyusutan Peralatan = 10.000.000</li>
+      <li>Beban Sewa Gedung = 15.000.000</li>
+    </ul>
+    <p>\\( \\text{Total Beban} = 25.000.000 + 5.000.000 + 10.000.000 + 15.000.000 = 55.000.000 \\)</p>
+    <p>Maka laba bersih adalah:</p>
+    <p>\\( \\text{Laba Bersih} = 120.000.000 - 55.000.000 = 65.000.000 \\)</p>
+    <p><b>Jadi, laba bersih perusahaan adalah Rp 65.000.000.</b></p>
+  `
+},
+{
+  "id": "eko16",
+  "tipe": "cb",
+  "bacaan": `
+    Berikut ini data permintaan kopi di Kafe Milenial pada Bulan Juni 2024. Data menunjukkan harga awal dan harga promo beserta jumlah permintaan.
+  `,
+  "tabel": [
+    ["Menu Kopi", "Harga Awal (Rp)", "Jumlah Awal (cup)", "Harga Promo (Rp)", "Jumlah Promo (cup)"],
+    ["Kopi Nusantara", "22.000", "500", "20.000", "700"],
+    ["Kopi Mantap", "22.000", "600", "19.000", "700"],
+    ["Kopi Sejuk", "20.000", "700", "18.000", "850"],
+    ["Kopi Rakyat", "18.000", "850", "16.000", "1.100"],
+    ["Kopi Hemat", "16.000", "1.000", "14.000", "1.200"]
+  ],
+  "tanya": "Berdasarkan data tersebut, tentukan pernyataan berikut ini yang benar berdasarkan prinsip ekonomi! Jawaban benar lebih dari satu.",
+  "opsi": [
+    "Penurunan harga kopi meningkatkan jumlah permintaan karena permintaan bersifat elastis terhadap harga.",
+    "Penurunan harga selalu menurunkan pendapatan total produsen, karena harga per unit turun.",
+    "Adanya penurunan harga kopi dapat meningkatkan loyalitas konsumen dan volume penjualan.",
+    "Pendapatan Kafe Milenial menurun karena permintaan kopi bersifat inelastis terhadap harga.",
+    "Adanya promo menyebabkan jumlah permintaan kopi meningkat, sehingga tidak sesuai dengan hukum permintaan."
+  ],
+  "kunci": [0,2],
+  "bahas": `
+    <p><b>Pembahasan per opsi:</b></p>
+    <ul>
+      <li><b>Opsi 1: Penurunan harga kopi meningkatkan jumlah permintaan karena permintaan bersifat elastis terhadap harga.</b><br>
+      Benar ✅. Jumlah permintaan meningkat ketika harga turun, sesuai dengan hukum permintaan.</li>
+
+      <li><b>Opsi 2: Penurunan harga selalu menurunkan pendapatan total produsen, karena harga per unit turun.</b><br>
+      Salah ❌. Pendapatan total = Harga × Jumlah. Jika permintaan elastis, penurunan harga justru meningkatkan pendapatan total.</li>
+
+      <li><b>Opsi 3: Adanya penurunan harga kopi dapat meningkatkan loyalitas konsumen dan volume penjualan.</b><br>
+      Benar ✅. Promo menarik lebih banyak konsumen, meningkatkan volume penjualan, dan mendorong loyalitas pelanggan.</li>
+
+      <li><b>Opsi 4: Pendapatan Kafe Milenial menurun karena permintaan kopi bersifat inelastis terhadap harga.</b><br>
+      Salah ❌. Data menunjukkan penurunan harga meningkatkan total penjualan → permintaan bersifat elastis, bukan inelastis.</li>
+
+      <li><b>Opsi 5: Adanya promo menyebabkan jumlah permintaan kopi meningkat, sehingga tidak sesuai dengan hukum permintaan.</b><br>
+      Salah ❌. Hukum permintaan tetap berlaku: jumlah permintaan meningkat karena harga turun. Promo tidak bertentangan dengan hukum permintaan.</li>
+    </ul>
+    <p><b>Kesimpulan:</b> Jawaban yang tepat adalah opsi 1 dan 3.</p>
+  `
+},
+
+{
+  "id": "eko17",
+  "tipe": "pg",
+  "bacaan": `
+    Berdasarkan data Badan Pusat Statistik, Indeks Harga Konsumen (IHK) di suatu wilayah tercatat sebesar 112 pada tahun 2022 dan meningkat menjadi 118 pada tahun 2023. Di sisi lain, IHK pada tahun 2024 naik kembali menjadi 125.
+  `,
+  "tabel": [
+    ["Tahun", "IHK"],
+    ["2022", "112"],
+    ["2023", "118"],
+    ["2024", "125"]
+  ],
+  "tanya": "Berdasarkan data tersebut, manakah pernyataan berikut yang paling tepat mengenai perkembangan laju inflasi dari tahun ke tahun?",
+  "opsi": [
+    "Inflasi tahun 2023 lebih tinggi dibandingkan tahun 2024.",
+    "Inflasi tahun 2023 dan 2024 menunjukkan tren penurunan.",
+    "Inflasi tahun 2024 lebih tinggi dibandingkan tahun 2023.",
+    "Inflasi pada tahun 2023 mencapai tertinggi adalah 7%.",
+    "Tingkat inflasi tahun 2024 yaitu 5% lebih rendah dari tahun sebelumnya."
+  ],
+  "kunci": 2,
+  "bahas": `
+    <p><b>Pembahasan per opsi:</b></p>
+    <ul>
+      <li><b>Opsi 1: Inflasi tahun 2023 lebih tinggi dibandingkan tahun 2024.</b><br>
+      Salah. Inflasi 2023 ≈ 5,36% dan inflasi 2024 ≈ 5,93%. Jadi inflasi 2024 lebih tinggi.</li>
+
+      <li><b>Opsi 2: Inflasi tahun 2023 dan 2024 menunjukkan tren penurunan.</b><br>
+      Salah. Inflasi meningkat dari 5,36% (2023) menjadi 5,93% (2024), sehingga tidak menurun.</li>
+
+      <li><b>Opsi 3: Inflasi tahun 2024 lebih tinggi dibandingkan tahun 2023.</b><br>
+      Benar. Inflasi 2024 ≈ 5,93% lebih tinggi daripada 5,36% pada 2023.</li>
+
+      <li><b>Opsi 4: Inflasi pada tahun 2023 mencapai tertinggi adalah 7%.</b><br>
+      Salah. Inflasi 2023 hanya sekitar 5,36%, bukan 7%.</li>
+
+      <li><b>Opsi 5: Tingkat inflasi tahun 2024 yaitu 5% lebih rendah dari tahun sebelumnya.</b><br>
+      Salah. Inflasi 2024 meningkat, bukan menurun, sehingga bukan 5% lebih rendah.</li>
+    </ul>
+    <p><b>Kesimpulan:</b> Jawaban yang tepat adalah opsi 3: "Inflasi tahun 2024 lebih tinggi dibandingkan tahun 2023."</p>
+  `
+},
+
+{
+  "id": "eko18",
+  "tipe": "cb",
+  "bacaan": `
+    Pada triwulan kedua tahun 2024, tingkat inflasi nasional melonjak menjadi 7,5% year-on-year, jauh melampaui target inflasi 3%. Kenaikan inflasi disebabkan oleh kombinasi dari:
+    
+      - Gangguan distribusi pangan domestik akibat cuaca ekstrem dan konflik logistik.
+      - Depresiasi nilai tukar rupiah terhadap dolar AS sebesar 12% dalam tiga bulan terakhir.
+      - Lonjakan harga energi global akibat ketegangan geopolitik.
+      - Ekspektasi inflasi yang meningkat di kalangan pelaku usaha dan konsumen, yang tercermin dari kenaikan upah dan harga-harga secara luas
+    
+    Di sisi lain, pertumbuhan ekonomi nasional pada saat yang sama melambat ke level 4,2% (di bawah target 5,5%), dan angka pengangguran terbuka naik menjadi 6,8%.
+  `,
+  "tanya": "Berdasarkan ilustrasi tersebut, manakah kebijakan moneter yang tepat untuk mengatasi masalah tersebut? Jawaban benar lebih dari satu.",
+  "opsi": [
+    "Menaikkan suku bunga acuan (BI Rate).",
+    "Menurunkan Giro Wajib Minimum (GWM) perbankan.",
+    "Menjual Surat Berharga Negara (SBN) di pasar terbuka.",
+    "Melakukan intervensi di pasar valas untuk menstabilkan rupiah.",
+    "Meningkatkan jumlah uang beredar untuk menjaga konsumsi masyarakat."
+  ],
+  "kunci": [0,2,3],
+  "bahas": `
+    <p><b>Pembahasan per opsi:</b></p>
+    <ul>
+      <li><b>Menaikkan suku bunga acuan (BI Rate)</b> - Benar ✅<br>
+          Inflasi tinggi perlu dikendalikan dengan menahan kredit dan konsumsi masyarakat. Suku bunga lebih tinggi membuat pinjaman lebih mahal, sehingga menekan inflasi.</li>
+      <li><b>Menurunkan Giro Wajib Minimum (GWM) perbankan</b> - Salah ❌<br>
+          Menurunkan GWM akan menambah likuiditas, justru mendorong inflasi lebih tinggi.</li>
+      <li><b>Menjual Surat Berharga Negara (SBN) di pasar terbuka</b> - Benar ✅<br>
+          Penjualan SBN menyerap likuiditas dari perbankan sehingga uang beredar berkurang, menekan inflasi.</li>
+      <li><b>Melakukan intervensi di pasar valas untuk menstabilkan rupiah</b> - Benar ✅<br>
+          Rupiah yang stabil membantu menahan tekanan harga barang impor, mengurangi inflasi impor.</li>
+      <li><b>Meningkatkan jumlah uang beredar untuk menjaga konsumsi masyarakat</b> - Salah ❌<br>
+          Menambah uang beredar saat inflasi tinggi akan memperburuk tekanan inflasi.</li>
+    </ul>
+    <p><b>Kesimpulan:</b> Kebijakan moneter yang tepat adalah opsi 1, 3, dan 4.</p>
+  `
+},
+{
+  "id": "eko19",
+  "tipe": "cb",
+  "bacaan": `
+    PT Perkebunan Nusantara (PTPN) merupakan sebuah Badan Usaha Milik Negara (BUMN) di sektor perkebunan, melakukan ekspansi usaha dengan membuka lahan baru dan membangun pabrik pengolahan sawit di beberapa daerah tertinggal. Langkah ini menciptakan lapangan kerja baru bagi masyarakat sekitar, meningkatkan pendapatan petani lokal melalui kemitraan, serta meningkatkan ekspor hasil perkebunan ke mancanegara.
+  `,
+  "tanya": "Berdasarkan ilustrasi tersebut, manakah dampak dari peran badan usaha PTPN terhadap perekonomian Indonesia? Jawaban benar lebih dari satu.",
+  "opsi": [
+    "Meningkatkan kesempatan kerja di wilayah tertinggal.",
+    "Meningkatkan potensi impor hasil perkebunan.",
+    "Mendorong pemerataan pembangunan antarwilayah.",
+    "Meningkatkan penerimaan devisa negara dari ekspor.",
+    "Melemahkan daya saing petani lokal dalam jangka panjang."
+  ],
+  "kunci": [0,2,3],
+  "bahas": `
+    <p><b>Pembahasan per opsi:</b></p>
+    <ul>
+      <li><b>Meningkatkan kesempatan kerja di wilayah tertinggal</b> - Benar ✅<br>
+          PTPN membuka lahan dan pabrik baru di wilayah tertinggal sehingga menciptakan lapangan kerja bagi masyarakat sekitar.</li>
+      <li><b>Meningkatkan potensi impor hasil perkebunan</b> - Salah ❌<br>
+          PTPN justru meningkatkan produksi dalam negeri dan ekspor, bukan impor.</li>
+      <li><b>Mendorong pemerataan pembangunan antarwilayah</b> - Benar ✅<br>
+          Ekspansi usaha ke daerah tertinggal membantu pemerataan pembangunan dan ekonomi antarwilayah.</li>
+      <li><b>Meningkatkan penerimaan devisa negara dari ekspor</b> - Benar ✅<br>
+          Peningkatan ekspor hasil perkebunan menambah devisa negara.</li>
+      <li><b>Melemahkan daya saing petani lokal dalam jangka panjang</b> - Salah ❌<br>
+          PTPN justru memperkuat pendapatan dan daya saing petani lokal melalui kemitraan.</li>
+    </ul>
+    <p><b>Kesimpulan:</b> Jawaban yang tepat adalah opsi 1, 3, dan 4.</p>
+  `
+},
+{
+  "id": "eko20",
+  "tipe": "cb",
+  "bacaan": `
+    Perusahaan dagang “Toko Berkah” milik Bapak Rahmat melakukan beberapa transaksi selama minggu pertama bulan Februari 2025.
+  `,
+  "tanya": "Manakah transaksi-transaksi yang mempengaruhi komponen ekuitas dalam persamaan dasar akuntansi? Jawaban benar lebih dari satu.",
+  "opsi": [
+    "Menyetorkan modal awal ke rekening perusahaan sebesar Rp75.000.000,00.",
+    "Membeli persediaan barang dagang secara kredit senilai Rp30.000.000,00.",
+    "Membayar sewa toko bulan Februari sebesar Rp5.000.000,00.",
+    "Menjual barang dagangan senilai Rp15.000.000,00 secara tunai (harga pokok penjualan: Rp9.000.000,00).",
+    "Membayar utang usaha sebesar Rp10.000.000,00."
+  ],
+  "kunci": [0,2,3],
+  "bahas": `
+    <p><b>Pembahasan per opsi:</b></p>
+    <ul>
+      <li><b>Menyetorkan modal awal ke rekening perusahaan sebesar Rp75.000.000,00</b> - Benar ✅<br>
+          Setoran modal menambah ekuitas pemilik.</li>
+      <li><b>Membeli persediaan barang dagang secara kredit senilai Rp30.000.000,00</b> - Salah ❌<br>
+          Transaksi ini hanya menambah aset (persediaan) dan kewajiban (utang usaha), ekuitas tidak berubah.</li>
+      <li><b>Membayar sewa toko bulan Februari sebesar Rp5.000.000,00</b> - Benar ✅<br>
+          Sewa merupakan beban, yang mengurangi laba → mengurangi ekuitas.</li>
+      <li><b>Menjual barang dagangan senilai Rp15.000.000,00 secara tunai (harga pokok penjualan: Rp9.000.000,00)</b> - Benar ✅<br>
+          Penjualan menghasilkan laba kotor Rp6.000.000, yang menambah ekuitas.</li>
+      <li><b>Membayar utang usaha sebesar Rp10.000.000,00</b> - Salah ❌<br>
+          Hanya mengurangi aset (kas) dan kewajiban (utang), ekuitas tidak berubah.</li>
+    </ul>
+    <p><b>Kesimpulan:</b> Transaksi yang mempengaruhi ekuitas adalah opsi 1, 3, dan 4.</p>
+  `
+},
+
 
   ]
 },
