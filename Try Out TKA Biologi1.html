@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Biologi - Kebun Ilmu</title>
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+
+  </style>
+</head>
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+
+<header>
+  <h2>Try Out TKA Biologi - Kebun Ilmu</h2>
+  <div>
+    <button id="fullscreenBtn" class="menu-button">Fullscreen</button>
+    <span class="timer" id="timer">60:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "tryout1",  password: "2025",  expire: "2025-11-11T23:59:59" },
+  { username: "nadira", password: "nad322", expire: "2025-11-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-11-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-11-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-11-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(60 * 60);
+}
+  const questions = [
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Bacalah teks berikut!</b><br><br>
+      Malaria merupakan salah satu penyakit yang pernah menyerang jutaan penduduk di berbagai belahan dunia. Untuk mengatasi penyakit malaria, dilakukan beberapa tindakan yang terbukti berhasil, yaitu memberikan obat kina dan pembasmian nyamuk dengan menyemprotkan DDT.<br><br>
+      Tabel berikut merupakan hasil penelitian tentang efektivitas pemberian obat kina dan penyemprotan DDT dalam menurunkan angka penderita malaria di dua wilayah berbeda.<br><br>
+
+      <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; text-align: center; width: 100%;">
+        <tr>
+          <th>Metode</th>
+          <th>Wilayah A (tanpa resistensi)</th>
+          <th>Wilayah B (dengan resistensi nyamuk)</th>
+        </tr>
+        <tr>
+          <td>Pemberian Kina 3 hari</td>
+          <td>50% sembuh</td>
+          <td>48% sembuh</td>
+        </tr>
+        <tr>
+          <td>Pemberian Kina 5 hari</td>
+          <td>76% sembuh</td>
+          <td>72% sembuh</td>
+        </tr>
+        <tr>
+          <td>Pemberian Kina 7 hari</td>
+          <td>87% sembuh</td>
+          <td>82% sembuh</td>
+        </tr>
+        <tr>
+          <td>Penyemprotan DDT</td>
+          <td>90% menurunkan infeksi</td>
+          <td>60% menurunkan infeksi</td>
+        </tr>
+      </table><br>
+
+      <b>Petunjuk:</b> Berdasarkan data tersebut, strategi apa yang paling tepat untuk menurunkan jumlah penderita malaria di kedua wilayah?  
+      Tentukanlah apakah pernyataan-pernyataan berikut <i>Tepat</i> atau <i>Tidak Tepat</i> sesuai dengan hasil analisis data tersebut!
+    </div>
+  `,
+  "statements": [
+    "A. Mengandalkan DDT di kedua wilayah, karena efektivitasnya paling tinggi dibandingkan obat kina.",
+    "B. Menggunakan DDT di wilayah A untuk hasil cepat, dan memperpanjang pemberian kina di wilayah B karena efektivitas DDT menurun akibat resistensi.",
+    "C. Mengutamakan kina 3 hari di wilayah A maupun B, karena tingkat kesembuhannya cukup tinggi dan tidak memerlukan waktu lama."
+  ],
+  "correct": [false, true, false]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://cdn.britannica.com/34/123434-050-9B7F4B7C/blue-whale.jpg" 
+      alt="Paus biru dan ikan hiu" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+      
+      Paus (<i>Balaenoptera musculus</i>) dan ikan hiu (<i>Carcharodon carcharias</i>) sama-sama hidup di laut, memiliki sirip dan ekor, serta bentuk tubuh yang lancip di ujung depan dan ujung belakang sehingga efisien untuk berenang. 
+      <br><br>
+      Namun, paus bernapas dengan paru-paru dan menyusui anaknya, sedangkan ikan hiu bernapas dengan insang dan sebagian besar bertelur. 
+      <br><br>
+      Meskipun memiliki bentuk luar yang mirip, dalam sistem klasifikasi keduanya ditempatkan pada kelompok yang berbeda.
+      <br><br>
+      <b>Question:</b> Apa prinsip utama yang digunakan dalam pengelompokan tersebut?
+    </div>
+  `,
+  "options": [
+    "Kedua makhluk hidup tersebut hidup di ekosistem laut yang berbeda.",
+    "Mereka memiliki peran yang berbeda dalam rantai makanan.",
+    "Pengelompokan didasarkan pada habitat dan perilaku makan.",
+    "Klasifikasi didasarkan pada persamaan dan perbedaan ciri.",
+    "Paus dan ikan hiu memiliki massa tubuh yang berbeda secara alami."
+  ],
+  "correct": 3
+},
+
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://cdn.hellosehat.com/wp-content/uploads/2021/03/IUD-atau-spiral.jpg" 
+      alt="IUD (Intra Uterine Device)" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+      
+      Seorang wanita datang ke dokter spesialis kandungan berniat memasang IUD (<i>Intra Uterine Device</i>). 
+      Pemasangan IUD merupakan cara kontrasepsi jangka panjang. 
+      IUD berupa alat kecil yang terdiri dari bahan plastik lentur dan dimasukkan ke dalam rongga rahim, 
+      yang harus diganti setelah digunakan selama periode tertentu.
+      <br><br>
+      <b>Question:</b> Tujuan penggunaan IUD ini adalah ....<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Mencegah terjadinya fertilisasi dengan mengganggu pergerakan sperma atau mencegah sperma mencapai sel telur.",
+    "Menghentikan kesuburan pada seorang wanita secara permanen sehingga tidak dapat hamil lagi.",
+    "Menghambat proses implantasi hasil pembuahan dengan menciptakan kondisi rahim yang kurang sesuai bagi embrio.",
+    "Menghalangi proses pembuahan dengan mencegah pelepasan sel telur di saluran reproduksi wanita.",
+    "Menurunkan kemampuan sperma dalam membuahi sel telur melalui pengaruh ion tembaga atau hormon pada alat tersebut."
+  ],
+  "correct": [0, 2, 4]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Masalah gizi di Indonesia saat ini masih sangat kompleks, tidak hanya masalah kekurangan gizi, masalah kelebihan gizi juga menjadi persoalan yang harus ditangani secara serius. 
+      Pada anak-anak kondisi <i>stunting</i> (pendek) sering ditemukan disebabkan karena asupan gizi yang tidak sesuai dengan kebutuhan gizinya dalam waktu yang lama.  
+      Hal itu terjadi sejak di dalam kandungan dan akan terlihat pada anak berusia 2 tahun, mengakibatkan perkembangan fisik maupun kognitif tidak maksimal, mudah terserang penyakit, serta berdaya saing rendah.
+      <br><br>
+      <b>Question:</b> Langkah pertama untuk memecahkan permasalahan tersebut menggunakan metode ilmiah yang tepat adalah ....<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Mengumpulkan informasi dari berbagai referensi terkait pengaruh faktor gizi terhadap pertumbuhan sebagai dasar untuk mengidentifikasi permasalahan.",
+    "Merumuskan masalah dengan memperjelas batasan permasalahan yang akan dipecahkan.",
+    "Melakukan pendataan bagi keluarga yang memiliki anak rendah gizi atau bergizi buruk.",
+    "Mengadakan sosialisasi program pentingnya makanan bergizi bagi ibu dan anak bagi masyarakat.",
+    "Pemberian makanan bergizi seimbang bagi seluruh anak balita dan usia anak sekolah dasar."
+  ],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Kecepatan pernapasan orang yang sedang berolahraga lebih tinggi dibandingkan dengan orang yang sedang duduk. 
+      Perbedaan kecepatan pernapasan ini disebabkan oleh ....
+      <br><br>
+      <b>Question:</b> Apa alasan ilmiah yang paling tepat mengenai perbedaan kecepatan pernapasan antara orang yang sedang berolahraga dan orang yang duduk?<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Orang yang sedang berolahraga membutuhkan energi lebih banyak daripada orang yang sedang duduk. Energi dihasilkan dari penguraian zat makanan dengan bantuan oksigen yang masuk melalui pernapasan.",
+    "Orang yang sedang berolahraga membutuhkan oksigen lebih sedikit daripada orang yang sedang duduk. Energi dihasilkan dari penguraian zat makanan dengan bantuan oksigen dan menghasilkan karbondioksida lebih sedikit.",
+    "Orang yang sedang berolahraga membutuhkan energi lebih banyak daripada orang yang sedang duduk. Energi dihasilkan dari penguraian zat makanan dengan bantuan karbondioksida.",
+    "Orang yang berolahraga membutuhkan oksigen lebih sedikit daripada orang yang duduk. Energi dihasilkan dari penguraian zat makanan dengan bantuan oksigen yang masuk melalui pernapasan.",
+    "Orang yang sedang berolahraga membutuhkan oksigen lebih sedikit daripada orang yang sedang duduk, energi dihasilkan dari penguraian zat makanan dengan bantuan oksigen dan menghasilkan karbondioksida lebih banyak."
+  ],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Kelenjar tiroid merupakan salah satu kelenjar endokrin yang terletak di bagian depan leher. 
+      Kelenjar ini menghasilkan hormon tiroksin yang berperan penting dalam berbagai proses fisiologis tubuh.
+      <br><br>
+      <b>Question:</b> Kelenjar tiroid menghasilkan tiroksin yang berperan ....<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Mengatur metabolisme tubuh.",
+    "Menurunkan kadar kalsium dalam darah.",
+    "Meningkatkan kadar kalsium dalam darah.",
+    "Merangsang lepasnya kalsium dari tulang keras.",
+    "Mengatur metabolisme mineral dan glukosa."
+  ],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/23147_51eba1b92b7e1bb69f6f2764b924e1b9.png" 
+      alt="Alat reproduksi laki-laki" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+      
+      Pak Tono mengalami nyeri hebat di bagian alat reproduksinya. 
+      Setelah diperiksa oleh dokter, diketahui bahwa terjadi penyumbatan pada bagian X seperti yang ditunjukkan pada gambar. 
+      Berdasarkan kondisi tersebut, apa kemungkinan yang akan terjadi pada pembentukan atau penyaluran sperma Pak Tono?
+      <br><br>
+      <b>Question:</b> Apa akibat yang paling mungkin terjadi jika terjadi penyumbatan pada saluran X pada alat reproduksi laki-laki?<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Produksi sperma tidak dapat terjadi karena fungsi reproduksi sepenuhnya terhenti.",
+    "Sel sperma yang telah diproduksi akan dikeluarkan bersamaan dengan urin.",
+    "Ejakulasi tidak dapat terjadi sama sekali meskipun sperma tetap dapat diproduksi.",
+    "Cairan semen ejakulasi tetap dikeluarkan, tetapi tidak mengandung sel-sel sperma.",
+    "Proses pematangan terganggu sehingga ekor sperma tidak terbentuk sempurna."
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Pada sebuah sel hewan, terdapat beberapa organel yang memiliki fungsi penting dalam mendukung kehidupan sel tersebut. 
+      Jika sebuah sel kekurangan mitokondria, maka manakah yang paling mungkin terjadi pada sel tersebut?
+      <br><br>
+      <b>Question:</b> Apa akibat utama yang terjadi pada sel hewan jika kekurangan mitokondria?<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Kekurangan energi untuk menjalankan proses metabolisme yang vital.",
+    "Tidak mampu mencerna zat asing sehingga limbah menumpuk di sel.",
+    "Mengalami hambatan pada sintesis protein dan pengeluaran zat dari sel.",
+    "Terganggu dalam penyimpanan dan pengaturan informasi genetik.",
+    "Kehilangan kemampuan dalam menjaga bentuk dan fungsi sel."
+  ],
+  "correct": 0
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Sudah 2 minggu Amir merasakan gangguan pada kesehatannya dengan gejala pucat, lesu, demam, dan sering terjadi pendarahan pada hidungnya. 
+      Setelah diperiksa, dokter meminta Amir untuk melakukan uji darah di laboratorium dan diperoleh hasil seperti pada tabel berikut:
+      <br><br>
+      <table border="1" cellspacing="0" cellpadding="4" style="border-collapse: collapse; text-align: center; width: 100%;">
+        <tr><th>Pemeriksaan</th><th>Hasil</th><th>Nilai Rujukan</th><th>Satuan</th></tr>
+        <tr><td>Trombosit</td><td>279</td><td>150 – 440</td><td>ribu sel/µL</td></tr>
+        <tr><td>Hematokrit</td><td>32,6</td><td>35 – 47</td><td>%</td></tr>
+        <tr><td>Hemoglobin</td><td>12,4</td><td>11,7 – 15,5</td><td>g/dL</td></tr>
+        <tr><td>Eritrosit</td><td>4,18</td><td>3,8 – 5,2</td><td>juta sel/µL</td></tr>
+        <tr><td>Leukosit</td><td>14,92</td><td>3,6 – 11,0</td><td>ribu sel/µL</td></tr>
+        <tr><td>Neutrofil</td><td>76,5</td><td>50 – 70</td><td>%</td></tr>
+        <tr><td>Limfosit</td><td>6</td><td>24 – 40</td><td>%</td></tr>
+        <tr><td>Monosit</td><td>6,4</td><td>2 – 8</td><td>%</td></tr>
+        <tr><td>Eosinofil</td><td>0,9</td><td>2 – 4</td><td>%</td></tr>
+      </table>
+      <br>
+      <b>Question:</b> Manakah pernyataan yang tepat terkait hasil uji laboratorium klinis darah Amir tersebut?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Amir mengalami gangguan fungsi jantung sehingga sel darah putih diproduksi dalam jumlah tinggi.",
+    "Amir mengalami kondisi produksi sel darah putih melebihi batas normal akibat gangguan pada sumsum tulang belakang.",
+    "Amir mengalami gangguan fungsi hati sehingga perombakan sel darah putih berlangsung lambat.",
+    "Terjadi penyumbatan pada pembuluh darah dan terjadi hemolisis (pecah) sehingga sel darah putih aktif diproduksi.",
+    "Terjadi penghancuran sel-sel darah merah dalam hati yang terlalu cepat dan banyak sehingga beberapa jenis leukosit jumlahnya lebih banyak."
+  ],
+  "correct": [1]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Sindrom Stevens-Johnson (SSJ) merupakan penyakit kulit dan mukosa yang berbahaya dan dapat mengakibatkan kematian. 
+      Sel-sel kulit bagian epidermis mengelupas dan memisahkan diri dari dermis, dengan gejala bercak kemerahan, perdarahan di bawah kulit, melepuh seperti luka bakar, sampai terkelupas. 
+      SSJ bukan merupakan penyakit menular, tetapi dipicu antara lain oleh hipersensitivitas terhadap obat tertentu.
+      <br><br>
+      <b>Question:</b> Bagaimana mekanisme pertahanan tubuh pada penderita sindrom tersebut?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Immunoglobulin G berperan dalam pertahanan tubuh sekunder terhadap antigen yang sama ketika masuk lagi ke dalam tubuh.",
+    "Immunoglobulin M mengikat antigen menjadi gumpalan atau diaglutinasi agar mudah difagositosis oleh makrofag.",
+    "Imunoglobulin E yang menempel pada sel mast dan bereaksi dengan antigen sehingga memicu reaksi alergi pada jaringan tubuh.",
+    "Sel yang terinfeksi antigen menghasilkan sejenis protein yang akan berikatan dengan sel yang tidak terinfeksi untuk mencegah perbanyakan antigen.",
+    "Antibodi yang terbentuk dalam plasma bekerja sama dengan protein komplemen untuk melisis sel asing yang masuk ke tubuh."
+  ],
+  "correct": [0, 2]
+},
+
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://i.imgur.com/UdVfh0Z.png" 
+      alt="Jaring-jaring makanan ekosistem laut" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+      
+      Dalam sebuah ekosistem laut, terdapat beberapa organisme seperti fitoplankton, zooplankton, ikan kecil, paus biru, anjing laut, dan penguin. 
+      Ikan kecil berperan sebagai konsumen tingkat pertama atau kedua yang memakan zooplankton dan menjadi mangsa bagi hewan besar seperti paus biru, penguin, serta anjing laut.
+      Jika populasi ikan kecil menurun drastis, maka keseimbangan jaring-jaring makanan di laut akan terganggu.
+      <br><br>
+      <b>Question:</b> Jika populasi ikan kecil menurun drastis, maka manakah dampak yang paling mungkin terjadi dalam jaring-jaring makanan pada ekosistem laut tersebut?<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Jumlah fitoplankton akan meningkat.",
+    "Populasi paus biru akan menurun.",
+    "Anjing laut akan meningkat populasinya.",
+    "Ledakan populasi zooplankton.",
+    "Populasi penguin akan berkurang."
+  ],
+  "correct": 3
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Dalam sebuah penelitian mengenai penyakit pada sel, para ilmuwan menemukan bahwa pada beberapa sel tubuh pasien, 
+      retikulum endoplasma kasar (RE kasar) dan retikulum endoplasma halus (RE halus) mengalami kerusakan parah. 
+      Hal ini menghambat beberapa fungsi penting dalam sel tersebut.
+      <br><br>
+      <b>Question:</b> Berdasarkan peranan RE kasar dan RE halus, apa kemungkinan yang dapat terjadi pada sel-sel pasien tersebut?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Produksi protein terganggu, mengakibatkan sel tidak dapat melakukan fungsi-fungsi penting yang membutuhkan protein.",
+    "Sintesis lipid terhambat, sehingga kemampuan sel untuk memproduksi membran dan melakukan detoksifikasi berkurang.",
+    "Sel mengalami kesulitan dalam menyimpan kalsium, yang berpotensi mempengaruhi aktivitas seluler yang bergantung pada kalsium, seperti kontraksi otot.",
+    "Penurunan produksi ATP yang signifikan terjadi, karena sel tidak dapat menghasilkan energi dengan efisien.",
+    "Gangguan dalam pengangkutan protein dan sintesis lipid menyebabkan berbagai proses seluler terganggu."
+  ],
+  "correct": [0, 1, 2, 4]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Berikut adalah grafik data banyaknya kasus penderita Covid-19 sejak Maret 2020 hingga Mei 2025.<br>
+<img src="https://i.imgur.com/NDScZC5.png" alt="Grafik Kasus Covid-19" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 10px;"> 
+      Selama pandemi dilaksanakan pemberian vaksin kepada masyarakat. 
+      Vaksin primer diberikan mulai tanggal 13 Januari 2021 dan vaksin booster 1 diberikan mulai Januari 2022. 
+      Terjadi tren penurunan kasus Covid-19 setelah dilaksanakannya vaksinasi. 
+      Data ini menunjukkan pentingnya vaksinasi dalam menurunkan risiko terinfeksi virus korona.
+      <br><br>
+      <b>Question:</b> Berdasarkan data dan pengetahuanmu tentang sistem imun, manakah pernyataan berikut yang logis dan didukung data tersebut?<br>
+      <i>Pilih semua jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Penurunan jumlah kasus setelah Januari 2022 menunjukkan bahwa booster memiliki dampak besar terhadap kekebalan seseorang.",
+    "Jika vaksin booster tidak diberikan, kemungkinan jumlah kasus tetap menurun karena vaksin primer sudah cukup efektif.",
+    "Vaksin primer dan booster bekerja sama membentuk kekebalan kolektif, sehingga menurunkan jumlah kasus secara bertahap.",
+    "Penurunan jumlah kasus terjadi secara alami karena vaksin primer menyebabkan virus tidak terlalu ganas.",
+    "Vaksin booster sudah efektif menurunkan jumlah kasus, namun perlu vaksin booster lanjutan untuk imunitas jangka panjang."
+  ],
+  "correct": [0, 2, 4]
+},
+
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      Seorang perempuan mengalami gangguan kehamilan yang cukup serius. Setelah dilakukan pemeriksaan, dokter menyatakan bahwa zigot tidak berkembang di dalam rahim, melainkan di luar rongga rahim. 
+      Kondisi ini dikenal dengan <b>kehamilan ektopik</b> (hamil di luar kandungan).
+      <br><br>
+      <b>Tentukan Benar (B) atau Salah (S)</b> untuk setiap pernyataan berikut mengenai penjelasan paling logis yang dapat mendukung diagnosis dokter terkait penyebab kehamilan ektopik tersebut:
+    </div>
+  `,
+  "statements": [
+    "Pembuahan tetap terjadi di tuba falopi, namun gangguan pada silia tuba menyebabkan zigot gagal mencapai rahim.",
+    "Zigot yang tertanam di tuba falopi menunjukkan adanya masalah pada mekanisme transportasi embrio menuju rahim.",
+    "Sel telur dan sel sperma bertemu di vagina sehingga zigot tidak dapat menuju rahim dan berkembang di vagina."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Bacalah kasus berikut!</b><br><br>
+      Seorang petani jagung membeli benih jagung sebanyak 1 kg di toko pertanian. Harga benih jagung tersebut ternyata beberapa kali lipat lebih mahal dari harga jagung di pasaran. Karena alasan mahalnya benih jagung di toko pertanian, pada saat panen petani tersebut memilih jagung yang kualitasnya bagus untuk dijadikan benih. 
+      <br><br>
+      Tetangganya yang sudah pernah menanam jagung dari benih hasil panen sendiri memberikan nasihat agar tidak melakukan hal itu karena hasil panennya tidak akan bagus. 
+      Penasaran dengan ungkapan tetangganya, petani tersebut ingin membuktikan ucapan tetangganya.
+      <br><br>
+      <b>Petunjuk:</b> Tentukan kegiatan berikut yang <i>Tepat Dilakukan</i> atau <i>Tidak Tepat Dilakukan</i> oleh petani untuk membuktikan ucapan tetangganya!
+    </div>
+  `,
+  "statements": [
+    "A. Menguji satu benih toko dan satu benih hasil panen di lahan yang sama, lalu membandingkan hasilnya.",
+    "B. Melakukan penanaman beberapa benih toko dan beberapa benih hasil panen di lahan yang sama, tetapi diberi pupuk yang berbeda, lalu membandingkan hasilnya.",
+    "C. Menanam beberapa benih toko dan beberapa benih hasil panen di lahan yang sama, diberi pupuk yang sama, kemudian membandingkan hasilnya."
+  ],
+  "correct": [false, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Yogurt_in_a_glass_bowl.jpg" 
+      alt="Proses pembuatan yogurt" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+      
+      Seorang murid mengikuti lomba membuat produk pangan fermentasi di sekolah, yaitu membuat yogurt. 
+      Murid tersebut bertanggung jawab untuk memastikan proses produksi berjalan dengan baik. 
+      Salah satu tahap penting dalam pembuatan yogurt adalah penambahan bakteri asam laktat, seperti 
+      <i>Lactobacillus bulgaricus</i> dan <i>Streptococcus thermophilus</i>, 
+      yang berperan dalam mengubah laktosa menjadi asam laktat sehingga yogurt memiliki tekstur dan rasa khas.
+      <br><br>
+      <b>Question:</b> Apa langkah pertama yang perlu dilakukan untuk memastikan bakteri yang digunakan dalam fermentasi berfungsi dengan optimal?<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Menambahkan bakteri ke dalam susu sebelum proses pasteurisasi dilakukan.",
+    "Meningkatkan jumlah bakteri dalam campuran untuk mempercepat proses produksi.",
+    "Menggunakan bakteri yang dapat mengurangi kandungan protein dalam yogurt.",
+    "Mencampur banyak jenis bakteri untuk menambah rasa yang lebih manis pada yogurt.",
+    "Memasukkan bakteri pada saat susu memiliki suhu 40–45°C sehingga bakteri aktif."
+  ],
+  "correct": 4
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+            
+      Seorang atlet mengalami kelelahan otot setelah latihan intensif. 
+      Pelatihnya menjelaskan bahwa sel-sel otot sedang mengalami peningkatan aktivitas metabolik untuk memenuhi kebutuhan energi. 
+      Salah satu mekanisme utama yang terjadi dalam sel otot tersebut adalah proses <b>katabolisme</b>, yaitu proses pemecahan molekul kompleks menjadi molekul yang lebih sederhana untuk menghasilkan energi.
+      <br><br>
+      <b>Question:</b> Berdasarkan situasi tersebut, proses manakah yang paling tepat dikategorikan sebagai katabolisme?<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Penyusunan protein baru untuk memperbaiki kerusakan otot akibat latihan berat.",
+    "Penggabungan molekul glukosa menjadi glikogen untuk penyimpanan energi di otot.",
+    "Pemecahan glukosa menjadi asam piruvat untuk menghasilkan energi cepat.",
+    "Pembentukan lemak dari gliserol dan asam lemak untuk penyimpanan cadangan energi.",
+    "Sintesis ATP dari ADP dan fosfat sebagai hasil akhir reaksi metabolisme energi."
+  ],
+  "correct": 2
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      Setelah berlari selama 30 menit tanpa henti, seorang murid merasa napasnya menjadi lebih cepat dan dalam. 
+      Hal ini terjadi karena tubuhnya membutuhkan lebih banyak oksigen dan harus membuang karbon dioksida lebih cepat. 
+      Untuk membantu tubuh kembali ke kondisi normal dan mendukung proses pernapasan yang optimal, pelari perlu melakukan beberapa aktivitas pemulihan yang sesuai.
+      <br><br>
+      <b>Tentukan Benar (B) atau Salah (S)</b> untuk setiap pernyataan berikut mengenai aktivitas pemulihan yang sebaiknya dilakukan setelah berlari:
+    </div>
+  `,
+  "statements": [
+    "Melakukan pendinginan dengan berjalan perlahan untuk menormalkan laju pernapasan.",
+    "Mengatur napas dengan teknik pernapasan dalam (deep breathing) secara perlahan.",
+    "Langsung duduk atau berbaring tanpa bergerak agar tubuh cepat beristirahat."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      
+      Berdasarkan survei Ikatan Dokter Anak Indonesia, terjadi peningkatan kasus kerusakan ginjal pada anak usia 12–18 tahun sepanjang tahun 2024. 
+      Penderita kerusakan ginjal yang parah perlu dibantu dengan cuci darah. 
+      Seorang murid bertanya, <i>“Mengapa ginjalnya yang rusak, tetapi darahnya yang ‘dicuci’?”</i>
+      <br><br>
+      <b>Question:</b> Apa penjelasan ilmiah secara fisiologis yang paling tepat untuk menjawab pertanyaan murid tersebut?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Kerusakan ginjal mengganggu sirkulasi darah dan kemampuan sel darah merah dalam mengikat oksigen.",
+    "Ketika ginjal tidak berfungsi dengan baik, darah menjadi kotor karena adanya sel-sel darah yang mati.",
+    "Kegagalan ginjal dalam menyaring zat sisa pencernaan memungkinkan limbah tersebut masuk ke dalam pembuluh darah.",
+    "Terganggunya fungsi ginjal menyebabkan sisa metabolisme tidak dapat tersaring dan terbuang dalam urin.",
+    "Karena ginjal tidak mampu menyaring darah, maka zat-zat sisa seperti urea dan kreatinin tetap berada dalam darah."
+  ],
+  "correct": [3, 4]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Seorang anak merasa kesal karena kolam ikan hias di halaman rumahnya sering ada kecebong. 
+      Untuk menjaga agar katak tidak lagi bertelur di kolam ikan hiasnya, anak tersebut memindahkan katak ke selokan di belakang rumahnya. 
+      Sekalipun dia sudah sering memindahkan katak dari kolam, hampir setiap menjelang malam ada katak yang bernyanyi di tepi kolam. 
+      Hari ini, anak itu melakukan sesuatu yang belum pernah dilakukannya — sebelum memindahkan katak, dia menandai katak-katak tersebut dengan angka-angka.
+      <br><br>
+      <b>Question:</b> Pertanyaan apa yang menurut kalian ingin diketahui anak tersebut?<br>
+      <i>Pilih satu jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Siapakah yang datang ke kolam itu, katak jantan ataukah betina?",
+    "Katak manakah yang pertama kali datang ke arah kolam itu?",
+    "Apakah katak yang datang ke kolam itu adalah yang pernah dipindah?",
+    "Dengan cara apakah katak-katak itu datang menuju kolam?",
+    "Mengapa selalu ada katak yang datang ke kolam setiap waktu?"
+  ],
+  "correct": 2
+}
+
+
+
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (['true_false', 'true_false_en', 'fact_opinion', 'benefit_challenge', 'tepat_tidak'].includes(q.type)) {
+    return Array(q.statements.length).fill(null);
+  }
+  return null;
+});
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+// ====== TEPAT / TIDAK TEPAT ======
+else if (q.type === 'tepat_tidak') {
+  html += `<table class="true-false">
+    <tr><th>Pernyataan</th><th>Tepat</th><th>Tidak Tepat</th></tr>`;
+  q.statements.forEach((stmt, i) => {
+    const tepatChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td><input type="radio" name="tt_${i}" value="true" ${tepatChecked}></td>
+      <td><input type="radio" name="tt_${i}" value="false" ${tidakChecked}></td>
+    </tr>`;
+  });
+  html += `</table>`;
+}
+
+  // ====== BENEFIT / CHALLENGE ======
+  else if (q.type === 'benefit_challenge') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Benefit</th><th>Challenge</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benChecked = answers[index][i] === 'benefit' ? 'checked' : '';
+      const chalChecked = answers[index][i] === 'challenge' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="bc_${i}" value="benefit" ${benChecked}></td>
+        <td><input type="radio" name="bc_${i}" value="challenge" ${chalChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== TRUE / FALSE (English version) ======
+  else if (q.type === 'true_false_en') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>True</th><th>False</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const trueChecked = answers[index][i] === true ? 'checked' : '';
+      const falseChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tfe_${i}" value="true" ${trueChecked}></td>
+        <td><input type="radio" name="tfe_${i}" value="false" ${falseChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== FACT / OPINION ======
+  else if (q.type === 'fact_opinion') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Fact</th><th>Opinion</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const factChecked = answers[index][i] === 'fact' ? 'checked' : '';
+      const opChecked = answers[index][i] === 'opinion' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="fo_${i}" value="fact" ${factChecked}></td>
+        <td><input type="radio" name="fo_${i}" value="opinion" ${opChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk Benefit/Challenge
+  if (q.type === 'benefit_challenge') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="bc_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+// Event listener untuk TEPAT/TIDAK TEPAT
+if (q.type === 'tepat_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="tt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+
+  // Event listener untuk True/False English
+  if (q.type === 'true_false_en') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tfe_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk Fact/Opinion
+  if (q.type === 'fact_opinion') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="fo_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk tipe mc_multiple
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', e => {
+        const val = parseInt(e.target.value);
+        if (e.target.checked) {
+          if (!answers[index].includes(val)) answers[index].push(val);
+        } else {
+          answers[index] = answers[index].filter(v => v !== val);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  // Hitung skor 0–100
+  const percentage = Math.round((score / questions.length) * 100);
+
+  // Tampilkan hanya skor akhir dalam bentuk nilai
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+}
+
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  const interval = setInterval(() => {
+    if (!timerRunning) { clearInterval(interval); return; }
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    if (--timer < 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+  }, 1000);
+}
+
+renderQuestionButtons();
+renderQuestion(currentQuestion);
+startTimer(60 * 60);
+
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+fullscreenBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      alert(`Gagal masuk fullscreen: ${err.message}`);
+    });
+    fullscreenBtn.textContent = "Exit Fullscreen";
+  } else {
+    document.exitFullscreen();
+    fullscreenBtn.textContent = "Fullscreen";
+  }
+});
+checkSession();
+
+  </script>
+</body>
+</html>
