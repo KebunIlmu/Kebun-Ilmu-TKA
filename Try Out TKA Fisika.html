@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Fisika - Kebun Ilmu</title>
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+
+  </style>
+</head>
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+
+<header>
+  <h2>Try Out TKA Fisika - Kebun Ilmu</h2>
+  <div>
+    <button id="fullscreenBtn" class="menu-button">Fullscreen</button>
+    <span class="timer" id="timer">60:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "tryout1",  password: "2025",  expire: "2025-11-11T23:59:59" },
+  { username: "nadira", password: "nad322", expire: "2025-11-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-11-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-11-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-11-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(60 * 60);
+}
+  const questions = [
+{
+  "type": "true_false",
+  "text": `
+    <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/01896_46d4c32348c2dd427b14f92222413698.png" alt="Bola A dan B" style="max-width:100%;height:auto;"><br><br>
+    Dua orang mencoba cara yang berbeda untuk menembak sasaran pada titik C. 
+    Orang pertama menggunakan bola A dan diletakkan di tepi meja. 
+    Orang kedua menggunakan bola B yang berada di lantai. 
+    Bola A dan B kemudian dihentakkan secara bersamaan pada arah mendatar 
+    (g = 10 m/s² dan gesekan diabaikan).
+
+    Tentukan benar (B) atau salah (S) untuk setiap kondisi awal yang dapat menyebabkan bola A dan B mengenai sasaran secara bersamaan:
+  `,
+  "statements": [
+    "A. Massa bola A dan bola B sama.",
+    "B. Posisi bola A saat itu adalah 0,8 m di atas tanah.",
+    "C. Bola B dihentakkan dengan kecepatan horizontal sebesar 30 m/s."
+  ],
+  "correct": [false, true, false]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    Sebuah meja pembuat perkakas keramik dapat berputar secara horizontal terhadap titik tengah dan di atas meja terdapat sebuah beban seperti pada gamabar.
+<img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/24342_437570c801e52163e79a6c9d0379704a.png" alt="Meja Berputar" style="max-width:100%;height:auto;"><br><br>
+Meja berputar dengan kecepatan sudut 4 rad/s dan koefisien gesekan statis antara beban dan permukaan meja 0,48 (percepatan gravitasi g = 10 m/s²). 
+    Gesekan yang tersedia mencegah beban tergelincir.<br><br>
+    Tentukan jarak maksimum dari pusat meja agar beban tidak terlempar dari meja.<br><br>
+    <i>Pilih jawaban benar lebih dari satu.</i>
+  `,
+  "options": [
+    "8 cm",
+    "16 cm",
+    "24 cm",
+    "30 cm",
+    "40 cm"
+  ],
+  "correct": [0, 1, 2,3]
+},
+{
+  "type": "true_false",
+  "text": `
+Perhatikan gambar peristiwa tumbukan antara mobil boks dan mobil sedan berikut ini.<br>
+    <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/89639_0365f6f2126396bb3220ae607ae0c92a.png" alt="Tumbukan Mobil" style="max-width:100%;height:auto;"><br><br>
+    Setelah bertumbukan, kedua mobil bergerak menjadi satu dalam keadaan mobil boks mendorong mobil sedan.<br><br>
+    Tentukan benar (B) atau salah (S) untuk setiap kondisi yang terjadi pada saat dan setelah tumbukan:
+  `,
+  "statements": [
+    "A. Setelah tumbukan, kecepatan kedua mobil itu sama besar.",
+    "B. Momentum kedua mobil sebelum tumbukan lebih besar daripada sesudah tumbukan.",
+    "C. Koefisien restitusi tumbukan bernilai nol."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p>
+        Seorang pengendara motor (PM) mengendarai motornya dengan kecepatan tertentu berada pada satu garis lurus dengan mobil ambulans (MA) yang sedang membunyikan sirine dengan frekuensi tertentu. 
+        Kedua kendaraan bergerak dengan kecepatan berbeda, di mana kecepatan PM lebih kecil dari MA.
+        Fenomena ini dapat dijelaskan menggunakan <i>efek Doppler</i>, yaitu perubahan frekuensi bunyi yang terdengar oleh pendengar karena adanya gerak relatif antara sumber bunyi dan pendengar.
+      </p>
+      <p><b>Pertanyaan:</b> Pada kondisi apa sajakah pengendara motor akan mendengar bunyi sirine ambulans dengan frekuensi bunyi lebih besar dari kondisi awalnya?  
+      <br><br><i>Pilih semua jawaban benar! Jawaban benar lebih dari satu</i></p>
+    </div>
+  `,
+  "options": [
+    "PM bergerak mendekati MA, MA bergerak mendekati PM",
+    "PM bergerak menjauhi MA, MA bergerak mendekati PM",
+    "PM diam, MA bergerak mendekati PM",
+    "PM bergerak mendekati MA, MA bergerak menjauhi PM",
+    "PM bergerak menjauhi MA, MA diam"
+  ],
+  "correct": [0, 1, 2]
+},
+{
+  "type": "mc",
+  "text": `
+Perhatikan gambar berikut!
+    <div style="text-align: justify;">
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/93293_75cf9078fd8375cbac9f01d0df41132b.png" alt="Cermin Cembung" style="max-width:100%;height:auto;"><br><br>
+      Seorang siswa yang tingginya 160 cm berdiri di depan cermin cembung yang mempunyai jarak fokus 16 cm. 
+      Dia mengamati bayangan dirinya dalam cermin cembung. Dia melangkah mundur menjauhi cermin sejauh 16 cm, kemudian kembali melihat bayangan dirinya di cermin.
+      <br><br>
+      <b>Pertanyaan:</b> Perbandingan tinggi bayangan sebelum dan sesudah siswa bergeser adalah ....
+    </div>
+  `,
+  "options": [
+    "1 : 2",
+    "2 : 3",
+    "3 : 4",
+    "4 : 5",
+    "5 : 4"
+  ],
+  "correct": 4
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+           Di sebuah laboratorium fisika, dua benda kecil bermuatan listrik diletakkan di atas meja isolator. 
+      Peneliti dapat mengatur jarak antara kedua benda menggunakan penggeser, lalu mengukur gaya listrik yang timbul dengan sensor gaya digital.
+      <br><br>
+      Hasil percobaan kemudian ditampilkan dalam grafik hubungan antara gaya listrik (F) terhadap jarak antar kedua benda (R) seperti pada gambar.
+      <br><br>
+<img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/16247_cc06d5de91a5d3d1aa4788ea3c0cf046.png" alt="Percobaan Muatan Listrik" style="max-width:100%;height:auto;"><br><br>
+
+      Diketahui bahwa muatan pada benda pertama selalu dua kali lebih besar daripada muatan pada benda kedua 
+      dan percobaan dilakukan di udara (anggap sama dengan ruang hampa) dengan konstanta Coulomb \\( k = 9 \\times 10^9~\\text{N·m}^2/\\text{C}^2 \\).
+      <br><br>
+      <b>Pertanyaan:</b> Berapakah besar masing-masing muatan listrik tersebut?
+    </div>
+  `,
+  "options": [
+    "q₁ = 0,1 × 10⁻⁶ C dan q₂ = 0,2 × 10⁻⁶ C",
+    "q₁ = 0,2 × 10⁻⁶ C dan q₂ = 0,1 × 10⁻⁶ C",
+    "q₁ = 1,0 × 10⁻⁶ C dan q₂ = 0,5 × 10⁻⁶ C",
+    "q₁ = 2,0 × 10⁻⁶ C dan q₂ = 1,0 × 10⁻⁶ C",
+    "q₁ = 3,0 × 10⁻⁶ C dan q₂ = 1,5 × 10⁻⁶ C"
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+Perhatikan gambar pipa U berikut ini!<br>
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/28914_375257aca64731035c6b292e7968d33d.png" alt="Pipa U" style="max-width:100%;height:auto;"><br><br>
+      Pipa U mula-mula diisi dengan air yang memiliki massa jenis \\( 1000~\\text{kg·m}^{-3} \\). 
+      Kemudian pada salah satu ujung pipa dituangkan zat cair X yang tidak bercampur dengan air. 
+      Interaksi antara zat cair dan dinding pipa diabaikan.
+      <br><br>
+      Setelah mencapai keadaan setimbang, tinggi kolom zat cair X adalah 12 cm dan tinggi kolom air di sisi lainnya adalah 8 cm.
+      <br><br>
+      <b>Pertanyaan:</b> Berdasarkan data tersebut, tentukan massa jenis zat cair X!
+    </div>
+  `,
+  "options": [
+    "666,7 kg·m⁻³",
+    "750,0 kg·m⁻³",
+    "800,0 kg·m⁻³",
+    "850,5 kg·m⁻³",
+    "900,0 kg·m⁻³"
+  ],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      
+      Sayap suatu pesawat terbang mainan mempunyai luas \\( A = 10~\\text{m}^2 \\). 
+      Udara mengalir secara horizontal melalui sayap tersebut sehingga kecepatan udara di bagian atas sayap adalah \\( v_1 = 40~\\text{m/s} \\)
+      dan di bagian bawah sayap \\( v_2 = 30~\\text{m/s} \\). 
+      Massa jenis udara pada saat itu sebesar \\( \\rho = 1{,}29~\\text{kg/m}^3 \\).
+      <br><br>
+<img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/41778_f7f5318b60f8c3ab8b141a077cc633f7.png" alt="Sayap Pesawat" style="max-width:100%;height:auto;"><br><br>
+      <b>Pertanyaan:</b> Berdasarkan data tersebut, tentukan besar gaya angkat yang dialami sayap pesawat terbang tersebut!
+    </div>
+  `,
+  "options": [
+    "4.515 N",
+    "3.000 N",
+    "1.515 N",
+    "515 N",
+    "0 N"
+  ],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/66560_16e4fd3893961592d67554619b8684e5.png" alt="Balok Terapung" style="max-width:100%;height:auto;"><br><br>
+      Balok P memiliki volume \\( V_P = 200~\\text{cm}^3 \\) dan terapung di atas suatu zat cair dengan massa jenis \\( \\rho_c = 1{,}3~\\text{g/cm}^3 \\). Diketahui bahwa 1/2 bagian balok P muncul di atas permukaan zat cair seperti pada gambar.
+      <br><br>
+      Balok P kemudian diikat dengan balok Q menggunakan tali (massa tali diabaikan), dan keduanya dimasukkan seluruhnya ke dalam zat cair yang sama. Jika massa jenis balok Q adalah \\( \\rho_Q = 3{,}9~\\text{g/cm}^3 \\),
+      <br><br>
+      <b>Pertanyaan:</b> Berapakah massa balok Q agar gabungan melayang di dalam zat cair?
+    </div>
+  `,
+  "options": [
+    "50 g",
+    "130 g",
+    "195 g",
+    "395 g",
+    "520 g"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    Pada suatu percobaan, kecepatan sebuah benda diamati selama 4 sekon dan tabel berikut menunjukkan data kecepatan benda tersebut:<br><br>
+    <table border="1" cellpadding="4" cellspacing="0">
+      <tr><th>Waktu (s)</th><th>Kecepatan (m/s)</th></tr>
+      <tr><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>2</td></tr>
+      <tr><td>2</td><td>4</td></tr>
+      <tr><td>3</td><td>6</td></tr>
+      <tr><td>4</td><td>8</td></tr>
+    </table><br>
+    Jika gerak benda tersebut disajikan ke dalam grafik berbagai besaran terhadap waktu, mana sajakah grafik yang tepat?<br><br>
+    <i>Pilih semua jawaban benar! Jawaban benar lebih dari satu</i>
+  `,
+  "options": [
+    "<img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/50068_ca40489487288966e3aaf7a02f64cc15.png' alt='Grafik 1' style='max-width:100%;height:auto;'>",
+    "<img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/50068_4be097469ad6414657b07e3f4ecd2021.png' alt='Grafik 2' style='max-width:100%;height:auto;'>",
+    "<img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/50068_1fa66841be7ebef98df0858b4b2bad2b.png' alt='Grafik 3' style='max-width:100%;height:auto;'>",
+    "<img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/50068_eaa6d6451c454edb4b64645ae58f6247.png' alt='Grafik 4' style='max-width:100%;height:auto;'>",
+    "<img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/50068_3a3742a00d8095012ebd005df22c856a.png' alt='Grafik 5' style='max-width:100%;height:auto;'>"
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/27198_48ac3029613d80a30c0d0659d26d6f90.png" alt="Pemain Sirkus" style="max-width:100%;height:auto;"><br><br>
+      Seorang pemain sirkus berjalan di atas seutas tali sambil memegang tongkat panjang yang ujung-ujungnya terkulai ke bawah. Seperti pada gambar.
+      <br><br>
+      <b>Pertanyaan:</b> Tongkat panjang yang terkulai ke bawah membantu pemain sirkus menjaga keseimbangan karena tongkat ….
+    </div>
+  `,
+  "options": [
+    "memperbesar gaya berat sehingga pergerakan ke samping menjadi lebih lambat",
+    "menyebabkan pusat massa sistem berada di bawah titik tumpu yang membuat sistem seimbang",
+    "memperbesar gaya gesek antara kaki dan tali sehingga orang dapat bertahan lebih lama di tali",
+    "menarik tubuh ke bawah sehingga tubuh pemain sirkus tidak mudah terangkat",
+    "menambah gaya dorong ke depan agar pemain sirkus dapat lebih mudah dan cepat berjalan"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/35088_cd907bfb0c0e3a22c2381d3590690bf7.png" alt="Botol Semprot Parfum" style="max-width:100%;height:auto;"><br><br>
+      Pada botol semprotan parfum, udara ditiupkan cepat ke atas lubang tabung sempit yang tersambung ke cairan parfum. 
+      Gambar berikut memperlihatkan prinsip kerja alat tersebut.<br><br>
+      <b>Pertanyaan:</b> Mana sajakah penjelasan yang benar mengenai cara kerja alat tersebut?<br><br>
+      <i>Pilih semua jawaban benar! Jawaban benar lebih dari satu</i>
+    </div>
+  `,
+  "options": [
+    "Udara yang mengalir cepat di atas permukaan parfum menyebabkan tekanan di tempat itu bertambah besar.",
+    "Tekanan di permukaan cairan parfum menjadi lebih tinggi daripada tekanan di atasnya.",
+    "Cairan parfum terdorong naik ke atas karena faktor tekanan udara luar.",
+    "Volume cairan yang berada di dalam botol parfum mempengaruhi aliran parfum.",
+    "Alat ini memanfaatkan hukum Pascal dalam proses penyemprotannya."
+  ],
+  "correct": [1, 2]
+},
+{
+  "type": "true_false",
+  "text": `
+    Perhatikan ilustrasi pemanah menembak ikan di kolam dangkal berikut ini:<br>
+    <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/32250_d3fdf9d003416b7943df57c410161c00.png" alt="Pemanah dan Ikan" style="max-width:100%;height:auto;"><br><br>
+    Sinar cahaya dari ikan menuju mata pemanah membentuk sudut 60° terhadap garis normal. 
+    Berdasarkan pengalaman, pemanah membidik ke posisi yang lebih rendah daripada posisi ikan yang terlihat.<br><br>
+    Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+  `,
+  "statements": [
+    "A. Strategi pemanah membidik lebih rendah dari posisi ikan yang terlihat merupakan strategi yang tepat berdasarkan prinsip pembiasan cahaya.",
+    "B. Penambahan kecepatan saat melempar tombak dapat meminimalisir kesalahan bidikan yang terjadi akibat pembiasan cahaya.",
+    "C. Semakin besar sudut pengamatan pemanah terhadap garis normal, semakin besar pula perbedaan antara posisi ikan yang terlihat dengan posisi ikan yang sebenarnya."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Pada eksperimen termodinamika, sebuah mesin Carnot beroperasi antara reservoir suhu tinggi 800 K dan reservoir suhu rendah 480 K. 
+      Seorang peneliti ingin mengganti mesin tersebut dengan mesin Carnot yang memiliki efisiensi lebih tinggi agar proses eksperimen menjadi lebih efektif.<br><br>
+      <b>Pertanyaan:</b> Mesin Carnot mana saja yang dapat digunakan sebagai pengganti mesin Carnot semula?<br><br>
+      <i>Pilih semua jawaban benar! Jawaban benar lebih dari satu</i>
+    </div>
+  `,
+  "options": [
+    "Suhu tinggi 600 K dan suhu rendah 480 K.",
+    "Suhu tinggi 800 K dan suhu rendah 400 K.",
+    "Suhu tinggi 900 K dan suhu rendah 500 K.",
+    "Suhu tinggi 900 K dan suhu rendah 600 K.",
+    "Suhu tinggi 1.000 K dan suhu rendah 600 K."
+  ],
+  "correct": [1, 2]
+},
+{
+  "type": "true_false",
+  "text": `
+    Sebuah perusahaan elektronik sedang mengembangkan mesin fotokopi generasi baru yang menggunakan teknologi transfer toner elektrostatis. 
+    Partikel toner bermuatan negatif (q = 1×10⁻⁷ C) dipindahkan dari drum ke kertas melalui medan listrik yang dihasilkan oleh dua pelat sejajar.<br><br>
+    Spesifikasi teknis mesin:<br>
+    <ul>
+      <li>Jarak antar pelat transfer dan drum: 2 mm</li>
+      <li>Beda potensial: 200 V</li>
+      <li>Gaya listrik minimum untuk memindahkan toner: 0,01 N</li>
+    </ul><br>
+    Tim penguji menemukan bahwa pada beberapa kondisi hasil cetakan kurang baik.<br><br>
+    Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+  `,
+  "statements": [
+    "A. Jika jarak antar pelat dikurangi menjadi 1,5 mm dengan beda potensial tetap, gaya listrik pada partikel toner akan meningkat sehingga memenuhi syarat fungsional.",
+    "B. Untuk mempertahankan jarak antar pelat tetap 2 mm, beda potensial minimal yang diperlukan agar mesin berfungsi optimal adalah 100 V.",
+    "C. Jika muatan partikel toner ditingkatkan menjadi 2 ×10⁻⁷ C, mesin fotokopi akan berfungsi dengan baik tanpa perlu mengubah parameter lainnya."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Siswa SMA mengukur diameter sebuah bola bekel secara berulang menggunakan jangka sorong. Hasil pengukuran beserta tampilan jangka sorong ditunjukkan pada tabel berikut:<br><br>
+      <table border="1" cellpadding="4" cellspacing="0">
+        <tr><th>Pengukuran ke-</th><th>Tampilan Jangka Sorong</th><th>Hasil Pengukuran (cm)</th></tr>
+        <tr><td>1</td><td><img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/66646_9a5ac05893fb3614ba403c557d81189e.png' width='auto'></td><td>1,06</td></tr>
+        <tr><td>2</td><td><img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/66646_ef235a3c5b782e62f11d89afd8c27ee4.png' width='auto'></td><td>1,08</td></tr>
+        <tr><td>3</td><td><img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/66646_4ea231a28aebabedd6e049bdeec75846.png' width='auto'></td><td>1,44</td></tr>
+        <tr><td>4</td><td><img src='https://pusmendik.kemdikbud.go.id/tka/cbt_images/66646_1844ed51f8b29fc7bacf1411f286b05e.png' width='auto'></td><td>1,17</td></tr>
+      </table><br>
+      <b>Pertanyaan:</b> Pernyataan berikut yang sesuai dengan pengukuran diameter bola bekel tersebut adalah…
+    </div>
+  `,
+  "options": [
+    "Data yang dihasilkan dapat dipercaya karena pengukuran dilakukan lebih dari satu kali.",
+    "Terdapat hasil pembacaan yang tidak sesuai dengan tampilan jangka sorong sehingga data tidak dapat dipercaya.",
+    "Hasil pengukuran berbeda-beda seperti yang ditunjukkan pada gambar merupakan kewajaran karena bola bekel elastis.",
+    "Pengukuran dilakukan oleh orang yang berbeda sehingga dapat dipastikan hasil pengukurannya juga berbeda.",
+    "Kesimpulan akhir diameter bola bekel dapat dihitung dengan merata-rata seluruh hasil pengukuran."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/93990_9d03a1e2ff76b1988e993f8d0af7253d.png" alt="Penjaga Gawang" style="max-width:100%;height:auto;"><br><br>
+      Seorang penjaga gawang menangkap bola yang bergerak sangat cepat dengan cara menarik tangannya sedikit ke belakang saat menangkap bola.<br><br>
+      <b>Pertanyaan:</b> Apa tujuan penjaga gawang tersebut menarik tangannya ke belakang?<br><br>
+      <i>Pilih semua jawaban benar! Jawaban benar lebih dari satu</i>
+    </div>
+  `,
+  "options": [
+    "Memperlama waktu kontak dengan bola.",
+    "Memperkecil gaya yang dirasakan tangan.",
+    "Memperkecil impuls yang diterima bola.",
+    "Memperbesar kecepatan bola.",
+    "Memperkecil tekanan yang diberikan tangan."
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/09631_fe0918e77d157f3e7042319caf331567.png" alt="Pemuaian Cincin" style="max-width:100%;height:auto;"><br><br>
+      Sebuah bola logam hanya dapat melewati cincin logam jika keduanya berada pada suhu ruang. 
+      Suatu saat Dita memanaskan bola, bola tidak lagi dapat melewati cincin. 
+      Dita kemudian memanaskan cincin tanpa memanaskan bola. 
+      <br><br>
+      <b>Pertanyaan:</b> Apa yang akan terjadi terhadap ukuran lubang cincin ketika suhu cincin dinaikkan?
+    </div>
+  `,
+  "options": [
+    "Ukuran lubang berkurang karena cincin mengembang ke arah luar dan menutup lubang.",
+    "Ukuran lubang berkurang karena pemuaian membuat cincin menjadi tebal dan padat.",
+    "Ukuran lubang tetap sama karena hanya bagian luar cincin yang mengembang.",
+    "Ukuran lubang bertambah dan memungkinkan bola kembali bisa melewati cincin.",
+    "Ukuran lubang bertambah tetapi cincin akan kehilangan bentuk bundarnya."
+  ],
+  "correct": 3
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Dua kelompok siswa melakukan pengamatan di dua rumah berbeda selama 10 hari untuk menganalisis penggunaan listrik. 
+      Diketahui tegangan listrik 220 V. 
+      Setelah penelitian selesai, tim memperoleh data bahwa energi listrik yang terukur pada rumah B jauh lebih rendah dari yang diperkirakan, 
+      sementara pencahayaan yang dihasilkan juga tidak optimal.<br><br>
+      <table border="1" cellpadding="4" cellspacing="0">
+        <tr>
+          <th>Rumah</th>
+          <th>Jenis Lampu</th>
+          <th>Daya Lampu</th>
+          <th>Jumlah Lampu</th>
+          <th>Rangkaian</th>
+          <th>Durasi Menyala per Hari</th>
+          <th>Resistensi Kabel</th>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>Lampu LED</td>
+          <td>10 watt</td>
+          <td>10</td>
+          <td>Paralel</td>
+          <td>5 jam</td>
+          <td>0,5 Ω per lampu</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>Lampu Pijar</td>
+          <td>40 watt</td>
+          <td>6</td>
+          <td>Seri</td>
+          <td>8 jam</td>
+          <td>0,2 Ω per lampu</td>
+        </tr>
+      </table><br>
+      <b>Pertanyaan:</b> Rekomendasi strategi yang tepat untuk optimalisasi penerangan di rumah B sesuai dengan hasil pengamatan tersebut adalah:<br><br>
+      <i>Pilih semua jawaban benar! Jawaban benar lebih dari satu</i>
+    </div>
+  `,
+  "options": [
+    "Rumah B sebaiknya mengganti lampu pijar dengan LED tanpa mengubah rangkaian seri.",
+    "Mengubah rangkaian lampu di rumah B dari seri menjadi paralel akan meningkatkan intensitas cahaya.",
+    "Masalah rumah B dapat diatasi dengan menambahkan resistor untuk menstabilkan tegangan.",
+    "Rumah B sebaiknya mengganti lampu dengan daya yang lebih tinggi tanpa mengubah rangkaian seri.",
+    "Rumah B perlu mengganti rangkaian menjadi paralel agar setiap lampu menerima tegangan penuh dan bekerja secara optimal."
+  ],
+  "correct": [1, 4]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Suatu rangkaian listrik lampu warna-warni menggunakan lampu dengan resistansi tertulis pada bagian lampu.<br><br>
+      Tabel pembacaan lampu:<br>
+      <table border="1" cellpadding="4" cellspacing="0">
+        <tr><th>Warna Lampu</th><th>Resistansi (Ω)</th></tr>
+        <tr><td><img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/26776_63f2c45072a60b2922a023ddccb28332.png" alt="Lampu Awal"> </td><td>Lampu tersebut memiliki resistansi 15 ohm</td></tr>
+      </table><br>
+      Lampu-lampu tersebut dipasang dan dihubungkan dengan dua buah sumber tegangan seperti pada gambar:<br>
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/26776_c6c52899188ed5beee95412a5cec44eb.png" alt="Rangkaian Lampu" style="max-width:100%;height:auto;"><br><br>
+      Jika lampu <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/26776_f15f6709a998270456c1166392cc8c0e.png" alt="Lampu Diganti"> diganti dengan lampu berwarna kuning dengan resistansi <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/26776_2af2c83de9870eb7b5423e1a976b13a2.png" alt="Lampu Kuning">,<br>
+      apa yang terjadi dengan rangkaian lampu sekarang?<br><br>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr>
+    <th>Besaran fisis</th>
+    <th>Lebih besar</th>
+    <th>Lebih kecil</th>
+    <th>Tetap</th>
+  </tr>
+  <tr>
+    <td>A. Resistansi pengganti rangkaian</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>B. Kuat arus yang mengalir pada rangkaian</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>C. Daya yang bekerja pada lampu <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/26776_340125c939274c997695c4c041621f77.png" alt="Lampu Kuning"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+      Pilih “lebih besar”, “lebih kecil”, atau “tetap” untuk setiap besaran fisis pada rangkaian.
+    </div>
+  `,
+  "options": [
+    "A lebih besar, B lebih besar, C lebih besar",
+    "A lebih besar, B lebih Kecil, C lebih besar",
+    "A lebih besar, B lebih kecil, C lebih kecil",
+    "A lebih Kecil, B lebih Kecil, C lebih Kecil",
+ "A lebih Besar, B lebih Kecil, C Tetap"
+  ],
+  "correct": 1
+},
+
+
+
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (['true_false', 'true_false_en', 'fact_opinion', 'benefit_challenge', 'tepat_tidak'].includes(q.type)) {
+    return Array(q.statements.length).fill(null);
+  }
+  return null;
+});
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+// ====== TEPAT / TIDAK TEPAT ======
+else if (q.type === 'tepat_tidak') {
+  html += `<table class="true-false">
+    <tr><th>Pernyataan</th><th>Tepat</th><th>Tidak Tepat</th></tr>`;
+  q.statements.forEach((stmt, i) => {
+    const tepatChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td><input type="radio" name="tt_${i}" value="true" ${tepatChecked}></td>
+      <td><input type="radio" name="tt_${i}" value="false" ${tidakChecked}></td>
+    </tr>`;
+  });
+  html += `</table>`;
+}
+
+  // ====== BENEFIT / CHALLENGE ======
+  else if (q.type === 'benefit_challenge') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Benefit</th><th>Challenge</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benChecked = answers[index][i] === 'benefit' ? 'checked' : '';
+      const chalChecked = answers[index][i] === 'challenge' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="bc_${i}" value="benefit" ${benChecked}></td>
+        <td><input type="radio" name="bc_${i}" value="challenge" ${chalChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== TRUE / FALSE (English version) ======
+  else if (q.type === 'true_false_en') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>True</th><th>False</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const trueChecked = answers[index][i] === true ? 'checked' : '';
+      const falseChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tfe_${i}" value="true" ${trueChecked}></td>
+        <td><input type="radio" name="tfe_${i}" value="false" ${falseChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  // ====== FACT / OPINION ======
+  else if (q.type === 'fact_opinion') {
+    html += `<table class="true-false">
+      <tr><th>Statement</th><th>Fact</th><th>Opinion</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const factChecked = answers[index][i] === 'fact' ? 'checked' : '';
+      const opChecked = answers[index][i] === 'opinion' ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="fo_${i}" value="fact" ${factChecked}></td>
+        <td><input type="radio" name="fo_${i}" value="opinion" ${opChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk Benefit/Challenge
+  if (q.type === 'benefit_challenge') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="bc_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+// Event listener untuk TEPAT/TIDAK TEPAT
+if (q.type === 'tepat_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="tt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+
+  // Event listener untuk True/False English
+  if (q.type === 'true_false_en') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tfe_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk Fact/Opinion
+  if (q.type === 'fact_opinion') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="fo_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = e.target.value;
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  // Event listener untuk tipe mc_multiple
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', e => {
+        const val = parseInt(e.target.value);
+        if (e.target.checked) {
+          if (!answers[index].includes(val)) answers[index].push(val);
+        } else {
+          answers[index] = answers[index].filter(v => v !== val);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  // Hitung skor 0–100
+  const percentage = Math.round((score / questions.length) * 100);
+
+  // Tampilkan hanya skor akhir dalam bentuk nilai
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+}
+
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  const interval = setInterval(() => {
+    if (!timerRunning) { clearInterval(interval); return; }
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    if (--timer < 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+  }, 1000);
+}
+
+renderQuestionButtons();
+renderQuestion(currentQuestion);
+startTimer(60 * 60);
+
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+fullscreenBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      alert(`Gagal masuk fullscreen: ${err.message}`);
+    });
+    fullscreenBtn.textContent = "Exit Fullscreen";
+  } else {
+    document.exitFullscreen();
+    fullscreenBtn.textContent = "Fullscreen";
+  }
+});
+checkSession();
+
+  </script>
+</body>
+</html>
