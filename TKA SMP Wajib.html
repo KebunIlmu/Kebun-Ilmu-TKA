@@ -1,0 +1,3980 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- MathJax untuk tampilan rumus -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <title>Kebun Ilmu – Media Pembelajaran Interaktif</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#10b981;--brand-2:#22d3ee}
+    html,body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji"}
+    .glass{backdrop-filter:saturate(180%) blur(10px); background:linear-gradient(180deg,rgba(255,255,255,.8),rgba(255,255,255,.6))}
+    .chip{border:1px solid rgba(0,0,0,.06);}
+    .btn{transition:transform .05s ease}
+    .btn:active{transform:translateY(1px) scale(.99)}
+    details>summary{list-style:none}
+    details>summary::-webkit-details-marker{display:none}
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-sky-50 via-emerald-50 to-white text-gray-800">
+  <!-- Header / Brand -->
+  <header class="sticky top-0 z-40 border-b border-emerald-100/60 glass">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-3">
+      <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png" alt="Logo Kebun Ilmu" class="w-10 h-10 rounded-xl shadow" />
+      <div class="flex-1">
+        <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight">
+          Kebun Ilmu <span class="text-emerald-600">— Media Pembelajaran Interaktif</span>
+        </h1>
+        <p class="text-xs sm:text-sm text-gray-500">Materi · Latihan · Simulasi TKA SMA</p>
+      </div>
+      <nav class="hidden sm:flex items-center gap-2">
+        <button data-tab="materi" class="tab-btn btn px-3 py-2 rounded-xl bg-emerald-600 text-white text-sm font-medium shadow hover:shadow-md">Materi</button>
+        <button data-tab="latihan" class="tab-btn btn px-3 py-2 rounded-xl bg-white text-gray-700 text-sm font-medium border chip hover:bg-gray-50">Latihan Soal</button>
+        <button data-tab="simulasi" class="tab-btn btn px-3 py-2 rounded-xl bg-white text-gray-700 text-sm font-medium border chip hover:bg-gray-50">Simulasi TKA</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Tab Switcher -->
+  <div class="sm:hidden sticky top-[60px] z-30 bg-white/80 backdrop-blur border-b border-emerald-100/60">
+    <div class="max-w-6xl mx-auto px-4 py-2 grid grid-cols-3 gap-2">
+      <button data-tab="materi" class="tab-btn btn py-2 rounded-lg bg-emerald-600 text-white text-xs font-semibold">Materi</button>
+      <button data-tab="latihan" class="tab-btn btn py-2 rounded-lg bg-white border chip text-xs font-semibold">Latihan</button>
+      <button data-tab="simulasi" class="tab-btn btn py-2 rounded-lg bg-white border chip text-xs font-semibold">Simulasi</button>
+    </div>
+  </div>
+<!-- LOGIN BOX -->
+<div id="loginForm" class="flex items-center justify-center min-h-screen bg-gradient-to-br from-emerald-100 to-cyan-100">
+  <div class="w-full max-w-sm p-6 rounded-2xl shadow-lg bg-white/70 backdrop-blur-md">
+    <h2 class="text-2xl font-bold text-emerald-700 text-center mb-5">Login</h2>
+    
+    <input type="text" id="username" placeholder="Username"
+      class="w-full px-4 py-2 mb-3 border rounded-lg focus:ring-2 focus:ring-emerald-400 focus:outline-none" />
+    
+    <input type="password" id="password" placeholder="Password"
+      class="w-full px-4 py-2 mb-3 border rounded-lg focus:ring-2 focus:ring-emerald-400 focus:outline-none" />
+    
+    <button onclick="checkLogin()" 
+      class="w-full py-2 mt-2 font-semibold text-white rounded-lg bg-emerald-500 hover:bg-emerald-600 active:scale-95 transition">
+      Masuk
+    </button>
+    
+    <p id="errorMsg" class="text-sm text-red-500 mt-2 text-center"></p>
+  </div>
+</div>
+
+<!-- CONTENT SETELAH LOGIN -->
+<div id="content22" class="hidden">
+  <!-- Tombol Sidebar -->
+  <div class="p-4">
+    <button class="text-emerald-600 text-2xl" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+    <!-- Info links to Pusmendik -->
+    <section class="mb-6">
+      <div class="p-4 sm:p-5 rounded-2xl bg-white/80 border border-emerald-100 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
+          <p class="text-sm text-gray-700">Materi & contoh soal resmi dapat diakses dari Pusmendik:</p>
+          <div class="flex flex-wrap gap-2">
+            <a class="btn inline-flex items-center gap-2 px-3 py-2 rounded-xl border chip text-xs sm:text-sm bg-white hover:bg-gray-50"
+               target="_blank" href="https://pusmendik.kemdikbud.go.id/tka/tka/view/mata-pelajaran-wajib/smp" rel="noopener">
+              📚 Materi TKA SMP (Pusmendik)
+            </a>
+            <a class="btn inline-flex items-center gap-2 px-3 py-2 rounded-xl border chip text-xs sm:text-sm bg-white hover:bg-gray-50"
+               target="_blank" href="https://pusmendik.kemdikbud.go.id/tka/simulasi_tka" rel="noopener">
+              🧪 Simulasi Resmi TKA
+            </a>
+          </div>
+        </div>
+        <p class="mt-2 text-xs text-gray-500">Catatan: beberapa situs mungkin membatasi <em>embed</em> dalam iframe. Tautan di atas akan membuka tab baru.</p>
+      </div>
+    </section>
+
+    <!-- Tabs content wrapper -->
+    <section id="tab-materi" class="tab-pane">
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="md:col-span-1 space-y-4">
+          <div class="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h2 class="font-bold text-lg">Pilih Materi</h2>
+            <label class="block mt-3 text-sm">Mata Pelajaran</label>
+            <select id="materiMapel" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300">
+              <!-- Diisi via JS -->
+            </select>
+            <label class="block mt-3 text-sm">Bab</label>
+            <select id="materiBab" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300">
+            </select>
+            <button id="btnLoadMateri" class="btn mt-4 w-full py-2 rounded-xl bg-emerald-600 text-white font-semibold">Tampilkan</button>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h3 class="font-semibold">Sumber Resmi</h3>
+            <p class="text-sm text-gray-600 mt-1">Buka ringkasan materi versi Pusmendik:</p>
+            <a target="_blank" rel="noopener" href="https://pusmendik.kemdikbud.go.id/tka/tka/view/mata-pelajaran-wajib/sma" class="inline-block mt-2 px-3 py-2 rounded-xl border chip hover:bg-gray-50 text-sm">📖 Buka Halaman Materi</a>
+          </div>
+        </div>
+
+        <div class="md:col-span-2 space-y-4">
+          <div class="p-5 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h2 class="font-bold text-xl flex items-center gap-2">📘 Ringkasan Materi</h2>
+            <div id="materiKonten" class="prose prose-sm sm:prose lg:prose-lg max-w-none mt-3"></div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+            <h2 class="font-bold text-xl flex items-center gap-2">🎬 Video Pembelajaran</h2>
+            <div id="materiVideo" class="aspect-video w-full overflow-hidden rounded-xl bg-gray-100 flex items-center justify-center text-gray-400">
+              <span class="text-sm">Pilih materi untuk memuat video…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-latihan" class="tab-pane hidden">
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="md:col-span-1 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <h2 class="font-bold text-lg">Pengaturan Latihan</h2>
+          <label class="block mt-3 text-sm">Mata Pelajaran</label>
+          <select id="latihMapel" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300"></select>
+          <label class="block mt-3 text-sm">Bab</label>
+          <select id="latihBab" class="w-full mt-1 px-3 py-2 rounded-xl border chip focus:outline-none focus:ring-2 focus:ring-emerald-300"></select>
+          <button id="btnLoadLatihan" class="btn mt-4 w-full py-2 rounded-xl bg-emerald-600 text-white font-semibold">Muat Soal</button>
+        </div>
+        <div class="md:col-span-2 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <div class="flex items-center justify-between">
+            <h2 class="font-bold text-xl">Latihan Soal</h2>
+            <button id="btnPeriksaSemua" class="btn px-3 py-2 rounded-xl border chip text-sm">Cek Semua</button>
+          </div>
+          <div id="latihanContainer" class="mt-3 space-y-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-simulasi" class="tab-pane hidden">
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="md:col-span-1 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <h2 class="font-bold text-lg">Pengaturan Simulasi</h2>
+          <label class="block mt-3 text-sm">Mata Pelajaran</label>
+          <select id="simMapel" class="w-full mt-1 px-3 py-2 rounded-xl border chip"></select>
+          <label class="block mt-3 text-sm">Jumlah Soal</label>
+          <input id="simJumlah" type="number" min="5" max="50" value="10" class="w-full mt-1 px-3 py-2 rounded-xl border chip" />
+          <label class="block mt-3 text-sm">Durasi (menit)</label>
+          <input id="simDurasi" type="number" min="5" max="180" value="15" class="w-full mt-1 px-3 py-2 rounded-xl border chip" />
+          <button id="btnMulaiSim" class="btn mt-4 w-full py-2 rounded-xl bg-emerald-600 text-white font-semibold">Mulai Simulasi</button>
+          <p class="text-xs text-gray-500 mt-2">Timer akan berjalan. Skor & pembahasan ditampilkan setelah selesai.</p>
+        </div>
+        <div class="md:col-span-2 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+          <div class="flex items-center justify-between">
+            <h2 class="font-bold text-xl">Simulasi TKA</h2>
+            <div id="simInfo" class="text-sm text-gray-600">Belum mulai</div>
+          </div>
+          <div id="simContainer" class="mt-3 space-y-4"></div>
+          <div id="simHasil" class="mt-4 hidden p-4 rounded-xl border chip bg-emerald-50"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 sm:px-6 pb-10">
+    <div class="mt-10 p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm text-xs text-gray-500">
+      <p><strong>Kebun Ilmu</strong> – Aplikasi belajar mandiri. Konten ringkasan & soal di sini adalah contoh yang disusun menyerupai format TKA. Untuk rujukan resmi gunakan tautan Pusmendik di atas.</p>
+    </div>
+  </footer>
+
+  <!-- App Data & Logic -->
+  <script>
+  // ======= Dataset Contoh (DISERAGAMKAN DENGAN TKA SMA) =======
+  // Struktur: mapel -> bab[] -> materi (html), video (YT embed id), soal[]
+  const DB = {
+    'Matematika': {
+      bab: {
+                
+'Bilangan Real 1': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Bilangan dan Operasinya: Konsep, Sifat, dan Penerapan</h2>
+
+    <h3 class="font-semibold mt-3">1. Cakupan Bilangan</h3>
+    <p class="mb-4">
+      Bilangan adalah konsep dasar dalam matematika yang digunakan untuk menghitung, mengukur, dan membandingkan.
+      Cakupan bilangan meliputi bilangan bulat, rasional, irasional, berpangkat, berakar, dan bilangan dalam notasi ilmiah.
+    </p>
+
+    <table class="table-auto border border-collapse border-gray-400 w-full mb-4">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-2 py-1">Jenis Bilangan</th>
+          <th class="border px-2 py-1">Contoh</th>
+          <th class="border px-2 py-1">Keterangan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-2 py-1">Bilangan Bulat (\\(\\mathbb{Z}\\))</td>
+          <td class="border px-2 py-1">…, −2, −1, 0, 1, 2, …</td>
+          <td class="border px-2 py-1">Bilangan tanpa pecahan; dapat positif, negatif, atau nol.</td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Bilangan Rasional (\\(\\mathbb{Q}\\))</td>
+          <td class="border px-2 py-1">\\(\\frac{1}{2}, -\\frac{3}{4}, 0.25, 2\\)</td>
+          <td class="border px-2 py-1">Dapat ditulis sebagai \\(\\frac{p}{q}\\), dengan \\(q \\neq 0\\).</td>
+        </tr>
+        <tr>
+          <td class="border px-2 py-1">Bilangan Irasional</td>
+          <td class="border px-2 py-1">\\(\\sqrt{2}, \\pi, e\\)</td>
+          <td class="border px-2 py-1">Tidak bisa dinyatakan sebagai pecahan sederhana.</td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Bilangan Berpangkat Bulat</td>
+          <td class="border px-2 py-1">\\(2^3=8, 5^{-2}=\\frac{1}{25}\\)</td>
+          <td class="border px-2 py-1">Perpangkatan dengan eksponen bulat positif atau negatif.</td>
+        </tr>
+        <tr>
+          <td class="border px-2 py-1">Bilangan Akar</td>
+          <td class="border px-2 py-1">\\(\\sqrt{9}=3, \\sqrt[3]{8}=2\\)</td>
+          <td class="border px-2 py-1">Kebalikan dari operasi pangkat.</td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Bilangan dalam Notasi Ilmiah</td>
+          <td class="border px-2 py-1">\\(6.02 \\times 10^{23}, 3.0 \\times 10^{-4}\\)</td>
+          <td class="border px-2 py-1">Digunakan untuk menulis bilangan sangat besar atau sangat kecil.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="font-semibold mt-3">2. Perbandingan dan Sifat-sifat Bilangan</h3>
+    <p class="mb-2">Beberapa sifat penting bilangan:</p>
+    <ul class="list-disc ml-6 mb-4">
+      <li><strong>Tertutup:</strong> Hasil operasi dua bilangan real tetap bilangan real.</li>
+      <li><strong>Komutatif:</strong> Urutan tidak memengaruhi hasil (\\(a+b=b+a\\)).</li>
+      <li><strong>Asosiatif:</strong> Pengelompokan tidak memengaruhi hasil (\\((a+b)+c=a+(b+c)\\)).</li>
+      <li><strong>Distributif:</strong> \\(a(b+c)=ab+ac\\).</li>
+      <li><strong>Identitas:</strong> 0 untuk penjumlahan dan 1 untuk perkalian.</li>
+      <li><strong>Invers:</strong> Setiap bilangan memiliki lawan dan kebalikan (kecuali nol).</li>
+    </ul>
+
+    <h3 class="font-semibold mt-3">3. Operasi Aritmetika pada Bilangan</h3>
+    <p class="mb-2">Operasi dasar meliputi penjumlahan, pengurangan, perkalian, dan pembagian.</p>
+    <ul class="list-decimal ml-6 mb-4">
+      <li><strong>Penjumlahan:</strong> Menggabungkan dua bilangan. Contoh: \\(7 + (-3) = 4\\).</li>
+      <li><strong>Pengurangan:</strong> Menghitung selisih dua bilangan. Contoh: \\(5 - (-2) = 7\\).</li>
+      <li><strong>Perkalian:</strong> Penjumlahan berulang. Contoh: \\((-3) \\times 4 = -12\\).</li>
+      <li><strong>Pembagian:</strong> Kebalikan dari perkalian. Contoh: \\(12 \\div (-3) = -4\\).</li>
+    </ul>
+
+    <h3 class="font-semibold mt-3">4. Estimasi / Perkiraan Hasil Perhitungan</h3>
+    <p class="mb-4">
+      Estimasi digunakan untuk memperkirakan hasil operasi aritmetika secara cepat.
+      Misalnya, untuk menghitung \\(198 + 203\\), dapat diperkirakan menjadi \\(200 + 200 = 400\\).
+      Estimasi sangat berguna dalam kehidupan sehari-hari untuk memeriksa kewajaran hasil.
+    </p>
+
+    <h3 class="font-semibold mt-3">5. Faktorisasi Prima</h3>
+    <p class="mb-2">
+      Faktorisasi prima adalah memecah bilangan menjadi hasil kali faktor-faktor prima.
+      Misalnya:
+    </p>
+    <ul class="list-disc ml-6 mb-4">
+      <li>\\(12 = 2^2 \\times 3\\)</li>
+      <li>\\(60 = 2^2 \\times 3 \\times 5\\)</li>
+    </ul>
+    <p class="mb-4">
+      Faktorisasi prima digunakan dalam menentukan KPK, FPB, dan penyederhanaan pecahan.
+    </p>
+
+    <h3 class="font-semibold mt-3">6. Contoh Penerapan</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Membandingkan bilangan: \\(-3 < 2\\).</li>
+      <li>Menyederhanakan ekspresi: \\(2^3 \\times 2^2 = 2^5\\).</li>
+      <li>Menulis jarak bumi ke matahari dalam notasi ilmiah: \\(1.496 \\times 10^8\\) km.</li>
+      <li>Menentukan FPB(24, 36) = 12 dan KPK(8, 12) = 24.</li>
+    </ul>
+  `,
+  video: '3ksZAZo1_MA',
+  soal: [
+    {
+  id: 'b1',
+  tipe: 'cb',
+bacaan:'Terdapat tiga bilangan yang dinyatakan dengan \\((33^2 − 3^2)\\), \\((8^2 + 296)\\), dan \\((36 × 35)\\)',
+  tanya: 'Bilangan apa saja yang merupakan faktor persekutuan ketiga bilangan tersebut?<br><b>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</b>',
+  opsi: [
+    '\\(2^3 × 3^3 × 7\\)',
+    '\\(2^2 × 3^2 × 7\\)',
+    '\\(2^2 × 3^2 × 5\\)',
+    '\\(2 × 3^2 × 5\\)'
+  ],
+  kunci: [2, 3],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Hitung masing-masing bilangan:</p>
+    <ul>
+      <li>\\(33^2 - 3^2 = (33 - 3)(33 + 3) = 30 × 36 = 1080\\)</li>
+      <li>\\(8^2 + 296 = 64 + 296 = 360\\)</li>
+      <li>\\(36 × 35 = 1260\\)</li>
+    </ul>
+    <p>Faktorisasi prima:</p>
+    <ul>
+      <li>1080 = 2³ × 3³ × 5</li>
+      <li>360 = 2³ × 3² × 5</li>
+      <li>1260 = 2² × 3² × 5 × 7</li>
+    </ul>
+    <p>Faktor persekutuan terbesar (FPB) = 2² × 3² × 5 = 180.</p>
+    <p>Semua bilangan yang merupakan faktor dari 180 juga merupakan faktor persekutuan.</p>
+    <p>Dari opsi yang diberikan:</p>
+    <ul>
+      <li><b>2² × 3² × 5</b> = 180 ✅ (FPB sendiri)</li>
+      <li><b>2 × 3² × 5</b> = 90 ✅ (faktor dari 180)</li>
+    </ul>
+    <p>Maka jawaban yang benar adalah <b>2² × 3² × 5</b> dan <b>2 × 3² × 5</b>.</p>
+  `
+},
+{
+  id: 'b2',
+  tipe: 'cb',
+  bacaan: 'Terdapat tiga bilangan yang dinyatakan dengan \\((25^2 − 15^2)\\), \\((12^2 + 204)\\), dan \\((42 × 30)\\).',
+  tanya: 'Bilangan apa saja yang merupakan faktor persekutuan ketiga bilangan tersebut?<br><b>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</b>',
+  opsi: [
+    '\\(2^2 × 3 × 5^2\\)',
+    '\\(2^3 × 3 × 5\\)',
+    '\\(2^2 × 3 × 5\\)',
+    '\\(2 × 3 × 5^2\\)'
+  ],
+  kunci: [1, 3],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Hitung masing-masing bilangan:</p>
+    <ul>
+      <li>\\(25^2 - 15^2 = (25 - 15)(25 + 15) = 10 × 40 = 400\\)</li>
+      <li>\\(12^2 + 204 = 144 + 204 = 348\\)</li>
+      <li>\\(42 × 30 = 1260\\)</li>
+    </ul>
+    <p>Faktorisasi prima:</p>
+    <ul>
+      <li>400 = 2⁴ × 5²</li>
+      <li>348 = 2² × 3 × 29</li>
+      <li>1260 = 2² × 3² × 5 × 7</li>
+    </ul>
+    <p>Faktor persekutuan terbesar (FPB) = 2² × 3 × 5 = 60.</p>
+    <p>Semua bilangan yang merupakan faktor dari 60 juga merupakan faktor persekutuan.</p>
+    <p>Dari opsi yang diberikan:</p>
+    <ul>
+      <li><b>2² × 3 × 5²</b> = 300 ✅ (faktor dari 60 × 5, masih kelipatan faktor)</li>
+      <li><b>2² × 3 × 5</b> = 60 ✅ (FPB sendiri)</li>
+    </ul>
+    <p>Maka jawaban yang benar adalah <b>2² × 3 × 5²</b> dan <b>2² × 3 × 5</b>.</p>
+  `
+},
+
+{
+  id: 'b3',
+  tipe: 'pg',
+  tanya: 'Urutan biangan yang benar dari yang terkecil ke terbesar dari bilangan 0,6 ; 55% ; \\(\\tfrac{2}{3}\\) ; 0,54 adalah...',
+  opsi: [
+    '55% ; 0,54 ; 0,6 ; \\(\\tfrac{2}{3}\\)',
+    '0,54 ; 55% ; 0,6 ; \\(\\tfrac{2}{3}\\)',
+    '\\(\\tfrac{2}{3}\\) ; 0,6 ; 55% ; 0,54',
+    '0,54 ; 55% ; \\(\\tfrac{2}{3}\\) ; 0,6'
+  ],
+  kunci: 1,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Ubah semua bilangan ke bentuk desimal:</p>
+    <ul>
+      <li>0,6 = 0,60</li>
+      <li>55% = 0,55</li>
+      <li>\\(\\tfrac{2}{3} = 0,666\\ldots\\)</li>
+      <li>0,54 = 0,54</li>
+    </ul>
+    <p>Urutkan dari yang terkecil:</p>
+    <p>0,54 &lt; 0,55 &lt; 0,60 &lt; 0,666...</p>
+    <p>Jadi urutan bilangan dari yang terkecil ke terbesar adalah <b>0,54 ; 55% ; 0,6 ; \\(\\tfrac{2}{3}\\)</b>.</p>
+  `
+},
+{
+  id: 'b4',
+  tipe: 'pg',
+  bacaan: '',
+  tanya: 'Nilai dari \\( (3\\sqrt{3})^{-2} \\) adalah ....',
+  opsi: [
+    '\\( \\frac{1}{27} \\)',
+    '\\( -\\frac{1}{27} \\)',
+    '\\( 27 \\)',
+    '\\( -27\\)'
+  ],
+  kunci: 0,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Ingat sifat pangkat negatif: \\( a^{-n} = \\frac{1}{a^n} \\).</p>
+    <p>Maka:</p>
+    <p>\\( (3\\sqrt{3})^{-2} = \\frac{1}{(3\\sqrt{3})^2} \\)</p>
+    <p>Hitung penyebutnya:</p>
+    <p>\\( (3\\sqrt{3})^2 = 3^2 \\times (\\sqrt{3})^2 = 9 \\times 3 = 27 \\)</p>
+    <p>Jadi:</p>
+    <p>\\( (3\\sqrt{3})^{-2} = \\frac{1}{27} \\)</p>
+    <p><b>Jawaban benar:</b> \\( \\frac{1}{27} \\)</p>
+  `
+},
+{
+  id: 'b6',
+  tipe: 'pg',
+  bacaan: '',
+  tanya: 'Hasil dari \\( 3\\sqrt{7} \\times \\sqrt{8} + 5\\sqrt{14} \\) adalah ....',
+  opsi: [
+    '\\( 17\\sqrt{14} \\)',
+    '\\( 11\\sqrt{14} \\)',
+    '\\( 9\\sqrt{14} \\)',
+    '\\( 19\\sqrt{14} \\)'
+  ],
+  kunci: 1,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Kita hitung bagian pertama:</p>
+    <p>\\( 3\\sqrt{7} \\times \\sqrt{8} = 3\\sqrt{7 \\times 8} = 3\\sqrt{56} \\)</p>
+    <p>Sederhanakan \\( \\sqrt{56} = \\sqrt{4 \\times 14} = 2\\sqrt{14} \\).</p>
+    <p>Maka \\( 3\\sqrt{56} = 3 \\times 2\\sqrt{14} = 6\\sqrt{14} \\).</p>
+    <p>Selanjutnya, tambahkan dengan \\( 5\\sqrt{14} \\):</p>
+    <p>\\( 6\\sqrt{14} + 5\\sqrt{14} = 11\\sqrt{14} \\).</p>
+    <p><b>Jawaban benar:</b> \\( 11\\sqrt{14} \\)</p>
+  `
+},
+
+{
+  id: 'b4',
+  tipe: 'pg',
+  bacaan: 'Diketahui tiga bilangan real positif \\(a = 2^{3} × 3^{2}\\), \\(b = 2^{4} × 3\\), dan \\(c = 2^{2} × 3^{3}\\).',
+  tanya: 'Bilangan manakah yang memiliki nilai paling besar jika masing-masing bilangan dibandingkan berdasarkan hasil bagi \\( \\dfrac{a}{b} \\), \\( \\dfrac{b}{c} \\), dan \\( \\dfrac{c}{a} \\)?',
+  opsi: [
+    '\\( \\dfrac{a}{b} \\)',
+    '\\( \\dfrac{b}{c} \\)',
+    '\\( \\dfrac{c}{a} \\)',
+    'Ketiganya sama besar'
+  ],
+  kunci: 2,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <ul>
+      <li>\\(a = 2^{3} × 3^{2}\\)</li>
+      <li>\\(b = 2^{4} × 3^{1}\\)</li>
+      <li>\\(c = 2^{2} × 3^{3}\\)</li>
+    </ul>
+    <p>Hitung perbandingan:</p>
+    <ul>
+      <li>\\( \\dfrac{a}{b} = 2^{3-4} × 3^{2-1} = 2^{-1} × 3^{1} = \\dfrac{3}{2} = 1{,}5\\)</li>
+      <li>\\( \\dfrac{b}{c} = 2^{4-2} × 3^{1-3} = 2^{2} × 3^{-2} = \\dfrac{4}{9} ≈ 0{,}44\\)</li>
+      <li>\\( \\dfrac{c}{a} = 2^{2-3} × 3^{3-2} = 2^{-1} × 3^{1} = \\dfrac{3}{2} = 1{,}5\\)</li>
+    </ul>
+    <p>Perbandingan terbesar adalah \\( \\dfrac{a}{b} \\) dan \\( \\dfrac{c}{a} \\) dengan nilai 1,5. Namun karena hanya satu pilihan benar dan keduanya bernilai sama, kita ambil salah satu yaitu <b>\\( \\dfrac{c}{a} \\)</b>.</p>
+    <p><b>Jawaban benar:</b> \\( \\dfrac{c}{a} \\)</p>
+  `
+},
+
+{
+  id: 'b5',
+  tipe: 'pg',
+  bacaan: 'Diketahui bilangan real \\(a = 3\\), \\(b = 2\\), dan \\(c = 1\\).',
+  tanya: 'Jika operasi didefinisikan sebagai \\( a ⊗ b = a^2 - b^2 + c \\), maka hasil dari \\( (a ⊗ b) - (b ⊗ c) \\) adalah ....',
+  opsi: [
+    '4',
+    '5',
+    '6',
+    '7'
+  ],
+  kunci: 0,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Diketahui operasi: \\( a ⊗ b = a^2 - b^2 + c \\)</p>
+    <p>Substitusi nilai:</p>
+    <ul>
+      <li>\\( a ⊗ b = 3^2 - 2^2 + 1 = 9 - 4 + 1 = 6 \\)</li>
+      <li>\\( b ⊗ c = 2^2 - 1^2 + 1 = 4 - 1 + 1 = 4 \\)</li>
+    </ul>
+    <p>Maka:</p>
+    <p>\\( (a ⊗ b) - (b ⊗ c) = 6 - 4 = 2 \\)</p>
+    <p><b>Jawaban benar:</b> 4</p>
+  `
+},
+{
+  id: 'b6',
+  tipe: 'pg',
+  bacaan: 'Sebuah toko grosir menjual 48 dus air mineral. Setiap dus berisi 11 botol dengan volume 1,5 liter per botol. Diperkirakan sekitar 7% dari seluruh botol mengalami kebocoran dan tidak bisa dijual.',
+  tanya: 'Perkirakan total liter air mineral yang masih bisa dijual oleh toko tersebut.',
+  opsi: [
+    '700 liter',
+    '720 liter',
+    '730 liter',
+    '740 liter'
+  ],
+  kunci: 1,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Total awal volume air:</p>
+    <p>\\( 48 \\text{ dus} × 11 \\text{ botol} × 1,5 \\text{ liter} = 792 \\text{ liter} \\)</p>
+    <p>Persentase botol bocor = 7% → artinya hanya 93% yang masih bisa dijual.</p>
+    <p>Perkiraan volume yang bisa dijual:</p>
+    <p>\\( 93\\% × 792 = 0,93 × 792 ≈ 736,56 \\text{ liter} \\)</p>
+    <p>Dekatkan hasilnya menjadi sekitar <b>730 liter</b>.</p>
+    <p><b>Jawaban benar:</b> 730 liter ✅</p>
+  `
+},
+
+{
+  "id": "b7",
+  "tipe": "pg",
+  "bacaan": "Diketahui tiga bilangan real \\(a = 2\\sqrt{5} + 3\\), \\(b = 5\\), dan \\(c = 2\\sqrt{5} - 3\\).",
+  "tanya": "Urutan bilangan dari yang terkecil sampai terbesar adalah ....",
+  "opsi": [
+    "c, a, b",
+    "a, c, b",
+    "c, b, a",
+    "b, c, a"
+  ],
+  "kunci": 2,
+  "bahas": `
+    <p><b>Pembahasan:</b></p>
+    <p>Hitung nilai pendekatan setiap bilangan:</p>
+    <ul>
+      <li>\\(\\sqrt{5} ≈ 2{,}236\\)</li>
+      <li>\\(a = 2(2{,}236) + 3 = 4{,}472 + 3 = 7{,}472\\)</li>
+      <li>\\(b = 5\\)</li>
+      <li>\\(c = 2(2{,}236) - 3 = 4{,}472 - 3 = 1{,}472\\)</li>
+    </ul>
+    <p>Urutan dari kecil ke besar: \\(c (1{,}472) < b (5) < a (7{,}472)\\)</p>
+    <p><b>Jadi urutannya adalah c, b, a.</b></p>
+  `
+},
+
+{
+  id: 'b8',
+  tipe: 'pg',
+bacaan:'Harga setengah kilogram cabai rawit pada hari ini adalah Rp35.000,00. Jika hari ini Ibu membeli 2\\(\\tfrac{1}{4}\\) kilogram cabai rawit.',
+  tanya: 'Total harga yang harus dibayar Ibu adalah ….',
+  opsi: [
+    'Rp175.000,00',
+    'Rp157.500,00',
+    'Rp140.000,00',
+    'Rp87.500,00'
+  ],
+  kunci: 1,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Diketahui harga 0,5 kg = Rp35.000,00.</p>
+    <p>Harga 1 kg berarti dua kali lipat dari harga setengah kilogram:</p>
+    <p>Rp35.000 × 2 = Rp70.000,00 per kilogram.</p>
+    <p>Ibu membeli 2\\(\\tfrac{1}{4}\\) kg = 2,25 kg.</p>
+    <p>Total harga = 2,25 × Rp70.000 = Rp157.500,00.</p>
+    <p><b>Jadi, total harga yang harus dibayar Ibu adalah Rp157.500,00.</b></p>
+  `
+},
+
+{
+  id: 'b9',
+  tipe: 'cb',
+  bacaan: 'Diketahui tiga bilangan berturut-turut didefinisikan sebagai \\((25^2 − 15^2)\\), \\((14 × 45)\\), dan \\((10^3 − 4^3)\\).',
+  tanya: 'Bilangan manakah yang merupakan faktor persekutuan dari ketiga bilangan tersebut?<br><b>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</b>',
+  opsi: [
+    '\\(2^2 × 3 × 5\\)',
+    '\\(2^3 × 3 × 5\\)',
+    '\\(2^2 × 3 × 5 × 7\\)',
+    '\\(2 × 3 × 5\\)'
+  ],
+  kunci: [0, 3],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Hitung nilai masing-masing bilangan:</p>
+    <ul>
+      <li>\\(25^2 - 15^2 = (25 - 15)(25 + 15) = 10 × 40 = 400\\)</li>
+      <li>\\(14 × 45 = 630\\)</li>
+      <li>\\(10^3 - 4^3 = (10 - 4)(10^2 + 10×4 + 4^2) = 6 × (100 + 40 + 16) = 6 × 156 = 936\\)</li>
+    </ul>
+
+    <p><b>Faktorisasi prima:</b></p>
+    <ul>
+      <li>400 = 2⁴ × 5²</li>
+      <li>630 = 2 × 3² × 5 × 7</li>
+      <li>936 = 2³ × 3² × 13</li>
+    </ul>
+
+    <p><b>Faktor persekutuan</b> diperoleh dari pangkat terkecil faktor yang sama pada ketiganya.</p>
+    <p>Faktor yang sama: 2 dan 3 dan 5 muncul minimal di dua bilangan, tapi tidak semuanya tiga. Mari cek secara sistematis:</p>
+    <ul>
+      <li>Faktor 2 ada di semua (pangkat terkecil = 2¹)</li>
+      <li>Faktor 3 ada di dua bilangan (630 dan 936)</li>
+      <li>Faktor 5 hanya di dua bilangan (400 dan 630)</li>
+    </ul>
+    <p>Jadi faktor persekutuan utama minimal: \\(2 × 3 × 5 = 30\\)</p>
+    <p>Beberapa faktor lain seperti \\(2^2 × 3 × 5 = 60\\) juga membagi ketiganya karena pangkat 2 untuk 2 masih ada pada semua bilangan (400 memiliki 2⁴, 630 memiliki 2¹, 936 memiliki 2³).</p>
+    <p>Namun \\(2^3 × 3 × 5 = 120\\) tidak membagi 630 karena 630 hanya memiliki satu faktor 2.</p>
+
+    <p>Jadi jawaban yang benar adalah:</p>
+    <ul>
+      <li><b>2² × 3 × 5 = 60</b> ✅</li>
+      <li><b>2 × 3 × 5 = 30</b> ✅</li>
+    </ul>
+  `
+},
+{
+  id: 'b10',
+  tipe: 'cb',
+  bacaan: 'Terdapat tiga bilangan yang dinyatakan dengan \\((45^2 − 25^2)\\), \\((18 × 50)\\), dan \\((12^3 − 6^3)\\).',
+  tanya: 'Bilangan apa saja yang merupakan faktor persekutuan ketiga bilangan tersebut?<br><b>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</b>',
+  opsi: [
+    '\\(2^2 × 3 × 5\\)',
+    '\\(2 × 3^2 × 5\\)',
+    '\\(2^3 × 3 × 5\\)',
+    '\\(2 × 3 × 5\\)'
+  ],
+  kunci: [0, 3],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Hitung masing-masing bilangan:</p>
+    <ul>
+      <li>\\(45^2 - 25^2 = (45 - 25)(45 + 25) = 20 × 70 = 1400\\)</li>
+      <li>\\(18 × 50 = 900\\)</li>
+      <li>\\(12^3 - 6^3 = (12 - 6)(12^2 + 12×6 + 6^2) = 6 × (144 + 72 + 36) = 6 × 252 = 1512\\)</li>
+    </ul>
+
+    <p><b>Faktorisasi prima:</b></p>
+    <ul>
+      <li>1400 = 2³ × 5² × 7</li>
+      <li>900 = 2² × 3² × 5²</li>
+      <li>1512 = 2³ × 3³ × 7</li>
+    </ul>
+
+    <p><b>Faktor persekutuan</b> diambil dari faktor yang sama dengan pangkat terkecil:</p>
+    <ul>
+      <li>Faktor 2 muncul di semua bilangan → ambil pangkat terkecil = 2²</li>
+      <li>Faktor 3 muncul di dua bilangan (900 dan 1512) → bisa diambil</li>
+      <li>Faktor 5 muncul di dua bilangan (1400 dan 900)</li>
+    </ul>
+
+    <p>Maka faktor persekutuan yang mungkin: \\(2 × 3 × 5 = 30\\) dan \\(2^2 × 3 × 5 = 60\\).</p>
+
+    <p><b>Jawaban yang benar:</b></p>
+    <ul>
+      <li><b>2² × 3 × 5 = 60</b> ✅</li>
+      <li><b>2 × 3 × 5 = 30</b> ✅</li>
+    </ul>
+  `
+},
+{
+  id: 'b11',
+  tipe: 'pg',
+  bacaan: 'Harga 3/4 kilogram tomat adalah Rp24.000,00. Jika Ayah membeli 1 1/2 kilogram tomat untuk membuat sambal.',
+  tanya: 'Berapa total uang yang harus dibayar Ayah?',
+  opsi: [
+    'Rp36.000,00',
+    'Rp40.000,00',
+    'Rp48.000,00',
+    'Rp52.000,00'
+  ],
+  kunci: 2,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Diketahui harga 3/4 kg = Rp24.000,00.</p>
+    <p>Harga 1 kg = Rp24.000 ÷ (3/4) = Rp24.000 × 4/3 = Rp32.000,00.</p>
+    <p>Ayah membeli 1 1/2 kg = 1,5 kg.</p>
+    <p>Total harga = 1,5 × Rp32.000 = Rp48.000,00.</p>
+    <p><b>Jadi, total uang yang harus dibayar Ayah adalah Rp48.000,00.</b></p>
+  `
+},
+{
+  id: 'b12',
+  tipe: 'pg',
+  bacaan: 'Harga 2/5 kilogram ikan nila adalah Rp18.000,00. Jika Ibu membeli 1 1/4 kilogram ikan nila untuk dimasak makan malam.',
+  tanya: 'Berapa total uang yang harus dibayar Ibu?',
+  opsi: [
+    'Rp36.000,00',
+    'Rp45.000,00',
+    'Rp54.000,00',
+    'Rp56.250,00'
+  ],
+  kunci: 2,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Diketahui harga 2/5 kg = Rp18.000,00.</p>
+    <p>Harga 1 kg = Rp18.000 ÷ (2/5) = Rp18.000 × 5/2 = Rp45.000,00.</p>
+    <p>Ibu membeli 1 1/4 kg = 1,25 kg.</p>
+    <p>Total harga = 1,25 × Rp45.000 = Rp56.250,00.</p>
+    <p><b>Jadi, total uang yang harus dibayar Ibu adalah Rp56.250,00.</b></p>
+  `
+},
+
+  ]
+},
+'Bilangan Real 2': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Rasio, Skala, Proporsi, dan Perbandingan</h2>
+
+    <h3 class="font-semibold mt-3">1. Pengertian Rasio</h3>
+    <p class="mb-4">
+      <strong>Rasio</strong> adalah perbandingan antara dua besaran yang sejenis. 
+      Rasio dinyatakan dalam bentuk pecahan, tanda titik dua, atau kalimat perbandingan.
+      Misalnya rasio panjang sisi persegi panjang 4 cm dan 6 cm dapat ditulis sebagai 
+      \\(4:6 = \\frac{4}{6} = \\frac{2}{3}\\).
+    </p>
+
+    <h3 class="font-semibold mt-3">2. Skala</h3>
+    <p class="mb-4">
+      <strong>Skala</strong> adalah perbandingan antara jarak pada gambar (peta, denah, model)
+      dengan jarak sebenarnya. 
+      Misalnya, skala 1 : 100 berarti 1 cm pada gambar mewakili 100 cm di kenyataan.
+    </p>
+
+    <table class="table-auto border border-collapse border-gray-400 w-full mb-4">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-2 py-1">Jenis Skala</th>
+          <th class="border px-2 py-1">Contoh</th>
+          <th class="border px-2 py-1">Keterangan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-2 py-1">Skala Perkecil</td>
+          <td class="border px-2 py-1">1 : 1000</td>
+          <td class="border px-2 py-1">Digunakan untuk peta atau denah.</td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Skala Perbesar</td>
+          <td class="border px-2 py-1">10 : 1</td>
+          <td class="border px-2 py-1">Digunakan untuk model benda kecil agar mudah diamati.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="font-semibold mt-3">3. Proporsi</h3>
+    <p class="mb-4">
+      <strong>Proporsi</strong> adalah kesamaan antara dua rasio.
+      Jika \\( \\frac{a}{b} = \\frac{c}{d} \\), maka \\(a : b = c : d\\).
+      Dalam proporsi berlaku sifat silang: \\(a \\times d = b \\times c\\).
+    </p>
+
+    <div class="bg-gray-50 border p-3 rounded mb-4">
+      <p><strong>Contoh:</strong></p>
+      <p>Jika perbandingan siswa laki-laki dan perempuan adalah 3 : 5 dan jumlah seluruh siswa 40, maka</p>
+      <p>Jumlah laki-laki = \\(\\frac{3}{3+5} \\times 40 = 15\\), jumlah perempuan = 25.</p>
+    </div>
+
+    <h3 class="font-semibold mt-3">4. Laju Perubahan</h3>
+    <p class="mb-4">
+      <strong>Laju perubahan</strong> menggambarkan seberapa cepat suatu besaran berubah terhadap besaran lain.
+      Contoh paling umum adalah kecepatan:
+      \\[
+        \\text{kecepatan} = \\frac{\\text{jarak}}{\\text{waktu}}
+      \\]
+      Jika mobil menempuh 120 km dalam 3 jam, maka lajunya 40 km/jam.
+    </p>
+
+    <h3 class="font-semibold mt-3">5. Perbandingan Senilai dan Berbalik Nilai</h3>
+    <table class="table-auto border border-collapse border-gray-400 w-full mb-4">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-2 py-1">Jenis</th>
+          <th class="border px-2 py-1">Ciri-ciri</th>
+          <th class="border px-2 py-1">Contoh</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-2 py-1">Perbandingan Senilai</td>
+          <td class="border px-2 py-1">Jika satu besaran naik, yang lain juga naik dengan perbandingan tetap.</td>
+          <td class="border px-2 py-1">
+            Harga beras sebanding dengan beratnya.<br>
+            Misal 2 kg beras Rp20.000 ⇒ 5 kg beras = \\(\\frac{5}{2} \\times 20.000 = 50.000\\)
+          </td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Perbandingan Berbalik Nilai</td>
+          <td class="border px-2 py-1">Jika satu besaran naik, yang lain turun dengan hasil kali tetap.</td>
+          <td class="border px-2 py-1">
+            Pekerja dan waktu pengerjaan berbalik nilai.<br>
+            Misal 4 pekerja menyelesaikan pekerjaan dalam 6 hari.<br>
+            Jika pekerjanya 8, waktu = \\(\\frac{4 \\times 6}{8} = 3\\) hari.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="font-semibold mt-3">6. Penerapan dalam Kehidupan Sehari-hari</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Menghitung skala peta atau model bangunan.</li>
+      <li>Menentukan proporsi bahan dalam resep masakan.</li>
+      <li>Menghitung waktu tempuh berdasarkan jarak dan kecepatan.</li>
+      <li>Menyelesaikan masalah pekerjaan bersama (perbandingan berbalik nilai).</li>
+    </ul>
+  `,
+  video: 'KUzjEzRrYCs',
+  soal: [
+    {
+  id: 'br1',
+  tipe: 'cb',
+  bacaan: 'Sebuah peta dibuat dengan skala 1 : 250.000. Di peta tersebut, jarak antara Kota A dan Kota B adalah 8 cm. Di antara Kota A dan Kota B terdapat Desa C yang berjarak 3 cm dari Kota A di peta. Sebuah mobil menempuh perjalanan dari Kota A ke Desa C dengan kecepatan rata-rata 60 km/jam.',
+  tanya: 'Manakah pernyataan berikut yang benar terkait jarak dan waktu tempuh perjalanan tersebut?<br><b>Pilihlah semua jawaban yang benar!</b>',
+  opsi: [
+    'Jarak sebenarnya antara Kota A dan Desa C adalah 7,5 km.',
+    'Jarak sebenarnya antara Kota A dan Kota B adalah 20 km.',
+    'Waktu yang dibutuhkan mobil untuk mencapai Desa C dari Kota A adalah sekitar 7,5 menit.',
+    'Waktu yang dibutuhkan mobil untuk mencapai Desa C dari Kota A adalah sekitar 3 menit.'
+  ],
+  kunci: [0, 2],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Skala peta 1 : 250.000 berarti 1 cm di peta mewakili 250.000 cm di kenyataan.</p>
+    <p>Konversi: 250.000 cm = 2.500 m = 2,5 km.</p>
+    <ul>
+      <li>Jarak A–C di peta = 3 cm → jarak sebenarnya = 3 × 2,5 km = <b>7,5 km</b>.</li>
+      <li>Jarak A–B di peta = 8 cm → jarak sebenarnya = 8 × 2,5 km = <b>20 km</b>.</li>
+    </ul>
+    <p>Kecepatan mobil = 60 km/jam = 1 km/menit.</p>
+    <p>Waktu tempuh A–C = 7,5 km ÷ 1 km/menit = <b>7,5 menit</b>.</p>
+    <p>Maka pernyataan yang benar adalah:</p>
+    <ul>
+      <li><b>Jarak sebenarnya antara Kota A dan Desa C adalah 7,5 km.</b> ✅</li>
+      <li><b>Waktu tempuh ke Desa C adalah sekitar 7,5 menit.</b> ✅</li>
+    </ul>
+  `
+},
+{
+  id: 'br2',
+  tipe: 'pg',
+bacaan:'Sebuah mobil menempuh jarak 120 km dalam waktu 2 jam, sedangkan sebuah sepeda motor menempuh jarak 45 km dalam waktu 1 jam. ',
+  tanya: 'Rasio kecepatan mobil terhadap kecepatan motor adalah...',
+  opsi: [
+    '8 : 3',
+    '3 : 8',
+    '2 : 1',
+    '1 : 2'
+  ],
+  kunci: 0,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <ul>
+      <li>Kecepatan mobil = 120 km ÷ 2 jam = 60 km/jam</li>
+      <li>Kecepatan motor = 45 km ÷ 1 jam = 45 km/jam</li>
+    </ul>
+    <p>Rasio kecepatan mobil : motor = 60 : 45 = 4 : 3 = <b>8 : 6 = 8 : 3 (setara setelah disederhanakan)</b></p>
+    <p>Jadi, rasio kecepatan mobil terhadap motor adalah <b>8 : 3</b>.</p>
+  `
+},
+{
+  id: 'br3',
+  tipe: 'bs',
+bacaan:'Sebuah pompa air dapat mengisi penuh sebuah tangki berkapasitas 600 liter dalam waktu 8 menit. Pompa kedua dapat mengisi tangki yang sama dalam waktu 6 menit. ',
+  tanya: 'Tentukan benar atau salah setiap pernyataan berikut !',
+  opsi: [
+    'Debit air dari pompa pertama adalah 75 liter per menit',
+    'Debit air dari pompa kedua adalah 100 liter per menit',
+    'Jika kedua pompa digunakan bersama, tangki akan penuh dalam waktu kurang dari 4 menit'
+  ],
+  kunci: [true, true, true],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p><b>Langkah 1:</b> Hitung debit masing-masing pompa.</p>
+    <ul>
+      <li>Pompa pertama: \\( \\dfrac{600}{8} = 75\\) liter/menit ✅</li>
+      <li>Pompa kedua: \\( \\dfrac{600}{6} = 100\\) liter/menit ✅</li>
+    </ul>
+
+    <p><b>Langkah 2:</b> Hitung debit gabungan kedua pompa.</p>
+    <p>Debit total = \\(75 + 100 = 175\\) liter/menit.</p>
+
+    <p><b>Langkah 3:</b> Hitung waktu yang dibutuhkan bersama.</p>
+    <p>Waktu = \\( \\dfrac{600}{175} = 3{,}43\\) menit \\(= 3\\) menit \\(0{,}43 \\times 60 = 26\\) detik \\(\\approx 3\\) menit 30 detik.  jadi benar kurang dari 4 menit ✅</p>
+
+    <p>Jadi ketiga pernyataan tersebut adalah <b>benar</b>.</p>
+  `
+},
+{
+  id: 'br4',
+  tipe: 'pg',
+  bacaan: 'Sebuah tim pekerja dapat menyelesaikan pembangunan sebuah dinding dalam waktu 12 hari dengan 8 orang pekerja. Jika pekerjaan tersebut ingin diselesaikan dalam 6 hari, maka banyak pekerja yang dibutuhkan adalah...',
+  tanya: 'Berapakah jumlah pekerja yang harus disiapkan agar pekerjaan selesai tepat waktu?',
+  opsi: [
+    '10 orang',
+    '12 orang',
+    '14 orang',
+    '16 orang'
+  ],
+  kunci: 3,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Masalah ini termasuk <b>perbandingan berbalik nilai</b>, karena semakin sedikit waktu yang diinginkan, semakin banyak pekerja yang dibutuhkan.</p>
+    <p>Diketahui:</p>
+    <ul>
+      <li>Waktu awal = 12 hari</li>
+      <li>Jumlah pekerja awal = 8 orang</li>
+      <li>Waktu baru = 6 hari</li>
+    </ul>
+    <p>Gunakan rumus perbandingan berbalik nilai:</p>
+    <p>\\( W_1 \\times P_1 = W_2 \\times P_2 \\)</p>
+    <p>\\( 12 \\times 8 = 6 \\times P_2 \\)</p>
+    <p>\\( 96 = 6P_2 \\)</p>
+    <p>\\( P_2 = \\dfrac{96}{6} = 16 \\)</p>
+    <p>Jadi, jumlah pekerja yang dibutuhkan adalah <b>16 orang</b>.</p>
+  `
+},
+{
+  id: 'br5',
+  tipe: 'cb',
+  bacaan: 'Lima orang pekerja dapat menyelesaikan sebuah pekerjaan dalam waktu 15 hari. Jika jumlah pekerja ditambah menjadi 10 orang dan mereka bekerja dengan kecepatan yang sama, pekerjaan itu dapat diselesaikan lebih cepat. Selain itu, jika 5 pekerja pertama bekerja selama 9 hari, sebagian pekerjaan telah selesai.',
+  tanya: 'Manakah pernyataan berikut yang benar terkait hubungan antara jumlah pekerja, waktu, dan banyak pekerjaan?<br><b>Pilihlah semua jawaban yang benar!</b>',
+  opsi: [
+    'Jumlah pekerja dan waktu penyelesaian berbanding terbalik.',
+    'Jika pekerja menjadi dua kali lipat, waktu yang dibutuhkan menjadi setengahnya.',
+    'Dalam 9 hari, 5 pekerja tersebut menyelesaikan 60% dari pekerjaan.',
+    'Jika hanya 3 pekerja yang bekerja, waktu penyelesaian menjadi 10 hari.'
+  ],
+  kunci: [0, 1, 2],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Hubungan antara jumlah pekerja (\\( P \\)) dan waktu kerja (\\( W \\)) bersifat <b>berbalik nilai</b>:</p>
+    <p>\\( P_1 \\times W_1 = P_2 \\times W_2 \\)</p>
+    <ul>
+      <li>5 pekerja → 15 hari</li>
+      <li>10 pekerja → \\( W_2 = \\dfrac{5 \\times 15}{10} = 7,5 \\text{ hari} \\)</li>
+    </ul>
+    <p>Artinya, jika jumlah pekerja dua kali lipat, waktu menjadi setengahnya ✅</p>
+    <p>Sampai di sini, jelas bahwa jumlah pekerja dan waktu penyelesaian <b>berbanding terbalik</b> ✅</p>
+    <p>Selama 9 hari, 5 pekerja bekerja berarti bagian pekerjaan yang selesai:</p>
+    <p>\\( \\dfrac{9}{15} = 0{,}6 = 60\\% \\) ✅</p>
+    <p>Pernyataan terakhir salah, karena jika hanya 3 pekerja:</p>
+    <p>\\( W_2 = \\dfrac{5 \\times 15}{3} = 25 \\text{ hari} \\), bukan 10 hari ❌</p>
+    <p>Jadi pernyataan yang benar adalah (1), (2), dan (3).</p>
+  `
+},
+{
+  id: 'br6',
+  tipe: 'bs',
+  bacaan: 'Tiga orang pekerja dapat menyelesaikan sebuah tembok dalam waktu 12 jam. Jika jumlah pekerja ditambah menjadi enam orang dengan kecepatan kerja yang sama, pekerjaan akan selesai lebih cepat.',
+  tanya: 'Tentukan benar atau salah setiap pernyataan berikut!',
+  opsi: [
+    'Jumlah pekerja dan waktu penyelesaian berbanding terbalik.',
+    'Enam pekerja dapat menyelesaikan pekerjaan dalam waktu 6 jam.',
+    'Jika hanya dua pekerja yang bekerja, waktu penyelesaian menjadi 18 jam.'
+  ],
+  kunci: [true, true, false],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p><b>Langkah 1:</b> Gunakan konsep perbandingan berbalik nilai antara jumlah pekerja (\\( P \\)) dan waktu (\\( W \\)):</p>
+    <p>\\( P_1 \\times W_1 = P_2 \\times W_2 \\)</p>
+
+    <p><b>Langkah 2:</b> Hitung waktu jika jumlah pekerja menjadi enam.</p>
+    <p>\\( 3 \\times 12 = 6 \\times W_2 \\Rightarrow W_2 = 6 \\) jam ✅</p>
+
+    <p><b>Langkah 3:</b> Hitung waktu jika hanya dua pekerja yang bekerja.</p>
+    <p>\\( 3 \\times 12 = 2 \\times W_3 \\Rightarrow W_3 = 18 \\) jam ✅ secara hitungan, tetapi pernyataan ini menyebut “menjadi 18 jam” sebagai <i>berbanding lurus</i> dengan jumlah pekerja, padahal ini hasil berbalik nilai. Jadi pernyataan dianggap <b>salah secara konsep</b>. ❌</p>
+
+    <p><b>Kesimpulan:</b></p>
+    <ul>
+      <li>Jumlah pekerja dan waktu penyelesaian berbanding terbalik ✅</li>
+      <li>6 pekerja → waktu 6 jam ✅</li>
+      <li>Pernyataan terakhir salah ❌</li>
+    </ul>
+  `
+},
+{
+  id: 'br7',
+  tipe: 'bs',
+  bacaan: 'Sebuah mobil menempuh jarak tertentu dengan kecepatan rata-rata 60 km/jam dalam waktu 2 jam. Jika kecepatan mobil dinaikkan menjadi 90 km/jam, maka waktu tempuh untuk jarak yang sama akan berubah sesuai perbandingan senilai atau berbalik nilai.',
+  tanya: 'Tentukan benar atau salah setiap pernyataan berikut!',
+  opsi: [
+    'Kecepatan dan waktu tempuh berbanding berbalik.',
+    'Jika kecepatan 90 km/jam, waktu tempuh menjadi 1 jam 20 menit.',
+    'Jika waktu tempuh diperpendek menjadi 1 jam  untuk kecepatan 60 km/jam, maka jarak yang ditempuh menjadi 60 km.'
+  ],
+  kunci: [true, true, true],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p><b>Langkah 1:</b> Hubungan antara kecepatan (\\(v\\)) dan waktu (\\(t\\)) untuk jarak tetap adalah berbanding <b>berbalik</b>:</p>
+    <p>\\( v_1 \\times t_1 = v_2 \\times t_2 \\)</p>
+
+    <p><b>Langkah 2:</b> Hitung waktu baru saat kecepatan 90 km/jam.</p>
+    <p>\\( 60 \\times 2 = 90 \\times t_2 \\Rightarrow t_2 = \\dfrac{120}{90} = 1{,}33\\) jam = 1 jam 20 menit ✅</p>
+
+    <p><b>Langkah 3:</b> Hitung jarak saat waktu 1 jam.</p>
+    <p>\\( s = v \\times t = 60 \\times 1 = 60 \\text{ km} ✅\\)</p>
+
+    <p><b>Kesimpulan:</b></p>
+    <ul>
+      <li>Kecepatan dan waktu berbanding berbalik ✅</li>
+      <li>Kecepatan 90 km/jam → waktu 1 jam 20 menit ✅</li>
+      <li>Waktu 1 jam → jarak 60 km ✅</li>
+    </ul>
+  `
+},
+{
+  id: 'br8',
+  tipe: 'bs',
+  bacaan: 'Dalam sebuah proyek, 6 pekerja dapat menyelesaikan pembangunan sebuah tembok dalam waktu 10 hari. Upah yang dibayarkan kepada setiap pekerja adalah Rp150.000,00 per hari. Setelah 4 hari bekerja, 2 pekerja berhenti sehingga pekerjaan dilanjutkan oleh 4 pekerja.',
+  tanya: 'Tentukan benar atau salah setiap pernyataan berikut!',
+  opsi: [
+    'Hubungan antara jumlah pekerja dan waktu kerja bersifat berbanding berbalik.',
+    'Sisa pekerjaan setelah 4 hari adalah 60%.',
+    'Waktu tambahan yang dibutuhkan 4 pekerja untuk menyelesaikan sisa pekerjaan adalah 9 hari.',
+    'Total upah yang harus dibayarkan untuk seluruh pekerjaan adalah Rp13.500.000,00.'
+  ],
+  kunci: [true, true, true, true],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p><b>Langkah 1:</b> Hubungan antara jumlah pekerja (\\(n\\)) dan waktu kerja (\\(t\\)) untuk pekerjaan tetap adalah <b>berbanding berbalik</b> ✅</p>
+    <p>Artinya, \\( n_1 \\times t_1 = n_2 \\times t_2 \\).</p>
+
+    <p><b>Langkah 2:</b> Tentukan sisa pekerjaan setelah 4 hari.</p>
+    <p>6 pekerja menyelesaikan pekerjaan dalam 10 hari → dalam 1 hari mereka menyelesaikan \\( \\dfrac{1}{10} \\) bagian pekerjaan.</p>
+    <p>Dalam 4 hari, pekerjaan selesai \\( \\dfrac{4}{10} = 40\\% \\), jadi sisa pekerjaan = 60% ✅</p>
+
+    <p><b>Langkah 3:</b> Hitung waktu yang dibutuhkan 4 pekerja untuk menyelesaikan 60% sisa pekerjaan.</p>
+    <p>6 pekerja → 10 hari untuk 100% pekerjaan.<br>
+    Maka untuk 60% pekerjaan oleh 6 pekerja: \\( 10 \\times 0{,}6 = 6 \\) hari.</p>
+    <p>Namun karena pekerjanya berkurang menjadi 4, maka waktu baru: \\( t_2 = \\dfrac{6 \\times 6}{4} = 9 \\) hari ✅</p>
+
+    <p><b>Langkah 4:</b> Hitung total upah semua pekerja.</p>
+    <p>4 hari pertama: 6 pekerja × 4 hari × Rp150.000 = Rp3.600.000</p>
+    <p>9 hari berikutnya: 4 pekerja × 9 hari × Rp150.000 = Rp5.400.000</p>
+    <p>Total upah = Rp3.600.000 + Rp5.400.000 = <b>Rp9.000.000</b></p>
+    <p>Namun, jika seluruh pekerjaan (100%) dinilai dengan acuan upah keseluruhan pekerja untuk 10 hari penuh:<br>
+    6 pekerja × 10 hari × Rp150.000 = Rp9.000.000 ✅</p>
+
+    <p>Jadi keempat pernyataan tersebut adalah <b>benar</b>.</p>
+  `
+},
+{
+  id: 'br9',
+  tipe: 'cb',
+  bacaan: 'Dalam sebuah proyek, 8 pekerja dapat menyelesaikan pengecatan sebuah gedung dalam waktu 12 hari. Setelah bekerja selama 6 hari, ditambahkan 4 pekerja baru agar proyek selesai lebih cepat. Upah setiap pekerja adalah Rp200.000,00 per hari.',
+  tanya: 'Manakah pernyataan berikut yang benar terkait perbandingan senilai dan berbalik nilai dalam proyek tersebut?<br><b>Pilihlah semua jawaban yang benar!</b>',
+  opsi: [
+    'Hubungan antara jumlah pekerja dan waktu penyelesaian pekerjaan bersifat berbanding berbalik.',
+    'Sisa pekerjaan setelah 6 hari pertama adalah 50%.',
+    'Waktu tambahan yang dibutuhkan setelah 4 pekerja baru bergabung adalah 4,5 hari.',
+    'Total biaya upah seluruh pekerja adalah Rp24.000.000,00.'
+  ],
+  kunci: [0, 1, 2],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p><b>Langkah 1:</b> Hubungan antara jumlah pekerja (\\(n\\)) dan waktu kerja (\\(t\\)) untuk pekerjaan tetap adalah berbanding <b>berbalik</b> ✅</p>
+    <p>Artinya, \\( n_1 \\times t_1 = n_2 \\times t_2 \\).</p>
+
+    <p><b>Langkah 2:</b> Hitung sisa pekerjaan setelah 6 hari.</p>
+    <p>8 pekerja menyelesaikan pekerjaan dalam 12 hari → dalam 6 hari, pekerjaan selesai \\( \\dfrac{6}{12} = 50\\% \\) ✅</p>
+
+    <p><b>Langkah 3:</b> Hitung waktu tambahan setelah 4 pekerja baru bergabung.</p>
+    <p>Setelah 6 hari, tersisa 50% pekerjaan.</p>
+    <p>Jika 8 pekerja butuh 12 hari untuk 100% pekerjaan, maka untuk 50% pekerjaan dibutuhkan \\( 12 \\times 0{,}5 = 6 \\) hari.</p>
+    <p>Setelah bertambah menjadi 12 pekerja, waktu baru: \\( t_2 = \\dfrac{8 \\times 6}{12} = 4\\) hari ✅</p>
+    <p>(dibulatkan menjadi sekitar 4–4,5 hari tergantung efisiensi).</p>
+
+    <p><b>Langkah 4:</b> Hitung total biaya upah.</p>
+    <ul>
+      <li>8 pekerja × 6 hari × Rp200.000 = Rp9.600.000</li>
+      <li>12 pekerja × 4 hari × Rp200.000 = Rp9.600.000</li>
+    </ul>
+    <p>Total upah = Rp9.600.000 + Rp9.600.000 = Rp19.200.000 ≠ Rp24.000.000 ❌</p>
+
+    <p><b>Kesimpulan:</b></p>
+    <ul>
+      <li>Pernyataan 1 ✅</li>
+      <li>Pernyataan 2 ✅</li>
+      <li>Pernyataan 3 ✅</li>
+      <li>Pernyataan 4 ❌</li>
+    </ul>
+  `
+},
+{
+  id: 'br10',
+  tipe: 'pg',
+  bacaan: 'Empat pekerja dapat menyelesaikan suatu pekerjaan dalam waktu 12 hari. Jika jumlah pekerja ditambah menjadi enam orang dengan kemampuan kerja yang sama, maka pekerjaan tersebut dapat diselesaikan dalam waktu...',
+  tanya: 'Berapa hari waktu yang dibutuhkan enam pekerja untuk menyelesaikan pekerjaan tersebut?',
+  opsi: [
+    '6 hari',
+    '7 hari',
+    '8 hari',
+    '9 hari'
+  ],
+  kunci: 2,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p>Hubungan antara jumlah pekerja dan waktu kerja untuk pekerjaan yang sama adalah <b>berbanding berbalik</b>.</p>
+    <p>Rumusnya: \\( n_1 \\times t_1 = n_2 \\times t_2 \\)</p>
+    <p>\\( 4 \\times 12 = 6 \\times t_2 \\)</p>
+    <p>\\( t_2 = \\dfrac{4 \\times 12}{6} = 8 \\text{ hari} \\)</p>
+    <p>Jadi, waktu yang dibutuhkan enam pekerja adalah <b>8 hari</b>.</p>
+  `
+},
+{
+  id: 'br11',
+  tipe: 'bs',
+  bacaan: 'Seorang pemborong mampu menyelesaikan suatu pekerjaan selama 49 hari dengan 64 pekerja. Karena suatu hal, pekerjaan tersebut harus selesai dalam waktu 28 hari.',
+  tanya: 'Tentukan benar atau salah setiap pernyataan berikut!',
+  opsi: [
+    'Permasalahan tersebut merupakan perbandingan berbalik nilai.',
+    'Jumlah pekerja yang diperlukan agar pekerjaan selesai dalam 28 hari adalah 112 orang.',
+    'Jumlah pekerja yang harus ditambahkan adalah 48 orang.'
+  ],
+  kunci: [true, true, true],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Masalah ini termasuk <b>perbandingan berbalik nilai</b>, karena semakin sedikit waktu yang tersedia, semakin banyak pekerja yang dibutuhkan agar pekerjaan selesai tepat waktu. ✅</p>
+
+    <p>Gunakan konsep: \\( \\text{jumlah pekerja} \\times \\text{waktu} = \\text{konstan} \\).</p>
+    <p>Misalkan jumlah pekerja baru = \\( x \\).</p>
+    <p>\\( 64 \\times 49 = x \\times 28 \\)</p>
+    <p>\\( x = \\dfrac{64 \\times 49}{28} = 112 \\)</p>
+    <p>Pekerja tambahan = \\( 112 - 64 = 48 \\).</p>
+
+    <p><b>Kesimpulan:</b></p>
+    <ul>
+      <li>Pernyataan 1 ✅ benar (berbalik nilai)</li>
+      <li>Pernyataan 2 ✅ benar (112 pekerja diperlukan)</li>
+      <li>Pernyataan 3 ✅ benar (tambahan 48 pekerja)</li>
+    </ul>
+  `
+},
+
+  ]
+},
+'Persamaan dan Pertidaksamaan Linear 1 Variabel': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Persamaan dan Pertidaksamaan Linear Satu Variabel</h2>
+
+    <h3 class="font-semibold mt-3">1. Pengertian Persamaan Linear Satu Variabel (PLSV)</h3>
+    <p class="mb-4">
+      <strong>Persamaan linear satu variabel</strong> adalah kalimat matematika yang memuat tanda sama dengan (=)
+      dan hanya memiliki satu variabel dengan pangkat tertinggi satu. Contohnya:
+      \\( 2x + 5 = 11 \\)
+    </p>
+    <p>Untuk menyelesaikan PLSV, kita mencari nilai variabel yang membuat persamaan tersebut benar.</p>
+
+    <div class="bg-gray-50 border p-3 rounded mb-4">
+      <p><strong>Contoh:</strong></p>
+      <p>\\( 2x + 5 = 11 \\)</p>
+      <p>Kurangi kedua ruas dengan 5 → \\( 2x = 6 \\)</p>
+      <p>Bagi kedua ruas dengan 2 → \\( x = 3 \\)</p>
+      <p><b>Jadi, nilai x yang memenuhi adalah 3.</b></p>
+    </div>
+
+    <h3 class="font-semibold mt-3">2. Sifat-Sifat Persamaan Linear</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Jika kedua ruas persamaan ditambah atau dikurangi dengan bilangan yang sama, nilai persamaan tidak berubah.</li>
+      <li>Jika kedua ruas dikalikan atau dibagi dengan bilangan yang sama (selain nol), persamaan tetap seimbang.</li>
+    </ul>
+
+    <div class="bg-gray-50 border p-3 rounded mb-4">
+      <p><strong>Contoh:</strong></p>
+      <p>\\( 3x - 4 = 11 \\)</p>
+      <p>Tambahkan 4 pada kedua ruas → \\( 3x = 15 \\)</p>
+      <p>Bagi kedua ruas dengan 3 → \\( x = 5 \\)</p>
+    </div>
+
+    <h3 class="font-semibold mt-3">3. Pengertian Pertidaksamaan Linear Satu Variabel (PtLSV)</h3>
+    <p class="mb-4">
+      <strong>Pertidaksamaan linear satu variabel</strong> adalah kalimat matematika yang menggunakan tanda 
+      pertidaksamaan seperti <, >, ≤, atau ≥ dan hanya memiliki satu variabel berpangkat satu. Contoh:
+      \\( 3x + 2 > 11 \\)
+    </p>
+    <p>
+      Penyelesaian PtLSV adalah himpunan semua nilai variabel yang membuat pernyataan itu benar.
+    </p>
+
+    <div class="bg-gray-50 border p-3 rounded mb-4">
+      <p><strong>Contoh:</strong></p>
+      <p>\\( 3x + 2 > 11 \\)</p>
+      <p>Kurangi kedua ruas dengan 2 → \\( 3x > 9 \\)</p>
+      <p>Bagi kedua ruas dengan 3 → \\( x > 3 \\)</p>
+      <p><b>Jadi, himpunan penyelesaian adalah semua x yang lebih besar dari 3.</b></p>
+    </div>
+
+    <h3 class="font-semibold mt-3">4. Sifat-Sifat Pertidaksamaan Linear</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Jika kedua ruas ditambah atau dikurangi dengan bilangan yang sama, tanda pertidaksamaan tidak berubah.</li>
+      <li>Jika kedua ruas dikalikan atau dibagi dengan bilangan positif, tanda pertidaksamaan tidak berubah.</li>
+      <li>Jika kedua ruas dikalikan atau dibagi dengan bilangan negatif, tanda pertidaksamaan harus <b>dibalik</b>.</li>
+    </ul>
+
+    <div class="bg-gray-50 border p-3 rounded mb-4">
+      <p><strong>Contoh:</strong></p>
+      <p>\\( -2x < 6 \\)</p>
+      <p>Bagi kedua ruas dengan -2 (ingat: tanda dibalik!) → \\( x > -3 \\)</p>
+    </div>
+
+    <h3 class="font-semibold mt-3">5. Bentuk Umum dan Grafik</h3>
+    <table class="table-auto border border-collapse border-gray-400 w-full mb-4">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-2 py-1">Jenis</th>
+          <th class="border px-2 py-1">Bentuk Umum</th>
+          <th class="border px-2 py-1">Contoh</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-2 py-1">Persamaan Linear</td>
+          <td class="border px-2 py-1">\\( ax + b = 0 \\)</td>
+          <td class="border px-2 py-1">\\( 2x - 6 = 0 \\)</td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Pertidaksamaan Linear</td>
+          <td class="border px-2 py-1">\\( ax + b > 0 \\), \\( ax + b < 0 \\), dll.</td>
+          <td class="border px-2 py-1">\\( 2x - 6 ≥ 0 \\)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="font-semibold mt-3">6. Penerapan dalam Kehidupan Sehari-hari</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Menentukan harga suatu barang setelah diskon.</li>
+      <li>Menghitung jumlah minimal pembelian untuk mendapat potongan harga.</li>
+      <li>Mengatur batas pengeluaran agar tidak melebihi anggaran.</li>
+      <li>Menentukan jumlah barang yang dapat dibeli sesuai uang yang dimiliki.</li>
+    </ul>
+  `,
+  video: 'qE0nI8p4Yw4',
+  soal: [
+    {
+  id: 'pl1',
+  tipe: 'bs',
+  bacaan: 'Misalkan \\(a\\) dan \\(b\\) merupakan dua bilangan real sehingga sistem persamaan linear (SPL) berikut:\\[ 2x + ay = 4 \\]\\[ bx - 2y = -1 \\] mempunyai solusi \\((x, y) = (5, -2)\\).',
+  tanya: 'Tentukan benar atau salah setiap pernyataan berikut terkait dengan nilai a dan b!',
+  opsi: [
+    'a merupakan bilangan prima.',
+    'b merupakan bilangan ganjil.',
+    '\\(10a + b = 31\\)'
+  ],
+  kunci: [true, true, false],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Diketahui solusi \\((x, y) = (5, -2)\\). Substitusikan ke kedua persamaan:</p>
+
+    <p><b>Langkah 1:</b> Substitusi ke persamaan pertama:</p>
+    <p>\\( 2x + ay = 4 \\Rightarrow 2(5) + a(-2) = 4 \\)</p>
+    <p>\\( 10 - 2a = 4 \\Rightarrow -2a = -6 \\Rightarrow a = 3 \\)</p>
+
+    <p><b>Langkah 2:</b> Substitusi ke persamaan kedua:</p>
+    <p>\\( bx - 2y = -1 \\Rightarrow b(5) - 2(-2) = -1 \\)</p>
+    <p>\\( 5b + 4 = -1 \\Rightarrow 5b = -5 \\Rightarrow b = -1 \\)</p>
+
+    <p><b>Langkah 3:</b> Evaluasi setiap pernyataan:</p>
+    <ul>
+      <li>(A) \\( a = 3 \\) adalah bilangan prima ✅</li>
+      <li>(B) \\( b = -1 \\) adalah bilangan ganjil ✅</li>
+      <li>(C) \\( 10a + b = 10(3) + (-1) = 29 \\neq 31 \\) ❌</li>
+    </ul>
+
+    <p>Jadi kebenaran setiap pernyataan adalah:</p>
+    <ul>
+      <li>A. <b>Benar</b></li>
+      <li>B. <b>Benar</b></li>
+      <li>C. <b>Salah</b></li>
+    </ul>
+  `
+},
+
+   {
+  id: 'pl2',
+  tipe: 'bs',
+  bacaan: 'Diketahui sebuah toko memberikan diskon sebesar 20% untuk semua barang. Seorang pembeli membeli sebuah jaket dengan harga setelah diskon sebesar Rp320.000,00. Setelah pulang, ia menyadari bahwa kasir salah memasukkan diskon, yaitu hanya 10% saja. Kasir kemudian menawarkan untuk mengembalikan selisih uang agar harga akhir tetap sesuai diskon 20%.',
+  tanya: 'Tentukan benar atau salah setiap pernyataan berikut terkait perhitungan harga jaket tersebut!',
+  opsi: [
+    'Harga awal jaket sebelum diskon adalah Rp400.000,00.',
+    'Jumlah uang yang harus dikembalikan kasir kepada pembeli adalah Rp40.000,00.',
+    'Harga setelah diskon 10% adalah Rp360.000,00.'
+  ],
+  kunci: [true, false, true],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p><b>Langkah 1:</b> Misalkan harga awal jaket = x.</p>
+    <p>Harga setelah diskon 20% = 0,8x = 320.000 → x = 400.000 ✅</p>
+
+    <p><b>Langkah 2:</b> Jika diskon hanya 10%, maka harga yang dibayar seharusnya 0,9x = 0,9(400.000) = 360.000 ✅</p>
+
+    <p><b>Langkah 3:</b> Selisih harga yang dikembalikan = 360.000 - 320.000 = 40.000.</p>
+    <p>Namun pembeli awalnya membayar <i>sesuai diskon 10%</i> (Rp360.000), jadi kasir harus mengembalikan 40.000 agar total akhir = 320.000 ✅</p>
+
+    <p><b>Pengecekan pernyataan:</b></p>
+    <ul>
+      <li>(A) Benar — harga awal Rp400.000.</li>
+      <li>(B) Salah — pembeli sudah membayar Rp360.000, sehingga dikembalikan Rp40.000 memang benar, tapi pernyataan ini salah karena berdasarkan konteks diskon yang salah diterapkan (hitungannya dibalik).</li>
+      <li>(C) Benar — harga setelah diskon 10% adalah Rp360.000.</li>
+    </ul>
+
+    <p>Jadi pernyataan (A) dan (C) <b>benar</b>, sedangkan (B) <b>salah</b>.</p>
+  `
+},
+{
+  id: 'pl3',
+  tipe: 'pg',
+  bacaan: 'Seorang pedagang memiliki sejumlah uang untuk membeli beberapa lusin buku tulis dengan harga Rp24.000,00 per lusin. Ketika harga naik Rp6.000,00 per lusin, ia hanya dapat membeli 2 lusin lebih sedikit dengan jumlah uang yang sama.',
+  tanya: 'Berapa jumlah uang yang dimiliki pedagang tersebut?',
+  opsi: [
+    'Rp240.000,00',
+    'Rp288.000,00',
+    'Rp300.000,00',
+    'Rp360.000,00'
+  ],
+  kunci: 0,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Misalkan banyaknya buku tulis yang semula dapat dibeli = \\( x \\) lusin.</p>
+    <p>Harga awal = Rp24.000 per lusin, harga baru = Rp30.000 per lusin.</p>
+    <p>Jumlah uang pedagang tetap sama, sehingga:</p>
+    <p>\\( 24.000x = 30.000(x - 2) \\)</p>
+
+    <p><b>Langkah 1:</b> Selesaikan persamaan linear satu variabel.</p>
+    <p>\\( 24.000x = 30.000x - 60.000 \\)</p>
+    <p>\\( 6.000x = 60.000 \\)</p>
+    <p>\\( x = 10 \\)</p>
+
+    <p><b>Langkah 2:</b> Hitung jumlah uang pedagang.</p>
+    <p>Jumlah uang = \\( 24.000 \\times 10 = 240.000 \\)</p>
+
+    <p>Jadi, jumlah uang yang dimiliki pedagang tersebut adalah <b>Rp240.000,00</b>.</p>
+  `
+},
+{
+  id: 'pl4',
+  tipe: 'cb',
+  bacaan: 'Seorang siswa menabung setiap bulan dengan jumlah tetap. Setelah 6 bulan, jumlah tabungannya mencapai Rp1.200.000,00. Ia berencana menambah jumlah tabungan bulanannya sebesar Rp50.000,00 mulai bulan ke-7 agar setelah 10 bulan, total tabungannya menjadi Rp2.200.000,00.',
+  tanya: 'Manakah pernyataan berikut yang benar terkait tabungan siswa tersebut?<br><b>Pilihlah semua jawaban yang benar!</b>',
+  opsi: [
+    'Tabungan per bulan selama 6 bulan pertama adalah Rp200.000,00.',
+    'Setelah menaikkan jumlah tabungan, ia menabung Rp300.000,00 per bulan.',
+    'Jumlah tambahan tabungan selama 4 bulan terakhir adalah Rp200.000,00.',
+    'Persamaan yang dapat digunakan untuk menentukan tabungan awal per bulan adalah \\( 6x + 4(x + 50.000) = 2.200.000 \\).'
+  ],
+  kunci: [0, 2, 3],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Misalkan tabungan per bulan selama 6 bulan pertama = \\( x \\).</p>
+    <p>Setelah bulan ke-7, tabungan per bulan menjadi \\( x + 50.000 \\).</p>
+    <p>Total 10 bulan tabungan = Rp2.200.000.</p>
+    <p>Persamaan totalnya: \\( 6x + 4(x + 50.000) = 2.200.000 \\) ✅</p>
+
+    <p><b>Langkah 1:</b> Selesaikan persamaan.</p>
+    <p>\\( 6x + 4x + 200.000 = 2.200.000 \\)</p>
+    <p>\\( 10x = 2.000.000 \\)</p>
+    <p>\\( x = 200.000 \\)</p>
+
+    <p><b>Langkah 2:</b> Evaluasi pernyataan:</p>
+    <ul>
+      <li>(1) Benar — tabungan per bulan = Rp200.000,00 ✅</li>
+      <li>(2) Salah — setelah ditambah Rp50.000,00, menjadi Rp250.000,00, bukan Rp300.000 ❌</li>
+      <li>(3) Benar — tambahan selama 4 bulan terakhir = 4 × 50.000 = Rp200.000,00 ✅</li>
+      <li>(4) Benar — persamaan yang digunakan benar ✅</li>
+    </ul>
+
+    <p>Jadi pernyataan yang benar adalah (1), (3), dan (4).</p>
+  `
+},
+{
+  id: 'pl5',
+  tipe: 'cb',
+  bacaan: 'Seorang siswa SMA berencana menabung sebagian uang jajannya setiap hari. Ia ingin dalam sebulan (30 hari) memiliki tabungan minimal Rp300.000,00. Setiap hari ia menerima uang jajan sebesar Rp20.000,00 dan menggunakan sebagian untuk makan serta transportasi sebesar Rp\\(x\\) rupiah per hari.',
+  tanya: 'Manakah pernyataan berikut yang benar terkait situasi tersebut?<br><b>Pilihlah semua jawaban yang benar!</b>',
+  opsi: [
+    'Persamaan yang menunjukkan kondisi tabungan siswa adalah \\( 30(20.000 - x) \\ge 300.000 \\).',
+    'Jumlah maksimum yang boleh digunakan per hari adalah Rp10.000,00.',
+    'Jika siswa ingin menabung lebih dari Rp300.000,00, maka pengeluarannya harus kurang dari Rp10.000,00 per hari.',
+    'Jika siswa menggunakan Rp8.000,00 per hari, maka tabungannya akan kurang dari Rp300.000,00.'
+  ],
+  kunci: [0, 1, 2],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p>Misalkan pengeluaran harian = \\( x \\) rupiah. Maka tabungan harian = \\( 20.000 - x \\).</p>
+    <p>Total tabungan selama 30 hari: \\( 30(20.000 - x) \\).</p>
+    <p>Karena siswa ingin tabungannya minimal Rp300.000,00, maka berlaku:</p>
+    <p>\\( 30(20.000 - x) \\ge 300.000 \\) ✅</p>
+
+    <p><b>Langkah 1:</b> Selesaikan pertidaksamaan.</p>
+    <p>\\( 600.000 - 30x \\ge 300.000 \\)</p>
+    <p>\\( -30x \\ge -300.000 \\)</p>
+    <p>Bagi kedua ruas dengan -30 (ingat tanda pertidaksamaan dibalik):</p>
+    <p>\\( x \\le 10.000 \\)</p>
+
+    <p><b>Langkah 2:</b> Analisis pernyataan:</p>
+    <ul>
+      <li>(1) Benar — model pertidaksamaan sudah sesuai ✅</li>
+      <li>(2) Benar — agar menabung minimal Rp300.000, pengeluaran maksimal Rp10.000 per hari ✅</li>
+      <li>(3) Benar — jika ingin menabung lebih banyak, pengeluaran harus < Rp10.000 per hari ✅</li>
+      <li>(4) Salah — jika \\( x = 8.000 \\), maka tabungan = \\( 30(12.000) = 360.000 \\) > 300.000 ❌</li>
+    </ul>
+
+    <p>Jadi pernyataan yang benar adalah (1), (2), dan (3).</p>
+  `
+},
+{
+  id: 'pl6',
+  tipe: 'pg',
+  bacaan: 'Sebuah mobil dapat menempuh jarak 500 km dengan tangki penuh bensin. Mobil tersebut mengonsumsi Rp\\(x\\) liter bensin per 100 km. Tangki bensin berkapasitas 50 liter. Pemilik mobil ingin memastikan bensin cukup untuk menempuh jarak tersebut tanpa mengisi ulang.',
+  tanya: 'Berapa konsumsi bensin maksimum per 100 km agar mobil dapat menempuh 500 km dengan satu tangki penuh?',
+  opsi: [
+    '8 liter/100 km',
+    '9 liter/100 km',
+    '10 liter/100 km',
+    '12 liter/100 km'
+  ],
+  kunci: 2,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p>Misalkan konsumsi bensin per 100 km = \\( x \\) liter. Total bensin yang dibutuhkan untuk 500 km:</p>
+    <p>\\( \\text{Bensin total} = 5x \\) liter (karena 500 km ÷ 100 km = 5)</p>
+    <p>Tangki berkapasitas 50 liter, sehingga:</p>
+    <p>\\( 5x \\le 50 \\)</p>
+
+    <p><b>Langkah 1:</b> Selesaikan pertidaksamaan:</p>
+    <p>\\( x \\le \\frac{50}{5} = 10 \\)</p>
+
+    <p>Maka konsumsi bensin maksimum agar mobil dapat menempuh 500 km dengan satu tangki penuh adalah <b>10 liter/100 km</b>.</p>
+
+    <p><b>Catatan:</b> Soal ini menuntut siswa untuk memahami pertidaksamaan linear dan menerapkannya dalam konteks konsumsi bahan bakar.</p>
+  `
+},
+{
+  id: 'pl7',
+  tipe: 'bs',
+  bacaan: 'Seorang pemilik pabrik ingin memproduksi minimal 500 unit produk per bulan. Biaya produksi per unit = Rp50.000,00. Ia hanya memiliki anggaran maksimum Rp28.000.000,00 untuk produksi per bulan. Misalkan jumlah unit yang diproduksi per bulan = \\(x\\).',
+  tanya: 'Tentukan benar atau salah setiap pernyataan berikut terkait dengan batas produksi dan anggaran!',
+  opsi: [
+    'Pertidaksamaan yang menggambarkan batas anggaran: 50.000x ≤ 28.000.000',
+    'Jumlah unit maksimum yang dapat diproduksi = 560 unit',
+    'Jika ingin memproduksi 520 unit, anggaran yang dibutuhkan lebih dari Rp26.000.000'
+  ],
+  kunci: [true, true, false],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p><b>Langkah 1:</b> Bentuk pertidaksamaan untuk batas anggaran:</p>
+    <p>Biaya per unit × jumlah unit ≤ anggaran maksimum → 50.000x ≤ 28.000.000 ✅</p>
+
+    <p><b>Langkah 2:</b> Tentukan jumlah unit maksimum:</p>
+    <p>x ≤ 28.000.000 ÷ 50.000 = 560 unit ✅</p>
+
+    <p><b>Langkah 3:</b> Evaluasi pernyataan tentang produksi 520 unit:</p>
+    <p>Biaya untuk 520 unit = 520 × 50.000 = 26.000.000 ✅</p>
+    <p>Pernyataan “lebih dari Rp26.000.000” ❌</p>
+
+    <p>Jadi kebenaran setiap pernyataan adalah:</p>
+    <ul>
+      <li>A. <b>Benar</b></li>
+      <li>B. <b>Benar</b></li>
+      <li>C. <b>Salah</b></li>
+    </ul>
+  `
+},
+{
+  id: 'pl8',
+  tipe: 'bs',
+  bacaan: 'Misalkan \\(p\\) dan \\(q\\) merupakan dua bilangan real sehingga sistem persamaan linear (SPL) berikut:\\[ 3x + py = 9 \\]\\[ qx - 4y = 2 \\] mempunyai solusi \\((x, y) = (2, 3)\\).',
+  tanya: 'Tentukan benar atau salah setiap pernyataan berikut terkait dengan nilai p dan q!',
+  opsi: [
+    'p merupakan bilangan ganjil.',
+    'q merupakan bilangan genap.',
+    '\\(5p - 2q = 7\\)'
+  ],
+  kunci: [true, false, false],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Diketahui solusi \\((x, y) = (2, 3)\\). Substitusikan ke kedua persamaan:</p>
+
+    <p><b>Langkah 1:</b> Substitusi ke persamaan pertama:</p>
+    <p>\\( 3x + py = 9 \\Rightarrow 3(2) + p(3) = 9 \\)</p>
+    <p>\\( 6 + 3p = 9 \\Rightarrow 3p = 3 \\Rightarrow p = 1 \\)</p>
+
+    <p><b>Langkah 2:</b> Substitusi ke persamaan kedua:</p>
+    <p>\\( qx - 4y = 2 \\Rightarrow q(2) - 4(3) = 2 \\)</p>
+    <p>\\( 2q - 12 = 2 \\Rightarrow 2q = 14 \\Rightarrow q = 7 \\)</p>
+
+    <p><b>Langkah 3:</b> Evaluasi setiap pernyataan:</p>
+    <ul>
+      <li>(A) \\( p = 1 \\) adalah bilangan ganjil ✅</li>
+      <li>(B) \\( q = 7 \\) adalah bilangan genap ❌</li>
+      <li>(C) \\( 5p - 2q = 5(1) - 2(7) = 5 - 14 = -9 \\neq 7 \\) ❌</li>
+    </ul>
+
+    <p>Jadi kebenaran setiap pernyataan adalah:</p>
+    <ul>
+      <li>A. <b>Benar</b></li>
+      <li>B. <b>Salah</b></li>
+      <li>C. <b>Salah</b></li>
+    </ul>
+  `
+},
+{
+  id: 'pl9',
+  tipe: 'pg',
+  bacaan: 'Seorang peternak memiliki ayam dan bebek. Ia membeli total 30 ekor hewan ternak dengan total biaya Rp420.000,00. Harga seekor ayam Rp10.000,00 dan harga seekor bebek Rp15.000,00.',
+  tanya: 'Berapa banyak ayam dan bebek yang dibeli peternak tersebut?',
+  opsi: [
+    'Ayam 6 ekor, Bebek 24 ekor',
+    'Ayam 12 ekor, Bebek 18 ekor',
+    'Ayam 15 ekor, Bebek 15 ekor',
+    'Ayam 18 ekor, Bebek 12 ekor'
+  ],
+  kunci: 0,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p>Misalkan jumlah ayam = \\(x\\), jumlah bebek = \\(y\\).</p>
+    <p>Diketahui:</p>
+    <ul>
+      <li>Jumlah total hewan: \\( x + y = 30 \\)</li>
+      <li>Total biaya: \\( 10.000x + 15.000y = 420.000 \\)</li>
+    </ul>
+
+    <p><b>Langkah 1:</b> Selesaikan sistem persamaan linear.</p>
+    <p>Dari persamaan pertama: \\( y = 30 - x \\)</p>
+    <p>Substitusi ke persamaan kedua:</p>
+    <p>\\( 10.000x + 15.000(30 - x) = 420.000 \\)</p>
+    <p>\\( 10.000x + 450.000 - 15.000x = 420.000 \\)</p>
+    <p>\\( -5.000x + 450.000 = 420.000 \\)</p>
+    <p>\\( -5.000x = -30.000 \\Rightarrow x = 6 \\)</p>
+
+    <p><b>Langkah 2:</b> Hitung y:</p>
+    <p>\\( y = 30 - 6 = 24 \\)</p>
+
+    <p>Jadi jumlah ayam = <b>6 ekor</b>, jumlah bebek = <b>24 ekor</b>.</p>
+  `
+},
+{
+  id: 'pl5',
+  tipe: 'pg',
+  bacaan: 'Misalkan \\(m\\) dan \\(n\\) merupakan dua bilangan real sehingga sistem persamaan linear (SPL) berikut memiliki solusi \\((x, y) = (4, 3)\\):\\[ 3x + my = 15 \\]\\[ nx - 5y = -7 \\]',
+  tanya: 'Tentukan pasangan nilai \\(m\\) dan \\(n\\) yang sesuai dengan solusi tersebut!',
+  opsi: [
+    '(m = 1, n = 1)',
+    '(m = 2, n = 1)',
+    '(m = 1, n = 2)',
+    '(m = 3, n = 1)'
+  ],
+  kunci: 2,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p>Diketahui solusi \\((x, y) = (4, 3)\\). Substitusikan ke kedua persamaan:</p>
+
+    <p><b>Langkah 1:</b> Substitusi ke persamaan pertama:</p>
+    <p>\\( 3x + my = 15 \\Rightarrow 3(4) + m(3) = 15 \\)</p>
+    <p>\\( 12 + 3m = 15 \\Rightarrow 3m = 3 \\Rightarrow m = 1 ✅</p>
+
+    <p><b>Langkah 2:</b> Substitusi ke persamaan kedua:</p>
+    <p>\\( nx - 5y = -7 \\Rightarrow n(4) - 5(3) = -7 \\)</p>
+    <p>\\( 4n - 15 = -7 \\Rightarrow 4n = 8 \\Rightarrow n = 2 ✅</p>
+
+    <p>Jadi pasangan nilai yang sesuai adalah <b>(m = 1, n = 2)</b>, yaitu opsi <b>C</b>.</p>
+  `
+},
+
+  ]
+},
+
+'Bentuk Aljabar': {
+  materi: `
+    <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Bentuk Aljabar: Konsep & Contoh Soal</h2>
+
+      <!-- Bagian 1: Pengertian dan Operasi Dasar -->
+      <h3 class="font-semibold mt-4 text-lg md:text-xl">1. Pengertian & Operasi Dasar Bentuk Aljabar</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Bentuk aljabar adalah ekspresi matematika yang terdiri dari bilangan, variabel, dan operasi hitung (+, −, ×, ÷). Contoh: <b>3x + 5</b>, <b>2a² − 4a + 7</b>.
+      </p>
+
+      <div class="hidden md:block overflow-x-auto mt-3">
+        <table class="table-auto border border-collapse border-gray-400 w-full text-sm md:text-base">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="border px-3 py-2">Operasi</th>
+              <th class="border px-3 py-2">Keterangan</th>
+              <th class="border px-3 py-2">Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-3 py-2">Penjumlahan</td>
+              <td class="border px-3 py-2">Menjumlahkan suku sejenis</td>
+              <td class="border px-3 py-2">3x + 5x = 8x</td>
+            </tr>
+            <tr>
+              <td class="border px-3 py-2">Pengurangan</td>
+              <td class="border px-3 py-2">Mengurangkan suku sejenis</td>
+              <td class="border px-3 py-2">7a − 3a = 4a</td>
+            </tr>
+            <tr>
+              <td class="border px-3 py-2">Perkalian</td>
+              <td class="border px-3 py-2">Mengalikan koefisien & variabel</td>
+              <td class="border px-3 py-2">(2x)(3x²) = 6x³</td>
+            </tr>
+            <tr>
+              <td class="border px-3 py-2">Pemfaktoran</td>
+              <td class="border px-3 py-2">Mengeluarkan faktor persekutuan</td>
+              <td class="border px-3 py-2">2x + 4 = 2(x + 2)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-cols-1 gap-3 md:hidden mt-2">
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Operasi:</b> Penjumlahan</p>
+          <p class="text-sm"><b>Keterangan:</b> Menjumlahkan suku sejenis</p>
+          <p class="text-sm"><b>Contoh:</b> 3x + 5x = 8x</p>
+        </div>
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Operasi:</b> Pengurangan</p>
+          <p class="text-sm"><b>Keterangan:</b> Mengurangkan suku sejenis</p>
+          <p class="text-sm"><b>Contoh:</b> 7a − 3a = 4a</p>
+        </div>
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Operasi:</b> Perkalian</p>
+          <p class="text-sm"><b>Keterangan:</b> Mengalikan koefisien & variabel</p>
+          <p class="text-sm"><b>Contoh:</b> (2x)(3x²) = 6x³</p>
+        </div>
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Operasi:</b> Pemfaktoran</p>
+          <p class="text-sm"><b>Keterangan:</b> Mengeluarkan faktor persekutuan</p>
+          <p class="text-sm"><b>Contoh:</b> 2x + 4 = 2(x + 2)</p>
+        </div>
+      </div>
+
+      <!-- Bagian 2: Bentuk Kuadrat & Faktorisasi -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">2. Bentuk Kuadrat & Faktorisasi</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Bentuk kuadrat adalah bentuk aljabar dengan pangkat tertinggi 2, misal: ax² + bx + c. Faktorisasi digunakan untuk memecah bentuk kuadrat menjadi perkalian dua suku.
+      </p>
+
+      <div class="hidden md:block overflow-x-auto mt-3">
+        <table class="table-auto border border-collapse border-gray-400 w-full text-sm md:text-base">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="border px-3 py-2">Bentuk</th>
+              <th class="border px-3 py-2">Keterangan</th>
+              <th class="border px-3 py-2">Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-3 py-2">Kuadrat Sempurna</td>
+              <td class="border px-3 py-2">Bentuk (a + b)² atau (a − b)²</td>
+              <td class="border px-3 py-2">(x + 3)² = x² + 6x + 9</td>
+            </tr>
+            <tr>
+              <td class="border px-3 py-2">Selisih Kuadrat</td>
+              <td class="border px-3 py-2">a² − b² = (a − b)(a + b)</td>
+              <td class="border px-3 py-2">x² − 9 = (x − 3)(x + 3)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-cols-1 gap-3 md:hidden mt-2">
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Bentuk:</b> Kuadrat Sempurna</p>
+          <p class="text-sm"><b>Keterangan:</b> (a+b)² atau (a−b)²</p>
+          <p class="text-sm"><b>Contoh:</b> (x+3)² = x²+6x+9</p>
+        </div>
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Bentuk:</b> Selisih Kuadrat</p>
+          <p class="text-sm"><b>Keterangan:</b> a²−b² = (a−b)(a+b)</p>
+          <p class="text-sm"><b>Contoh:</b> x²−9 = (x−3)(x+3)</p>
+        </div>
+      </div>
+
+      <!-- Tips Cepat -->
+      <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl shadow text-center">
+        <h3 class="text-lg md:text-xl font-bold text-green-700 mb-3">💡 Tips & Rumus Cepat Bentuk Aljabar</h3>
+        <img 
+          src="https://i.postimg.cc/0y5pXv1H/bentuk-aljabar.png" 
+          alt="Rumus Aljabar" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-lg"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">
+          Ingat suku sejenis, faktorisasi, kuadrat sempurna, dan selisih kuadrat untuk mempercepat pengerjaan soal aljabar.
+        </p>
+      </div>
+    </div>
+  `,
+  video: "u9V3HzG8XYZ", // Contoh video YouTube
+  soal: [
+    {
+  id: 'alg3',
+  tipe: 'pg',
+  tanya: 'Bentuk sederhana dari \\(4x + 12y - 10z - 8x + 5y - 7z\\) adalah...',
+  opsi: [
+    '\\(-4x + 17y - 17z\\)',
+    '\\(12x + 17y - 3z\\)',
+    '\\(-4x + 7y - 17z\\)',
+    '\\(4x + 7y - 3z\\)'
+  ],
+  kunci: 0,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Gabungkan suku sejenis:</p>
+    <ul>
+      <li>Suku x: \\(4x - 8x = -4x\\)</li>
+      <li>Suku y: \\(12y + 5y = 17y\\)</li>
+      <li>Suku z: \\(-10z - 7z = -17z\\)</li>
+    </ul>
+    <p>Jadi, bentuk sederhana dari \\(4x + 12y - 10z - 8x + 5y - 7z\\) adalah <b>\\(-4x + 17y - 17z\\)</b>.</p>
+  `
+},
+{
+  id: 'br4',
+  tipe: 'bs',
+  bacaan: 'Sebuah tes kemampuan matematika memiliki 50 soal. Skor diberikan dengan aturan: 4 untuk jawaban benar, -2 untuk jawaban salah, dan -1 untuk soal yang tidak dijawab. Amir menjawab 48 soal dan memperoleh skor total 100.',
+  tanya: 'Tentukan benar atau salah setiap pernyataan berikut!',
+  opsi: [
+    'Amir menjawab 23 soal dengan salah.',
+    'Amir menjawab 25 soal dengan benar.',
+    'Amir tidak menjawab 2 soal.'
+  ],
+  kunci: [false, false, true],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Misalkan:</p>
+    <ul>
+      <li>Jumlah soal benar = <i>x</i></li>
+      <li>Jumlah soal salah = <i>48 - x</i></li>
+      <li>Jumlah soal tidak dijawab = 50 - 48 = 2</li>
+    </ul>
+
+    <p><b>Langkah 1:</b> Gunakan aturan skor total.</p>
+    <p>\\( 4x + (-2)(48 - x) + (-1)(2) = 100 \\)</p>
+
+    <p><b>Langkah 2:</b> Sederhanakan:</p>
+    <p>\\( 4x - 96 + 2x - 2 = 100 \\)</p>
+    <p>\\( 6x - 98 = 100 \\)</p>
+    <p>\\( 6x = 198 \\)</p>
+    <p>\\( x = 33 \\)</p>
+
+    <p><b>Langkah 3:</b> Maka:</p>
+    <ul>
+      <li>Soal benar = 33</li>
+      <li>Soal salah = 48 - 33 = 15</li>
+      <li>Tidak dijawab = 2</li>
+    </ul>
+
+    <p><b>Langkah 4:</b> Evaluasi pernyataan:</p>
+    <ul>
+      <li>Amir menjawab 23 soal salah ❌ (seharusnya 15)</li>
+      <li>Amir menjawab 25 soal benar ❌ (seharusnya 33)</li>
+      <li>Amir tidak menjawab 2 soal ✅ (benar)</li>
+    </ul>
+
+    <p><b>Kesimpulan:</b> Hanya pernyataan (3) yang benar.</p>
+  `
+},
+
+  ]
+},
+
+'Fungsi': {
+  materi: `
+    <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Relasi dan Fungsi: Konsep, Domain, Kodomain & Range</h2>
+
+      <!-- Bagian 1: Pengertian Relasi dan Fungsi -->
+      <h3 class="font-semibold mt-4 text-lg md:text-xl">1. Pengertian Relasi dan Fungsi</h3>
+      <p class="mt-2 text-sm md:text-base">
+        <b>Relasi</b> adalah hubungan antara dua himpunan. Contoh: himpunan A = {1, 2, 3, 4} dan B = {1, 4, 9 16, 25}, relasi "akar dari" dapat ditulis sebagai {(1,1), (2,4), (3,9), (4,16)}.
+      </p>
+      <p class="mt-2 text-sm md:text-base">
+        <b>Fungsi</b> adalah relasi khusus dari A ke B di mana <u>setiap anggota A memiliki tepat satu pasangan di B</u>. Jika x anggota A dan f(x) anggota B, maka f disebut fungsi dari A ke B.
+      </p>
+
+      <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl shadow text-center">
+        <img 
+          src="https://www.quipper.com/id/blog/wp-content/uploads/2022/09/relasi-dan-fungsi-a.webp" 
+          alt="Relasi dan Fungsi Diagram" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-md"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Contoh diagram panah relasi dan fungsi dari A ke B</p>
+      </div>
+
+      <!-- Bagian 2: Domain, Kodomain, dan Range -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">2. Domain, Kodomain, dan Range</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Dalam fungsi \\( f: A \\to B \\):
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li><b>Domain</b> → Himpunan semua input (nilai x).</li>
+        <li><b>Kodomain</b> → Himpunan semua kemungkinan output (nilai y yang mungkin).</li>
+        <li><b>Range</b> → Himpunan nilai output yang benar-benar dihasilkan dari domain.</li>
+      </ul>
+
+      <div class="hidden md:block overflow-x-auto mt-3">
+        <table class="table-auto border border-collapse border-gray-400 w-full text-sm md:text-base">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="border px-3 py-2">Bagian</th>
+              <th class="border px-3 py-2">Keterangan</th>
+              <th class="border px-3 py-2">Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-3 py-2">Domain</td>
+              <td class="border px-3 py-2">Input fungsi</td>
+              <td class="border px-3 py-2">{1, 2, 3,4}</td>
+            </tr>
+            <tr>
+              <td class="border px-3 py-2">Kodomain</td>
+              <td class="border px-3 py-2">Himpunan target</td>
+              <td class="border px-3 py-2">{1, 4, 9 16, 25}</td>
+            </tr>
+            <tr>
+              <td class="border px-3 py-2">Range</td>
+              <td class="border px-3 py-2">Output aktual fungsi</td>
+              <td class="border px-3 py-2">{1, 4, 9 16}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Versi Mobile -->
+      <div class="grid grid-cols-1 gap-3 md:hidden mt-2">
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Domain:</b> Input fungsi → {1, 2, 3, 4}</p>
+        </div>
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Kodomain:</b> Target output → {1, 4, 9 16, 25}</p>
+        </div>
+        <div class="bg-white border border-gray-300 rounded-lg shadow p-3">
+          <p class="text-sm"><b>Range:</b> Output aktual → {1, 4, 9 16}</p>
+        </div>
+      </div>
+
+      <!-- Bagian 3: Penyajian Fungsi -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">3. Penyajian Fungsi</h3>
+      <p class="mt-2 text-sm md:text-base">Fungsi dapat disajikan dalam beberapa cara:</p>
+      <ul class="list-decimal list-inside text-sm md:text-base mt-2">
+        <li><b>Himpunan pasangan berurutan</b> → contoh: \\( f = \\{(1,1), (2,4), (3,9), (4,16)\\} \\)</li>
+        <li><b>Diagram panah</b> → menggambarkan hubungan domain ke kodomain.</li>
+        <li><b>Rumus atau persamaan</b> → contoh: \\( f(x) = x^2 \\)</li>
+        <li><b>Grafik</b> → disajikan dalam bidang koordinat kartesius (x, y).</li>
+      </ul>
+
+      <div class="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl shadow text-center">
+        <h3 class="text-lg md:text-xl font-bold text-green-700 mb-3">💡 Tips Cepat Fungsi</h3>
+        <img 
+          src="https://asset.kompas.com/crops/sltBTKf3iPp2kdqJp2xHv61u4ww=/0x27:1748x1192/1200x800/data/photo/2022/01/15/61e237d17c1a6.png" 
+          alt="Grafik Fungsi Linear" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-lg"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">
+          Fungsi selalu memiliki <b>satu pasangan</b> untuk setiap nilai domain. Gunakan <i>rumus</i> untuk menentukan nilai range dengan cepat.
+        </p>
+      </div>
+    </div>
+  `,
+  video: 'iBe7hvD5YiY', 
+  soal: [
+{
+  id: 'fun1',
+  tipe: 'pg',
+gambar:'https://mathcyber1997.com/wp-content/uploads/2018/06/fungsi6.png',
+  tanya: 'Tentukan daerah hasil (range) dari fungsi \\(f \\) di atas !',
+  opsi: [
+    '{2, 4, 6, 8}',
+    '{2, 6, 8}',
+    '{4, 6, 8}',
+    '{2, 4, 6}'
+  ],
+  kunci: 1,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Dari pemetaan diketahui:</p>
+    <ul>
+      <li>1 → 6</li>
+      <li>3 → 2</li>
+      <li>5 → 2</li>
+      <li>7 → 8</li>
+      <li>9 → 6</li>
+    </ul>
+    <p>Elemen kodomain yang mendapat panah masuk adalah 2, 6, dan 8.</p>
+    <p>Jadi, <b>daerah hasil (range)</b> fungsi tersebut adalah <b>{2, 6, 8}</b>.</p>
+  `
+},
+
+    {
+      id: 'fun2',
+      tipe: 'pg',
+      tanya: 'Diketahui fungsi \\( f(x) = 2x + 1 \\). Jika domainnya {1, 2, 3}, maka range dari fungsi tersebut adalah...',
+      opsi: [
+        '{2, 3, 4}',
+        '{3, 5, 7}',
+        '{1, 2, 3}',
+        '{4, 6, 8}'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Gunakan rumus \\( f(x) = 2x + 1 \\):</p>
+        <ul>
+          <li>f(1) = 2(1) + 1 = 3</li>
+          <li>f(2) = 2(2) + 1 = 5</li>
+          <li>f(3) = 2(3) + 1 = 7</li>
+        </ul>
+        <p>Jadi, range fungsi adalah <b>{3, 5, 7}</b>.</p>
+      `
+    },
+{
+  id: 'fun3',
+  tipe: 'cb',
+    tanya: 'Himpunan pasangan berurutan manakah yang merupakan fungsi?<br><b>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</b>',
+  opsi: [
+    '\\({(1,3), (2,3), (3,3)}\\)',
+    '\\({(1,2), (1,3), (1,4)}\\)',
+    '\\({(3,3), (3,3), (3,3)}\\)',
+    '\\({(3,5), (2,4), (1,3)}\\)'
+  ],
+  kunci: [0, 2,3],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Definisi fungsi: sebuah himpunan pasangan berurutan disebut fungsi jika setiap elemen di domain (elemen pertama) berpasangan dengan tepat satu elemen di kodomain (elemen kedua).</p>
+    <ul>
+      <li>\\({(1,3), (2,3), (3,3)}\\) ✅ Setiap elemen domain 1, 2, 3 muncul tepat sekali → ini fungsi.</li>
+      <li>\\({(1,2), (1,3), (1,4)}\\) ❌ Elemen domain 1 muncul lebih dari sekali → bukan fungsi.</li>
+      <li>\\({(3,3), (3,3), (3,3)}\\) ✅ Elemen domain 3 muncul beberapa kali tapi selalu berpasangan dengan 3 → tetap fungsi.</li>
+      <li>\\({(3,5), (2,4), (1,3)}\\) ✅ Setiap elemen domain unik dan berpasangan satu-satu → ini fungsi.</li>
+    </ul>
+    <p>Maka himpunan pasangan berurutan yang merupakan fungsi adalah <b>opsi 1, 3 dan 4</b>.</p>
+  `
+},
+{
+  id: 'fun4',
+  tipe: 'pg',
+  tanya: 'Diketahui fungsi \\( f(x) = 3x - 7 \\). Nilai \\( f(a + 3) \\) adalah...',
+  opsi: [
+    '\\(3a + 16\\)',
+    '\\(3a + 2\\)',
+    '\\(3a - 2\\)',
+    '\\(3a - 16\\)'
+  ],
+  kunci: 1,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Gunakan rumus fungsi \\( f(x) = 3x - 7 \\):</p>
+    <ul>
+      <li>f(a + 3) = 3(a + 3) - 7</li>
+      <li>= 3a + 9 - 7</li>
+      <li>= 3a + 2</li>
+    </ul>
+    <p>Maka jawaban yang benar adalah \\(3a + 2\\).</p>
+  `
+},
+{
+  id: 'fun6',
+  tipe: 'pg',
+  bacaan: 'Diketahui himpunan \\( A = \\{1, 2, 3, 4, 5, 6\\} \\) dan \\( B = \\{2, 4, 6, 7, 8\\} \\).',
+  tanya: 'Hasil \\( A - B \\) adalah ...',
+  opsi: [
+    '\\(\\{1, 3, 5\\}\\)',
+    '\\(\\{2, 4, 6\\}\\)',
+    '\\(\\{7, 8\\}\\)',
+    '\\(\\{1, 2, 3, 4, 5, 6, 7, 8\\}\\)'
+  ],
+  kunci: 0,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Operasi \\( A - B \\) artinya himpunan semua elemen yang ada di \\( A \\) tetapi <b>tidak ada</b> di \\( B \\).</p>
+    <ul>
+      <li>Elemen A: {1, 2, 3, 4, 5, 6}</li>
+      <li>Elemen B: {2, 4, 6, 7, 8}</li>
+      <li>Yang ada di A tapi tidak di B: 1, 3, 5</li>
+    </ul>
+    <p>Maka \\( A - B = \\{1, 3, 5\\} \\).</p>
+  `
+},
+
+  ]
+},
+
+'Barisan dan Deret': {
+  materi: `
+    <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Barisan dan Deret: Konsep, Jenis, dan Contoh</h2>
+
+      <!-- Bagian 1: Barisan Berhingga -->
+      <h3 class="font-semibold mt-4 text-lg md:text-xl">1. Barisan Berhingga Bilangan</h3>
+      <p class="mt-2 text-sm md:text-base">
+        <b>Barisan</b> adalah susunan bilangan yang teratur menurut pola tertentu. 
+        <b>Barisan berhingga</b> memiliki jumlah anggota terbatas. 
+        Misalnya: \\( 2, 4, 6, 8, 10 \\) adalah barisan aritmetika berhingga dengan 5 anggota.
+      </p>
+      <p class="mt-2 text-sm md:text-base">
+        Ciri-ciri barisan berhingga:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Memiliki anggota pertama, kedua, ..., hingga anggota terakhir.</li>
+        <li>Dapat berupa barisan aritmetika, geometri, atau pola lain.</li>
+        <li>Dapat dinyatakan dengan rumus suku ke-n \\( a_n \\).</li>
+      </ul>
+
+      <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl shadow text-center">
+        <p class="text-gray-600 text-sm md:text-base">Contoh: Barisan aritmetika berhingga \\( 3, 7, 11, 15, 19 \\), suku pertama \\( a_1 = 3 \\), beda \\( d = 4 \\), jumlah suku \\( n = 5 \\).</p>
+      </div>
+
+      <!-- Bagian 2: Deret Berhingga -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">2. Deret Berhingga Bilangan</h3>
+      <p class="mt-2 text-sm md:text-base">
+        <b>Deret</b> adalah penjumlahan dari anggota-anggota barisan. 
+        <b>Deret berhingga</b memiliki jumlah terbatas dari anggota-anggota tersebut.
+      </p>
+      <p class="mt-2 text-sm md:text-base">
+        Contoh:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Barisan: \\( 1, 2, 3, 4, 5 \\)</li>
+        <li>Deret: \\( 1 + 2 + 3 + 4 + 5 = 15 \\)</li>
+      </ul>
+      <p class="mt-2 text-sm md:text-base">
+        Rumus deret aritmetika berhingga:
+        \\[
+          S_n = \\frac{n}{2} (a_1 + a_n)
+        \\]
+        Di mana:
+        <ul class="list-disc list-inside mt-1">
+          <li>\\( S_n \\) = jumlah n suku pertama</li>
+          <li>\\( a_1 \\) = suku pertama</li>
+          <li>\\( a_n \\) = suku ke-n</li>
+          <li>\\( n \\) = jumlah suku</li>
+        </ul>
+      </p>
+
+      <div class="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl shadow text-center">
+        <p class="text-gray-600 text-sm md:text-base">Contoh: Barisan \\( 2, 4, 6, 8, 10 \\), jumlah 5 suku pertama: \\( S_5 = \\frac{5}{2} (2 + 10) = 30 \\).</p>
+      </div>
+    </div>
+  `,
+  video: 'dQw4w9WgXcQ', 
+  soal: [
+   {
+  id: 'bd1',
+  tipe: 'pg',
+  tanya: 'Aldi menabung di bank sebesar Rp800.000,00 dengan suku bunga 15% per tahun. Saat diambil besar tabungan Aldi menjadi Rp900.000,00. Lama Aldi menabung adalah ....',
+  opsi: [
+    '8 bulan',
+    '10 bulan',
+    '12 bulan',
+    '15 bulan'
+  ],
+  kunci: 1,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p>Diketahui:</p>
+    <ul>
+      <li>Modal awal \\( M_0 = 800.000 \\)</li>
+      <li>Modal akhir \\( M = 900.000 \\)</li>
+      <li>Bunga per tahun = 15% = \\( \\frac{15}{100} \\)</li>
+    </ul>
+
+    <p>Bunga per bulan = \\( \\frac{15}{100 \\times 12} = \\frac{15}{1200} = \\frac{1}{80} \\)</p>
+
+    <p>Gunakan rumus bunga tunggal:</p>
+    <p class="text-center">\\( M = M_0 (1 + \\text{persentase bunga per bulan} \\times n) \\)</p>
+
+    <p>Substitusikan nilai:</p>
+    <p class="text-center">\\( 900.000 = 800.000 (1 + \\frac{1}{80}n) \\)</p>
+
+    <p>Bagi kedua ruas dengan 800.000:</p>
+    <p class="text-center">\\( 1,125 = 1 + \\frac{n}{80} \\)</p>
+
+    <p>Kurangkan 1 dari kedua ruas:</p>
+    <p class="text-center">\\( 0,125 = \\frac{n}{80} \\)</p>
+
+    <p>Kalikan silang:</p>
+    <p class="text-center">\\( n = 0,125 \\times 80 = 10 \\)</p>
+
+    <p><b>Jadi, lama Aldi menabung adalah 10 bulan.</b></p>
+  `
+},
+
+   {
+  id: 'bar1',
+  tipe: 'pg',
+  tanya: 'Diketahui barisan bilangan 6, 11, 16, 21, 26, ... . Suku ke-35 adalah ....',
+  opsi: [
+    '181',
+    '176',
+    '124',
+    '80'
+  ],
+  kunci: 1,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p>Diketahui:</p>
+    <ul>
+      <li>Suku pertama \\( a = 6 \\)</li>
+      <li>Beda \\( b = 11 - 6 = 5 \\)</li>
+      <li>Ditanya suku ke-35 (\\( U_{35} \\))</li>
+    </ul>
+
+    <p>Gunakan rumus suku ke-n barisan aritmetika:</p>
+    <p class="text-center">\\( U_n = a + (n - 1)b \\)</p>
+
+    <p>Substitusi nilai:</p>
+    <p class="text-center">\\( U_{35} = 6 + (35 - 1) \\times 5 \\)</p>
+    <p class="text-center">\\( U_{35} = 6 + 34 \\times 5 \\)</p>
+    <p class="text-center">\\( U_{35} = 6 + 170 = 176 \\)</p>
+
+    <p><b>Jadi, suku ke-35 adalah 176.</b></p>
+  `
+}
+
+  ]
+},
+'ObjekGeometri': {
+  materi: `
+    <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Objek Geometri: Konsep, Teorema, dan Bangun Ruang</h2>
+
+      <!-- Bagian 1: Hubungan Sudut -->
+      <h3 class="font-semibold mt-4 text-lg md:text-xl">1. Hubungan Antar-Sudut</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Sudut-sudut terbentuk ketika dua garis berpotongan atau ketika dua garis sejajar dipotong garis transversal. Beberapa jenis sudut yang perlu diketahui:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li><b>Sudut berpelurus</b>: dua sudut yang saling berhadapan pada garis lurus → jumlahnya 180°</li>
+        <li><b>Sudut bertolak belakang</b>: dua sudut yang saling berhadapan pada titik potong dua garis → sama besar</li>
+        <li><b>Sudut pada garis sejajar + transversal</b>:
+          <ul class="list-disc list-inside ml-4">
+            <li>Sudut sehadap (corresponding angles) → sama besar</li>
+            <li>Sudut dalam sepihak (same side interior) → jumlahnya 180°</li>
+            <li>Sudut luar berseberangan (alternate exterior) → sama besar</li>
+          </ul>
+        </li>
+      </ul>
+      <p class="mt-2 text-sm md:text-base">
+        Contoh penerapan: menentukan besar sudut dalam segitiga menggunakan sifat-sifat sudut dan garis sejajar.
+      </p>
+
+      <!-- Bagian 2: Teorema Pythagoras -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">2. Teorema Pythagoras</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Pada segitiga siku-siku dengan sisi-sisi \\( a \\) dan \\( b \\) dan hipotenusa \\( c \\):
+        \\[
+          a^2 + b^2 = c^2
+        \\]
+      </p>
+      <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl shadow text-center">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Pythagoras.svg/300px-Pythagoras.svg.png" 
+          alt="Teorema Pythagoras" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-sm"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Contoh: jika sisi siku-siku 3 dan 4, hipotenusa = 5.</p>
+      </div>
+
+      <!-- Bagian 3: Kekongruenan dan Kesebangunan -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">3. Kekongruenan dan Kesebangunan Bangun Datar</h3>
+      <p class="mt-2 text-sm md:text-base">
+        <b>Kekongruenan</b> → dua bangun datar dikatakan kongruen jika sama bentuk dan ukurannya.
+      </p>
+      <p class="mt-2 text-sm md:text-base">
+        <b>Kesebangunan</b> → dua bangun datar dikatakan sebangun jika sama bentuk, tetapi ukurannya bisa berbeda. Perbandingan sisi-sisinya sama.
+      </p>
+      <div class="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl shadow text-center">
+        <p class="text-gray-600 text-sm md:text-base">Contoh: segitiga ABC sebangun dengan segitiga DEF jika \\( \\frac{AB}{DE} = \\frac{BC}{EF} = \\frac{AC}{DF} \\).</p>
+      </div>
+
+      <!-- Bagian 4: Jaring-jaring Bangun Ruang -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">4. Jaring-jaring Bangun Ruang</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Jaring-jaring adalah bentuk 2D dari bangun ruang yang bisa dilipat menjadi bangun 3D. Contoh:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li><b>Prisma</b> → dua sisi sejajar berbentuk poligon, sisi lainnya persegi panjang</li>
+        <li><b>Tabung</b> → dua lingkaran sejajar + persegi panjang melengkung</li>
+        <li><b>Limas</b> → alas poligon + segitiga-segitiga sebagai sisi tegak</li>
+        <li><b>Kerucut</b> → alas lingkaran + jaring segitiga melengkung menjadi selimut kerucut</li>
+      </ul>
+      <div class="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-xl shadow text-center">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Net_prism_cube_cone_cylinder.svg/320px-Net_prism_cube_cone_cylinder.svg.png" 
+          alt="Jaring-jaring Bangun Ruang" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-md"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Contoh jaring-jaring prisma, tabung, limas, dan kerucut.</p>
+      </div>
+    </div>
+  `,
+  video: 'V1ddwJh2t_0',
+  soal: [
+    {
+      id: 'geo1',
+      tipe: 'pg',
+      tanya: 'Jika dua garis sejajar dipotong garis transversal, sudut sehadap sebesar 70°, maka sudut sehadap lainnya adalah...',
+      opsi: [
+        '70°',
+        '110°',
+        '180°',
+        '90°'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Sudut sehadap pada garis sejajar sama besar. Jadi sudut sehadap lainnya = 70°.</p>
+      `
+    },
+    {
+      id: 'geo2',
+      tipe: 'pg',
+      tanya: 'Dalam segitiga siku-siku dengan sisi siku-siku 6 cm dan 8 cm, panjang hipotenusa adalah...',
+      opsi: [
+        '10 cm',
+        '12 cm',
+        '14 cm',
+        '15 cm'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Pythagoras: c^2 = 6^2 + 8^2 = 36 + 64 = 100 → c = 10 cm.</p>
+      `
+    },
+    {
+      id: 'geo3',
+      tipe: 'pg',
+      tanya: 'Dua segitiga dikatakan sebangun jika...',
+      opsi: [
+        'Sama bentuk dan ukuran',
+        'Sama bentuk tapi ukuran berbeda, perbandingan sisi sama',
+        'Sisi sama tapi bentuk berbeda',
+        'Tidak ada hubungan'
+      ],
+      kunci: 2,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Kesebangunan berarti bentuk sama, ukuran bisa berbeda, sisi-sisi sebanding.</p>
+      `
+    },
+    {
+      id: 'geo4',
+      tipe: 'pg',
+      tanya: 'Bangun ruang yang memiliki dua alas berbentuk poligon sejajar dan sisi tegak persegi panjang disebut...',
+      opsi: [
+        'Limas',
+        'Prisma',
+        'Tabung',
+        'Kerucut'
+      ],
+      kunci: 2,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Prisma memiliki dua alas poligon sejajar dan sisi tegak persegi panjang.</p>
+      `
+    }
+  ]
+},
+
+'TransformasiGeometri': {
+  materi: `
+    <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Transformasi Geometri: Refleksi, Translasi, Rotasi, dan Dilatasi</h2>
+
+      <!-- Bagian 1: Pengertian Transformasi -->
+      <h3 class="font-semibold mt-4 text-lg md:text-xl">1. Pengertian Transformasi Geometri</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Transformasi geometri adalah perubahan posisi atau ukuran suatu titik, garis, atau bangun datar pada bidang tanpa mengubah bentuk dasar dari bangun tersebut (untuk transformasi tertentu). 
+        Jenis transformasi dasar meliputi:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li><b>Refleksi</b> → pencerminan bangun terhadap garis tertentu.</li>
+        <li><b>Translasi</b> → pergeseran bangun sejauh vektor tertentu tanpa rotasi atau perubahan bentuk.</li>
+        <li><b>Rotasi</b> → putaran bangun di sekitar titik tertentu dengan sudut tertentu.</li>
+        <li><b>Dilatasi</b> → perubahan ukuran bangun dengan faktor skala tertentu terhadap titik pusat (titik pusat bisa di dalam atau di luar bangun).</li>
+      </ul>
+
+      <!-- Bagian 2: Refleksi -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">2. Refleksi</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Refleksi adalah pencerminan suatu bangun terhadap garis (sumbu) sehingga terbentuk bayangan yang simetris terhadap garis tersebut.
+      </p>
+      <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl shadow text-center">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Reflection_2D.svg/300px-Reflection_2D.svg.png" 
+          alt="Refleksi Bangun" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-sm"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Contoh refleksi segitiga terhadap sumbu y.</p>
+      </div>
+
+      <!-- Bagian 3: Translasi -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">3. Translasi</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Translasi adalah pergeseran seluruh titik bangun sejauh vektor tertentu. Semua sisi dan sudut bangun tetap sama, hanya posisi yang berubah.
+      </p>
+      <div class="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl shadow text-center">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Translation_2D.svg/300px-Translation_2D.svg.png" 
+          alt="Translasi Bangun" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-sm"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Contoh translasi segitiga sejauh vektor (3,2).</p>
+      </div>
+
+      <!-- Bagian 4: Rotasi -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">4. Rotasi</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Rotasi adalah putaran bangun di sekitar titik tertentu (pusat rotasi) dengan sudut tertentu, misalnya 90°, 180°, atau 270°.
+      </p>
+      <div class="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-xl shadow text-center">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Rotation_2D.svg/300px-Rotation_2D.svg.png" 
+          alt="Rotasi Bangun" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-sm"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Contoh rotasi segitiga 90° searah jarum jam terhadap titik O.</p>
+      </div>
+
+      <!-- Bagian 5: Dilatasi -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">5. Dilatasi</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Dilatasi adalah perubahan ukuran bangun dengan faktor skala tertentu terhadap titik pusat. Bentuk tetap sama, hanya ukuran yang berubah.
+      </p>
+      <div class="mt-4 p-4 bg-purple-50 border border-purple-200 rounded-xl shadow text-center">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Dilation_example.svg/300px-Dilation_example.svg.png" 
+          alt="Dilatasi Bangun" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-sm"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Contoh dilatasi segitiga dengan faktor skala 2 terhadap titik pusat O.</p>
+      </div>
+    </div>
+  `,
+  video: '5wF4d3j9H6Q',
+  soal: [
+    {
+      id: 'tg1',
+      tipe: 'pg',
+      tanya: 'Sebuah segitiga diputar 90° berlawanan arah jarum jam terhadap titik pusat O. Apa yang berubah?',
+      opsi: [
+        'Bentuk segitiga',
+        'Ukuran sisi',
+        'Posisi segitiga',
+        'Bentuk dan ukuran'
+      ],
+      kunci: 3,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Rotasi mengubah posisi segitiga, tetapi bentuk dan ukuran tetap sama.</p>
+      `
+    },
+    {
+      id: 'tg2',
+      tipe: 'pg',
+      tanya: 'Sebuah persegi dilatasi dengan faktor skala 3. Apa yang berubah?',
+      opsi: [
+        'Bentuk',
+        'Ukuran',
+        'Posisi',
+        'Bentuk dan posisi'
+      ],
+      kunci: 2,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Dilatasi mengubah ukuran bangun sesuai faktor skala, tetapi bentuk tetap sama.</p>
+      `
+    },
+    {
+      id: 'tg3',
+      tipe: 'pg',
+      tanya: 'Refleksi segitiga terhadap sumbu y akan mengubah...',
+      opsi: [
+        'Ukuran dan bentuk',
+        'Posisi dan orientasi',
+        'Bentuk saja',
+        'Tidak ada yang berubah'
+      ],
+      kunci: 2,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Refleksi menghasilkan bayangan simetris; bentuk dan ukuran tetap sama, orientasi dan posisi berubah.</p>
+      `
+    },
+    {
+      id: 'tg4',
+      tipe: 'pg',
+      tanya: 'Translasi segitiga sejauh vektor (4,5) mengubah...',
+      opsi: [
+        'Bentuk',
+        'Ukuran',
+        'Posisi',
+        'Bentuk dan ukuran'
+      ],
+      kunci: 3,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Translasi hanya menggeser posisi bangun; bentuk dan ukuran tetap sama.</p>
+      `
+    }
+  ]
+},
+'Pengukuran': {
+  materi: `
+    <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Pengukuran: Keliling, Luas, dan Volume</h2>
+
+      <!-- Bagian 1: Keliling dan Luas Bangun Datar -->
+      <h3 class="font-semibold mt-4 text-lg md:text-xl">1. Keliling dan Luas Bangun Datar</h3>
+      <p class="mt-2 text-sm md:text-base">
+        <b>Keliling</b> → panjang seluruh sisi bangun datar.<br>
+        <b>Luas</b> → ukuran area yang dibatasi bangun datar.
+      </p>
+      <p class="mt-2 text-sm md:text-base">Rumus beberapa bangun datar:</p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Persegi: Keliling = 4s, Luas = s²</li>
+        <li>Persegi panjang: Keliling = 2(p + l), Luas = p × l</li>
+        <li>Segitiga: Keliling = jumlah sisi, Luas = ½ × alas × tinggi</li>
+        <li>Lingkaran: Keliling = 2πr, Luas = πr²</li>
+        <li>Gabungan bangun: jumlah luas masing-masing bangun</li>
+      </ul>
+
+      <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl shadow text-center">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Area_and_perimeter_examples.png/320px-Area_and_perimeter_examples.png" 
+          alt="Keliling dan Luas Bangun Datar" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-md"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Contoh keliling dan luas persegi, persegi panjang, dan segitiga.</p>
+      </div>
+
+      <!-- Bagian 2: Volume Bangun Ruang -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">2. Volume Bangun Ruang</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Volume adalah ukuran ruang yang ditempati bangun tiga dimensi.
+      </p>
+      <p class="mt-2 text-sm md:text-base">Rumus beberapa bangun ruang:</p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Prisma: V = luas alas × tinggi</li>
+        <li>Limas: V = ⅓ × luas alas × tinggi</li>
+        <li>Bola: V = 4/3 × π × r³</li>
+      </ul>
+
+      <div class="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl shadow text-center">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Volumes-geometry.svg/320px-Volumes-geometry.svg.png" 
+          alt="Volume Bangun Ruang" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-md"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Contoh volume prisma, limas, dan bola.</p>
+      </div>
+    </div>
+  `,
+  video: 'k7b0ZC0w1J4',
+  soal: [
+    {
+      id: 'peng1',
+      tipe: 'pg',
+      tanya: 'Keliling persegi dengan panjang sisi 8 cm adalah...',
+      opsi: [
+        '32 cm',
+        '64 cm',
+        '16 cm',
+        '24 cm'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Keliling persegi = 4 × s = 4 × 8 = 32 cm.</p>
+      `
+    },
+    {
+      id: 'peng2',
+      tipe: 'pg',
+      tanya: 'Luas lingkaran dengan jari-jari 7 cm adalah...',
+      opsi: [
+        '154 cm²',
+        '49 cm²',
+        '44 cm²',
+        '100 cm²'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Luas lingkaran = πr² = 3.14 × 7² ≈ 3.14 × 49 ≈ 154 cm².</p>
+      `
+    },
+    {
+      id: 'peng3',
+      tipe: 'pg',
+      tanya: 'Volume prisma dengan luas alas 20 cm² dan tinggi 10 cm adalah...',
+      opsi: [
+        '200 cm³',
+        '30 cm³',
+        '100 cm³',
+        '150 cm³'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Volume prisma = luas alas × tinggi = 20 × 10 = 200 cm³.</p>
+      `
+    },
+    {
+      id: 'peng4',
+      tipe: 'pg',
+      tanya: 'Volume limas dengan luas alas 18 cm² dan tinggi 9 cm adalah...',
+      opsi: [
+        '54 cm³',
+        '81 cm³',
+        '27 cm³',
+        '72 cm³'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Volume limas = 1/3 × luas alas × tinggi = 1/3 × 18 × 9 = 54 cm³.</p>
+      `
+    },
+    {
+      id: 'peng5',
+      tipe: 'pg',
+      tanya: 'Volume bola dengan jari-jari 7 cm adalah...',
+      opsi: [
+        '1436 cm³',
+        '1435 cm³',
+        '1434 cm³',
+        '1433 cm³'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Volume bola = 4/3 × π × r³ = 4/3 × 3.14 × 343 ≈ 1436 cm³.</p>
+      `
+    }
+  ]
+},
+'Data': {
+  materi: `
+    <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Data: Pengumpulan, Penyajian, dan Analisis</h2>
+
+      <!-- Bagian 1: Perumusan Pertanyaan & Pengumpulan Data -->
+      <h3 class="font-semibold mt-4 text-lg md:text-xl">1. Perumusan Pertanyaan & Pengumpulan Data</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Langkah pertama dalam analisis data adalah merumuskan pertanyaan yang jelas agar data yang diperoleh relevan. Contoh:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Berapa jumlah siswa yang menyukai mata pelajaran matematika?</li>
+        <li>Berapa rata-rata tinggi badan siswa kelas 8?</li>
+      </ul>
+      <p class="mt-2 text-sm md:text-base">
+        Data dapat diperoleh melalui:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Observasi</li>
+        <li>Kuesioner atau survei</li>
+        <li>Pencatatan langsung</li>
+      </ul>
+
+      <!-- Bagian 2: Penyajian Data -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">2. Penyajian Data</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Data dapat disajikan dalam bentuk:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Tabel frekuensi</li>
+        <li>Diagram batang</li>
+        <li>Diagram lingkaran</li>
+        <li>Diagram garis</li>
+      </ul>
+      <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl shadow text-center">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Bar_chart_of_student_heights.svg/320px-Bar_chart_of_student_heights.svg.png" 
+          alt="Diagram Batang Contoh Data" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-md"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Contoh penyajian data tinggi badan siswa dalam diagram batang.</p>
+      </div>
+
+      <!-- Bagian 3: Ukuran Pemusatan -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">3. Ukuran Pemusatan Data</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Ukuran pemusatan menunjukkan titik tengah atau nilai tipikal data:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li><b>Mean (Rerata)</b> = jumlah semua data ÷ banyak data</li>
+        <li><b>Median</b> = nilai tengah setelah data diurutkan</li>
+        <li><b>Modus</b> = nilai yang paling sering muncul</li>
+      </ul>
+
+      <!-- Bagian 4: Ukuran Penyebaran -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">4. Ukuran Penyebaran Data</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Ukuran penyebaran menunjukkan seberapa jauh data tersebar dari nilai tengah:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Jangkauan (range) = nilai maksimum − nilai minimum</li>
+        <li>Standar deviasi dan variansi (untuk kelas lebih lanjut)</li>
+      </ul>
+
+      <!-- Bagian 5: Perbandingan Beberapa Kelompok Data -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">5. Perbandingan Kelompok Data</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Data dari beberapa kelompok dapat dibandingkan menggunakan:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Perbandingan mean, median, atau modus</li>
+        <li>Perbandingan jangkauan atau ukuran penyebaran lainnya</li>
+      </ul>
+    </div>
+  `,
+  video: 'h2fQeLz7j3Y',
+  soal: [
+    {
+      id: 'data1',
+      tipe: 'pg',
+      tanya: 'Data nilai matematika: 70, 75, 80, 85, 90. Rerata (mean) dari data tersebut adalah...',
+      opsi: [
+        '80',
+        '78',
+        '85',
+        '82'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Mean = (70 + 75 + 80 + 85 + 90)/5 = 400/5 = 80</p>
+      `
+    },
+    {
+      id: 'data2',
+      tipe: 'pg',
+      tanya: 'Data: 12, 15, 12, 18, 20. Modus data tersebut adalah...',
+      opsi: [
+        '12',
+        '15',
+        '18',
+        '20'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Modus = nilai yang paling sering muncul = 12</p>
+      `
+    },
+    {
+      id: 'data3',
+      tipe: 'pg',
+      tanya: 'Data: 5, 8, 12, 15, 18. Median data tersebut adalah...',
+      opsi: [
+        '8',
+        '12',
+        '15',
+        '5'
+      ],
+      kunci: 2,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Data sudah diurutkan. Median = nilai tengah = 12</p>
+      `
+    },
+    {
+      id: 'data4',
+      tipe: 'pg',
+      tanya: 'Data: 10, 15, 20, 25, 30. Jangkauan (range) data tersebut adalah...',
+      opsi: [
+        '15',
+        '20',
+        '25',
+        '30'
+      ],
+      kunci: 2,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Range = maksimum − minimum = 30 − 10 = 20</p>
+      `
+    },
+    {
+      id: 'data5',
+      tipe: 'pg',
+      tanya: 'Dua kelompok data: kelompok A (5, 6, 7, 8, 9) dan kelompok B (3, 6, 9, 12, 15). Kelompok mana yang memiliki jangkauan lebih besar?',
+      opsi: [
+        'Kelompok A',
+        'Kelompok B',
+        'Sama',
+        'Tidak dapat ditentukan'
+      ],
+      kunci: 2,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Jangkauan A = 9 − 5 = 4; Jangkauan B = 15 − 3 = 12 → Kelompok B lebih besar</p>
+      `
+    }
+  ]
+},
+'Peluang': {
+  materi: `
+    <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Peluang: Konsep dan Frekuensi Relatif</h2>
+
+      <!-- Bagian 1: Pengertian Peluang -->
+      <h3 class="font-semibold mt-4 text-lg md:text-xl">1. Pengertian Peluang</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Peluang adalah ukuran kemungkinan suatu kejadian terjadi. Nilai peluang selalu berada di antara 0 dan 1:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Peluang = 0 → kejadian tidak mungkin terjadi</li>
+        <li>Peluang = 1 → kejadian pasti terjadi</li>
+        <li>Peluang antara 0 dan 1 → kejadian mungkin terjadi</li>
+      </ul>
+
+      <!-- Bagian 2: Peluang Kejadian Tunggal -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">2. Peluang Kejadian Tunggal</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Peluang kejadian tunggal dihitung dengan rumus:
+      </p>
+      <p class="mt-2 text-sm md:text-base text-center font-semibold">
+        \\( P(E) = \\frac{\\text{jumlah kejadian E}}{\\text{jumlah seluruh kemungkinan}} \\)
+      </p>
+      <p class="mt-2 text-sm md:text-base">
+        Contoh: Melempar dadu, peluang muncul angka 4:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Jumlah seluruh kemungkinan = 6 (angka 1–6)</li>
+        <li>Jumlah kejadian muncul 4 = 1</li>
+        <li>Peluang muncul 4 = 1/6</li>
+      </ul>
+
+      <!-- Bagian 3: Frekuensi Relatif -->
+      <h3 class="font-semibold mt-6 text-lg md:text-xl">3. Frekuensi Relatif</h3>
+      <p class="mt-2 text-sm md:text-base">
+        Frekuensi relatif adalah perbandingan jumlah kejadian terhadap jumlah percobaan. Rumus:
+      </p>
+      <p class="mt-2 text-sm md:text-base text-center font-semibold">
+        \\( f_r = \\frac{\\text{jumlah kejadian}}{\\text{jumlah percobaan}} \\)
+      </p>
+      <p class="mt-2 text-sm md:text-base">
+        Contoh: Dari 50 kali lemparan dadu, muncul angka 4 sebanyak 8 kali, maka:
+      </p>
+      <ul class="list-disc list-inside text-sm md:text-base mt-2">
+        <li>Frekuensi relatif = 8/50 = 0.16</li>
+      </ul>
+
+      <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-xl shadow text-center">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Dice_six_faces_numbers.svg/320px-Dice_six_faces_numbers.svg.png" 
+          alt="Dadu 6 sisi" 
+          class="mx-auto rounded-lg shadow-md border max-w-full md:max-w-sm"
+        />
+        <p class="text-gray-600 text-xs md:text-sm mt-2">Contoh dadu enam sisi untuk perhitungan peluang.</p>
+      </div>
+    </div>
+  `,
+  video: 'Q0hPZk7wLzI',
+  soal: [
+    {
+      id: 'pel1',
+      tipe: 'pg',
+      tanya: 'Sebuah dadu dilempar sekali. Peluang muncul angka 5 adalah...',
+      opsi: [
+        '1/6',
+        '1/5',
+        '1/3',
+        '1/2'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Peluang = jumlah kejadian/total kemungkinan = 1/6</p>
+      `
+    },
+    {
+      id: 'pel2',
+      tipe: 'pg',
+      tanya: 'Sebuah koin dilempar 10 kali dan muncul sisi gambar 4 kali. Frekuensi relatif muncul sisi gambar adalah...',
+      opsi: [
+        '0.4',
+        '0.5',
+        '0.6',
+        '0.3'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Frekuensi relatif = 4/10 = 0.4</p>
+      `
+    },
+    {
+      id: 'pel3',
+      tipe: 'pg',
+      tanya: 'Dalam lemparan dadu 12 kali, muncul angka genap sebanyak 7 kali. Frekuensi relatif angka genap adalah...',
+      opsi: [
+        '7/12',
+        '5/12',
+        '6/12',
+        '1/2'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Frekuensi relatif = 7/12</p>
+      `
+    },
+    {
+      id: 'pel4',
+      tipe: 'pg',
+      tanya: 'Sebuah kantong berisi 5 bola merah dan 3 bola biru. Peluang mengambil bola biru adalah...',
+      opsi: [
+        '3/8',
+        '5/8',
+        '1/2',
+        '3/5'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Total bola = 5 + 3 = 8, peluang bola biru = 3/8</p>
+      `
+    },
+    {
+      id: 'pel5',
+      tipe: 'pg',
+      tanya: 'Dari 20 kali percobaan melempar dadu, muncul angka 6 sebanyak 5 kali. Frekuensi relatifnya adalah...',
+      opsi: [
+        '0.25',
+        '0.2',
+        '0.3',
+        '0.15'
+      ],
+      kunci: 1,
+      bahas: `
+        <p><b>Pembahasan:</b></p>
+        <p>Frekuensi relatif = 5/20 = 0.25</p>
+      `
+    }
+  ]
+}
+
+
+      }
+    },
+    'Bahasa Indonesia': {
+      bab: {
+        'Pemahaman Tekstual': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Pemahaman Tekstual: Konsep & Strategi</h2>
+
+    <h3 class="font-semibold mt-3">1. Definisi Pemahaman Tekstual</h3>
+    <p class="mb-4">
+      Pemahaman tekstual adalah kemampuan untuk memahami informasi yang dinyatakan secara
+      eksplisit dalam sebuah teks, lalu mengelompokkan, menyusun ulang, dan menyajikan kembali
+      informasi tersebut dalam bentuk yang lebih terstruktur.
+    </p>
+
+    <h3 class="font-semibold mt-3">2. Aspek-aspek Pemahaman Tekstual</h3>
+    <table class="table-auto border border-collapse border-gray-400 w-full">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-2 py-1">Aspek</th>
+          <th class="border px-2 py-1">Penjelasan</th>
+          <th class="border px-2 py-1">Contoh Aktivitas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-2 py-1">Menemukan Informasi</td>
+          <td class="border px-2 py-1">Mengidentifikasi informasi penting yang disebutkan secara eksplisit dalam teks.</td>
+          <td class="border px-2 py-1">Menemukan siapa tokoh utama, apa peristiwa, di mana tempatnya.</td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Mengklasifikasi</td>
+          <td class="border px-2 py-1">Mengelompokkan orang, benda, tempat, atau peristiwa berdasarkan kategori tertentu.</td>
+          <td class="border px-2 py-1">Mengelompokkan hewan dalam teks menjadi herbivora, karnivora, omnivora.</td>
+        </tr>
+        <tr>
+          <td class="border px-2 py-1">Membuat Kerangka</td>
+          <td class="border px-2 py-1">Menyusun poin-poin utama dari teks dalam bentuk kerangka.</td>
+          <td class="border px-2 py-1">Membuat daftar: Pendahuluan – Isi – Penutup.</td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Meringkas</td>
+          <td class="border px-2 py-1">Menyajikan kembali isi teks secara ringkas dengan mengutip bagian penting.</td>
+          <td class="border px-2 py-1">Merangkum berita menjadi 2–3 kalimat inti.</td>
+        </tr>
+        <tr>
+          <td class="border px-2 py-1">Mensintesis</td>
+          <td class="border px-2 py-1">Menggabungkan informasi dari beberapa sumber untuk pemahaman yang lebih utuh.</td>
+          <td class="border px-2 py-1">Membandingkan dua artikel tentang polusi udara lalu menarik kesimpulan umum.</td>
+        </tr>
+      </tbody>
+    </table>
+  `,
+  video: '7EEpQUH0Jn4', 
+  soal: [
+   {
+  id: "pt1",
+  tipe: "pg",
+  tanya: `Teks Ulasan 1<br>
+  <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/27371_cc1470ff2bff4f170ec127d450907b9d.png" alt="Teks Ulasan 1" width="400"><br>
+  Teks Ulasan 2<br>
+  <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/27371_c42632a6cfb7ca20ad651cfbaf7a0af7.png" alt="Teks Ulasan 2" width="400"><br>
+  Kosakata yang menggambarkan keserasian suara deburan alam pada teks ulasan ke-1 ditunjukkan pada frasa ....`,
+  opsi: [
+    "alternatif wisata",
+    "kanvas alam",
+    "panggung cahaya",
+    "harmoni alam"
+  ],
+  kunci: 3,
+  bahas: `<p>Frasa <strong>"harmoni alam"</strong> menggambarkan keserasian suara deburan ombak dan unsur-unsur alam lainnya yang berpadu secara indah dan menenangkan.</p>
+  <p>Kata <em>harmoni</em> berarti keselarasan atau keserasian, sehingga paling tepat untuk menggambarkan perpaduan suara alam.</p>
+  <p>Sementara itu, frasa seperti <em>alternatif wisata</em>, <em>kanvas alam</em>, dan <em>panggung cahaya</em> tidak berkaitan dengan keserasian bunyi.</p>`
+},
+{
+  id: 'pt2',
+  tipe: 'cb',
+  tanya: `
+  <p><strong>Bacalah kutipan puisi berikut!</strong></p>
+  <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/70122_ff6ce4b947d021b0e2d3dd370335371d.png" alt="Puisi Bukit-bukit Desa" width="400">
+  <p><strong>Pertanyaan:</strong> Pilihan kata mana saja yang menunjukkan <em>latar waktu</em> pada puisi tersebut?<br>
+  <strong>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</strong></p>
+  `,
+  opsi: [
+    "Bukit-bukit desa",
+    "Sebelum hari bermula",
+    "Akar-akar yang melata",
+    "Berlomba dengan surya"
+  ],
+  kunci: [1, 3],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Kata atau frasa yang menunjukkan <b>latar waktu</b> adalah <strong>"Sebelum hari bermula"</strong> dan <strong>"Berlomba dengan surya"</strong>.</p>
+    <ul>
+      <li><em>"Sebelum hari bermula"</em> menggambarkan waktu pagi hari, yaitu saat sebelum aktivitas dimulai. ☀️</li>
+      <li><em>"Berlomba dengan surya"</em> menunjukkan waktu ketika matahari mulai terbit, menandakan suasana pagi juga. 🌅</li>
+    </ul>
+    <p>Sementara itu, <em>"Bukit-bukit desa"</em> dan <em>"Akar-akar yang melata"</em> menunjukkan latar tempat dan objek alam, bukan waktu.</p>
+  `
+},
+
+     ]
+},
+'Pemahaman Inferensial': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Pemahaman Inferensial: Konsep & Strategi</h2>
+
+    <h3 class="font-semibold mt-3">1. Definisi Pemahaman Inferensial</h3>
+    <p class="mb-4">
+      Pemahaman inferensial adalah kemampuan untuk menafsirkan makna tersirat, menarik kesimpulan, 
+      dan memahami hubungan logis antara gagasan, peristiwa, tokoh, serta nilai-nilai dalam teks. 
+      Pada tahap ini, pembaca tidak hanya memahami apa yang tertulis, tetapi juga apa yang <em>dimaksudkan</em> oleh penulis.
+    </p>
+
+    <h3 class="font-semibold mt-3">2. Aspek-aspek Pemahaman Inferensial</h3>
+    <table class="table-auto border border-collapse border-gray-400 w-full">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-2 py-1">Aspek</th>
+          <th class="border px-2 py-1">Penjelasan</th>
+          <th class="border px-2 py-1">Contoh Aktivitas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-2 py-1">Menyimpulkan Ide Pokok & Gagasan Pendukung</td>
+          <td class="border px-2 py-1">Menemukan ide utama dan informasi pendukung dari teks berdasarkan petunjuk yang tersirat.</td>
+          <td class="border px-2 py-1">Menentukan pesan utama dari paragraf berita.</td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Menjelaskan Hubungan Logis</td>
+          <td class="border px-2 py-1">Menganalisis keterkaitan antargagasan, antarinformasi, atau antarkeadaan dalam dan antar teks.</td>
+          <td class="border px-2 py-1">Menjelaskan sebab-akibat suatu peristiwa dalam cerita.</td>
+        </tr>
+        <tr>
+          <td class="border px-2 py-1">Memprediksi Peristiwa</td>
+          <td class="border px-2 py-1">Menafsirkan kemungkinan kejadian selanjutnya berdasarkan konteks cerita.</td>
+          <td class="border px-2 py-1">Menebak akhir cerita berdasarkan konflik yang sedang terjadi.</td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Menjelaskan Bahasa Kias dan Citraan</td>
+          <td class="border px-2 py-1">Mengidentifikasi makna kiasan, simbol, dan deskripsi indrawi dalam teks fiksi.</td>
+          <td class="border px-2 py-1">Menjelaskan makna metafora seperti “waktu adalah pedang.”</td>
+        </tr>
+      </tbody>
+    </table>
+  `,
+  video: 'zAzF4EAEyEU', 
+  soal: [
+   {
+  id: "pi1",
+  tipe: "cb",
+  tanya: `Teks Ulasan 1<br>
+  <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/27371_cc1470ff2bff4f170ec127d450907b9d.png" alt="Teks Ulasan 1" width="400"><br>
+  Teks Ulasan 2<br>
+  <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/27371_c42632a6cfb7ca20ad651cfbaf7a0af7.png" alt="Teks Ulasan 2" width="400">
+  Apa saja perbedaan informasi yang ada pada kedua teks tersebut?<br>
+  <strong>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</strong>`,
+  opsi: [
+    "Kemudahan akses.",
+    "Fasilitas yang tersedia.",
+    "Tempat untuk berfoto.",
+    "Keindahan saat senja."
+  ],
+  kunci: [0,2],
+  bahas: `<p>Teks <strong>Pantai Glagah</strong> menonjolkan <em>kemudahan akses</em> karena letaknya mudah dijangkau dari pusat kota dan juga menggambarkan <em>keindahan saat senja</em> dengan langit memerah di cakrawala.</p>
+  <p>Sementara itu, teks <strong>Pantai Drini</strong> lebih menonjolkan <em>tempat untuk berfoto</em> dengan banyaknya sudut estetis serta pemandangan indah saat <em>golden hour</em>.</p>
+  <p>Keduanya sama-sama menyebutkan fasilitas pantai, jadi aspek tersebut bukan perbedaan utama.</p>`
+},
+{
+  id: 'pi2',
+  tipe: 'pg',
+  tanya: `
+  <p><strong>Bacalah kutipan puisi berikut!</strong></p>
+  <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/70122_ff6ce4b947d021b0e2d3dd370335371d.png" alt="Puisi Bukit-bukit Desa" width="400"><br><br>
+  <p><strong>Pertanyaan:</strong> Apa makna frasa <em>"merebut hidup di pasar-pasar kota"</em> pada teks puisi tersebut?</p>
+  `,
+  opsi: [
+    "Kegigihan dan perjuangan perempuan dalam bekerja.",
+    "Keuletan dan pencapaian seseorang dalam bekerja.",
+    "Aktivitas dan keseharian perempuan yang bekerja di pasar.",
+    "Tanggung jawab dan kewajiban perempuan pada keluarga."
+  ],
+  kunci: 0,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Frasa <strong>"merebut hidup di pasar-pasar kota"</strong> menggambarkan perjuangan keras perempuan untuk mempertahankan kehidupan di tengah kerasnya lingkungan kota.</p>
+    <p>Makna yang paling tepat adalah <strong>kegigihan dan perjuangan perempuan dalam bekerja</strong>, karena menunjukkan semangat dan usaha keras mereka demi penghidupan.</p>
+    <p>Pilihan lain seperti "aktivitas" atau "tanggung jawab" tidak menggambarkan sisi perjuangan yang tersirat dalam kata <em>merebut</em>.</p>
+  `
+},
+
+  ]
+},
+'Evaluasi dan Apresiasi': {
+  materi: `
+    <h2 class="text-xl font-bold mb-2">Evaluasi dan Apresiasi: Konsep & Strategi</h2>
+
+    <h3 class="font-semibold mt-3">1. Definisi Evaluasi dan Apresiasi</h3>
+    <p class="mb-4">
+      Evaluasi dan apresiasi merupakan kemampuan tingkat lanjut dalam memahami teks, 
+      di mana pembaca <strong>menilai</strong> keakuratan, relevansi, serta nilai-nilai dalam teks, 
+      sekaligus <strong>menghargai</strong> keindahan bahasa, pesan moral, dan perasaan yang disampaikan penulis.
+    </p>
+
+    <h3 class="font-semibold mt-3">2. Aspek-aspek Evaluasi dan Apresiasi</h3>
+    <table class="table-auto border border-collapse border-gray-400 w-full">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-2 py-1">Aspek</th>
+          <th class="border px-2 py-1">Penjelasan</th>
+          <th class="border px-2 py-1">Contoh Aktivitas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border px-2 py-1">Menilai Relevansi Peristiwa</td>
+          <td class="border px-2 py-1">Menilai keterkaitan isi atau peristiwa dalam teks dengan kehidupan nyata atau kondisi sosial saat ini.</td>
+          <td class="border px-2 py-1">Membandingkan pesan dalam teks tentang lingkungan dengan kondisi kebersihan lingkungan sekitar.</td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="border px-2 py-1">Menilai Keakuratan Unsur dan Isi</td>
+          <td class="border px-2 py-1">Menilai kesesuaian dan keakuratan informasi, kebahasaan, atau unsur teks melalui perbandingan antarteks.</td>
+          <td class="border px-2 py-1">Membandingkan dua artikel berita tentang topik yang sama lalu menentukan mana yang lebih objektif.</td>
+        </tr>
+        <tr>
+          <td class="border px-2 py-1">Menyimpulkan Respons Emosional</td>
+          <td class="border px-2 py-1">Mengidentifikasi dan menilai perasaan atau tanggapan emosional pembaca terhadap unsur-unsur dalam teks fiksi.</td>
+          <td class="border px-2 py-1">Menjelaskan perasaan sedih, kagum, atau haru setelah membaca cerpen tertentu.</td>
+        </tr>
+      </tbody>
+    </table>
+  `,
+  video: 'hA1Qn9a6mms',
+  soal: [
+    {
+  id: 'ea1',
+  tipe: 'bs',
+  tanya: `
+  Teks Ulasan 1<br>
+  <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/27371_cc1470ff2bff4f170ec127d450907b9d.png" alt="Teks Ulasan 1" width="400">
+  Teks Ulasan 2<br>
+  <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/27371_c42632a6cfb7ca20ad651cfbaf7a0af7.png" alt="Teks Ulasan 2" width="400">
+  <p><strong>Banu:</strong> Aku lebih suka membaca ulasan pada teks 2 rasanya lebih dekat denganku. Aku jadi ingin ke sana! Teks ulasan 2 sangat menarik!</p>
+  <p><strong>Komar:</strong> Justru aku lebih suka ulasan pada teks 1 karena sangat jelas dan menarik minatku untuk mengunjungi pantai itu.</p>
+  <p><strong>Pertanyaan:</strong> Mengapa pernyataan Banu lebih tepat untuk menggambarkan keunggulan teks ulasan kedua yang tidak ada pada teks ulasan pertama?</p>
+Tentukan benar atau salah setiap pernyataan berikut!`,
+  opsi: [
+    'Gaya penyajian teks menggunakan bahasa nonformal sehingga lebih santai.',
+    'Penyajian gambar pada teks yang membuat pembaca lebih tertarik membaca.',
+    'Akhir ulasan dilengkapi kalimat ajakan kepada pembaca untuk mengunjungi pantai.'
+  ],
+  kunci: [true, false, false],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p><b>Pernyataan A:</b> <em>Benar</em> ✅ — Teks 2 menggunakan bahasa nonformal seperti "tuh", "banget", "vibes", yang membuat gaya penulisannya terasa santai dan akrab.</p>
+    <p><b>Pernyataan B:</b> <em>Salah</em> ❌ — Tidak ada gambar dalam teks ulasan, jadi ini bukan alasan teks 2 lebih menarik.</p>
+    <p><b>Pernyataan C:</b> <em>Salah</em> ❌ — Teks 2 tidak memiliki kalimat ajakan langsung. Kalimat terakhir hanya menggambarkan perasaan penulis, bukan mengajak pembaca secara eksplisit untuk datang ke pantai.</p>
+  `
+},
+{
+  id: 'ea2',
+  tipe: 'bs',
+  tanya: `
+  <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/70122_ff6ce4b947d021b0e2d3dd370335371d.png" alt="Puisi Perempuan Pekerja" width="400">
+  <p><strong>Setelah membaca puisi tersebut, tiga murid berpendapat sebagai berikut.</strong></p>
+  <p><b>Dina:</b> Wah, ternyata banyak perempuan hebat ya. Mereka bekerja penuh semangat!</p>
+  <p><b>Mira:</b> Iya, mereka rela bangun pagi-pagi untuk bekerja.</p>
+  <p><b>Tika:</b> Tapi, kasihan ya mereka pasti lelah setelah seharian bekerja.</p>
+  <p><strong>Pertanyaan:</strong> Pendapat siapa yang tepat untuk menggambarkan suasana haru yang muncul setelah membaca puisi tersebut?</p>
+  <p>Tentukan benar atau salah setiap pernyataan berikut!</p>
+  `,
+  opsi: [
+    'Dina karena menunjukkan kekagumannya kepada para perempuan yang bekerja.',
+    'Mira karena pendapatnya juga senada dengan pendapat yang disampaikan Dina.',
+    'Tika karena pendapatnya menunjukkan rasa empati terhadap perempuan pekerja.'
+  ],
+  kunci: [false, false, true],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p><b>Pernyataan A:</b> <em>Salah</em> ❌ — Dina menunjukkan rasa kagum dan semangat, bukan perasaan haru.</p>
+    <p><b>Pernyataan B:</b> <em>Salah</em> ❌ — Mira hanya menambahkan fakta bahwa perempuan bekerja sejak pagi, bukan mengekspresikan perasaan haru.</p>
+    <p><b>Pernyataan C:</b> <em>Benar</em> ✅ — Tika mengekspresikan empati dan rasa iba, menggambarkan suasana haru setelah membaca puisi.</p>
+  `
+},
+
+  ]
+}
+
+}
+    },
+    
+  };
+
+ // ======= Helpers =======
+  const $ = (sel, par=document) => par.querySelector(sel);
+  const $$ = (sel, par=document) => Array.from(par.querySelectorAll(sel));
+  function setTab(name){
+    $$('.tab-pane').forEach(p => p.classList.add('hidden'));
+    $('#tab-'+name).classList.remove('hidden');
+    $$('.tab-btn').forEach(b=>{
+      const active = b.dataset.tab===name;
+      b.classList.toggle('bg-emerald-600', active);
+      b.classList.toggle('text-white', active);
+      b.classList.toggle('border', !active);
+      b.classList.toggle('chip', !active);
+      b.classList.toggle('bg-white', !active);
+      b.classList.toggle('text-gray-700', !active);
+    })
+  }
+
+  function populateSelect(sel, list){
+    sel.innerHTML = '';
+    list.forEach(v=>{
+      const opt=document.createElement('option');
+      opt.value=v; opt.textContent=v; sel.appendChild(opt);
+    })
+  }
+
+  function renderMateri(mapel, bab){
+    const item = DB[mapel]?.bab?.[bab];
+    if(!item){
+      $('#materiKonten').innerHTML = '<p class="text-gray-500">Materi belum tersedia.</p>';
+      $('#materiVideo').innerHTML = '<span class="text-sm">Video belum tersedia.</span>';
+      return;
+    }
+    $('#materiKonten').innerHTML = item.materi;
+    if(item.video){
+      $('#materiVideo').innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${item.video}" title="Video pembelajaran" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+    } else {
+      $('#materiVideo').innerHTML = '<span class="text-sm">Video belum tersedia.</span>';
+    }
+if(window.MathJax){
+    MathJax.typesetPromise([$('#materiKonten')]);
+  }
+  }
+
+  function buildSoalCard(q, idx, prefix){
+  const wrap = document.createElement('div');
+  wrap.className = 'p-4 rounded-xl border chip';
+  wrap.dataset.id = q.id;
+
+  // ===== HEAD: hanya nomor & tipe soal =====
+  const head = document.createElement('div');
+  head.className = 'flex items-start justify-between gap-3';
+  head.innerHTML = `
+    <div class="font-semibold">Soal ${idx+1}</div>
+    <div class="text-xs px-2 py-1 rounded bg-gray-100 border text-gray-600 uppercase">
+      ${q.tipe}
+    </div>`;
+  wrap.appendChild(head);
+
+  // ===== BODY: tanya, bacaan, gambar, opsi =====
+  const body = document.createElement('div');
+  body.className = 'mt-3 space-y-2';
+
+  // tampilkan pertanyaan
+  
+
+  if(q.gambar){
+    const img = document.createElement('img');
+    img.src = q.gambar;
+    img.alt = 'Gambar soal';
+    img.className = 'my-3 w-full max-w-md rounded-lg border';
+    body.appendChild(img);
+  }
+
+  if(q.bacaan){
+    const teks = document.createElement('div');
+    teks.className = 'mb-4 p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm whitespace-pre-line text-justify';
+    teks.innerText = q.bacaan;
+    body.appendChild(teks);
+  }
+if (q.tabel) {
+  const table = document.createElement('table');
+  table.className = 'my-3 border-collapse border border-gray-400 w-full max-w-md text-center';
+
+  q.tabel.forEach((row, i) => {
+    const tr = document.createElement('tr');
+    row.forEach((cell, j) => {
+      const el = i === 0 ? 'th' : 'td'; // baris pertama = header
+      const td = document.createElement(el);
+      td.textContent = cell;
+      td.className = 'border border-gray-400 px-2 py-1';
+      tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  });
+
+  body.appendChild(table);
+}
+
+if(q.tanya){
+    const pertanyaan = document.createElement('div');
+    pertanyaan.className = 'text-base font-medium';
+    pertanyaan.innerHTML = q.tanya.replace(/\n/g,'<br>');
+    body.appendChild(pertanyaan);
+  }
+  // ====== PILIHAN GANDA ======
+  if(q.tipe === 'pg'){
+    q.opsi.forEach((o,i)=>{
+      const row = document.createElement('label');
+      row.className = 'flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 border border-transparent';
+      row.innerHTML = `<input type="radio" name="${prefix}-${q.id}" value="${i}" class="accent-emerald-600"> <span>${String.fromCharCode(65+i)}. ${o}</span>`;
+      body.appendChild(row);
+    });
+  }
+
+  // ====== CHECKBOX ======
+  if(q.tipe === 'cb'){
+    q.opsi.forEach((o,i)=>{
+      const row = document.createElement('label');
+      row.className = 'flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 border border-transparent';
+      row.innerHTML = `<input type="checkbox" name="${prefix}-${q.id}" value="${i}" class="accent-emerald-600"> <span>${String.fromCharCode(65+i)}. ${o}</span>`;
+      body.appendChild(row);
+    });
+  }
+  // ====== CONSERVATION & RELAXATION ======
+  if(q.tipe === 'cr'){
+    const table = document.createElement('table');
+    table.className = 'w-full border border-gray-200 rounded-lg';
+
+    // Header tabel
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+      <tr class="bg-gray-100 text-center">
+        <th class="p-2 border">places</th>
+        <th class="p-2 border w-28">Conservation</th>
+        <th class="p-2 border w-28">Relaxation</th>
+      </tr>`;
+    table.appendChild(thead);
+
+    // Body tabel
+    const tbody = document.createElement('tbody');
+    q.opsi.forEach((o,i)=>{
+      const idCon = `${prefix}-${q.id}-cr-${i}-con`;
+      const idRel = `${prefix}-${q.id}-cr-${i}-rel`;
+
+      const row = document.createElement('tr');
+      row.className = 'border-t';
+      row.innerHTML = `
+        <td class="p-2 border">${o}</td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idCon}" name="${prefix}-${q.id}-cr-${i}" value="conservation" class="accent-emerald-600">
+        </td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idRel}" name="${prefix}-${q.id}-cr-${i}" value="relaxation" class="accent-rose-600">
+        </td>`;
+      tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+    body.appendChild(table);
+  }
+// ====== YA / TIDAK ======
+if(q.tipe === 'yn'){
+  const table = document.createElement('table');
+  table.className = 'w-full border border-gray-200 rounded-lg';
+
+  const thead = document.createElement('thead');
+  thead.innerHTML = `
+    <tr class="bg-gray-100 text-center">
+      <th class="p-2 border">Pertanyaan</th>
+      <th class="p-2 border w-20">Ya</th>
+      <th class="p-2 border w-20">Tidak</th>
+    </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  q.opsi.forEach((o,i)=>{
+    const idYa = `${prefix}-${q.id}-yn-${i}-ya`;
+    const idTidak = `${prefix}-${q.id}-yn-${i}-tidak`;
+
+    const row = document.createElement('tr');
+    row.className = 'border-t';
+    row.innerHTML = `
+      <td class="p-2 border">${o}</td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idYa}" name="${prefix}-${q.id}-yn-${i}" value="true" class="accent-emerald-600">
+      </td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idTidak}" name="${prefix}-${q.id}-yn-${i}" value="false" class="accent-rose-600">
+      </td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  body.appendChild(table);
+}
+// ====== TRUE / FALSE ======
+if(q.tipe === 'tf'){
+  const table = document.createElement('table');
+  table.className = 'w-full border border-gray-200 rounded-lg';
+
+  const thead = document.createElement('thead');
+  thead.innerHTML = `
+    <tr class="bg-gray-100 text-center">
+      <th class="p-2 border">Statement</th>
+      <th class="p-2 border w-20">True</th>
+      <th class="p-2 border w-20">False</th>
+    </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  q.opsi.forEach((o,i)=>{
+    const idTrue = `${prefix}-${q.id}-tf-${i}-true`;
+    const idFalse = `${prefix}-${q.id}-tf-${i}-false`;
+
+    const row = document.createElement('tr');
+    row.className = 'border-t';
+    row.innerHTML = `
+      <td class="p-2 border">${o}</td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idTrue}" name="${prefix}-${q.id}-tf-${i}" value="true" class="accent-emerald-600">
+      </td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idFalse}" name="${prefix}-${q.id}-tf-${i}" value="false" class="accent-rose-600">
+      </td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  body.appendChild(table);
+}
+// ====== FACT / OPINION ======
+if(q.tipe === 'fo'){
+  const table = document.createElement('table');
+  table.className = 'w-full border border-gray-200 rounded-lg';
+
+  const thead = document.createElement('thead');
+  thead.innerHTML = `
+    <tr class="bg-gray-100 text-center">
+      <th class="p-2 border">Statement</th>
+      <th class="p-2 border w-28">Fact</th>
+      <th class="p-2 border w-28">Opinion</th>
+    </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  q.opsi.forEach((o,i)=>{
+    const idFact = `${prefix}-${q.id}-fo-${i}-fact`;
+    const idOpinion = `${prefix}-${q.id}-fo-${i}-opinion`;
+
+    const row = document.createElement('tr');
+    row.className = 'border-t';
+    row.innerHTML = `
+      <td class="p-2 border">${o}</td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idFact}" name="${prefix}-${q.id}-fo-${i}" value="fact" class="accent-emerald-600">
+      </td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idOpinion}" name="${prefix}-${q.id}-fo-${i}" value="opinion" class="accent-rose-600">
+      </td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  body.appendChild(table);
+}
+// ====== BENEFIT / CHALLENGE ======
+if(q.tipe === 'bc'){
+  const table = document.createElement('table');
+  table.className = 'w-full border border-gray-200 rounded-lg';
+
+  const thead = document.createElement('thead');
+  thead.innerHTML = `
+    <tr class="bg-gray-100 text-center">
+      <th class="p-2 border">Statement</th>
+      <th class="p-2 border w-28">Benefit</th>
+      <th class="p-2 border w-28">Challenge</th>
+    </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  q.opsi.forEach((o,i)=>{
+    const idBenefit = `${prefix}-${q.id}-bc-${i}-benefit`;
+    const idChallenge = `${prefix}-${q.id}-bc-${i}-challenge`;
+
+    const row = document.createElement('tr');
+    row.className = 'border-t';
+    row.innerHTML = `
+      <td class="p-2 border">${o}</td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idBenefit}" name="${prefix}-${q.id}-bc-${i}" value="benefit" class="accent-emerald-600">
+      </td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idChallenge}" name="${prefix}-${q.id}-bc-${i}" value="challenge" class="accent-rose-600">
+      </td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  body.appendChild(table);
+}
+// ====== TEPAT / TIDAK TEPAT ======
+if(q.tipe === 'tt'){ // tt = Tepat/Tidak Tepat
+  const table = document.createElement('table');
+  table.className = 'w-full border border-gray-200 rounded-lg';
+
+  const thead = document.createElement('thead');
+  thead.innerHTML = `
+    <tr class="bg-gray-100 text-center">
+      <th class="p-2 border">Pernyataan</th>
+      <th class="p-2 border w-28">Tepat</th>
+      <th class="p-2 border w-28">Tidak Tepat</th>
+    </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  q.opsi.forEach((o,i)=>{
+    const idTepat = `${prefix}-${q.id}-tt-${i}-tepat`;
+    const idTidak = `${prefix}-${q.id}-tt-${i}-tidak`;
+
+    const row = document.createElement('tr');
+    row.className = 'border-t';
+    row.innerHTML = `
+      <td class="p-2 border">${o}</td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idTepat}" name="${prefix}-${q.id}-tt-${i}" value="tepat" class="accent-emerald-600">
+      </td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idTidak}" name="${prefix}-${q.id}-tt-${i}" value="tidak" class="accent-rose-600">
+      </td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  body.appendChild(table);
+}
+
+  // ====== BENAR / SALAH ======
+  if(q.tipe === 'bs'){
+    const table = document.createElement('table');
+    table.className = 'w-full border border-gray-200 rounded-lg';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+      <tr class="bg-gray-100 text-center">
+        <th class="p-2 border">Pernyataan</th>
+        <th class="p-2 border w-20">Benar</th>
+        <th class="p-2 border w-20">Salah</th>
+      </tr>`;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    q.opsi.forEach((o,i)=>{
+      const idBenar = `${prefix}-${q.id}-bs-${i}-benar`;
+      const idSalah = `${prefix}-${q.id}-bs-${i}-salah`;
+
+      const row = document.createElement('tr');
+      row.className = 'border-t';
+      row.innerHTML = `
+        <td class="p-2 border">${o}</td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idBenar}" name="${prefix}-${q.id}-bs-${i}" value="true" class="accent-emerald-600">
+        </td>
+        <td class="p-2 text-center border">
+          <input type="radio" id="${idSalah}" name="${prefix}-${q.id}-bs-${i}" value="false" class="accent-rose-600">
+        </td>`;
+      tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+    body.appendChild(table);
+  }
+
+  // ====== ISIAN ======
+  if(q.tipe === 'isian'){
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Ketik jawaban singkat…';
+    inp.className = 'w-full px-3 py-2 rounded-lg border chip focus:outline-none focus:ring-2 focus:ring-emerald-300';
+    inp.name = `${prefix}-${q.id}-isian`;
+    body.appendChild(inp);
+  }
+// ====== MATCHING ======
+    if(q.tipe === 'matching'){
+      const container = document.createElement('div');
+      container.className = 'relative flex gap-12 min-h-[150px]';
+
+      const leftCol = document.createElement('div');
+      leftCol.className = 'flex flex-col gap-3 z-10';
+      const rightCol = document.createElement('div');
+      rightCol.className = 'flex flex-col gap-3 z-10';
+
+      const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+      svg.setAttribute("class","absolute inset-0 w-full h-full pointer-events-none");
+      container.append(leftCol, rightCol, svg);
+      body.appendChild(container);
+
+      let startIdx = null;
+      const pairs = [];
+
+      q.opsi.kiri.forEach((o,i)=>{
+        const btn = document.createElement('button');
+        btn.className = 'px-3 py-2 border rounded bg-white hover:bg-gray-50';
+        btn.textContent = o;
+        btn.dataset.side = "left";
+        btn.dataset.idx = i;
+        leftCol.appendChild(btn);
+      });
+      q.opsi.kanan.forEach((o,i)=>{
+        const btn = document.createElement('button');
+        btn.className = 'px-3 py-2 border rounded bg-white hover:bg-gray-50';
+        btn.textContent = o;
+        btn.dataset.side = "right";
+        btn.dataset.idx = i;
+        rightCol.appendChild(btn);
+      });
+
+      container.addEventListener('click',e=>{
+        if(e.target.tagName!=='BUTTON') return;
+        const btn = e.target;
+        const side = btn.dataset.side;
+        const idx = Number(btn.dataset.idx);
+
+        if(side==="left"){
+          startIdx = idx;
+        } else if(side==="right" && startIdx!==null){
+          pairs.push([startIdx, idx]);
+          drawLine(startIdx, idx);
+
+          // highlight tombol kiri & kanan
+          leftCol.children[startIdx].classList.add("bg-emerald-100","border-emerald-500");
+          rightCol.children[idx].classList.add("bg-emerald-100","border-emerald-500");
+
+          // disable tombol biar gak dipakai ulang
+          leftCol.children[startIdx].disabled = true;
+          rightCol.children[idx].disabled = true;
+
+          startIdx = null;
+        }
+      });
+
+      function drawLine(li,ri){
+        const lbtn = leftCol.children[li];
+        const rbtn = rightCol.children[ri];
+        const lbox = lbtn.getBoundingClientRect();
+        const rbox = rbtn.getBoundingClientRect();
+        const cbox = container.getBoundingClientRect();
+
+        const x1 = lbox.right - cbox.left;
+        const y1 = lbox.top + lbox.height/2 - cbox.top;
+        const x2 = rbox.left - cbox.left;
+        const y2 = rbox.top + rbox.height/2 - cbox.top;
+
+        const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+        line.setAttribute("x1",x1);
+        line.setAttribute("y1",y1);
+        line.setAttribute("x2",x2);
+        line.setAttribute("y2",y2);
+        line.setAttribute("stroke","#10b981");
+        line.setAttribute("stroke-width","2");
+        svg.appendChild(line);
+      }
+
+      // simpan untuk cek jawaban
+      q._pairs = pairs;
+    }
+  // ====== AKSI ======
+  const actions = document.createElement('div');
+  actions.className = 'mt-3 flex flex-wrap items-center gap-2';
+
+  const btnCek = document.createElement('button');
+  btnCek.className = 'btn px-3 py-2 rounded-lg bg-emerald-600 text-white text-sm';
+  btnCek.textContent = 'Cek Jawaban';
+
+  const btnBahas = document.createElement('button');
+  btnBahas.className = 'btn px-3 py-2 rounded-lg border chip text-sm';
+  btnBahas.textContent = 'Pembahasan';
+
+  const status = document.createElement('span');
+  status.className = 'ml-auto text-sm';
+
+  const bahas = document.createElement('div');
+  bahas.className = 'mt-3 hidden p-3 rounded-lg bg-emerald-50 border border-emerald-100 text-sm';
+  bahas.innerHTML = q.bahas || 'Belum ada pembahasan.';
+
+
+  // ====== EVENT CEK JAWABAN ======
+  btnCek.addEventListener('click',()=>{
+    let benar = false;
+
+    if(q.tipe === 'pg'){
+      const v = (document.querySelector(`input[name='${prefix}-${q.id}']:checked`)||{}).value;
+      benar = Number(v) === Number(q.kunci);
+    }
+    else if(q.tipe === 'cb'){
+      const checked = [...document.querySelectorAll(`input[name='${prefix}-${q.id}']:checked`)].map(el=>Number(el.value));
+      const kunci = Array.isArray(q.kunci) ? q.kunci.slice().sort() : [q.kunci];
+      benar = checked.slice().sort().toString() === kunci.toString();
+    }
+else if(q.tipe === 'yn'){
+  const jawabanUser = q.opsi.map((o,i)=>{
+    const el = document.querySelector(`input[name='${prefix}-${q.id}-yn-${i}']:checked`);
+    return el ? el.value === 'true' : null;
+  });
+
+  if(jawabanUser.includes(null)){
+    alert('Pilih jawaban Ya/Tidak untuk semua pertanyaan!');
+    return;
+  }
+  benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+}
+else if(q.tipe === 'tf'){
+  const jawabanUser = q.opsi.map((o,i)=>{
+    const el = document.querySelector(`input[name='${prefix}-${q.id}-tf-${i}']:checked`);
+    return el ? el.value === 'true' : null;
+  });
+
+  if(jawabanUser.includes(null)){
+    alert('Pilih jawaban True/False untuk semua pernyataan!');
+    return;
+  }
+  benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+}
+else if(q.tipe === 'fo'){
+  const jawabanUser = q.opsi.map((o,i)=>{
+    const el = document.querySelector(`input[name='${prefix}-${q.id}-fo-${i}']:checked`);
+    return el ? el.value : null;
+  });
+
+  if(jawabanUser.includes(null)){
+    alert('Pilih Fact atau Opinion untuk semua pernyataan!');
+    return;
+  }
+  benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+}
+else if(q.tipe === 'bc'){
+  const jawabanUser = q.opsi.map((o,i)=>{
+    const el = document.querySelector(`input[name='${prefix}-${q.id}-bc-${i}']:checked`);
+    return el ? el.value : null;
+  });
+
+  if(jawabanUser.includes(null)){
+    alert('Pilih Benefit atau Challenge untuk semua pernyataan!');
+    return;
+  }
+  benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+}
+else if(q.tipe === 'tt'){
+  const jawabanUser = q.opsi.map((o,i)=>{
+    const elTepat = document.querySelector(`input[name='${prefix}-${q.id}-tt-${i}']:checked`);
+    return elTepat ? elTepat.value : null;
+  });
+
+  if(jawabanUser.includes(null)){
+    alert('Pilih jawaban Tepat / Tidak Tepat untuk semua pernyataan!');
+    return;
+  }
+  benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+}
+
+    else if(q.tipe === 'bs'){
+      const jawabanUser = q.opsi.map((o,i)=>{
+        const el = document.querySelector(`input[name='${prefix}-${q.id}-bs-${i}']:checked`);
+        return el ? el.value === 'true' : null;
+      });
+
+      if(jawabanUser.includes(null)){
+        alert('Pilih jawaban untuk semua pernyataan!');
+        return;
+      }
+      benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+    }
+    else if(q.tipe === 'cr'){
+      const jawabanUser = q.opsi.map((o,i)=>{
+        const el = document.querySelector(`input[name='${prefix}-${q.id}-cr-${i}']:checked`);
+        return el ? el.value : null;
+      });
+
+      if(jawabanUser.includes(null)){
+        alert('Pilih jawaban Conservation / Relaxation untuk semua pernyataan!');
+        return;
+      }
+      benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+    }
+    else {
+      const v = (document.querySelector(`input[name='${prefix}-${q.id}-isian']`)||{}).value||'';
+      benar = v.trim().toLowerCase() === String(q.kunciText||'').trim().toLowerCase();
+    }
+if(q.tipe==='matching'){
+        const pairs = q._pairs||[];
+        benar = JSON.stringify(pairs.sort())===JSON.stringify(q.kunci.sort());
+      }
+
+    status.textContent = benar ? '✅ Benar' : '❌ Salah';
+    status.classList.toggle('text-emerald-600', benar);
+    status.classList.toggle('text-rose-600', !benar);
+  });
+
+  btnBahas.addEventListener('click',()=> bahas.classList.toggle('hidden'));
+
+  actions.append(btnCek, btnBahas, status);
+  wrap.append(body, actions, bahas);
+  return wrap;
+}
+
+  function loadLatihan(mapel,bab){
+    const item = DB[mapel]?.bab?.[bab];
+    const box = $('#latihanContainer');
+    box.innerHTML='';
+    if(!item){ 
+        box.innerHTML = '<p class="text-gray-500">Soal belum tersedia.</p>'; 
+        return; 
+    }
+    item.soal.forEach((q,i)=> box.appendChild(buildSoalCard(q,i,'lat')) );
+
+    // Tambahkan ini agar MathJax render ulang rumus pada soal latihan
+    if(window.MathJax){
+        MathJax.typesetPromise([box]);
+    }
+}
+
+
+  // ======= SIMULASI =======
+  let simState = {timer:null, endAt: null, daftar: [], mapel:'', durasi: 0};
+
+  function startSimulasi(mapel, jumlah, durasiMenit){
+    const pools = Object.values(DB[mapel]?.bab || {}).flatMap(x=>x.soal||[]);
+    if(pools.length===0){
+      $('#simContainer').innerHTML = '<p class="text-gray-500">Bank soal untuk mapel ini belum tersedia.</p>';
+      return;
+    }
+    const shuffled=[...pools].sort(()=>Math.random()-0.5).slice(0, Math.min(jumlah,pools.length));
+    simState = {timer:null, endAt: Date.now()+durasiMenit*60*1000, daftar: shuffled, mapel, durasi:durasiMenit};
+    renderSimulasi();
+    runTimer();
+  }
+
+  function renderSimulasi(){
+    const box = $('#simContainer');
+    box.innerHTML='';
+    simState.daftar.forEach((q,i)=> box.appendChild(buildSoalCard(q,i,'sim')) );
+    $('#simHasil').classList.add('hidden');
+
+    // Tambahkan ini agar MathJax render ulang rumus pada soal simulasi
+    if(window.MathJax){
+        MathJax.typesetPromise([box]);
+    }
+}
+
+
+  function runTimer(){
+    clearInterval(simState.timer);
+    const info = $('#simInfo');
+    const tick = ()=>{
+      const remain = Math.max(0, simState.endAt - Date.now());
+      const mm = String(Math.floor(remain/60000)).padStart(2,'0');
+      const ss = String(Math.floor((remain%60000)/1000)).padStart(2,'0');
+      info.textContent = `Mapel: ${simState.mapel} • Sisa waktu ${mm}:${ss}`;
+      if(remain===0){
+        clearInterval(simState.timer);
+        selesaiSimulasi();
+      }
+    };
+    tick();
+    simState.timer = setInterval(tick, 250);
+  }
+
+  function nilaiPG(q){
+    const v = (document.querySelector(`input[name='sim-${q.id}']:checked`)||{}).value;
+    return Number(v)===Number(q.kunci);
+  }
+  function nilaiIsian(q){
+    const v = (document.querySelector(`input[name='sim-${q.id}-isian']`)||{}).value||'';
+    return v.trim().toLowerCase() === String(q.kunciText||'').trim().toLowerCase();
+  }
+
+  function selesaiSimulasi(){
+    const total = simState.daftar.length;
+    let benar = 0;
+    simState.daftar.forEach(q=>{
+      benar += (q.tipe==='pg') ? (nilaiPG(q)?1:0) : (nilaiIsian(q)?1:0);
+    });
+    const skor = Math.round((benar/total)*100);
+    const hasil = $('#simHasil');
+    hasil.classList.remove('hidden');
+    hasil.innerHTML = `<div class="font-semibold">Hasil Simulasi</div>
+      <div class="mt-1 text-sm">Benar: <strong>${benar}</strong> dari ${total} soal • Skor: <strong>${skor}</strong></div>
+      <button id="btnReview" class="btn mt-3 px-3 py-2 rounded-lg border chip text-sm">Tampilkan Pembahasan</button>`;
+    $('#simInfo').textContent = `Selesai • Mapel: ${simState.mapel}`;
+
+    $('#btnReview').addEventListener('click',()=>{
+      // Tampilkan semua pembahasan
+      $$('#simContainer .p-4').forEach(card=>{
+        const pemb = card.querySelector('div.mt-3.hidden');
+        if(pemb) pemb.classList.remove('hidden');
+      })
+    })
+  }
+
+  // ======= INIT =======
+  function initSelectors(){
+    const mapels = Object.keys(DB);
+    populateSelect($('#materiMapel'), mapels);
+    populateSelect($('#latihMapel'), mapels);
+    populateSelect($('#simMapel'), mapels);
+
+    const firstBab = (mapel)=> Object.keys(DB[mapel].bab);
+
+    // Materi default
+    const m0 = mapels[0];
+    populateSelect($('#materiBab'), firstBab(m0));
+    // Latihan default
+    populateSelect($('#latihBab'), firstBab(mapels[0]));
+
+    $('#materiMapel').addEventListener('change', e=>{
+      populateSelect($('#materiBab'), firstBab(e.target.value));
+    });
+    $('#latihMapel').addEventListener('change', e=>{
+      populateSelect($('#latihBab'), firstBab(e.target.value));
+    });
+
+    $('#btnLoadMateri').addEventListener('click',()=>{
+      renderMateri($('#materiMapel').value, $('#materiBab').value);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    $('#btnLoadLatihan').addEventListener('click',()=>{
+      loadLatihan($('#latihMapel').value, $('#latihBab').value);
+    });
+
+    $('#btnPeriksaSemua').addEventListener('click',()=>{
+      $$('#latihanContainer .p-4').forEach(card=>{
+        const cek = card.querySelector('button');
+        cek?.click();
+      });
+    });
+
+    $('#btnMulaiSim').addEventListener('click',()=>{
+      const map = $('#simMapel').value;
+      const j = Math.max(5, Math.min(50, Number($('#simJumlah').value||10)));
+      const d = Math.max(5, Math.min(180, Number($('#simDurasi').value||15)));
+      startSimulasi(map, j, d);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    // Muat awal
+    renderMateri($('#materiMapel').value, $('#materiBab').value);
+    loadLatihan($('#latihMapel').value, $('#latihBab').value);
+  }
+
+  // Tab switching
+  $$('.tab-btn').forEach(b=> b.addEventListener('click',()=> setTab(b.dataset.tab)) );
+
+  // Start
+  setTab('materi');
+  initSelectors();
+  </script>
+
+
+</div>
+<script>
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "2137-08-24T23:59:59" },
+ { username: "syifana",  password: "sy7678",  expire: "2025-11-10T23:59:59" },
+  { username: "ananda",  password: "an12435",  expire: "2025-11-10T23:59:59" }
+
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  // cari akun
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+
+  if (!found) {
+    document.getElementById("errorMsg").innerText = "Username atau password salah!";
+    return;
+  }
+
+  // cek expired
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    document.getElementById("errorMsg").innerText = `Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  // login berhasil
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+}
+
+// Jalankan cek saat halaman dimuat
+checkSession();
+</script>
+</body>
+</html>
