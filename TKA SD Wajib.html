@@ -50,6 +50,34 @@
       <button data-tab="simulasi" class="tab-btn btn py-2 rounded-lg bg-white border chip text-xs font-semibold">Simulasi</button>
     </div>
   </div>
+<!-- LOGIN BOX -->
+<div id="loginForm" class="flex items-center justify-center min-h-screen bg-gradient-to-br from-emerald-100 to-cyan-100">
+  <div class="w-full max-w-sm p-6 rounded-2xl shadow-lg bg-white/70 backdrop-blur-md">
+    <h2 class="text-2xl font-bold text-emerald-700 text-center mb-5">Login</h2>
+    
+    <input type="text" id="username" placeholder="Username"
+      class="w-full px-4 py-2 mb-3 border rounded-lg focus:ring-2 focus:ring-emerald-400 focus:outline-none" />
+    
+    <input type="password" id="password" placeholder="Password"
+      class="w-full px-4 py-2 mb-3 border rounded-lg focus:ring-2 focus:ring-emerald-400 focus:outline-none" />
+    
+    <button onclick="checkLogin()" 
+      class="w-full py-2 mt-2 font-semibold text-white rounded-lg bg-emerald-500 hover:bg-emerald-600 active:scale-95 transition">
+      Masuk
+    </button>
+    
+    <p id="errorMsg" class="text-sm text-red-500 mt-2 text-center"></p>
+  </div>
+</div>
+
+<!-- CONTENT SETELAH LOGIN -->
+<div id="content22" class="hidden">
+  <!-- Tombol Sidebar -->
+  <div class="p-4">
+    <button class="text-emerald-600 text-2xl" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6">
     <!-- Info links to Pusmendik -->
@@ -1059,120 +1087,29 @@ Jawaban benar = 2 botol minuman dan 3 bungkus roti.`
   video: "dSa_FwiFfModSa_FwiFfMo",
   soal: [
 {
-  id:'geo1',
-  tipe:'pg',
-gambar:'https://i.imgur.com/4TWkccs.png',
-bacaan:'Mae sedang bermain ular tangga dengan Doni. Bermain ular tangga membutuhkan dadu dan bidak. Diketahui bahwa jumlah titik pada setiap dua sisi berlawanan pada dadu adalah 7. Pada saat giliran Mae bermain, Mae melempar dadunya. Berikut adalah dadu hasil lemparan Mae dengan sisi atas menunjukkan 4 titik. ',
-  tanya:'Pada dadu tersebut, banyak titik yang ada di sisi bawah adalah ….',
-  opsi:['2','3','4','5'],
-  kunci:1,
-  bahas:`Pada dadu, jumlah titik pada sisi berlawanan selalu 7.  
-Jika sisi atas menunjukkan 4 titik, maka sisi bawah = \\(7 - 4 = 3\\).  
-Jadi jawabannya adalah 3.`
+      id: 'geo1',
+      tipe: 'cb',
+      bacaan: 'Perhatikan sifat-sifat bangun datar trapesium berikut:',
+      tanya: 'Manakah pernyataan yang benar tentang trapesium?<br><i>Pilihan jawaban benar lebih dari satu</i>',
+      opsi: [
+        'Mempunyai empat sisi dan empat sudut',
+        'Hanya mempunyai sepasang sisi sejajar',
+        'Hanya mempunyai dua sudut 90°'
+      ],
+      kunci: [0,1],
+      bahas: `<p>1. Mempunyai empat sisi dan empat sudut → <b>Benar</b>, karena trapesium termasuk bangun segi empat.<br>
+2. Hanya mempunyai sepasang sisi sejajar → <b>Benar</b>, karena ciri utama trapesium adalah satu pasang sisi sejajar.<br>
+3. Hanya mempunyai dua sudut 90° → <b>Salah</b>, karena sifat ini hanya dimiliki trapesium siku-siku, bukan semua trapesium.</p><p>Jadi, pernyataan yang benar adalah <b>1 dan 2</b>.</p>`
 },
 {
-  id:'geo2',
-  tipe:'pg',
-  bacaan:'Sebuah dadu standar dilempar. Diketahui sisi atas menunjukkan 5 titik, dan sisi depan menunjukkan 3 titik. Pada dadu standar, sisi yang berhadapan jumlahnya 7 dan tiga sisi yang saling berdekatan jumlahnya 12 atau kurang. ',
-  tanya:'Banyak titik pada sisi samping kanan dadu adalah ….',
-  opsi:['1','2','4','6'],
-  kunci:2,
-  bahas:`Diketahui:  
-- Sisi atas = 5 → sisi bawah = 2.  
-- Sisi depan = 3 → sisi belakang = 4.  
-Tersisa sisi kiri dan kanan, yaitu 1 dan 6.  
-Karena 5 (atas), 3 (depan), dan 6 tidak mungkin bersebelahan (jumlahnya 14), maka sisi kanan bukan 6 tetapi 4.  
-Jadi jawabannya adalah 4.`
-},
-
-        {
-      id: 'geo3',
+      id: 'geo2',
       tipe: 'pg',
-      bacaan: 'Perhatikan gambar jaring-jaring kubus berikut:',
-      tanya: 'Jika jaring-jaring tersebut dilipat menjadi kubus, huruf manakah yang akan berhadapan dengan sisi bertuliskan A?',
-      opsi: ['B', 'C', 'D', 'E'],
-      kunci: 1,
-      bahas: 'Saat jaring dilipat, sisi A akan berhadapan dengan sisi C.'
-    },
-    {
-      id: 'geo4',
-      tipe: 'isian',
-      bacaan: 'Sebuah balok memiliki panjang 8 cm, lebar 6 cm, dan tinggi 4 cm.',
-      tanya: 'Hitunglah luas permukaan balok tersebut!',
-      kunciText: '208',
-      bahas: 'Luas permukaan balok = 2 × (pl + pt + lt) = 2 × (8×6 + 8×4 + 6×4) = 2 × (48+32+24) = 208 cm².'
-    },
-    {
-      id: 'geo5',
-      tipe: 'isian',
-      bacaan: 'Seorang arsitek membuat desain gedung dengan tampak depan berbentuk persegi panjang, tampak samping berbentuk segitiga, dan tampak atas berbentuk persegi.',
-      tanya: 'Jelaskan bangun ruang apa yang mungkin terbentuk dari rancangan tersebut!',
-      kunciText: 'Prisma segitiga',
-      bahas: 'Karena tampak atas berbentuk persegi (alas), tampak depan berbentuk persegi panjang (sisi tegak), dan tampak samping berbentuk segitiga, maka bangun yang terbentuk adalah prisma segitiga dengan alas persegi.'
-    },
-{
-  id:'geo6',
-  tipe:'pg',
-  bacaan:'Sebuah balok memiliki volume 504 cm^3. Panjang balok tersebut adalah 9 cm dan lebarnya 8 cm.',
-  tanya:'Tinggi balok tersebut adalah ….',
-  opsi:['6 cm','7 cm','8 cm','9 cm'],
-  kunci:1,
-  bahas:`Diketahui volume balok \\(V = p \\times l \\times t\\).  
-Maka \\(504 = 9 \\times 8 \\times t\\).  
-\\(504 = 72 \\times t\\).  
-\\(t = 504 / 72 = 7\\).  
+      tanya: 'Perhatikan gambar berikut: <br><img src="https://akcdn.detik.net.id/community/media/visual/2022/06/20/kubus_169.jpeg?w=700&q=90" class="w-48 mx-auto my-2"/>Banyak rusuk pada bangun di atas adalah ....',
+      opsi: ['12', '10', '8', '6'],
+      kunci: 0,
+      bahas: `<p>Bangun pada gambar adalah sebuah <b>kubus</b>.<br>Kubus memiliki \\( 12 \\) rusuk, \\( 8 \\) titik sudut, dan \\( 6 \\) sisi.</p><p>Jadi, banyak rusuk pada bangun tersebut adalah <b>12</b>.</p>`
+},
 
-Eh, koreksi: hasilnya adalah 7 cm, jadi jawaban yang benar adalah opsi (2).`
-},
-{
-  id:'geo10',
-  tipe:'pg',
-  bacaan:'Sebuah bangun mempunyai sifat-sifat sebagai berikut:<br>- mempunyai empat simetri lipat<br>- keempat sisinya sama panjang<br>- kedua diagonalnya berpotongan tegak lurus',
-  tanya:'Bangun datar yang dimaksud adalah …',
-  opsi:[
-    'Trapesium',
-    'Jajargenjang',
-    'Belah ketupat',
-    'Persegi panjang'
-  ],
-  kunci:2,
-  bahas:`- Trapesium tidak memiliki 4 simetri lipat.  
-- Jajargenjang tidak memiliki diagonal tegak lurus.  
-- Persegi panjang memiliki 2 simetri lipat, bukan 4.  
-- Belah ketupat: sisi sama panjang, diagonal tegak lurus, dan memiliki 4 simetri lipat. → BENAR.`
-},
-{
-  id:'geo11',
-  tipe:'cb',
-  bacaan:'Perhatikan sifat-sifat bangun datar berikut!',
-  tanya:'Manakah pernyataan yang benar tentang persegi panjang? (jawaban benar bisa lebih dari satu)',
-  opsi:[
-    'Memiliki 2 pasang sisi sejajar.',
-    'Memiliki 4 sudut siku-siku.',
-    'Diagonalnya sama panjang.',
-    'Memiliki 4 simetri lipat.'
-  ],
-  kunci:[0,1,2],
-  bahas:`- Persegi panjang punya 2 pasang sisi sejajar → BENAR.  
-- Semua sudutnya siku-siku → BENAR.  
-- Diagonalnya sama panjang → BENAR.  
-- Simetri lipat persegi panjang hanya 2, bukan 4 → SALAH.`
-},
-{
-  id:'geo12',
-  tipe:'bs',
-  bacaan:'Perhatikan bangun datar belah ketupat!',
-  tanya:'Tentukan benar atau salah untuk setiap pernyataan berikut!',
-  opsi:[
-    'Semua sisi belah ketupat sama panjang.',
-    'Diagonal belah ketupat selalu sama panjang.',
-    'Belah ketupat memiliki 2 simetri lipat.'
-  ],
-  kunci:[true, false, true],
-  bahas:`- Semua sisi belah ketupat sama panjang → BENAR.  
-- Diagonal belah ketupat tegak lurus, tetapi tidak selalu sama panjang → SALAH.  
-- Belah ketupat memiliki 2 simetri lipat → BENAR.`
-},
 
   ]
 },
@@ -1299,648 +1236,93 @@ Eh, koreksi: hasilnya adalah 7 cm, jadi jawaban yang benar adalah opsi (2).`
   `,
   video: "nFo2HzG7GHU",
   soal: [
-    {
-      id: 'ukur1',
-      tipe: 'pg',
-      bacaan: 'Sebuah lingkaran berjari-jari 14 cm.',
-      tanya: 'Berapakah keliling lingkaran tersebut? (π=22/7)',
-      opsi: ['44 cm', '88 cm', '154 cm', '308 cm'],
-      kunci: 1,
-      bahas: 'Keliling = 2πr = 2 × 22/7 × 14 = 88 cm.'
-    },
-    {
+{
+  id: 'ukur1',
+  tipe: 'cb',
+  bacaan: `Setiap bulan Ramadan, SD Harapan mengadakan bakti sosial. Mereka membagi sembako yang berisi 3 kg beras, dua bungkus gula pasir dengan berat masing-masing kemasan 5 hg, dan lima bungkus mi instan dengan berat per bungkus 85 g.`,
+  tanya: 'Seberapa berat paket sembako tersebut?<br><br><b>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</b>',
+  opsi: [
+    'Total berat semua isi paket adalah 425 gram.',
+    'Berat mi instan dalam paket tersebut lebih dari 0,5 kg.',
+    'Satu kemasan gula pasir lebih berat dibandingkan seluruh mi.'
+  ],
+  kunci: [2],
+  bahas: `
+  <p>Langkah-langkah:</p>
+  <ul>
+    <li>Berat beras = \\( 3 \\text{ kg} = 3000 \\text{ g} \\)</li>
+    <li>Berat gula = \\( 2 \\times 5 \\text{ hg} = 2 \\times 500 \\text{ g} = 1000 \\text{ g} \\)</li>
+    <li>Berat mi instan = \\( 5 \\times 85 \\text{ g} = 425 \\text{ g} \\)</li>
+  </ul>
+  <p><b>Total berat paket sembako:</b> \\( 3000 + 1000 + 425 = 4425 \\text{ g} = 4{,}425 \\text{ kg} \\)</p>
+  <p>Berat mi instan = \\( 425 \\text{ g} = 0{,}425 \\text{ kg} \\), artinya kurang dari 0,5 kg.</p>
+  <p>Satu kemasan gula pasir beratnya \\( 500 \\text{ g} \\), lebih besar dari total mi \\( 425 \\text{ g} \\).</p>
+  <p><b>Jadi, pernyataan yang benar adalah:</b></p>
+  <ul>
+    <li>Pernyataan 1 <b>salah </b>(karena total bukan 425 g, melainkan 4425 g).</li>
+    <li>Pernyataan 2 <b>salah </b> (karena 0,425 kg &lt; 0,5 kg).</li>
+    <li>Pernyataan 3 <b>benar </b>(satu kemasan gula lebih berat dari semua mi).</li>
+  </ul>
+  <p><b>Jadi, jawaban yang benar adalah pernyataan ke-3.</b></p>
+  `
+},
+
+{
       id: 'ukur2',
       tipe: 'pg',
-      bacaan: 'Diketahui balok berukuran panjang 6 cm, lebar 4 cm, dan tinggi 5 cm.',
-      tanya: 'Volume balok tersebut adalah …',
-      opsi: ['120 cm³', '100 cm³', '60 cm³', '80 cm³'],
-      kunci: 0,
-      bahas: 'Volume balok = p × l × t = 6 × 4 × 5 = 120 cm³.'
-    },
-    {
+      bacaan: 'Tinggi awal tembok Pak Yadi 225 cm. Kemudian tingginya ditambah 750 mm. Beberapa hari kemudian tembok tersebut roboh bagian atasnya setinggi 4 dm.',
+      tanya: 'Tinggi tembok Pak Yadi sekarang adalah .... cm',
+      opsi: ['230', '240', '250', '260'],
+      kunci: 3,
+      bahas: `<p>Tinggi awal = 225 cm.<br>750 mm = 75 cm, sehingga tinggi menjadi \\( 225 + 75 = 300 \\) cm.<br>Lalu roboh setinggi 4 dm = 40 cm.</p><p>Maka tinggi sekarang \\( = 300 - 40 = 260 \\) cm.</p><p>Jadi, tinggi tembok Pak Yadi sekarang adalah <b>260 cm</b>.</p>`
+},
+{
       id: 'ukur3',
-      tipe: 'bs',
-      bacaan: 'Diketahui titik A(0,3) dan garis y=−1.',
-      tanya: 'Tentukan benar (B) atau salah (S):',
-      opsi: [
-        '1. Jarak titik A ke garis y=−1 adalah 4 satuan',
-        '2. Jarak titik A ke garis y=−1 sama dengan |3−(−1)|',
-        '3. Jarak titik A ke garis y=−1 adalah 2 satuan'
-      ],
-      kunci: [true, true, false],
-      bahas: 'Jarak titik ke garis horizontal: |3−(−1)|=4. Jadi pernyataan 1 & 2 benar, pernyataan 3 salah.'
-    },
-    {
+      tipe: 'pg',
+      bacaan: 'Pak Hadi mengisi kolam ikan dengan air selama 2,5 jam. Jika debit air yang mengalir 45 liter per menit.',
+      tanya: 'Volume air yang telah mengalir sebanyak ....',
+      opsi: ['33 liter', '112,5 liter', '1.125 liter', '6.750 liter'],
+      kunci: 3,
+      bahas: `<p>Waktu \\( 2{,}5 \\) jam = \\( 2{,}5 \\times 60 = 150 \\) menit.<br>Debit air \\( = 45 \\) liter/menit.</p><p>Volume \\( = 45 \\times 150 = 6.750 \\) liter.</p><p>Jadi, volume air yang telah mengalir sebanyak <b>6.750 liter</b>.</p>`
+},
+{
       id: 'ukur4',
-      tipe: 'cb',
-      bacaan: 'Perhatikan pernyataan tentang luas permukaan bangun ruang:\n(1) Luas permukaan kubus = 6s².\n(2) Luas permukaan tabung = 2πr(r+t).\n(3) Luas permukaan prisma = luas alas × 2 + luas selimut.',
-      tanya: 'Pernyataan yang benar adalah …',
-      opsi: ['(1) saja', '(1) dan (2)', '(1) dan (3)', '(1), (2), dan (3)'],
-      kunci: [3],
-      bahas: 'Semua rumus yang disebutkan adalah benar → (1),(2),(3).'
-    },
-    {
+      tipe: 'pg',
+      bacaan: 'Di dalam gudang Pak Rudi terdapat gula 12 1/2 ton, beras 7 1/2 kwintal, dan tepung 750 hg.',
+      tanya: 'Berat isi gudang Pak Rudi seluruhnya adalah ....',
+      opsi: ['13.225 kg', '13.325 kg', '13.900 kg', '14.000 kg'],
+      kunci: 1,
+      bahas: `<p>Gula = \\( 12\\tfrac{1}{2} \\text{ ton} = 12{,}5 \\times 1.000 = 12.500 \\) kg.<br>Beras = \\( 7\\tfrac{1}{2} \\text{ kwintal} = 7{,}5 \\times 100 = 750 \\) kg.<br>Tepung = \\( 750 \\text{ hg} = 750 \\times 0{,}1 = 75 \\) kg.</p><p>Total berat = \\( 12.500 + 750 + 75 = 13.325 \\) kg.</p><p>Jadi, berat isi gudang Pak Rudi seluruhnya adalah <b>13.325 kg</b>.</p>`
+},
+{
       id: 'ukur5',
       tipe: 'pg',
-      bacaan: 'Sebuah kerucut memiliki jari-jari alas 7 cm dan tinggi 24 cm.',
-      tanya: 'Berapakah panjang garis pelukis kerucut?',
-      opsi: ['25 cm', '24 cm', '26 cm', '20 cm'],
-      kunci: 0,
-      bahas: 's = √(r²+h²) = √(7²+24²) = √(49+576) = √625 = 25 cm.'
-    },
- {
-    id: 'ukur6',
-    tipe: 'bs',
-    bacaan: 'Segitiga ABC memiliki sisi AB=6 cm, BC=8 cm, dan AC=10 cm.',
-    tanya: 'Tentukan benar (B) atau salah (S) untuk pernyataan berikut:',
-    opsi: [
-      'Segitiga ABC merupakan segitiga siku-siku',
-      'Keliling segitiga ABC adalah 24 cm',
-      'Luas segitiga ABC adalah 24 cm²',
-      'Segitiga ABC sebangun dengan segitiga dengan sisi 3,4,5'
-    ],
-    kunci: [true, true, true, true],
-    bahas: '✅ 6²+8²=36+64=100=10² → segitiga siku-siku.\n✅ Keliling=6+8+10=24.\n✅ Luas=½×6×8=24.\n✅ Perbandingan 6:8:10 = 3:4:5 → sebangun.'
-  },
-  {
-    id: 'ukur7',
-    tipe: 'pg',
-    bacaan: 'Sebuah lingkaran memiliki jari-jari 14 cm (π=22/7).',
-    tanya: 'Luas lingkaran tersebut adalah …',
-    opsi: ['154 cm²', '308 cm²', '616 cm²', '704 cm²'],
-    kunci: 2,
-    bahas: 'L=πr²=22/7×14²=22/7×196=616 cm².'
-  },
-  {
-    id: 'ukur8',
-    tipe: 'cb',
-    bacaan: 'Perhatikan pernyataan tentang keliling bangun datar gabungan:',
-    tanya: 'Bangun gabungan setengah lingkaran menempel pada sisi persegi dengan sisi 14 cm. Pernyataan yang benar adalah …',
-    opsi: [
-      'Keliling = 4s',
-      'Keliling = 3s + ½×keliling lingkaran',
-      'Keliling = 2s + πr',
-      'Keliling = s + πr'
-    ],
-    kunci: [1,2],
-    bahas: 'Keliling gabungan = 3 sisi persegi + setengah lingkaran.\nKarena r=7, maka ½ keliling lingkaran = πr.'
-  },
-  {
-    id: 'ukur9',
-    tipe: 'pg',
-    bacaan: 'Sebuah balok berukuran 6×4×5 cm.',
-    tanya: 'Luas permukaan balok tersebut adalah …',
-    opsi: ['148 cm²', '164 cm²', '188 cm²', '196 cm²'],
-    kunci: 1,
-    bahas: 'L=2(pl+pt+lt)=2(6×4+6×5+4×5)=2(24+30+20)=2×74=148 cm² (cek ulang → harusnya 148, bukan 164).'
-  },
-  {
-    id: 'ukur10',
-    tipe: 'bs',
-    bacaan: 'Kubus dengan panjang rusuk 8 cm.',
-    tanya: 'Tentukan benar (B) atau salah (S) untuk pernyataan berikut:',
-    opsi: [
-      'Volume kubus = 512 cm³',
-      'Luas permukaan kubus = 384 cm²',
-      'Diagonal ruang kubus = 8√3 cm',
-      'Diagonal sisi kubus = 8√2 cm'
-    ],
-    kunci: [true, true, true, true],
-    bahas: 'V=s³=512. L=6s²=6×64=384. Diagonal ruang = s√3=8√3. Diagonal sisi = s√2=8√2.'
-  },
-  {
-    id: 'ukur11',
-    tipe: 'pg',
-    bacaan: 'Sebuah tabung dengan jari-jari 7 cm dan tinggi 10 cm (π=22/7).',
-    tanya: 'Volume tabung tersebut adalah …',
-    opsi: ['1540 cm³', '770 cm³', '3080 cm³', '2200 cm³'],
-    kunci: 0,
-    bahas: 'V=πr²t=22/7×49×10=1540 cm³.'
-  },
-  {
-    id: 'ukur12',
-    tipe: 'cb',
-    bacaan: 'Perhatikan pernyataan tentang jarak dalam geometri ruang:',
-    tanya: 'Pernyataan yang benar adalah …',
-    opsi: [
-      'Jarak titik ke garis selalu melalui garis tegak lurus',
-      'Jarak titik ke bidang adalah panjang tegak lurus dari titik ke bidang',
-      'Jarak dua garis sejajar adalah panjang ruas garis tegak lurus yang menghubungkan keduanya',
-      'Jarak dua titik adalah jumlah koordinat kedua titik'
-    ],
-    kunci: [0,1,2],
-    bahas: '✅ Semua definisi benar kecuali jarak dua titik, seharusnya √((x2−x1)²+(y2−y1)²+(z2−z1)²).'
-  },
-  {
-    id: 'ukur13',
-    tipe: 'pg',
-    bacaan: 'Titik A(2,3) dan B(6,9).',
-    tanya: 'Jarak AB adalah …',
-    opsi: ['5', '6', '7', '8'],
-    kunci: 1,
-    bahas: 'Jarak = √((6−2)²+(9−3)²)=√(16+36)=√52=2√13 ≈ 7,2 → seharusnya opsi 7 yang benar.'
-  },
-  {
-    id: 'ukur14',
-    tipe: 'bs',
-    bacaan: 'Sebuah kerucut dengan jari-jari 9 cm dan tinggi 12 cm.',
-    tanya: 'Tentukan benar (B) atau salah (S) untuk pernyataan berikut:',
-    opsi: [
-      'Panjang garis pelukis kerucut = 15 cm',
-      'Volume kerucut = 324π cm³',
-      'Luas alas kerucut = 81π cm²',
-      'Luas permukaan kerucut = 324π cm²'
-    ],
-    kunci: [true, true, true, false],
-    bahas: 's=√(r²+h²)=√(81+144)=15. V=⅓πr²h=⅓π×81×12=324π. Luas alas=πr²=81π. Luas permukaan=πr(s+r)=π×9×24=216π, bukan 324π.'
-  },
-  {
-    id: 'ukur15',
-    tipe: 'pg',
-    bacaan: 'Dua bidang sejajar berjarak 8 cm. Titik P berada pada salah satu bidang.',
-    tanya: 'Jarak titik P ke bidang lainnya adalah …',
-    opsi: ['0 cm', '4 cm', '8 cm', '16 cm'],
-    kunci: 2,
-    bahas: 'Jika titik P berada pada bidang pertama, maka jaraknya ke bidang sejajar kedua adalah tepat 8 cm.'
-  },
-{
-    id: 'ukur16',
-    tipe: 'pg',
-    bacaan: 'Sebuah taman berbentuk persegi dengan sisi 20 m. Di setiap sudut taman ditanami seperempat lingkaran rumput (r=10 m).',
-    tanya: 'Luas area rumput yang ditanami adalah …',
-    opsi: ['200π m²', '300π m²', '400π m²', '600π m²'],
-    kunci: 2,
-    bahas: '4 × ¼ lingkaran = 1 lingkaran penuh dengan r=10. Luas=πr²=π×100=100π ≈ 314 m² → paling dekat 400π m².'
-  },
-  {
-    id: 'ukur17',
-    tipe: 'bs',
-    bacaan: 'Sebuah silinder pejal (tabung) dilubangi dengan kerucut yang memiliki alas sama dan tinggi sama.',
-    tanya: 'Tentukan benar (B) atau salah (S):',
-    opsi: [
-      'Volume benda = volume tabung – volume kerucut',
-      'Volume benda = ⅔ volume tabung',
-      'Jika r=6 cm, t=9 cm → volume benda = 648π cm³',
-      'Jika tinggi diperbesar, perbandingan volume tabung dan kerucut tetap'
-    ],
-    kunci: [true, true, true, true],
-    bahas: 'Vtabung=πr²t. Vkerucut=⅓πr²t. Selisih=⅔πr²t. Jika r=6,t=9→⅔π×36×9=216π=≈678 cm³ (opsi 648π mendekati). Perbandingan tetap karena faktor ⅓.'
-  },
-  {
-    id: 'ukur18',
-    tipe: 'pg',
-    bacaan: 'Dua pipa air berbentuk tabung berjari-jari 7 cm dan panjang 2 m dipotong-potong menjadi cincin (torus) dengan lebar 2 cm.',
-    tanya: 'Jumlah cincin yang dihasilkan adalah …',
-    opsi: ['25', '50', '75', '100'],
-    kunci: 1,
-    bahas: 'Panjang tabung=200 cm. Lebar setiap cincin=2 cm → jumlah=200/2=100 cincin.'
-  },
-  {
-    id: 'ukur19',
-    tipe: 'cb',
-    bacaan: 'Diketahui dua titik A(2,3,5) dan B(2,3,−1).',
-    tanya: 'Pernyataan yang benar adalah …',
-    opsi: [
-      'Jarak AB = 6',
-      'Jarak AB = √(2²+3²+6²)',
-      'Jarak AB ditentukan hanya oleh koordinat z',
-      'AB sejajar dengan sumbu-z'
-    ],
-    kunci: [0,2,3],
-    bahas: 'Perubahan hanya pada z → jarak=|5−(−1)|=6. Jadi sejajar sumbu-z.'
-  },
-  {
-    id: 'ukur20',
-    tipe: 'pg',
-    bacaan: 'Sebuah tangki berbentuk setengah bola dengan jari-jari 7 m dipasang tepat di atas tabung berdiameter sama dan tinggi 14 m.',
-    tanya: 'Volume total tangki adalah … (π=22/7)',
-    opsi: ['2156 m³', '3080 m³', '4312 m³', '5390 m³'],
-    kunci: 1,
-    bahas: 'V=Vtabung+V½bola = πr²t + ½(4/3πr³) = 22/7×49×14 + 2/3×22/7×343 = 2156+924=3080 m³.'
-  },
-  {
-    id: 'ukur21',
-    tipe: 'bs',
-    bacaan: 'Sebuah lapangan berbentuk lingkaran (r=14 m). Di dalamnya akan dibuat lintasan melingkar selebar 7 m.',
-    tanya: 'Tentukan benar (B) atau salah (S):',
-    opsi: [
-      'Luas lintasan = luas lingkaran besar – luas lingkaran kecil',
-      'Luas lintasan = 462π m²',
-      'Keliling luar lintasan = 88 m',
-      'Keliling dalam lintasan = 44 m'
-    ],
-    kunci: [true, true, true, false],
-    bahas: 'Luas besar=π14²=616π. Luas kecil=π7²=49π. Selisih=567π≈1782 → 462π salah. Kel luar=2π14=88. Kel dalam=2π7=44.'
-  },
-  {
-    id: 'ukur22',
-    tipe: 'pg',
-    bacaan: 'Sebuah prisma segitiga memiliki alas segitiga sama sisi dengan sisi 6 cm dan tinggi prisma 10 cm.',
-    tanya: 'Volume prisma tersebut adalah …',
-    opsi: ['60√3 cm³', '90√3 cm³', '120√3 cm³', '180√3 cm³'],
-    kunci: 2,
-    bahas: 'Luas alas=¼√3 s²=9√3. Volume=luas alas×tinggi=9√3×10=90√3. → opsi 120√3 salah, seharusnya 90√3.'
-  },
-  {
-    id: 'ukur23',
-    tipe: 'cb',
-    bacaan: 'Perhatikan pernyataan tentang jarak dua garis:',
-    tanya: 'Dua garis sejajar: g₁: y=2 dan g₂: y=−4. Pernyataan benar adalah …',
-    opsi: [
-      'Jarak g₁ ke g₂ = 6',
-      'Jarak dihitung dengan tegak lurus pada sumbu-x',
-      'Jika ditambah titik (0,2) → titik berada pada g₁',
-      'Jika ditambah titik (3,−4) → titik berada pada g₂'
-    ],
-    kunci: [0,2,3],
-    bahas: 'Jarak sejajar=|2−(−4)|=6. Garis sejajar sumbu-x, jadi jarak tegak lurus pada sumbu-y.'
-  },
-  {
-    id: 'ukur24',
-    tipe: 'bs',
-    bacaan: 'Bangun gabungan terdiri dari setengah lingkaran dengan diameter 14 cm yang menempel pada persegi panjang 14×20 cm.',
-    tanya: 'Tentukan benar (B) atau salah (S):',
-    opsi: [
-      'Keliling bangun = 2×20 + 14 + ½ keliling lingkaran',
-      'Luas bangun = luas persegi panjang + luas setengah lingkaran',
-      'Keliling = 54 + 22',
-      'Luas = 280 + 77'
-    ],
-    kunci: [true, true, true, true],
-    bahas: 'Keliling=20+20+14+½×2πr=54+22=76. Luas=280+½πr²=280+77=357.'
-  },
-  {
-    id: 'ukur25',
-    tipe: 'pg',
-    bacaan: 'Sebuah balok memiliki ukuran p=8 cm, l=6 cm, t=4 cm. Kubus memiliki volume sama dengan balok.',
-    tanya: 'Panjang rusuk kubus adalah …',
-    opsi: ['6 cm', '7 cm', '8 cm', '9 cm'],
-    kunci: 0,
-    bahas: 'Vbalok=8×6×4=192. Vkubus=s³=192 → s≈5,8 ≈ 6 cm.'
-  },
-  ]
-},
-'Trigonometri': {
-  materi: `
-    <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8">
-      <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Trigonometri: Perbandingan Dasar & Contoh Soal</h2>
-
-      <!-- Bagian 1: Konsep Dasar -->
-      <h3 class="font-semibold mt-4 text-lg md:text-xl">1. Konsep Perbandingan Trigonometri</h3>
-      <p class="text-sm md:text-base">
-        Trigonometri mempelajari perbandingan panjang sisi dalam segitiga siku-siku terhadap sudutnya. 
-        Misalkan segitiga siku-siku dengan sudut siku di C, sudut A, sudut B, sisi miring (hipotenusa) c, sisi depan sudut A = a, sisi samping sudut A = b.
-      </p>
-      <div class="hidden md:block overflow-x-auto">
-        <table class="table-auto border border-collapse border-gray-400 w-full text-sm md:text-base text-center">
-          <thead class="bg-gray-200">
-            <tr>
-              <th class="border px-3 py-2">Fungsi</th>
-              <th class="border px-3 py-2">Rumus</th>
-              <th class="border px-3 py-2">Keterangan</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="border px-3 py-2">sin θ</td>
-              <td class="border px-3 py-2">\\( \\frac{a}{c} \\)</td>
-              <td class="border px-3 py-2">depan / miring</td>
-            </tr>
-            <tr>
-              <td class="border px-3 py-2">cos θ</td>
-              <td class="border px-3 py-2">\\( \\frac{b}{c} \\)</td>
-              <td class="border px-3 py-2">samping / miring</td>
-            </tr>
-            <tr>
-              <td class="border px-3 py-2">tan θ</td>
-              <td class="border px-3 py-2">\\( \\frac{a}{b} \\)</td>
-              <td class="border px-3 py-2">depan / samping</td>
-            </tr>
-            <tr>
-              <td class="border px-3 py-2">cot θ</td>
-              <td class="border px-3 py-2">\\( \\frac{b}{a} \\)</td>
-              <td class="border px-3 py-2">samping / depan</td>
-            </tr>
-            <tr>
-              <td class="border px-3 py-2">sec θ</td>
-              <td class="border px-3 py-2">\\( \\frac{c}{b} \\)</td>
-              <td class="border px-3 py-2">miring / samping</td>
-            </tr>
-            <tr>
-              <td class="border px-3 py-2">csc θ</td>
-              <td class="border px-3 py-2">\\( \\frac{c}{a} \\)</td>
-              <td class="border px-3 py-2">miring / depan</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Bagian 2: Identitas Penting -->
-      <h3 class="font-semibold mt-6 text-lg md:text-xl">2. Identitas Penting</h3>
-      <ul class="list-disc ml-6 text-sm md:text-base">
-        <li>\\( \\sin^2θ + \\cos^2θ = 1 \\)</li>
-        <li>\\( 1 + \\tan^2θ = \\sec^2θ \\)</li>
-        <li>\\( 1 + \\cot^2θ = \\csc^2θ \\)</li>
-      </ul>
-
-      <!-- Bagian 3: Aplikasi -->
-      <h3 class="font-semibold mt-6 text-lg md:text-xl">3. Aplikasi</h3>
-      <p class="text-sm md:text-base">
-        Trigonometri digunakan untuk mengukur tinggi gedung, jarak kapal di laut, sudut elevasi atau depresi, dan perhitungan astronomi.
-      </p>
-    </div>
-  `,
-  video: "4W0ehd6Z7hM",
-  soal: [
-{
-  id: 'trig1',
-  tipe: 'pg',
-gambar:'https://i.imgur.com/xeJ7ACG.png',
-  tanya: 'Suatu tangga dengan panjang 6 meter disandarkan pada dinding vertikal. Sudut yang dibentuk tangga dengan lantai adalah 60°. Tinggi dinding yang disentuh ujung atas tangga adalah …',
-  opsi: [
-    '3 meter',
-    '3√2 meter',
-    '3√3 meter',
-    '4√2 meter',
-    '4√3 meter'
-  ],
-  kunci: 2,
-  bahas: 'Tinggi = sisi depan sudut = 6 × sin 60° = 6 × (√3/2) = 3√3 meter.'
-},
-
-    {
-      id: 'trig2',
-      tipe: 'bs',
-      bacaan: 'Segitiga siku-siku memiliki sisi miring 13, sisi depan 5, dan sisi samping 12.',
-      tanya: 'Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:',
-      opsi: [
-        'sin θ = 5/13',
-        'cos θ = 12/13',
-        'tan θ = 5/12'
-      ],
-      kunci: [true, true, true],
-      bahas: '✅ Semua benar, sesuai definisi sin, cos, dan tan.'
-    },
-    {
-      id: 'trig3',
-      tipe: 'pg',
-      tanya: 'Jika \\( \\tan θ = \\frac{3}{4} \\), maka nilai \\( \\sin θ \\) adalah …',
-      opsi: [
-        '3/4',
-        '4/5',
-        '3/5',
-        '5/3'
-      ],
+      bacaan: 'Kecepatan Zaky bersepeda ke rumah nenek 16 km per jam. Ia berangkat dari rumah pukul 05.30 dan tiba di rumah nenek pukul 09.45.',
+      tanya: 'Jarak yang ditempuh Zaky adalah ....',
+      opsi: ['58 km', '64 km', '68 km', '72 km'],
       kunci: 2,
-      bahas: 'Gunakan segitiga 3-4-5 → sin θ = 3/5.'
-    },
-    {
-      id: 'trig4',
-      tipe: 'cb',
-      bacaan: 'Diketahui identitas trigonometri berikut:',
-      tanya: 'Manakah yang merupakan identitas yang selalu benar?',
-      opsi: [
-        '\\( \\sin^2θ + \\cos^2θ = 1 \\)',
-        '\\( \\tan^2θ + 1 = \\csc^2θ \\)',
-        '\\( 1 + \\tan^2θ = \\sec^2θ \\)',
-        '\\( 1 + \\cot^2θ = \\csc^2θ \\)'
-      ],
-      kunci: [0,2,3],
-      bahas: 'Identitas dasar: sin²+cos²=1, 1+tan²=sec², 1+cot²=csc².'
-    },
-    {
-      id: 'trig5',
+      bahas: `<p>Waktu tempuh = 09.45 - 05.30 = 4 jam 15 menit = \\( 4{,}25 \\) jam.<br>Kecepatan = 16 km/jam.</p><p>Jarak = \\( 16 \\times 4{,}25 = 68 \\) km.</p><p>Jadi, jarak yang ditempuh Zaky adalah <b>68 km</b>.</p>`
+},
+{
+      id: 'ukur6',
       tipe: 'pg',
-      tanya: 'Jika \\( \\sin θ = 0,6 \\) dan θ di kuadran I, maka nilai \\( \\cos θ \\) adalah …',
-      opsi: ['0,8', '0,36', '0,64', '0,4'],
-      kunci: 0,
-      bahas: 'Gunakan identitas: cos θ = √(1 - sin²θ) = √(1 - 0,36) = 0,8.'
-    },
+      bacaan: 'Sebuah bak mandi berbentuk balok dengan ukuran panjang 2,5 m, lebar 1,5 m, dan tinggi 0,6 m. Bak mandi tersebut diisi air sampai penuh.',
+      tanya: 'Volume air dalam bak mandi tersebut adalah .... m³',
+      opsi: ['6,75', '5,25', '3,75', '2,25'],
+      kunci: 3,
+      bahas: `<p>Volume balok \\( V = p \\times l \\times t \\).<br>\\( V = 2{,}5 \\times 1{,}5 \\times 0{,}6 = 2{,}25 \\) m³.</p><p>Jadi, volume air dalam bak mandi tersebut adalah <b>2,25 m³</b>.</p>`
+},
+
     {
-      id: 'trig6',
-      tipe: 'bs',
-      bacaan: 'Perhatikan identitas trigonometri.',
-      tanya: 'Tentukan benar (B) atau salah (S) untuk pernyataan berikut:',
-      opsi: [
-        '\\( \\tan θ = \\frac{\\sin θ}{\\cos θ} \\)',
-        '\\( \\cot θ = \\frac{\\cos θ}{\\sin θ} \\)',
-        '\\( \\sec θ = \\frac{1}{\\sin θ} \\)'
-      ],
-      kunci: [true, true, false],
-      bahas: '✅ 1 benar (tan=sin/cos)\n✅ 2 benar (cot=cos/sin)\n❌ 3 salah, sec=1/cos.'
-    },
-{
-    id: 'trig7',
-    tipe: 'pg',
-    tanya: 'Jika \\(\\sin θ = \\tfrac{3}{5}\\) dan θ di kuadran I, maka nilai \\(\\cos θ\\) adalah …',
-    opsi: ['\\(\\tfrac{4}{5}\\)', '\\(\\tfrac{5}{3}\\)', '\\(\\tfrac{3}{4}\\)', '\\(\\tfrac{2}{5}\\)'],
-    kunci: 0,
-    bahas: 'Gunakan identitas sin²θ + cos²θ = 1. cosθ = √(1 - (3/5)²) = 4/5.'
-  },
-  {
-    id: 'trig8',
-    tipe: 'bs',
-    bacaan: 'Perhatikan pernyataan berikut:',
-    tanya: 'Tentukan benar (B) atau salah (S) untuk setiap pernyataan:',
-    opsi: [
-      'tan θ = sin θ / cos θ',
-      'cot θ = cos θ / sin θ',
-      'sec θ = 1 / sin θ'
-    ],
-    kunci: [true, true, false],
-    bahas: '✅ 1 benar (tan = sin/cos), ✅ 2 benar (cot = cos/sin), ❌ 3 salah (sec = 1/cos).'
-  },
-  {
-    id: 'trig9',
-    tipe: 'cb',
-    bacaan: 'Perhatikan identitas berikut:',
-    tanya: 'Manakah yang selalu benar?',
-    opsi: [
-      '\\(\\sin^2θ + \\cos^2θ = 1\\)',
-      '\\(1 + \\tan^2θ = \\sec^2θ\\)',
-      '\\(1 + \\cot^2θ = \\csc^2θ\\)',
-      '\\(\\tan^2θ + 1 = \\csc^2θ\\)'
-    ],
-    kunci: [0,1,2],
-    bahas: 'Identitas dasar trigonometri adalah sin²+cos²=1, 1+tan²=sec², 1+cot²=csc².'
-  },
-  {
-    id: 'trig10',
-    tipe: 'pg',
-    tanya: 'Jika \\(\\tan θ = 0,75\\) dan θ di kuadran I, maka nilai \\(\\sin θ\\) adalah …',
-    opsi: ['0,6', '0,8', '0,75', '0,45'],
-    kunci: 0,
-    bahas: 'Gunakan segitiga 3-4-5. tanθ = 3/4 → sinθ = 3/5 = 0,6.'
-  },
-  {
-    id: 'trig11',
-    tipe: 'bs',
-    bacaan: 'Segitiga siku-siku dengan sisi depan = 7, samping = 24, miring = 25.',
-    tanya: 'Tentukan benar (B) atau salah (S) untuk setiap pernyataan:',
-    opsi: [
-      'sin θ = 7/25',
-      'cos θ = 24/25',
-      'tan θ = 7/24'
-    ],
-    kunci: [true, true, true],
-    bahas: 'Semua perbandingan sesuai definisi sin, cos, dan tan.'
-  },
-  {
-    id: 'trig12',
-    tipe: 'pg',
-    tanya: 'Jika \\(\\sec θ = 5/4\\) dan θ di kuadran I, maka nilai \\(\\tan θ\\) adalah …',
-    opsi: ['3/4', '4/3', '5/3', '3/5'],
-    kunci: 0,
-    bahas: 'sec θ = 5/4 → cos θ = 4/5 → sin θ = 3/5 → tan θ = sin/cos = 3/4.'
-  },
-  {
-    id: 'trig13',
-    tipe: 'cb',
-    bacaan: 'Seorang pengamat berdiri 40 m dari sebuah gedung dan melihat puncak gedung dengan sudut elevasi 60°.',
-    tanya: 'Pernyataan yang benar adalah …',
-    opsi: [
-      'Tinggi gedung = 40 tan 60°',
-      'Tinggi gedung = 40 cot 60°',
-      'Tinggi gedung ≈ 69,3 m',
-      'Tinggi gedung ≈ 23,1 m'
-    ],
-    kunci: [0,2],
-    bahas: 'Gunakan tan 60° = tinggi/40 → tinggi = 40 tan 60° ≈ 69,3 m.'
-  },
-  {
-    id: 'trig14',
-    tipe: 'pg',
-    tanya: 'Nilai dari \\(\\sin 30° \\cdot \\cos 60° + \\cos 30° \\cdot \\sin 60°\\) adalah …',
-    opsi: ['1', '0,5', '√3/2', '0'],
-    kunci: 0,
-    bahas: 'Gunakan identitas sin(A+B): sin(30°+60°) = sin 90° = 1.'
-  },
-  {
-    id: 'trig15',
-    tipe: 'bs',
-    bacaan: 'Perhatikan identitas berikut:',
-    tanya: 'Tentukan benar (B) atau salah (S) untuk pernyataan:',
-    opsi: [
-      '\\(\\sin(90°-θ) = \\cos θ\\)',
-      '\\(\\tan(90°-θ) = \\cot θ\\)',
-      '\\(\\cos(90°-θ) = \\sin θ\\)'
-    ],
-    kunci: [true, true, true],
-    bahas: 'Semua benar, sesuai hubungan sudut komplemen.'
-  },
-  {
-    id: 'trig16',
-    tipe: 'pg',
-    tanya: 'Seorang nelayan melihat mercusuar dengan sudut elevasi 45°. Jika jarak nelayan ke mercusuar 100 m, maka tinggi mercusuar adalah …',
-    opsi: ['100 m', '50 m', '√2/2 m', '200 m'],
-    kunci: 0,
-    bahas: 'tan 45° = tinggi/100 → 1 = tinggi/100 → tinggi = 100 m.'
-  },
-{
-    id: 'trig17',
-    tipe: 'bs',
-    bacaan: 'Segitiga siku-siku ABC memiliki ∠C = 90°, AB = 10 cm, AC = 6 cm.',
-    tanya: 'Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:',
-    opsi: [
-      'sin B = 4/5',
-      'cos A = 4/5',
-      'tan A = 3/4',
-      'csc B = 5/4'
-    ],
-    kunci: [true, false, true, true],
-    bahas: 'Dengan pitagoras, BC = 8. sin B = 8/10 = 4/5 (benar), cos A = 6/10 = 3/5 (salah), tan A = 8/6 = 4/3 (salah, tapi tan B = 3/4), csc B = 1/sin B = 5/4 (benar).'
-  },
-  {
-    id: 'trig18',
-    tipe: 'pg',
-    tanya: 'Jika sin θ = 3/5 dengan 0° < θ < 90°, maka nilai dari cos θ + tan θ adalah …',
-    opsi: ['3/4 + 3/5', '4/5 + 3/4', '5/3 + 4/5', '4/5 + 5/3'],
-    kunci: 1,
-    bahas: 'sin θ = 3/5 → cos θ = 4/5. tan θ = 3/4. Jadi cos θ + tan θ = 4/5 + 3/4.'
-  },
-  {
-    id: 'trig19',
-    tipe: 'cb',
-    bacaan: 'Diketahui tan A = 5/12. Tentukan identitas trigonometri yang benar.',
-    tanya: 'Pilih semua pernyataan yang benar:',
-    opsi: [
-      'sin A = 5/13',
-      'cos A = 12/13',
-      'sec A = 13/12',
-      'cot A = 12/5'
-    ],
-    kunci: [0,1,2,3],
-    bahas: 'Jika tan A = 5/12, maka segitiga pitagoras 5-12-13. Jadi sin A=5/13, cos A=12/13, sec=13/12, cot=12/5. Semua benar.'
-  },
-  {
-    id: 'trig20',
-    tipe: 'pg',
-    tanya: 'Nilai dari sin² 30° + cos² 30° adalah …',
-    opsi: ['0', '1', '√3/2', '1/2'],
-    kunci: 1,
-    bahas: 'Identitas dasar: sin² θ + cos² θ = 1 untuk semua θ.'
-  },
-  {
-    id: 'trig21',
-    tipe: 'pg',
-    tanya: 'Jika cos θ = 0,6 dan θ berada di kuadran IV, maka nilai tan θ adalah …',
-    opsi: ['-3/4', '3/4', '-4/3', '4/3'],
-    kunci: 2,
-    bahas: 'cos θ = 3/5, sin θ = -4/5 (kuadran IV). Tan θ = sin/cos = (-4/5)/(3/5) = -4/3.'
-  },
-  {
-    id: 'trig22',
-    tipe: 'bs',
-    bacaan: 'Diketahui sin A = 12/13, dengan 0° < A < 90°.',
-    tanya: 'Benar atau salah:',
-    opsi: [
-      'cos A = 5/13',
-      'tan A = 12/5',
-      'csc A = 13/12',
-      'cot A = 13/12'
-    ],
-    kunci: [true, true, true, false],
-    bahas: 'cos A = 5/13, tan A = 12/5, csc A = 13/12 benar. cot A = 5/12, bukan 13/12.'
-  },
-  {
-    id: 'trig23',
-    tipe: 'cb',
-    bacaan: 'Perhatikan identitas trigonometri berikut:\n(1) 1 + tan² θ = sec² θ\n(2) 1 + cot² θ = csc² θ\n(3) sin² θ + cos² θ = 0',
-    tanya: 'Manakah yang benar?',
-    opsi: ['(1)', '(2)', '(3)', '(1) dan (2)'],
-    kunci: [0,1,3],
-    bahas: 'Identitas dasar (1) dan (2) benar. (3) salah karena identitasnya = 1.'
-  },
-  {
-    id: 'trig24',
-    tipe: 'pg',
-    tanya: 'Jika ∠A dan ∠B saling berkomplemen, maka nilai sin A = …',
-    opsi: ['cos B', 'tan B', 'cot B', 'sec B'],
-    kunci: 0,
-    bahas: 'Sinus sudut komplemen sama dengan cosinus: sin A = cos(90°−A) = cos B.'
-  },
-  {
-    id: 'trig25',
-    tipe: 'pg',
-    tanya: 'Seorang pengamat berdiri 30 m dari sebuah menara. Sudut elevasi ke puncak menara adalah 45°. Tinggi menara adalah …',
-    opsi: ['15 m', '30 m', '45 m', '60 m'],
-    kunci: 1,
-    bahas: 'tan 45° = tinggi/30 → 1 = tinggi/30 → tinggi = 30 m.'
-  },
-  {
-    id: 'trig26',
-    tipe: 'cb',
-    bacaan: 'Dalam segitiga siku-siku berlaku hubungan trigonometri. Pilih pernyataan yang benar:',
-    tanya: ' ',
-    opsi: [
-      'Jika sin θ = a/c, maka cos θ = b/c',
-      'Jika tan θ = a/b, maka cot θ = b/a',
-      'Jika sec θ = c/b, maka cos θ = b/c',
-      'Jika csc θ = c/a, maka sin θ = a/c'
-    ],
-    kunci: [0,1,2,3],
-    bahas: 'Semua identitas tersebut sesuai dengan definisi perbandingan sisi pada segitiga siku-siku.'
-  },
+      id: 'ukur7',
+      tipe: 'pg',
+      bacaan: 'Sebuah kubus mempunyai volume 1.728 dm³.',
+      tanya: 'Berapa panjang rusuk kubus tersebut?',
+      opsi: ['8 dm', '12 dm', '14 dm', '22 dm'],
+      kunci: 1,
+      bahas: `<p>Volume kubus \\( V = s^3 \\).<br> Diketahui \\( V = 1.728 \\), maka:</p><p>\\( s = \\sqrt[3]{1.728} = 12 \\).<br>Jadi, panjang rusuk kubus adalah <b>12 dm</b>.</p>`
+},
+
   ]
 },
 
@@ -2040,330 +1422,229 @@ gambar:'https://i.imgur.com/xeJ7ACG.png',
   video: "uGxa7VO9j0Y",
   soal: [
 {
-  id:'d1',
-  tipe:'bs',
-  bacaan:'SD Harapan baru saja meresmikan ruang perpustakaan untuk siswa. Bu Anita mendata banyak siswa yang berkunjung ke perpustakaan tersebut pada lima hari pertama sejak diresmikan. Diagram menunjukkan data seperti pada gambar:',
-gambar:'https://i.imgur.com/M4AixCP.png',
-  tanya:'Deskripsi apakah yang tepat tentang data pada diagram tersebut? Tentukan Benar atau Salah untuk setiap pernyataan berikut!',
-  opsi:[
-    'Banyak siswa yang mengunjungi perpustakaan pada hari Senin hanya \\(\\tfrac{3}{4}\\) dari pengunjung pada hari Rabu.',
+  id: 'd1',
+  tipe: 'bs',
+   tanya: 'SD Harapan baru saja meresmikan ruang perpustakaan untuk siswa. Bu Anita sedang mendata banyak siswa yang berkunjung ke perpustakaan tersebut pada lima hari pertama sejak diresmikan. Diagram berikut menggambarkan data yang diperoleh Bu Anita.<br><img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/73109_ffe98e27da69e4bb210706baa1ce06e6.png" alt="Diagram kunjungan perpustakaan" class="my-2"/><br>Deskripsi apakah yang tepat tentang data pada diagram tersebut?<br><br> <i>Tentukan <b>Benar</b> atau <b>Salah</b> untuk setiap pernyataan berikut!</i>',
+  opsi: [
+    'Banyak siswa yang mengunjungi perpustakaan pada hari Senin hanya \\( \\tfrac{3}{4} \\) dari pengunjung pada hari Rabu.',
     'Total siswa pengunjung perpustakaan mulai dari hari Senin hingga hari Jumat adalah 100.',
     'Perbedaan banyak pengunjung harian dengan hari sebelumnya tidak lebih dari 5 orang.'
   ],
-  kunci:[true, false, true],
-  bahas:`- Senin = 15, Rabu = 20. \\(\\tfrac{3}{4} \\times 20 = 15\\). Pernyataan A BENAR.  
-- Total = 15 + 18 + 20 + 24 + 20 = 97, bukan 100. Pernyataan B SALAH.  
-- Selisih harian:  
-  Selasa–Senin = 3, Rabu–Selasa = 2, Kamis–Rabu = 4, Jumat–Kamis = 4. Semua selisih ≤ 5. Pernyataan C BENAR.`
+  kunci: [true, false, true],
+  bahas: `
+  <p>
+  1️⃣ <b>Benar</b> → Hari Rabu terdapat 20 pengunjung. \\( \\tfrac{3}{4} \\times 20 = 15 \\), sama dengan jumlah pengunjung pada hari Senin.
+  </p>
+  <p>
+  2️⃣ <b>Salah</b> → Total seluruh pengunjung adalah \\( 15 + 18 + 20 + 24 + 20 = 97 \\).
+  </p>
+  <p>
+  3️⃣ <b>Benar</b> → Selisih antar hari berturut-turut adalah:  
+  Senin–Selasa = 3, Selasa–Rabu = 2, Rabu–Kamis = 4, Kamis–Jumat = 4.  
+  Semua selisih ≤ 5, jadi pernyataan ini benar.
+  </p>
+  `
 },
-    {
-      id: 'data1',
+{
+      id: 'd2',
       tipe: 'pg',
-      tanya: 'Nilai ulangan Matematika 5 siswa adalah: 70, 80, 60, 90, 100. Rata-rata nilai mereka adalah …',
-      opsi: ['75', '80', '85', '90'],
+      tanya: 'Diagram berikut menerangkan tentang makanan kegemaran 50 siswa kelas VI SD:<br><img src="https://core-ruangguru.s3.amazonaws.com/assets/ruang_belajar/questions/q_5dmd7c919.JPG" class="w-64 mx-auto my-2"/><br><b>Banyak siswa yang gemar makan sate adalah ....</b>',
+      opsi: ['3', '4', '5', '6'],
+      kunci: 2,
+      bahas: `<p>Diketahui pada diagram:<br>
+      Bakso = 30%<br>
+      Soto = 20%<br>
+      Mie = 15%<br>
+      Gado-gado = 90° = 25% (karena \\( 90°/360° = 1/4 = 25\\% \\)).</p>
+      <p>Jumlah seluruhnya = 30% + 20% + 15% + 25% = 90%, maka bagian sate = 100% - 90% = 10%.</p>
+      <p>Banyak siswa = \\( 10\\% \\times 50 = 5 \\) siswa.</p>
+      <p>Jadi, banyak siswa yang gemar makan sate adalah <b>5 siswa</b>.</p>`
+},
+{
+      id: 'd3',
+      tipe: 'pg',
+      tanya: 'Data telur pada peternakan ayam dalam waktu 4 hari disajikan sebagai berikut:<br><img src="https://core-ruangguru.s3.amazonaws.com/assets/ruang_belajar/questions/q_q9zciv9652.JPG" class="w-64 mx-auto my-2"/><br><b>Diagram batang yang mewakili data tersebut adalah ....</b>',
+      opsi: [
+        '<img src="https://core-ruangguru.s3.amazonaws.com/assets/ruang_belajar/questions/q_d1psm96512.JPG" class="w-40 mx-auto"/>',
+        '<img src="https://core-ruangguru.s3.amazonaws.com/assets/ruang_belajar/questions/q_tu64q67832.JPG" class="w-40 mx-auto"/>',
+        '<img src="https://core-ruangguru.s3.amazonaws.com/assets/ruang_belajar/questions/q_fyno7p2168.JPG" class="w-40 mx-auto"/>',
+        '<img src="https://core-ruangguru.s3.amazonaws.com/assets/ruang_belajar/questions/q_cutqvd5422.JPG" class="w-40 mx-auto"/>'
+      ],
+      kunci: 3,
+      bahas: `<p>Berdasarkan tabel data, jumlah telur setiap hari sesuai dengan diagram batang pada gambar keempat.<br>Diagram tersebut menunjukkan perbandingan tinggi batang yang benar sesuai data jumlah telur per hari.</p><p>Jadi, diagram batang yang benar adalah <b>opsi keempat</b>.</p>`
+},
+{
+      id: 'd4',
+      tipe: 'pg',
+      tanya: 'Hasil panen kebun Pak Amat pada bulan Januari 2012 disajikan dalam diagram batang berikut:<br><img src="https://roboguru-forum-cdn.ruangguru.com/image/a4906ada-a0ba-4bc1-9848-d75a83f1fde4.PNG" class="w-64 mx-auto my-2"/><br><b>Jika jumlah panen Pak Amat 175 kg, maka hasil panen cabai adalah ....</b>',
+      opsi: ['60 kg', '50 kg', '35 kg', '25 kg'],
+      kunci: 3,
+      bahas: `<p>Diketahui hasil panen:<br>
+      Tomat = 35 kg<br>
+      Kedelai = 50 kg<br>
+      Kacang panjang = 35 kg<br>
+      Buncis = 30 kg<br>
+      Cabai = ?</p>
+      <p>Total panen = 175 kg, maka:</p>
+      <p>\\( 35 + 50 + 35 + 30 + \\text{Cabai} = 175 \\)<br>
+      \\( 150 + \\text{Cabai}  = 175 \\)<br>
+      \\( \\text{Cabai}  = 25 \\).</p>
+      <p>Jadi, hasil panen cabai adalah <b>25 kg</b>.</p>`
+},
+{
+      id: 'd5',
+      tipe: 'pg',
+      bacaan:`Hasil penjualan kue Bu Ipah selama satu minggu adalah: 
+21, 30, 20, 27, 25, 22, dan 30. `,
+      tanya: '<b>Rata-rata penjualan kue tersebut adalah ....</b>',
+      opsi: ['24', '25', '26', '27'],
       kunci: 1,
-      bahas: 'Jumlah = 400, banyak data = 5 → rata-rata = 400/5 = 80.'
-    },
-    {
-      id: 'data2',
-      tipe: 'bs',
-      bacaan: 'Diketahui data tinggi badan siswa (cm): 150, 155, 160, 165, 170.',
-      tanya: 'Tentukan benar (B) atau salah (S) untuk pernyataan berikut:',
-      opsi: [
-        'Median data adalah 160.',
-        'Modus data adalah 165.',
-        'Jangkauan data adalah 20.'
-      ],
-      kunci: [true, false, true],
-      bahas: '✅ Median = 160 (tengah). ❌ Tidak ada modus. ✅ Jangkauan = 170−150 = 20.'
-    },
-    {
-      id: 'data3',
-      tipe: 'cb',
-      bacaan: 'Dalam sebuah kelas terdapat 40 siswa, 18 suka Matematika, 15 suka IPA, dan 10 suka keduanya.',
-      tanya: 'Pernyataan yang benar adalah:',
-      opsi: [
-        'Jumlah siswa yang hanya suka Matematika adalah 8.',
-        'Jumlah siswa yang hanya suka IPA adalah 5.',
-        'Jumlah siswa yang tidak suka keduanya adalah 17.'
-      ],
-      kunci: [0,2],
-      bahas: 'Hanya Matematika = 18−10 = 8, Hanya IPA = 15−10 = 5, Total suka min 1 = 23, jadi tidak suka keduanya = 40−23 = 17.'
-    },
-    {
-      id: 'data4',
+      bahas: `<p>Jumlah seluruh penjualan = \\( 21 + 30 + 20 + 27 + 25 + 22 + 30 = 175 \\).<br>
+      Banyak hari = 7.</p>
+      <p>Rata-rata = \\( \\frac{175}{7} = 25 \\).</p>
+      <p>Jadi, rata-rata penjualan kue Bu Ipah adalah <b>25</b>.</p>`
+},
+{
+      id: 'd6',
       tipe: 'pg',
-      tanya: 'Sebuah dadu dilempar sekali. Peluang muncul bilangan genap adalah …',
-      opsi: ['1/2', '1/3', '2/3', '1/6'],
-      kunci: 0,
-      bahas: 'Bilangan genap = {2,4,6}, ruang sampel = 6 → 3/6 = 1/2.'
-    },
-    {
-      id: 'data5',
-      tipe: 'bs',
-      bacaan: 'Dalam kotak terdapat 3 bola merah dan 2 bola biru. Diambil satu bola secara acak.',
-      tanya: 'Tentukan benar (B) atau salah (S):',
-      opsi: [
-        'P(bola merah) = 3/5',
-        'P(bola biru) = 2/5',
-        'P(bola merah atau biru) = 1'
-      ],
-      kunci: [true, true, true],
-      bahas: 'Semua benar, karena ruang sampel hanya merah & biru.'
-    },
-{
-  id: 'data6',
-  tipe: 'cb',
-  bacaan: 'Rata-rata nilai ulangan 17 murid dari skala 100 adalah 83. Ada 3 murid yang mengikuti ujian susulan sehingga rata-rata nilai ulangan dari 20 murid menjadi 82. Tentukan semua pernyataan berikut yang benar terkait dengan nilai ketiga murid yang mengikuti ujian susulan!',
-  tanya: 'Pilih semua pernyataan yang benar:',
-  opsi: [
-    'Jumlah nilai ketiga murid yang mengikuti ujian susulan adalah 229.',
-    'Rata-rata nilai ketiga murid yang mengikuti ujian susulan lebih dari 70.',
-    'Nilai terendah dari ketiga murid yang mengikuti ujian susulan tidak kurang dari 29.',
-    'Nilai tertinggi dari ketiga murid yang mengikuti ujian susulan lebih dari 76.',
-    'Jangkauan data nilai ketiga murid yang mengikuti ujian susulan lebih dari 72.'
-  ],
-  kunci: [0,1,2,3],
-  bahas:
-    'Hitung total awal: 17 × 83 = 1411.\n' +
-    'Total setelah 20 murid: 20 × 82 = 1640.\n' +
-    'Jumlah ketiga murid susulan = 1640 − 1411 = 229. → (1) BENAR.\n\n' +
-    'Rata-rata ketiga murid = 229 / 3 ≈ 76,33 → lebih dari 70. → (2) BENAR.\n\n' +
-    'Nilai minimum yang mungkin untuk salah satu murid terjadi jika dua murid lain maksimum (100). Dua maksimum: 100+100=200 → nilai ketiga = 229−200 = 29. Jadi nilai terendah tidak bisa kurang dari 29. → (3) BENAR.\n\n' +
-    'Apabila semua tiga ≤ 76, maka jumlah ≤ 3×76 = 228 < 229, kontradiksi. Jadi setidaknya satu > 76. → (4) BENAR.\n\n' +
-    'Untuk (5): jangkauan = tertinggi − terendah. Kita dapat punya nilai mis. 76,76,77 (jumlah 229) sehingga jangkauan = 1, jauh ≤ 72. Jadi jangkauan >72 tidak harus berlaku. → (5) SALAH.'
+      tanya: 'Berikut ini adalah data berat badan siswa kelas V SD Cinta Damai:<br><table class="table-auto border mx-auto my-2"><tr><th class="border px-2">Berat (kg)</th><th class="border px-2">Banyak Siswa</th></tr><tr><td class="border px-2">34</td><td class="border px-2">2</td></tr><tr><td class="border px-2">32</td><td class="border px-2">4</td></tr><tr><td class="border px-2">30</td><td class="border px-2">10</td></tr><tr><td class="border px-2">28</td><td class="border px-2">8</td></tr><tr><td class="border px-2">25</td><td class="border px-2">6</td></tr></table><b>Nilai rata-rata berat badan siswa tersebut adalah ....</b>',
+      opsi: ['28,5', '29,5', '30,0', '31,0'],
+      kunci: 1,
+      bahas: `<p>Hitung total berat seluruh siswa:</p>
+      <p>\\[ (34 \\times 2) + (32 \\times 4) + (30 \\times 10) + (28 \\times 8) + (25 \\times 6)\\]\\[ = 68 + 128 + 300 + 224 + 150 = 870 \\].</p>
+      <p>Total siswa = \\( 2 + 4 + 10 + 8 + 6 = 30 \\).</p>
+      <p>Rata-rata = \\( \\frac{870}{30} = 29{,}5 \\).</p>
+      <p>Jadi, nilai rata-rata berat badan siswa kelas V adalah <b>29,5 kg</b>.</p>`
 },
 {
-  id: 'data7',
+      id: 'd7',
+      tipe: 'pg',
+      tanya: 'Berikut ini data siswa yang masuk kelas 1 SD mulai tahun 2007 s/d 2012 di SDN Sebangau.<br><img src="https://core-ruangguru.s3.amazonaws.com/assets/ruang_belajar/questions/q_ytmyke2543.JPG" class="mx-auto my-2"/><br><b>Rata-rata data di atas adalah ... orang</b>',
+      opsi: ['13', '14', '15', '16'],
+      kunci: 2,
+      bahas: `<p>Untuk mencari <b>rata-rata</b> data, digunakan rumus:</p>
+      <p class="text-center"><b>Rata-rata = (Jumlah seluruh data) / (Banyaknya data)</b></p>
+
+      <p>Dari tabel diketahui jumlah siswa tiap tahun:</p>
+      <ul>
+        <li>Tahun 2007 = 20 orang</li>
+        <li>Tahun 2008 = 18 orang</li>
+        <li>Tahun 2009 = 15 orang</li>
+        <li>Tahun 2010 = 14 orang</li>
+        <li>Tahun 2011 = 13 orang</li>
+        <li>Tahun 2012 = 10 orang</li>
+      </ul>
+
+      <p>Langkah 1: Jumlahkan semua data</p>
+      <p>20 + 18 + 15 + 14 + 13 + 10 = <b>90</b></p>
+
+      <p>Langkah 2: Hitung banyaknya data</p>
+      <p>Ada 6 tahun, jadi banyak data = <b>6</b></p>
+
+      <p>Langkah 3: Hitung rata-rata</p>
+      <p>Rata-rata = 90 / 6 = <b>15</b></p>
+
+      <p><b>Jadi, rata-rata siswa yang masuk kelas 1 SD dari tahun 2007 sampai 2012 adalah 15 orang.</b></p>`
+},
+{
+  id: 'd8',
   tipe: 'pg',
-  tanya: 'Luki adalah panitia bazar di sekolah. Dia mendapat tugas untuk membuat kupon dengan kode unik lima karakter berformat A B C X Y (A,B,C = huruf berbeda; X,Y = angka berbeda). Tidak boleh ada pengulangan huruf maupun angka. Berapa banyak kode akses berbeda yang dapat dibuat?',
-  opsi: [
-    '1.263.600',
-    '1.352.000',
-    '1.404.000',
-    '1.423.656',
-    '1.757.600'
-  ],
+bacaan:`Data nilai ulangan Ilmu Pengetahuan Alam beberapa siswa sebagai berikut: 
+5, 6, 5, 8, 8, 8, 9, 6, 7, 7, dan 6.`,
+  tanya: '<b>Median dari data tersebut adalah ....</b>',
+  opsi: ['5', '6', '7', '8'],
   kunci: 2,
-  bahas: 'Jumlah cara = P(26,3) × P(10,2) = (26×25×24) × (10×9) = 15.600 × 90 = 1.404.000.'
+  bahas: `
+  <p>Langkah-langkah mencari <b>median</b>:</p>
+  <p>1. Urutkan data dari yang terkecil ke terbesar:</p>
+  <p>5, 5, 6, 6, 6, 7, 7, 8, 8, 8, 9</p>
+  <p>2. Banyak data \\( n = 11 \\) (ganjil)</p>
+  <p>3. Posisi median ada pada data ke-\\( \\frac{n + 1}{2} = \\frac{11 + 1}{2} = 6 \\)</p>
+  <p>4. Data ke-6 adalah \\( 7 \\)</p>
+  <p><b>Jadi, median dari data tersebut adalah \\( 7 \\).</b></p>
+  `
 },
 {
-    id: 'data8',
-    tipe: 'pg',
-    tanya: 'Diketahui nilai ulangan Matematika 10 siswa: 70, 75, 80, 85, 90, 95, 75, 80, 85, 90. Median dari data tersebut adalah …',
-    opsi: ['80', '82,5', '85', '87,5'],
-    kunci: 1,
-    bahas: 'Urutkan data: 70,75,75,80,80,85,85,90,90,95. Median = (80+85)/2 = 82,5.'
-  },
-  {
-    id: 'data9',
-    tipe: 'pg',
-    bacaan: 'Diagram lingkaran hasil survei makanan favorit siswa: 90° (Bakso), 120° (Nasi Goreng), 60° (Sate), sisanya Mie Ayam.',
-    tanya: 'Jika jumlah siswa 120 orang, banyak siswa yang memilih Mie Ayam adalah …',
-    opsi: ['20', '25', '30', '35'],
-    kunci: 2,
-    bahas: 'Sudut Mie Ayam = 360° – (90°+120°+60°) = 90°. Jumlah siswa = 90°/360° × 120 = 30.'
-  },
-  {
-    id: 'data10',
-    tipe: 'cb',
-    bacaan: 'Diketahui data tinggi badan siswa (dalam cm): 150, 155, 160, 165, 170.',
-    tanya: 'Pernyataan yang benar adalah …',
-    opsi: [
-      'Rata-rata = 160',
-      'Median = 160',
-      'Modus = 160',
-      'Jangkauan = 20'
-    ],
-    kunci: [0,1,3],
-    bahas: 'Rata-rata = 160, median = 160, jangkauan = 170–150=20. Tidak ada modus karena semua unik.'
-  },
-  {
-    id: 'data11',
-    tipe: 'bs',
-    bacaan: 'Sebuah dadu dilempar sekali.',
-    tanya: 'Tentukan benar (B) atau salah (S) dari pernyataan berikut:',
-    opsi: [
-      'Peluang muncul angka genap adalah 1/2',
-      'Peluang muncul angka prima adalah 1/2',
-      'Peluang muncul angka lebih dari 4 adalah 1/3',
-      'Peluang muncul angka 7 adalah 1/6'
-    ],
-    kunci: [true, true, true, false],
-    bahas: 'Genap {2,4,6} → 3/6=1/2. Prima {2,3,5} → 3/6=1/2. >4 {5,6} → 2/6=1/3. Angka 7 tidak ada.'
-  },
-  {
-    id: 'data12',
-    tipe: 'pg',
-    tanya: 'Rata-rata nilai Matematika 40 siswa adalah 70. Jika ditambah 1 siswa baru dengan nilai 100, rata-rata yang baru adalah …',
-    opsi: ['72', '72,5', '73', '74'],
-    kunci: 1,
-    bahas: 'Jumlah semula = 40×70=2800. Ditambah 100 → 2900. Jumlah siswa = 41. Rata-rata = 2900/41 ≈ 70,73 ≈ 72,5.'
-  },
-  {
-    id: 'data13',
-    tipe: 'pg',
-    bacaan: 'Hasil undian berhadiah menunjukkan peluang seorang peserta menang adalah 0,05.',
-    tanya: 'Jika terdapat 200 peserta, banyak peserta yang diperkirakan menang adalah …',
-    opsi: ['5', '8', '10', '12'],
-    kunci: 2,
-    bahas: '0,05 × 200 = 10.'
-  },
-  {
-    id: 'data14',
-    tipe: 'cb',
-    bacaan: 'Suatu kelas berisi 30 siswa terdiri dari 12 laki-laki dan 18 perempuan.',
-    tanya: 'Jika dipilih satu siswa secara acak, peluang yang benar adalah …',
-    opsi: [
-      'P(laki-laki) = 12/30',
-      'P(perempuan) = 18/30',
-      'P(bukan laki-laki) = 12/30',
-      'P(laki-laki atau perempuan) = 1'
-    ],
-    kunci: [0,1,3],
-    bahas: 'Laki-laki = 12/30, perempuan = 18/30, bukan laki-laki = 18/30. P(laki atau perempuan) = 1.'
-  },
-  {
-    id: 'data15',
-    tipe: 'bs',
-    bacaan: 'Data tinggi badan 50 siswa dikelompokkan dalam tabel distribusi dengan interval kelas.',
-    tanya: 'Tentukan benar (B) atau salah (S) untuk pernyataan berikut:',
-    opsi: [
-      'Rata-rata data kelompok dapat dihitung dengan nilai tengah kelas',
-      'Median data kelompok ditentukan dengan kelas yang memuat frekuensi terbanyak',
-      'Modus data kelompok selalu sama dengan median',
-      'Jangkauan data kelompok adalah nilai maksimum – minimum'
-    ],
-    kunci: [true, false, false, true],
-    bahas: 'Median bukan berdasarkan frekuensi terbanyak, melainkan kelas median. Modus ≠ median selalu.'
-  },
-  {
-    id: 'data16',
-    tipe: 'pg',
-    tanya: 'Sebuah koin dilempar 3 kali. Peluang muncul tepat 2 gambar adalah …',
-    opsi: ['1/4', '3/8', '3/4', '1/2'],
-    kunci: 1,
-    bahas: 'Banyak ruang sampel = 2^3 = 8. Kasus 2 gambar = 3. Peluang = 3/8.'
-  },
-  {
-    id: 'data17',
-    tipe: 'pg',
-    bacaan: 'Diagram batang menunjukkan jumlah siswa yang gemar olahraga: Basket (12), Sepak Bola (18), Voli (10).',
-    tanya: 'Jika satu siswa dipilih acak, peluang yang gemar basket adalah …',
-    opsi: ['12/40', '12/30', '12/28', '12/25'],
-    kunci: 0,
-    bahas: 'Total siswa = 12+18+10 = 40. Peluang basket = 12/40.'
-  },
+  id: 'd9',
+  tipe: 'pg',
+  tanya: 'Nilai ulangan Bahasa Indonesia siswa kelas V semester 1 SDN Mekar adalah sebagai berikut: 9, 9, 6, 7, 7, 8, 5, 5, 8, 6, 7, 7, 7, 9, 7, 7, 6, 6, 8, dan 6.<br><b>Modus dari data tersebut adalah ....</b>',
+  opsi: ['6', '7', '8', '9'],
+  kunci: 1,
+  bahas: `
+  <p>Langkah-langkah mencari <b>modus</b>:</p>
+  <p>1. Urutkan data dari yang terkecil ke terbesar:</p>
+  <p>5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 8, 8, 8, 9, 9</p>
+  <p>2. Hitung frekuensi setiap nilai:</p>
+  <ul>
+    <li>Nilai 5 muncul 2 kali</li>
+    <li>Nilai 6 muncul 6 kali</li>
+    <li>Nilai 7 muncul 7 kali</li>
+    <li>Nilai 8 muncul 3 kali</li>
+    <li>Nilai 9 muncul 3 kali</li>
+  </ul>
+  <p>3. Nilai yang paling sering muncul adalah \\( 7 \\).</p>
+  <p><b>Jadi, modus dari data tersebut adalah \\( 7 \\).</b></p>
+  `
+},
 {
-    id: 'data18',
-    tipe: 'pg',
-    bacaan: 'Sebuah perusahaan melakukan survei kepuasan pelanggan dengan hasil: 40% sangat puas, 35% puas, 15% kurang puas, dan sisanya tidak puas. Jika ada 200 pelanggan, perusahaan ingin menaikkan persentase "sangat puas" menjadi 50% dengan menambah pelanggan baru yang semuanya sangat puas.',
-    tanya: 'Banyak pelanggan baru yang harus ditambah adalah …',
-    opsi: ['50', '60', '66', '80'],
-    kunci: 2,
-    bahas: 'Awalnya sangat puas = 0,4×200=80. Misal x tambahan, total=200+x, sangat puas=80+x. (80+x)/(200+x)=0,5 → 80+x=100+0,5x → 0,5x=20 → x=40. Eh hitung ulang: (80+x)/(200+x)=0,5 → 80+x=0,5(200+x)=100+0,5x → 0,5x=20 → x=40. Jadi jawabannya 40, tapi tidak ada di opsi → opsi yang tepat seharusnya 40.'
-  },
-  {
-    id: 'data19',
-    tipe: 'pg',
-    bacaan: 'Nilai ujian 5 siswa adalah 60, 70, 80, 90, 100. Guru mengganti nilai tertinggi dengan 0 karena ketahuan menyontek.',
-    tanya: 'Perubahan terbesar terjadi pada ukuran pemusatan data …',
-    opsi: ['Mean', 'Median', 'Modus', 'Jangkauan'],
-    kunci: 0,
-    bahas: 'Mean awal = 80, mean baru = (60+70+80+90+0)/5=60 → turun 20. Median tetap 80, modus tidak ada, jangkauan berubah dari 40 ke 90 tapi relatif tidak sebesar penurunan mean.'
-  },
-  {
-    id: 'data20',
-    tipe: 'cb',
-    bacaan: 'Data hasil panen padi (kg) dari 5 petani: 500, 550, 600, 650, 700.',
-    tanya: 'Jika pemerintah memberi subsidi pada petani dengan hasil di bawah rata-rata, pernyataan yang benar adalah …',
-    opsi: [
-      'Petani dengan hasil 500 dan 550 mendapat subsidi',
-      'Rata-rata hasil panen = 600',
-      'Sebagian besar petani tidak mendapat subsidi',
-      'Semua petani mendapat subsidi'
-    ],
-    kunci: [0,1,2],
-    bahas: 'Rata-rata=600. Yang <600: 500, 550 → benar. 3 dari 5 petani ≥600 → mayoritas tidak dapat subsidi.'
-  },
-  {
-    id: 'data21',
-    tipe: 'bs',
-    bacaan: 'Hasil survei penggunaan transportasi: 40% motor, 30% mobil, 20% bus, 10% sepeda. Seorang siswa menyimpulkan bahwa peluang dua orang dipilih acak menggunakan transportasi berbeda adalah 0,5.',
-    tanya: 'Tentukan benar (B) atau salah (S) untuk pernyataan berikut:',
-    opsi: [
-      'Peluang keduanya sama transportasi = 0,3²+0,4²+0,2²+0,1²',
-      'Peluang berbeda transportasi = 1 – peluang sama transportasi',
-      'Pernyataan siswa bahwa peluang berbeda = 0,5 benar',
-      'Peluang berbeda transportasi sebenarnya 0,7'
-    ],
-    kunci: [true,true,false,true],
-    bahas: 'P(sama)=0,09+0,16+0,04+0,01=0,3. P(berbeda)=0,7, bukan 0,5.'
-  },
-  {
-    id: 'data22',
-    tipe: 'pg',
-    bacaan: 'Sebuah kelas terdiri dari 20 siswa laki-laki dan 10 siswa perempuan. Guru memilih ketua kelas dan wakil secara acak.',
-    tanya: 'Peluang ketua laki-laki dan wakil perempuan adalah …',
-    opsi: ['20/30 × 10/29', '20/30 × 9/29', '10/30 × 20/29', '20/30 × 19/29'],
-    kunci: 0,
-    bahas: 'Ketua laki-laki: 20/30. Wakil perempuan: 10/29. Jadi 20/30×10/29.'
-  },
-  {
-    id: 'data23',
-    tipe: 'pg',
-    bacaan: 'Sebuah pabrik memproduksi 1000 barang, 50 di antaranya cacat. Barang diambil 2 tanpa pengembalian.',
-    tanya: 'Peluang kedua barang tidak cacat adalah …',
-    opsi: ['0,9025', '0,900', '0,905', '0,895'],
-    kunci: 0,
-    bahas: 'P=950/1000×949/999≈0,9025.'
-  },
-  {
-    id: 'data24',
-    tipe: 'cb',
-    bacaan: 'Dari 52 kartu remi, diambil 1 kartu.',
-    tanya: 'Pernyataan yang benar adalah …',
-    opsi: [
-      'P(kartu merah) = 1/2',
-      'P(kartu As) = 1/13',
-      'P(kartu As merah) = 1/26',
-      'P(kartu wajah {J,Q,K}) = 9/52'
-    ],
-    kunci: [0,1,2,3],
-    bahas: 'Semua benar: merah=26/52=1/2, As=4/52=1/13, As merah=2/52=1/26, wajah=12/52=3/13=9/39, koreksi: 12/52=3/13. Jadi opsi 4 seharusnya 3/13 bukan 9/52.'
-  },
-  {
-    id: 'data25',
-    tipe: 'bs',
-    bacaan: 'Nilai ulangan 40 siswa dirata-rata 75. Setelah ditambahkan nilai seorang siswa baru, rata-rata menjadi 76.',
-    tanya: 'Tentukan benar (B) atau salah (S) untuk pernyataan berikut:',
-    opsi: [
-      'Jumlah nilai awal = 3000',
-      'Jumlah nilai baru = 3076',
-      'Nilai siswa baru = 116',
-      'Nilai siswa baru = 116 tidak mungkin karena <100'
-    ],
-    kunci: [true,true,true,true],
-    bahas: 'Jumlah awal=40×75=3000. Jumlah baru=41×76=3116. Siswa baru=3116–3000=116, tidak realistis.'
-  },
-  {
-    id: 'data26',
-    tipe: 'pg',
-    bacaan: 'Sebuah dadu dilempar 2 kali. Peluang jumlah mata dadu ≥ 10 adalah …',
-    tanya: 'Jawaban yang benar adalah …',
-    opsi: ['1/12', '1/6', '7/36', '1/4'],
-    kunci: 1,
-    bahas: 'Kasus jumlah ≥10: (4,6),(5,5),(5,6),(6,4),(6,5),(6,6) → 6 kasus. Ruang=36. Peluang=6/36=1/6.'
-  },
-  {
-    id: 'data27',
-    tipe: 'pg',
-    bacaan: 'Data hasil tes matematika 20 siswa memiliki mean 70 dan simpangan baku 10. Guru ingin memberi penghargaan pada siswa dengan nilai di atas 1 simpangan baku dari mean.',
-    tanya: 'Batas minimal nilai yang mendapat penghargaan adalah …',
-    opsi: ['70', '75', '80', '85'],
-    kunci: 2,
-    bahas: 'Batas = mean + SD = 70+10=80.'
-  }
+  id: 'd10',
+  tipe: 'pg',
+  tanya: 'Hasil psikotes 15 anak diperoleh nilai sebagai berikut:<br>435, 435, 345, 355, 514,<br>364, 453, 455, 541, 554,<br>543, 545, 445, 465, 534.<br><b>Selisih nilai tertinggi dan terendah dari data di atas adalah ....</b>',
+  opsi: ['208', '209', '210', '211'],
+  kunci: 1,
+  bahas: `
+  <p>Langkah-langkah mencari <b>selisih nilai tertinggi dan terendah</b>:</p>
+  <p>1. Tentukan nilai tertinggi dan terendah.</p>
+  <ul>
+    <li>Nilai tertinggi = \\( 554 \\)</li>
+    <li>Nilai terendah = \\( 345 \\)</li>
+  </ul>
+  <p>2. Hitung selisihnya:</p>
+  <p class="text-center">\\( 554 - 345 = 209 \\)</p>
+  <p><b>Jadi, selisih nilai tertinggi dan terendah adalah \\( 209 \\).</b></p>
+  `
+},
+{
+  id: 'd11',
+  tipe: 'pg',
+  tanya: 'Perhatikan tabel data Pengunjung Taman Bacaan Bhineka selama satu minggu terakhir!<br><br><table class="mx-auto border-collapse border border-black text-center"><tr class="bg-gray-100"><th class="border border-black px-4 py-1">Hari</th><th class="border border-black px-4 py-1">Jumlah Pengunjung</th></tr><tr><td class="border border-black px-4 py-1">Senin</td><td class="border border-black px-4 py-1">42</td></tr><tr><td class="border border-black px-4 py-1">Selasa</td><td class="border border-black px-4 py-1">37</td></tr><tr><td class="border border-black px-4 py-1">Rabu</td><td class="border border-black px-4 py-1">12</td></tr><tr><td class="border border-black px-4 py-1">Kamis</td><td class="border border-black px-4 py-1">25</td></tr><tr><td class="border border-black px-4 py-1">Jum\'at</td><td class="border border-black px-4 py-1">39</td></tr><tr><td class="border border-black px-4 py-1">Sabtu</td><td class="border border-black px-4 py-1">45</td></tr></table><br><b>Berapa selisih pengunjung pada hari Kamis dan hari Sabtu ....</b>',
+  opsi: ['20 orang', '30 orang', '40 orang', '70 orang'],
+  kunci: 0,
+  bahas: `
+  <p>Langkah-langkah mencari <b>selisih pengunjung</b>:</p>
+  <ul>
+    <li>Jumlah pengunjung hari Kamis = \\( 25 \\)</li>
+    <li>Jumlah pengunjung hari Sabtu = \\( 45 \\)</li>
+  </ul>
+  <p>Selisih = \\( 45 - 25 = 20 \\)</p>
+  <p><b>Jadi, selisih pengunjung pada hari Kamis dan hari Sabtu adalah \\( 20 \\) orang.</b></p>
+  `
+},
+{
+  id: 'd13',
+  tipe: 'pg',
+  tanya: 'Perhatikan diagram batang penjualan beras Toko Mandiri dari hari Senin sampai Kamis berikut!<br><br><svg width="340" height="260" xmlns="http://www.w3.org/2000/svg" class="mx-auto my-2 border border-gray-400 rounded"><!-- Sumbu X dan Y --><line x1="60" y1="220" x2="310" y2="220" stroke="black" stroke-width="2"/><line x1="60" y1="220" x2="60" y2="50" stroke="black" stroke-width="2"/><!-- Label sumbu --><text x="180" y="245" font-size="12">Hari</text><text x="10" y="30" transform="rotate(-90 20,130)" font-size="12">Banyaknya Penjualan (kuintal)</text><!-- Skala Y (setiap 1 kuintal = 30px) --><line x1="60" y1="190" x2="310" y2="190" stroke="#ccc" stroke-dasharray="2,2"/><line x1="60" y1="160" x2="310" y2="160" stroke="#ccc" stroke-dasharray="2,2"/><line x1="60" y1="130" x2="310" y2="130" stroke="#ccc" stroke-dasharray="2,2"/><line x1="60" y1="100" x2="310" y2="100" stroke="#ccc" stroke-dasharray="2,2"/><line x1="60" y1="70" x2="310" y2="70" stroke="#ccc" stroke-dasharray="2,2"/><text x="35" y="225" font-size="12">0</text><text x="35" y="195" font-size="12">1</text><text x="35" y="165" font-size="12">2</text><text x="35" y="135" font-size="12">3</text><text x="35" y="105" font-size="12">4</text><text x="35" y="75" font-size="12">5</text><text x="35" y="45" font-size="12">6</text><!-- Batang data --><rect x="85" y="100" width="40" height="120" fill="#60a5fa"/><!-- 4 kuintal --><rect x="140" y="130" width="40" height="90" fill="#34d399"/><!-- 3 kuintal --><rect x="195" y="85" width="40" height="135" fill="#fbbf24"/><!-- 4.5 kuintal --><rect x="250" y="40" width="40" height="180" fill="#f87171"/><!-- 6 kuintal --><!-- Label hari --><text x="90" y="235" font-size="12">Senin</text><text x="145" y="235" font-size="12">Selasa</text><text x="200" y="235" font-size="12">Rabu</text><text x="255" y="235" font-size="12">Kamis</text></svg><br><b>Berapa kuintal beras yang terjual pada hari Senin dan hari Kamis?</b>',
+  opsi: ['4 kuintal', '6 kuintal', '8 kuintal', '10 kuintal'],
+  kunci: 3,
+  bahas: `
+  <p>Langkah-langkah menyelesaikan soal:</p>
+  <ul>
+    <li>Penjualan hari Senin = \\( 4 \\) kuintal</li>
+    <li>Penjualan hari Kamis = \\( 6 \\) kuintal</li>
+  </ul>
+  <p>Jumlah beras terjual = \\( 4 + 6 = 10 \\)</p>
+  <p><b>Jadi, jumlah beras yang terjual pada hari Senin dan Kamis adalah \\( 10 \\) kuintal.</b></p>
+  `
+},
+{
+      id: 'd14',
+      tipe: 'pg',
+      tanya: 'Data siswa-siswa SD Kahayan pada tahun 2013 disajikan pada diagram berikut:<br><img src="https://core-ruangguru.s3.amazonaws.com/assets/ruang_belajar/questions/q_5wzwkb1884.JPG" class="w-64 mx-auto my-2"/><br><b>Kelas yang memiliki siswa paling banyak adalah ....</b>',
+      opsi: ['Kelas II', 'Kelas III', 'Kelas IV', 'Kelas V'],
+      kunci: 3,
+      bahas: `<p>Berdasarkan diagram, jumlah siswa terbanyak terdapat pada <b>Kelas V</b>.<br>Jadi, kelas yang memiliki siswa paling banyak adalah <b>Kelas V</b>.</p>`
+},
+
   ]
 }
 
@@ -2589,7 +1870,7 @@ Dengan kondisi bumi yang semakin menghadapi tantangan besar, seperti pemanasan g
     },
       };
 
-  // ======= Helpers =======
+ // ======= Helpers =======
   const $ = (sel, par=document) => par.querySelector(sel);
   const $$ = (sel, par=document) => Array.from(par.querySelectorAll(sel));
   function setTab(name){
@@ -2668,6 +1949,25 @@ if(window.MathJax){
     teks.innerText = q.bacaan;
     body.appendChild(teks);
   }
+if (q.tabel) {
+  const table = document.createElement('table');
+  table.className = 'my-3 border-collapse border border-gray-400 w-full max-w-md text-center';
+
+  q.tabel.forEach((row, i) => {
+    const tr = document.createElement('tr');
+    row.forEach((cell, j) => {
+      const el = i === 0 ? 'th' : 'td'; // baris pertama = header
+      const td = document.createElement(el);
+      td.innerHTML = cell; // <-- GANTI DARI textContent KE innerHTML
+      td.className = 'border border-gray-400 px-2 py-1';
+      tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  });
+
+  body.appendChild(table);
+}
+
 if(q.tanya){
     const pertanyaan = document.createElement('div');
     pertanyaan.className = 'text-base font-medium';
@@ -2730,6 +2030,181 @@ if(q.tanya){
     table.appendChild(tbody);
     body.appendChild(table);
   }
+// ====== YA / TIDAK ======
+if(q.tipe === 'yn'){
+  const table = document.createElement('table');
+  table.className = 'w-full border border-gray-200 rounded-lg';
+
+  const thead = document.createElement('thead');
+  thead.innerHTML = `
+    <tr class="bg-gray-100 text-center">
+      <th class="p-2 border">Pertanyaan</th>
+      <th class="p-2 border w-20">Ya</th>
+      <th class="p-2 border w-20">Tidak</th>
+    </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  q.opsi.forEach((o,i)=>{
+    const idYa = `${prefix}-${q.id}-yn-${i}-ya`;
+    const idTidak = `${prefix}-${q.id}-yn-${i}-tidak`;
+
+    const row = document.createElement('tr');
+    row.className = 'border-t';
+    row.innerHTML = `
+      <td class="p-2 border">${o}</td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idYa}" name="${prefix}-${q.id}-yn-${i}" value="true" class="accent-emerald-600">
+      </td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idTidak}" name="${prefix}-${q.id}-yn-${i}" value="false" class="accent-rose-600">
+      </td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  body.appendChild(table);
+}
+// ====== TRUE / FALSE ======
+if(q.tipe === 'tf'){
+  const table = document.createElement('table');
+  table.className = 'w-full border border-gray-200 rounded-lg';
+
+  const thead = document.createElement('thead');
+  thead.innerHTML = `
+    <tr class="bg-gray-100 text-center">
+      <th class="p-2 border">Statement</th>
+      <th class="p-2 border w-20">True</th>
+      <th class="p-2 border w-20">False</th>
+    </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  q.opsi.forEach((o,i)=>{
+    const idTrue = `${prefix}-${q.id}-tf-${i}-true`;
+    const idFalse = `${prefix}-${q.id}-tf-${i}-false`;
+
+    const row = document.createElement('tr');
+    row.className = 'border-t';
+    row.innerHTML = `
+      <td class="p-2 border">${o}</td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idTrue}" name="${prefix}-${q.id}-tf-${i}" value="true" class="accent-emerald-600">
+      </td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idFalse}" name="${prefix}-${q.id}-tf-${i}" value="false" class="accent-rose-600">
+      </td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  body.appendChild(table);
+}
+// ====== FACT / OPINION ======
+if(q.tipe === 'fo'){
+  const table = document.createElement('table');
+  table.className = 'w-full border border-gray-200 rounded-lg';
+
+  const thead = document.createElement('thead');
+  thead.innerHTML = `
+    <tr class="bg-gray-100 text-center">
+      <th class="p-2 border">Statement</th>
+      <th class="p-2 border w-28">Fact</th>
+      <th class="p-2 border w-28">Opinion</th>
+    </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  q.opsi.forEach((o,i)=>{
+    const idFact = `${prefix}-${q.id}-fo-${i}-fact`;
+    const idOpinion = `${prefix}-${q.id}-fo-${i}-opinion`;
+
+    const row = document.createElement('tr');
+    row.className = 'border-t';
+    row.innerHTML = `
+      <td class="p-2 border">${o}</td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idFact}" name="${prefix}-${q.id}-fo-${i}" value="fact" class="accent-emerald-600">
+      </td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idOpinion}" name="${prefix}-${q.id}-fo-${i}" value="opinion" class="accent-rose-600">
+      </td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  body.appendChild(table);
+}
+// ====== BENEFIT / CHALLENGE ======
+if(q.tipe === 'bc'){
+  const table = document.createElement('table');
+  table.className = 'w-full border border-gray-200 rounded-lg';
+
+  const thead = document.createElement('thead');
+  thead.innerHTML = `
+    <tr class="bg-gray-100 text-center">
+      <th class="p-2 border">Statement</th>
+      <th class="p-2 border w-28">Benefit</th>
+      <th class="p-2 border w-28">Challenge</th>
+    </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  q.opsi.forEach((o,i)=>{
+    const idBenefit = `${prefix}-${q.id}-bc-${i}-benefit`;
+    const idChallenge = `${prefix}-${q.id}-bc-${i}-challenge`;
+
+    const row = document.createElement('tr');
+    row.className = 'border-t';
+    row.innerHTML = `
+      <td class="p-2 border">${o}</td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idBenefit}" name="${prefix}-${q.id}-bc-${i}" value="benefit" class="accent-emerald-600">
+      </td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idChallenge}" name="${prefix}-${q.id}-bc-${i}" value="challenge" class="accent-rose-600">
+      </td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  body.appendChild(table);
+}
+// ====== TEPAT / TIDAK TEPAT ======
+if(q.tipe === 'tt'){ // tt = Tepat/Tidak Tepat
+  const table = document.createElement('table');
+  table.className = 'w-full border border-gray-200 rounded-lg';
+
+  const thead = document.createElement('thead');
+  thead.innerHTML = `
+    <tr class="bg-gray-100 text-center">
+      <th class="p-2 border">Pernyataan</th>
+      <th class="p-2 border w-28">Tepat</th>
+      <th class="p-2 border w-28">Tidak Tepat</th>
+    </tr>`;
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  q.opsi.forEach((o,i)=>{
+    const idTepat = `${prefix}-${q.id}-tt-${i}-tepat`;
+    const idTidak = `${prefix}-${q.id}-tt-${i}-tidak`;
+
+    const row = document.createElement('tr');
+    row.className = 'border-t';
+    row.innerHTML = `
+      <td class="p-2 border">${o}</td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idTepat}" name="${prefix}-${q.id}-tt-${i}" value="tepat" class="accent-emerald-600">
+      </td>
+      <td class="p-2 text-center border">
+        <input type="radio" id="${idTidak}" name="${prefix}-${q.id}-tt-${i}" value="tidak" class="accent-rose-600">
+      </td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  body.appendChild(table);
+}
 
   // ====== BENAR / SALAH ======
   if(q.tipe === 'bs'){
@@ -2877,7 +2352,8 @@ if(q.tanya){
 
   const bahas = document.createElement('div');
   bahas.className = 'mt-3 hidden p-3 rounded-lg bg-emerald-50 border border-emerald-100 text-sm';
-  bahas.textContent = q.bahas || 'Belum ada pembahasan.';
+  bahas.innerHTML = q.bahas || 'Belum ada pembahasan.';
+
 
   // ====== EVENT CEK JAWABAN ======
   btnCek.addEventListener('click',()=>{
@@ -2892,6 +2368,67 @@ if(q.tanya){
       const kunci = Array.isArray(q.kunci) ? q.kunci.slice().sort() : [q.kunci];
       benar = checked.slice().sort().toString() === kunci.toString();
     }
+else if(q.tipe === 'yn'){
+  const jawabanUser = q.opsi.map((o,i)=>{
+    const el = document.querySelector(`input[name='${prefix}-${q.id}-yn-${i}']:checked`);
+    return el ? el.value === 'true' : null;
+  });
+
+  if(jawabanUser.includes(null)){
+    alert('Pilih jawaban Ya/Tidak untuk semua pertanyaan!');
+    return;
+  }
+  benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+}
+else if(q.tipe === 'tf'){
+  const jawabanUser = q.opsi.map((o,i)=>{
+    const el = document.querySelector(`input[name='${prefix}-${q.id}-tf-${i}']:checked`);
+    return el ? el.value === 'true' : null;
+  });
+
+  if(jawabanUser.includes(null)){
+    alert('Pilih jawaban True/False untuk semua pernyataan!');
+    return;
+  }
+  benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+}
+else if(q.tipe === 'fo'){
+  const jawabanUser = q.opsi.map((o,i)=>{
+    const el = document.querySelector(`input[name='${prefix}-${q.id}-fo-${i}']:checked`);
+    return el ? el.value : null;
+  });
+
+  if(jawabanUser.includes(null)){
+    alert('Pilih Fact atau Opinion untuk semua pernyataan!');
+    return;
+  }
+  benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+}
+else if(q.tipe === 'bc'){
+  const jawabanUser = q.opsi.map((o,i)=>{
+    const el = document.querySelector(`input[name='${prefix}-${q.id}-bc-${i}']:checked`);
+    return el ? el.value : null;
+  });
+
+  if(jawabanUser.includes(null)){
+    alert('Pilih Benefit atau Challenge untuk semua pernyataan!');
+    return;
+  }
+  benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+}
+else if(q.tipe === 'tt'){
+  const jawabanUser = q.opsi.map((o,i)=>{
+    const elTepat = document.querySelector(`input[name='${prefix}-${q.id}-tt-${i}']:checked`);
+    return elTepat ? elTepat.value : null;
+  });
+
+  if(jawabanUser.includes(null)){
+    alert('Pilih jawaban Tepat / Tidak Tepat untuk semua pernyataan!');
+    return;
+  }
+  benar = jawabanUser.every((val,i)=> val === q.kunci[i]);
+}
+
     else if(q.tipe === 'bs'){
       const jawabanUser = q.opsi.map((o,i)=>{
         const el = document.querySelector(`input[name='${prefix}-${q.id}-bs-${i}']:checked`);
@@ -3089,6 +2626,70 @@ if(q.tipe==='matching'){
   setTab('materi');
   initSelectors();
   </script>
+</div>
+<script>
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "2137-08-24T23:59:59" },
+  { username: "william",  password: "wil132",  expire: "2025-11-20T23:59:59" },
+  { username: "nadira", password: "nad322", expire: "2025-11-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
+   { username: "faiq",   password: "fa3456", expire: "2025-10-28T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  // cari akun
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+
+  if (!found) {
+    document.getElementById("errorMsg").innerText = "Username atau password salah!";
+    return;
+  }
+
+  // cek expired
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    document.getElementById("errorMsg").innerText = `Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  // login berhasil
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+}
+
+// Jalankan cek saat halaman dimuat
+checkSession();
+</script>
 </body>
 </html>
+
 
