@@ -371,6 +371,33 @@ bacaan:'Terdapat tiga bilangan yang dinyatakan dengan \\((33^2 − 3^2)\\), \\((
     <p>Maka jawaban yang benar adalah <b>2² × 3 × 5²</b> dan <b>2² × 3 × 5</b>.</p>
   `
 },
+{
+  id: 'b3',
+  tipe: 'cb',
+    tanya: 'Tentukan pernyataan yang benar dari pernyataan berikut!<br><b>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</b>',
+  opsi: [
+    'I. 4x² − 9 = (2x + 3)(2x − 3)',
+'II. 2x² + x − 3 = (2x − 3)(x + 1)',
+'III. x² + x − 6 = (x + 3)(x − 2)',
+'IV. x² + 4x − 5 = (x − 5)(x + 1)'
+  ],
+  kunci: [0, 2],
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+
+    <p><b>I.</b> 4x² − 9 = (2x + 3)(2x − 3) ✅<br>
+    Benar, karena ini bentuk <i>selisih dua kuadrat</i> (a² − b² = (a + b)(a − b)).</p>
+
+    <p><b>II.</b> (2x − 3)(x + 1) = 2x² + 2x − 3x − 3 = 2x² − x − 3 ❌<br>
+    Tidak sama dengan 2x² + x − 3, jadi salah.</p>
+
+    <p><b>III.</b> (x + 3)(x − 2) = x² − 2x + 3x − 6 = x² + x − 6 ✅</p>
+
+    <p><b>IV.</b> (x − 5)(x + 1) = x² + x − 5x − 5 = x² − 4x − 5 ❌</p>
+
+    <p>Maka yang benar adalah <b>I dan III</b>.</p>
+  `
+},
 
 {
   id: 'b3',
@@ -2133,11 +2160,63 @@ gambar:'https://mathcyber1997.com/wp-content/uploads/2018/06/fungsi6.png',
 
     <p><b>Jadi, suku ke-35 adalah 176.</b></p>
   `
-}
+},
+{
+  id: 'bd3',
+  tipe: 'pg',
+  tanya: 'Seutas tali dipotong menjadi lima bagian dengan panjang masing-masing bagian membentuk barisan geometri. Jika potongan tali yang terpendek 4 m dan potongan yang terpanjang 64 m, maka panjang tali semula adalah ....',
+  opsi: [
+    '124 m',
+    '160 m',
+    '252 m',
+    '256 m'
+  ],
+  kunci: 0,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Diketahui barisan geometri dengan suku pertama \\(a = 4\\) dan suku kelima \\(a r^4 = 64\\).</p>
+    <p>Hitung rasio:</p>
+    <p>\\( r^4 = \\frac{64}{4} = 16 \\Rightarrow r = 2 \\)</p>
+    <p>Panjang tiap potongan: 4, 8, 16, 32, 64.</p>
+    <p>Jumlah seluruh panjang tali = jumlah 5 suku barisan geometri:</p>
+    <p>\\( S_5 = a \\frac{r^5 - 1}{r - 1} = 4 \\times \\frac{2^5 - 1}{2 - 1} = 4 \\times 31 = 124 \\)</p>
+    <p>Jadi, panjang tali semula adalah <b>124 meter</b>.</p>
+  `
+},
+{
+  id: 'bd4',
+  tipe: 'pg',
+  tanya: 'Jumlah bilangan kelipatan 5 antara 200 dan 400 adalah ....',
+  opsi: [
+    '11.700',
+    '12.700',
+    '13.161',
+    '14.121'
+  ],
+  kunci: 0,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Kelipatan 5 antara 200 dan 400 adalah 205, 210, 215, ..., 395.</p>
+    <p>Barisan ini merupakan barisan aritmetika dengan:</p>
+    <ul>
+      <li>\\(a_1 = 205\\)</li>
+      <li>\\(a_n = 395\\)</li>
+      <li>\\(d = 5\\)</li>
+    </ul>
+    <p>Cari banyak suku \\(n\\):</p>
+    <p>\\(a_n = a_1 + (n - 1)d\\)</p>
+    <p>\\(395 = 205 + (n - 1)5\\)</p>
+    <p>\\(190 = 5(n - 1) \\Rightarrow n - 1 = 38 \\Rightarrow n = 39\\)</p>
+    <p>Jumlah suku:</p>
+    <p>\\(S_n = \\frac{n}{2}(a_1 + a_n) = \\frac{39}{2}(205 + 395) = \\frac{39}{2} \\times 600 = 39 \\times 300 = 11.700\\)</p>
+    <p>Jadi, jumlah bilangan kelipatan 5 antara 200 dan 400 adalah <b>11.700</b>.</p>
+  `
+},
+
 
   ]
 },
-'ObjekGeometri': {
+'Objek Geometri': {
   materi: `
     <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8">
       <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Objek Geometri: Konsep, Teorema, dan Bangun Ruang</h2>
@@ -2215,69 +2294,57 @@ gambar:'https://mathcyber1997.com/wp-content/uploads/2018/06/fungsi6.png',
   video: 'V1ddwJh2t_0',
   soal: [
     {
-      id: 'geo1',
-      tipe: 'pg',
-      tanya: 'Jika dua garis sejajar dipotong garis transversal, sudut sehadap sebesar 70°, maka sudut sehadap lainnya adalah...',
-      opsi: [
-        '70°',
-        '110°',
-        '180°',
-        '90°'
-      ],
-      kunci: 1,
-      bahas: `
-        <p><b>Pembahasan:</b></p>
-        <p>Sudut sehadap pada garis sejajar sama besar. Jadi sudut sehadap lainnya = 70°.</p>
-      `
-    },
-    {
-      id: 'geo2',
-      tipe: 'pg',
-      tanya: 'Dalam segitiga siku-siku dengan sisi siku-siku 6 cm dan 8 cm, panjang hipotenusa adalah...',
-      opsi: [
-        '10 cm',
-        '12 cm',
-        '14 cm',
-        '15 cm'
-      ],
-      kunci: 1,
-      bahas: `
-        <p><b>Pembahasan:</b></p>
-        <p>Pythagoras: c^2 = 6^2 + 8^2 = 36 + 64 = 100 → c = 10 cm.</p>
-      `
-    },
-    {
-      id: 'geo3',
-      tipe: 'pg',
-      tanya: 'Dua segitiga dikatakan sebangun jika...',
-      opsi: [
-        'Sama bentuk dan ukuran',
-        'Sama bentuk tapi ukuran berbeda, perbandingan sisi sama',
-        'Sisi sama tapi bentuk berbeda',
-        'Tidak ada hubungan'
-      ],
-      kunci: 2,
-      bahas: `
-        <p><b>Pembahasan:</b></p>
-        <p>Kesebangunan berarti bentuk sama, ukuran bisa berbeda, sisi-sisi sebanding.</p>
-      `
-    },
-    {
-      id: 'geo4',
-      tipe: 'pg',
-      tanya: 'Bangun ruang yang memiliki dua alas berbentuk poligon sejajar dan sisi tegak persegi panjang disebut...',
-      opsi: [
-        'Limas',
-        'Prisma',
-        'Tabung',
-        'Kerucut'
-      ],
-      kunci: 2,
-      bahas: `
-        <p><b>Pembahasan:</b></p>
-        <p>Prisma memiliki dua alas poligon sejajar dan sisi tegak persegi panjang.</p>
-      `
-    }
+  id: 'og1',
+  tipe: 'pg',
+  tanya: 'Sebuah tiang tingginya 12 m, berdiri tegak di atas tanah datar. Dari ujung atas tiang ditarik seutas tali ke sebuah patok pada tanah. Jika panjang tali 15 m, jarak patok dengan pangkal tiang bagian bawah adalah ....',
+  opsi: [
+    '13,5 m',
+    '10 m',
+    '9 m',
+    '3 m'
+  ],
+  kunci: 2,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Gambarkan segitiga siku-siku, dengan:</p>
+    <ul>
+      <li>Tinggi tiang = 12 m (sisi tegak)</li>
+      <li>Panjang tali = 15 m (sisi miring / hipotenusa)</li>
+      <li>Jarak patok dari pangkal tiang = x (sisi alas)</li>
+    </ul>
+    <p>Gunakan teorema Pythagoras:</p>
+    <p>\\( x^2 = 15^2 - 12^2 = 225 - 144 = 81 \\)</p>
+    <p>\\( x = \\sqrt{81} = 9 \\)</p>
+    <p>Jadi jarak patok dari pangkal tiang adalah <b>9 meter</b>.</p>
+  `
+},
+
+   {
+  id: 'og7',
+  tipe: 'pg',
+  tanya: 'Perhatikan gambar berikut!<br><img src="https://i.imgur.com/3oXUOMi.png" width="350"><br> Trapesium ABCD sebangun dengan trapesium EFCD. Jika CF : FB = 2 : 3 , maka panjang CD adalah ....',
+  opsi: [
+    '9 cm',
+    '12 cm',
+    '15 cm',
+    '18 cm'
+  ],
+  kunci: 2,
+  bahas: `
+    <p><b>Pembahasan:</b></p>
+    <p>Diketahui trapesium ABCD ∼ EFCD, dengan CF : FB = 2 : 3 dan AB = 27 cm.</p>
+    <p>Langkah 1: Hubungkan sisi-sisi yang bersesuaian antara trapesium besar dan trapesium menengah.</p>
+    <p>\\( \\frac{EF}{AB} = \\frac{CF}{FB} \\)</p>
+    <p>\\( \\frac{EF}{27} = \\frac{2}{3} \\Rightarrow EF = 27 \\times \\frac{2}{3} = 18 \\, \\text{cm} \\)</p>
+    <p>Langkah 2: Hubungkan trapesium menengah (EFCD) dengan trapesium kecil di bawahnya.</p>
+    <p>\\( \\frac{CD}{EF} = \\frac{CF}{FB} \\)</p>
+    <p>\\( \\frac{CD}{18} = \\frac{2}{3} \\Rightarrow CD = 18 \\times \\frac{2}{3} = 12 \\, \\text{cm} \\)</p>
+    <p>Jadi, panjang CD adalah <b>12 cm</b>.</p>
+    <p><b>Video Pembahasan:</b></p>
+    <iframe width="400" height="225" src="https://www.youtube.com/embed/vbCeGt3wiwU" title="Video Pembahasan Trapesium Sebangun" frameborder="0" allowfullscreen></iframe>
+  `
+},
+
   ]
 },
 
