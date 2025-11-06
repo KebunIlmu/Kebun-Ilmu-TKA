@@ -36,68 +36,9 @@
       opacity: 0.15;
     }
 
-    .shape.one {
-      width: 400px;
-      height: 400px;
-      top: -120px;
-      right: -150px;
-    }
-
-    .shape.two {
-      width: 300px;
-      height: 300px;
-      bottom: -120px;
-      left: -120px;
-    }
-
-    .shape.three {
-      width: 250px;
-      height: 250px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .sidebar {
-      width: 260px;
-      height: 100vh;
-      background: #f8d444;
-      position: fixed;
-      left: -260px;
-      top: 0;
-      transition: left 0.3s ease-in-out;
-      padding-top: 20px;
-      box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
-      z-index: 1300;
-    }
-
-    .sidebar h2 {
-      color: #333;
-      text-align: center;
-      margin-bottom: 20px;
-      font-weight: bold;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 10px;
-    }
-
-    .sidebar ul li a {
-      text-decoration: none;
-      color: #333;
-      font-size: 16px;
-      display: block;
-      padding: 12px;
-      margin: 6px 0;
-      border-radius: 6px;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .sidebar ul li a:hover {
-      background: #4dd4a3;
-      color: white;
-    }
+    .shape.one { width: 400px; height: 400px; top: -120px; right: -150px; }
+    .shape.two { width: 300px; height: 300px; bottom: -120px; left: -120px; }
+    .shape.three { width: 250px; height: 250px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
     .toggle-btn {
       position: fixed;
@@ -114,9 +55,7 @@
       transition: transform 0.2s;
     }
 
-    .toggle-btn:hover {
-      transform: scale(1.1);
-    }
+    .toggle-btn:hover { transform: scale(1.1); }
 
     .header {
       background: white;
@@ -136,18 +75,9 @@
       gap: 10px;
     }
 
-    .header img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
+    .header img { width: 40px; height: 40px; border-radius: 50%; }
 
-    .content {
-      text-align: center;
-      padding: 10px;
-      color: #333;
-      font-size: 18px;
-    }
+    .content { text-align: center; padding: 10px; color: #333; font-size: 18px; }
 
     .card-container {
       display: flex;
@@ -170,10 +100,7 @@
       position: relative;
     }
 
-    .card:hover {
-      transform: scale(1.07);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-    }
+    .card:hover { transform: scale(1.07); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); }
 
     .card a {
       text-decoration: none;
@@ -183,31 +110,27 @@
       display: block;
     }
 
-    /* Area tombol pilihan */
     .options, .sub-options {
       display: none;
       margin-top: 10px;
       animation: fadeIn 0.3s ease-in-out;
     }
 
-   .options button, .sub-options button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-  border: none;
-  border-radius: 8px;
-  background-color: white;
-  color: #4dd4a3;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
+    .options button, .sub-options button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: none;
+      border-radius: 8px;
+      background-color: white;
+      color: #4dd4a3;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-.options button:hover, .sub-options button:hover {
-  background-color: #ffec7a;
-}
-
+    .options button:hover, .sub-options button:hover { background-color: #ffec7a; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-5px); }
@@ -215,13 +138,8 @@
     }
 
     @media (max-width: 768px) {
-      .card-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      .header {
-        font-size: 18px;
-      }
+      .card-container { flex-direction: column; align-items: center; }
+      .header { font-size: 18px; }
     }
   </style>
 </head>
@@ -252,7 +170,36 @@
     <div class="card"><a href="TKA SMA Wajib.html">TKA SMA Wajib</a></div>
     <div class="card"><a href="TKA SMA Pilian.html">TKA SMA Pilihan</a></div>
 
-    <!-- Card utama -->
+    <!-- TRYOUT TKA SD -->
+    <div class="card" id="cardSD">
+      <a href="#">Try out TKA SD</a>
+      <div class="options" id="optionsSD">
+        <button id="btnTryoutSD1">Tryout 1</button>
+        <div class="sub-options" id="subTryoutSD1">
+          <button onclick="location.href='Try Out TKA SD Matematika1.html'">Matematika</button>
+          <button onclick="location.href='Try Out TKA SD Bahasa Indonesia1.html'">Bahasa Indonesia</button>
+          <button onclick="location.href='Try Out TKA SD IPA1.html'">IPA</button>
+        </div>
+        <button onclick="location.href='Pembahasan Try Out TKA SD.html'">Pembahasan</button>
+      </div>
+    </div>
+
+    <!-- TRYOUT TKA SMP -->
+    <div class="card" id="cardSMP">
+      <a href="#">Try out TKA SMP</a>
+      <div class="options" id="optionsSMP">
+        <button id="btnTryoutSMP1">Tryout 1</button>
+        <div class="sub-options" id="subTryoutSMP1">
+          <button onclick="location.href='Try Out TKA SMP Matematika1.html'">Matematika</button>
+          <button onclick="location.href='Try Out TKA SMP Bahasa Indonesia1.html'">Bahasa Indonesia</button>
+          <button onclick="location.href='Try Out TKA SMP Bahasa Inggris1.html'">Bahasa Inggris</button>
+          <button onclick="location.href='Try Out TKA SMP IPA1.html'">IPA</button>
+        </div>
+        <button onclick="location.href='Pembahasan Try Out TKA SMP.html'">Pembahasan</button>
+      </div>
+    </div>
+
+    <!-- TRYOUT TKA SMA -->
     <div class="card" id="cardTKA">
       <a href="#">Try out TKA SMA</a>
       <div class="options" id="optionsTKA">
@@ -272,37 +219,36 @@
   </div>
 
   <script>
-    // buka tutup sidebar
-    function toggleSidebar() {
-      let sidebar = document.getElementById("sidebar");
-      sidebar.style.left = sidebar.style.left === "-260px" ? "0" : "-260px";
+    // toggle untuk setiap card
+    function toggle(cardId, optionId) {
+      const card = document.getElementById(cardId);
+      const options = document.getElementById(optionId);
+      card.addEventListener('click', function(e) {
+        e.preventDefault();
+        options.style.display = options.style.display === 'block' ? 'none' : 'block';
+      });
     }
 
-    // toggle utama untuk card
-    const cardTKA = document.getElementById('cardTKA');
-    const optionsTKA = document.getElementById('optionsTKA');
-    const btnTryout1 = document.getElementById('btnTryout1');
-    const subTryout1 = document.getElementById('subTryout1');
+    // toggle sub-options
+    function subToggle(btnId, subId) {
+      const btn = document.getElementById(btnId);
+      const sub = document.getElementById(subId);
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sub.style.display = sub.style.display === 'block' ? 'none' : 'block';
+      });
+    }
 
-    // klik card → tampilkan Tryout 1 & Pembahasan
-    cardTKA.addEventListener('click', function(e) {
-      e.preventDefault();
-      optionsTKA.style.display = optionsTKA.style.display === 'block' ? 'none' : 'block';
-    });
+    // jalankan semua toggle
+    toggle('cardTKA', 'optionsTKA');
+    subToggle('btnTryout1', 'subTryout1');
 
-    // klik Tryout 1 → tampilkan daftar mata pelajaran
-    btnTryout1.addEventListener('click', function(e) {
-      e.stopPropagation(); // biar gak nutup card
-      subTryout1.style.display = subTryout1.style.display === 'block' ? 'none' : 'block';
-    });
+    toggle('cardSD', 'optionsSD');
+    subToggle('btnTryoutSD1', 'subTryoutSD1');
+
+    toggle('cardSMP', 'optionsSMP');
+    subToggle('btnTryoutSMP1', 'subTryoutSMP1');
   </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
