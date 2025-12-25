@@ -246,6 +246,28 @@ table.true-false tr:has(input[type="radio"]:checked) {
 .hidden { display: none; }
   </style>
 </head>
+<div id="pesertaForm" style="display:none;">
+  <div class="login-box">
+    <h2>Data Peserta</h2>
+
+    <input id="nik" placeholder="NIK">
+    <input id="namaPeserta" placeholder="Nama Peserta">
+
+    <select id="jk">
+      <option value="">Jenis Kelamin</option>
+      <option value="L">Laki-laki</option>
+      <option value="P">Perempuan</option>
+    </select>
+
+    <input id="tglLahir" type="date">
+    <input id="sekolah" placeholder="Nama Sekolah">
+    <input id="tokenUjian" placeholder="Token Ujian">
+
+    <button onclick="mulaiUjian()">Mulai Ujian</button>
+    <p id="errorPeserta" style="color:red;"></p>
+  </div>
+</div>
+
 <body>
 <!-- ====== LOGIN SCREEN ====== -->
 <div id="loginForm">
@@ -288,6 +310,33 @@ table.true-false tr:has(input[type="radio"]:checked) {
 </div>
 
 <script>
+function mulaiUjian() {
+  const nik = document.getElementById("nik").value.trim();
+  const nama = document.getElementById("namaPeserta").value.trim();
+  const jk = document.getElementById("jk").value;
+  const tgl = document.getElementById("tglLahir").value;
+  const sekolah = document.getElementById("sekolah").value.trim();
+  const token = document.getElementById("tokenUjian").value.trim();
+
+  if (!nik || !nama || !jk || !tgl || !sekolah || !token) {
+    document.getElementById("errorPeserta").innerText = "❌ Semua data wajib diisi";
+    return;
+  }
+
+  if (token !== "KI2025") {
+    document.getElementById("errorPeserta").innerText = "❌ Token salah";
+    return;
+  }
+
+  // simpan data peserta sementara
+  window.dataPeserta = {
+    nik, nama, jk, tgl, sekolah, token
+  };
+
+  document.getElementById("pesertaForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+}
+
 // ====== DATA AKUN + KADALUWARSA ======
 const accounts = [
   { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
@@ -340,7 +389,7 @@ function checkSession() {
 // ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
 function showContent() {
   document.getElementById("loginForm").style.display = "none";
-  document.getElementById("content22").classList.remove("hidden");
+  document.getElementById("pesertaForm").style.display = "flex";
   renderQuestionButtons();
   renderQuestion(currentQuestion);
   startTimer(50 * 60);
@@ -983,6 +1032,8 @@ function calculateScore() {
   // Tampilkan hanya skor akhir dalam bentuk nilai
   scoreDisplay.textContent = `Skor Anda: ${percentage}`;
   scoreDisplay.style.display = 'block';
+// 🔥 KIRIM KE FIREBASE
+  simpanHasilFirebase(percentage);
 }
 function disableAll() {
   document.querySelectorAll('button').forEach(btn => btn.disabled = true);
@@ -1053,6 +1104,23 @@ checkSession();
   const db = getFirestore(app);
 
   window.db = db;
+
+async function simpanHasilFirebase(nilai) {
+  const { addDoc, collection } = await import(
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+  );
+
+  await addDoc(collection(window.db, "hasil_ujian"), {
+    nik: window.dataPeserta.nik,
+    nama: window.dataPeserta.nama,
+    jk: window.dataPeserta.jk,
+    tglLahir: window.dataPeserta.tgl,
+    sekolah: window.dataPeserta.sekolah,
+    nilai: nilai,
+    waktu: new Date().toISOString()
+  });
+}
+
 </script>
 
 </body>
