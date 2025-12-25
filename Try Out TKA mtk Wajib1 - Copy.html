@@ -246,25 +246,29 @@ table.true-false tr:has(input[type="radio"]:checked) {
 .hidden { display: none; }
   </style>
 </head>
-<div id="pesertaForm" style="display:none;">
-  <div class="login-box">
-    <h2>Data Peserta</h2>
+<div id="pesertaForm" style="display:flex; justify-content:center; align-items:center; height:100vh; background-color:#f4f9ff; padding:20px; box-sizing:border-box;">
+  <div style="background:white; padding:30px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:100%; max-width:400px; text-align:center;">
+    <h2 style="margin-bottom:20px; color:#1E88E5;">Data Peserta</h2>
 
-    <input id="nik" placeholder="NIK">
-    <input id="namaPeserta" placeholder="Nama Peserta">
+    <input id="nik" placeholder="NIK" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
+    <input id="namaPeserta" placeholder="Nama Peserta" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
 
-    <select id="jk">
+    <select id="jk" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
       <option value="">Jenis Kelamin</option>
       <option value="L">Laki-laki</option>
       <option value="P">Perempuan</option>
     </select>
 
-    <input id="tglLahir" type="date">
-    <input id="sekolah" placeholder="Nama Sekolah">
-    <input id="tokenUjian" placeholder="Token Ujian">
+    <input id="tglLahir" type="date" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
+    <input id="sekolah" placeholder="Nama Sekolah" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
+    <input id="tokenUjian" placeholder="Token Ujian" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
 
-    <button onclick="mulaiUjian()">Mulai Ujian</button>
-    <p id="errorPeserta" style="color:red;"></p>
+    <button onclick="mulaiUjian()" style="width:100%; padding:12px; background-color:#1E88E5; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:16px;"
+      onmouseover="this.style.backgroundColor='#1565C0';" 
+      onmouseout="this.style.backgroundColor='#1E88E5';">
+      Mulai Ujian
+    </button>
+    <p id="errorPeserta" style="margin-top:10px; font-size:14px; color:red;"></p>
   </div>
 </div>
 
@@ -1091,36 +1095,40 @@ checkSession();
   import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
-  apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
-  authDomain: "tryout-kebun-ilmu.firebaseapp.com",
-  projectId: "tryout-kebun-ilmu",
-  storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
-  messagingSenderId: "497636674894",
-  appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
-};
-
+    apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
+    authDomain: "tryout-kebun-ilmu.firebaseapp.com",
+    projectId: "tryout-kebun-ilmu",
+    storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
+    messagingSenderId: "497636674894",
+    appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
+  };
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  // supaya bisa dipakai di script lain
   window.db = db;
 
-async function simpanHasilFirebase(nilai) {
-  const { addDoc, collection } = await import(
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
-  );
+  // 🔥 INI YANG PALING PENTING
+  window.simpanHasilFirebase = async function (nilai) {
+    const { addDoc, collection, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+    );
 
-  await addDoc(collection(window.db, "hasil_ujian"), {
-    nik: window.dataPeserta.nik,
-    nama: window.dataPeserta.nama,
-    jk: window.dataPeserta.jk,
-    tglLahir: window.dataPeserta.tgl,
-    sekolah: window.dataPeserta.sekolah,
-    nilai: nilai,
-    waktu: new Date().toISOString()
-  });
-}
+    await addDoc(collection(window.db, "hasil_ujian"), {
+  nik: window.dataPeserta.nik,
+  nama: window.dataPeserta.nama,
+  jk: window.dataPeserta.jk,
+  tglLahir: window.dataPeserta.tgl,
+  sekolah: window.dataPeserta.sekolah,
+  mapel: "Matematika Wajib SD", // tambah field mapel
+  nilai: nilai,
+  waktu: new Date().toISOString()
+});
 
+
+    console.log("✅ HASIL UJIAN TERSIMPAN");
+  };
 </script>
 
 </body>
