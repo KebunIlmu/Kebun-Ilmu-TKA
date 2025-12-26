@@ -246,7 +246,19 @@ table.true-false tr:has(input[type="radio"]:checked) {
 .hidden { display: none; }
   </style>
 </head>
-<div id="pesertaForm" style="display:flex; justify-content:center; align-items:center; height:100vh; background-color:#f4f9ff; padding:20px; box-sizing:border-box;">
+
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+<div id="pesertaForm" class="hidden" style="justify-content:center; align-items:center; height:100vh; background-color:#f4f9ff; padding:20px; box-sizing:border-box;">
   <div style="background:white; padding:30px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:100%; max-width:400px; text-align:center;">
     <h2 style="margin-bottom:20px; color:#1E88E5;">Data Peserta</h2>
 
@@ -272,25 +284,13 @@ table.true-false tr:has(input[type="radio"]:checked) {
   </div>
 </div>
 
-<body>
-<!-- ====== LOGIN SCREEN ====== -->
-<div id="loginForm">
-  <div class="login-box">
-    <h2>Login Try Out</h2>
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="checkLogin()">Masuk</button>
-    <p id="errorMsg"></p>
-  </div>
-</div>
-
 <!-- ====== TRYOUT CONTENT ====== -->
 <div id="content22" class="hidden">
 <header>
   <h2>Try Out TKA Matematika SD/MI - Kebun Ilmu</h2>
   <div>
     <button id="fullscreenBtn" class="menu-button">Fullscreen</button>
-    <span class="timer" id="timer">50:00</span>
+    <span class="timer" id="timer">60:00</span>
   </div>
 </header>
 
@@ -342,13 +342,13 @@ function mulaiUjian() {
   // 🔥 render soal dan start timer di sini
   renderQuestionButtons();
   renderQuestion(currentQuestion);
-  startTimer(50 * 60);
+  startTimer(60 * 60);
 }
 
 // ====== DATA AKUN + KADALUWARSA ======
 const accounts = [
   { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
-  { username: "tryout1",  password: "2025",  expire: "2025-10-11T23:59:59" },
+  { username: "MRI",  password: "2026",  expire: "2026-4-11T23:59:59" },
   { username: "nadira", password: "nad322", expire: "2025-10-30T23:59:59" },
   { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
   { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
