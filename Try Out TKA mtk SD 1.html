@@ -259,28 +259,53 @@ table.true-false tr:has(input[type="radio"]:checked) {
   </div>
 </div>
 <div id="pesertaForm" class="hidden" style="justify-content:center; align-items:center; height:100vh; background-color:#f4f9ff; padding:20px; box-sizing:border-box;">
-  <div style="background:white; padding:30px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:100%; max-width:400px; text-align:center;">
-    <h2 style="margin-bottom:20px; color:#1E88E5;">Data Peserta</h2>
+  <div style="background:white; padding:24px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:100%; max-width:400px;">
 
-    <input id="nik" placeholder="NIK" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
-    <input id="namaPeserta" placeholder="Nama Peserta" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
+    <h2 style="margin-bottom:14px; color:#1E88E5; text-align:center;">Data Peserta</h2>
 
-    <select id="jk" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
-      <option value="">Jenis Kelamin</option>
+    <!-- NIK -->
+    <label for="nik" style="font-weight:600; display:block; margin-bottom:3px;">NIK</label>
+    <input id="nik" placeholder="Masukkan NIK"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Nama Peserta -->
+    <label for="namaPeserta" style="font-weight:600; display:block; margin-bottom:3px;">Nama Peserta</label>
+    <input id="namaPeserta" placeholder="Masukkan nama lengkap"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Jenis Kelamin -->
+    <label for="jk" style="font-weight:600; display:block; margin-bottom:3px;">Jenis Kelamin</label>
+    <select id="jk"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+      <option value="">-- Pilih Jenis Kelamin --</option>
       <option value="L">Laki-laki</option>
       <option value="P">Perempuan</option>
     </select>
 
-    <input id="tglLahir" type="date" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
-    <input id="sekolah" placeholder="Nama Sekolah" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
-    <input id="tokenUjian" placeholder="Token Ujian" style="width:100%; padding:10px; margin-bottom:15px; border:1.5px solid #90CAF9; border-radius:6px; font-size:16px; box-sizing:border-box;">
+    <!-- Tanggal Lahir -->
+    <label for="tglLahir" style="font-weight:600; display:block; margin-bottom:3px;">Tanggal Lahir</label>
+    <input id="tglLahir" type="date"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
 
-    <button onclick="mulaiUjian()" style="width:100%; padding:12px; background-color:#1E88E5; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:16px;"
+    <!-- Sekolah -->
+    <label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">Nama Sekolah</label>
+    <input id="sekolah" placeholder="Nama sekolah"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Token -->
+    <label for="tokenUjian" style="font-weight:600; display:block; margin-bottom:3px;">Token Ujian</label>
+    <input id="tokenUjian" placeholder="Masukkan token ujian"
+      style="width:100%; padding:8px 10px; margin-bottom:14px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <button onclick="mulaiUjian()"
+      style="width:100%; padding:10px; background-color:#1E88E5; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:15px;"
       onmouseover="this.style.backgroundColor='#1565C0';" 
       onmouseout="this.style.backgroundColor='#1E88E5';">
       Mulai Ujian
     </button>
-    <p id="errorPeserta" style="margin-top:10px; font-size:14px; color:red;"></p>
+
+    <p id="errorPeserta" style="margin-top:8px; font-size:13px; color:red; text-align:center;"></p>
+
   </div>
 </div>
 
