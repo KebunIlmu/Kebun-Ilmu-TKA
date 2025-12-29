@@ -3,9 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Data Hasil Try Out - Kebun Ilmu</title>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import {
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    orderBy
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
@@ -19,33 +26,38 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  window.addEventListener('DOMContentLoaded', async () => {
-    const tabelContainer = document.getElementById('tabelHasil');
-    tabelContainer.innerHTML = '<p>Loading data...</p>';
+  window.addEventListener("DOMContentLoaded", async () => {
+    const tabelContainer = document.getElementById("tabelHasil");
+    tabelContainer.innerHTML = "<p>Loading data...</p>";
 
     try {
-      const snapshot = await getDocs(collection(db, "hasil_ujian"));
+      // 🔥 DATA TERBARU DI ATAS
+      const q = query(
+        collection(db, "hasil_ujian"),
+        orderBy("waktu", "desc")
+      );
+
+      const snapshot = await getDocs(q);
+
       if (snapshot.empty) {
-        tabelContainer.innerHTML = '<p>Belum ada data peserta.</p>';
+        tabelContainer.innerHTML = "<p>Belum ada data peserta.</p>";
         return;
       }
 
-      // Buat tabel
-      const table = document.createElement('table');
-      table.border = '1';
-      table.cellPadding = '8';
-      table.style.borderCollapse = 'collapse';
-      table.style.width = '100%';
+      const table = document.createElement("table");
+      table.style.width = "100%";
+      table.style.borderCollapse = "collapse";
 
-      // Header tabel
+      // Header
       const header = table.insertRow();
-      ["No", "NIK", "Nama", "JK", "Tanggal Lahir", "Sekolah", "Mapel", "Nilai", "Waktu"].forEach(text => {
-        const th = document.createElement('th');
+      const kolom = [
+        "No", "NIK", "Nama", "JK", "Tanggal Lahir",
+        "Sekolah", "Mapel", "Nilai", "Waktu"
+      ];
+
+      kolom.forEach(text => {
+        const th = document.createElement("th");
         th.textContent = text;
-        th.style.background = '#1565c0'; // biru tua logo
-        th.style.color = 'white';
-        th.style.fontWeight = 'bold';
-        th.style.textAlign = 'left';
         header.appendChild(th);
       });
 
@@ -54,69 +66,130 @@
       snapshot.docs.forEach(doc => {
         const d = doc.data();
         const row = table.insertRow();
+
         row.insertCell().textContent = no++;
-        row.insertCell().textContent = d.nik || '';
-        row.insertCell().textContent = d.nama || '';
-        row.insertCell().textContent = d.jk || '';
-        row.insertCell().textContent = d.tglLahir || '';
-        row.insertCell().textContent = d.sekolah || '';
-        row.insertCell().textContent = d.mapel || ''; // kolom Mapel
-        row.insertCell().textContent = d.nilai || '';
-        row.insertCell().textContent = d.waktu ? new Date(d.waktu).toLocaleDateString('id-ID') : ''; // tanggal saja
-        row.style.backgroundColor = (no % 2 === 0) ? '#bbdefb' : '#e3f2fd'; // biru muda stripe
+        row.insertCell().textContent = d.nik || "";
+        row.insertCell().textContent = d.nama || "";
+        row.insertCell().textContent = d.jk || "";
+        row.insertCell().textContent = d.tglLahir || "";
+        row.insertCell().textContent = d.sekolah || "";
+        row.insertCell().textContent = d.mapel || "";
+        row.insertCell().textContent = d.nilai || "";
+
+        // ✅ FIX WAKTU (ANTI INVALID)
+        let waktuTampil = "";
+        if (d.waktu) {
+          // Firestore Timestamp
+          if (typeof d.waktu === "object" && "seconds" in d.waktu) {
+            waktuTampil = new Date(d.waktu.seconds * 1000).toLocaleString("id-ID");
+          }
+          // Number (ms)
+          else if (typeof d.waktu === "number") {
+            waktuTampil = new Date(d.waktu).toLocaleString("id-ID");
+          }
+          // String
+          else if (typeof d.waktu === "string") {
+            const t = new Date(d.waktu);
+            waktuTampil = isNaN(t) ? "" : t.toLocaleString("id-ID");
+          }
+        }
+
+        row.insertCell().textContent = waktuTampil;
       });
 
-      tabelContainer.innerHTML = '';
+      tabelContainer.innerHTML = "";
       tabelContainer.appendChild(table);
 
     } catch (err) {
-      tabelContainer.innerHTML = '<p>Error saat mengambil data. Cek console.</p>';
+      tabelContainer.innerHTML = "<p>Error saat mengambil data.</p>";
       console.error(err);
     }
   });
 
-  // Fungsi download CSV
+  // Download CSV
   function downloadCSV() {
     const table = document.querySelector("#tabelHasil table");
-    if (!table) return alert("Tabel kosong, tidak ada data untuk di-download.");
+    if (!table) return alert("Tabel kosong.");
 
     let csv = [];
     const rows = table.querySelectorAll("tr");
+
     rows.forEach(row => {
       const cols = row.querySelectorAll("th, td");
-      csv.push(Array.from(cols).map(col => `"${col.textContent}"`).join(","));
+      csv.push(
+        Array.from(cols).map(col => `"${col.textContent}"`).join(",")
+      );
     });
 
-    const csvString = csv.join("\n");
-    const blob = new Blob([csvString], {type: 'text/csv'});
-    const link = document.createElement('a');
+    const blob = new Blob([csv.join("\n")], { type: "text/csv" });
+    const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = 'hasil_tryout.csv';
+    link.download = "hasil_tryout.csv";
     link.click();
   }
 
   window.downloadCSV = downloadCSV;
 </script>
+
 <style>
-  body { font-family: sans-serif; padding: 30px; background: #f4f9ff; }
-  header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-  header img { height: 60px; }
-  header h1 { color: #1565c0; font-size: 28px; margin: 0; }
-  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-  th, td { border: 1px solid #1565c0; padding: 8px; }
-  th { background-color: #1565c0; color: white; text-align: left; }
-  tr:nth-child(even) { background-color: #bbdefb; }
-  tr:nth-child(odd) { background-color: #e3f2fd; }
-  button { margin-top: 20px; padding: 10px 15px; background: #1565c0; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-  button:hover { background-color: #1e88e5; }
+  body {
+    font-family: sans-serif;
+    padding: 30px;
+    background: #f4f9ff;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  header img {
+    height: 60px;
+  }
+  header h1 {
+    color: #1565c0;
+    margin: 0;
+  }
+  table, th, td {
+    border: 1px solid #1565c0;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background: #1565c0;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background: #bbdefb;
+  }
+  tr:nth-child(odd) {
+    background: #e3f2fd;
+  }
+  button {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    background: #1565c0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #1e88e5;
+  }
 </style>
 </head>
+
 <body>
 
 <header>
   <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png" alt="Logo Kebun Ilmu">
   <h1>Kebun Ilmu - Hasil Try Out</h1>
 </header>
+
 <button onclick="downloadCSV()">Download CSV / Excel</button>
 <div id="tabelHasil"></div>
 
