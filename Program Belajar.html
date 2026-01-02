@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kebun Ilmu — Bimbel Online</title>
+  <meta name="description" content="Kebun Ilmu — Bimbel online interaktif dengan tutor berpengalaman. Les privat, kelas kelompok, dan latihan soal lengkap." />
+  <style>
+    :root{
+      --primary:#0f766e; --secondary:#14b8a6; --text:#1e293b; --muted:#64748b; --bg:#f0fdfa; --card:#ffffff;
+      --radius:16px; --shadow:0 8px 24px rgba(0,0,0,0.08);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family: 'Inter', sans-serif;background:var(--bg);color:var(--text)}
+    a{text-decoration:none;color:inherit}
+
+    header{background:#ffffff;box-shadow:var(--shadow);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1000}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:50px;height:50px;border-radius:12px}
+    .brand-name{font-weight:700;font-size:20px;color:var(--primary)}
+
+    nav{display:flex;gap:18px}
+    nav a{padding:8px 14px;border-radius:10px;color:var(--muted);transition:.2s}
+    nav a:hover{background:var(--secondary);color:white}
+
+    .btn{padding:10px 18px;border:none;border-radius:10px;cursor:pointer;font-weight:600}
+    .btn-primary{background:var(--primary);color:white}
+    .btn-outline{border:2px solid var(--primary);background:transparent;color:var(--primary)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;padding:50px 24px;max-width:1200px;margin:auto}
+    .hero-text h1{font-size:34px;line-height:1.2;color:var(--primary)}
+    .hero-text p{margin:18px 0;font-size:18px;color:var(--muted)}
+    .hero-actions{display:flex;gap:12px;margin-top:20px}
+
+    .hero-img img{width:100%;border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    /* Section */
+    section{padding:60px 24px;max-width:1200px;margin:auto}
+    h2{text-align:center;font-size:28px;color:var(--primary);margin-bottom:30px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+    .card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);transition:.2s}
+    .card:hover{transform:translateY(-5px)}
+    .card img{width:100%;border-radius:12px;margin-bottom:14px}
+    .card h3{font-size:18px;margin-bottom:8px;color:var(--primary)}
+    .card p{font-size:14px;color:var(--muted)}
+
+    /* Tutors */
+    .tutors{display:flex;gap:16px;overflow-x:auto;padding-bottom:10px}
+    .tutor{min-width:220px;background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center}
+    .tutor img{width:70px;height:70px;border-radius:50%;margin-bottom:10px}
+    .tutor h4{margin:0;color:var(--primary)}
+
+    /* Testimonials */
+    .testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+    .testimonials .card{font-size:14px}
+
+    footer{background:#ffffff;padding:20px;text-align:center;color:var(--muted);margin-top:40px}
+
+    @media(max-width:768px){
+      .hero{grid-template-columns:1fr}
+    }
+  /* Responsive improvements */
+  @media(max-width:1024px){
+    .hero-text h1{font-size:28px}
+    .hero-text p{font-size:16px}
+  }
+
+  @media(max-width:768px){
+    header{flex-wrap:wrap;gap:10px}
+    nav{display:none;flex-direction:column;width:100%;background:white;border-radius:12px;margin-top:10px;padding:10px}
+    nav a{padding:10px;color:var(--text)}
+    nav.show{display:flex}
+    .hero{grid-template-columns:1fr}
+    .hero-text h1{font-size:24px}
+    .hero-text p{font-size:15px}
+  }
+
+  .menu-toggle{display:none;font-size:26px;cursor:pointer;color:var(--primary);background:none;border:none}
+  @media(max-width:768px){
+    .menu-toggle{display:block}
+    header > div:last-child{margin-left:auto}
+  }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png" alt="Kebun Ilmu Logo">
+      <span class="brand-name">Kebun Ilmu</span>
+    </div>
+    
+    <!-- Tombol menu hamburger -->
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <nav id="navMenu">
+      <a href="#courses">Kursus</a>
+      <a href="#tutors">Pengajar</a>
+      <a href="#testimonials">Testimoni</a>
+      <a href="#about">Tentang</a>
+    </nav>
+
+    <div>
+      <a href="https://kebunilmu.github.io/Kebun-Ilmu-TKA/home.html" target="_blank">
+        <button class="btn btn-outline">Home</button>
+      </a>
+
+      <a href="https://forms.gle/Xaz7nYueVzNbevNv5" target="_blank">
+        <button class="btn btn-primary">Daftar</button>
+      </a>
+    </div>
+  </header>
+
+  
+  <section id="categories" style="margin-top:60px">
+    <h2>Pilihan Program Belajar</h2>
+    <div class="grid">
+      <a href="https://zahwan93.github.io/matematika-SD/"
+   style="text-decoration:none; color:inherit;">
+  <div class="card">
+    <img src="https://img.freepik.com/free-vector/kids-studying-concept-illustration_114360-1233.jpg" alt="SD">
+    <h3>SD</h3>
+    <p>
+      Mendampingi pelajaran Matematika, IPA, dan Bahasa Inggris untuk anak SD dengan metode interaktif.
+    </p>
+    <button class="btn btn-primary" style="margin-top:12px">
+      Lihat Program
+    </button>
+  </div>
+</a>
+
+      <a href="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/MTK%20SMP.html"
+   style="text-decoration:none; color:inherit;">
+  <div class="card">
+    <img src="https://img.freepik.com/free-vector/children-studying-online-concept-illustration_114360-1235.jpg" alt="SMP">
+    <h3>SMP</h3>
+    <p>
+      Belajar Matematika, IPA, dan Bahasa Inggris dengan latihan soal dan bimbingan intensif untuk SMP.
+    </p>
+    <button class="btn btn-primary" style="margin-top:12px">
+      Lihat Program
+    </button>
+  </div>
+</a>
+
+
+      <a href="https://kebunilmu.github.io/mateamtika-sma/MTK%20SMA.html"
+   style="text-decoration:none; color:inherit;">
+  <div class="card">
+    <img src="https://img.freepik.com/free-vector/teenager-studying-online_23-2148524833.jpg" alt="SMA">
+    <h3>SMA</h3>
+    <p>
+      Mendalami Matematika, Fisika, Biologi, Ekonomi, dan persiapan UTBK secara efektif untuk SMA.
+    </p>
+    <button class="btn btn-primary" style="margin-top:12px">
+      Lihat Program
+    </button>
+  </div>
+</a>
+
+      <a href="https://kebunilmu.github.io/Kebun-Ilmu-TKA/" 
+   style="text-decoration:none; color:inherit;">
+  <div class="card">
+    <img src="https://img.freepik.com/free-vector/online-test-concept-illustration_114360-1238.jpg" alt="TKA">
+    <h3>TKA</h3>
+    <p>Persiapan Try Out dan TKA dengan strategi belajar intensif agar siap menghadapi ujian.</p>
+    <button class="btn btn-primary" style="margin-top:12px">
+      Lihat Program
+    </button>
+  </div>
+</a>
+
+
+      <div class="card">
+        <img src="https://img.freepik.com/free-vector/kids-learning-english-online-concept-illustration_114360-1240.jpg" alt="Bahasa Inggris SD">
+        <h3>Bahasa Inggris SD</h3>
+        <p>Belajar Bahasa Inggris dasar untuk anak SD dengan metode menyenangkan dan interaktif.</p>
+        <button class="btn btn-primary" style="margin-top:12px">Lihat Program</button>
+      </div>
+
+      <div class="card">
+        <img src="https://img.freepik.com/free-vector/online-english-learning-concept-illustration_114360-1239.jpg" alt="Bahasa Inggris SMP/SMA">
+        <h3>Bahasa Inggris SMP/SMA</h3>
+        <p>Program Bahasa Inggris lanjutan untuk SMP dan SMA, fokus pada percakapan dan persiapan ujian.</p>
+        <button class="btn btn-primary" style="margin-top:12px">Lihat Program</button>
+      </div>
+    </div>
+  </section>
+
+  <footer style="margin-top:50px; background:var(--primary); color:white; padding:30px; border-radius:20px 20px 0 0">
+    <h3 style="margin-bottom:12px">📍 Kebun Ilmu</h3>
+    <p style="margin:5px 0">Perumahan Puri Indah Permata 1 Blok D5</p>
+    <p style="margin:5px 0">Desa Bulakelor, Kec. Ketanggungan, Kab. Brebes</p>
+    <p style="margin:10px 0">📞 <a href="https://wa.me/6285641387872" target="_blank" style="color:#fff; font-weight:600; text-decoration:underline">+62 856-4138-7872</a></p>
+    
+    <button onclick="window.open('https://wa.me/6285641387872','_blank')" 
+            class="btn btn-primary" 
+            style="background:#25D366; border:none; margin-top:15px; font-size:16px; padding:12px 22px; border-radius:12px; cursor:pointer">
+      💬 Hubungi via WhatsApp
+    </button>
+
+    <p style="margin-top:25px; font-size:14px; color:#e0f7f4">© 2025 Kebun Ilmu • Belajar jadi lebih mudah</p>
+  </footer>
+
+  <script>
+    function toggleMenu(){
+      document.getElementById("navMenu").classList.toggle("show");
+    }
+  </script>
+</body>
+</html>
