@@ -5,106 +5,192 @@
 <title>Data Hasil Try Out - Kebun Ilmu</title>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import {
-    getFirestore,
-    collection,
-    getDocs,
-    query,
-    orderBy
-  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
-    authDomain: "tryout-kebun-ilmu.firebaseapp.com",
-    projectId: "tryout-kebun-ilmu",
-    storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
-    messagingSenderId: "497636674894",
-    appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
+  authDomain: "tryout-kebun-ilmu.firebaseapp.com",
+  projectId: "tryout-kebun-ilmu",
+  storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
+  messagingSenderId: "497636674894",
+  appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-  window.addEventListener("DOMContentLoaded", async () => {
-    const tabelContainer = document.getElementById("tabelHasil");
-    tabelContainer.innerHTML = "<p>Loading data...</p>";
+window.addEventListener("DOMContentLoaded", async () => {
+  const tabelContainer = document.getElementById("tabelHasil");
+  const rankingMapelDiv = document.getElementById("rankingMapel");
+  const rankingRataDiv = document.getElementById("rankingRata");
 
-    try {
-      // 🔥 DATA TERBARU DI ATAS
-      const q = query(
-        collection(db, "hasil_ujian"),
-        orderBy("waktu", "desc")
-      );
+  tabelContainer.innerHTML = "<p>Loading data...</p>";
 
-      const snapshot = await getDocs(q);
+  try {
+    const q = query(
+      collection(db, "hasil_ujian"),
+      orderBy("waktu", "desc")
+    );
 
-      if (snapshot.empty) {
-        tabelContainer.innerHTML = "<p>Belum ada data peserta.</p>";
-        return;
+    const snapshot = await getDocs(q);
+
+    if (snapshot.empty) {
+      tabelContainer.innerHTML = "<p>Belum ada data peserta.</p>";
+      return;
+    }
+
+    // =====================
+    // TABEL DATA UTAMA
+    // =====================
+    const table = document.createElement("table");
+    table.style.width = "100%";
+    table.style.borderCollapse = "collapse";
+
+    const header = table.insertRow();
+    const kolom = [
+      "No", "NIK", "Nama", "JK", "Tanggal Lahir",
+      "Sekolah", "Mapel", "Nilai", "Waktu"
+    ];
+
+    kolom.forEach(text => {
+      const th = document.createElement("th");
+      th.textContent = text;
+      header.appendChild(th);
+    });
+
+    let no = 1;
+    const semuaData = [];
+
+    snapshot.docs.forEach(doc => {
+      const d = doc.data();
+      semuaData.push(d);
+
+      const row = table.insertRow();
+      row.insertCell().textContent = no++;
+      row.insertCell().textContent = d.nik || "";
+      row.insertCell().textContent = d.nama || "";
+      row.insertCell().textContent = d.jk || "";
+      row.insertCell().textContent = d.tglLahir || "";
+      row.insertCell().textContent = d.sekolah || "";
+      row.insertCell().textContent = d.mapel || "";
+      row.insertCell().textContent = d.nilai || "";
+
+      let waktuTampil = "";
+      if (d.waktu) {
+        if (typeof d.waktu === "object" && "seconds" in d.waktu) {
+          waktuTampil = new Date(d.waktu.seconds * 1000).toLocaleString("id-ID");
+        } else if (typeof d.waktu === "number") {
+          waktuTampil = new Date(d.waktu).toLocaleString("id-ID");
+        } else if (typeof d.waktu === "string") {
+          const t = new Date(d.waktu);
+          waktuTampil = isNaN(t) ? "" : t.toLocaleString("id-ID");
+        }
       }
 
-      const table = document.createElement("table");
-      table.style.width = "100%";
-      table.style.borderCollapse = "collapse";
+      row.insertCell().textContent = waktuTampil;
+    });
 
-      // Header
-      const header = table.insertRow();
-      const kolom = [
-        "No", "NIK", "Nama", "JK", "Tanggal Lahir",
-        "Sekolah", "Mapel", "Nilai", "Waktu"
-      ];
+    tabelContainer.innerHTML = "";
+    tabelContainer.appendChild(table);
 
-      kolom.forEach(text => {
+    // =====================
+    // 🏆 RANKING 5 BESAR PER MAPEL
+    // =====================
+    rankingMapelDiv.innerHTML = "";
+    const mapelGroup = {};
+
+    semuaData.forEach(d => {
+      if (!mapelGroup[d.mapel]) mapelGroup[d.mapel] = [];
+      if (!isNaN(d.nilai)) mapelGroup[d.mapel].push(d);
+    });
+
+    Object.keys(mapelGroup).forEach(mapel => {
+      const top5 = mapelGroup[mapel]
+        .sort((a, b) => b.nilai - a.nilai)
+        .slice(0, 5);
+
+      const title = document.createElement("h3");
+      title.textContent = `📘 ${mapel}`;
+      rankingMapelDiv.appendChild(title);
+
+      const t = document.createElement("table");
+      const h = t.insertRow();
+      ["Rank", "Nama", "Sekolah", "Nilai"].forEach(x => {
         const th = document.createElement("th");
-        th.textContent = text;
-        header.appendChild(th);
+        th.textContent = x;
+        h.appendChild(th);
       });
 
-      // Isi tabel
-      let no = 1;
-      snapshot.docs.forEach(doc => {
-        const d = doc.data();
-        const row = table.insertRow();
-
-        row.insertCell().textContent = no++;
-        row.insertCell().textContent = d.nik || "";
-        row.insertCell().textContent = d.nama || "";
-        row.insertCell().textContent = d.jk || "";
-        row.insertCell().textContent = d.tglLahir || "";
-        row.insertCell().textContent = d.sekolah || "";
-        row.insertCell().textContent = d.mapel || "";
-        row.insertCell().textContent = d.nilai || "";
-
-        // ✅ FIX WAKTU (ANTI INVALID)
-        let waktuTampil = "";
-        if (d.waktu) {
-          // Firestore Timestamp
-          if (typeof d.waktu === "object" && "seconds" in d.waktu) {
-            waktuTampil = new Date(d.waktu.seconds * 1000).toLocaleString("id-ID");
-          }
-          // Number (ms)
-          else if (typeof d.waktu === "number") {
-            waktuTampil = new Date(d.waktu).toLocaleString("id-ID");
-          }
-          // String
-          else if (typeof d.waktu === "string") {
-            const t = new Date(d.waktu);
-            waktuTampil = isNaN(t) ? "" : t.toLocaleString("id-ID");
-          }
-        }
-
-        row.insertCell().textContent = waktuTampil;
+      top5.forEach((d, i) => {
+        const r = t.insertRow();
+        r.insertCell().textContent = i + 1;
+        r.insertCell().textContent = d.nama;
+        r.insertCell().textContent = d.sekolah;
+        r.insertCell().textContent = d.nilai;
       });
 
-      tabelContainer.innerHTML = "";
-      tabelContainer.appendChild(table);
+      rankingMapelDiv.appendChild(t);
+    });
 
-    } catch (err) {
-      tabelContainer.innerHTML = "<p>Error saat mengambil data.</p>";
-      console.error(err);
-    }
-  });
+    // =====================
+    // 📊 RANKING 5 BESAR RATA-RATA
+    // =====================
+    rankingRataDiv.innerHTML = "";
+    const peserta = {};
+
+    semuaData.forEach(d => {
+      if (!peserta[d.nik]) {
+        peserta[d.nik] = {
+          nama: d.nama,
+          sekolah: d.sekolah,
+          total: 0,
+          jumlah: 0
+        };
+      }
+      if (!isNaN(d.nilai)) {
+        peserta[d.nik].total += Number(d.nilai);
+        peserta[d.nik].jumlah++;
+      }
+    });
+
+    const rankingRata = Object.values(peserta)
+      .map(p => ({
+        ...p,
+        rata: (p.total / p.jumlah).toFixed(2)
+      }))
+      .sort((a, b) => b.rata - a.rata)
+      .slice(0, 5);
+
+    const tRata = document.createElement("table");
+    const hRata = tRata.insertRow();
+    ["Rank", "Nama", "Sekolah", "Rata-rata"].forEach(x => {
+      const th = document.createElement("th");
+      th.textContent = x;
+      hRata.appendChild(th);
+    });
+
+    rankingRata.forEach((d, i) => {
+      const r = tRata.insertRow();
+      r.insertCell().textContent = i + 1;
+      r.insertCell().textContent = d.nama;
+      r.insertCell().textContent = d.sekolah;
+      r.insertCell().textContent = d.rata;
+    });
+
+    rankingRataDiv.appendChild(tRata);
+
+  } catch (err) {
+    tabelContainer.innerHTML = "<p>Error saat mengambil data.</p>";
+    console.error(err);
+  }
+});
 
   // Download CSV
   function downloadCSV() {
@@ -129,6 +215,22 @@
   }
 
   window.downloadCSV = downloadCSV;
+window.filterTable = function () {
+  const input = document.getElementById("searchInput");
+  const filter = input.value.toLowerCase();
+  const table = document.querySelector("#tabelHasil table");
+
+  if (!table) return;
+
+  const rows = table.querySelectorAll("tr");
+
+  rows.forEach((row, index) => {
+    if (index === 0) return; // header
+
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(filter) ? "" : "none";
+  });
+};
 </script>
 
 <style>
@@ -191,7 +293,27 @@
 </header>
 
 <button onclick="downloadCSV()">Download CSV / Excel</button>
+<input
+  type="text"
+  id="searchInput"
+  placeholder="🔍 Cari NIK / Nama / Sekolah / Mapel..."
+  style="
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #1565c0;
+    border-radius: 6px;
+    font-size: 14px;
+  "
+  onkeyup="filterTable()"
+/>
+
 <div id="tabelHasil"></div>
+<h2>🏆 Ranking 5 Besar Per Mata Pelajaran</h2>
+<div id="rankingMapel"></div>
+
+<h2>📊 Ranking 5 Besar Rata-rata Nilai</h2>
+<div id="rankingRata"></div>
 
 </body>
 </html>
