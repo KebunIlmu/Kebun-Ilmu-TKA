@@ -248,7 +248,9 @@ table.true-false tr:has(input[type="radio"]:checked) {
 .hidden { display: none; }
 /* ===== RESPONSIVE MOBILE ===== */
 @media (max-width: 768px) {
-
+* {
+  box-sizing: border-box;
+}
   header {
     padding: 10px 14px;
     flex-direction: column;
@@ -264,6 +266,33 @@ table.true-false tr:has(input[type="radio"]:checked) {
   .menu-button, .timer {
     padding: 6px 10px;
     font-size: 13px;
+  }
+.container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #cfd8dc;
+  }
+
+  .right-panel {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .question-buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+#questionDisplay {
+    font-size: 14px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px 10px;
   }
 .fullscreen-mode header {
     padding: 6px 10px;
@@ -413,7 +442,7 @@ function mulaiUjian() {
 const accounts = [
   { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
   { username: "MANU9",  password: "2026",  expire: "2026-4-11T23:59:59" },
-  { username: "nadira", password: "nad322", expire: "2025-10-30T23:59:59" },
+  { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
   { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
   { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
   { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
