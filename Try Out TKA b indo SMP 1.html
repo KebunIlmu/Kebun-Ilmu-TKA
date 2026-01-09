@@ -244,6 +244,69 @@ table.true-false tr:has(input[type="radio"]:checked) {
   margin-top: 10px;
 }
 .hidden { display: none; }
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+
+  header {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  header h2 {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .menu-button, .timer {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+.container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #cfd8dc;
+  }
+
+  .right-panel {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .question-buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+#questionDisplay {
+    font-size: 14px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+.fullscreen-mode header {
+    padding: 6px 10px;
+    min-height: unset;
+  }
+
+  .fullscreen-mode header h2 {
+    font-size: 13px;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .fullscreen-mode .menu-button,
+  .fullscreen-mode .timer {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
 
   </style>
 </head>
@@ -376,7 +439,7 @@ const accounts = [
   { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
   { username: "MANU9",  password: "2026",  expire: "2026-4-11T23:59:59" },
   { username: "nadira", password: "nad322", expire: "2025-10-30T23:59:59" },
-  { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
+  { username: "Kebunilmu",  password: "2026", expire: "2026-10-31T23:59:59" },
   { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
   { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
 ];
@@ -432,9 +495,9 @@ function showContent() {
   "text": `
     <div style="text-align: justify;">
       <b>Teks Ulasan 1</b><br>
-      <img src="https://i.imgur.com/d1JeNwr.png" alt="Teks Ulasan 1" width="600"><br><br>
+      <img src="https://i.imgur.com/d1JeNwr.png" alt="Teks Ulasan 1" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
       <b>Teks Ulasan 2</b><br>
-      <img src="https://i.imgur.com/bA8wKFK.png" alt="Teks Ulasan 2" width="600"><br><br>
+      <img src="https://i.imgur.com/bA8wKFK.png" alt="Teks Ulasan 2" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
       <b>Question:</b> Kosakata yang menggambarkan keserasian suara deburan alam pada teks ulasan ke-1 ditunjukkan pada frasa ....
     </div>
   `,
@@ -451,9 +514,9 @@ function showContent() {
   "text": `
     <div style="text-align: justify;">
       <b>Teks Ulasan 1</b><br>
-      <img src="https://i.imgur.com/d1JeNwr.png" alt="Teks Ulasan 1" width="600"><br><br>
+      <img src="https://i.imgur.com/d1JeNwr.png" alt="Teks Ulasan 1" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
       <b>Teks Ulasan 2</b><br>
-      <img src="https://i.imgur.com/bA8wKFK.png" alt="Teks Ulasan 2" width="600"><br><br>
+      <img src="https://i.imgur.com/bA8wKFK.png" alt="Teks Ulasan 2" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
       <b>Question:</b> Apa saja perbedaan informasi yang ada pada kedua teks tersebut?<br>
       <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
     </div>
@@ -471,9 +534,9 @@ function showContent() {
   "text": `
     <div style="text-align: justify;">
       <b>Teks Ulasan 1</b><br>
-      <img src="https://i.imgur.com/d1JeNwr.png" alt="Teks Ulasan 1" width="600"><br><br>
+      <img src="https://i.imgur.com/d1JeNwr.png" alt="Teks Ulasan 1" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
       <b>Teks Ulasan 2</b><br>
-      <img src="https://i.imgur.com/bA8wKFK.png" alt="Teks Ulasan 2" width="600"><br><br>
+      <img src="https://i.imgur.com/bA8wKFK.png" alt="Teks Ulasan 2" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
       <p><strong>Banu:</strong> Aku lebih suka membaca ulasan pada teks 2 rasanya lebih dekat denganku. Aku jadi ingin ke sana! Teks ulasan 2 sangat menarik!</p>
       <p><strong>Komar:</strong> Justru aku lebih suka ulasan pada teks 1 karena sangat jelas dan menarik minatku untuk mengunjungi pantai itu.</p>
       <p><strong>Question:</strong> Mengapa pernyataan Banu lebih tepat untuk menggambarkan keunggulan teks ulasan kedua yang tidak ada pada teks ulasan pertama?</p>
@@ -1594,4 +1657,3 @@ checkSession();
 
 </body>
 </html>
-
