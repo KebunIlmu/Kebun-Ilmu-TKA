@@ -247,7 +247,9 @@ table.true-false tr:has(input[type="radio"]:checked) {
 .hidden { display: none; }
 /* ===== RESPONSIVE MOBILE ===== */
 @media (max-width: 768px) {
-
+* {
+  box-sizing: border-box;
+}
   header {
     padding: 10px 14px;
     flex-direction: column;
