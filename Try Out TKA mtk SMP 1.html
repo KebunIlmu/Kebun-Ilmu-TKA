@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Try Out TKA Matematika Wajib- Kebun Ilmu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -244,7 +246,29 @@ table.true-false tr:has(input[type="radio"]:checked) {
   margin-top: 10px;
 }
 .hidden { display: none; }
-  </style>
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+
+  header {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  header h2 {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .menu-button, .timer {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+}
+  
+</style>
 </head>
 
 <body>
