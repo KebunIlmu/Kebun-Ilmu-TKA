@@ -382,8 +382,7 @@ table.true-false tr:has(input[type="radio"]:checked) {
 <header>
   <h2>Try Out TKA Matematika SMP/MTs - Kebun Ilmu</h2>
   <div>
-    <button id="fullscreenBtn" class="menu-button">Fullscreen</button>
-    <span class="timer" id="timer">60:00</span>
+        <span class="timer" id="timer">60:00</span>
   </div>
 </header>
 
@@ -407,6 +406,14 @@ table.true-false tr:has(input[type="radio"]:checked) {
 </div>
 
 <script>
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 function mulaiUjian() {
   const nik = document.getElementById("nik").value.trim();
   const nama = document.getElementById("namaPeserta").value.trim();
@@ -428,14 +435,29 @@ function mulaiUjian() {
   // simpan data peserta sementara
   window.dataPeserta = { nik, nama, jk, tgl, sekolah, token };
 
+ questions = shuffleArray(questions);
+  answers = questions.map(q => {
+    if (q.type === 'mc_multiple') return [];
+    if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+    return null;
+  });
+  currentQuestion = 0;
+
   // sembunyikan form peserta dan tampilkan konten try out
   document.getElementById("pesertaForm").style.display = "none";
   document.getElementById("content22").classList.remove("hidden");
 
-  // 🔥 render soal dan start timer di sini
+  // 🔥 Render soal dan start timer
   renderQuestionButtons();
   renderQuestion(currentQuestion);
   startTimer(60 * 60);
+
+  // AUTO FULLSCREEN
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.warn("Fullscreen gagal:", err);
+    });
+  }
 }
 
 // ====== DATA AKUN + KADALUWARSA ======
@@ -494,7 +516,8 @@ function showContent() {
   
 }
 
-  const questions = [
+  let questions = [
+
 {
   "type": "mc_multiple",
   "text": "Terdapat tiga bilangan yang dinyatakan dengan \\((33^2 − 3^2)\\), \\((8^2 + 296)\\), dan \\((36 × 35)\\).<br><br>Pilihlah bilangan yang merupakan faktor persekutuan ketiga bilangan tersebut! (Jawaban benar lebih dari satu)",
@@ -1141,6 +1164,22 @@ function endTryout() {
     calculateScore();
     disableAll();
     timerRunning = false;
+// Tampilkan tombol Kembali setelah submit
+const backBtn = document.createElement('button');
+backBtn.textContent = "Kembali ke Beranda";
+backBtn.style.padding = "10px 18px";
+backBtn.style.marginTop = "10px";
+backBtn.style.backgroundColor = "#1e88e5";
+backBtn.style.color = "white";
+backBtn.style.border = "none";
+backBtn.style.borderRadius = "6px";
+backBtn.style.fontWeight = "bold";
+backBtn.style.cursor = "pointer";
+backBtn.addEventListener('click', () => {
+    window.location.href = "https://kebunilmu.github.io/Kebun-Ilmu-TKA/";
+});
+document.querySelector('.right-panel .navigation').appendChild(backBtn);
+
   }
 }
 
@@ -1173,19 +1212,33 @@ function startTimer(duration) {
 }
 
 
-const fullscreenBtn = document.getElementById("fullscreenBtn");
-fullscreenBtn.addEventListener("click", () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(err => {
-      alert(`Gagal masuk fullscreen: ${err.message}`);
-    });
-    fullscreenBtn.textContent = "Exit Fullscreen";
-  } else {
-    document.exitFullscreen();
-    fullscreenBtn.textContent = "Fullscreen";
+// Auto submit saat keluar fullscreen
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement && timerRunning) {
+    alert("Anda keluar dari fullscreen. Jawaban otomatis disubmit!");
+    endTryout();
   }
 });
+
+// Auto submit saat pindah tab/window (desktop)
+window.addEventListener("blur", () => {
+  if (timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah app / tab (HP)
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// cek session saat halaman dimuat
 checkSession();
+
   </script>
 <!-- FIREBASE SDK -->
 <script type="module">
