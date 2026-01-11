@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Bahasa Indonesia - Kebun Ilmu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+* {
+  box-sizing: border-box;
+}
+  header {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  header h2 {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .menu-button, .timer {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+.container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #cfd8dc;
+  }
+
+  .right-panel {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .question-buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+#questionDisplay {
+    font-size: 14px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+.fullscreen-mode header {
+    padding: 6px 10px;
+    min-height: unset;
+  }
+
+  .fullscreen-mode header h2 {
+    font-size: 13px;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .fullscreen-mode .menu-button,
+  .fullscreen-mode .timer {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+  
+</style>
+</head>
+
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+<div id="pesertaForm" class="hidden" style="justify-content:center; align-items:center; height:100vh; background-color:#f4f9ff; padding:20px; box-sizing:border-box;">
+  <div style="background:white; padding:24px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:100%; max-width:400px;">
+
+    <h2 style="margin-bottom:14px; color:#1E88E5; text-align:center;">Data Peserta</h2>
+
+    <!-- NIK -->
+    <label for="nik" style="font-weight:600; display:block; margin-bottom:3px;">NIK</label>
+    <input id="nik" placeholder="Masukkan NIK"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Nama Peserta -->
+    <label for="namaPeserta" style="font-weight:600; display:block; margin-bottom:3px;">Nama Peserta</label>
+    <input id="namaPeserta" placeholder="Masukkan nama lengkap"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Jenis Kelamin -->
+    <label for="jk" style="font-weight:600; display:block; margin-bottom:3px;">Jenis Kelamin</label>
+    <select id="jk"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+      <option value="">-- Pilih Jenis Kelamin --</option>
+      <option value="L">Laki-laki</option>
+      <option value="P">Perempuan</option>
+    </select>
+
+    <!-- Tanggal Lahir -->
+    <label for="tglLahir" style="font-weight:600; display:block; margin-bottom:3px;">Tanggal Lahir</label>
+    <input id="tglLahir" type="date"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Sekolah -->
+    <label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">Nama Sekolah</label>
+    <input id="sekolah" placeholder="Nama sekolah"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Token -->
+    <label for="tokenUjian" style="font-weight:600; display:block; margin-bottom:3px;">Token Ujian</label>
+    <input id="tokenUjian" placeholder="Masukkan token ujian"
+      style="width:100%; padding:8px 10px; margin-bottom:14px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <button onclick="mulaiUjian()"
+      style="width:100%; padding:10px; background-color:#1E88E5; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:15px;"
+      onmouseover="this.style.backgroundColor='#1565C0';" 
+      onmouseout="this.style.backgroundColor='#1E88E5';">
+      Mulai Ujian
+    </button>
+
+    <p id="errorPeserta" style="margin-top:8px; font-size:13px; color:red; text-align:center;"></p>
+
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+<header>
+  <h2>Try Out TKA Bahasa Indonesia SD/MI - Kebun Ilmu</h2>
+  <div>
+        <span class="timer" id="timer">60:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+function getTokenSekarang() {
+  const now = new Date();
+  const jam = now.getHours();
+  const menit = now.getMinutes();
+
+  // batas waktu
+  if (jam < 7 || jam >= 22) return null;
+
+  // slot 10 menit (0–5)
+  const slot = Math.floor(menit / 10);
+
+  // ===== DEPAN ACAK TERKONTROL =====
+  const seed = jam * 100 + slot;   // angka unik tiap 10 menit
+  const depan = String.fromCharCode(65 + (seed * 7) % 26); // A–Z
+
+  // token akhir
+  return `${depan}${jam.toString().padStart(2,'0')}${slot}`;
+}
+function mulaiUjian() {
+  const nik = document.getElementById("nik").value.trim();
+  const nama = document.getElementById("namaPeserta").value.trim();
+  const jk = document.getElementById("jk").value;
+  const tgl = document.getElementById("tglLahir").value;
+  const sekolah = document.getElementById("sekolah").value.trim();
+  const token = document.getElementById("tokenUjian").value.trim();
+
+  if (!nik || !nama || !jk || !tgl || !sekolah || !token) {
+    document.getElementById("errorPeserta").innerText = "❌ Semua data wajib diisi";
+    return;
+  }
+
+  const tokenAktif = getTokenSekarang();
+
+if (!tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    "⏰ Ujian hanya bisa diakses pukul 07.00 – 17.00";
+  return;
+}
+
+if (token !== tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    `❌ Token salah. Tanya admin`;
+  return;
+}
+
+  // simpan data peserta sementara
+  window.dataPeserta = { nik, nama, jk, tgl, sekolah, token };
+
+ questions = shuffleArray(questions);
+  answers = questions.map(q => {
+    if (q.type === 'mc_multiple') return [];
+    if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+    return null;
+  });
+  currentQuestion = 0;
+
+  // sembunyikan form peserta dan tampilkan konten try out
+  document.getElementById("pesertaForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+
+  // 🔥 Render soal dan start timer
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(60 * 60);
+
+  // AUTO FULLSCREEN
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.warn("Fullscreen gagal:", err);
+    });
+  }
+}
+
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "MANU9",  password: "2026",  expire: "2026-4-11T23:59:59" },
+  { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("pesertaForm").style.display = "flex";
+  
+}
+
+  let questions = [
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Bacalah teks berikut!</b><br><br>
+      Pembiasaan Cuci Tangan dengan Sabun<br><br>
+      Mencuci tangan dengan sabun penting bagi kesehatan. Kebiasaan baik ini harus dilakukan oleh semua masyarakat. Sayangnya, masih banyak orang lupa mencuci tangan. Mereka sering kali mencuci tangan tanpa menggunakan sabun. Padahal, sabun membantu membunuh kuman di kulit.<br><br>
+      Sebagian keluarga memiliki fasilitas cuci tangan yang lengkap. Meskipun demikian, praktik mencuci tangan masih belum maksimal dilakukan. Mereka kadang kala lupa mencuci tangan sebelum makan. Kadang kala juga lupa setelah buang air. Perilaku ini menyebabkan penyakit berbahaya menyerang.<br><br>
+      Guru di sekolah harus memberikan contoh mengenai kebersihan. Orang tua di rumah pun perlu mengingatkan anak. Anak diwajibkan mencuci tangan secara rutin. Guru dan orang tua dapat menyediakan sabun cuci tangan. Sabun dapat diletakkan di dekat tempat cuci tangan. Guru dan orang tua dapat mengawasi agar anak terbiasa sejak dini.<br><br>
+      Kebiasaan mencuci tangan perlu dijadikan budaya hidup bersih. Kebiasaan tersebut dapat diterapkan secara konsisten. Semua harus membiasakan menjaga kebersihan tangan. Dengan demikian, kesehatan masyarakat akan makin baik. Lingkungan rumah menjadi sehat. Lingkungan sekolah pun nyaman untuk tumbuh dan belajar.<br><br>
+      <b>Petunjuk:</b> Tentukan Tepat (T) atau Tidak Tepat (TT) pada penggunaan kosakata umum berikut:
+    </div>
+  `,
+  "statements": [
+    "A. Kata “kuman” digunakan untuk menyebut mikroorganisme penyebab penyakit.",
+    "B. Kata “penyakit” digunakan untuk menggambarkan kondisi tubuh yang terganggu.",
+    "C. Kata “masyarakat” digunakan untuk menyebut individu tertentu, bukan kelompok."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Pembiasaan Cuci Tangan dengan Sabun</b><br><br>
+      Mencuci tangan dengan sabun penting bagi kesehatan. Kebiasaan baik ini harus dilakukan oleh semua masyarakat. Sayangnya, masih banyak orang lupa mencuci tangan. Mereka sering kali mencuci tangan tanpa menggunakan sabun. Padahal, sabun membantu membunuh kuman di kulit.<br><br>
+      Sebagian keluarga memiliki fasilitas cuci tangan yang lengkap. Meskipun demikian, praktik mencuci tangan masih belum maksimal dilakukan. Mereka kadang kala lupa mencuci tangan sebelum makan. Kadang kala juga lupa setelah buang air. Perilaku ini menyebabkan penyakit berbahaya menyerang.<br><br>
+      Guru di sekolah harus memberikan contoh mengenai kebersihan. Orang tua di rumah pun perlu mengingatkan anak. Anak diwajibkan mencuci tangan secara rutin. Guru dan orang tua dapat menyediakan sabun cuci tangan. Sabun dapat diletakkan di dekat tempat cuci tangan. Guru dan orang tua dapat mengawasi agar anak terbiasa sejak dini.<br><br>
+      Kebiasaan mencuci tangan perlu dijadikan budaya hidup bersih. Kebiasaan tersebut dapat diterapkan secara konsisten. Semua harus membiasakan menjaga kebersihan tangan. Dengan demikian, kesehatan masyarakat akan makin baik. Lingkungan rumah menjadi sehat. Lingkungan sekolah pun nyaman untuk tumbuh dan belajar.<br><br>
+      <b>Question:</b> Teks tersebut menjelaskan fenomena mengenai sanitasi. Manakah kata atau frasa dan makna denotatif yang menggambarkan fenomena tersebut?
+    </div>
+  `,
+  "options": [
+    "Kata “guru” untuk menjelaskan pendidik di sekolah formal.",
+    "Kata “sabun” untuk menjelaskan benda pembersih kotoran.",
+    "Frasa “cuci tangan” untuk menjelaskan kegiatan membersihkan tangan dengan sabun.",
+    "Kata “orang tua” untuk menjelaskan pengawas di rumah."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Pembiasaan Cuci Tangan dengan Sabun</b><br><br>
+      Mencuci tangan dengan sabun penting bagi kesehatan. Kebiasaan baik ini harus dilakukan oleh semua masyarakat. Sayangnya, masih banyak orang lupa mencuci tangan. Mereka sering kali mencuci tangan tanpa menggunakan sabun. Padahal, sabun membantu membunuh kuman di kulit.<br><br>
+      Sebagian keluarga memiliki fasilitas cuci tangan yang lengkap. Meskipun demikian, praktik mencuci tangan masih belum maksimal dilakukan. Mereka kadang kala lupa mencuci tangan sebelum makan. Kadang kala juga lupa setelah buang air. Perilaku ini menyebabkan penyakit berbahaya menyerang.<br><br>
+      Guru di sekolah harus memberikan contoh mengenai kebersihan. Orang tua di rumah pun perlu mengingatkan anak. Anak diwajibkan mencuci tangan secara rutin. Guru dan orang tua dapat menyediakan sabun cuci tangan. Sabun dapat diletakkan di dekat tempat cuci tangan. Guru dan orang tua dapat mengawasi agar anak terbiasa sejak dini.<br><br>
+      Kebiasaan mencuci tangan perlu dijadikan budaya hidup bersih. Kebiasaan tersebut dapat diterapkan secara konsisten. Semua harus membiasakan menjaga kebersihan tangan. Dengan demikian, kesehatan masyarakat akan makin baik. Lingkungan rumah menjadi sehat. Lingkungan sekolah pun nyaman untuk tumbuh dan belajar.<br><br>
+      <b>Question:</b> Tiap paragraf dalam teks tersebut memuat ide pendukung. Manakah ide pendukung paragraf ketiga?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Guru dan orang tua dapat menyediakan sabun cuci tangan.",
+    "Guru di sekolah harus memberikan contoh mengenai kebersihan.",
+    "Guru dan orang tua dapat mengawasi agar anak terbiasa sejak dini."
+  ],
+  "correct": [0, 1, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjxPrmj2n-PeirKCaCfY74Oez1X9Cp3VjPIhopxRlNmAjYD8wRHu60dGVzx5swmm3cqcxDaCxOB75BPtx6q093mItidcidFCL-lmGJIfvzC0hCpFiTjtO5roe780nCMAXDxdi2yJ1RqHs/s1600/Cut+Nyak+Dien_Grafis.jpg" 
+      alt="Cut Nyak Dien" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
+      Infografik tentang Cut Nyak Dien menggambarkan perjuangan beliau sebagai pahlawan wanita Aceh yang aktif memimpin perlawanan terhadap kolonial Belanda, mengorganisir pasukan, dan mempertahankan kemerdekaan wilayahnya.<br><br>
+      <b>Question:</b> Manakah kalimat tanya yang paling sesuai dengan isi infografik tersebut?
+    </div>
+  `,
+  "options": [
+    "Mengapa Cut Nyak Dien menetap di Sumedang?",
+    "Mengapa Cut Nyak Dien memimpin pasukan sendiri?",
+    "Mengapa Cut Nyak Dien memilih tinggal di Lampadang?",
+    "Mengapa Cut Nyak Dien membantu suaminya berperang?"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjxPrmj2n-PeirKCaCfY74Oez1X9Cp3VjPIhopxRlNmAjYD8wRHu60dGVzx5swmm3cqcxDaCxOB75BPtx6q093mItidcidFCL-lmGJIfvzC0hCpFiTjtO5roe780nCMAXDxdi2yJ1RqHs/s1600/Cut+Nyak+Dien_Grafis.jpg" 
+      alt="Cut Nyak Dien" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
+      Infografik tentang Cut Nyak Dien menampilkan perjuangan beliau sebagai pahlawan wanita Aceh yang tegas, pemberani, dan pantang menyerah dalam melawan penjajah.<br><br>
+      <b>Question:</b> Manakah pernyataan yang menggambarkan karakter Cut Nyak Dien? <br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Perempuan yang tegas dan pemberani.",
+    "Perempuan yang tangguh dan pantang menyerah.",
+    "Perempuan yang patuh dan tunduk kepada pemerintah."
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjxPrmj2n-PeirKCaCfY74Oez1X9Cp3VjPIhopxRlNmAjYD8wRHu60dGVzx5swmm3cqcxDaCxOB75BPtx6q093mItidcidFCL-lmGJIfvzC0hCpFiTjtO5roe780nCMAXDxdi2yJ1RqHs/s1600/Cut+Nyak+Dien_Grafis.jpg" 
+      alt="Cut Nyak Dien" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
+      Perhatikan bagian informasi tahun "1890–1905" pada infografik Cut Nyak Dien. Dalam bagian tersebut terdapat penggunaan huruf kapital, huruf miring, dan tanda baca.<br><br>
+      <b>Question:</b> Manakah penilaian yang tepat? <br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Penggunaan huruf miring sudah benar. Huruf miring digunakan untuk menjelaskan nama daerah.",
+    "Penggunaan tanda baca sudah benar. Tanda kurung digunakan untuk menjelaskan wilayah secara spesifik.",
+    "Penggunaan huruf kapital sudah benar. Huruf kapital digunakan untuk awal kalimat, nama orang, dan daerah."
+  ],
+  "correct": [1, 2]
+},
+
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      "Selamat ulang tahun, Sayang." Ayah mencium pipi Nanda.<br>
+      "Terima kasih, Ayah," ujar Nanda memeluk ayahnya.<br>
+      "Nanda mau minta hadiah apa?" tanya Ayah sambil memakan puding yang disajikan Ibu.<br>
+      "Mmm, boleh nggak, Nanda minta dibelikan handphone?" tanya Nanda agak ragu.<br>
+      "Nanda, kan masih kecil. Belum bisa bertanggung jawab memegang barang berharga. Lagi pula ke sekolah tidak boleh membawa handphone, kan? Bisa mengganggu saat pelajaran," nasihat Ibu.<br>
+      "Nanda akan matikan saat jam pelajaran, Ibu."<br>
+      "Bagaimana jika hadiah handphone-nya setelah berumur 15 tahun?" tawar Ayah.<br>
+      Sejak saat itu, Nanda merajuk. Ia yang biasanya ceria, kini jadi pendiam. Nanda jadi sering mengurung diri di kamar. Ayah dan Ibu akhirnya sepakat membelikan handphone.<br>
+      Benar saja, Nanda langsung ceria saat diberikan handphone. Ia mengirim pesan kepada teman dan saudaranya. Nanda berkirim pesan hingga larut malam.<br>
+      Hari ini, Nanda bangun kesiangan. Dengan tergesa, ia mandi dan memasukkan bukunya.<br>
+      "Ya Tuhan, aku lupa mengerjakan PR!"<br>
+      Ia berangkat ke sekolah dengan terburu-buru. Di kelas, semua murid diminta mengumpulkan tugas.<br>
+      "Maaf, Pak, saya lupa membuat PR," ujar Nanda.<br>
+      "Baiklah, Nanda. Kamu saya beri tugas meringkas satu buku di perpustakaan," ujar Pak Guru tegas.<br>
+      Sambil berjalan, Nanda berpikir. "Ternyata benar apa kata Ibu dan Ayah. Belum saatnya aku memiliki handphone."<br><br>
+
+      <b>Petunjuk:</b> Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+    </div>
+  `,
+  "statements": [
+    "Tokoh Ibu dermawan karena memberi nasihat.",
+    "Tokoh Nanda bersifat ceria, tetapi mudah merajuk.",
+    "Tokoh Pak Guru memiliki sifat kukuh."
+  ],
+  "correct": [false, true, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      "Selamat ulang tahun, Sayang." Ayah mencium pipi Nanda.<br>
+      "Terima kasih, Ayah," ujar Nanda memeluk ayahnya.<br>
+      "Nanda mau minta hadiah apa?" tanya Ayah sambil memakan puding yang disajikan Ibu.<br>
+      "Mmm, boleh nggak, Nanda minta dibelikan handphone?" tanya Nanda agak ragu.<br>
+      "Nanda, kan masih kecil. Belum bisa bertanggung jawab memegang barang berharga. Lagi pula ke sekolah tidak boleh membawa handphone, kan? Bisa mengganggu saat pelajaran," nasihat Ibu.<br>
+      "Nanda akan matikan saat jam pelajaran, Ibu."<br>
+      "Bagaimana jika hadiah handphone-nya setelah berumur 15 tahun?" tawar Ayah.<br>
+      Sejak saat itu, Nanda merajuk. Ia yang biasanya ceria, kini jadi pendiam. Nanda jadi sering mengurung diri di kamar. Ayah dan Ibu akhirnya sepakat membelikan handphone.<br>
+      Benar saja, Nanda langsung ceria saat diberikan handphone. Ia mengirim pesan kepada teman dan saudaranya. Nanda berkirim pesan hingga larut malam.<br>
+      Hari ini, Nanda bangun kesiangan. Dengan tergesa, ia mandi dan memasukkan bukunya.<br>
+      "Ya Tuhan, aku lupa mengerjakan PR!"<br>
+      Ia berangkat ke sekolah dengan terburu-buru. Di kelas, semua murid diminta mengumpulkan tugas.<br>
+      "Maaf, Pak, saya lupa membuat PR," ujar Nanda.<br>
+      "Baiklah, Nanda. Kamu saya beri tugas meringkas satu buku di perpustakaan," ujar Pak Guru tegas.<br>
+      Sambil berjalan, Nanda berpikir. "Ternyata benar apa kata Ibu dan Ayah. Belum saatnya aku memiliki handphone."<br><br>
+
+      <b>Question:</b> Bagaimana sinopsis cerita tersebut?
+    </div>
+  `,
+  "options": [
+    "Tokoh Nanda merayakan ulang tahun. Tokoh Ayah dan Ibu memberikan handphone. Tokoh Nanda senang dan menggunakannya hingga malam. Tokoh Nanda kesiangan dan lupa mengerjakan PR. Tokoh Nanda dimarahi tokoh Pak Guru.",
+    "Tokoh Nanda berulang tahun dan mendapat handphone. Tokoh Ibu menasihati untuk tidak menggunakannya di sekolah. Namun, tokoh Nanda lupa waktu. Tokoh Nanda kesiangan dan tidak mengerjakan PR. Tokoh Pak Guru memberi tugas tambahan untuk tokoh Nanda.",
+    "Tokoh Nanda ingin handphone untuk hadiah ulang tahun. Tokoh Ayah dan Ibu menolak, tetapi tokoh Nanda mengurung diri. Tokoh Ayah dan Ibu membelikan handphone. Karena asyik bermain handphone, tokoh Nanda menjadi lupa waktu. Tokoh Nanda kesiangan dan tidak mengerjakan PR.",
+    "Tokoh Nanda meminta handphone untuk hadiah ulang tahun. Tokoh Ayah dan Ibu setuju dan membelikan handphone. Tokoh Nanda menggunakannya hingga lupa waktu. Tokoh Nanda kesiangan dan lupa mengerjakan PR. Tokoh Pak Guru memberi tugas tambahan untuk tokoh Nanda."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      "Selamat ulang tahun, Sayang." Ayah mencium pipi Nanda.<br>
+      "Terima kasih, Ayah," ujar Nanda memeluk ayahnya.<br>
+      "Nanda mau minta hadiah apa?" tanya Ayah sambil memakan puding yang disajikan Ibu.<br>
+      "Mmm, boleh nggak, Nanda minta dibelikan handphone?" tanya Nanda agak ragu.<br>
+      "Nanda, kan masih kecil. Belum bisa bertanggung jawab memegang barang berharga. Lagi pula ke sekolah tidak boleh membawa handphone, kan? Bisa mengganggu saat pelajaran," nasihat Ibu.<br>
+      "Nanda akan matikan saat jam pelajaran, Ibu."<br>
+      "Bagaimana jika hadiah handphone-nya setelah berumur 15 tahun?" tawar Ayah.<br>
+      Sejak saat itu, Nanda merajuk. Ia yang biasanya ceria, kini jadi pendiam. Nanda jadi sering mengurung diri di kamar. Ayah dan Ibu akhirnya sepakat membelikan handphone.<br>
+      Benar saja, Nanda langsung ceria saat diberikan handphone. Ia mengirim pesan kepada teman dan saudaranya. Nanda berkirim pesan hingga larut malam.<br>
+      Hari ini, Nanda bangun kesiangan. Dengan tergesa, ia mandi dan memasukkan bukunya.<br>
+      "Ya Tuhan, aku lupa mengerjakan PR!"<br>
+      Ia berangkat ke sekolah dengan terburu-buru. Di kelas, semua murid diminta mengumpulkan tugas.<br>
+      "Maaf, Pak, saya lupa membuat PR," ujar Nanda.<br>
+      "Baiklah, Nanda. Kamu saya beri tugas meringkas satu buku di perpustakaan," ujar Pak Guru tegas.<br>
+      Sambil berjalan, Nanda berpikir. "Ternyata benar apa kata Ibu dan Ayah. Belum saatnya aku memiliki handphone."<br><br>
+
+      <b>Question:</b> Apa akibat dari konflik cerita tersebut?
+    </div>
+  `,
+  "options": [
+    "Tokoh Nanda merajuk kepada tokoh Ayah dan Ibu.",
+    "Tokoh Nanda mendapatkan handphone.",
+    "Tokoh Nanda menyesali perbuatannya.",
+    "Tokoh Nanda meminta handphone."
+  ],
+  "correct": 2
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      "Selamat ulang tahun, Sayang." Ayah mencium pipi Nanda.<br>
+      "Terima kasih, Ayah," ujar Nanda memeluk ayahnya.<br>
+      "Nanda mau minta hadiah apa?" tanya Ayah sambil memakan puding yang disajikan Ibu.<br>
+      "Mmm, boleh nggak, Nanda minta dibelikan handphone?" tanya Nanda agak ragu.<br>
+      "Nanda, kan masih kecil. Belum bisa bertanggung jawab memegang barang berharga. Lagi pula ke sekolah tidak boleh membawa handphone, kan? Bisa mengganggu saat pelajaran," nasihat Ibu.<br>
+      "Nanda akan matikan saat jam pelajaran, Ibu."<br>
+      "Bagaimana jika hadiah handphone-nya setelah berumur 15 tahun?" tawar Ayah.<br>
+      Sejak saat itu, Nanda merajuk. Ia yang biasanya ceria, kini jadi pendiam. Nanda jadi sering mengurung diri di kamar. Ayah dan Ibu akhirnya sepakat membelikan handphone.<br>
+      Benar saja, Nanda langsung ceria saat diberikan handphone. Ia mengirim pesan kepada teman dan saudaranya. Nanda berkirim pesan hingga larut malam.<br>
+      Hari ini, Nanda bangun kesiangan. Dengan tergesa, ia mandi dan memasukkan bukunya.<br>
+      "Ya Tuhan, aku lupa mengerjakan PR!"<br>
+      Ia berangkat ke sekolah dengan terburu-buru. Di kelas, semua murid diminta mengumpulkan tugas.<br>
+      "Maaf, Pak, saya lupa membuat PR," ujar Nanda.<br>
+      "Baiklah, Nanda. Kamu saya beri tugas meringkas satu buku di perpustakaan," ujar Pak Guru tegas.<br>
+      Sambil berjalan, Nanda berpikir. "Ternyata benar apa kata Ibu dan Ayah. Belum saatnya aku memiliki handphone."<br><br>
+
+      <b>Petunjuk:</b> Manakah kejadian sesuai isi cerita? Tentukan Sesuai atau Tidak Sesuai untuk setiap pernyataan berikut!
+    </div>
+  `,
+  "statements": [
+    "Anak-anak menggunakan handphone sebelum cukup usia.",
+    "Orang tua menuruti keinginan anak tanpa penolakan.",
+    "Murid mendapat tugas tambahan karena tidak disiplin."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Taman Mayura</b><br><br>
+      Taman Mayura ada di Mataram, Nusa Tenggara Barat. Dahulu, taman ini dibangun oleh raja. Taman ini melengkapi istana raja. Di Taman Mayura ada tempat istirahat raja. Taman Mayura termasuk peninggalan raja. Oleh karena itu, taman ini termasuk dalam cagar budaya.<br><br>
+
+      Taman Mayura berbentuk empat persegi panjang. Di bagian tengah terdapat kolam. Di tengah kolam tersebut terdapat bangunan. Nama bangunan tersebut adalah Balai Kambang. Kolam dan bangunan tersebut menjadi daya tarik utama.<br><br>
+
+      Pengunjung dapat mengunjungi Taman Mayura dengan tiket masuk. Harga tiket masuk dibedakan berdasarkan usia dan asalnya. Sebagai contoh, harga tiket masuk untuk wisatawan lokal dewasa berbeda dengan tiket untuk wisatawan mancanegara dewasa. Untuk wisatawan lokal anak-anak gratis. Sementara itu, wisatawan anak mancanegara tetap membayar tiket masuk. Harga setiap jenis tiket relatif terjangkau. Taman Mayura buka dari pukul 08.00 hingga 21.00 WITA.<br><br>
+
+      Taman Mayura berjarak 5,6 km dari Kota Mataram. Dari Mataram, Taman Mayura ditempuh selama 15 menit dengan kendaraan. Perjalanan dapat ditempuh melalui Jalan Gajah Mada. Perjalanan bisa juga melalui Jalan Pancaka dan Jalan Pejanggik. Selain itu, bisa melalui Jalan Tenun. Taman Mayura berada di Jalan Purbasari Nomor 29.<br><br>
+
+      <b>Question:</b> Manakah susunan informasi sesuai kerangka teks tersebut?
+    </div>
+  `,
+  "options": [
+    "Gambaran umum Taman Mayura > Ciri dan daya tarik > Informasi tiket dan jam buka > Rute ke Taman Mayura.",
+    "Gambaran umum Taman Mayura > Daya tarik bangunan > Informasi tiket dan jam buka > Perjalanan ke Taman Mayura.",
+    "Gambaran umum Taman Mayura > Ciri bangunan dan kolam > Informasi tiket wisatawan > Nama jalan di Taman Mayura.",
+    "Gambaran umum Taman Mayura > Ciri dan daya tarik > Informasi tiket dan jam buka > Lama perjalanan ke Taman Mayura."
+  ],
+  "correct": 0
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Taman Mayura</b><br><br>
+
+      Taman Mayura ada di Mataram, Nusa Tenggara Barat. Dahulu, taman ini dibangun oleh raja. Taman ini melengkapi istana raja. Di Taman Mayura ada tempat istirahat raja. Taman Mayura termasuk peninggalan raja. Oleh karena itu, taman ini termasuk dalam cagar budaya.<br><br>
+
+      Taman Mayura berbentuk empat persegi panjang. Di bagian tengah terdapat kolam. Di tengah kolam tersebut terdapat bangunan. Nama bangunan tersebut adalah Balai Kambang. Kolam dan bangunan tersebut menjadi daya tarik utama.<br><br>
+
+      Pengunjung dapat mengunjungi Taman Mayura dengan tiket masuk. Harga tiket masuk dibedakan berdasarkan usia dan asalnya. Sebagai contoh, harga tiket masuk untuk wisatawan lokal dewasa berbeda dengan tiket untuk wisatawan mancanegara dewasa. Untuk wisatawan lokal anak-anak gratis. Sementara itu, wisatawan anak mancanegara tetap membayar tiket masuk. Harga setiap jenis tiket relatif terjangkau. Taman Mayura buka dari pukul 08.00 hingga 21.00 WITA.<br><br>
+
+      Taman Mayura berjarak 5,6 km dari Kota Mataram. Dari Mataram, Taman Mayura ditempuh selama 15 menit dengan kendaraan. Perjalanan dapat ditempuh melalui Jalan Gajah Mada. Perjalanan bisa juga melalui Jalan Pancaka dan Jalan Pejanggik. Selain itu, bisa melalui Jalan Tenun. Taman Mayura berada di Jalan Purbasari Nomor 29.<br><br>
+
+      <b>Question:</b> Apa kalimat tanya yang sesuai isi paragraf keempat? <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Bagaimana menuju ke Taman Mayura?",
+    "Kapan perjalanan ke Taman Mayura?",
+    "Di mana Taman Mayura berada?"
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Taman Mayura</b><br><br>
+
+      Taman Mayura berada di Kota Cakranegara, Lombok, Nusa Tenggara Barat. Taman ini dibangun oleh Raja Anak Agung Ngurah Karangasem pada tahun 1744. Di tengah taman terdapat sebuah kolam besar. Di tengah kolam itu terdapat sebuah balai yang disebut Bale Kambang.<br><br>
+
+      Nama Mayura diambil dari bahasa Sanskerta yang berarti burung merak. Dahulu, banyak burung merak datang ke taman ini. Taman Mayura sering digunakan untuk tempat pertemuan raja-raja dan upacara keagamaan. Sekarang, Taman Mayura menjadi salah satu objek wisata bersejarah di Lombok.<br><br>
+
+      Masyarakat sekitar ikut menjaga kebersihan dan kelestarian taman. Mereka juga turut melindungi bangunan bersejarah yang ada di dalam taman. Dengan demikian, Taman Mayura tetap terawat dan menarik untuk dikunjungi wisatawan.<br><br>
+
+      <b>Question:</b> Apa peristiwa dalam kehidupan sehari-hari yang sesuai teks?
+    </div>
+  `,
+  "options": [
+    "Masyarakat membuka sistem tiket di tempat wisata.",
+    "Masyarakat menambah akses jalan ke tempat wisata.",
+    "Masyarakat membayar tiket untuk wisatawan yang berkunjung.",
+    "Masyarakat melindungi warisan budaya menjadi tempat wisata."
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Dampak Radiasi Ponsel pada Tubuh</b><br><br>
+
+      Ponsel (telepon seluler) dan gawai (gadget) memancarkan radiasi. Karena itu, ponsel tidak boleh diletakkan sembarangan. Ponsel tidak disarankan diletakkan dekat kepala. Sering kali, kebiasaan tersebut dilakukan saat tidur. Ponsel juga sebaiknya tidak disimpan di saku. Saat disimpan di saku, posisi ponsel dekat dengan tubuh. Radiasi ponsel bisa memancar ke tubuh. Radiasi ponsel berbahaya bagi kesehatan tubuh.<br><br>
+
+      Ada beberapa gangguan kesehatan akibat radiasi ponsel. Radiasi ponsel bisa membuat saraf kepala tegang. Aliran darah ke kepala juga sedikit terhambat. Akibatnya, tubuh terasa lelah.<br><br>
+
+      Radiasi ponsel juga bisa mengakibatkan gelisah berlebihan. Kegelisahan tersebut bisa menyebabkan sulit tidur. Radiasi ponsel dapat membuat kepala pusing. Kondisi itu disebabkan ponsel diletakkan dekat wajah. Pusing yang terus-menerus bisa membuat mual. Bermain ponsel terlalu lama juga memengaruhi emosi.<br><br>
+
+      Radiasi yang terpancar bisa mengakibatkan mudah tersinggung. Makin banyak radiasi masuk otak, makin berbahaya. Gelombang elektromagnetik ponsel bisa menembus jaringan otak. Akibatnya, sel-sel dalam otak menjadi tidak terkendali. Oleh karena itu, penggunaan ponsel harus dibatasi. Dengan demikian, kesehatan tubuh tetap terjaga.<br><br>
+
+      <b>Question:</b> Seseorang terus-menerus menggunakan ponsel, bahkan saat hendak tidur. Berdasarkan teks, apa yang paling mungkin terjadi?
+    </div>
+  `,
+  "options": [
+    "Kesehatannya akan terganggu, terutama kesehatan organ dalam.",
+    "Kondisi fisik dan mentalnya menurun, bisa juga mengalami gangguan fungsi otak.",
+    "Tenaganya akan terkuras habis karena tersedot oleh radiasi ponsel.",
+    "Ketajaman matanya akan melemah karena terlalu lama menatap layar ponsel."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Dampak Radiasi Ponsel pada Tubuh</b><br><br>
+
+      Ponsel (telepon seluler) dan gawai (gadget) memancarkan radiasi. Karena itu, ponsel tidak boleh diletakkan sembarangan. Ponsel tidak disarankan diletakkan dekat kepala. Sering kali, kebiasaan tersebut dilakukan saat tidur. Ponsel juga sebaiknya tidak disimpan di saku. Saat disimpan di saku, posisi ponsel dekat dengan tubuh. Radiasi ponsel bisa memancar ke tubuh. Radiasi ponsel berbahaya bagi kesehatan tubuh.<br><br>
+
+      Ada beberapa gangguan kesehatan akibat radiasi ponsel. Radiasi ponsel bisa membuat saraf kepala tegang. Aliran darah ke kepala juga sedikit terhambat. Akibatnya, tubuh terasa lelah.<br><br>
+
+      Radiasi ponsel juga bisa mengakibatkan gelisah berlebihan. Kegelisahan tersebut bisa menyebabkan sulit tidur. Radiasi ponsel dapat membuat kepala pusing. Kondisi itu disebabkan ponsel diletakkan dekat wajah. Pusing yang terus-menerus bisa membuat mual. Bermain ponsel terlalu lama juga memengaruhi emosi.<br><br>
+
+      Radiasi yang terpancar bisa mengakibatkan mudah tersinggung. Makin banyak radiasi masuk otak, makin berbahaya. Gelombang elektromagnetik ponsel bisa menembus jaringan otak. Akibatnya, sel-sel dalam otak menjadi tidak terkendali. Oleh karena itu, penggunaan ponsel harus dibatasi. Dengan demikian, kesehatan tubuh tetap terjaga.<br><br>
+
+      <b>Question:</b> Apa ide pokok teks "Dampak Radiasi Ponsel pada Tubuh"?
+    </div>
+  `,
+  "options": [
+    "Ponsel tidak boleh diletakkan sembarangan, seperti di dekat kepala, untuk menghindari radiasi.",
+    "Gelombang elektromagnetik bisa menembus otak sehingga sel otak akan rusak.",
+    "Penggunaan ponsel harus dibatasi karena radiasinya berbahaya bagi kesehatan tubuh.",
+    "Radiasi ponsel menyebabkan kepala tegang dan sulit tidur jika digunakan terlalu lama."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Dampak Radiasi Ponsel pada Tubuh</b><br><br>
+
+      Ponsel (telepon seluler) dan gawai (gadget) memancarkan radiasi. Karena itu, ponsel tidak boleh diletakkan sembarangan. Ponsel tidak disarankan diletakkan dekat kepala. Sering kali, kebiasaan tersebut dilakukan saat tidur. Ponsel juga sebaiknya tidak disimpan di saku. Saat disimpan di saku, posisi ponsel dekat dengan tubuh. Radiasi ponsel bisa memancar ke tubuh. Radiasi ponsel berbahaya bagi kesehatan tubuh.<br><br>
+
+      Ada beberapa gangguan kesehatan akibat radiasi ponsel. Radiasi ponsel bisa membuat saraf kepala tegang. Aliran darah ke kepala juga sedikit terhambat. Akibatnya, tubuh terasa lelah.<br><br>
+
+      Radiasi ponsel juga bisa mengakibatkan gelisah berlebihan. Kegelisahan tersebut bisa menyebabkan sulit tidur. Radiasi ponsel dapat membuat kepala pusing. Kondisi itu disebabkan ponsel diletakkan dekat wajah. Pusing yang terus-menerus bisa membuat mual. Bermain ponsel terlalu lama juga memengaruhi emosi.<br><br>
+
+      Radiasi yang terpancar bisa mengakibatkan mudah tersinggung. Makin banyak radiasi masuk otak, makin berbahaya. Gelombang elektromagnetik ponsel bisa menembus jaringan otak. Akibatnya, sel-sel dalam otak menjadi tidak terkendali. Oleh karena itu, penggunaan ponsel harus dibatasi. Dengan demikian, kesehatan tubuh tetap terjaga.<br><br>
+
+      <b>Question:</b> Apa upaya yang bisa dilakukan untuk menghindari dampak negatif radiasi ponsel? <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Meletakkan ponsel jauh dari tubuh, terutama saat tidur atau menyimpannya.",
+    "Membatasi penggunaan ponsel agar radiasi yang masuk ke otak tidak berlebihan.",
+    "Menggunakan ponsel hanya saat malam hari dan suasana sekitar sepi."
+  ],
+  "correct": [0, 1]
+},
+
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Puisi "Ilmu"</b><br><br>
+      Untuk mengenal hitam putih dunia butuh ilmu<br>
+      Untuk mengenal cinta butuh ilmu<br>
+      Tetapi, ilmu tidak mengajarkan memecah belah<br>
+      Tetapi, ilmu tidak mengajarkan kemaksiatan<br>
+      Lalu, kemaksiatan ilmu dari siapa<br>
+      Lalu, memecah belah ilmu dari siapa<br>
+      Semua berasal dari hati yang busuk ini<br>
+      Semua berasal dari otak kotor ini<br><br>
+      
+      <b>Petunjuk:</b> Perhatikan penggunaan majas dalam puisi. Tentukan <i>Tepat (T)</i> atau <i>Tidak Tepat (TT)</i> untuk setiap pernyataan berikut!
+    </div>
+  `,
+  "statements": [
+    "Larik 'Tetapi, ilmu tidak mengajarkan memecah belah' menggunakan majas personifikasi. Majas ini menggambarkan ilmu yang dapat mengajar seperti manusia.",
+    "Larik 'Semua berasal dari hati yang busuk ini' menggunakan majas metafora. Majas ini menggambarkan sifat buruk/jahat.",
+    "Larik 'Untuk mengenal hitam putih dunia butuh ilmu' menggunakan majas hiperbola. Majas ini untuk penggambaran dunia seolah hanya berwarna hitam putih."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Puisi "Ilmu"</b><br><br>
+      Untuk mengenal hitam putih dunia butuh ilmu<br>
+      Untuk mengenal cinta butuh ilmu<br>
+      Tetapi, ilmu tidak mengajarkan memecah belah<br>
+      Tetapi, ilmu tidak mengajarkan kemaksiatan<br>
+      Lalu, kemaksiatan ilmu dari siapa<br>
+      Lalu, memecah belah ilmu dari siapa<br>
+      Semua berasal dari hati yang busuk ini<br>
+      Semua berasal dari otak kotor ini<br><br>
+      
+      <b>Petunjuk:</b> Perhatikan cara penyair menyampaikan nilai moral dalam puisi. Pilih semua jawaban yang benar!
+    </div>
+  `,
+  "options": [
+    "Nilai moral disampaikan melalui penegasan. Penyair menjelaskan bahwa ilmu tidak mengajarkan perpecahan dan kemaksiatan.",
+    "Nilai moral disampaikan melalui ajakan kepada pembaca. Penyair mengajak pembaca mencintai ilmu dan rajin belajar sejak dini.",
+    "Nilai moral disampaikan melalui pernyataan. Penyair menjelaskan bahwa keburukan berasal dari hati dan pikiran manusia, bukan dari ilmu."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Puisi "Ilmu"</b><br><br>
+      Untuk mengenal hitam putih dunia butuh ilmu<br>
+      Untuk mengenal cinta butuh ilmu<br>
+      Tetapi, ilmu tidak mengajarkan memecah belah<br>
+      Tetapi, ilmu tidak mengajarkan kemaksiatan<br>
+      Lalu, kemaksiatan ilmu dari siapa<br>
+      Lalu, memecah belah ilmu dari siapa<br>
+      Semua berasal dari hati yang busuk ini<br>
+      Semua berasal dari otak kotor ini<br><br>
+
+      <i>Sumber: Agus Budi Wahyudi, dkk., <b>Surat dari Samudra Antologi Puisi Anak</b>, Semarang, Kementerian Pendidikan dan Kebudayaan, 
+      Badan Pengembangan dan Pembinaan Bahasa, Balai Bahasa Jawa Tengah, 2018</i><br><br>
+
+      <b>Petunjuk:</b> Perhatikan penggunaan ungkapan dalam puisi. Pilih semua jawaban yang benar!
+    </div>
+  `,
+  "options": [
+    "Ungkapan \"hitam putih dunia\" dalam larik \"Untuk mengenal hitam putih dunia butuh ilmu\" bermakna bahwa kehidupan memiliki sisi baik dan buruk yang perlu dipahami.",
+    "Ungkapan \"otak kotor\" dalam larik \"Semua berasal dari otak kotor ini\" bermakna bahwa pikiran seseorang dipenuhi niat jahat atau cara berpikir yang menyimpang.",
+    "Ungkapan \"hati yang busuk\" dalam larik \"Semua berasal dari hati yang busuk ini\" bermakna bahwa seseorang sedang mengalami sakit organ tubuh."
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "dampak_jangka",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Bahaya Sinar Ultraviolet bagi Tubuh Manusia</b><br><br>
+      Sinar ultraviolet atau UV adalah bagian dari cahaya matahari. Sinar UV tidak dapat dilihat oleh mata manusia. Namun, sinar ini berbahaya bagi tubuh dan kesehatan.<br><br>
+      Tubuh manusia dilapisi oleh kulit yang sensitif. Kulit adalah bagian tubuh yang langsung terpapar sinar. Jika lama terpapar sinar UV, kulit rasanya seperti terbakar. Kulit menjadi merah. Kulit juga terasa panas dan mudah iritasi.<br><br>
+      Makin sering terpapar sinar UV, makin cepat pula kulit akan keriput. Selain itu, kulit bisa menjadi kering. Kulit menjadi kasar dan muncul bintik hitam. Dalam waktu lama, sinar UV dapat menyebabkan kanker kulit. Tidak hanya itu, sinar UV dapat merusak mata. Dampaknya mata bisa terasa perih. Mata juga bisa menjadi buram.<br><br>
+      Kita perlu melindungi kulit dari sinar UV. Gunakan topi, baju lengan panjang, dan tabir surya. Hindari berjemur pada siang hari yang terik. Berjemurlah pada pagi hari.<br><br>
+      Sinar UV memiliki manfaat, misalnya penghasil vitamin D. Akan tetapi, jika terlalu banyak, sinar UV menjadi bahaya. Oleh karena itu, kita harus lebih hati-hati. Jagalah kulit dan mata dari sinar UV.<br><br>
+      <i>Sumber: Ragam Info/Kumparan (2024)</i><br><br>
+      <b>Petunjuk:</b> Paparan sinar UV dapat berdampak pada tubuh manusia. Tentukan Dampak Jangka Pendek atau Dampak Jangka Panjang untuk setiap pernyataan berikut!
+    </div>
+  `,
+  "statements": [
+    "Kulit menjadi gelap, kering, dan berbintik hitam.",
+    "Kulit terasa panas, merah, dan mudah terluka.",
+    "Kulit berpotensi rusak hingga mengalami kanker."
+  ],
+  "correct": ["panjang", "pendek", "panjang"]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Bahaya Sinar Ultraviolet bagi Tubuh Manusia</b><br><br>
+      Sinar ultraviolet atau UV adalah bagian dari cahaya matahari. Sinar UV tidak dapat dilihat oleh mata manusia. Namun, sinar ini berbahaya bagi tubuh dan kesehatan.<br><br>
+      Tubuh manusia dilapisi oleh kulit yang sensitif. Kulit adalah bagian tubuh yang langsung terpapar sinar. Jika lama terpapar sinar UV, kulit rasanya seperti terbakar. Kulit menjadi merah. Kulit juga terasa panas dan mudah iritasi.<br><br>
+      Makin sering terpapar sinar UV, makin cepat pula kulit akan keriput. Selain itu, kulit bisa menjadi kering. Kulit menjadi kasar dan muncul bintik hitam. Dalam waktu lama, sinar UV dapat menyebabkan kanker kulit. Tidak hanya itu, sinar UV dapat merusak mata. Dampaknya mata bisa terasa perih. Mata juga bisa menjadi buram.<br><br>
+      Kita perlu melindungi kulit dari sinar UV. Gunakan topi, baju lengan panjang, dan tabir surya. Hindari berjemur pada siang hari yang terik. Berjemurlah pada pagi hari.<br><br>
+      Sinar UV memiliki manfaat, misalnya penghasil vitamin D. Akan tetapi, jika terlalu banyak, sinar UV menjadi bahaya. Oleh karena itu, kita harus lebih hati-hati. Jagalah kulit dan mata dari sinar UV.<br><br>
+      <i>Sumber: Ragam Info/Kumparan (2024)</i><br><br>
+      <b>Petunjuk:</b> Bagaimana cara yang benar agar terhindar dari bahaya sinar UV? Pilih semua jawaban yang benar!
+    </div>
+  `,
+  "options": [
+    "Menghindari berjemur pada siang yang terik.",
+    "Memakai topi dan pakaian lengan panjang.",
+    "Mengenakan pakaian berbahan katun."
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Bahaya Sinar Ultraviolet bagi Tubuh Manusia</b><br><br>
+      Sinar ultraviolet atau UV adalah bagian dari cahaya matahari. Sinar UV tidak dapat dilihat oleh mata manusia. Namun, sinar ini berbahaya bagi tubuh dan kesehatan.<br><br>
+      Tubuh manusia dilapisi oleh kulit yang sensitif. Kulit adalah bagian tubuh yang langsung terpapar sinar. Jika lama terpapar sinar UV, kulit rasanya seperti terbakar. Kulit menjadi merah. Kulit juga terasa panas dan mudah iritasi.<br><br>
+      Makin sering terpapar sinar UV, makin cepat pula kulit akan keriput. Selain itu, kulit bisa menjadi kering. Kulit menjadi kasar dan muncul bintik hitam. Dalam waktu lama, sinar UV dapat menyebabkan kanker kulit. Tidak hanya itu, sinar UV dapat merusak mata. Dampaknya mata bisa terasa perih. Mata juga bisa menjadi buram.<br><br>
+      Kita perlu melindungi kulit dari sinar UV. Gunakan topi, baju lengan panjang, dan tabir surya. Hindari berjemur pada siang hari yang terik. Berjemurlah pada pagi hari.<br><br>
+      Sinar UV memiliki manfaat, misalnya penghasil vitamin D. Akan tetapi, jika terlalu banyak, sinar UV menjadi bahaya. Oleh karena itu, kita harus lebih hati-hati. Jagalah kulit dan mata dari sinar UV.<br><br>
+      <i>Sumber: Ragam Info/Kumparan (2024)</i><br><br>
+      <b>Petunjuk:</b> Mengapa kita perlu berhati-hati terhadap dampak buruk sinar ultraviolet? Pilih semua jawaban yang benar!
+    </div>
+  `,
+  "options": [
+    "Sinar ultraviolet mengakibatkan kulit menjadi lebih kusam.",
+    "Sinar ultraviolet menyebabkan kerusakan pada kulit dan mata.",
+    "Sinar ultraviolet mengganggu kesehatan jika terkena terlalu lama."
+  ],
+  "correct": [1, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Legenda Onak Berduri Sungsang</b><br><br>
+      Zaman dahulu, hiduplah dua orang hulubalang. Mereka bernama Serunting Sakti dan Rio Tabing. Mereka memiliki wilayah kekuasaan masing-masing. Wilayah kekuasaan mereka sangat luas. Namun, keduanya tidak dapat hidup rukun. Mereka sering bertempur hebat. Awalnya, mereka mengerahkan pasukan dan rakyat. Pertempuran sampai menimbulkan banyak korban. Namun, pertempuran masih belum berakhir.<br><br>
+      "Sebaiknya kita bertempur satu lawan satu." Serunting Sakti menantang.<br>
+      "Siapa takut?" jawab Rio Tabing sengit.<br>
+      Keduanya mempersiapkan diri. Keduanya juga memohon kesaktian kepada Dewa. Tenaga dan pikiran dipusatkan. Ledakan terjadi silih berganti. Ledakan tanda kesaktian keduanya bertempur di angkasa.<br><br>
+      "Dewa, aku mohon tambahkan kesaktian kepadaku!" seru Rio Tabing. Dewa pun memberi kesaktian kepadanya. Akibatnya, tenaganya bisa mengubah tanah datar menjadi berbukit-bukit. Apa pun yang dilewatinya menjadi rusak binasa. Duri dan onak menjadi sungsang atau terbalik. Rio Tabing pun membuat batas kekuasaannya.<br><br>
+      "Inilah batas kekuasaanku. Semua keturunan Serunting Sakti akan binasa jika melewatinya!" seru Rio Tabing. Setelah Rio Tabing mengucapkan hal itu, alam berubah tenang. Pertempuran keduanya terhenti. Perkelahian usai. Tidak ada yang kalah ataupun menang. Mereka bersama-sama menanggung kerugian besar. Kedua wilayah mereka sama-sama hancur. Wilayah kekuasaan yang dibuat Rio Tabing disebut Onak Berduri Sungsang. Tempat itu berada di daerah Bengkulu.<br><br>
+      <i>Sumber: David Wijaya, 120 Cerita Nusantara, Jakarta, Elex Media Komputindo, 2019</i><br><br>
+      <b>Petunjuk:</b> Pilih jawaban yang paling tepat!
+    </div>
+  `,
+  "options": [
+    "Ledakan terjadi silih berganti di angkasa.",
+    "Tanah datar berubah menjadi berbukit-bukit.",
+    "Tokoh Rio Tabing berhasil membuat wilayah sendiri.",
+    "Tokoh Rio Tabing berhasil mengakhiri pertempuran."
+  ],
+  "correct": 1
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Legenda Onak Berduri Sungsang</b><br><br>
+      Zaman dahulu, hiduplah dua orang hulubalang. Mereka bernama Serunting Sakti dan Rio Tabing. Mereka memiliki wilayah kekuasaan masing-masing. Wilayah kekuasaan mereka sangat luas. Namun, keduanya tidak dapat hidup rukun.<br><br>
+      Mereka sering bertempur hebat. Awalnya, mereka mengerahkan pasukan dan rakyat. Pertempuran sampai menimbulkan banyak korban. Namun, pertempuran masih belum berakhir.<br><br>
+      "Sebaiknya kita bertempur satu lawan satu." Serunting Sakti menantang.<br>
+      "Siapa takut?" jawab Rio Tabing sengit.<br><br>
+      Keduanya mempersiapkan diri. Keduanya juga memohon kesaktian kepada Dewa. Tenaga dan pikiran dipusatkan. Ledakan terjadi silih berganti. Ledakan tanda kesaktian keduanya bertempur di angkasa.<br><br>
+      "Dewa, aku mohon tambahkan kesaktian kepadaku!" seru Rio Tabing. Dewa pun memberi kesaktian kepadanya. Akibatnya, tenaganya bisa mengubah tanah datar menjadi berbukit-bukit. Apa pun yang dilewatinya menjadi rusak binasa. Duri dan onak menjadi sungsang atau terbalik. Rio Tabing pun membuat batas kekuasaannya.<br><br>
+      "Inilah batas kekuasaanku. Semua keturunan Serunting Sakti akan binasa jika melewatinya!" seru Rio Tabing. Setelah Rio Tabing mengucapkan hal itu, alam berubah tenang. Pertempuran keduanya terhenti. Perkelahian usai. Tidak ada yang kalah ataupun menang. Mereka bersama-sama menanggung kerugian besar. Kedua wilayah mereka sama-sama hancur. Wilayah kekuasaan yang dibuat Rio Tabing disebut Onak Berduri Sungsang. Tempat itu berada di daerah Bengkulu.<br><br>
+      <i>Sumber: David Wijaya, 120 Cerita Nusantara, Jakarta, Elex Media Komputindo, 2019</i><br><br>
+      <b>Petunjuk:</b> Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!
+    </div>
+  `,
+  "statements": [
+    "1. Sikap tidak mengorbankan rakyat hanya untuk kepentingan diri sendiri merupakan keteladanan dari tokoh Serunting Sakti.",
+    "2. Sikap berani menghadapi tantangan merupakan keteladanan dari tokoh Rio Tabing.",
+    "3. Sikap bijaksana dalam menghadapi konflik merupakan keteladanan dari tokoh Hulubalang."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Legenda Onak Berduri Sungsang</b><br><br>
+      Zaman dahulu, hiduplah dua orang hulubalang. Mereka bernama Serunting Sakti dan Rio Tabing. Mereka memiliki wilayah kekuasaan masing-masing. Wilayah kekuasaan mereka sangat luas. Namun, keduanya tidak dapat hidup rukun.<br><br>
+      Mereka sering bertempur hebat. Awalnya, mereka mengerahkan pasukan dan rakyat. Pertempuran sampai menimbulkan banyak korban. Namun, pertempuran masih belum berakhir.<br><br>
+      "Sebaiknya kita bertempur satu lawan satu." Serunting Sakti menantang.<br>
+      "Siapa takut?" jawab Rio Tabing sengit.<br><br>
+      Keduanya mempersiapkan diri. Keduanya juga memohon kesaktian kepada Dewa. Tenaga dan pikiran dipusatkan. Ledakan terjadi silih berganti. Ledakan tanda kesaktian keduanya bertempur di angkasa.<br><br>
+      "Dewa, aku mohon tambahkan kesaktian kepadaku!" seru Rio Tabing. Dewa pun memberi kesaktian kepadanya. Akibatnya, tenaganya bisa mengubah tanah datar menjadi berbukit-bukit. Apa pun yang dilewatinya menjadi rusak binasa. Duri dan onak menjadi sungsang atau terbalik. Rio Tabing pun membuat batas kekuasaannya.<br><br>
+      "Inilah batas kekuasaanku. Semua keturunan Serunting Sakti akan binasa jika melewatinya!" seru Rio Tabing. Setelah Rio Tabing mengucapkan hal itu, alam berubah tenang. Pertempuran keduanya terhenti. Perkelahian usai. Tidak ada yang kalah ataupun menang. Mereka bersama-sama menanggung kerugian besar. Kedua wilayah mereka sama-sama hancur. Wilayah kekuasaan yang dibuat Rio Tabing disebut Onak Berduri Sungsang. Tempat itu berada di daerah Bengkulu.<br><br>
+      <i>Sumber: David Wijaya, 120 Cerita Nusantara, Jakarta, Elex Media Komputindo, 2019</i><br><br>
+      <b>Petunjuk:</b> Pilih semua jawaban yang tepat!
+    </div>
+  `,
+  "options": [
+    "Merasa senang karena akhirnya ada pemenang dalam pertempuran tersebut.",
+    "Merasa prihatin karena sifat egois kedua tokoh menyebabkan wilayah mereka hancur.",
+    "Merasa lega karena kedua tokoh menyelesaikan konflik tanpa mengorbankan rakyatnya kembali."
+  ],
+  "correct": [1, 2]
+}
+
+
+
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  return null;
+});
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk tipe mc_multiple
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', e => {
+        const val = parseInt(e.target.value);
+        if (e.target.checked) {
+          if (!answers[index].includes(val)) answers[index].push(val);
+        } else {
+          answers[index] = answers[index].filter(v => v !== val);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  // Hitung skor 0–100
+  const percentage = Math.round((score / questions.length) * 100);
+
+  // Tampilkan hanya skor akhir dalam bentuk nilai
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+// 🔥 KIRIM KE FIREBASE
+  simpanHasilFirebase(percentage);
+}
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+// Tampilkan tombol Kembali setelah submit
+const backBtn = document.createElement('button');
+backBtn.textContent = "Kembali ke Beranda";
+backBtn.style.padding = "10px 18px";
+backBtn.style.marginTop = "10px";
+backBtn.style.backgroundColor = "#1e88e5";
+backBtn.style.color = "white";
+backBtn.style.border = "none";
+backBtn.style.borderRadius = "6px";
+backBtn.style.fontWeight = "bold";
+backBtn.style.cursor = "pointer";
+backBtn.addEventListener('click', () => {
+    window.location.href = "https://kebunilmu.github.io/Kebun-Ilmu-TKA/";
+});
+document.querySelector('.right-panel .navigation').appendChild(backBtn);
+
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  timerRunning = true; // pastikan timer aktif
+
+  const interval = setInterval(() => {
+    if (!timerRunning) { 
+      clearInterval(interval); 
+      return; 
+    }
+
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+    if (timer <= 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+
+    timer--;
+  }, 1000);
+}
+
+
+// Auto submit saat keluar fullscreen
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement && timerRunning) {
+    alert("Anda keluar dari fullscreen. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah tab/window (desktop)
+window.addEventListener("blur", () => {
+  if (timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah app / tab (HP)
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// cek session saat halaman dimuat
+checkSession();
+
+  </script>
+<!-- FIREBASE SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
+    authDomain: "tryout-kebun-ilmu.firebaseapp.com",
+    projectId: "tryout-kebun-ilmu",
+    storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
+    messagingSenderId: "497636674894",
+    appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // supaya bisa dipakai di script lain
+  window.db = db;
+
+  // 🔥 INI YANG PALING PENTING
+  window.simpanHasilFirebase = async function (nilai) {
+    const { addDoc, collection, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+    );
+
+    await addDoc(collection(window.db, "hasil_ujian"), {
+  nik: window.dataPeserta.nik,
+  nama: window.dataPeserta.nama,
+  jk: window.dataPeserta.jk,
+  tglLahir: window.dataPeserta.tgl,
+  sekolah: window.dataPeserta.sekolah,
+  mapel: "Bahasa Indonesia SD/MI", // tambah field mapel
+  nilai: nilai,
+  waktu: new Date().toISOString()
+});
+
+
+    console.log("✅ HASIL UJIAN TERSIMPAN");
+  };
+</script>
+
+</body>
+</html>

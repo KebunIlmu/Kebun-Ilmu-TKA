@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Matematika Wajib- Kebun Ilmu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+* {
+  box-sizing: border-box;
+}
+  header {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  header h2 {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .menu-button, .timer {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+.container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #cfd8dc;
+  }
+
+  .right-panel {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .question-buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+#questionDisplay {
+    font-size: 14px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+.fullscreen-mode header {
+    padding: 6px 10px;
+    min-height: unset;
+  }
+
+  .fullscreen-mode header h2 {
+    font-size: 13px;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .fullscreen-mode .menu-button,
+  .fullscreen-mode .timer {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+  
+</style>
+</head>
+
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+<div id="pesertaForm" class="hidden" style="justify-content:center; align-items:center; height:100vh; background-color:#f4f9ff; padding:20px; box-sizing:border-box;">
+  <div style="background:white; padding:24px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:100%; max-width:400px;">
+
+    <h2 style="margin-bottom:14px; color:#1E88E5; text-align:center;">Data Peserta</h2>
+
+    <!-- NIK -->
+    <label for="nik" style="font-weight:600; display:block; margin-bottom:3px;">NIK</label>
+    <input id="nik" placeholder="Masukkan NIK"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Nama Peserta -->
+    <label for="namaPeserta" style="font-weight:600; display:block; margin-bottom:3px;">Nama Peserta</label>
+    <input id="namaPeserta" placeholder="Masukkan nama lengkap"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Jenis Kelamin -->
+    <label for="jk" style="font-weight:600; display:block; margin-bottom:3px;">Jenis Kelamin</label>
+    <select id="jk"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+      <option value="">-- Pilih Jenis Kelamin --</option>
+      <option value="L">Laki-laki</option>
+      <option value="P">Perempuan</option>
+    </select>
+
+    <!-- Tanggal Lahir -->
+    <label for="tglLahir" style="font-weight:600; display:block; margin-bottom:3px;">Tanggal Lahir</label>
+    <input id="tglLahir" type="date"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Sekolah -->
+    <label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">Nama Sekolah</label>
+    <input id="sekolah" placeholder="Nama sekolah"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Token -->
+    <label for="tokenUjian" style="font-weight:600; display:block; margin-bottom:3px;">Token Ujian</label>
+    <input id="tokenUjian" placeholder="Masukkan token ujian"
+      style="width:100%; padding:8px 10px; margin-bottom:14px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <button onclick="mulaiUjian()"
+      style="width:100%; padding:10px; background-color:#1E88E5; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:15px;"
+      onmouseover="this.style.backgroundColor='#1565C0';" 
+      onmouseout="this.style.backgroundColor='#1E88E5';">
+      Mulai Ujian
+    </button>
+
+    <p id="errorPeserta" style="margin-top:8px; font-size:13px; color:red; text-align:center;"></p>
+
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+<header>
+  <h2>Try Out TKA Matematika SMP/MTs - Kebun Ilmu</h2>
+  <div>
+        <span class="timer" id="timer">60:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+function getTokenSekarang() {
+  const now = new Date();
+  const jam = now.getHours();
+  const menit = now.getMinutes();
+
+  // batas waktu
+  if (jam < 7 || jam >= 22) return null;
+
+  // slot 10 menit (0–5)
+  const slot = Math.floor(menit / 10);
+
+  // ===== DEPAN ACAK TERKONTROL =====
+  const seed = jam * 100 + slot;   // angka unik tiap 10 menit
+  const depan = String.fromCharCode(65 + (seed * 7) % 26); // A–Z
+
+  // token akhir
+  return `${depan}${jam.toString().padStart(2,'0')}${slot}`;
+}
+function mulaiUjian() {
+  const nik = document.getElementById("nik").value.trim();
+  const nama = document.getElementById("namaPeserta").value.trim();
+  const jk = document.getElementById("jk").value;
+  const tgl = document.getElementById("tglLahir").value;
+  const sekolah = document.getElementById("sekolah").value.trim();
+  const token = document.getElementById("tokenUjian").value.trim();
+
+  if (!nik || !nama || !jk || !tgl || !sekolah || !token) {
+    document.getElementById("errorPeserta").innerText = "❌ Semua data wajib diisi";
+    return;
+  }
+
+  const tokenAktif = getTokenSekarang();
+
+if (!tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    "⏰ Ujian hanya bisa diakses pukul 07.00 – 17.00";
+  return;
+}
+
+if (token !== tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    `❌ Token salah. Tanya admin`;
+  return;
+}
+
+  // simpan data peserta sementara
+  window.dataPeserta = { nik, nama, jk, tgl, sekolah, token };
+
+ questions = shuffleArray(questions);
+  answers = questions.map(q => {
+    if (q.type === 'mc_multiple') return [];
+    if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+    return null;
+  });
+  currentQuestion = 0;
+
+  // sembunyikan form peserta dan tampilkan konten try out
+  document.getElementById("pesertaForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+
+  // 🔥 Render soal dan start timer
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(60 * 60);
+
+  // AUTO FULLSCREEN
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.warn("Fullscreen gagal:", err);
+    });
+  }
+}
+
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "MANU9",  password: "2026",  expire: "2026-4-11T23:59:59" },
+  { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("pesertaForm").style.display = "flex";
+  
+}
+
+  let questions = [
+
+{
+  "type": "mc_multiple",
+  "text": "Terdapat tiga bilangan yang dinyatakan dengan \\((33^2 − 3^2)\\), \\((8^2 + 296)\\), dan \\((36 × 35)\\).<br><br>Pilihlah bilangan yang merupakan faktor persekutuan ketiga bilangan tersebut! (Jawaban benar lebih dari satu)",
+  "options": [
+    "\\(2^3 × 3^3 × 7\\)",
+    "\\(2^2 × 3^2 × 7\\)",
+    "\\(2^2 × 3^2 × 5\\)",
+    "\\(2 × 3^2 × 5\\)"
+  ],
+  "correct": [1, 2]
+},
+{
+  "type": "mc",
+  "text": "Harga setengah kilogram cabai rawit pada hari ini adalah Rp35.000,00. Jika Ibu membeli 2\\(\\tfrac{1}{4}\\) kilogram cabai rawit, total harga yang harus dibayar Ibu adalah ….",
+  "options": [
+    "Rp175.000,00",
+    "Rp157.500,00",
+    "Rp140.000,00",
+    "Rp87.500,00"
+  ],
+  "correct": 1
+},
+{
+  "type": "true_false",
+  "text": `
+    Misalkan \\(a\\) dan \\(b\\) merupakan dua bilangan real sehingga sistem persamaan linear (SPL) berikut:<br>
+    \\[ 2x + ay = 4 \\]
+    \\[ bx - 2y = -1 \\]
+    mempunyai solusi \\((x, y) = (5, -2)\\).<br><br>
+    Tentukan Benar atau Salah untuk setiap pernyataan berikut terkait dengan nilai a dan b:
+  `,
+  "statements": [
+    "a merupakan bilangan prima.",
+    "b merupakan bilangan ganjil.",
+    "\\(10a + b = 31\\)"
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "true_false",
+  "text": `
+    Desain jembatan yang tepat sangat penting untuk memperkuat struktur karena menentukan kestabilan, ketahanan, dan keselamatan jembatan dalam menghadapi beban serta kondisi lingkungan.<br>
+    Salah satu contoh desain rangka jembatan ditunjukkan pada gambar berikut:<br>
+    <p style="text-align:center;"><img src="https://i.imgur.com/1BMOdXT.png" alt="Desain jembatan" style="max-width:100%; height:auto; display:block; margin:12px auto;"></p>
+    Bagian rangka jembatan tersebut dapat digambarkan dengan sketsa garis sebagai berikut:<br>
+    <p style="text-align:center;"><img src="https://i.imgur.com/RBujXKv.png" alt="Sketsa garis rangka jembatan" style="max-width:100%; height:auto; display:block; margin:12px auto;"></p>
+    Diketahui pada sketsa tersebut garis \\( L_1 \\) sejajar dengan garis \\( L_2 \\) dan garis \\( L_3 \\) sejajar dengan garis \\( L_4 \\).<br>
+    Jika besar sudut \\( A = 50^\\circ \\), tentukan Benar atau Salah pernyataan berikut:
+  `,
+  "statements": [
+    "Besar sudut D adalah 50°",
+    "Besar sudut C dapat ditentukan menggunakan aturan sudut berpelurus yaitu sebesar 50°",
+    "Sudut B dan sudut E sama besar"
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    Pak Doni mempunyai rumah dengan tampak samping kanan seperti pada gambar berikut:<br>
+    <img src="https://i.imgur.com/QQJWBox.png"
+     alt="Tampak samping rumah Pak Doni"
+     style="max-width:100%; height:auto; display:block; margin:12px auto;">
+<br>
+    Pak Doni ingin mengecat dinding samping kanan rumah yang luasnya <b>72 m²</b>.<br>
+    Terdapat empat merek cat di pasaran dengan ketentuan sebagai berikut:<br>
+    <table border="1" cellpadding="5" cellspacing="0">
+      <tr>
+        <th>Merek Cat</th>
+        <th>1 kg Dapat Mengecat</th>
+        <th>Kemasan yang Tersedia</th>
+      </tr>
+      <tr>
+        <td>Momilex</td>
+        <td>7 m²</td>
+        <td>5 kg dan 10 kg</td>
+      </tr>
+      <tr>
+        <td>Josun</td>
+        <td>8 m²</td>
+        <td>2 kg dan 10 kg</td>
+      </tr>
+      <tr>
+        <td>Bulux</td>
+        <td>10 m²</td>
+        <td>2 kg dan 5 kg</td>
+      </tr>
+      <tr>
+        <td>Noppin</td>
+        <td>9 m²</td>
+        <td>1 kg dan 5 kg</td>
+      </tr>
+    </table><br>
+    Agar sisa cat yang dibeli paling sedikit, merek cat manakah yang sebaiknya dipilih Pak Doni?
+  `,
+  "options": [
+    "Momilex",
+    "Josun",
+    "Bulux",
+    "Noppin"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    Berdasarkan data diketahui bahwa rata-rata berat satu butir telur kecil 45 gram, satu telur sedang 55 gram, dan satu telur besar 65 gram.<br>
+    Seorang karyawan toko bahan pangan sedang mengemas setiap 10 butir telur ke dalam satu kemasan dengan ketentuan bahwa rata-rata berat per telur dalam setiap kemasan tersebut adalah 55 gram.<br><br>
+    Jika dalam satu kemasan sudah berisi 1 telur besar, 5 telur sedang, dan 2 telur kecil, maka dua telur tambahan yang harus dipilih supaya tetap memenuhi aturan pengemasan adalah ….
+  `,
+  "options": [
+    "2 telur sedang",
+    "2 telur besar",
+    "1 telur besar dan 1 telur kecil",
+    "1 telur besar dan 1 telur sedang"
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": `
+    Sebuah mobil menempuh jarak 120 km dalam waktu 2 jam, sedangkan sebuah sepeda motor menempuh jarak 45 km dalam waktu 1 jam.<br><br>
+    Rasio kecepatan mobil terhadap kecepatan motor adalah...
+  `,
+  "options": [
+    "8 : 3",
+    "3 : 8",
+    "2 : 1",
+    "1 : 2"
+  ],
+  "correct": 0
+},
+{
+  "type": "true_false",
+  "text": `
+    Diketahui sebuah toko memberikan diskon sebesar 20% untuk semua barang. Seorang pembeli membeli sebuah jaket dengan harga setelah diskon sebesar Rp320.000,00.<br>
+    Setelah pulang, ia menyadari bahwa kasir salah memasukkan diskon, yaitu hanya 10% saja. Kasir kemudian menawarkan untuk mengembalikan selisih uang agar harga akhir tetap sesuai diskon 20%.<br><br>
+    Tentukan Benar atau Salah setiap pernyataan berikut terkait perhitungan harga jaket tersebut:
+  `,
+  "statements": [
+    "Harga awal jaket sebelum diskon adalah Rp400.000,00.",
+    "Jumlah uang yang harus dikembalikan kasir kepada pembeli adalah Rp40.000,00.",
+    "Harga setelah diskon 10% adalah Rp360.000,00."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    Seorang siswa SMA berencana menabung sebagian uang jajannya setiap hari. Ia ingin dalam sebulan (30 hari) memiliki tabungan minimal Rp300.000,00. 
+    Setiap hari ia menerima uang jajan sebesar Rp20.000,00 dan menggunakan sebagian untuk makan serta transportasi sebesar Rp\\(x\\) rupiah per hari.<br><br>
+    Manakah pernyataan berikut yang benar terkait situasi tersebut? (Jawaban benar lebih dari satu)
+  `,
+  "options": [
+    "Persamaan yang menunjukkan kondisi tabungan siswa adalah \\( 30(20.000 - x) \\ge 300.000 \\).",
+    "Jumlah maksimum yang boleh digunakan per hari adalah Rp10.000,00.",
+    "Jika siswa ingin menabung lebih dari Rp300.000,00, maka pengeluarannya harus kurang dari Rp10.000,00 per hari.",
+    "Jika siswa menggunakan Rp8.000,00 per hari, maka tabungannya akan kurang dari Rp300.000,00."
+  ],
+  "correct": [0, 1, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    Diketahui \\( k \\) adalah penyelesaian dari persamaan:<br>
+    \\[ \\frac{1}{6}x + 2 = \\frac{2}{4}x - 1\\frac{1}{2} \\]<br><br>
+    Nilai dari \\( k - 4 \\) adalah ....
+  `,
+  "options": [
+    "\\( \\frac{9}{2} \\)",
+    "\\( 6 \\)",
+    "\\( \\frac{13}{2} \\)",
+    "\\( 7 \\)"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    Perhatikan persamaan garis berikut:<br>
+    (i) \\( -x + 2y + 5 = 0 \\)<br>
+    (ii) \\( -2x + y - 3 = 0 \\)<br>
+    (iii) \\( 3x - y + 9 = 0 \\)<br>
+    (iv) \\( 4x - 2y - 6 = 0 \\)<br><br>
+    Pasangan garis yang <b>sejajar</b> adalah .... (Jawaban benar lebih dari satu)
+  `,
+  "options": [
+    "(i) \\( -x + 2y + 5 = 0 \\)",
+    "(ii) \\( -2x + y - 3 = 0 \\)",
+    "(iii) \\( 3x - y + 9 = 0 \\)",
+    "(iv) \\( 4x - 2y - 6 = 0 \\)"
+  ],
+  "correct": [1, 3]
+},
+{
+  "type": "mc",
+  "text": `
+    Bentuk sederhana dari \\(4x + 12y - 10z - 8x + 5y - 7z\\) adalah...
+  `,
+  "options": [
+    "\\(-4x + 17y - 17z\\)",
+    "\\(12x + 17y - 3z\\)",
+    "\\(-4x + 7y - 17z\\)",
+    "\\(4x + 7y - 3z\\)"
+  ],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    Diketahui fungsi \\( f(x) = 2x + 1 \\). Jika domainnya {1, 2, 3}, maka range dari fungsi tersebut adalah...
+  `,
+  "options": [
+    "{2, 3, 4}",
+    "{3, 5, 7}",
+    "{1, 2, 3}",
+    "{4, 6, 8}"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    Perhatikan diagram panah berikut yang menunjukkan relasi dari himpunan A ke B:<br>
+    <svg width="420" height="220">
+      <!-- Elips kiri (A) -->
+      <ellipse cx="120" cy="120" rx="40" ry="90" fill="none" stroke="black" />
+      <text x="120" y="20" font-size="14">A</text>
+      <text x="120" y="70">1</text>
+      <text x="120" y="100">2</text>
+      <text x="120" y="130">3</text>
+      <text x="120" y="160">4</text>
+
+      <!-- Elips kanan (B) -->
+      <ellipse cx="250" cy="120" rx="40" ry="90" fill="none" stroke="black" />
+      <text x="250" y="20" font-size="14">B</text>
+      <text x="250" y="60">1</text>
+      <text x="250" y="90">4</text>
+      <text x="250" y="120">9</text>
+      <text x="250" y="150">12</text>
+      <text x="250" y="180">16</text>
+
+      <!-- Panah -->
+      <line x1="140" y1="70" x2="240" y2="60" stroke="black" marker-end="url(#arrow)" />
+      <line x1="140" y1="100" x2="240" y2="90" stroke="black" marker-end="url(#arrow)" />
+      <line x1="140" y1="130" x2="240" y2="120" stroke="black" marker-end="url(#arrow)" />
+      <line x1="140" y1="160" x2="240" y2="180" stroke="black" marker-end="url(#arrow)" />
+
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L9,3 z" fill="black" />
+        </marker>
+      </defs>
+    </svg><br><br>
+    Daerah hasil dari relasi tersebut adalah ....
+  `,
+  "options": [
+    "{1, 2, 3, 4}",
+    "{1, 4, 9, 12, 16}",
+    "{1, 4, 9, 16}",
+    "{4, 9, 12, 16}"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    Perhatikan diagram Kartesius berikut yang menunjukkan suatu relasi dari himpunan A ke himpunan B:<br>
+    <svg width="360" height="360">
+      <!-- Grid -->
+      <g stroke="#ccc" stroke-width="1">
+        <!-- garis vertikal -->
+        <line x1="80" y1="40" x2="80" y2="320"/>
+        <line x1="120" y1="40" x2="120" y2="320"/>
+        <line x1="160" y1="40" x2="160" y2="320"/>
+        <line x1="200" y1="40" x2="200" y2="320"/>
+        <line x1="240" y1="40" x2="240" y2="320"/>
+        <line x1="280" y1="40" x2="280" y2="320"/>
+
+        <!-- garis horizontal -->
+        <line x1="40" y1="280" x2="320" y2="280"/>
+        <line x1="40" y1="240" x2="320" y2="240"/>
+        <line x1="40" y1="200" x2="320" y2="200"/>
+        <line x1="40" y1="160" x2="320" y2="160"/>
+        <line x1="40" y1="120" x2="320" y2="120"/>
+        <line x1="40" y1="80" x2="320" y2="80"/>
+      </g>
+
+      <!-- Sumbu -->
+      <line x1="40" y1="320" x2="320" y2="320" stroke="black"/>
+      <line x1="40" y1="320" x2="40" y2="40" stroke="black"/>
+
+      <!-- Label sumbu -->
+      <text x="330" y="325">x</text>
+      <text x="30" y="35">y</text>
+
+      <!-- Angka sumbu x -->
+      <text x="75" y="340">1</text>
+      <text x="115" y="340">2</text>
+      <text x="155" y="340">3</text>
+      <text x="195" y="340">4</text>
+
+      <!-- Angka sumbu y -->
+      <text x="20" y="285">1</text>
+      <text x="20" y="245">2</text>
+      <text x="20" y="205">3</text>
+      <text x="20" y="165">4</text>
+
+      <!-- Titik relasi -->
+      <circle cx="80" cy="280" r="4" fill="blue"/>
+      <circle cx="120" cy="240" r="4" fill="blue"/>
+      <circle cx="160" cy="200" r="4" fill="blue"/>
+      <circle cx="200" cy="160" r="4" fill="blue"/>
+    </svg><br><br>
+    Pernyataan berikut yang benar adalah … (jawaban lebih dari satu)
+  `,
+  "options": [
+    "Himpunan pasangan berurutan adalah \\( \\{(1,1),(2,2),(3,3),(4,4)\\} \\)",
+    "Domain relasi adalah \\( \\{1,2,3,4\\} \\)",
+    "Range relasi adalah \\( \\{1,2,3,4\\} \\)",
+    "Relasi tersebut bukan fungsi"
+  ],
+  "correct": [0, 1, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    Seutas tali dipotong menjadi lima bagian dengan panjang masing-masing bagian membentuk barisan geometri. 
+    Jika potongan tali yang terpendek 4 m dan potongan yang terpanjang 64 m, maka panjang tali semula adalah ....
+  `,
+  "options": [
+    "124 m",
+    "160 m",
+    "252 m",
+    "256 m"
+  ],
+  "correct": 0
+},
+{
+  "type": "true_false",
+  "text": `
+    Diketahui rumus suku ke-n suatu barisan adalah \\( U_n = 10n + 3 \\).<br><br>
+    Tentukan Benar atau Salah setiap pernyataan berikut:
+  `,
+  "statements": [
+    "Nilai suku ke-22 adalah 223",
+    "Nilai suku ke-24 adalah 243",
+    "Hasil penjumlahan suku ke-22 dan ke-24 adalah 466"
+  ],
+  "correct": [true, true, true]
+},
+{
+  "type": "mc",
+  "text": `
+    Sebuah tiang tingginya 12 m berdiri tegak di atas tanah datar. 
+    Dari ujung atas tiang ditarik seutas tali ke sebuah patok pada tanah. 
+    Jika panjang tali 15 m, jarak patok dengan pangkal tiang bagian bawah adalah ....
+  `,
+  "options": [
+    "13,5 m",
+    "10 m",
+    "9 m",
+    "3 m"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    Sebuah pohon yang berada di depan gedung mempunyai tinggi 8 m. 
+    Pada saat yang sama, bayangan gedung berimpit dengan bayangan pohon seperti tampak pada gambar berikut:<br>
+    <p style="text-align:center;"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUW3XRpnn7u7DlAqleHtZrRh5HFf8ZapamDX5mulyiA9cF9JiTTJdfCJG7guxyAMZoBHqmUKt_JvQW-QWyPtHe0Itzd5DF8ZmxerXHYWr-MK7YDTqIYpF7x6Zkn4Xjt2G22_TIPWhYBOpq/s1600/UNBK+SMP+2019+Gedung+dan+Pohon.jpg" alt="Gedung dan pohon" style="max-width:100%; height:auto; display:block; margin:12px auto;"></p>
+    Panjang bayangan pohon adalah 10 m dan panjang bayangan gedung adalah 15 m.<br><br>
+    Tinggi gedung yang sesuai dengan ukuran tersebut adalah ....
+  `,
+  "options": [
+    "5,30 m",
+    "6,25 m",
+    "10,00 m",
+    "12,00 m"
+  ],
+  "correct": 3
+},
+{
+  "type": "true_false",
+  "text": `
+    Diketahui segitiga ABC dengan titik: A(-2,3), B(2,3), dan C(0,-4). 
+    Segitiga tersebut didilatasi dengan pusat \\( O(0,0) \\) dan faktor skala 4.<br><br>
+    Tentukan Benar atau Salah setiap pernyataan berikut:
+  `,
+  "statements": [
+    "Luas segitiga ABC sebelum dilatasi adalah 14 satuan luas",
+    "Faktor pengali luas akibat dilatasi adalah 4",
+    "Luas segitiga setelah dilatasi adalah 224 satuan luas"
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    Sebuah topi ulang tahun dibuat dari kertas karton seperti gambar berikut:<br>
+    <img src="https://imgix2.ruangguru.com/assets/miscellaneous/png_abcl3f_9716.png" alt="Topi ulang tahun" style="max-width:300px;"><br>
+    Luas kertas karton yang diperlukan adalah \\((\\pi = 3{,}14)\\) ....
+  `,
+  "options": [
+    "\\(954{,}56\\,cm^2\\)",
+    "\\(1.004{,}56\\,cm^2\\)",
+    "\\(1.117{,}84\\,cm^2\\)",
+    "\\(1.254{,}40\\,cm^2\\)"
+  ],
+  "correct": 2
+},
+{
+  "type": "true_false",
+  "text": `
+    Sebuah drum berbentuk tabung diletakkan secara horizontal. Setengah bagian drum berisi air seperti pada gambar berikut:<br>
+    <img src="https://mathcyber1997.com/wp-content/uploads/2019/06/Rebahan-tabung-e1585208851861-768x445.jpg" alt="Drum horizontal" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br>
+    Volume air dalam drum adalah \\(98,56\\,\\text{liter}\\) dan panjang drum \\(80\\,\\text{cm}\\).<br><br>
+    Tentukan Benar atau Salah setiap pernyataan berikut:
+  `,
+  "statements": [
+    "Diameter drum adalah 56 cm",
+    "Tinggi air di dalam drum adalah 28 cm",
+    "Volume total drum adalah 197,12 liter"
+  ],
+  "correct": [true, true, true]
+},
+{
+  "type": "mc",
+  "text": `
+    Sekolah melakukan pendataan terhadap kegiatan yang paling disenangi siswa setelah pulang sekolah. 
+    Hasil pendataan tersebut disajikan dalam diagram lingkaran berikut:<br>
+    <p style="text-align:center;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVXNXYbr2bLNdkeLMUyH3zvuDpi_iIXbTygV0STZADisx676HJJ44471wbnUWVdqU28Lnuocq1HTbAZTH35KI4pkcjHG1R7aBu4N4mOMtlte8zDzT8EdU0Tz2fK0fYSL3dys6mrcxGwbry/s1600/UNBK+SMP+2019+Diagram+Lingkaran.jpg"
+           alt="Diagram Lingkaran Kegiatan Siswa" style="max-width:100%; height:auto; display:block; margin:12px auto;">
+    </p>
+    Jika jumlah siswa yang didata adalah <b>1.800 anak</b>, maka banyak siswa yang senang bermain bersama teman adalah ….
+  `,
+  "options": [
+    "300 anak",
+    "350 anak",
+    "400 anak",
+    "600 anak"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    Lama pembicaraan telepon (dalam menit) yang dilakukan oleh seorang pengusaha adalah:<br>
+    7, 8, 10, 6, 6, 4, 5, 4, 5, 7, 9, 7<br><br>
+    Modus dan rata-rata dari pembicaraan tersebut berturut-turut adalah …
+  `,
+  "options": [
+    "7 dan 6,5",
+    "7 dan 6",
+    "6 dan 6",
+    "6 dan 6,5"
+  ],
+  "correct": 0
+},
+{
+  "type": "mc",
+  "text": `
+    Dalam rangka memperingati Hari Kemerdekaan RI yang ke-80, sekolah mengadakan undian doorprize bagi seluruh murid. 
+    Panitia menyiapkan sebuah kotak berisi kartu bernomor 1 sampai 30. 
+    Aturan pengambilan undian: "setiap peserta hanya boleh mengambil satu kartu, dan yang mendapatkan kartu bernomor kelipatan 3 atau bilangan prima" akan mendapat hadiah doorprize.<br><br>
+    Berapakah peluang seorang murid akan mendapatkan doorprize?
+  `,
+  "options": [
+    "\\( \\frac{10}{30} \\)",
+    "\\( \\frac{20}{30} \\)",
+    "\\( \\frac{19}{30} \\)",
+    "\\( \\frac{21}{30} \\)"
+  ],
+  "correct": 2
+},
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  return null;
+});
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk tipe mc_multiple
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', e => {
+        const val = parseInt(e.target.value);
+        if (e.target.checked) {
+          if (!answers[index].includes(val)) answers[index].push(val);
+        } else {
+          answers[index] = answers[index].filter(v => v !== val);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  // Hitung skor 0–100
+  const percentage = Math.round((score / questions.length) * 100);
+
+  // Tampilkan hanya skor akhir dalam bentuk nilai
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+// 🔥 KIRIM KE FIREBASE
+  simpanHasilFirebase(percentage);
+}
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+// Tampilkan tombol Kembali setelah submit
+const backBtn = document.createElement('button');
+backBtn.textContent = "Kembali ke Beranda";
+backBtn.style.padding = "10px 18px";
+backBtn.style.marginTop = "10px";
+backBtn.style.backgroundColor = "#1e88e5";
+backBtn.style.color = "white";
+backBtn.style.border = "none";
+backBtn.style.borderRadius = "6px";
+backBtn.style.fontWeight = "bold";
+backBtn.style.cursor = "pointer";
+backBtn.addEventListener('click', () => {
+    window.location.href = "https://kebunilmu.github.io/Kebun-Ilmu-TKA/";
+});
+document.querySelector('.right-panel .navigation').appendChild(backBtn);
+
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  timerRunning = true; // pastikan timer aktif
+
+  const interval = setInterval(() => {
+    if (!timerRunning) { 
+      clearInterval(interval); 
+      return; 
+    }
+
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+    if (timer <= 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+
+    timer--;
+  }, 1000);
+}
+
+
+// Auto submit saat keluar fullscreen
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement && timerRunning) {
+    alert("Anda keluar dari fullscreen. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah tab/window (desktop)
+window.addEventListener("blur", () => {
+  if (timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah app / tab (HP)
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// cek session saat halaman dimuat
+checkSession();
+
+  </script>
+<!-- FIREBASE SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
+    authDomain: "tryout-kebun-ilmu.firebaseapp.com",
+    projectId: "tryout-kebun-ilmu",
+    storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
+    messagingSenderId: "497636674894",
+    appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // supaya bisa dipakai di script lain
+  window.db = db;
+
+  // 🔥 INI YANG PALING PENTING
+  window.simpanHasilFirebase = async function (nilai) {
+    const { addDoc, collection, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+    );
+
+    await addDoc(collection(window.db, "hasil_ujian"), {
+  nik: window.dataPeserta.nik,
+  nama: window.dataPeserta.nama,
+  jk: window.dataPeserta.jk,
+  tglLahir: window.dataPeserta.tgl,
+  sekolah: window.dataPeserta.sekolah,
+  mapel: "Matematika SMP/MTs", // tambah field mapel
+  nilai: nilai,
+  waktu: new Date().toISOString()
+});
+
+
+    console.log("✅ HASIL UJIAN TERSIMPAN");
+  };
+</script>
+
+</body>
+</html>
