@@ -2,8 +2,9 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Try Out TKA Matematika Wajib- Kebun Ilmu</title>
+  <title>Try Out TKA Matematika - Kebun Ilmu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -310,8 +311,8 @@ table.true-false tr:has(input[type="radio"]:checked) {
     font-size: 12px;
   }
 }
-
-  </style>
+  
+</style>
 </head>
 
 <body>
@@ -381,8 +382,7 @@ table.true-false tr:has(input[type="radio"]:checked) {
 <header>
   <h2>Try Out TKA Matematika SD/MI - Kebun Ilmu</h2>
   <div>
-    <button id="fullscreenBtn" class="menu-button">Fullscreen</button>
-    <span class="timer" id="timer">60:00</span>
+        <span class="timer" id="timer">60:00</span>
   </div>
 </header>
 
@@ -406,6 +406,14 @@ table.true-false tr:has(input[type="radio"]:checked) {
 </div>
 
 <script>
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 function mulaiUjian() {
   const nik = document.getElementById("nik").value.trim();
   const nama = document.getElementById("namaPeserta").value.trim();
@@ -419,7 +427,7 @@ function mulaiUjian() {
     return;
   }
 
-  if (token !== "KI2025") {
+  if (token !== "MAT26") {
     document.getElementById("errorPeserta").innerText = "❌ Token salah";
     return;
   }
@@ -427,21 +435,36 @@ function mulaiUjian() {
   // simpan data peserta sementara
   window.dataPeserta = { nik, nama, jk, tgl, sekolah, token };
 
+ questions = shuffleArray(questions);
+  answers = questions.map(q => {
+    if (q.type === 'mc_multiple') return [];
+    if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+    return null;
+  });
+  currentQuestion = 0;
+
   // sembunyikan form peserta dan tampilkan konten try out
   document.getElementById("pesertaForm").style.display = "none";
   document.getElementById("content22").classList.remove("hidden");
 
-  // 🔥 render soal dan start timer di sini
+  // 🔥 Render soal dan start timer
   renderQuestionButtons();
   renderQuestion(currentQuestion);
   startTimer(60 * 60);
+
+  // AUTO FULLSCREEN
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.warn("Fullscreen gagal:", err);
+    });
+  }
 }
 
 // ====== DATA AKUN + KADALUWARSA ======
 const accounts = [
   { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
-  { username: "MRI",  password: "2026",  expire: "2026-4-11T23:59:59" },
-  { username: "nadira", password: "nad322", expire: "2025-10-30T23:59:59" },
+  { username: "MANU9",  password: "2026",  expire: "2026-4-11T23:59:59" },
+  { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
   { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
   { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
   { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
@@ -493,7 +516,7 @@ function showContent() {
   
 }
 
-  const questions = [
+  let questions = [
 {
   type: "mc_multiple",
   text: `Sebuah toko alat tulis menjual 15 pensil. Harga setiap pensil Rp1.250,00.Dari hasil penjualan, sebanyak Rp8.400,00 digunakan untuk modal. Sementara uang sisa hasil penjualan merupakan keuntungan toko.<br><br>Pilihlah pernyataan yang benar! (Jawaban benar lebih dari satu)
@@ -1143,6 +1166,22 @@ function endTryout() {
     calculateScore();
     disableAll();
     timerRunning = false;
+// Tampilkan tombol Kembali setelah submit
+const backBtn = document.createElement('button');
+backBtn.textContent = "Kembali ke Beranda";
+backBtn.style.padding = "10px 18px";
+backBtn.style.marginTop = "10px";
+backBtn.style.backgroundColor = "#1e88e5";
+backBtn.style.color = "white";
+backBtn.style.border = "none";
+backBtn.style.borderRadius = "6px";
+backBtn.style.fontWeight = "bold";
+backBtn.style.cursor = "pointer";
+backBtn.addEventListener('click', () => {
+    window.location.href = "https://kebunilmu.github.io/Kebun-Ilmu-TKA/";
+});
+document.querySelector('.right-panel .navigation').appendChild(backBtn);
+
   }
 }
 
@@ -1175,19 +1214,33 @@ function startTimer(duration) {
 }
 
 
-const fullscreenBtn = document.getElementById("fullscreenBtn");
-fullscreenBtn.addEventListener("click", () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(err => {
-      alert(`Gagal masuk fullscreen: ${err.message}`);
-    });
-    fullscreenBtn.textContent = "Exit Fullscreen";
-  } else {
-    document.exitFullscreen();
-    fullscreenBtn.textContent = "Fullscreen";
+// Auto submit saat keluar fullscreen
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement && timerRunning) {
+    alert("Anda keluar dari fullscreen. Jawaban otomatis disubmit!");
+    endTryout();
   }
 });
+
+// Auto submit saat pindah tab/window (desktop)
+window.addEventListener("blur", () => {
+  if (timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah app / tab (HP)
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// cek session saat halaman dimuat
 checkSession();
+
   </script>
 <!-- FIREBASE SDK -->
 <script type="module">
