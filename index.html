@@ -1,256 +1,268 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kebun Ilmu – Tes Kemampuan Akademik</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', Arial, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kebun Ilmu — Program TKA</title>
 
-    body {
-      display: flex;
-      flex-direction: column;
-      background: #e9f8f3;
-      position: relative;
-      overflow-x: hidden;
-    }
+<style>
+:root{
+  --primary:#0f766e;
+  --bg:#f0fdfa;
+  --card:#ffffff;
+  --text:#1e293b;
+  --muted:#64748b;
+  --radius:16px;
+  --shadow:0 8px 24px rgba(0,0,0,.08);
+}
 
-    .background-shapes {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+/* HEADER */
+header{
+  background:#fff;
+  padding:14px 20px;
+  box-shadow:var(--shadow);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{width:44px;border-radius:12px}
+.brand h1{font-size:20px;color:var(--primary)}
+nav a{
+  margin-left:12px;
+  padding:8px 14px;
+  border-radius:10px;
+  font-weight:600;
+  text-decoration:none;
+  color:var(--primary);
+}
+nav a:hover{background:#ccfbf1}
+nav a.daftar{background:var(--primary);color:#fff}
 
-    .shape {
-      position: absolute;
-      background: #4dd4a3;
-      border-radius: 50%;
-      opacity: 0.15;
-    }
+/* INTRO */
+.intro{text-align:center;padding:40px 20px}
+.intro p{color:var(--muted)}
 
-    .shape.one { width: 400px; height: 400px; top: -120px; right: -150px; }
-    .shape.two { width: 300px; height: 300px; bottom: -120px; left: -120px; }
-    .shape.three { width: 250px; height: 250px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+/* GRID */
+.container{max-width:1200px;margin:auto;padding:20px 20px 60px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+}
 
-    .toggle-btn {
-      position: fixed;
-      left: 20px;
-      top: 20px;
-      font-size: 24px;
-      cursor: pointer;
-      background: #4dd4a3;
-      padding: 10px 14px;
-      border-radius: 6px;
-      color: white;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      z-index: 1400;
-      transition: transform 0.2s;
-    }
+/* CARD */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  transition:.25s;
+}
+.card:hover{transform:translateY(-6px)}
 
-    .toggle-btn:hover { transform: scale(1.1); }
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
 
-    .header {
-      background: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-      color: #4dd4a3;
-      border-radius: 10px;
-      margin: 70px auto 10px;
-      width: 90%;
-      max-width: 900px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
+.card-content{padding:20px}
+.card h3{color:var(--primary)}
+.card p{font-size:14px;color:var(--muted);margin:10px 0}
 
-    .header img { width: 40px; height: 40px; border-radius: 50%; }
+/* BUTTON */
+.btn{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:8px;
+}
+.btn-primary{background:var(--primary);color:white}
+.btn-outline{
+  background:transparent;
+  border:2px solid var(--primary);
+  color:var(--primary);
+}
 
-    .content { text-align: center; padding: 10px; color: #333; font-size: 18px; }
+/* TRYOUT */
+.tryout{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease;
+}
+/* HOVER TRYOUT BUTTON */
+.tryout button{
+  background:#ecfeff;
+  color:var(--primary);
+  border:none;
+  padding:9px;
+  border-radius:8px;
+  width:100%;
+  margin-top:6px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .25s ease;
+}
 
-    .card-container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 20px;
-    }
+/* efek hover */
+.tryout button:hover{
+  background:var(--primary);
+  color:white;
+  transform:translateX(4px);
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+}
 
-    .card {
-      padding: 25px;
-      width: 250px;
-      border-radius: 20px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-      text-align: center;
-      background: #4dd4a3;
-      color: white;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-      position: relative;
-    }
+.arrow{
+  float:right;
+  transition:.3s;
+}
+.rotate{transform:rotate(180deg)}
 
-    .card:hover { transform: scale(1.07); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); }
+/* FOOTER */
+footer{
+  background:var(--primary);
+  color:white;
+  text-align:center;
+  padding:28px;
+  border-radius:24px 24px 0 0;
+}
 
-    .card a {
-      text-decoration: none;
-      font-size: 20px;
-      color: white;
-      font-weight: bold;
-      display: block;
-    }
-
-    .options, .sub-options {
-      display: none;
-      margin-top: 10px;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .options button, .sub-options button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      border: none;
-      border-radius: 8px;
-      background-color: white;
-      color: #4dd4a3;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .options button:hover, .sub-options button:hover { background-color: #ffec7a; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 768px) {
-      .card-container { flex-direction: column; align-items: center; }
-      .header { font-size: 18px; }
-    }
-  </style>
+</style>
 </head>
+
 <body>
 
-  <div class="background-shapes">
-    <div class="shape one"></div>
-    <div class="shape two"></div>
-    <div class="shape three"></div>
+<header>
+  <div class="brand">
+    <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png">
+    <h1>Kebun Ilmu</h1>
   </div>
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="https://forms.gle/Xaz7nYueVzNbevNv5" class="daftar" target="_blank">Daftar</a>
+  </nav>
+</header>
+<section class="intro">
+  <p>Pilih jenjang TKA. Tersedia <b>materi</b> dan <b>Try Out </b>.</p>
+</section>
 
-  <div class="toggle-btn" onclick="toggleSidebar()">
-    <i class="fas fa-bars"></i>
-  </div>
+<section class="container">
+<div class="grid">
 
-  <div class="header">
-    <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png" alt="Logo">
-    <span>Kebun Ilmu – Tes Kemampuan Akademik</span>
-  </div>
+<!-- SD -->
+<div class="card">
+  <img src="https://img.freepik.com/free-vector/education-concept-illustration_114360-7923.jpg">
+  <div class="card-content">
+    <h3>TKA SD</h3>
+    <p>Penguatan kemampuan akademik dasar siswa SD.</p>
 
-  <div class="content">
-    <p>Selamat datang di <b>Kebun Ilmu</b>! Silakan pilih tingkat TKA yang ingin kamu pelajari.</p>
-  </div>
+    <a href="TKA SD Wajib.html">
+      <button class="btn btn-outline">📘 Materi TKA SD</button>
+    </a>
 
-  <div class="card-container">
-    <div class="card"><a href="TKA SD Wajib.html">TKA SD</a></div>
-    <div class="card"><a href="TKA SMP Wajib.html">TKA SMP</a></div>
-    <div class="card"><a href="TKA SMA Wajib.html">TKA SMA Wajib</a></div>
-    <div class="card"><a href="TKA SMA Pilian.html">TKA SMA Pilihan</a></div>
+    <button class="btn btn-primary try-btn">
+      📝 Try Out TKA SD <span class="arrow">▼</span>
+    </button>
 
-    <!-- TRYOUT TKA SD -->
-    <div class="card" id="cardSD">
-      <a href="#">Try out TKA SD</a>
-      <div class="options" id="optionsSD">
-        <button id="btnTryoutSD1">Tryout 1</button>
-        <div class="sub-options" id="subTryoutSD1">
-          <button onclick="location.href='Try Out TKA mtk SD 1.html'">Matematika</button>
-          <button onclick="location.href='Try Out TKA b indo SD 1.html'">Bahasa Indonesia</button>
-        </div>
-        <button onclick="location.href='pembahasan Try Out TKA SD.html'">Pembahasan</button>
-      </div>
-    </div>
-
-    <!-- TRYOUT TKA SMP -->
-    <div class="card" id="cardSMP">
-      <a href="#">Try out TKA SMP</a>
-      <div class="options" id="optionsSMP">
-        <button id="btnTryoutSMP1">Tryout 1</button>
-        <div class="sub-options" id="subTryoutSMP1">
-          <button onclick="location.href='Try Out TKA mtk SMP 1.html'">Matematika</button>
-          <button onclick="location.href='Try Out TKA b indo SMP 1.html'">Bahasa Indonesia</button>
-        </div>
-        <button onclick="location.href='pembahasan Try Out TKA SMP.html'">Pembahasan</button>
-      </div>
-    </div>
-
-    <!-- TRYOUT TKA SMA -->
-    <div class="card" id="cardTKA">
-      <a href="#">Try out TKA SMA</a>
-      <div class="options" id="optionsTKA">
-        <button id="btnTryout1">Tryout 1</button>
-        <div class="sub-options" id="subTryout1">
-          <button onclick="location.href='Try Out TKA mtk Wajib1.html'">Matematika</button>
-          <button onclick="location.href='Try Out TKA b indo Wajib1.html'">Bahasa Indonesia</button>
-          <button onclick="location.href='Try Out TKA b ing Wajib1.html'">Bahasa Inggris</button>
-          <button onclick="location.href='Try Out TKA Matematika TL1.html'">Matematika Tingkat Lanjut</button>
-          <button onclick="location.href='Try Out TKA Biologi1.html'">Biologi</button>
-          <button onclick="location.href='Try Out TKA Fisika.html'">Fisika</button>
-          <button onclick="location.href='Try Out TKA Ekonomi1.html'">Ekonomi</button>
-        </div>
-        <button onclick="location.href='pembahasan Try Out TKA Wajib.html'">Pembahasan</button>
-      </div>
+    <div class="tryout">
+      <button onclick="location.href='Try Out TKA mtk SD 1.html'">Try Out 1 – Matematika</button>
+      <button onclick="location.href='Try Out TKA b indo SD 1.html'">Try Out 1 – Bahasa Indonesia</button>
+      <button onclick="location.href='Try Out TKA mtk SD 2.html'">Try Out 2 – Matematika</button>
+      <button onclick="location.href='Try Out TKA b indo SD 2.html'">Try Out 2 – Bahasa Indonesia</button>
     </div>
   </div>
+</div>
 
-  <script>
-    // toggle untuk setiap card
-    function toggle(cardId, optionId) {
-      const card = document.getElementById(cardId);
-      const options = document.getElementById(optionId);
-      card.addEventListener('click', function(e) {
-        e.preventDefault();
-        options.style.display = options.style.display === 'block' ? 'none' : 'block';
-      });
+<!-- SMP -->
+<div class="card">
+  <img src="https://img.freepik.com/free-vector/online-learning-concept-illustration_114360-4764.jpg">
+  <div class="card-content">
+    <h3>TKA SMP</h3>
+    <p>Latihan soal dan evaluasi akademik siswa SMP.</p>
+
+    <a href="TKA SMP Wajib.html">
+      <button class="btn btn-outline">📘 Materi TKA SMP</button>
+    </a>
+
+    <button class="btn btn-primary try-btn">
+      📝 Try Out TKA SMP <span class="arrow">▼</span>
+    </button>
+
+    <div class="tryout">
+      <button onclick="location.href='Try Out TKA mtk SMP 1.html'">Try Out 1 – Matematika</button>
+      <button onclick="location.href='Try Out TKA b indo SMP 1.html'">Try Out 1 – Bahasa Indonesia</button>
+      <button onclick="location.href='Try Out TKA mtk SMP 2.html'">Try Out 2 – Matematika</button>
+      <button onclick="location.href='Try Out TKA b indo SMP 2.html'">Try Out 2 – Bahasa Indonesia</button>
+    </div>
+  </div>
+</div>
+
+<!-- SMA -->
+<div class="card">
+  <img src="https://img.freepik.com/free-vector/exam-preparation-concept-illustration_114360-7914.jpg">
+  <div class="card-content">
+    <h3>TKA SMA</h3>
+    <p>Persiapan akademik & try out TKA SMA.</p>
+
+    <a href="TKA SMA Wajib.html">
+      <button class="btn btn-outline">📘 Materi TKA SMA</button>
+    </a>
+
+    <button class="btn btn-primary try-btn">
+      📝 Try Out TKA SMA <span class="arrow">▼</span>
+    </button>
+
+    <div class="tryout">
+      <button onclick="location.href='Try Out TKA SMA 1.html'">Try Out 1 – Semua Mapel</button>
+      <button onclick="location.href='Try Out TKA SMA 2.html'">Try Out 2 – Semua Mapel</button>
+    </div>
+  </div>
+</div>
+
+</div>
+</section>
+
+<footer>
+  <p>© 2025 Kebun Ilmu • Belajar jadi lebih mudah</p>
+</footer>
+
+<script>
+document.querySelectorAll('.try-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const card = btn.closest('.card');
+    const tryout = card.querySelector('.tryout');
+    const arrow = btn.querySelector('.arrow');
+
+    // Tutup tryout card lain
+    document.querySelectorAll('.tryout').forEach(t=>{
+      if(t !== tryout){
+        t.style.maxHeight = null;
+        const otherArrow = t.closest('.card').querySelector('.arrow');
+        if(otherArrow) otherArrow.classList.remove('rotate');
+      }
+    });
+
+    // Toggle current
+    if(tryout.style.maxHeight){
+      tryout.style.maxHeight = null;
+      arrow.classList.remove('rotate');
+    }else{
+      tryout.style.maxHeight = tryout.scrollHeight + "px";
+      arrow.classList.add('rotate');
     }
-
-    // toggle sub-options
-    function subToggle(btnId, subId) {
-      const btn = document.getElementById(btnId);
-      const sub = document.getElementById(subId);
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        sub.style.display = sub.style.display === 'block' ? 'none' : 'block';
-      });
-    }
-
-    // jalankan semua toggle
-    toggle('cardTKA', 'optionsTKA');
-    subToggle('btnTryout1', 'subTryout1');
-
-    toggle('cardSD', 'optionsSD');
-    subToggle('btnTryoutSD1', 'subTryoutSD1');
-
-    toggle('cardSMP', 'optionsSMP');
-    subToggle('btnTryoutSMP1', 'subTryoutSMP1');
-  </script>
+  });
+});
+</script>
 
 </body>
 </html>
-
-
-
-
-
