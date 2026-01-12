@@ -462,11 +462,15 @@ if (token !== tokenAktif) {
   window.dataPeserta = { nik, nama, jk, tgl, sekolah, token };
 
  questions = shuffleArray(questions);
-  answers = questions.map(q => {
-    if (q.type === 'mc_multiple') return [];
-    if (q.type === 'true_false') return Array(q.statements.length).fill(null);
-    return null;
-  });
+answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  if (q.type === 'tepat_tidak') return Array(q.statements.length).fill(null);
+  if (q.type === 'dampak_jangka')
+    return Array(q.statements.length).fill(null);
+  return null;
+});
+
   currentQuestion = 0;
 
   // sembunyikan form peserta dan tampilkan konten try out
@@ -608,7 +612,7 @@ function showContent() {
   "text": `
     <div style="text-align: justify;">
       <p><strong>Bacalah kutipan puisi berikut!</strong></p>
-      <img src="https://i.imgur.com/hPvdTLG.png" alt="Puisi Bukit-bukit Desa" width="400"><br><br>
+      <img src="https://i.imgur.com/hPvdTLG.png" alt="Puisi Bukit-bukit Desa" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
       <p><strong>Question:</strong> Pilihan kata mana saja yang menunjukkan <em>latar waktu</em> pada puisi tersebut?</p>
       <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
     </div>
@@ -626,7 +630,7 @@ function showContent() {
   "text": `
     <div style="text-align: justify;">
       <p><strong>Bacalah kutipan puisi berikut!</strong></p>
-      <img src="https://i.imgur.com/hPvdTLG.png" alt="Puisi Bukit-bukit Desa" width="400"><br><br>
+      <img src="https://i.imgur.com/hPvdTLG.png" alt="Puisi Bukit-bukit Desa" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
       <p><strong>Question:</strong> Apa makna frasa <em>"merebut hidup di pasar-pasar kota"</em> pada teks puisi tersebut?</p>
     </div>
   `,
@@ -642,7 +646,7 @@ function showContent() {
   "type": "true_false",
   "text": `
     <div style="text-align: justify;">
-      <img src="https://i.imgur.com/hPvdTLG.png" alt="Puisi Perempuan Pekerja" width="400"><br><br>
+      <img src="https://i.imgur.com/hPvdTLG.png" alt="Puisi Perempuan Pekerja" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
       <p><strong>Setelah membaca puisi tersebut, tiga murid berpendapat sebagai berikut.</strong></p>
       <p><b>Dina:</b> Wah, ternyata banyak perempuan hebat ya. Mereka bekerja penuh semangat!</p>
       <p><b>Mira:</b> Iya, mereka rela bangun pagi-pagi untuk bekerja.</p>
@@ -1310,8 +1314,12 @@ function showContent() {
 let answers = questions.map(q => {
   if (q.type === 'mc_multiple') return [];
   if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  if (q.type === 'tepat_tidak') return Array(q.statements.length).fill(null);
+  if (q.type === 'dampak_jangka') return Array(q.statements.length).fill(null);
   return null;
 });
+
+
 let currentQuestion = 0;
 let timerRunning = true;
 
@@ -1344,7 +1352,8 @@ function renderQuestionButtons() {
 
 function renderQuestion(index) {
   const q = questions[index];
-  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+  let html = `<h3>Soal ${index + 1}</h3>${q.text}`;
+
 
   if (q.type === 'mc') {
     q.options.forEach((opt, i) => {
@@ -1362,6 +1371,61 @@ function renderQuestion(index) {
       </label>`;
     });
   }
+else if (q.type === 'tepat_tidak') {
+  html += `<table class="true-false">
+    <tr>
+      <th>Pernyataan</th>
+      <th>Tepat</th>
+      <th>Tidak Tepat</th>
+    </tr>`;
+
+  q.statements.forEach((stmt, i) => {
+    const tepatChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td>
+        <input type="radio" name="tt_${i}" value="true" ${tepatChecked}>
+      </td>
+      <td>
+        <input type="radio" name="tt_${i}" value="false" ${tidakChecked}>
+      </td>
+    </tr>`;
+  });
+
+  html += `</table>`;
+}
+else if (q.type === 'dampak_jangka') {
+  html += `
+    <table class="true-false">
+      <tr>
+        <th>Pernyataan</th>
+        <th>Jangka Pendek</th>
+        <th>Jangka Panjang</th>
+      </tr>
+  `;
+
+  q.statements.forEach((stmt, i) => {
+    const pendekChecked = answers[index][i] === 'pendek' ? 'checked' : '';
+    const panjangChecked = answers[index][i] === 'panjang' ? 'checked' : '';
+
+    html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td>
+          <input type="radio" name="dj_${i}" value="pendek" ${pendekChecked}>
+        </td>
+        <td>
+          <input type="radio" name="dj_${i}" value="panjang" ${panjangChecked}>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += `</table>`;
+}
 
   else if (q.type === 'true_false') {
     html += `<table class="true-false">
@@ -1390,21 +1454,29 @@ function renderQuestion(index) {
       renderQuestionButtons();
     });
   });
-  // Event listener untuk tipe mc_multiple
-  if (q.type === 'mc_multiple') {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(chk => {
-      chk.addEventListener('change', e => {
-        const val = parseInt(e.target.value);
-        if (e.target.checked) {
-          if (!answers[index].includes(val)) answers[index].push(val);
-        } else {
-          answers[index] = answers[index].filter(v => v !== val);
-        }
+  // Event listener untuk tipe tepat_tidak
+if (q.type === 'tepat_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="tt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
         renderQuestionButtons();
       });
     });
-  }
+  });
+}
+// Event listener dampak_jangka
+if (q.type === 'dampak_jangka') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="dj_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = e.target.value;
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+
 
   // Event listener untuk tipe benar-salah
   if (q.type === 'true_false') {
@@ -1448,20 +1520,24 @@ function calculateScore() {
     if (q.type === 'mc' && answers[i] === q.correct) score++;
     else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
     else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
-    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'dampak_jangka' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual([...answers[i]].sort(), [...q.correct].sort())) score++;
     else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
     else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
     else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
   });
 
-  // Hitung skor 0–100
   const percentage = Math.round((score / questions.length) * 100);
 
-  // Tampilkan hanya skor akhir dalam bentuk nilai
   scoreDisplay.textContent = `Skor Anda: ${percentage}`;
   scoreDisplay.style.display = 'block';
+
 // 🔥 KIRIM KE FIREBASE
   simpanHasilFirebase(percentage);
+}
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
 }
 function disableAll() {
   document.querySelectorAll('button').forEach(btn => btn.disabled = true);
