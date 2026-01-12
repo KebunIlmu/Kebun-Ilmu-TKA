@@ -380,7 +380,7 @@ table.true-false tr:has(input[type="radio"]:checked) {
 <!-- ====== TRYOUT CONTENT ====== -->
 <div id="content22" class="hidden">
 <header>
-  <h2>Try Out TKA Bahasa Indonesia SMP/MTs - Kebun Ilmu</h2>
+  <h2>Try Out TKA Bahasa Indonesia SD/MI - Kebun Ilmu</h2>
   <div>
         <span class="timer" id="timer">60:00</span>
   </div>
@@ -460,7 +460,6 @@ if (token !== tokenAktif) {
 
   // simpan data peserta sementara
   window.dataPeserta = { nik, nama, jk, tgl, sekolah, token };
-
  questions = shuffleArray(questions);
 answers = questions.map(q => {
   if (q.type === 'mc_multiple') return [];
@@ -548,174 +547,384 @@ function showContent() {
 
   let questions = [
 {
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Bacalah teks berikut!</b><br><br>
+      Pembiasaan Cuci Tangan dengan Sabun<br><br>
+      Mencuci tangan dengan sabun penting bagi kesehatan. Kebiasaan baik ini harus dilakukan oleh semua masyarakat. Sayangnya, masih banyak orang lupa mencuci tangan. Mereka sering kali mencuci tangan tanpa menggunakan sabun. Padahal, sabun membantu membunuh kuman di kulit.<br><br>
+      Sebagian keluarga memiliki fasilitas cuci tangan yang lengkap. Meskipun demikian, praktik mencuci tangan masih belum maksimal dilakukan. Mereka kadang kala lupa mencuci tangan sebelum makan. Kadang kala juga lupa setelah buang air. Perilaku ini menyebabkan penyakit berbahaya menyerang.<br><br>
+      Guru di sekolah harus memberikan contoh mengenai kebersihan. Orang tua di rumah pun perlu mengingatkan anak. Anak diwajibkan mencuci tangan secara rutin. Guru dan orang tua dapat menyediakan sabun cuci tangan. Sabun dapat diletakkan di dekat tempat cuci tangan. Guru dan orang tua dapat mengawasi agar anak terbiasa sejak dini.<br><br>
+      Kebiasaan mencuci tangan perlu dijadikan budaya hidup bersih. Kebiasaan tersebut dapat diterapkan secara konsisten. Semua harus membiasakan menjaga kebersihan tangan. Dengan demikian, kesehatan masyarakat akan makin baik. Lingkungan rumah menjadi sehat. Lingkungan sekolah pun nyaman untuk tumbuh dan belajar.<br><br>
+      <b>Petunjuk:</b> Tentukan Tepat (T) atau Tidak Tepat (TT) pada penggunaan kosakata umum berikut:
+    </div>
+  `,
+  "statements": [
+    "A. Kata “kuman” digunakan untuk menyebut mikroorganisme penyebab penyakit.",
+    "B. Kata “penyakit” digunakan untuk menggambarkan kondisi tubuh yang terganggu.",
+    "C. Kata “masyarakat” digunakan untuk menyebut individu tertentu, bukan kelompok."
+  ],
+  "correct": [true, true, false]
+},
+{
   "type": "mc",
   "text": `
     <div style="text-align: justify;">
-      <b>Teks Ulasan 1</b><br>
-      <img src="https://i.imgur.com/d1JeNwr.png" alt="Teks Ulasan 1" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
-      <b>Teks Ulasan 2</b><br>
-      <img src="https://i.imgur.com/bA8wKFK.png" alt="Teks Ulasan 2" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
-      <b>Question:</b> Kosakata yang menggambarkan keserasian suara deburan alam pada teks ulasan ke-1 ditunjukkan pada frasa ....
+      <b>Pembiasaan Cuci Tangan dengan Sabun</b><br><br>
+      Mencuci tangan dengan sabun penting bagi kesehatan. Kebiasaan baik ini harus dilakukan oleh semua masyarakat. Sayangnya, masih banyak orang lupa mencuci tangan. Mereka sering kali mencuci tangan tanpa menggunakan sabun. Padahal, sabun membantu membunuh kuman di kulit.<br><br>
+      Sebagian keluarga memiliki fasilitas cuci tangan yang lengkap. Meskipun demikian, praktik mencuci tangan masih belum maksimal dilakukan. Mereka kadang kala lupa mencuci tangan sebelum makan. Kadang kala juga lupa setelah buang air. Perilaku ini menyebabkan penyakit berbahaya menyerang.<br><br>
+      Guru di sekolah harus memberikan contoh mengenai kebersihan. Orang tua di rumah pun perlu mengingatkan anak. Anak diwajibkan mencuci tangan secara rutin. Guru dan orang tua dapat menyediakan sabun cuci tangan. Sabun dapat diletakkan di dekat tempat cuci tangan. Guru dan orang tua dapat mengawasi agar anak terbiasa sejak dini.<br><br>
+      Kebiasaan mencuci tangan perlu dijadikan budaya hidup bersih. Kebiasaan tersebut dapat diterapkan secara konsisten. Semua harus membiasakan menjaga kebersihan tangan. Dengan demikian, kesehatan masyarakat akan makin baik. Lingkungan rumah menjadi sehat. Lingkungan sekolah pun nyaman untuk tumbuh dan belajar.<br><br>
+      <b>Question:</b> Teks tersebut menjelaskan fenomena mengenai sanitasi. Manakah kata atau frasa dan makna denotatif yang menggambarkan fenomena tersebut?
     </div>
   `,
   "options": [
-    "alternatif wisata",
-    "kanvas alam",
-    "panggung cahaya",
-    "harmoni alam"
+    "Kata “guru” untuk menjelaskan pendidik di sekolah formal.",
+    "Kata “sabun” untuk menjelaskan benda pembersih kotoran.",
+    "Frasa “cuci tangan” untuk menjelaskan kegiatan membersihkan tangan dengan sabun.",
+    "Kata “orang tua” untuk menjelaskan pengawas di rumah."
   ],
-  "correct": 3
+  "correct": 2
 },
 {
   "type": "mc_multiple",
   "text": `
     <div style="text-align: justify;">
-      <b>Teks Ulasan 1</b><br>
-      <img src="https://i.imgur.com/d1JeNwr.png" alt="Teks Ulasan 1" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
-      <b>Teks Ulasan 2</b><br>
-      <img src="https://i.imgur.com/bA8wKFK.png" alt="Teks Ulasan 2" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
-      <b>Question:</b> Apa saja perbedaan informasi yang ada pada kedua teks tersebut?<br>
-      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+      <b>Pembiasaan Cuci Tangan dengan Sabun</b><br><br>
+      Mencuci tangan dengan sabun penting bagi kesehatan. Kebiasaan baik ini harus dilakukan oleh semua masyarakat. Sayangnya, masih banyak orang lupa mencuci tangan. Mereka sering kali mencuci tangan tanpa menggunakan sabun. Padahal, sabun membantu membunuh kuman di kulit.<br><br>
+      Sebagian keluarga memiliki fasilitas cuci tangan yang lengkap. Meskipun demikian, praktik mencuci tangan masih belum maksimal dilakukan. Mereka kadang kala lupa mencuci tangan sebelum makan. Kadang kala juga lupa setelah buang air. Perilaku ini menyebabkan penyakit berbahaya menyerang.<br><br>
+      Guru di sekolah harus memberikan contoh mengenai kebersihan. Orang tua di rumah pun perlu mengingatkan anak. Anak diwajibkan mencuci tangan secara rutin. Guru dan orang tua dapat menyediakan sabun cuci tangan. Sabun dapat diletakkan di dekat tempat cuci tangan. Guru dan orang tua dapat mengawasi agar anak terbiasa sejak dini.<br><br>
+      Kebiasaan mencuci tangan perlu dijadikan budaya hidup bersih. Kebiasaan tersebut dapat diterapkan secara konsisten. Semua harus membiasakan menjaga kebersihan tangan. Dengan demikian, kesehatan masyarakat akan makin baik. Lingkungan rumah menjadi sehat. Lingkungan sekolah pun nyaman untuk tumbuh dan belajar.<br><br>
+      <b>Question:</b> Tiap paragraf dalam teks tersebut memuat ide pendukung. Manakah ide pendukung paragraf ketiga?<br>
+      <i>Pilih semua jawaban yang benar!</i>
     </div>
   `,
   "options": [
-    "Kemudahan akses.",
-    "Fasilitas yang tersedia.",
-    "Tempat untuk berfoto.",
-    "Keindahan saat senja."
+    "Guru dan orang tua dapat menyediakan sabun cuci tangan.",
+    "Guru di sekolah harus memberikan contoh mengenai kebersihan.",
+    "Guru dan orang tua dapat mengawasi agar anak terbiasa sejak dini."
+  ],
+  "correct": [0, 1, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjxPrmj2n-PeirKCaCfY74Oez1X9Cp3VjPIhopxRlNmAjYD8wRHu60dGVzx5swmm3cqcxDaCxOB75BPtx6q093mItidcidFCL-lmGJIfvzC0hCpFiTjtO5roe780nCMAXDxdi2yJ1RqHs/s1600/Cut+Nyak+Dien_Grafis.jpg" 
+      alt="Cut Nyak Dien" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
+      Infografik tentang Cut Nyak Dien menggambarkan perjuangan beliau sebagai pahlawan wanita Aceh yang aktif memimpin perlawanan terhadap kolonial Belanda, mengorganisir pasukan, dan mempertahankan kemerdekaan wilayahnya.<br><br>
+      <b>Question:</b> Manakah kalimat tanya yang paling sesuai dengan isi infografik tersebut?
+    </div>
+  `,
+  "options": [
+    "Mengapa Cut Nyak Dien menetap di Sumedang?",
+    "Mengapa Cut Nyak Dien memimpin pasukan sendiri?",
+    "Mengapa Cut Nyak Dien memilih tinggal di Lampadang?",
+    "Mengapa Cut Nyak Dien membantu suaminya berperang?"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjxPrmj2n-PeirKCaCfY74Oez1X9Cp3VjPIhopxRlNmAjYD8wRHu60dGVzx5swmm3cqcxDaCxOB75BPtx6q093mItidcidFCL-lmGJIfvzC0hCpFiTjtO5roe780nCMAXDxdi2yJ1RqHs/s1600/Cut+Nyak+Dien_Grafis.jpg" 
+      alt="Cut Nyak Dien" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
+      Infografik tentang Cut Nyak Dien menampilkan perjuangan beliau sebagai pahlawan wanita Aceh yang tegas, pemberani, dan pantang menyerah dalam melawan penjajah.<br><br>
+      <b>Question:</b> Manakah pernyataan yang menggambarkan karakter Cut Nyak Dien? <br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Perempuan yang tegas dan pemberani.",
+    "Perempuan yang tangguh dan pantang menyerah.",
+    "Perempuan yang patuh dan tunduk kepada pemerintah."
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjxPrmj2n-PeirKCaCfY74Oez1X9Cp3VjPIhopxRlNmAjYD8wRHu60dGVzx5swmm3cqcxDaCxOB75BPtx6q093mItidcidFCL-lmGJIfvzC0hCpFiTjtO5roe780nCMAXDxdi2yJ1RqHs/s1600/Cut+Nyak+Dien_Grafis.jpg" 
+      alt="Cut Nyak Dien" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
+      Perhatikan bagian informasi tahun "1890–1905" pada infografik Cut Nyak Dien. Dalam bagian tersebut terdapat penggunaan huruf kapital, huruf miring, dan tanda baca.<br><br>
+      <b>Question:</b> Manakah penilaian yang tepat? <br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Penggunaan huruf miring sudah benar. Huruf miring digunakan untuk menjelaskan nama daerah.",
+    "Penggunaan tanda baca sudah benar. Tanda kurung digunakan untuk menjelaskan wilayah secara spesifik.",
+    "Penggunaan huruf kapital sudah benar. Huruf kapital digunakan untuk awal kalimat, nama orang, dan daerah."
+  ],
+  "correct": [1, 2]
+},
+
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      "Selamat ulang tahun, Sayang." Ayah mencium pipi Nanda.<br>
+      "Terima kasih, Ayah," ujar Nanda memeluk ayahnya.<br>
+      "Nanda mau minta hadiah apa?" tanya Ayah sambil memakan puding yang disajikan Ibu.<br>
+      "Mmm, boleh nggak, Nanda minta dibelikan handphone?" tanya Nanda agak ragu.<br>
+      "Nanda, kan masih kecil. Belum bisa bertanggung jawab memegang barang berharga. Lagi pula ke sekolah tidak boleh membawa handphone, kan? Bisa mengganggu saat pelajaran," nasihat Ibu.<br>
+      "Nanda akan matikan saat jam pelajaran, Ibu."<br>
+      "Bagaimana jika hadiah handphone-nya setelah berumur 15 tahun?" tawar Ayah.<br>
+      Sejak saat itu, Nanda merajuk. Ia yang biasanya ceria, kini jadi pendiam. Nanda jadi sering mengurung diri di kamar. Ayah dan Ibu akhirnya sepakat membelikan handphone.<br>
+      Benar saja, Nanda langsung ceria saat diberikan handphone. Ia mengirim pesan kepada teman dan saudaranya. Nanda berkirim pesan hingga larut malam.<br>
+      Hari ini, Nanda bangun kesiangan. Dengan tergesa, ia mandi dan memasukkan bukunya.<br>
+      "Ya Tuhan, aku lupa mengerjakan PR!"<br>
+      Ia berangkat ke sekolah dengan terburu-buru. Di kelas, semua murid diminta mengumpulkan tugas.<br>
+      "Maaf, Pak, saya lupa membuat PR," ujar Nanda.<br>
+      "Baiklah, Nanda. Kamu saya beri tugas meringkas satu buku di perpustakaan," ujar Pak Guru tegas.<br>
+      Sambil berjalan, Nanda berpikir. "Ternyata benar apa kata Ibu dan Ayah. Belum saatnya aku memiliki handphone."<br><br>
+
+      <b>Petunjuk:</b> Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+    </div>
+  `,
+  "statements": [
+    "Tokoh Ibu dermawan karena memberi nasihat.",
+    "Tokoh Nanda bersifat ceria, tetapi mudah merajuk.",
+    "Tokoh Pak Guru memiliki sifat kukuh."
+  ],
+  "correct": [false, true, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      "Selamat ulang tahun, Sayang." Ayah mencium pipi Nanda.<br>
+      "Terima kasih, Ayah," ujar Nanda memeluk ayahnya.<br>
+      "Nanda mau minta hadiah apa?" tanya Ayah sambil memakan puding yang disajikan Ibu.<br>
+      "Mmm, boleh nggak, Nanda minta dibelikan handphone?" tanya Nanda agak ragu.<br>
+      "Nanda, kan masih kecil. Belum bisa bertanggung jawab memegang barang berharga. Lagi pula ke sekolah tidak boleh membawa handphone, kan? Bisa mengganggu saat pelajaran," nasihat Ibu.<br>
+      "Nanda akan matikan saat jam pelajaran, Ibu."<br>
+      "Bagaimana jika hadiah handphone-nya setelah berumur 15 tahun?" tawar Ayah.<br>
+      Sejak saat itu, Nanda merajuk. Ia yang biasanya ceria, kini jadi pendiam. Nanda jadi sering mengurung diri di kamar. Ayah dan Ibu akhirnya sepakat membelikan handphone.<br>
+      Benar saja, Nanda langsung ceria saat diberikan handphone. Ia mengirim pesan kepada teman dan saudaranya. Nanda berkirim pesan hingga larut malam.<br>
+      Hari ini, Nanda bangun kesiangan. Dengan tergesa, ia mandi dan memasukkan bukunya.<br>
+      "Ya Tuhan, aku lupa mengerjakan PR!"<br>
+      Ia berangkat ke sekolah dengan terburu-buru. Di kelas, semua murid diminta mengumpulkan tugas.<br>
+      "Maaf, Pak, saya lupa membuat PR," ujar Nanda.<br>
+      "Baiklah, Nanda. Kamu saya beri tugas meringkas satu buku di perpustakaan," ujar Pak Guru tegas.<br>
+      Sambil berjalan, Nanda berpikir. "Ternyata benar apa kata Ibu dan Ayah. Belum saatnya aku memiliki handphone."<br><br>
+
+      <b>Question:</b> Bagaimana sinopsis cerita tersebut?
+    </div>
+  `,
+  "options": [
+    "Tokoh Nanda merayakan ulang tahun. Tokoh Ayah dan Ibu memberikan handphone. Tokoh Nanda senang dan menggunakannya hingga malam. Tokoh Nanda kesiangan dan lupa mengerjakan PR. Tokoh Nanda dimarahi tokoh Pak Guru.",
+    "Tokoh Nanda berulang tahun dan mendapat handphone. Tokoh Ibu menasihati untuk tidak menggunakannya di sekolah. Namun, tokoh Nanda lupa waktu. Tokoh Nanda kesiangan dan tidak mengerjakan PR. Tokoh Pak Guru memberi tugas tambahan untuk tokoh Nanda.",
+    "Tokoh Nanda ingin handphone untuk hadiah ulang tahun. Tokoh Ayah dan Ibu menolak, tetapi tokoh Nanda mengurung diri. Tokoh Ayah dan Ibu membelikan handphone. Karena asyik bermain handphone, tokoh Nanda menjadi lupa waktu. Tokoh Nanda kesiangan dan tidak mengerjakan PR.",
+    "Tokoh Nanda meminta handphone untuk hadiah ulang tahun. Tokoh Ayah dan Ibu setuju dan membelikan handphone. Tokoh Nanda menggunakannya hingga lupa waktu. Tokoh Nanda kesiangan dan lupa mengerjakan PR. Tokoh Pak Guru memberi tugas tambahan untuk tokoh Nanda."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      "Selamat ulang tahun, Sayang." Ayah mencium pipi Nanda.<br>
+      "Terima kasih, Ayah," ujar Nanda memeluk ayahnya.<br>
+      "Nanda mau minta hadiah apa?" tanya Ayah sambil memakan puding yang disajikan Ibu.<br>
+      "Mmm, boleh nggak, Nanda minta dibelikan handphone?" tanya Nanda agak ragu.<br>
+      "Nanda, kan masih kecil. Belum bisa bertanggung jawab memegang barang berharga. Lagi pula ke sekolah tidak boleh membawa handphone, kan? Bisa mengganggu saat pelajaran," nasihat Ibu.<br>
+      "Nanda akan matikan saat jam pelajaran, Ibu."<br>
+      "Bagaimana jika hadiah handphone-nya setelah berumur 15 tahun?" tawar Ayah.<br>
+      Sejak saat itu, Nanda merajuk. Ia yang biasanya ceria, kini jadi pendiam. Nanda jadi sering mengurung diri di kamar. Ayah dan Ibu akhirnya sepakat membelikan handphone.<br>
+      Benar saja, Nanda langsung ceria saat diberikan handphone. Ia mengirim pesan kepada teman dan saudaranya. Nanda berkirim pesan hingga larut malam.<br>
+      Hari ini, Nanda bangun kesiangan. Dengan tergesa, ia mandi dan memasukkan bukunya.<br>
+      "Ya Tuhan, aku lupa mengerjakan PR!"<br>
+      Ia berangkat ke sekolah dengan terburu-buru. Di kelas, semua murid diminta mengumpulkan tugas.<br>
+      "Maaf, Pak, saya lupa membuat PR," ujar Nanda.<br>
+      "Baiklah, Nanda. Kamu saya beri tugas meringkas satu buku di perpustakaan," ujar Pak Guru tegas.<br>
+      Sambil berjalan, Nanda berpikir. "Ternyata benar apa kata Ibu dan Ayah. Belum saatnya aku memiliki handphone."<br><br>
+
+      <b>Question:</b> Apa akibat dari konflik cerita tersebut?
+    </div>
+  `,
+  "options": [
+    "Tokoh Nanda merajuk kepada tokoh Ayah dan Ibu.",
+    "Tokoh Nanda mendapatkan handphone.",
+    "Tokoh Nanda menyesali perbuatannya.",
+    "Tokoh Nanda meminta handphone."
+  ],
+  "correct": 2
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      "Selamat ulang tahun, Sayang." Ayah mencium pipi Nanda.<br>
+      "Terima kasih, Ayah," ujar Nanda memeluk ayahnya.<br>
+      "Nanda mau minta hadiah apa?" tanya Ayah sambil memakan puding yang disajikan Ibu.<br>
+      "Mmm, boleh nggak, Nanda minta dibelikan handphone?" tanya Nanda agak ragu.<br>
+      "Nanda, kan masih kecil. Belum bisa bertanggung jawab memegang barang berharga. Lagi pula ke sekolah tidak boleh membawa handphone, kan? Bisa mengganggu saat pelajaran," nasihat Ibu.<br>
+      "Nanda akan matikan saat jam pelajaran, Ibu."<br>
+      "Bagaimana jika hadiah handphone-nya setelah berumur 15 tahun?" tawar Ayah.<br>
+      Sejak saat itu, Nanda merajuk. Ia yang biasanya ceria, kini jadi pendiam. Nanda jadi sering mengurung diri di kamar. Ayah dan Ibu akhirnya sepakat membelikan handphone.<br>
+      Benar saja, Nanda langsung ceria saat diberikan handphone. Ia mengirim pesan kepada teman dan saudaranya. Nanda berkirim pesan hingga larut malam.<br>
+      Hari ini, Nanda bangun kesiangan. Dengan tergesa, ia mandi dan memasukkan bukunya.<br>
+      "Ya Tuhan, aku lupa mengerjakan PR!"<br>
+      Ia berangkat ke sekolah dengan terburu-buru. Di kelas, semua murid diminta mengumpulkan tugas.<br>
+      "Maaf, Pak, saya lupa membuat PR," ujar Nanda.<br>
+      "Baiklah, Nanda. Kamu saya beri tugas meringkas satu buku di perpustakaan," ujar Pak Guru tegas.<br>
+      Sambil berjalan, Nanda berpikir. "Ternyata benar apa kata Ibu dan Ayah. Belum saatnya aku memiliki handphone."<br><br>
+
+      <b>Petunjuk:</b> Manakah kejadian sesuai isi cerita? Tentukan Sesuai atau Tidak Sesuai untuk setiap pernyataan berikut!
+    </div>
+  `,
+  "statements": [
+    "Anak-anak menggunakan handphone sebelum cukup usia.",
+    "Orang tua menuruti keinginan anak tanpa penolakan.",
+    "Murid mendapat tugas tambahan karena tidak disiplin."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Taman Mayura</b><br><br>
+      Taman Mayura ada di Mataram, Nusa Tenggara Barat. Dahulu, taman ini dibangun oleh raja. Taman ini melengkapi istana raja. Di Taman Mayura ada tempat istirahat raja. Taman Mayura termasuk peninggalan raja. Oleh karena itu, taman ini termasuk dalam cagar budaya.<br><br>
+
+      Taman Mayura berbentuk empat persegi panjang. Di bagian tengah terdapat kolam. Di tengah kolam tersebut terdapat bangunan. Nama bangunan tersebut adalah Balai Kambang. Kolam dan bangunan tersebut menjadi daya tarik utama.<br><br>
+
+      Pengunjung dapat mengunjungi Taman Mayura dengan tiket masuk. Harga tiket masuk dibedakan berdasarkan usia dan asalnya. Sebagai contoh, harga tiket masuk untuk wisatawan lokal dewasa berbeda dengan tiket untuk wisatawan mancanegara dewasa. Untuk wisatawan lokal anak-anak gratis. Sementara itu, wisatawan anak mancanegara tetap membayar tiket masuk. Harga setiap jenis tiket relatif terjangkau. Taman Mayura buka dari pukul 08.00 hingga 21.00 WITA.<br><br>
+
+      Taman Mayura berjarak 5,6 km dari Kota Mataram. Dari Mataram, Taman Mayura ditempuh selama 15 menit dengan kendaraan. Perjalanan dapat ditempuh melalui Jalan Gajah Mada. Perjalanan bisa juga melalui Jalan Pancaka dan Jalan Pejanggik. Selain itu, bisa melalui Jalan Tenun. Taman Mayura berada di Jalan Purbasari Nomor 29.<br><br>
+
+      <b>Question:</b> Manakah susunan informasi sesuai kerangka teks tersebut?
+    </div>
+  `,
+  "options": [
+    "Gambaran umum Taman Mayura > Ciri dan daya tarik > Informasi tiket dan jam buka > Rute ke Taman Mayura.",
+    "Gambaran umum Taman Mayura > Daya tarik bangunan > Informasi tiket dan jam buka > Perjalanan ke Taman Mayura.",
+    "Gambaran umum Taman Mayura > Ciri bangunan dan kolam > Informasi tiket wisatawan > Nama jalan di Taman Mayura.",
+    "Gambaran umum Taman Mayura > Ciri dan daya tarik > Informasi tiket dan jam buka > Lama perjalanan ke Taman Mayura."
+  ],
+  "correct": 0
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Taman Mayura</b><br><br>
+
+      Taman Mayura ada di Mataram, Nusa Tenggara Barat. Dahulu, taman ini dibangun oleh raja. Taman ini melengkapi istana raja. Di Taman Mayura ada tempat istirahat raja. Taman Mayura termasuk peninggalan raja. Oleh karena itu, taman ini termasuk dalam cagar budaya.<br><br>
+
+      Taman Mayura berbentuk empat persegi panjang. Di bagian tengah terdapat kolam. Di tengah kolam tersebut terdapat bangunan. Nama bangunan tersebut adalah Balai Kambang. Kolam dan bangunan tersebut menjadi daya tarik utama.<br><br>
+
+      Pengunjung dapat mengunjungi Taman Mayura dengan tiket masuk. Harga tiket masuk dibedakan berdasarkan usia dan asalnya. Sebagai contoh, harga tiket masuk untuk wisatawan lokal dewasa berbeda dengan tiket untuk wisatawan mancanegara dewasa. Untuk wisatawan lokal anak-anak gratis. Sementara itu, wisatawan anak mancanegara tetap membayar tiket masuk. Harga setiap jenis tiket relatif terjangkau. Taman Mayura buka dari pukul 08.00 hingga 21.00 WITA.<br><br>
+
+      Taman Mayura berjarak 5,6 km dari Kota Mataram. Dari Mataram, Taman Mayura ditempuh selama 15 menit dengan kendaraan. Perjalanan dapat ditempuh melalui Jalan Gajah Mada. Perjalanan bisa juga melalui Jalan Pancaka dan Jalan Pejanggik. Selain itu, bisa melalui Jalan Tenun. Taman Mayura berada di Jalan Purbasari Nomor 29.<br><br>
+
+      <b>Question:</b> Apa kalimat tanya yang sesuai isi paragraf keempat? <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Bagaimana menuju ke Taman Mayura?",
+    "Kapan perjalanan ke Taman Mayura?",
+    "Di mana Taman Mayura berada?"
   ],
   "correct": [0, 2]
 },
 {
-  "type": "true_false",
+  "type": "mc",
   "text": `
     <div style="text-align: justify;">
-      <b>Teks Ulasan 1</b><br>
-      <img src="https://i.imgur.com/d1JeNwr.png" alt="Teks Ulasan 1" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
-      <b>Teks Ulasan 2</b><br>
-      <img src="https://i.imgur.com/bA8wKFK.png" alt="Teks Ulasan 2" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
-      <p><strong>Banu:</strong> Aku lebih suka membaca ulasan pada teks 2 rasanya lebih dekat denganku. Aku jadi ingin ke sana! Teks ulasan 2 sangat menarik!</p>
-      <p><strong>Komar:</strong> Justru aku lebih suka ulasan pada teks 1 karena sangat jelas dan menarik minatku untuk mengunjungi pantai itu.</p>
-      <p><strong>Question:</strong> Mengapa pernyataan Banu lebih tepat untuk menggambarkan keunggulan teks ulasan kedua yang tidak ada pada teks ulasan pertama?</p>
-      <i>Tentukan benar atau salah setiap pernyataan berikut!</i>
-    </div>
-  `,
-  "statements": [
-    "Gaya penyajian teks menggunakan bahasa nonformal sehingga lebih santai.",
-    "Penyajian gambar pada teks yang membuat pembaca lebih tertarik membaca.",
-    "Akhir ulasan dilengkapi kalimat ajakan kepada pembaca untuk mengunjungi pantai."
-  ],
-  "correct": [true, false, false]
-},
-{
-  "type": "mc_multiple",
-  "text": `
-    <div style="text-align: justify;">
-      <p><strong>Bacalah kutipan puisi berikut!</strong></p>
-      <img src="https://i.imgur.com/hPvdTLG.png" alt="Puisi Bukit-bukit Desa" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
-      <p><strong>Question:</strong> Pilihan kata mana saja yang menunjukkan <em>latar waktu</em> pada puisi tersebut?</p>
-      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+      <b>Taman Mayura</b><br><br>
+
+      Taman Mayura berada di Kota Cakranegara, Lombok, Nusa Tenggara Barat. Taman ini dibangun oleh Raja Anak Agung Ngurah Karangasem pada tahun 1744. Di tengah taman terdapat sebuah kolam besar. Di tengah kolam itu terdapat sebuah balai yang disebut Bale Kambang.<br><br>
+
+      Nama Mayura diambil dari bahasa Sanskerta yang berarti burung merak. Dahulu, banyak burung merak datang ke taman ini. Taman Mayura sering digunakan untuk tempat pertemuan raja-raja dan upacara keagamaan. Sekarang, Taman Mayura menjadi salah satu objek wisata bersejarah di Lombok.<br><br>
+
+      Masyarakat sekitar ikut menjaga kebersihan dan kelestarian taman. Mereka juga turut melindungi bangunan bersejarah yang ada di dalam taman. Dengan demikian, Taman Mayura tetap terawat dan menarik untuk dikunjungi wisatawan.<br><br>
+
+      <b>Question:</b> Apa peristiwa dalam kehidupan sehari-hari yang sesuai teks?
     </div>
   `,
   "options": [
-    "Bukit-bukit desa",
-    "Sebelum hari bermula",
-    "Akar-akar yang melata",
-    "Berlomba dengan surya"
+    "Masyarakat membuka sistem tiket di tempat wisata.",
+    "Masyarakat menambah akses jalan ke tempat wisata.",
+    "Masyarakat membayar tiket untuk wisatawan yang berkunjung.",
+    "Masyarakat melindungi warisan budaya menjadi tempat wisata."
   ],
-  "correct": [1, 3]
+  "correct": 3
 },
 {
   "type": "mc",
   "text": `
     <div style="text-align: justify;">
-      <p><strong>Bacalah kutipan puisi berikut!</strong></p>
-      <img src="https://i.imgur.com/hPvdTLG.png" alt="Puisi Bukit-bukit Desa" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
-      <p><strong>Question:</strong> Apa makna frasa <em>"merebut hidup di pasar-pasar kota"</em> pada teks puisi tersebut?</p>
+      <b>Dampak Radiasi Ponsel pada Tubuh</b><br><br>
+
+      Ponsel (telepon seluler) dan gawai (gadget) memancarkan radiasi. Karena itu, ponsel tidak boleh diletakkan sembarangan. Ponsel tidak disarankan diletakkan dekat kepala. Sering kali, kebiasaan tersebut dilakukan saat tidur. Ponsel juga sebaiknya tidak disimpan di saku. Saat disimpan di saku, posisi ponsel dekat dengan tubuh. Radiasi ponsel bisa memancar ke tubuh. Radiasi ponsel berbahaya bagi kesehatan tubuh.<br><br>
+
+      Ada beberapa gangguan kesehatan akibat radiasi ponsel. Radiasi ponsel bisa membuat saraf kepala tegang. Aliran darah ke kepala juga sedikit terhambat. Akibatnya, tubuh terasa lelah.<br><br>
+
+      Radiasi ponsel juga bisa mengakibatkan gelisah berlebihan. Kegelisahan tersebut bisa menyebabkan sulit tidur. Radiasi ponsel dapat membuat kepala pusing. Kondisi itu disebabkan ponsel diletakkan dekat wajah. Pusing yang terus-menerus bisa membuat mual. Bermain ponsel terlalu lama juga memengaruhi emosi.<br><br>
+
+      Radiasi yang terpancar bisa mengakibatkan mudah tersinggung. Makin banyak radiasi masuk otak, makin berbahaya. Gelombang elektromagnetik ponsel bisa menembus jaringan otak. Akibatnya, sel-sel dalam otak menjadi tidak terkendali. Oleh karena itu, penggunaan ponsel harus dibatasi. Dengan demikian, kesehatan tubuh tetap terjaga.<br><br>
+
+      <b>Question:</b> Seseorang terus-menerus menggunakan ponsel, bahkan saat hendak tidur. Berdasarkan teks, apa yang paling mungkin terjadi?
     </div>
   `,
   "options": [
-    "Kegigihan dan perjuangan perempuan dalam bekerja.",
-    "Keuletan dan pencapaian seseorang dalam bekerja.",
-    "Aktivitas dan keseharian perempuan yang bekerja di pasar.",
-    "Tanggung jawab dan kewajiban perempuan pada keluarga."
-  ],
-  "correct": 0
-},
-{
-  "type": "true_false",
-  "text": `
-    <div style="text-align: justify;">
-      <img src="https://i.imgur.com/hPvdTLG.png" alt="Puisi Perempuan Pekerja" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>
-      <p><strong>Setelah membaca puisi tersebut, tiga murid berpendapat sebagai berikut.</strong></p>
-      <p><b>Dina:</b> Wah, ternyata banyak perempuan hebat ya. Mereka bekerja penuh semangat!</p>
-      <p><b>Mira:</b> Iya, mereka rela bangun pagi-pagi untuk bekerja.</p>
-      <p><b>Tika:</b> Tapi, kasihan ya mereka pasti lelah setelah seharian bekerja.</p>
-      <p><strong>Question:</strong> Pendapat siapa yang tepat untuk menggambarkan suasana haru yang muncul setelah membaca puisi tersebut?</p>
-      <i>Tentukan benar atau salah setiap pernyataan berikut!</i>
-    </div>
-  `,
-  "statements": [
-    "Dina karena menunjukkan kekagumannya kepada para perempuan yang bekerja.",
-    "Mira karena pendapatnya juga senada dengan pendapat yang disampaikan Dina.",
-    "Tika karena pendapatnya menunjukkan rasa empati terhadap perempuan pekerja."
-  ],
-  "correct": [false, false, true]
-},
-{
-  "type": "mc",
-  "text": `
-    <div style="text-align: justify;">
-      <p><strong>Bacalah teks berikut!</strong></p>
-      <p>
-        Kondisi ekonomi yang sangat sulit memaksa N. Wayan Mertayani harus bekerja di usianya yang masih 14 tahun. Pagi hari, dia pergi ke sekolah di SMPN 2 Abang, Bali, kemudian dia membantu ibunya berjualan. Setelah itu, Mertayani mencari barang rongsokan di pinggir pantai. Hal itu dilakukannya sejak ayahnya meninggal. Ia rajin dan tidak mudah putus asa. Semua pekerjaan ia lakukan dengan senang hati.
-      </p>
-      <p>
-        Ketika mencari barang rongsokan, Mertayani meminjam kamera foto milik Mrs. Dolly Amarhoseija, seorang wisatawan yang dikenalnya. Kemudian, dia membuat 15 foto dengan kamera itu. Hasil foto terakhirnya adalah sebuah potret pohon ubi karet dengan dahan tanpa daun yang tumbuh di depan rumahnya. Seekor ayam bertengger di salah satu dahan. Handuk berwarna merah jambu dan baju hariannya yang dijemur di bawahnya.
-      </p>
-      <p>
-        Dia tidak menyangka foto sederhana itu memikat 12 fotografer kelas dunia dan menjadi pemenang dalam World Press Photo yang diadakan oleh Yayasan Anne Frank di Belanda pada tahun 2009.
-      </p>
-      <p>
-        Ibu Mertayani sangat senang dengan prestasi yang dicapai anaknya. Apa yang dia yakini dan lakukan selama ini ternyata tidak sia-sia. Dia pun berharap anaknya bisa mewujudkan apa yang menjadi cita-citanya.
-      </p>
-      <p><strong>Question:</strong> Keistimewaan tokoh pada teks tersebut adalah ....</p>
-    </div>
-  `,
-  "options": [
-    "Membantu ibunya berjualan.",
-    "Menjadi pemenang World Press Photo.",
-    "Melakukan pemotretan berkali-kali.",
-    "Mencari barang rongsokan di pantai."
+    "Kesehatannya akan terganggu, terutama kesehatan organ dalam.",
+    "Kondisi fisik dan mentalnya menurun, bisa juga mengalami gangguan fungsi otak.",
+    "Tenaganya akan terkuras habis karena tersedot oleh radiasi ponsel.",
+    "Ketajaman matanya akan melemah karena terlalu lama menatap layar ponsel."
   ],
   "correct": 1
 },
 {
-  "type": "mc_multiple",
+  "type": "mc",
   "text": `
     <div style="text-align: justify;">
-      <p><strong>Bacalah teks berikut!</strong></p>
-      <p>
-        Kondisi ekonomi yang sangat sulit memaksa N. Wayan Mertayani harus bekerja di usianya yang masih 14 tahun. Pagi hari, dia pergi ke sekolah di SMPN 2 Abang, Bali, kemudian dia membantu ibunya berjualan. Setelah itu, Mertayani mencari barang rongsokan di pinggir pantai. Hal itu dilakukannya sejak ayahnya meninggal. Ia rajin dan tidak mudah putus asa. Semua pekerjaan ia lakukan dengan senang hati.
-      </p>
-      <p>
-        Ketika mencari barang rongsokan, Mertayani meminjam kamera foto milik Mrs. Dolly Amarhoseija, seorang wisatawan yang dikenalnya. Kemudian, dia membuat 15 foto dengan kamera itu. Hasil foto terakhirnya adalah sebuah potret pohon ubi karet dengan dahan tanpa daun yang tumbuh di depan rumahnya. Seekor ayam bertengger di salah satu dahan. Handuk berwarna merah jambu dan baju hariannya yang dijemur di bawahnya.
-      </p>
-      <p>
-        Dia tidak menyangka foto sederhana itu memikat 12 fotografer kelas dunia dan menjadi pemenang dalam World Press Photo yang diadakan oleh Yayasan Anne Frank di Belanda pada tahun 2009.
-      </p>
-      <p>
-        Ibu Mertayani sangat senang dengan prestasi yang dicapai anaknya. Apa yang dia yakini dan lakukan selama ini ternyata tidak sia-sia. Dia pun berharap anaknya bisa mewujudkan apa yang menjadi cita-citanya.
-      </p>
-      <p><strong>Question:</strong> Sikap atau tindakan tokoh yang patut diteladani pada teks tersebut adalah ....</p>
-      <i>(Jawaban benar lebih dari satu)</i>
+      <b>Dampak Radiasi Ponsel pada Tubuh</b><br><br>
+
+      Ponsel (telepon seluler) dan gawai (gadget) memancarkan radiasi. Karena itu, ponsel tidak boleh diletakkan sembarangan. Ponsel tidak disarankan diletakkan dekat kepala. Sering kali, kebiasaan tersebut dilakukan saat tidur. Ponsel juga sebaiknya tidak disimpan di saku. Saat disimpan di saku, posisi ponsel dekat dengan tubuh. Radiasi ponsel bisa memancar ke tubuh. Radiasi ponsel berbahaya bagi kesehatan tubuh.<br><br>
+
+      Ada beberapa gangguan kesehatan akibat radiasi ponsel. Radiasi ponsel bisa membuat saraf kepala tegang. Aliran darah ke kepala juga sedikit terhambat. Akibatnya, tubuh terasa lelah.<br><br>
+
+      Radiasi ponsel juga bisa mengakibatkan gelisah berlebihan. Kegelisahan tersebut bisa menyebabkan sulit tidur. Radiasi ponsel dapat membuat kepala pusing. Kondisi itu disebabkan ponsel diletakkan dekat wajah. Pusing yang terus-menerus bisa membuat mual. Bermain ponsel terlalu lama juga memengaruhi emosi.<br><br>
+
+      Radiasi yang terpancar bisa mengakibatkan mudah tersinggung. Makin banyak radiasi masuk otak, makin berbahaya. Gelombang elektromagnetik ponsel bisa menembus jaringan otak. Akibatnya, sel-sel dalam otak menjadi tidak terkendali. Oleh karena itu, penggunaan ponsel harus dibatasi. Dengan demikian, kesehatan tubuh tetap terjaga.<br><br>
+
+      <b>Question:</b> Apa ide pokok teks "Dampak Radiasi Ponsel pada Tubuh"?
     </div>
   `,
   "options": [
-    "Rajin dan tidak mudah putus asa dalam menghadapi kesulitan hidup.",
-    "Tetap bersekolah meskipun harus bekerja membantu orang tua.",
-    "Meminjam kamera wisatawan untuk mengikuti lomba fotografi.",
-    "Mencari barang rongsokan semata-mata untuk memenangkan lomba."
+    "Ponsel tidak boleh diletakkan sembarangan, seperti di dekat kepala, untuk menghindari radiasi.",
+    "Gelombang elektromagnetik bisa menembus otak sehingga sel otak akan rusak.",
+    "Penggunaan ponsel harus dibatasi karena radiasinya berbahaya bagi kesehatan tubuh.",
+    "Radiasi ponsel menyebabkan kepala tegang dan sulit tidur jika digunakan terlalu lama."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Dampak Radiasi Ponsel pada Tubuh</b><br><br>
+
+      Ponsel (telepon seluler) dan gawai (gadget) memancarkan radiasi. Karena itu, ponsel tidak boleh diletakkan sembarangan. Ponsel tidak disarankan diletakkan dekat kepala. Sering kali, kebiasaan tersebut dilakukan saat tidur. Ponsel juga sebaiknya tidak disimpan di saku. Saat disimpan di saku, posisi ponsel dekat dengan tubuh. Radiasi ponsel bisa memancar ke tubuh. Radiasi ponsel berbahaya bagi kesehatan tubuh.<br><br>
+
+      Ada beberapa gangguan kesehatan akibat radiasi ponsel. Radiasi ponsel bisa membuat saraf kepala tegang. Aliran darah ke kepala juga sedikit terhambat. Akibatnya, tubuh terasa lelah.<br><br>
+
+      Radiasi ponsel juga bisa mengakibatkan gelisah berlebihan. Kegelisahan tersebut bisa menyebabkan sulit tidur. Radiasi ponsel dapat membuat kepala pusing. Kondisi itu disebabkan ponsel diletakkan dekat wajah. Pusing yang terus-menerus bisa membuat mual. Bermain ponsel terlalu lama juga memengaruhi emosi.<br><br>
+
+      Radiasi yang terpancar bisa mengakibatkan mudah tersinggung. Makin banyak radiasi masuk otak, makin berbahaya. Gelombang elektromagnetik ponsel bisa menembus jaringan otak. Akibatnya, sel-sel dalam otak menjadi tidak terkendali. Oleh karena itu, penggunaan ponsel harus dibatasi. Dengan demikian, kesehatan tubuh tetap terjaga.<br><br>
+
+      <b>Question:</b> Apa upaya yang bisa dilakukan untuk menghindari dampak negatif radiasi ponsel? <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Meletakkan ponsel jauh dari tubuh, terutama saat tidur atau menyimpannya.",
+    "Membatasi penggunaan ponsel agar radiasi yang masuk ke otak tidak berlebihan.",
+    "Menggunakan ponsel hanya saat malam hari dan suasana sekitar sepi."
   ],
   "correct": [0, 1]
 },
@@ -724,587 +933,209 @@ function showContent() {
   "type": "tepat_tidak",
   "text": `
     <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-      Kondisi ekonomi yang sangat sulit memaksa N. Wayan Mertayani harus bekerja di usianya yang masih 14 tahun. Pagi hari, dia pergi ke sekolah di SMPN 2 Abang, Bali, kemudian dia membantu ibunya berjualan. Setelah itu, Mertayani mencari barang rongsokan di pinggir pantai. Hal itu dilakukannya sejak ayahnya meninggal. Ia rajin dan tidak mudah putus asa. Semua pekerjaan ia lakukan dengan senang hati.<br><br>
-
-      Ketika mencari barang rongsokan, Mertayani meminjam kamera foto milik Mrs. Dolly Amarhoseija, seorang wisatawan yang dikenalnya. Kemudian, dia membuat 15 foto dengan kamera itu. Hasil foto terakhirnya adalah sebuah potret pohon ubi karet dengan dahan tanpa daun yang tumbuh di depan rumahnya. Seekor ayam bertengger di salah satu dahan. Handuk berwarna merah jambu dan baju hariannya yang dijemur di bawahnya.<br><br>
-
-      Dia tidak menyangka foto sederhana itu memikat 12 fotografer kelas dunia dan menjadi pemenang dalam World Press Photo yang diadakan oleh Yayasan Anne Frank di Belanda pada tahun 2009.<br><br>
-
-      Ibu Mertayani sangat senang dengan prestasi yang dicapai anaknya. Apa yang dia yakini dan lakukan selama ini ternyata tidak sia-sia. Dia pun berharap anaknya bisa mewujudkan apa yang menjadi cita-citanya.<br><br>
-
-      <b>Petunjuk:</b> Pendapat penulis terhadap tokoh pada teks tersebut ditunjukkan melalui pernyataan berikut. Tentukan Tepat (T) atau Tidak Tepat (TT)!
+      <b>Puisi "Ilmu"</b><br><br>
+      Untuk mengenal hitam putih dunia butuh ilmu<br>
+      Untuk mengenal cinta butuh ilmu<br>
+      Tetapi, ilmu tidak mengajarkan memecah belah<br>
+      Tetapi, ilmu tidak mengajarkan kemaksiatan<br>
+      Lalu, kemaksiatan ilmu dari siapa<br>
+      Lalu, memecah belah ilmu dari siapa<br>
+      Semua berasal dari hati yang busuk ini<br>
+      Semua berasal dari otak kotor ini<br><br>
+      
+      <b>Petunjuk:</b> Perhatikan penggunaan majas dalam puisi. Tentukan <i>Tepat (T)</i> atau <i>Tidak Tepat (TT)</i> untuk setiap pernyataan berikut!
     </div>
   `,
   "statements": [
-    "A. Penulis memandang tokoh sebagai anak yang rajin dan pantang menyerah dalam menghadapi kesulitan hidup.",
-    "B. Penulis menilai tokoh sebagai anak yang terpaksa bekerja sehingga mengabaikan pendidikan.",
-    "C. Penulis memberikan penilaian positif terhadap sikap tokoh yang tetap bekerja dengan senang hati."
+    "Larik 'Tetapi, ilmu tidak mengajarkan memecah belah' menggunakan majas personifikasi. Majas ini menggambarkan ilmu yang dapat mengajar seperti manusia.",
+    "Larik 'Semua berasal dari hati yang busuk ini' menggunakan majas metafora. Majas ini menggambarkan sifat buruk/jahat.",
+    "Larik 'Untuk mengenal hitam putih dunia butuh ilmu' menggunakan majas hiperbola. Majas ini untuk penggambaran dunia seolah hanya berwarna hitam putih."
   ],
-  "correct": [true, false, true]
-},
-{
-  "type": "tepat_tidak",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah kutipan dongeng berikut!</b><br><br>
-      "Begini Baginda. Roti itu memang hamba sisakan separuh sebab hamba khawatir jangan-jangan baginda lupa membuka tutup tabung ini. Jika baginda lupa membukanya, tentu saja hamba masih dapat makan roti setahun lagi. Untunglah baginda tidak lupa. Hamba sangat senang."<br><br>
-      Sang raja terkejut mendengar penjelasan si semut kecil di dekat tabung semut.<br><br>
-      <b>Petunjuk:</b> Relevansi isi dongeng dengan kehidupan sekarang ditunjukkan melalui pernyataan berikut. Tentukan Tepat (T) atau Tidak Tepat (TT)!
-    </div>
-  `,
-  "statements": [
-    "A. Sifat hemat dan berpikir jauh ke depan seperti yang dilakukan semut dapat dijadikan teladan dalam kehidupan manusia.",
-    "B. Dongeng ini menunjukkan bahwa raja yang sibuk sering melupakan kehidupan rakyat kecil.",
-    "C. Kisah semut dalam dongeng ini menggambarkan pentingnya sikap waspada dan perencanaan dalam menghadapi masa depan."
-  ],
-  "correct": [true, false, true]
+  "correct": [true, true, false]
 },
 {
   "type": "mc_multiple",
   "text": `
     <div style="text-align: justify;">
-      <b>Bacalah kutipan cerita anak berikut!</b><br><br>
-      "Begini Baginda. Roti itu memang hamba sisakan separuh sebab hamba khawatir jangan-jangan baginda lupa membuka tutup tabung ini. Jika baginda lupa membukanya, tentu saja hamba masih dapat makan roti setahun lagi. Untunglah baginda tidak lupa. Hamba sangat senang."<br><br>
-      Sang raja terkejut mendengar penjelasan si semut kecil di dekat tabung semut.<br><br>
-      <b>Question:</b> Kebiasaan tokoh raja berdasarkan kutipan cerita anak tersebut adalah ....<br>
-      <i>(Jawaban benar lebih dari satu)</i>
+      <b>Puisi "Ilmu"</b><br><br>
+      Untuk mengenal hitam putih dunia butuh ilmu<br>
+      Untuk mengenal cinta butuh ilmu<br>
+      Tetapi, ilmu tidak mengajarkan memecah belah<br>
+      Tetapi, ilmu tidak mengajarkan kemaksiatan<br>
+      Lalu, kemaksiatan ilmu dari siapa<br>
+      Lalu, memecah belah ilmu dari siapa<br>
+      Semua berasal dari hati yang busuk ini<br>
+      Semua berasal dari otak kotor ini<br><br>
+      
+      <b>Petunjuk:</b> Perhatikan cara penyair menyampaikan nilai moral dalam puisi. Pilih semua jawaban yang benar!
     </div>
   `,
   "options": [
-    "Menepati kesepakatan",
-    "Mau mendengarkan penjelasan",
-    "Bersikap keras terhadap rakyat kecil",
-    "Sering menguji rakyatnya"
+    "Nilai moral disampaikan melalui penegasan. Penyair menjelaskan bahwa ilmu tidak mengajarkan perpecahan dan kemaksiatan.",
+    "Nilai moral disampaikan melalui ajakan kepada pembaca. Penyair mengajak pembaca mencintai ilmu dan rajin belajar sejak dini.",
+    "Nilai moral disampaikan melalui pernyataan. Penyair menjelaskan bahwa keburukan berasal dari hati dan pikiran manusia, bukan dari ilmu."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Puisi "Ilmu"</b><br><br>
+      Untuk mengenal hitam putih dunia butuh ilmu<br>
+      Untuk mengenal cinta butuh ilmu<br>
+      Tetapi, ilmu tidak mengajarkan memecah belah<br>
+      Tetapi, ilmu tidak mengajarkan kemaksiatan<br>
+      Lalu, kemaksiatan ilmu dari siapa<br>
+      Lalu, memecah belah ilmu dari siapa<br>
+      Semua berasal dari hati yang busuk ini<br>
+      Semua berasal dari otak kotor ini<br><br>
+
+      <i>Sumber: Agus Budi Wahyudi, dkk., <b>Surat dari Samudra Antologi Puisi Anak</b>, Semarang, Kementerian Pendidikan dan Kebudayaan, 
+      Badan Pengembangan dan Pembinaan Bahasa, Balai Bahasa Jawa Tengah, 2018</i><br><br>
+
+      <b>Petunjuk:</b> Perhatikan penggunaan ungkapan dalam puisi. Pilih semua jawaban yang benar!
+    </div>
+  `,
+  "options": [
+    "Ungkapan \"hitam putih dunia\" dalam larik \"Untuk mengenal hitam putih dunia butuh ilmu\" bermakna bahwa kehidupan memiliki sisi baik dan buruk yang perlu dipahami.",
+    "Ungkapan \"otak kotor\" dalam larik \"Semua berasal dari otak kotor ini\" bermakna bahwa pikiran seseorang dipenuhi niat jahat atau cara berpikir yang menyimpang.",
+    "Ungkapan \"hati yang busuk\" dalam larik \"Semua berasal dari hati yang busuk ini\" bermakna bahwa seseorang sedang mengalami sakit organ tubuh."
   ],
   "correct": [0, 1]
 },
 {
-  "type": "mc",
+  "type": "dampak_jangka",
   "text": `
     <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-      Siang hari menjelang sore, kamar Citra kedatangan pendatang baru. 
-      Citra baru saja membereskan peralatan melukisnya saat si pendatang baru itu masuk ke dalam bersama pendampingnya. 
-      Seorang perawat segera menarik tirai yang membatasi ranjang Citra dengan ranjang yang terletak di sebelahnya sehingga Citra tidak melihat dengan jelas orang baru yang menjadi teman sekamarnya.<br><br>
-
-      "Apa Mama benar-benar nggak mau nemanin aku di sini? Hanya untuk malam ini....."<br><br>
-
-      Terdengar suara rengekan seorang anak di sebelahnya.<br><br>
-
-      "Maafin Mama, sayang. Pagi-pagi Mama harus segera berangkat ke kantor, ..... besok sore Mama akan datang lagi."<br><br>
-
-      <b>Question:</b> Tindakan terpuji yang dilakukan tokoh ibu dalam teks tersebut adalah ....
-    </div>
-  `,
-  "options": [
-    "Meminta anaknya untuk menahan rasa takut sendirian",
-    "Tetap bertanggung jawab bekerja demi kebutuhan keluarga",
-    "Meninggalkan anaknya tanpa memberi penjelasan",
-    "Memarahi anaknya karena terus merengek"
-  ],
-  "correct": 1
-},
-{
-  "type": "tepat_tidak",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-      Kondisi ekonomi yang sangat sulit memaksa N. Wayan Mertayani harus bekerja di usianya yang masih 14 tahun. Pagi hari, dia pergi ke sekolah di SMPN 2 Abang, Bali, kemudian dia membantu ibunya berjualan. Setelah itu, Mertayani mencari barang rongsokan di pinggir pantai. Hal itu dilakukannya sejak ayahnya meninggal. Ia rajin dan tidak mudah putus asa. Semua pekerjaan ia lakukan dengan senang hati.<br><br>
-
-      Ketika mencari barang rongsokan, Mertayani meminjam kamera foto milik Mrs. Dolly Amarhoseija, seorang wisatawan yang dikenalnya. Kemudian, dia membuat 15 foto dengan kamera itu. Hasil foto terakhirnya adalah sebuah potret pohon ubi karet dengan dahan tanpa daun yang tumbuh di depan rumahnya. Seekor ayam bertengger di salah satu dahan. Handuk berwarna merah jambu dan baju hariannya yang dijemur di bawahnya.<br><br>
-
-      Dia tidak menyangka foto sederhana itu memikat 12 fotografer kelas dunia dan menjadi pemenang dalam World Press Photo yang diadakan oleh Yayasan Anne Frank di Belanda pada tahun 2009.<br><br>
-
-      Ibu Mertayani sangat senang dengan prestasi yang dicapai anaknya. Apa yang dia yakini dan lakukan selama ini ternyata tidak sia-sia. Dia pun berharap anaknya bisa mewujudkan apa yang menjadi cita-citanya.<br><br>
-
-      <b>Petunjuk:</b> Pendapat penulis terhadap tokoh pada teks tersebut ditunjukkan melalui pernyataan berikut. Tentukan Tepat (T) atau Tidak Tepat (TT)!
+      <b>Bahaya Sinar Ultraviolet bagi Tubuh Manusia</b><br><br>
+      Sinar ultraviolet atau UV adalah bagian dari cahaya matahari. Sinar UV tidak dapat dilihat oleh mata manusia. Namun, sinar ini berbahaya bagi tubuh dan kesehatan.<br><br>
+      Tubuh manusia dilapisi oleh kulit yang sensitif. Kulit adalah bagian tubuh yang langsung terpapar sinar. Jika lama terpapar sinar UV, kulit rasanya seperti terbakar. Kulit menjadi merah. Kulit juga terasa panas dan mudah iritasi.<br><br>
+      Makin sering terpapar sinar UV, makin cepat pula kulit akan keriput. Selain itu, kulit bisa menjadi kering. Kulit menjadi kasar dan muncul bintik hitam. Dalam waktu lama, sinar UV dapat menyebabkan kanker kulit. Tidak hanya itu, sinar UV dapat merusak mata. Dampaknya mata bisa terasa perih. Mata juga bisa menjadi buram.<br><br>
+      Kita perlu melindungi kulit dari sinar UV. Gunakan topi, baju lengan panjang, dan tabir surya. Hindari berjemur pada siang hari yang terik. Berjemurlah pada pagi hari.<br><br>
+      Sinar UV memiliki manfaat, misalnya penghasil vitamin D. Akan tetapi, jika terlalu banyak, sinar UV menjadi bahaya. Oleh karena itu, kita harus lebih hati-hati. Jagalah kulit dan mata dari sinar UV.<br><br>
+      <i>Sumber: Ragam Info/Kumparan (2024)</i><br><br>
+      <b>Petunjuk:</b> Paparan sinar UV dapat berdampak pada tubuh manusia. Tentukan Dampak Jangka Pendek atau Dampak Jangka Panjang untuk setiap pernyataan berikut!
     </div>
   `,
   "statements": [
-    "A. Penulis memandang tokoh sebagai anak yang rajin dan pantang menyerah dalam menghadapi kesulitan hidup.",
-    "B. Penulis menilai tokoh sebagai anak yang terpaksa bekerja sehingga mengabaikan pendidikan.",
-    "C. Penulis memberikan penilaian positif terhadap sikap tokoh yang tetap bekerja dengan senang hati."
+    "Kulit menjadi gelap, kering, dan berbintik hitam.",
+    "Kulit terasa panas, merah, dan mudah terluka.",
+    "Kulit berpotensi rusak hingga mengalami kanker."
   ],
-  "correct": [true, false, true]
+  "correct": ["panjang", "pendek", "panjang"]
 },
 {
   "type": "mc_multiple",
   "text": `
     <div style="text-align: justify;">
-      <b>Bacalah kutipan cerita berikut!</b><br><br>
-      (1) Seli mengayunkan tangan ke depan, membuat petir biru. (2) Retakan itu memanjang. 
-      (3) Butuh waktu empat kali pukulan hingga tiang itu roboh, berdebam menimpa sebelahnya. 
-      (4) Aku dan Seli segera melompat mundur, menghindar dari guguran kristal.<br><br>
-
-      (5) Lima menit kemudian, dengan napas tersengal, kami berhasil menyingkirkan tiga tiang kristal. 
-      (6) Seli mengangkat patahan tiang dengan kemampuan kinetiknya, melemparkannya jauh-jauh. 
-      (7) Mulut lorong semakin terlihat. 
-      (8) Masih ada tiga tiang kristal lagi yang harus dihancurkan agar kapsul perak kami bisa melintasinya.<br><br>
-
-      <b>Question:</b> Bukti latar suasana riuh pada kutipan cerita tersebut adalah ….<br>
-      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+      <b>Bahaya Sinar Ultraviolet bagi Tubuh Manusia</b><br><br>
+      Sinar ultraviolet atau UV adalah bagian dari cahaya matahari. Sinar UV tidak dapat dilihat oleh mata manusia. Namun, sinar ini berbahaya bagi tubuh dan kesehatan.<br><br>
+      Tubuh manusia dilapisi oleh kulit yang sensitif. Kulit adalah bagian tubuh yang langsung terpapar sinar. Jika lama terpapar sinar UV, kulit rasanya seperti terbakar. Kulit menjadi merah. Kulit juga terasa panas dan mudah iritasi.<br><br>
+      Makin sering terpapar sinar UV, makin cepat pula kulit akan keriput. Selain itu, kulit bisa menjadi kering. Kulit menjadi kasar dan muncul bintik hitam. Dalam waktu lama, sinar UV dapat menyebabkan kanker kulit. Tidak hanya itu, sinar UV dapat merusak mata. Dampaknya mata bisa terasa perih. Mata juga bisa menjadi buram.<br><br>
+      Kita perlu melindungi kulit dari sinar UV. Gunakan topi, baju lengan panjang, dan tabir surya. Hindari berjemur pada siang hari yang terik. Berjemurlah pada pagi hari.<br><br>
+      Sinar UV memiliki manfaat, misalnya penghasil vitamin D. Akan tetapi, jika terlalu banyak, sinar UV menjadi bahaya. Oleh karena itu, kita harus lebih hati-hati. Jagalah kulit dan mata dari sinar UV.<br><br>
+      <i>Sumber: Ragam Info/Kumparan (2024)</i><br><br>
+      <b>Petunjuk:</b> Bagaimana cara yang benar agar terhindar dari bahaya sinar UV? Pilih semua jawaban yang benar!
     </div>
   `,
   "options": [
-    "Tiang roboh berdebam menimpa sebelahnya.",
-    "Kami berhasil menyingkirkan tiga tiang kristal.",
-    "Mulut lorong semakin terlihat.",
-    "Seli mengangkat patahan tiang dan melemparkannya jauh-jauh."
+    "Menghindari berjemur pada siang yang terik.",
+    "Memakai topi dan pakaian lengan panjang.",
+    "Mengenakan pakaian berbahan katun."
   ],
-  "correct": [0, 3]
-},
-{
-  "type": "mc",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah kutipan cerita berikut!</b><br><br>
-      (1) Seli mengayunkan tangan ke depan, membuat petir biru. (2) Retakan itu memanjang. 
-      (3) Butuh waktu empat kali pukulan hingga tiang itu roboh, berdebam menimpa sebelahnya. 
-      (4) Aku dan Seli segera melompat mundur, menghindar dari guguran kristal.<br><br>
-
-      (5) Lima menit kemudian, dengan napas tersengal, kami berhasil menyingkirkan tiga tiang kristal. 
-      (6) Seli mengangkat patahan tiang dengan kemampuan kinetiknya, melemparkannya jauh-jauh. 
-      (7) Mulut lorong semakin terlihat. 
-      (8) Masih ada tiga tiang kristal lagi yang harus dihancurkan agar kapsul perak kami bisa melintasinya.<br><br>
-
-      <b>Question:</b> Komentar yang tepat terhadap isi teks cerita tersebut adalah …
-    </div>
-  `,
-  "options": [
-    "Penggambaran para tokoh yang mampu merobohkan tiang sangat tidak masuk akal.",
-    "Tokoh Seli sangat membahayakan diri sendiri karena mengeluarkan petir dari tangan.",
-    "Semangat pantang menyerah dalam menyelesaikan masalah dari para tokoh patut diteladani.",
-    "Hanya demi kapsul perak, para tokoh seharusnya tidak usah menghabiskan tenaga."
-  ],
-  "correct": 2
+  "correct": [0, 1]
 },
 {
   "type": "mc_multiple",
   "text": `
     <div style="text-align: justify;">
-      <b>Bacalah kutipan cerita berikut!</b><br><br>
-      (1) "Setiap kali aku terjaga malam di asrama, aku selalu melihat Miss Selena masih sibuk di depan layar.
-      (2) Dia sepertinya tidak pernah istirahat.
-      (3) "Apakah petarung memang punya kekuatan tidak tidur, Ra?
-      (4) Selalu berjaga 24 jam?" Seli berguman.<br><br>
-
-      (5) "Tapi normal saja.
-      (6) Kemungkinan besar karena dia hendak memastikan semua berjalan lancar.
-      (7) Dia memimpin misi ini.
-      (8) Dia bertanggung jawab penuh kepada ketua komite.
-      (9) Itu pekerjaannya, kurang tidur atau malah mungkin sama sekali tidak tidur berhari-hari," Ali memberi pandangan lain.
-      (10) Aku mengangguk.
-      (11) Itu masuk akal.<br><br>
-
-      (12) "Kalian pernah memikirkannya tidak sih?
-      (13) Aku tidak tahu bagaimana caranya hingga Miss Selena bisa menjadi guru di sekolah kita.
-      (14) Maksudku, apakah dia punya ijazah dan sertifikat seorang guru?"<br><br>
-
-      <b>Question:</b> Bukti Miss Selena berwatak penuh tanggung jawab terdapat pada kalimat nomor ….<br>
-      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+      <b>Bahaya Sinar Ultraviolet bagi Tubuh Manusia</b><br><br>
+      Sinar ultraviolet atau UV adalah bagian dari cahaya matahari. Sinar UV tidak dapat dilihat oleh mata manusia. Namun, sinar ini berbahaya bagi tubuh dan kesehatan.<br><br>
+      Tubuh manusia dilapisi oleh kulit yang sensitif. Kulit adalah bagian tubuh yang langsung terpapar sinar. Jika lama terpapar sinar UV, kulit rasanya seperti terbakar. Kulit menjadi merah. Kulit juga terasa panas dan mudah iritasi.<br><br>
+      Makin sering terpapar sinar UV, makin cepat pula kulit akan keriput. Selain itu, kulit bisa menjadi kering. Kulit menjadi kasar dan muncul bintik hitam. Dalam waktu lama, sinar UV dapat menyebabkan kanker kulit. Tidak hanya itu, sinar UV dapat merusak mata. Dampaknya mata bisa terasa perih. Mata juga bisa menjadi buram.<br><br>
+      Kita perlu melindungi kulit dari sinar UV. Gunakan topi, baju lengan panjang, dan tabir surya. Hindari berjemur pada siang hari yang terik. Berjemurlah pada pagi hari.<br><br>
+      Sinar UV memiliki manfaat, misalnya penghasil vitamin D. Akan tetapi, jika terlalu banyak, sinar UV menjadi bahaya. Oleh karena itu, kita harus lebih hati-hati. Jagalah kulit dan mata dari sinar UV.<br><br>
+      <i>Sumber: Ragam Info/Kumparan (2024)</i><br><br>
+      <b>Petunjuk:</b> Mengapa kita perlu berhati-hati terhadap dampak buruk sinar ultraviolet? Pilih semua jawaban yang benar!
     </div>
   `,
   "options": [
-    "Kalimat (5)",
-    "Kalimat (6)",
-    "Kalimat (7)",
-    "Kalimat (8)"
+    "Sinar ultraviolet mengakibatkan kulit menjadi lebih kusam.",
+    "Sinar ultraviolet menyebabkan kerusakan pada kulit dan mata.",
+    "Sinar ultraviolet mengganggu kesehatan jika terkena terlalu lama."
   ],
-  "correct": [1, 2, 3]
-},
-{
-  "type": "tepat_tidak",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah kutipan cerita berikut!</b><br><br>
-      (1) "Setiap kali aku terjaga malam di asrama, aku selalu melihat Miss Selena masih sibuk di depan layar.
-      (2) Dia sepertinya tidak pernah istirahat.
-      (3) "Apakah petarung memang punya kekuatan tidak tidur, Ra?
-      (4) Selalu berjaga 24 jam?" Seli berguman.<br><br>
-
-      (5) "Tapi normal saja.
-      (6) Kemungkinan besar karena dia hendak memastikan semua berjalan lancar.
-      (7) Dia memimpin misi ini.
-      (8) Dia bertanggung jawab penuh kepada ketua komite.
-      (9) Itu pekerjaannya, kurang tidur atau malah mungkin sama sekali tidak tidur berhari-hari," Ali memberi pandangan lain.
-      (10) Aku mengangguk.
-      (11) Itu masuk akal.<br><br>
-
-      (12) "Kalian pernah memikirkannya tidak sih?
-      (13) Aku tidak tahu bagaimana caranya hingga Miss Selena bisa menjadi guru di sekolah kita.
-      (14) Maksudku, apakah dia punya ijazah dan sertifikat seorang guru?"<br><br>
-
-      <b>Petunjuk:</b> Tentukan Tepat (T) atau Tidak Tepat (TT) untuk setiap pernyataan berikut mengenai nilai moral kutipan cerita!
-    </div>
-  `,
-  "statements": [
-    "A. Bekerja sebaiknya sesuai porsi tanggung jawabnya.",
-    "B. Biasakan tidak tidur jika menunaikan tanggung jawab.",
-    "C. Bekerjalah berdasarkan waktu yang telah ditetapkan."
-  ],
-  "correct": [true, false, false]
+  "correct": [1, 2]
 },
 {
   "type": "mc",
   "text": `
     <div style="text-align: justify;">
-      <b>Bacalah kutipan cerita berikut!</b><br><br>
-      (1) "Setiap kali aku terjaga malam di asrama, aku selalu melihat Miss Selena masih sibuk di depan layar.
-      (2) Dia sepertinya tidak pernah istirahat.
-      (3) "Apakah petarung memang punya kekuatan tidak tidur, Ra?
-      (4) Selalu berjaga 24 jam?" Seli berguman.<br><br>
-
-      (5) "Tapi normal saja.
-      (6) Kemungkinan besar karena dia hendak memastikan semua berjalan lancar.
-      (7) Dia memimpin misi ini.
-      (8) Dia bertanggung jawab penuh kepada ketua komite.
-      (9) Itu pekerjaannya, kurang tidur atau malah mungkin sama sekali tidak tidur berhari-hari," Ali memberi pandangan lain.
-      (10) Aku mengangguk.
-      (11) Itu masuk akal.<br><br>
-
-      (12) "Kalian pernah memikirkannya tidak sih?
-      (13) Aku tidak tahu bagaimana caranya hingga Miss Selena bisa menjadi guru di sekolah kita.
-      (14) Maksudku, apakah dia punya ijazah dan sertifikat seorang guru?"<br><br>
-
-      <b>Question:</b> Makna simbol kata <i>"sertifikat"</i> yang tepat pada cerita tersebut adalah …
+      <b>Legenda Onak Berduri Sungsang</b><br><br>
+      Zaman dahulu, hiduplah dua orang hulubalang. Mereka bernama Serunting Sakti dan Rio Tabing. Mereka memiliki wilayah kekuasaan masing-masing. Wilayah kekuasaan mereka sangat luas. Namun, keduanya tidak dapat hidup rukun. Mereka sering bertempur hebat. Awalnya, mereka mengerahkan pasukan dan rakyat. Pertempuran sampai menimbulkan banyak korban. Namun, pertempuran masih belum berakhir.<br><br>
+      "Sebaiknya kita bertempur satu lawan satu." Serunting Sakti menantang.<br>
+      "Siapa takut?" jawab Rio Tabing sengit.<br>
+      Keduanya mempersiapkan diri. Keduanya juga memohon kesaktian kepada Dewa. Tenaga dan pikiran dipusatkan. Ledakan terjadi silih berganti. Ledakan tanda kesaktian keduanya bertempur di angkasa.<br><br>
+      "Dewa, aku mohon tambahkan kesaktian kepadaku!" seru Rio Tabing. Dewa pun memberi kesaktian kepadanya. Akibatnya, tenaganya bisa mengubah tanah datar menjadi berbukit-bukit. Apa pun yang dilewatinya menjadi rusak binasa. Duri dan onak menjadi sungsang atau terbalik. Rio Tabing pun membuat batas kekuasaannya.<br><br>
+      "Inilah batas kekuasaanku. Semua keturunan Serunting Sakti akan binasa jika melewatinya!" seru Rio Tabing. Setelah Rio Tabing mengucapkan hal itu, alam berubah tenang. Pertempuran keduanya terhenti. Perkelahian usai. Tidak ada yang kalah ataupun menang. Mereka bersama-sama menanggung kerugian besar. Kedua wilayah mereka sama-sama hancur. Wilayah kekuasaan yang dibuat Rio Tabing disebut Onak Berduri Sungsang. Tempat itu berada di daerah Bengkulu.<br><br>
+      <i>Sumber: David Wijaya, 120 Cerita Nusantara, Jakarta, Elex Media Komputindo, 2019</i><br><br>
+      <b>Petunjuk:</b> Pilih jawaban yang paling tepat!
     </div>
   `,
   "options": [
-    "Kepemilikan keahlian",
-    "Kepemilikan lahan",
-    "Kepemilikan kewenangan",
-    "Kepemilikan usaha"
-  ],
-  "correct": 0
-},
-{
-  "type": "mc",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-      (1) Di era digital ini semua orang bisa menjadi reporter walaupun tidak berprofesi sebagai wartawan.
-      (2) Setiap orang dapat mengunggah berita di media sosial.
-      (3) Redaksi dan penyuntingnya adalah diri sendiri.
-      (4) Peristiwa demi peristiwa dapat dilaporkan secara langsung dari lapangan oleh pengguna telepon pintar yang akan terus meningkat.<br><br>
-
-      Berbagai informasi dapat diwartakan, terutama hal-hal positif yang unik, khas, dan menarik, dari berbagai daerah di Indonesia. 
-      Cara mengirimkan warta dapat melalui foto, video, atau tulisan ringan yang singkat. Informasi bisa sangat beragam. 
-      Laporan tentang kuliner yang khas di suatu tempat atau melaporkan peristiwa terjadinya bencana alam, seperti letusan gunung api.<br><br>
-
-      <b>Question:</b> Kalimat utama paragraf pertama pada teks tersebut terdapat pada nomor …
-    </div>
-  `,
-  "options": [
-    "(1)",
-    "(2)",
-    "(3)",
-    "(4)"
-  ],
-  "correct": 0
-},
-{
-  "type": "mc",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-      (1) Di era digital ini semua orang bisa menjadi reporter walaupun tidak berprofesi sebagai wartawan.
-      (2) Setiap orang dapat mengunggah berita di media sosial.
-      (3) Redaksi dan penyuntingnya adalah diri sendiri.
-      (4) Peristiwa demi peristiwa dapat dilaporkan secara langsung dari lapangan oleh pengguna telepon pintar yang akan terus meningkat.<br><br>
-
-      Berbagai informasi dapat diwartakan, terutama hal-hal positif yang unik, khas, dan menarik, dari berbagai daerah di Indonesia. 
-      Cara mengirimkan warta dapat melalui foto, video, atau tulisan ringan yang singkat. Informasi bisa sangat beragam. 
-      Laporan tentang kuliner yang khas di suatu tempat atau melaporkan peristiwa terjadinya bencana alam, seperti letusan gunung api.<br><br>
-
-      <b>Question:</b> Ide pokok paragraf kedua pada teks tersebut adalah …
-    </div>
-  `,
-  "options": [
-    "Cara mengirimkan warta di media sosial",
-    "Berbagai cara mewartakan informasi yang positif",
-    "Laporan peristiwa terjadinya bencana alam",
-    "Laporan tentang kuliner yang khas di suatu tempat"
+    "Ledakan terjadi silih berganti di angkasa.",
+    "Tanah datar berubah menjadi berbukit-bukit.",
+    "Tokoh Rio Tabing berhasil membuat wilayah sendiri.",
+    "Tokoh Rio Tabing berhasil mengakhiri pertempuran."
   ],
   "correct": 1
-},
-{
-  "type": "mc",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-      (1) Di era digital ini semua orang bisa menjadi reporter walaupun tidak berprofesi sebagai wartawan.
-      (2) Setiap orang dapat mengunggah berita di media sosial.
-      (3) Redaksi dan penyuntingnya adalah diri sendiri.
-      (4) Peristiwa demi peristiwa dapat dilaporkan secara langsung dari lapangan oleh pengguna telepon pintar yang akan terus meningkat.<br><br>
-
-      Berbagai informasi dapat diwartakan, terutama hal-hal positif yang unik, khas, dan menarik, dari berbagai daerah di Indonesia. 
-      Cara mengirimkan warta dapat melalui foto, video, atau tulisan ringan yang singkat. Informasi bisa sangat beragam. 
-      Laporan tentang kuliner yang khas di suatu tempat atau melaporkan peristiwa terjadinya bencana alam, seperti letusan gunung api.<br><br>
-
-      <b>Question:</b> Ringkasan yang tepat sesuai teks tersebut adalah …
-    </div>
-  `,
-  "options": [
-    "Semua orang bisa menjadi reporter di era digitalisasi ini walaupun tidak berprofesi sebagai wartawan dan berbagai informasi dapat diwartakan terutama hal-hal positif yang unik, khas, dan menarik.",
-    "Di era digital ini semua orang bisa menjadi reporter walaupun tidak berprofesi sebagai wartawan sehingga setiap orang dapat mengunggah berita di media sosial.",
-    "Setiap orang dapat mewartakan berbagai informasi terutama hal-hal positif yang unik, khas, dan menarik dari berbagai daerah di Indonesia.",
-    "Berbagai informasi dapat diwartakan terutama hal-hal positif yang unik, khas, dan menarik dari berbagai daerah di Indonesia."
-  ],
-  "correct": 0
-},
-{
-  "type": "mc",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-      Sengaja Pingkan berlama-lama di kamar. Dia menghindari Tom sejak kemarin sore. Dia tidak mau bertemu. 
-      Walaupun Rara sahabatnya meyakinkan bahwa Tom sangat menyesalinya. Tapi Pingkan masih takut kalau Tom memarahinya 
-      atau jangan-jangan wajah Tom masih murung seperti kemarin. Kedua keadaan itu sangat tidak mengenakkan. 
-      Pingkan merasa seperti pengecut. Lantas, apa bedanya dengan Tom? Ia selalu bermuka dua. 
-      Ah, Pingkan menulis surat sedih yang ditujukan untuk Uni. Ia kini mengerti bagaimana rasanya sebatang kara di negeri orang.<br><br>
-
-      <b>Question:</b> Sikap Pingkan terhadap Tom pada teks tersebut adalah …
-    </div>
-  `,
-  "options": [
-    "Menghindari Tom karena masih takut dan merasa tidak nyaman.",
-    "Langsung meminta maaf dan menghadapi Tom dengan tegas.",
-    "Bersikap acuh dan tidak peduli terhadap Tom.",
-    "Menertawakan Tom karena murung kemarin."
-  ],
-  "correct": 0
-},
-{
-  "type": "mc",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-      Sengaja Pingkan berlama-lama di kamar. Dia menghindari Tom sejak kemarin sore. Dia tidak mau bertemu. 
-      Walaupun Rara sahabatnya meyakinkan bahwa Tom sangat menyesalinya. Tapi Pingkan masih takut kalau Tom memarahinya 
-      atau jangan-jangan wajah Tom masih murung seperti kemarin. Kedua keadaan itu sangat tidak mengenakkan. 
-      Pingkan merasa seperti <i>pengecut</i>. Lantas, apa bedanya dengan Tom? Ia selalu bermuka dua. 
-      Ah, Pingkan menulis surat sedih yang ditujukan untuk Uni. Ia kini mengerti bagaimana rasanya sebatang kara di negeri orang.<br><br>
-
-      <b>Question:</b> Makna kata yang bercetak miring pada kutipan teks cerita tersebut adalah …
-    </div>
-  `,
-  "options": [
-    "tidak berpendirian",
-    "tidak menarik",
-    "tidak kuat",
-    "tidak dipercaya"
-  ],
-  "correct": 2
-},
-{
-  "type": "mc",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-      Sengaja Pingkan berlama-lama di kamar. Dia menghindari Tom sejak kemarin sore. Dia tidak mau bertemu. 
-      Walaupun Rara sahabatnya meyakinkan bahwa Tom sangat menyesalinya. Tapi Pingkan masih takut kalau Tom memarahinya 
-      atau jangan-jangan wajah Tom masih murung seperti kemarin. Kedua keadaan itu sangat tidak mengenakkan. 
-      Pingkan merasa seperti pengecut. Lantas, apa bedanya dengan Tom? Ia selalu <i>bermuka dua</i>. 
-      Ah, Pingkan menulis surat sedih yang ditujukan untuk Uni. Ia kini mengerti bagaimana rasanya sebatang kara di negeri orang.<br><br>
-
-      <b>Question:</b> Makna kata yang bercetak miring pada kutipan teks cerita tersebut adalah …
-    </div>
-  `,
-  "options": [
-    "tidak berpendirian",
-    "tidak jujur / berpura-pura",
-    "tidak kuat",
-    "tidak dipercaya"
-  ],
-  "correct": 1
-},
-{
-  "type": "mc",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-
-      <b>Teks Ulasan 1</b><br>
-      Pasar Buku Bekas Merdeka menjadi ruang alternatif bagi masyarakat yang ingin mendapatkan bahan bacaan dengan harga terjangkau. 
-      Lapak-lapak buku tersusun memanjang di sepanjang trotoar, menawarkan berbagai jenis bacaan, mulai dari novel lawas, buku pelajaran, 
-      hingga majalah lama. Penjual melayani pembeli dengan ramah dan bersedia membantu mencarikan buku yang diinginkan. 
-      Meskipun berada di ruang terbuka, suasana pasar relatif tertib. Keberadaan Pasar Buku Bekas Merdeka turut mendukung budaya literasi di kota tersebut.<br><br>
-
-      <b>Teks Ulasan 2</b><br>
-      Berjalan menyusuri Pasar Buku Bekas Merdeka serupa memasuki lorong waktu. Bau kertas lama dan sampul buku yang mulai pudar membawa pembaca 
-      pada kenangan masa lalu. Setiap tumpukan buku menyimpan cerita yang menunggu untuk ditemukan. Pengunjung tidak sekadar membeli buku, 
-      tetapi juga menikmati proses memilih, membuka, dan membaca sekilas halaman-halaman yang pernah hidup pada zamannya. 
-      Ulasan ini menempatkan pasar buku sebagai ruang perjumpaan antara pengalaman membaca dan nostalgia.<br><br>
-
-      <b>Question:</b> Perbedaan sudut pandang penulis pada kedua teks ulasan tersebut tampak pada …
-    </div>
-  `,
-  "options": [
-    "tujuan penulisan ulasan",
-    "lokasi pasar buku",
-    "jenis buku yang dijual",
-    "waktu operasional pasar"
-  ],
-  "correct": 0
-},
-{
-  "type": "mc_multiple",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-
-      <b>Teks Ulasan 1</b><br>
-      Pasar Buku Bekas Merdeka menjadi ruang alternatif bagi masyarakat yang ingin mendapatkan bahan bacaan dengan harga terjangkau. 
-      Lapak-lapak buku tersusun memanjang di sepanjang trotoar, menawarkan berbagai jenis bacaan, mulai dari novel lawas, buku pelajaran, 
-      hingga majalah lama. Penjual melayani pembeli dengan ramah dan bersedia membantu mencarikan buku yang diinginkan. 
-      Meskipun berada di ruang terbuka, suasana pasar relatif tertib. Keberadaan Pasar Buku Bekas Merdeka turut mendukung budaya literasi di kota tersebut.<br><br>
-
-      <b>Teks Ulasan 2</b><br>
-      Berjalan menyusuri Pasar Buku Bekas Merdeka serupa memasuki lorong waktu. Bau kertas lama dan sampul buku yang mulai pudar membawa pembaca 
-      pada kenangan masa lalu. Setiap tumpukan buku menyimpan cerita yang menunggu untuk ditemukan. Pengunjung tidak sekadar membeli buku, 
-      tetapi juga menikmati proses memilih, membuka, dan membaca sekilas halaman-halaman yang pernah hidup pada zamannya. 
-      Ulasan ini menempatkan pasar buku sebagai ruang perjumpaan antara pengalaman membaca dan nostalgia.<br><br>
-
-      <b>Question:</b> Informasi yang tersirat dalam teks ulasan ke-2 adalah …<br>
-      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
-    </div>
-  `,
-  "options": [
-    "Pasar buku tidak hanya bernilai ekonomis",
-    "Aktivitas membaca memiliki dimensi emosional",
-    "Harga buku di pasar relatif mahal",
-    "Pengunjung datang untuk sekadar bernostalgia"
-  ],
-  "correct": [0, 1, 3]
 },
 {
   "type": "true_false",
   "text": `
     <div style="text-align: justify;">
-      <b>Bacalah teks berikut!</b><br><br>
-
-      <b>Teks Ulasan 1</b><br>
-      Pasar Buku Bekas Merdeka menjadi ruang alternatif bagi masyarakat yang ingin mendapatkan bahan bacaan dengan harga terjangkau. 
-      Lapak-lapak buku tersusun memanjang di sepanjang trotoar, menawarkan berbagai jenis bacaan, mulai dari novel lawas, buku pelajaran, 
-      hingga majalah lama. Penjual melayani pembeli dengan ramah dan bersedia membantu mencarikan buku yang diinginkan. 
-      Meskipun berada di ruang terbuka, suasana pasar relatif tertib. Keberadaan Pasar Buku Bekas Merdeka turut mendukung budaya literasi di kota tersebut.<br><br>
-
-      <b>Teks Ulasan 2</b><br>
-      Berjalan menyusuri Pasar Buku Bekas Merdeka serupa memasuki lorong waktu. Bau kertas lama dan sampul buku yang mulai pudar membawa pembaca 
-      pada kenangan masa lalu. Setiap tumpukan buku menyimpan cerita yang menunggu untuk ditemukan. Pengunjung tidak sekadar membeli buku, 
-      tetapi juga menikmati proses memilih, membuka, dan membaca sekilas halaman-halaman yang pernah hidup pada zamannya. 
-      Ulasan ini menempatkan pasar buku sebagai ruang perjumpaan antara pengalaman membaca dan nostalgia.<br><br>
-
-      <div style="border:2px solid #16a34a; padding:10px;">
-        <p><strong>Bayu:</strong> Aku merasa teks ulasan 2 lebih menarik karena membuat pembaca ikut merasakan suasana pasar.</p>
-        <p><strong>Rendi:</strong> Menurutku teks 1 lebih informatif karena isinya jelas dan objektif.</p>
-      </div><br>
-
-      <p><strong>Question:</strong> Pernyataan yang paling tepat untuk menjelaskan keunggulan teks ulasan ke-2 dibandingkan teks ke-1 adalah …</p>
-      <i>Tentukan <strong>Benar</strong> atau <strong>Salah</strong> untuk setiap pernyataan berikut!</i>
+      <b>Legenda Onak Berduri Sungsang</b><br><br>
+      Zaman dahulu, hiduplah dua orang hulubalang. Mereka bernama Serunting Sakti dan Rio Tabing. Mereka memiliki wilayah kekuasaan masing-masing. Wilayah kekuasaan mereka sangat luas. Namun, keduanya tidak dapat hidup rukun.<br><br>
+      Mereka sering bertempur hebat. Awalnya, mereka mengerahkan pasukan dan rakyat. Pertempuran sampai menimbulkan banyak korban. Namun, pertempuran masih belum berakhir.<br><br>
+      "Sebaiknya kita bertempur satu lawan satu." Serunting Sakti menantang.<br>
+      "Siapa takut?" jawab Rio Tabing sengit.<br><br>
+      Keduanya mempersiapkan diri. Keduanya juga memohon kesaktian kepada Dewa. Tenaga dan pikiran dipusatkan. Ledakan terjadi silih berganti. Ledakan tanda kesaktian keduanya bertempur di angkasa.<br><br>
+      "Dewa, aku mohon tambahkan kesaktian kepadaku!" seru Rio Tabing. Dewa pun memberi kesaktian kepadanya. Akibatnya, tenaganya bisa mengubah tanah datar menjadi berbukit-bukit. Apa pun yang dilewatinya menjadi rusak binasa. Duri dan onak menjadi sungsang atau terbalik. Rio Tabing pun membuat batas kekuasaannya.<br><br>
+      "Inilah batas kekuasaanku. Semua keturunan Serunting Sakti akan binasa jika melewatinya!" seru Rio Tabing. Setelah Rio Tabing mengucapkan hal itu, alam berubah tenang. Pertempuran keduanya terhenti. Perkelahian usai. Tidak ada yang kalah ataupun menang. Mereka bersama-sama menanggung kerugian besar. Kedua wilayah mereka sama-sama hancur. Wilayah kekuasaan yang dibuat Rio Tabing disebut Onak Berduri Sungsang. Tempat itu berada di daerah Bengkulu.<br><br>
+      <i>Sumber: David Wijaya, 120 Cerita Nusantara, Jakarta, Elex Media Komputindo, 2019</i><br><br>
+      <b>Petunjuk:</b> Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!
     </div>
   `,
   "statements": [
-    "Menyajikan pengalaman personal yang membangun suasana.",
-    "Memberikan data rinci mengenai kondisi pasar.",
-    "Menggunakan bahasa konotatif untuk membangun makna."
+    "1. Sikap tidak mengorbankan rakyat hanya untuk kepentingan diri sendiri merupakan keteladanan dari tokoh Serunting Sakti.",
+    "2. Sikap berani menghadapi tantangan merupakan keteladanan dari tokoh Rio Tabing.",
+    "3. Sikap bijaksana dalam menghadapi konflik merupakan keteladanan dari tokoh Hulubalang."
   ],
-  "correct": [true, false, true]
+  "correct": [true, true, false]
 },
 {
   "type": "mc_multiple",
   "text": `
     <div style="text-align: justify;">
-      <b>Bacalah puisi berikut!</b><br><br>
-
-      <b>Teks Puisi</b><br>
-      Pagi tidak selalu datang dengan riuh<br>
-      Ia menyelinap di sela rutinitas<br>
-      Saat kota baru membuka mata<br>
-      Dan langkah-langkah kecil mulai berpacu<br><br>
-
-      Di dapur sempit, tangan bekerja<br>
-      Menghitung waktu lebih cepat dari jam<br>
-      Ada lelah yang tidak diucap<br>
-      Ada cinta yang memilih diam<br><br>
-
-      <b>Question:</b> Pernyataan yang menunjukkan pemahaman mendalam terhadap latar suasana puisi tersebut adalah …<br>
-      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+      <b>Legenda Onak Berduri Sungsang</b><br><br>
+      Zaman dahulu, hiduplah dua orang hulubalang. Mereka bernama Serunting Sakti dan Rio Tabing. Mereka memiliki wilayah kekuasaan masing-masing. Wilayah kekuasaan mereka sangat luas. Namun, keduanya tidak dapat hidup rukun.<br><br>
+      Mereka sering bertempur hebat. Awalnya, mereka mengerahkan pasukan dan rakyat. Pertempuran sampai menimbulkan banyak korban. Namun, pertempuran masih belum berakhir.<br><br>
+      "Sebaiknya kita bertempur satu lawan satu." Serunting Sakti menantang.<br>
+      "Siapa takut?" jawab Rio Tabing sengit.<br><br>
+      Keduanya mempersiapkan diri. Keduanya juga memohon kesaktian kepada Dewa. Tenaga dan pikiran dipusatkan. Ledakan terjadi silih berganti. Ledakan tanda kesaktian keduanya bertempur di angkasa.<br><br>
+      "Dewa, aku mohon tambahkan kesaktian kepadaku!" seru Rio Tabing. Dewa pun memberi kesaktian kepadanya. Akibatnya, tenaganya bisa mengubah tanah datar menjadi berbukit-bukit. Apa pun yang dilewatinya menjadi rusak binasa. Duri dan onak menjadi sungsang atau terbalik. Rio Tabing pun membuat batas kekuasaannya.<br><br>
+      "Inilah batas kekuasaanku. Semua keturunan Serunting Sakti akan binasa jika melewatinya!" seru Rio Tabing. Setelah Rio Tabing mengucapkan hal itu, alam berubah tenang. Pertempuran keduanya terhenti. Perkelahian usai. Tidak ada yang kalah ataupun menang. Mereka bersama-sama menanggung kerugian besar. Kedua wilayah mereka sama-sama hancur. Wilayah kekuasaan yang dibuat Rio Tabing disebut Onak Berduri Sungsang. Tempat itu berada di daerah Bengkulu.<br><br>
+      <i>Sumber: David Wijaya, 120 Cerita Nusantara, Jakarta, Elex Media Komputindo, 2019</i><br><br>
+      <b>Petunjuk:</b> Pilih semua jawaban yang tepat!
     </div>
   `,
   "options": [
-    "Suasana pagi digambarkan melalui aktivitas, bukan penjelasan langsung",
-    "Latar tempat ditunjukkan secara eksplisit dan rinci",
-    "Ritme puisi mencerminkan kesibukan yang terukur",
-    "Penggambaran tokoh bersifat simbolik"
+    "Merasa senang karena akhirnya ada pemenang dalam pertempuran tersebut.",
+    "Merasa prihatin karena sifat egois kedua tokoh menyebabkan wilayah mereka hancur.",
+    "Merasa lega karena kedua tokoh menyelesaikan konflik tanpa mengorbankan rakyatnya kembali."
   ],
-  "correct": [0, 2, 3]
-},
-{
-  "type": "mc",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah puisi berikut!</b><br><br>
-
-      <b>Teks Puisi</b><br>
-      Pagi tidak selalu datang dengan riuh<br>
-      Ia menyelinap di sela rutinitas<br>
-      Saat kota baru membuka mata<br>
-      Dan langkah-langkah kecil mulai berpacu<br><br>
-
-      Di dapur sempit, tangan bekerja<br>
-      Menghitung waktu lebih cepat dari jam<br>
-      Ada lelah yang tidak diucap<br>
-      Ada <i>cinta yang memilih diam</i><br><br>
-
-      <b>Question:</b> Makna implisit dari baris yang dicetak miring tersebut adalah …
-    </div>
-  `,
-  "options": [
-    "Tokoh merasa terpaksa menjalani rutinitas",
-    "Kasih sayang diwujudkan melalui tindakan, bukan kata",
-    "Tokoh tidak mampu menyampaikan perasaan",
-    "Hubungan tokoh bersifat formal dan kaku"
-  ],
-  "correct": 1
-},
-{
-  "type": "tepat_tidak",
-  "text": `
-    <div style="text-align: justify;">
-      <b>Bacalah puisi berikut!</b><br><br>
-
-      <b>Teks Puisi</b><br>
-      Pagi tidak selalu datang dengan riuh<br>
-      Ia menyelinap di sela rutinitas<br>
-      Saat kota baru membuka mata<br>
-      Dan langkah-langkah kecil mulai berpacu<br><br>
-
-      Di dapur sempit, tangan bekerja<br>
-      Menghitung waktu lebih cepat dari jam<br>
-      Ada lelah yang tidak diucap<br>
-      Ada cinta yang memilih diam<br><br>
-
-      <b>Setelah membaca puisi tersebut, tiga murid berpendapat sebagai berikut.</b><br><br>
-
-      <div style="border:1px solid #16a34a; background-color:#f0fdf4; padding:10px;">
-        <p><strong>Alya:</strong> Puisinya terasa tenang, tetapi menyimpan kelelahan.</p>
-        <p><strong>Bima:</strong> Aku menangkap suasana pagi yang penuh kesibukan.</p>
-        <p><strong>Cesa:</strong> Menurutku, puisi ini ingin menonjolkan pengorbanan tanpa keluhan.</p>
-      </div><br>
-
-      <p><strong>Question:</strong> Pendapat yang paling mencerminkan suasana emosional dominan dalam puisi tersebut adalah …</p>
-      <i>Tentukan <strong>Tepat (T)</strong> atau <strong>Tidak Tepat (TT)</strong> untuk setiap pernyataan berikut!</i>
-    </div>
-  `,
-  "statements": [
-    "Alya karena mampu membaca lapisan emosi di balik suasana tenang.",
-    "Bima karena fokus pada aktivitas yang tampak.",
-    "Cesa karena menangkap makna pengorbanan implisit."
-  ],
-  "correct": [true, false, true]
-},
+  "correct": [1, 2]
+}
 
 
 
@@ -1539,10 +1370,6 @@ function disableAll() {
   document.querySelectorAll('button').forEach(btn => btn.disabled = true);
   document.querySelectorAll('input').forEach(inp => inp.disabled = true);
 }
-function disableAll() {
-  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
-  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
-}
 
 function endTryout() {
   if (timerRunning) {
@@ -1657,7 +1484,7 @@ checkSession();
   jk: window.dataPeserta.jk,
   tglLahir: window.dataPeserta.tgl,
   sekolah: window.dataPeserta.sekolah,
-  mapel: "Bahasa Indonesia SMP/MTs", // tambah field mapel
+  mapel: "Bahasa Indonesia SD/MI", // tambah field mapel
   nilai: nilai,
   waktu: new Date().toISOString()
 });
