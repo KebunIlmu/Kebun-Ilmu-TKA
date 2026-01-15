@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Bahasa Indonesia - Kebun Ilmu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+* {
+  box-sizing: border-box;
+}
+  header {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  header h2 {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .menu-button, .timer {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+.container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #cfd8dc;
+  }
+
+  .right-panel {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .question-buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+#questionDisplay {
+    font-size: 14px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+.fullscreen-mode header {
+    padding: 6px 10px;
+    min-height: unset;
+  }
+
+  .fullscreen-mode header h2 {
+    font-size: 13px;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .fullscreen-mode .menu-button,
+  .fullscreen-mode .timer {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+  
+</style>
+</head>
+
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+<div id="pesertaForm" class="hidden" style="justify-content:center; align-items:center; height:100vh; background-color:#f4f9ff; padding:20px; box-sizing:border-box;">
+  <div style="background:white; padding:24px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:100%; max-width:400px;">
+
+    <h2 style="margin-bottom:14px; color:#1E88E5; text-align:center;">Data Peserta</h2>
+
+    <!-- NIK -->
+    <label for="nik" style="font-weight:600; display:block; margin-bottom:3px;">NIK</label>
+    <input id="nik" placeholder="Masukkan NIK"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Nama Peserta -->
+    <label for="namaPeserta" style="font-weight:600; display:block; margin-bottom:3px;">Nama Peserta</label>
+    <input id="namaPeserta" placeholder="Masukkan nama lengkap"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Jenis Kelamin -->
+    <label for="jk" style="font-weight:600; display:block; margin-bottom:3px;">Jenis Kelamin</label>
+    <select id="jk"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+      <option value="">-- Pilih Jenis Kelamin --</option>
+      <option value="L">Laki-laki</option>
+      <option value="P">Perempuan</option>
+    </select>
+
+    <!-- Tanggal Lahir -->
+    <label for="tglLahir" style="font-weight:600; display:block; margin-bottom:3px;">Tanggal Lahir</label>
+    <input id="tglLahir" type="date"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Sekolah -->
+    <label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">Nama Sekolah</label>
+    <input id="sekolah" placeholder="Nama sekolah"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Token -->
+    <label for="tokenUjian" style="font-weight:600; display:block; margin-bottom:3px;">Token Ujian</label>
+    <input id="tokenUjian" placeholder="Masukkan token ujian"
+      style="width:100%; padding:8px 10px; margin-bottom:14px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <button onclick="mulaiUjian()"
+      style="width:100%; padding:10px; background-color:#1E88E5; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:15px;"
+      onmouseover="this.style.backgroundColor='#1565C0';" 
+      onmouseout="this.style.backgroundColor='#1E88E5';">
+      Mulai Ujian
+    </button>
+
+    <p id="errorPeserta" style="margin-top:8px; font-size:13px; color:red; text-align:center;"></p>
+
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+<header>
+  <h2>Try Out TKA Bahasa Indonesia SMP/MTs - Kebun Ilmu</h2>
+  <div>
+        <span class="timer" id="timer">60:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+function getTokenSekarang() {
+  const now = new Date();
+  const jam = now.getHours();
+  const menit = now.getMinutes();
+
+  // batas waktu
+  if (jam < 7 || jam >= 22) return null;
+
+  // slot 10 menit (0–5)
+  const slot = Math.floor(menit / 10);
+
+  // ===== DEPAN ACAK TERKONTROL =====
+  const seed = jam * 100 + slot;   // angka unik tiap 10 menit
+  const depan = String.fromCharCode(65 + (seed * 7) % 26); // A–Z
+
+  // token akhir
+  return `${depan}${jam.toString().padStart(2,'0')}${slot}`;
+}
+function mulaiUjian() {
+  const nik = document.getElementById("nik").value.trim();
+  const nama = document.getElementById("namaPeserta").value.trim();
+  const jk = document.getElementById("jk").value;
+  const tgl = document.getElementById("tglLahir").value;
+  const sekolah = document.getElementById("sekolah").value.trim();
+  const token = document.getElementById("tokenUjian").value.trim();
+
+  if (!nik || !nama || !jk || !tgl || !sekolah || !token) {
+    document.getElementById("errorPeserta").innerText = "❌ Semua data wajib diisi";
+    return;
+  }
+
+  const tokenAktif = getTokenSekarang();
+
+if (!tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    "⏰ Ujian hanya bisa diakses pukul 07.00 – 17.00";
+  return;
+}
+
+if (token !== tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    `❌ Token salah. Tanya admin`;
+  return;
+}
+
+  // simpan data peserta sementara
+  window.dataPeserta = { nik, nama, jk, tgl, sekolah, token };
+
+ questions = shuffleArray(questions);
+answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  if (q.type === 'tepat_tidak') return Array(q.statements.length).fill(null);
+if (q.type === 'relevan_tidak') return Array(q.statements.length).fill(null);
+  if (q.type === 'dampak_jangka')
+    return Array(q.statements.length).fill(null);
+  return null;
+});
+
+  currentQuestion = 0;
+
+  // sembunyikan form peserta dan tampilkan konten try out
+  document.getElementById("pesertaForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+
+  // 🔥 Render soal dan start timer
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(60 * 60);
+
+  // AUTO FULLSCREEN
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.warn("Fullscreen gagal:", err);
+    });
+  }
+}
+
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "MANU9",  password: "2026",  expire: "2026-5-11T23:59:59" },
+  { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-7-30T23:59:59" },
+  { username: "MTSMH",   password: "2026", expire: "2026-7-30T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("pesertaForm").style.display = "flex";
+  
+}
+
+  let questions = [
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Wahidin Soedirohoesodo, Dokter Bijak yang Menginspirasi Bangsa</strong></p>
+
+      Wahidin Soedirohoesodo sosok yang cerdas, lembut, dan nasionalis. Wahidin lahir di Mlati, Yogyakarta, pada 7 Januari 1852. Ia tumbuh dalam keluarga yang menjunjung tinggi pendidikan. Sejak kecil Wahidin menunjukkan ketekunan dalam belajar. Ketekunan membuatnya dapat bersekolah di Sekolah Dokter Jawa di Batavia. Ia menjadi anak desa pertama yang diterima sekolah kedokteran. Karena pandai, Wahidin mendapat tawaran sebagai asisten guru. Namun, tawaran tersebut tidak ia ambil. Wahidin memilih kembali ke tanah kelahirannya untuk <strong>mengabdi</strong> sebagai dokter.<br><br>
+
+      Sebagai dokter, Wahidin terkenal murah hati. Ia tidak pernah memungut bayaran dari pasien. Wahidin kerap kali memberi nasihat seputar kesehatan. Wahidin juga sering memberi nasihat mengenai persoalan hidup. Wahidin memiliki sifat lembut dan penuh empati. Oleh karena itu, ia dihormati dan dicintai masyarakat.<br><br>
+
+      Namun, perjuangan Wahidin tidak berhenti pada pengobatan. Ia sangat prihatin dengan nasib bangsa Indonesia. Wahidin memelopori gerakan pendidikan. Ia juga menggugah semangat kebangsaan melalui tulisan dan pertemuan-pertemuan. Gagasan Wahidin menjadi cikal bakal kelahiran Budi Utomo, sebuah organisasi pemuda pertama di Indonesia.<br><br>
+
+      Hingga akhir hayatnya, Wahidin tetap aktif memperjuangkan pendidikan. Ia juga aktif memperjuangkan kesadaran nasional. Ia dikenang sebagai dokter yang dermawan. Ia meninggalkan warisan berharga bagi bangsa Indonesia. Kepribadian baik Wahidin patut menjadi teladan, salah satunya mengabdi pada negara dengan keilmuan dan ketulusan.<br><br>
+
+      <b>Question:</b> Makna kata bercetak tebal pada paragraf pertama adalah ....
+    </div>
+  `,
+  "options": [
+    "Membantu masyarakat dengan imbalan tertentu.",
+    "Mendedikasikan diri untuk melayani tanpa pamrih.",
+    "Mengajar dan membimbing murid-murid di sekolah.",
+    "Bekerja secara profesional demi mendapatkan upah."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Wahidin Soedirohoesodo, Dokter Bijak yang Menginspirasi Bangsa</strong></p>
+
+      Wahidin Soedirohoesodo sosok yang cerdas, lembut, dan nasionalis. Wahidin lahir di Mlati, Yogyakarta, pada 7 Januari 1852. Ia tumbuh dalam keluarga yang menjunjung tinggi pendidikan. Sejak kecil Wahidin menunjukkan ketekunan dalam belajar. Ketekunan membuatnya dapat bersekolah di Sekolah Dokter Jawa di Batavia. Ia menjadi anak desa pertama yang diterima sekolah kedokteran. Karena pandai, Wahidin mendapat tawaran sebagai asisten guru. Namun, tawaran tersebut tidak ia ambil. Wahidin memilih kembali ke tanah kelahirannya untuk <strong>mengabdi</strong> sebagai dokter.<br><br>
+
+      Sebagai dokter, Wahidin terkenal murah hati. Ia tidak pernah memungut bayaran dari pasien. Wahidin kerap kali memberi nasihat seputar kesehatan. Wahidin juga sering memberi nasihat mengenai persoalan hidup. Wahidin memiliki sifat lembut dan penuh empati. Oleh karena itu, ia dihormati dan dicintai masyarakat.<br><br>
+
+      Namun, perjuangan Wahidin tidak berhenti pada pengobatan. Ia sangat prihatin dengan nasib bangsa Indonesia. Wahidin memelopori gerakan pendidikan. Ia juga menggugah semangat kebangsaan melalui tulisan dan pertemuan-pertemuan. Gagasan Wahidin menjadi cikal bakal kelahiran Budi Utomo, sebuah organisasi pemuda pertama di Indonesia.<br><br>
+
+      Hingga akhir hayatnya, Wahidin tetap aktif memperjuangkan pendidikan. Ia juga aktif memperjuangkan kesadaran nasional. Ia dikenang sebagai dokter yang dermawan. Ia meninggalkan warisan berharga bagi bangsa Indonesia. Kepribadian baik Wahidin patut menjadi teladan, salah satunya mengabdi pada negara dengan keilmuan dan ketulusan.<br><br>
+
+      <b>Question:</b> Manakah ide pokok paragraf kedua teks tersebut?
+    </div>
+  `,
+  "options": [
+    "Sifat Wahidin Soedirohoesodo.",
+    "Perjuangan Wahidin Soedirohoesodo.",
+    "Tempat asal Wahidin Soedirohoesodo.",
+    "Keteladanan Wahidin Soedirohoesodo."
+  ],
+  "correct": 0
+},
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Wahidin Soedirohoesodo, Dokter Bijak yang Menginspirasi Bangsa</strong></p>
+
+      Wahidin Soedirohoesodo sosok yang cerdas, lembut, dan nasionalis. Wahidin lahir di Mlati, Yogyakarta, pada 7 Januari 1852. Ia tumbuh dalam keluarga yang menjunjung tinggi pendidikan. Sejak kecil Wahidin menunjukkan ketekunan dalam belajar. Ketekunan membuatnya dapat bersekolah di Sekolah Dokter Jawa di Batavia. Ia menjadi anak desa pertama yang diterima sekolah kedokteran. Karena pandai, Wahidin mendapat tawaran sebagai asisten guru. Namun, tawaran tersebut tidak ia ambil. Wahidin memilih kembali ke tanah kelahirannya untuk <strong>mengabdi</strong> sebagai dokter.<br><br>
+
+      Sebagai dokter, Wahidin terkenal murah hati. Ia tidak pernah memungut bayaran dari pasien. Wahidin kerap kali memberi nasihat seputar kesehatan. Wahidin juga sering memberi nasihat mengenai persoalan hidup. Wahidin memiliki sifat lembut dan penuh empati. Oleh karena itu, ia dihormati dan dicintai masyarakat.<br><br>
+
+      Namun, perjuangan Wahidin tidak berhenti pada pengobatan. Ia sangat prihatin dengan nasib bangsa Indonesia. Wahidin memelopori gerakan pendidikan. Ia juga menggugah semangat kebangsaan melalui tulisan dan pertemuan-pertemuan. Gagasan Wahidin menjadi cikal bakal kelahiran Budi Utomo, sebuah organisasi pemuda pertama di Indonesia.<br><br>
+
+      Hingga akhir hayatnya, Wahidin tetap aktif memperjuangkan pendidikan. Ia juga aktif memperjuangkan kesadaran nasional. Ia dikenang sebagai dokter yang dermawan. Ia meninggalkan warisan berharga bagi bangsa Indonesia. Kepribadian baik Wahidin patut menjadi teladan, salah satunya mengabdi pada negara dengan keilmuan dan ketulusan.<br><br>
+
+      <b>Petunjuk:</b> Tentukan Tepat (T) atau Tidak Tepat (TT) untuk setiap pernyataan berikut berdasarkan teks!
+    </div>
+  `,
+  "statements": [
+    "A. Sebagai dokter, Wahidin Soedirohoesodo lebih baik dibanding dokter lain pada masa itu.",
+    "B. Wahidin Soedirohoesodo lebih memilih mengajar di Batavia daripada kembali ke tanah kelahirannya.",
+    "C. Wahidin Soedirohoesodo lebih mengutamakan perjuangan fisik dibanding bidang pendidikan."
+  ],
+  "correct": [false, false, false]
+},
+
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Hustle Culture: Budaya Kerja Berlebihan yang Perlu Diwaspadai</strong></p>
+
+      Hustle culture atau gila kerja merupakan fenomena yang patut diwaspadai. Hustle culture mendorong seseorang untuk terus bekerja tanpa henti. Bahkan, seseorang bekerja sampai melupakan waktu istirahat. Orang-orang yang terjebak dalam budaya ini merasa harus terus produktif. Semua itu dilakukan agar mereka dianggap sukses. Mereka sering kali bekerja melebihi batas wajar. Bahkan, rela mengorbankan waktu istirahat dan kesehatan demi terus aktif.<br><br>
+
+      Hustle culture berdampak buruk bagi kesehatan, baik fisik maupun psikis. Seseorang yang terus bekerja tanpa cukup istirahat berisiko mengalami kelelahan. Kelelahan itu meliputi fisik, mental, ataupun emosional. Keadaan ini dapat menyebabkan tekanan darah tinggi. Bekerja tanpa henti juga menyebabkan penyakit jantung dan depresi. Berdasarkan penelitian, jika bekerja atau beraktivitas lebih dari 55 jam seminggu, risiko terkena penyakit akan meningkat.<br><br>
+
+      Agar terhindar dari hustle culture, kita perlu menjaga keseimbangan. Pertama, tentukan arti sukses menurut dirimu sendiri. Jangan mengikuti standar sukses orang lain. Kedua, buatlah jadwal kegiatan dan waktu istirahat yang seimbang. Pastikan ada waktu untuk bersantai. Usahakan bertemu teman atau melakukan hobi. Ketiga, lakukan kegiatan-kegiatan menyenangkan. Sebagai contoh, membaca buku, menonton film, atau berolahraga. Kegiatan-kegiatan itu dilakukan agar pikiran tetap sehat.<br><br>
+
+      Bekerja keras memang penting. Namun, menjaga kesehatan juga tidak kalah penting. Jagalah keseimbangan antara pekerjaan dan istirahat. Kita akan bahagia dan tetap produktif tanpa mengorbankan kesehatan.<br><br>
+
+      <em>Sumber: Winona Katyusha / Hello Sehat (2024)</em><br><br>
+
+      <b>Question:</b> Manakah kata kiasan yang menggambarkan fenomena dalam teks tersebut?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Gila kerja.",
+    "Batas wajar.",
+    "Budaya kerja.",
+    "Waktu istirahat."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Hustle Culture: Budaya Kerja Berlebihan yang Perlu Diwaspadai</strong></p>
+
+      Hustle culture atau gila kerja merupakan fenomena yang patut diwaspadai. Hustle culture mendorong seseorang untuk terus bekerja tanpa henti. Bahkan, seseorang bekerja sampai melupakan waktu istirahat. Orang-orang yang terjebak dalam budaya ini merasa harus terus produktif. Semua itu dilakukan agar mereka dianggap sukses. Mereka sering kali bekerja melebihi batas wajar. Bahkan, rela mengorbankan waktu istirahat dan kesehatan demi terus aktif.<br><br>
+
+      Hustle culture berdampak buruk bagi kesehatan, baik fisik maupun psikis. Seseorang yang terus bekerja tanpa cukup istirahat berisiko mengalami kelelahan. Kelelahan itu meliputi fisik, mental, ataupun emosional. Keadaan ini dapat menyebabkan tekanan darah tinggi. Bekerja tanpa henti juga menyebabkan penyakit jantung dan depresi. Berdasarkan penelitian, jika bekerja atau beraktivitas lebih dari 55 jam seminggu, risiko terkena penyakit akan meningkat.<br><br>
+
+      Agar terhindar dari hustle culture, kita perlu menjaga keseimbangan. Pertama, tentukan arti sukses menurut dirimu sendiri. Jangan mengikuti standar sukses orang lain. Kedua, buatlah jadwal kegiatan dan waktu istirahat yang seimbang. Pastikan ada waktu untuk bersantai. Usahakan bertemu teman atau melakukan hobi. Ketiga, lakukan kegiatan-kegiatan menyenangkan. Sebagai contoh, membaca buku, menonton film, atau berolahraga. Kegiatan-kegiatan itu dilakukan agar pikiran tetap sehat.<br><br>
+
+      Bekerja keras memang penting. Namun, menjaga kesehatan juga tidak kalah penting. Jagalah keseimbangan antara pekerjaan dan istirahat. Kita akan bahagia dan tetap produktif tanpa mengorbankan kesehatan.<br><br>
+
+      <em>Sumber: Winona Katyusha / Hello Sehat (2024)</em><br><br>
+
+      <b>Question:</b> Tentukan Benar atau Salah untuk setiap pernyataan berikut berkaitan dengan informasi penting dalam teks tersebut!<br>
+      <i>Tentukan benar atau salah setiap pernyataan berikut!</i>
+    </div>
+  `,
+  "statements": [
+    "Hustle culture mendorong seseorang terus bekerja tanpa henti karena ingin dianggap sukses.",
+    "Hustle culture sangat dianjurkan karena seseorang dapat mengikuti standar orang lain.",
+    "Hustle culture perlu dihindari karena dapat menimbulkan penyakit degeneratif."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Hustle Culture: Budaya Kerja Berlebihan yang Perlu Diwaspadai</strong></p>
+
+      Hustle culture atau gila kerja merupakan fenomena yang patut diwaspadai. Hustle culture mendorong seseorang untuk terus bekerja tanpa henti. Bahkan, seseorang bekerja sampai melupakan waktu istirahat. Orang-orang yang terjebak dalam budaya ini merasa harus terus produktif. Semua itu dilakukan agar mereka dianggap sukses. Mereka sering kali bekerja melebihi batas wajar. Bahkan, rela mengorbankan waktu istirahat dan kesehatan demi terus aktif.<br><br>
+
+      Hustle culture berdampak buruk bagi kesehatan, baik fisik maupun psikis. Seseorang yang terus bekerja tanpa cukup istirahat berisiko mengalami kelelahan. Kelelahan itu meliputi fisik, mental, ataupun emosional. Keadaan ini dapat menyebabkan tekanan darah tinggi. Bekerja tanpa henti juga menyebabkan penyakit jantung dan depresi. Berdasarkan penelitian, jika bekerja atau beraktivitas lebih dari 55 jam seminggu, risiko terkena penyakit akan meningkat.<br><br>
+
+      Agar terhindar dari hustle culture, kita perlu menjaga keseimbangan. Pertama, tentukan arti sukses menurut dirimu sendiri. Jangan mengikuti standar sukses orang lain. Kedua, buatlah jadwal kegiatan dan waktu istirahat yang seimbang. Pastikan ada waktu untuk bersantai. Usahakan bertemu teman atau melakukan hobi. Ketiga, lakukan kegiatan-kegiatan menyenangkan. Sebagai contoh, membaca buku, menonton film, atau berolahraga. Kegiatan-kegiatan itu dilakukan agar pikiran tetap sehat.<br><br>
+
+      Bekerja keras memang penting. Namun, menjaga kesehatan juga tidak kalah penting. Jagalah keseimbangan antara pekerjaan dan istirahat. Kita akan bahagia dan tetap produktif tanpa mengorbankan kesehatan.<br><br>
+
+      <em>Sumber: Winona Katyusha / Hello Sehat (2024)</em><br><br>
+
+      <b>Question:</b> Jika seseorang menerapkan <em>hustle culture</em>, kemungkinan apa yang akan terjadi pada kesehatan mentalnya?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Mengalami kelelahan mental dan emosional.",
+    "Memperkuat konsentrasi dan terbebas dari stres.",
+    "Meningkatkan potensi depresi yang cukup parah.",
+    "Meningkatkan daya juang dan semangat untuk bekerja."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Muslik asyik membaca koran di pinggir trotoar. Datanglah Koiron dengan perlahan-lahan, ia menggoda Muslik dengan memainkan rumput di telinga Muslik.<br><br>
+
+      Muslik : (Agak terkejut) Siapa ini! Awas nanti ...<br>
+      Koiron : Maaf, Kak ... habis penjual koran, kok, korannya dibaca sendiri ... tidak laku, ya?<br>
+      Muslik : Iya, Ron. Kelihatannya sepi pembeli hari ini.<br>
+      Koiron : Iya, betul, Kak. Jajan yang kubawa hari ini masih sisa banyak. (Sambil menunjukkan dagangannya)<br>
+      Muslik : Ron, kalau begini terus, kita nggak bakal bisa nabung lagi.<br><br>
+
+      Datang Kliwon yang membawa amanah dari Kuncir.<br><br>
+
+      Kliwon : Nah, ini. Pucuk dicinta ulam tiba. (Ketawa) Kebetulan sekarang perintah komandan, kalian harus memberikan sebagian uang kalian kepada Bos Kuncir.<br>
+      Koiron : Enak, ojo. Memangnya uang ini harta karun nenek moyangmu?! Mikir mikir, jangan asal <em>sambar</em> saja!<br>
+      Kliwon : Tidak peduli, yang penting aku dapat uang untuk si Bos.<br>
+      Muslik : Tidak bisa. Sekarang tidak ada wilayah-wilayahan. Dan sekarang kami siap menerima kemarahan Kuncir.<br><br>
+
+      Kliwon mendekat kepada Muslik, terjadi tarik-menarik antara Kliwon dan Muslik. Seketika, muncul Sarti meleraikan.<br><br>
+
+      Sarti : Ada apa ini? Ada apa?<br>
+      Koiron : Ini, Mbak, Kliwon mau <em>meres</em> lagi.<br>
+      Sarti : Enak ajo! Ayo, bubar! Kalau nggak mau bubar, aku laporkan ke yang berwajib kamu, Kliwon, berulah lagi!<br>
+      Kliwon : Ti, tidak, Yu ... (Gugup)<br>
+      Sarti : Awas kalau ini perintah Kuncir!<br><br>
+
+      Kliwon cepat-cepat meninggalkan mereka.<br><br>
+
+      <em>Sumber: Sukarjan, "Kado Kecil buat Mak Unah" dalam Kumpulan Naskah Drama Terlena, Tangerang, Indocamp, 2019</em><br><br>
+
+      <b>Question:</b> Apa gambaran yang tampak dari kata <em>sambar</em> dan <em>meres</em> yang diucapkan tokoh Koiron?
+    </div>
+  `,
+  "options": [
+    "Kedua kata tersebut menggambarkan tokoh Kliwon yang cepat memenuhi perintah tokoh Kuncir.",
+    "Kedua kata tersebut menggambarkan tokoh Kliwon yang mudah tersulut emosi hingga berkelahi.",
+    "Kedua kata tersebut berarti kasar, menggambarkan tokoh Kliwon yang ingin menguasai wilayah.",
+    "Kedua kata tersebut berarti meminta dengan paksa dari tokoh Kliwon yang meminta uang."
+  ],
+  "correct": 3
+},
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      Muslik asyik membaca koran di pinggir trotoar. Datanglah Koiron dengan perlahan-lahan, ia menggoda Muslik dengan memainkan rumput di telinga Muslik.<br><br>
+
+      Muslik : (Agak terkejut) Siapa ini! Awas nanti ...<br>
+      Koiron : Maaf, Kak ... habis penjual koran, kok, korannya dibaca sendiri ... tidak laku, ya?<br>
+      Muslik : Iya, Ron. Kelihatannya sepi pembeli hari ini.<br>
+      Koiron : Iya, betul, Kak. Jajan yang kubawa hari ini masih sisa banyak. (Sambil menunjukkan dagangannya)<br>
+      Muslik : Ron, kalau begini terus, kita nggak bakal bisa nabung lagi.<br><br>
+
+      Datang Kliwon yang membawa amanah dari Kuncir.<br><br>
+
+      Kliwon : Nah, ini. Pucuk dicinta ulam tiba. (Ketawa) Kebetulan sekarang perintah komandan, kalian harus memberikan sebagian uang kalian kepada Bos Kuncir.<br>
+      Koiron : Enak, ojo. Memangnya uang ini harta karun nenek moyangmu?! Mikir mikir, jangan asal sambar saja!<br>
+      Kliwon : Tidak peduli, yang penting aku dapat uang untuk si Bos.<br>
+      Muslik : Tidak bisa. Sekarang tidak ada wilayah-wilayahan. Dan sekarang kami siap menerima kemarahan Kuncir.<br><br>
+
+      Kliwon mendekat kepada Muslik, terjadi tarik-menarik antara Kliwon dan Muslik. Seketika, muncul Sarti meleraikan.<br><br>
+
+      Sarti : Ada apa ini? Ada apa?<br>
+      Koiron : Ini, Mbak, Kliwon mau meres lagi.<br>
+      Sarti : Enak ajo! Ayo, bubar! Kalau nggak mau bubar, aku laporkan ke yang berwajib kamu, Kliwon, berulah lagi!<br>
+      Kliwon : Ti, tidak, Yu ... (Gugup)<br>
+      Sarti : Awas kalau ini perintah Kuncir!<br><br>
+
+      Kliwon cepat-cepat meninggalkan mereka.<br><br>
+
+      <em>Sumber: Sukarjan, "Kado Kecil buat Mak Unah" dalam Kumpulan Naskah Drama Terlena, Tangerang, Indocamp, 2019</em><br><br>
+
+      <b>Petunjuk:</b> Tentukan Tepat (T) atau Tidak Tepat (TT) untuk setiap pernyataan berikut berdasarkan isi teks drama tersebut!
+    </div>
+  `,
+  "statements": [
+    "A. Tindakan tokoh Muslik yang melawan tokoh Kliwon menggambarkan perlawanan terhadap ketidakadilan. Tokoh Muslik menunjukkan sikap berani.",
+    "B. Tindakan tokoh Kliwon yang meminta uang menggambarkan kepatuhan dan penertiban. Tokoh Kliwon bersifat dapat dipercaya.",
+    "C. Tindakan tokoh Sarti sebagai pelerai untuk menjaga kedamaian. Tokoh Sarti menunjukkan sikap tegas dan adil."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Muslik asyik membaca koran di pinggir trotoar. Datanglah Koiron dengan perlahan-lahan, ia menggoda Muslik dengan memainkan rumput di telinga Muslik.<br><br>
+
+      Muslik : (Agak terkejut) Siapa ini! Awas nanti ...<br>
+      Koiron : Maaf, Kak ... habis penjual koran, kok, korannya dibaca sendiri ... tidak laku, ya?<br>
+      Muslik : Iya, Ron. Kelihatannya sepi pembeli hari ini.<br>
+      Koiron : Iya, betul, Kak. Jajan yang kubawa hari ini masih sisa banyak. (Sambil menunjukkan dagangannya)<br>
+      Muslik : Ron, kalau begini terus, kita nggak bakal bisa nabung lagi.<br><br>
+
+      Datang Kliwon yang membawa amanah dari Kuncir.<br><br>
+
+      Kliwon : Nah, ini. Pucuk dicinta ulam tiba. (Ketawa) Kebetulan sekarang perintah komandan, kalian harus memberikan sebagian uang kalian kepada Bos Kuncir.<br>
+      Koiron : Enak, ojo. Memangnya uang ini harta karun nenek moyangmu?! Mikir mikir, jangan asal sambar saja!<br>
+      Kliwon : Tidak peduli, yang penting aku dapat uang untuk si Bos.<br>
+      Muslik : Tidak bisa. Sekarang tidak ada wilayah-wilayahan. Dan sekarang kami siap menerima kemarahan Kuncir.<br><br>
+
+      Kliwon mendekat kepada Muslik, terjadi tarik-menarik antara Kliwon dan Muslik. Seketika, muncul Sarti meleraikan.<br><br>
+
+      Sarti : Ada apa ini? Ada apa?<br>
+      Koiron : Ini, Mbak, Kliwon mau meres lagi.<br>
+      Sarti : Enak ajo! Ayo, bubar! Kalau nggak mau bubar, aku laporkan ke yang berwajib kamu, Kliwon, berulah lagi!<br>
+      Kliwon : Ti, tidak, Yu ... (Gugup)<br>
+      Sarti : Awas kalau ini perintah Kuncir!<br><br>
+
+      Kliwon cepat-cepat meninggalkan mereka.<br><br>
+
+      <em>Sumber: Sukarjan, "Kado Kecil buat Mak Unah" dalam Kumpulan Naskah Drama Terlena, Tangerang, Indocamp, 2019</em><br><br>
+
+      <b>Question:</b> Dalam kutipan naskah drama tersebut ditampilkan konflik fisik antartokoh. Apa saja akibat yang mungkin terjadi dari konflik tersebut?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Tokoh Kliwon akan membantah tokoh Kuncir karena takut kepada tokoh Sarti.",
+    "Tokoh Kliwon akan kembali menagih uang kepada tokoh Muslik dan tokoh Koiron.",
+    "Tokoh Koiron dan tokoh Muslik akan terus melawan dan menentang tokoh Kliwon.",
+    "Tokoh Koiron dan tokoh Muslik berhenti berjualan agar tidak diganggu tokoh Kliwon."
+  ],
+  "correct": [1, 2]
+},
+
+{
+  "type": "relevan_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;"><strong>Kutipan Naskah Drama</strong></p>
+
+      Muslik asyik membaca koran di pinggir trotoar. Datanglah Koiron dengan perlahan-lahan, ia menggoda Muslik dengan memainkan rumput di telinga Muslik.<br><br>
+
+      Muslik : (Agak terkejut) Siapa ini! Awas nanti ...<br>
+      Koiron : Maaf, Kak ... habis penjual koran, kok, korannya dibaca sendiri ... tidak laku, ya?<br>
+      Muslik : Iya, Ron. Kelihatannya sepi pembeli hari ini.<br>
+      Koiron : Iya, betul, Kak. Jajan yang kubawa hari ini masih sisa banyak.<br>
+      Muslik : Ron, kalau begini terus, kita nggak bakal bisa nabung lagi.<br><br>
+
+      Datang Kliwon yang membawa amanah dari Kuncir.<br><br>
+
+      Kliwon : Nah, ini. Pucuk dicinta ulam tiba. Kebetulan sekarang perintah komandan, kalian harus memberikan sebagian uang kalian kepada Bos Kuncir.<br>
+      Koiron : Enak, ojo. Memangnya uang ini harta karun nenek moyangmu?!<br>
+      Kliwon : Tidak peduli, yang penting aku dapat uang untuk si Bos.<br>
+      Muslik : Tidak bisa. Sekarang tidak ada wilayah-wilayahan.<br><br>
+
+      Kliwon mendekat kepada Muslik, terjadi tarik-menarik. Seketika muncul Sarti meleraikan.<br><br>
+
+      Sarti : Ada apa ini?<br>
+      Koiron : Ini, Mbak, Kliwon mau meres lagi.<br>
+      Sarti : Enak ajo! Ayo, bubar! Kalau tidak, aku laporkan ke yang berwajib!<br>
+      Kliwon : Ti, tidak, Yu ...<br><br>
+
+      <em>Sumber: Sukarjan, "Kado Kecil buat Mak Unah", 2019</em><br><br>
+
+      <b>Pertanyaan:</b><br>
+      Manakah kondisi dalam kutipan naskah drama yang relevan dengan kehidupan sehari-hari?<br>
+      <i>Tentukan Relevan atau Tidak Relevan untuk setiap pernyataan berikut!</i>
+    </div>
+  `,
+  "statements": [
+    "Pekerjaan tokoh Muslik dan tokoh Koiron menggambarkan pedagang kecil yang terkadang tidak mendapat pembeli.",
+    "Peleraian yang dilakukan tokoh Sarti menggambarkan kepedulian terhadap orang yang tertindas.",
+    "Perkelahian tokoh Kliwon dan tokoh Muslik tidak menarik perhatian warga menggambarkan ketidakpedulian seseorang terhadap urusan orang lain."
+  ],
+  "correct": [
+    true,
+    true,
+    false
+  ]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Buku <em>"Sepotong Hati yang Baru"</em> merupakan karya penulis Tere Liye. Karya ini adalah buku kedua dari buku sebelumnya, yaitu <em>"Berjuta Rasanya"</em>. Dalam buku ini terdapat delapan cerpen dengan tema yang sama. Akan tetapi, tema-tema tersebut tidak saling berhubungan. Tema patah hati dan jatuh cinta disatupadukan dalam buku ini.<br><br>
+
+      Delapan tema cerpen dalam buku sering ditemukan dalam kehidupan. Kisah pertama menceritakan dua sahabat yang salah paham. Salah paham muncul karena sikap ramah seorang lelaki. Kisah kedua adalah hubungan yang dilandasi uang. Ketiga mengisahkan lelaki yang ditinggalkan seseorang. Ia mencoba menjaga harga dirinya. Kisah berikutnya berkaitan dengan hubungan yang tidak direstui orang tua. Kisah selanjutnya tentang sepasang kekasih pada zaman penjajahan Belanda. Selanjutnya, kisah persahabatan yang berubah setelah menjadi kaya. Setelah itu, ada cerita Rama dan Sinta. Buku ini diakhiri cerpen tentang cinta beda kasta.<br><br>
+
+      Tema buku <em>"Sepotong Hati yang Baru"</em> dekat dengan kehidupan sehari-hari. Tere Liye berhasil memberikan banyak pemahaman terkait perasaan. Buku ini disajikan dengan bahasa yang puitis dan indah. Pemilihan diksinya membuat pembaca hanyut dalam cerita. Namun, dalam cerita terdapat ejaan zaman dahulu. Kemungkinan diksi tersebut sulit dimengerti seluruh pembaca.<br><br>
+
+      Buku ini mengajarkan untuk mengendalikan perasaan kita. Tetap menggunakan rasional untuk mengendalikan perasaan, baik perasaan jatuh cinta maupun patah hati. Semua pembaca, remaja atau dewasa, dapat menikmati buku ini.<br><br>
+
+      <em>Sumber: Nandy/Gramedia (2023)</em><br><br>
+
+      <b>Question:</b> Apa saja keunggulan buku yang dibahas dalam teks tersebut?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Ada delapan cerpen berbeda dengan tema yang sama.",
+    "Tema yang diangkat dekat dengan pembaca.",
+    "Bahasa yang digunakan sangat indah dan puitis.",
+    "Ejaan yang digunakan menggunakan aturan zaman dulu."
+  ],
+  "correct": [0, 1, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Buku <em>"Sepotong Hati yang Baru"</em> merupakan karya penulis Tere Liye. Karya ini adalah buku kedua dari buku sebelumnya, yaitu <em>"Berjuta Rasanya"</em>. Dalam buku ini terdapat delapan cerpen dengan tema yang sama. Akan tetapi, tema-tema tersebut tidak saling berhubungan. Tema patah hati dan jatuh cinta disatupadukan dalam buku ini.<br><br>
+
+      Delapan tema cerpen dalam buku sering ditemukan dalam kehidupan. Kisah pertama menceritakan dua sahabat yang salah paham. Salah paham muncul karena sikap ramah seorang lelaki. Kisah kedua adalah hubungan yang dilandasi uang. Ketiga mengisahkan lelaki yang ditinggalkan seseorang. Ia mencoba menjaga harga dirinya. Kisah berikutnya berkaitan dengan hubungan yang tidak direstui orang tua. Kisah selanjutnya tentang sepasang kekasih pada zaman penjajahan Belanda. Selanjutnya, kisah persahabatan yang berubah setelah menjadi kaya. Setelah itu, ada cerita Rama dan Sinta. Buku ini diakhiri cerpen tentang cinta beda kasta.<br><br>
+
+      Tema buku <em>"Sepotong Hati yang Baru"</em> dekat dengan kehidupan sehari-hari. Tere Liye berhasil memberikan banyak pemahaman terkait perasaan. Buku ini disajikan dengan bahasa yang puitis dan indah. Pemilihan diksinya membuat pembaca hanyut dalam cerita. Namun, dalam cerita terdapat ejaan zaman dahulu. Kemungkinan diksi tersebut sulit dimengerti seluruh pembaca.<br><br>
+
+      Buku ini mengajarkan untuk mengendalikan perasaan kita. Tetap menggunakan rasional untuk mengendalikan perasaan, baik perasaan jatuh cinta maupun patah hati. Semua pembaca, remaja atau dewasa, dapat menikmati buku ini.<br><br>
+
+      <em>Sumber: Nandy/Gramedia (2023)</em><br><br>
+
+      <b>Question:</b> Apa hubungan antarkalimat yang ditunjukkan oleh konjungsi <b>selanjutnya</b> dalam paragraf kedua?
+    </div>
+  `,
+  "options": [
+    "Hubungan pilihan untuk menggambarkan pilihan berbagai cerpen dalam buku.",
+    "Hubungan penambahan untuk menambahkan bahasan cerpen dalam buku.",
+    "Hubungan urutan untuk menjelaskan isi cerpen pertama hingga kedelapan.",
+    "Hubungan pelengkap karena melengkapi penjelasan cerpen sebelumnya."
+  ],
+  "correct": 2
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      Buku <em>"Sepotong Hati yang Baru"</em> merupakan karya penulis Tere Liye. Karya ini adalah buku kedua dari buku sebelumnya, yaitu <em>"Berjuta Rasanya"</em>. Dalam buku ini terdapat delapan cerpen dengan tema yang sama. Akan tetapi, tema-tema tersebut tidak saling berhubungan. Tema patah hati dan jatuh cinta disatupadukan dalam buku ini.<br><br>
+
+      Delapan tema cerpen dalam buku sering ditemukan dalam kehidupan. Kisah pertama menceritakan dua sahabat yang salah paham. Salah paham muncul karena sikap ramah seorang lelaki. Kisah kedua adalah hubungan yang dilandasi uang. Ketiga mengisahkan lelaki yang ditinggalkan seseorang. Ia mencoba menjaga harga dirinya. Kisah berikutnya berkaitan dengan hubungan yang tidak direstui orang tua. Kisah selanjutnya tentang sepasang kekasih pada zaman penjajahan Belanda. Selanjutnya, kisah persahabatan yang berubah setelah menjadi kaya. Setelah itu, ada cerita Rama dan Sinta. Buku ini diakhiri cerpen tentang cinta beda kasta.<br><br>
+
+      Tema buku <em>"Sepotong Hati yang Baru"</em> dekat dengan kehidupan sehari-hari. Tere Liye berhasil memberikan banyak pemahaman terkait perasaan. Buku ini disajikan dengan bahasa yang puitis dan indah. Pemilihan diksinya membuat pembaca hanyut dalam cerita. Namun, dalam cerita terdapat ejaan zaman dahulu. Kemungkinan diksi tersebut sulit dimengerti seluruh pembaca.<br><br>
+
+      Buku ini mengajarkan untuk mengendalikan perasaan kita. Tetap menggunakan rasional untuk mengendalikan perasaan, baik perasaan jatuh cinta maupun patah hati. Semua pembaca, remaja atau dewasa, dapat menikmati buku ini.<br><br>
+
+      <em>Sumber: Nandy/Gramedia (2023)</em><br><br>
+
+      <b>Pertanyaan:</b><br>
+      Bagaimanakah perbaikan kesalahan ejaan yang terdapat dalam teks tersebut?<br>
+      Tentukan <b>Benar</b> atau <b>Salah</b> untuk setiap perbaikan berikut!
+    </div>
+  `,
+  "statements": [
+    "Penulisan judul buku \"Sepotong Hati yang Baru\" dan \"Berjuta Rasanya\" seharusnya ditulis Sepotong Hati yang Baru dan Berjuta Rasanya.",
+    "Kata disatupadukan seharusnya ditulis disatu padukan karena satu padu adalah gabungan kata, bukan satu kata.",
+    "Kata sehari-hari tidak perlu menggunakan tanda hubung (-) karena merupakan kata pengulangan."
+  ],
+  "correct": [false, false, false]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;"><b>Pentingnya Pendidikan Kewirausahaan bagi Generasi Muda</b></p>
+
+      Pendidikan kewirausahaan harus diajarkan kepada generasi muda. Penyebabnya, tuntutan zaman yang makin maju. Kreativitas dan inovasi diperlukan untuk menghadapi tantangan masa depan. Pada era digital, kewirausahaan menjadi solusi yang menarik. Kewirausahaan mampu menciptakan peluang bisnis yang tak terbatas.<br><br>
+
+      Ada beberapa alasan kuat pendidikan kewirausahaan penting untuk diajarkan. Pertama, pendidikan kewirausahaan meningkatkan kemampuan seseorang untuk membangun usaha. Kedua, peluang kerja baru menjadi meningkat. Ketiga, peluang kerja mengurangi angka pengangguran di Indonesia. Keempat, pendidikan kewirausahaan mendorong kemajuan ekonomi Indonesia secara keseluruhan. Kelima, karakter wirausahawan pada diri seseorang dapat terbangun. Karakter tersebut dibutuhkan untuk membangun usaha yang sukses. Dengan demikian, pendidikan kewirausahaan memengaruhi ekonomi dan pengembangan diri.<br><br>
+
+      Sayangnya, masih banyak kendala dalam pelaksanaan pendidikan kewirausahaan. Salah satu kendala tersebut adalah kurangnya dukungan pemerintah. Jumlah sekolah yang menerapkannya pun masih sedikit. Selain itu, kurikulum kewirausahaan di sekolah perlu diperbarui. Kurikulum kewirausahaan di sekolah masih berisi teori tanpa praktik. Padahal, praktik sangat penting dalam mempelajari kewirausahaan.<br><br>
+
+      (1) Kendala lainnya, banyak masyarakat belum memahami pentingnya pendidikan kewirausahaan.  
+      (2) Pendidikan kewirausahaan dianggap hanya untuk orang yang ingin memulai usaha.  
+      (3) Banyak orang yang salah paham dengan tujuan pendidikan ini.  
+      (4) Padahal, kewirausahaan bisa bermanfaat banyak bagi masyarakat.  
+      (5) Pemerintah, sekolah, dan masyarakat wajib berpartisipasi mengembangkan pendidikan kewirausahaan.  
+      (6) Oleh karena itu, tidak ada alasan pelaksanaannya.<br><br>
+
+      <em>Sumber: Muannas Annas/Geotimes (2023)</em><br><br>
+
+      <b>Question:</b> Manakah pendapat yang mendukung isi teks tersebut?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Menurut saya, karakter wirausahawan pada diri seseorang dapat terbentuk melalui pendidikan kewirausahaan.",
+    "Saya berpendapat bahwa pendidikan kewirausahaan dapat meningkatkan kemampuan seseorang untuk membangun usaha.",
+    "Saya merasa bahwa pendidikan kewirausahaan dianggap hanya untuk orang yang ingin memulai usaha besar.",
+    "Menurut pendapat saya pribadi, kurikulum kewirausahaan di sekolah masih berisi teori tanpa praktik."
+  ],
+  "correct": [0, 1, 3]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;"><b>Pentingnya Pendidikan Kewirausahaan bagi Generasi Muda</b></p>
+
+      Pendidikan kewirausahaan harus diajarkan kepada generasi muda. Penyebabnya, tuntutan zaman yang makin maju. Kreativitas dan inovasi diperlukan untuk menghadapi tantangan masa depan. Pada era digital, kewirausahaan menjadi solusi yang menarik. Kewirausahaan mampu menciptakan peluang bisnis yang tak terbatas.<br><br>
+
+      Ada beberapa alasan kuat pendidikan kewirausahaan penting untuk diajarkan. Pertama, pendidikan kewirausahaan meningkatkan kemampuan seseorang untuk membangun usaha. Kedua, peluang kerja baru menjadi meningkat. Ketiga, peluang kerja mengurangi angka pengangguran di Indonesia. Keempat, pendidikan kewirausahaan mendorong kemajuan ekonomi Indonesia secara keseluruhan. Kelima, karakter wirausahawan pada diri seseorang dapat terbangun. Karakter tersebut dibutuhkan untuk membangun usaha yang sukses. Dengan demikian, pendidikan kewirausahaan memengaruhi ekonomi dan pengembangan diri.<br><br>
+
+      Sayangnya, masih banyak kendala dalam pelaksanaan pendidikan kewirausahaan. Salah satu kendala tersebut adalah kurangnya dukungan pemerintah. Jumlah sekolah yang menerapkannya pun masih sedikit. Selain itu, kurikulum kewirausahaan di sekolah perlu diperbarui. Kurikulum kewirausahaan di sekolah masih berisi teori tanpa praktik. Padahal, praktik sangat penting dalam mempelajari kewirausahaan.<br><br>
+
+      (1) Kendala lainnya, banyak masyarakat belum memahami pentingnya pendidikan kewirausahaan.  
+      (2) Pendidikan kewirausahaan dianggap hanya untuk orang yang ingin memulai usaha.  
+      (3) Banyak orang yang salah paham dengan tujuan pendidikan ini.  
+      (4) Padahal, kewirausahaan bisa bermanfaat banyak bagi masyarakat.  
+      (5) Pemerintah, sekolah, dan masyarakat wajib berpartisipasi mengembangkan pendidikan kewirausahaan.  
+      (6) Oleh karena itu, tidak ada alasan pelaksanaannya.<br><br>
+
+      <em>Sumber: Muannas Annas/Geotimes (2023)</em><br><br>
+
+      <b>Question:</b> Bagaimana susunan kalimat agar paragraf keempat menjadi padu?
+    </div>
+  `,
+  "options": [
+    "1)-2)-3)-5)-4)-6)",
+    "1)-2)-4)-3)-6)-5)",
+    "1)-3)-2)-4)-6)-5)",
+    "1)-3)-4)-2)-5)-6)"
+  ],
+  "correct": 3
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;"><b>Pentingnya Pendidikan Kewirausahaan bagi Generasi Muda</b></p>
+
+      Pendidikan kewirausahaan harus diajarkan kepada generasi muda. Penyebabnya, tuntutan zaman yang makin maju. Kreativitas dan inovasi diperlukan untuk menghadapi tantangan masa depan. Pada era digital, kewirausahaan menjadi solusi yang menarik. Kewirausahaan mampu menciptakan peluang bisnis yang tak terbatas.<br><br>
+
+      Ada beberapa alasan kuat pendidikan kewirausahaan penting untuk diajarkan. Pertama, pendidikan kewirausahaan meningkatkan kemampuan seseorang untuk membangun usaha. Kedua, peluang kerja baru menjadi meningkat. Ketiga, peluang kerja mengurangi angka pengangguran di Indonesia. Keempat, pendidikan kewirausahaan mendorong kemajuan ekonomi Indonesia secara keseluruhan. Kelima, karakter wirausahawan pada diri seseorang dapat terbangun. Karakter tersebut dibutuhkan untuk membangun usaha yang sukses. Dengan demikian, pendidikan kewirausahaan memengaruhi ekonomi dan pengembangan diri.<br><br>
+
+      Sayangnya, masih banyak kendala dalam pelaksanaan pendidikan kewirausahaan. Salah satu kendala tersebut adalah kurangnya dukungan pemerintah. Jumlah sekolah yang menerapkannya pun masih sedikit. Selain itu, kurikulum kewirausahaan di sekolah perlu diperbarui. Kurikulum kewirausahaan di sekolah masih berisi teori tanpa praktik. Padahal, praktik sangat penting dalam mempelajari kewirausahaan.<br><br>
+
+      (1) Kendala lainnya, banyak masyarakat belum memahami pentingnya pendidikan kewirausahaan.  
+      (2) Pendidikan kewirausahaan dianggap hanya untuk orang yang ingin memulai usaha.  
+      (3) Banyak orang yang salah paham dengan tujuan pendidikan ini.  
+      (4) Padahal, kewirausahaan bisa bermanfaat banyak bagi masyarakat.  
+      (5) Pemerintah, sekolah, dan masyarakat wajib berpartisipasi mengembangkan pendidikan kewirausahaan.  
+      (6) Oleh karena itu, tidak ada alasan pelaksanaannya.<br><br>
+
+      <em>Sumber: Muannas Annas/Geotimes (2023)</em><br><br>
+
+      <b>Question:</b> Manakah pernyataan berikut yang sesuai dengan hubungan antarparagraf dalam teks?<br>
+      <i>Pilihlah jawaban yang benar! (Jawaban benar lebih dari satu)</i>
+    </div>
+  `,
+  "options": [
+    "Paragraf pertama berisi pernyataan umum dan paragraf kedua memuat penjelasan lebih lanjut.",
+    "Paragraf kedua dan ketiga bertentangan karena menyampaikan sudut pandang berbeda.",
+    "Paragraf ketiga berkaitan dengan paragraf keempat, yakni memiliki hubungan sebab akibat.",
+    "Paragraf keempat melanjutkan paragraf ketiga dan menambahkan bagian solusi."
+  ],
+  "correct": [0, 2, 3]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Rupanya Patiasina telah mengatur perjalanan Sarwono sedemikian rupa sehingga dia tidak usah repot-repot ke sana-sini mencari tumpangan atau mencarter mobil.<br><br>
+
+      "Lebih baik berangkat jam empat sore," kata mahasiswa yang diberi tugas menemani mereka ke Gorontalo, "saya sudah biasa bolak-balik Manado–Gorontalo ditugasi seperti ini," sambungnya. Meskipun sudah membayangkan perjalanan yang membosankan—dan siapa tahu juga membahayakan, keduanya merasa aman karena setidaknya ada mahasiswa yang bisa menggantikan Pak Sopir bila kecapekan. Baru memulai perjalanan saja Sarwono sudah siap-siap deg-degan; kata sopir bensin harus dipenuhi, kalau perlu bawa jerigen bensin, sebab sepanjang jalan pompa bensin langka.<br><br>
+
+      "Hanya ada gereja dan masjid, Meneer," kata si mahasiswa. Sarwono dan Pingkan tidak kaget lagi mendengar sapaan itu sebab ketika memberikan ceramah di kampus kemarin mahasiswa yang bertanya selalu menyapanya "Meneer". Begitu keluar dari kota, kedua orang muda Jakarta menyaksikan adegan yang biasa mereka saksikan di Jakarta: beberapa kelompok orang mencegat mobil untuk mengumpulkan dana bagi pembangunan Rumah Tuhan. Bedanya adalah, di Jakarta Rumah Tuhan itu masjid, di Manado tentu saja gereja.<br><br>
+
+      "Lain lubuk, lain pula ikannya," bisik Pingkan ke telinga Sarwono, "meskipun yang dipancing sama saja, yakni rupiah."<br><br>
+
+      Kepada mahasiswa yang mengantar itu Sarwono menjelaskan bahwa Pingkan adalah calon istrinya. Pingkan sama sekali tidak menunjukkan reaksi apa pun.<br><br>
+
+      <em>Sumber: Sapardi Djoko Damono, <b>Hujan Bulan Juni</b>, Jakarta, Gramedia Pustaka Utama, 2017</em><br><br>
+
+      <b>Question:</b> Berdasarkan kutipan novel, manakah pernyataan yang menggambarkan hubungan antarperistiwa dalam cerita?<br>
+      <i>Pilihlah jawaban yang benar! (Jawaban benar lebih dari satu)</i>
+    </div>
+  `,
+  "options": [
+    "Tokoh Sarwono setuju dengan penggalangan dana untuk tempat ibadah karena mencerminkan semangat gotong royong.",
+    "Dialog tokoh Pingkan menunjukkan sikap tak acuh terhadap praktik penggalangan dana di daerah asalnya.",
+    "Kata sapaan \"Meneer\" menunjukkan bahwa para mahasiswa memiliki rasa hormat terhadap pembicara dari luar daerah.",
+    "Pesan tokoh mahasiswa menunjukkan sikap khawatir terhadap perjalanan yang akan dilakukan bersama tokoh Sarwono."
+  ],
+  "correct": [2, 3]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      Rupanya Patiasina telah mengatur perjalanan Sarwono sedemikian rupa sehingga dia tidak usah repot-repot ke sana-sini mencari tumpangan atau mencarter mobil.<br><br>
+
+      "Lebih baik berangkat jam empat sore," kata mahasiswa yang diberi tugas menemani mereka ke Gorontalo, "saya sudah biasa bolak-balik Manado–Gorontalo ditugasi seperti ini," sambungnya. Meskipun sudah membayangkan perjalanan yang membosankan—dan siapa tahu juga membahayakan, keduanya merasa aman karena setidaknya ada mahasiswa yang bisa menggantikan Pak Sopir bila kecapekan. Baru memulai perjalanan saja Sarwono sudah siap-siap deg-degan; kata sopir bensin harus dipenuhi, kalau perlu bawa jerigen bensin, sebab sepanjang jalan pompa bensin langka.<br><br>
+
+      "Hanya ada gereja dan masjid, Meneer," kata si mahasiswa. Sarwono dan Pingkan tidak kaget lagi mendengar sapaan itu sebab ketika memberikan ceramah di kampus kemarin mahasiswa yang bertanya selalu menyapanya "Meneer". Begitu keluar dari kota, kedua orang muda Jakarta menyaksikan adegan yang biasa mereka saksikan di Jakarta: beberapa kelompok orang mencegat mobil untuk mengumpulkan dana bagi pembangunan Rumah Tuhan. Bedanya adalah, di Jakarta Rumah Tuhan itu masjid, di Manado tentu saja gereja.<br><br>
+
+      "Lain lubuk, lain pula ikannya," bisik Pingkan ke telinga Sarwono, "meskipun yang dipancing sama saja, yakni rupiah."<br><br>
+
+      Kepada mahasiswa yang mengantar itu Sarwono menjelaskan bahwa Pingkan adalah calon istrinya. Pingkan sama sekali tidak menunjukkan reaksi apa pun.<br><br>
+
+      <em>Sumber: Sapardi Djoko Damono, <b>Hujan Bulan Juni</b>, Jakarta, Gramedia Pustaka Utama, 2017</em><br><br>
+
+      <b>Question:</b> Apa kemungkinan yang paling logis terjadi, apabila di tengah perjalanan tokoh Pak Sopir memutuskan untuk istirahat?<br>
+      <i>Pilihlah jawaban yang benar! (Jawaban benar lebih dari satu)</i>
+    </div>
+  `,
+  "options": [
+    "Tokoh Mahasiswa pengantar mengambil alih kemudi, seperti yang telah dipersiapkan sebelumnya. Perjalanan tetap berlanjut dengan lancar.",
+    "Tokoh Sarwono meminta bantuan sopir dari kendaraan lain. Tokoh Sarwono khawatir keselamatannya terancam jika tokoh Mahasiswa yang menyetir.",
+    "Tokoh Pingkan menyarankan untuk berhenti lebih lama. Tokoh Pingkan menganggap perjalanan darat terlalu melelahkan dan berisiko.",
+    "Tokoh Sarwono merasa cemas karena tokoh Mahasiswa yang mengemudikan mobil. Namun, tokoh Sarwono mencoba percaya kepada tokoh Mahasiswa karena sudah berpengalaman."
+  ],
+  "correct": [0, 3]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Rupanya Patiasina telah mengatur perjalanan Sarwono sedemikian rupa sehingga dia tidak usah repot-repot ke sana-sini mencari tumpangan atau mencarter mobil.<br><br>
+
+      "Lebih baik berangkat jam empat sore," kata mahasiswa yang diberi tugas menemani mereka ke Gorontalo, "saya sudah biasa bolak-balik Manado–Gorontalo ditugasi seperti ini," sambungnya. Meskipun sudah membayangkan perjalanan yang membosankan—dan siapa tahu juga membahayakan, keduanya merasa aman karena setidaknya ada mahasiswa yang bisa menggantikan Pak Sopir bila kecapekan. Baru memulai perjalanan saja Sarwono sudah siap-siap deg-degan; kata sopir bensin harus dipenuhi, kalau perlu bawa jerigen bensin, sebab sepanjang jalan pompa bensin langka.<br><br>
+
+      "Hanya ada gereja dan masjid, Meneer," kata si mahasiswa. Sarwono dan Pingkan tidak kaget lagi mendengar sapaan itu sebab ketika memberikan ceramah di kampus kemarin mahasiswa yang bertanya selalu menyapanya "Meneer". Begitu keluar dari kota, kedua orang muda Jakarta menyaksikan adegan yang biasa mereka saksikan di Jakarta: beberapa kelompok orang mencegat mobil untuk mengumpulkan dana bagi pembangunan Rumah Tuhan. Bedanya adalah, di Jakarta Rumah Tuhan itu masjid, di Manado tentu saja gereja.<br><br>
+
+      "Lain lubuk, lain pula ikannya," bisik Pingkan ke telinga Sarwono, "meskipun yang dipancing sama saja, yakni rupiah."<br><br>
+
+      Kepada mahasiswa yang mengantar itu Sarwono menjelaskan bahwa Pingkan adalah calon istrinya. Pingkan sama sekali tidak menunjukkan reaksi apa pun.<br><br>
+
+      <em>Sumber: Sapardi Djoko Damono, <b>Hujan Bulan Juni</b>, Jakarta, Gramedia Pustaka Utama, 2017</em><br><br>
+
+      <b>Question:</b> Dalam kutipan novel tersebut terdapat penggunaan peribahasa.<br>
+      Apa arti peribahasa <em>"Lain lubuk, lain pula ikannya"</em>?
+    </div>
+  `,
+  "options": [
+    "Setiap daerah memiliki kebiasaan yang berbeda-beda dalam berinteraksi dengan orang baru.",
+    "Orang selalu bertindak lebih baik saat berada di tempat baru daripada di tempat asal.",
+    "Setiap daerah memiliki karakteristik budaya yang unik meskipun tujuannya sama.",
+    "Tradisi beramal di daerah perantauan selalu lebih baik daripada di tempat asal."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;"><b>Literasi Majukan Pendidikan Bangsa</b></p>
+
+      Literasi adalah kegiatan positif yang sangat bermanfaat bagi seseorang. Literasi sangat terkait erat dengan aktivitas membaca. Dengan membaca, seseorang bisa mendapat pengetahuan. Selain itu, kemampuan bernalar seseorang akan terlatih dengan baik. Kebiasaan membaca sangat penting ditanamkan sejak kecil. Tujuannya, agar anak tumbuh menjadi pribadi yang cerdas. Diharapkan pula anak memiliki pola pikir kritis.<br><br>
+
+      Ada beberapa trik membuat budaya membaca menjadi kebiasaan. Pertama, anak-anak memiliki akses terhadap buku-buku yang menarik. Usahakan buku yang isinya mudah dipahami anak. Kedua, orang tua dan guru sebaiknya memberi contoh. Lakukan kegiatan membaca bersama anak-anak. Ketiga, sediakan tempat yang nyaman untuk membaca. Fasilitas yang memadai sangat membantu pengembangan literasi.<br><br>
+
+      Pemerintah dan berbagai pihak perlu bekerja sama. Semua pihak wajib menyediakan bahan bacaan yang cukup. Bahan bacaan itu harus menjangkau daerah-daerah yang jauh dari kota. Adakan kegiatan membaca bersama. Adakan pula lomba membaca. Kegiatan tersebut menumbuhkan rasa cinta membaca dalam diri anak. Lingkungan menjadi faktor pendorong anak untuk rajin membaca. Kebiasaan membaca ini diharapkan dapat menjadi bagian kehidupan sehari-hari.<br><br>
+
+      Kegiatan membaca bukan hanya membantu anak belajar. Kebiasaan membaca membentuk cara berpikir kritis. Kebiasaan membaca membuat anak bertindak lebih baik. Jika budaya membaca terus ditumbuhkan, pendidikan akan makin maju. Pada akhirnya, akan tercipta generasi yang berkualitas.<br><br>
+
+      <em>Sumber: Ghani Nurcahyadi/Media Indonesia (2025)</em><br><br>
+
+      <b>Question:</b> Berdasarkan teks di atas, manakah alasan yang mendukung pentingnya budaya membaca bagi anak?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Budaya membaca membantu anak menjadi pribadi yang kritis dan cerdas.",
+    "Budaya membaca bisa dibentuk melalui lomba membaca dan pojok baca.",
+    "Budaya membaca membantu anak mampu berpikir dan bertindak lebih baik.",
+    "Budaya membaca berkaitan dengan kecepatan menyelesaikan ujian literasi."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;"><b>Literasi Majukan Pendidikan Bangsa</b></p>
+
+      Literasi adalah kegiatan positif yang sangat bermanfaat bagi seseorang. Literasi sangat terkait erat dengan aktivitas membaca. Dengan membaca, seseorang bisa mendapat pengetahuan. Selain itu, kemampuan bernalar seseorang akan terlatih dengan baik. Kebiasaan membaca sangat penting ditanamkan sejak kecil. Tujuannya, agar anak tumbuh menjadi pribadi yang cerdas. Diharapkan pula anak memiliki pola pikir kritis.<br><br>
+
+      Ada beberapa trik membuat budaya membaca menjadi kebiasaan. Pertama, anak-anak memiliki akses terhadap buku-buku yang menarik. Usahakan buku yang isinya mudah dipahami anak. Kedua, orang tua dan guru sebaiknya memberi contoh. Lakukan kegiatan membaca bersama anak-anak. Ketiga, sediakan tempat yang nyaman untuk membaca. Fasilitas yang memadai sangat membantu pengembangan literasi.<br><br>
+
+      Pemerintah dan berbagai pihak perlu bekerja sama. Semua pihak wajib menyediakan bahan bacaan yang cukup. Bahan bacaan itu harus menjangkau daerah-daerah yang jauh dari kota. Adakan kegiatan membaca bersama. Adakan pula lomba membaca. Kegiatan tersebut menumbuhkan rasa cinta membaca dalam diri anak. Lingkungan menjadi faktor pendorong anak untuk rajin membaca. Kebiasaan membaca ini diharapkan dapat menjadi bagian kehidupan sehari-hari.<br><br>
+
+      Kegiatan membaca bukan hanya membantu anak belajar. Kebiasaan membaca membentuk cara berpikir kritis. Kebiasaan membaca membuat anak bertindak lebih baik. Jika budaya membaca terus ditumbuhkan, pendidikan akan makin maju. Pada akhirnya, akan tercipta generasi yang berkualitas.<br><br>
+
+      <em>Sumber: Ghani Nurcahyadi/Media Indonesia (2025)</em><br><br>
+
+      <b>Question:</b> Manakah pernyataan yang sesuai dengan isi teks?<br>
+      <i>Tentukan Benar atau Salah untuk setiap pernyataan berikut!</i>
+    </div>
+  `,
+  "statements": [
+    "Teks menjelaskan hubungan sebab akibat antara kebiasaan membaca dan kemajuan pendidikan.",
+    "Gagasan tentang pentingnya membaca disajikan secara logis untuk membangun keyakinan pembaca.",
+    "Pilihan kata penulis memuat sisi emosional untuk menggugah perasaan pembaca tentang pentingnya membaca."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;"><b>Literasi Majukan Pendidikan Bangsa</b></p>
+
+      Literasi adalah kegiatan positif yang sangat bermanfaat bagi seseorang. Literasi sangat terkait erat dengan aktivitas membaca. Dengan membaca, seseorang bisa mendapat pengetahuan. Selain itu, kemampuan bernalar seseorang akan terlatih dengan baik. Kebiasaan membaca sangat penting ditanamkan sejak kecil. Tujuannya, agar anak tumbuh menjadi pribadi yang cerdas. Diharapkan pula anak memiliki pola pikir kritis.<br><br>
+
+      Ada beberapa trik membuat budaya membaca menjadi kebiasaan. Pertama, anak-anak memiliki akses terhadap buku-buku yang menarik. Usahakan buku yang isinya mudah dipahami anak. Kedua, orang tua dan guru sebaiknya memberi contoh. Lakukan kegiatan membaca bersama anak-anak. Ketiga, sediakan tempat yang nyaman untuk membaca. Fasilitas yang memadai sangat membantu pengembangan literasi.<br><br>
+
+      Pemerintah dan berbagai pihak perlu bekerja sama. Semua pihak wajib menyediakan bahan bacaan yang cukup. Bahan bacaan itu harus menjangkau daerah-daerah yang jauh dari kota. Adakan kegiatan membaca bersama. Adakan pula lomba membaca. Kegiatan tersebut menumbuhkan rasa cinta membaca dalam diri anak. Lingkungan menjadi faktor pendorong anak untuk rajin membaca. Kebiasaan membaca ini diharapkan dapat menjadi bagian kehidupan sehari-hari.<br><br>
+
+      Kegiatan membaca bukan hanya membantu anak belajar. Kebiasaan membaca membentuk cara berpikir kritis. Kebiasaan membaca membuat anak bertindak lebih baik. Jika budaya membaca terus ditumbuhkan, pendidikan akan makin maju. Pada akhirnya, akan tercipta generasi yang berkualitas.<br><br>
+
+      <em>Sumber: Ghani Nurcahyadi/Media Indonesia (2025)</em><br><br>
+
+      <b>Question:</b> Perhatikan kalimat kedua paragraf pertama.<br>
+      Bagaimana perbaikan yang tepat agar menjadi <b>kalimat efektif</b>?
+    </div>
+  `,
+  "options": [
+    "Literasi sangat terkait dengan aktivasi membaca.",
+    "Literasi terkait erat dengan aktivitas membaca.",
+    "Literasi terkait erat dalam aktivisme membaca.",
+    "Literasi sangat erat dengan aktivator membaca."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;"><b>Burung Gagak</b></p>
+
+      kupinjam penglihatanmu, jendela<br>
+      yang menuntun kata-kata<br>
+      kembali pada kegaiban. kamar<br>
+      dalam diri, kembali terkuak tipis gordennya,<br>
+      riuh-sesak dengan berita-berita menggoreng<br>
+      negara. sebuah malam dengan jiwa yang cedera<br>
+      memberimu cerita, perihal ayah yang tak kembali<br>
+      setelah tahun terbakar diiringi koak ratusan gagak<br><br>
+
+      gagak-gagak itu terus menghantu,<br>
+      mendatangi duniamu yang padam<br>
+      dibisikkannya igauan perihal pulang<br>
+      jiwa-jiwa tumbang<br>
+      setelah khusyuk perjamuan<br><br>
+
+      gagak-gagak terus berkoak<br>
+      menyusup dalam diammu<br>
+      mencuri mimpi<br>
+      dari tiap kesedihan<br><br>
+      
+      tak dibiarkannya<br>
+      kau sendirian<br>
+      menyusun sepi<br>
+      jadi sebuah taman<br>
+      tempat bernostalgia<br>
+      segala yang masih anomali<br><br>
+
+      <em>Sumber: Muhammad Dalfa/Kompas.id (2025)</em><br><br>
+
+      <b>Question:</b> Dalam puisi tersebut terdapat beberapa kata bermakna konotatif.<br>
+      Pilihlah makna konotatif yang tepat dalam puisi tersebut!<br>
+      <i>Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Jendela bermakna sarana untuk melihat atau memahami sesuatu.",
+    "Gorden bermakna kesempatan atau masa depan yang lebih cerah.",
+    "Gagak bermakna pembawa berita buruk atau pertanda tidak baik.",
+    "Taman berarti tempat menenangkan diri atau tempat beristirahat."
+  ],
+  "correct": [0, 2, 3]
+},
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;"><strong>Burung Gagak</strong></p>
+
+      kupinjam penglihatanmu, jendela<br>
+      yang menuntun kata-kata<br>
+      kembali pada kegaiban. kamar<br>
+      dalam diri, kembali terkuak tipis gordennya,<br>
+      riuh-sesak dengan berita-berita menggoreng<br>
+      negara. sebuah malam dengan jiwa yang cedera<br>
+      memberimu cerita, perihal ayah yang tak kembali<br>
+      setelah tahun terbakar diiringi koak ratusan gagak<br><br>
+
+      gagak-gagak itu terus menghantu,<br>
+      mendatangi duniamu yang padam<br>
+      dibisikkannya igauan perihal pulang<br>
+      jiwa-jiwa tumbang<br>
+      setelah khusyuk perjamuan<br><br>
+
+      gagak-gagak terus berkoak<br>
+      menyusup dalam diammu<br>
+      mencuri mimpi<br>
+      dari tiap kesedihan<br><br>
+      
+      tak dibiarkannya<br>
+      kau sendirian<br>
+      menyusun sepi<br>
+      jadi sebuah taman<br>
+      tempat bernostalgia<br>
+      segala yang masih anomali<br><br>
+
+      <em>Sumber: Muhammad Dalfa/Kompas.id (2025)</em><br><br>
+
+      <b>Petunjuk:</b> Tentukan Tepat (T) atau Tidak Tepat (TT) untuk setiap pernyataan berikut berdasarkan puisi!
+    </div>
+  `,
+  "statements": [
+    "A. Gagak-gagak dalam puisi digambarkan sebagai makhluk yang mengganggu ketenangan.",
+    "B. Penyair menyampaikan kerinduan kepada ayahnya yang telah lama tiada meskipun ayahnya pernah membuat luka di hatinya.",
+    "C. Puisi menggambarkan suasana batin penyair yang terluka oleh peristiwa masa lalu karena kehilangan ayahnya."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;"><strong>Burung Gagak</strong></p>
+
+      kupinjam penglihatanmu, jendela<br>
+      yang menuntun kata-kata<br>
+      kembali pada kegaiban. kamar<br>
+      dalam diri, kembali terkuak tipis gordennya,<br>
+      riuh-sesak dengan berita-berita menggoreng<br>
+      negara. sebuah malam dengan jiwa yang cedera<br>
+      memberimu cerita, perihal ayah yang tak kembali<br>
+      setelah tahun terbakar diiringi koak ratusan gagak<br><br>
+
+      gagak-gagak itu terus menghantu,<br>
+      mendatangi duniamu yang padam<br>
+      dibisikkannya igauan perihal pulang<br>
+      jiwa-jiwa tumbang<br>
+      setelah khusyuk perjamuan<br><br>
+
+      gagak-gagak terus berkoak<br>
+      menyusup dalam diammu<br>
+      mencuri mimpi<br>
+      dari tiap kesedihan<br><br>
+
+      tak dibiarkannya<br>
+      kau sendirian<br>
+      menyusun sepi<br>
+      jadi sebuah taman<br>
+      tempat bernostalgia<br>
+      segala yang masih anomali<br><br>
+
+      <em>Sumber: Muhammad Dalfa/Kompas.id (2025)</em><br><br>
+
+      <b>Pertanyaan:</b><br>
+      Bagaimana gambaran emosional penyair yang sesuai dengan isi puisi tersebut?
+    </div>
+  `,
+  "options": [
+    "Kenyataan pahit yang harus dihadapi ketika malam tiba.",
+    "Kesedihan mendalam akibat kehilangan sosok penting keluarga.",
+    "Kegelisahan batin membuat suasana hati menjadi makin kacau.",
+    "Ketakutan dan kesedihan yang terus menghantui dalam hidup."
+  ],
+  "correct": 1
+},
+
+
+
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  if (q.type === 'tepat_tidak') return Array(q.statements.length).fill(null);
+if (q.type === 'relevan_tidak') return Array(q.statements.length).fill(null);
+  if (q.type === 'dampak_jangka') return Array(q.statements.length).fill(null);
+  return null;
+});
+
+
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3>${q.text}`;
+
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+else if (q.type === 'relevan_tidak') {
+  html += `<table class="true-false">
+    <tr>
+      <th>Pernyataan</th>
+      <th>Relevan</th>
+      <th>Tidak Relevan</th>
+    </tr>`;
+
+  q.statements.forEach((stmt, i) => {
+    const relevanChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td>
+        <input type="radio" name="rt_${i}" value="true" ${relevanChecked}>
+      </td>
+      <td>
+        <input type="radio" name="rt_${i}" value="false" ${tidakChecked}>
+      </td>
+    </tr>`;
+  });
+
+  html += `</table>`;
+}
+
+else if (q.type === 'tepat_tidak') {
+  html += `<table class="true-false">
+    <tr>
+      <th>Pernyataan</th>
+      <th>Tepat</th>
+      <th>Tidak Tepat</th>
+    </tr>`;
+
+  q.statements.forEach((stmt, i) => {
+    const tepatChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td>
+        <input type="radio" name="tt_${i}" value="true" ${tepatChecked}>
+      </td>
+      <td>
+        <input type="radio" name="tt_${i}" value="false" ${tidakChecked}>
+      </td>
+    </tr>`;
+  });
+
+  html += `</table>`;
+}
+else if (q.type === 'dampak_jangka') {
+  html += `
+    <table class="true-false">
+      <tr>
+        <th>Pernyataan</th>
+        <th>Jangka Pendek</th>
+        <th>Jangka Panjang</th>
+      </tr>
+  `;
+
+  q.statements.forEach((stmt, i) => {
+    const pendekChecked = answers[index][i] === 'pendek' ? 'checked' : '';
+    const panjangChecked = answers[index][i] === 'panjang' ? 'checked' : '';
+
+    html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td>
+          <input type="radio" name="dj_${i}" value="pendek" ${pendekChecked}>
+        </td>
+        <td>
+          <input type="radio" name="dj_${i}" value="panjang" ${panjangChecked}>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += `</table>`;
+}
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk tipe tepat_tidak
+if (q.type === 'tepat_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="tt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+if (q.type === 'relevan_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="rt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+
+// Event listener dampak_jangka
+if (q.type === 'dampak_jangka') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="dj_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = e.target.value;
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'dampak_jangka' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual([...answers[i]].sort(), [...q.correct].sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+else if (q.type === 'relevan_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  const percentage = Math.round((score / questions.length) * 100);
+
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+
+// 🔥 KIRIM KE FIREBASE
+  simpanHasilFirebase(percentage);
+}
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+// Tampilkan tombol Kembali setelah submit
+const backBtn = document.createElement('button');
+backBtn.textContent = "Kembali ke Beranda";
+backBtn.style.padding = "10px 18px";
+backBtn.style.marginTop = "10px";
+backBtn.style.backgroundColor = "#1e88e5";
+backBtn.style.color = "white";
+backBtn.style.border = "none";
+backBtn.style.borderRadius = "6px";
+backBtn.style.fontWeight = "bold";
+backBtn.style.cursor = "pointer";
+backBtn.addEventListener('click', () => {
+    window.location.href = "https://kebunilmu.github.io/Kebun-Ilmu-TKA/";
+});
+document.querySelector('.right-panel .navigation').appendChild(backBtn);
+
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  timerRunning = true; // pastikan timer aktif
+
+  const interval = setInterval(() => {
+    if (!timerRunning) { 
+      clearInterval(interval); 
+      return; 
+    }
+
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+    if (timer <= 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+
+    timer--;
+  }, 1000);
+}
+
+
+// Auto submit saat keluar fullscreen
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement && timerRunning) {
+    alert("Anda keluar dari fullscreen. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah tab/window (desktop)
+window.addEventListener("blur", () => {
+  if (timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah app / tab (HP)
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// cek session saat halaman dimuat
+checkSession();
+
+  </script>
+<!-- FIREBASE SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
+    authDomain: "tryout-kebun-ilmu.firebaseapp.com",
+    projectId: "tryout-kebun-ilmu",
+    storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
+    messagingSenderId: "497636674894",
+    appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // supaya bisa dipakai di script lain
+  window.db = db;
+
+  // 🔥 INI YANG PALING PENTING
+  window.simpanHasilFirebase = async function (nilai) {
+    const { addDoc, collection, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+    );
+
+    await addDoc(collection(window.db, "hasil_ujian"), {
+  nik: window.dataPeserta.nik,
+  nama: window.dataPeserta.nama,
+  jk: window.dataPeserta.jk,
+  tglLahir: window.dataPeserta.tgl,
+  sekolah: window.dataPeserta.sekolah,
+  mapel: "Bahasa Indonesia SMP/MTs", // tambah field mapel
+  nilai: nilai,
+  waktu: new Date().toISOString()
+});
+
+
+    console.log("✅ HASIL UJIAN TERSIMPAN");
+  };
+</script>
+
+</body>
+</html>
