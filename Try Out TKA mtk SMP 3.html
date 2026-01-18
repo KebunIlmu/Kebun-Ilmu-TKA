@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Matematika Wajib- Kebun Ilmu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+* {
+  box-sizing: border-box;
+}
+  header {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  header h2 {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .menu-button, .timer {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+.container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #cfd8dc;
+  }
+
+  .right-panel {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .question-buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+#questionDisplay {
+    font-size: 14px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+.fullscreen-mode header {
+    padding: 6px 10px;
+    min-height: unset;
+  }
+
+  .fullscreen-mode header h2 {
+    font-size: 13px;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .fullscreen-mode .menu-button,
+  .fullscreen-mode .timer {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+  
+</style>
+</head>
+
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+<div id="pesertaForm" class="hidden" style="justify-content:center; align-items:center; height:100vh; background-color:#f4f9ff; padding:20px; box-sizing:border-box;">
+  <div style="background:white; padding:24px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:100%; max-width:400px;">
+
+    <h2 style="margin-bottom:14px; color:#1E88E5; text-align:center;">Data Peserta</h2>
+
+    <!-- NIK -->
+    <label for="nik" style="font-weight:600; display:block; margin-bottom:3px;">NIK</label>
+    <input id="nik" placeholder="Masukkan NIK"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Nama Peserta -->
+    <label for="namaPeserta" style="font-weight:600; display:block; margin-bottom:3px;">Nama Peserta</label>
+    <input id="namaPeserta" placeholder="Masukkan nama lengkap"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Jenis Kelamin -->
+    <label for="jk" style="font-weight:600; display:block; margin-bottom:3px;">Jenis Kelamin</label>
+    <select id="jk"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+      <option value="">-- Pilih Jenis Kelamin --</option>
+      <option value="L">Laki-laki</option>
+      <option value="P">Perempuan</option>
+    </select>
+
+    <!-- Tanggal Lahir -->
+    <label for="tglLahir" style="font-weight:600; display:block; margin-bottom:3px;">Tanggal Lahir</label>
+    <input id="tglLahir" type="date"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Sekolah -->
+    <label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">Nama Sekolah</label>
+    <input id="sekolah" placeholder="Nama sekolah"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Token -->
+    <label for="tokenUjian" style="font-weight:600; display:block; margin-bottom:3px;">Token Ujian</label>
+    <input id="tokenUjian" placeholder="Masukkan token ujian"
+      style="width:100%; padding:8px 10px; margin-bottom:14px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <button onclick="mulaiUjian()"
+      style="width:100%; padding:10px; background-color:#1E88E5; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:15px;"
+      onmouseover="this.style.backgroundColor='#1565C0';" 
+      onmouseout="this.style.backgroundColor='#1E88E5';">
+      Mulai Ujian
+    </button>
+
+    <p id="errorPeserta" style="margin-top:8px; font-size:13px; color:red; text-align:center;"></p>
+
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+<header>
+  <h2>Try Out TKA Matematika SMP/MTs - Kebun Ilmu</h2>
+  <div>
+        <span class="timer" id="timer">60:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+function getTokenSekarang() {
+  const now = new Date();
+  const jam = now.getHours();
+  const menit = now.getMinutes();
+
+  // batas waktu
+  if (jam < 7 || jam >= 22) return null;
+
+  // slot 10 menit (0–5)
+  const slot = Math.floor(menit / 10);
+
+  // ===== DEPAN ACAK TERKONTROL =====
+  const seed = jam * 100 + slot;   // angka unik tiap 10 menit
+  const depan = String.fromCharCode(65 + (seed * 7) % 26); // A–Z
+
+  // token akhir
+  return `${depan}${jam.toString().padStart(2,'0')}${slot}`;
+}
+function mulaiUjian() {
+  const nik = document.getElementById("nik").value.trim();
+  const nama = document.getElementById("namaPeserta").value.trim();
+  const jk = document.getElementById("jk").value;
+  const tgl = document.getElementById("tglLahir").value;
+  const sekolah = document.getElementById("sekolah").value.trim();
+  const token = document.getElementById("tokenUjian").value.trim();
+
+  if (!nik || !nama || !jk || !tgl || !sekolah || !token) {
+    document.getElementById("errorPeserta").innerText = "❌ Semua data wajib diisi";
+    return;
+  }
+
+  const tokenAktif = getTokenSekarang();
+
+if (!tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    "⏰ Ujian hanya bisa diakses pukul 07.00 – 17.00";
+  return;
+}
+
+if (token !== tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    `❌ Token salah. Tanya admin`;
+  return;
+}
+
+  // simpan data peserta sementara
+  window.dataPeserta = { nik, nama, jk, tgl, sekolah, token };
+
+ questions = shuffleArray(questions);
+  answers = questions.map(q => {
+    if (q.type === 'mc_multiple') return [];
+    if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+    return null;
+  });
+  currentQuestion = 0;
+
+  // sembunyikan form peserta dan tampilkan konten try out
+  document.getElementById("pesertaForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+
+  // 🔥 Render soal dan start timer
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(60 * 60);
+
+  // AUTO FULLSCREEN
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.warn("Fullscreen gagal:", err);
+    });
+  }
+}
+
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "MANU9",  password: "2026",  expire: "2026-4-11T23:59:59" },
+  { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
+  { username: "MTSMH",  password: "2026", expire: "2026-7-30T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("pesertaForm").style.display = "flex";
+  
+}
+
+  let questions = [
+{
+  "type": "true_false",
+  "text": "Di dalam sebuah perumahan terdapat gedung berlantai 2. Gedung itu juga memiliki basemen. Reva berada di lantai 1 gedung tersebut. Dari lantai 1 Reva naik ke lantai 2 dengan ketinggian 4 meter. Selanjutnya, ia turun ke basemen. Letak lantai basemen 3 meter di bawah permukaan tanah.<br><br>Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+  "statements": [
+    "Lantai 1 dan lantai basemen berjarak 3 meter.",
+    "Lantai 2 dan lantai basemen berjarak 6 meter.",
+    "Dari posisi semula hingga basemen, Reva menempuh jarak 11 meter."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": "Masyarakat Desa Makmur Sejahtera mengikuti kegiatan jalan sehat. Jalan sehat melalui rute Jalan Ahmad Yani sejauh \\(1\\tfrac{2}{5}\\) km, kemudian Jalan Soedirman sejauh \\(2\\tfrac{3}{10}\\) km, dan terakhir melalui Jalan Kartini sejauh \\(1\\tfrac{3}{5}\\) km.<br><br>Berdasarkan informasi tersebut, manakah pernyataan berikut yang benar?<br><b>Jawaban benar lebih dari satu.</b>",
+  "options": [
+    "Sebelum melalui Jalan Kartini, jarak tempuh jalan sehat adalah \\(3\\tfrac{7}{10}\\) km.",
+    "Sebelum melalui Jalan Kartini, jarak tempuh jalan sehat adalah \\(4\\tfrac{1}{2}\\) km.",
+    "Jarak tempuh jalan sehat seluruhnya kurang dari 5 km.",
+    "Jarak tempuh jalan sehat seluruhnya lebih dari 5 km."
+  ],
+  "correct": [0, 3]
+},
+{
+  "type": "mc",
+  "text": "Perhatikan operasi hitung berikut.<br><br>Hasil operasi hitung \\(\\left(\\tfrac{1}{32}\\right)^{1/5} + \\left(\\tfrac{1}{8}\\right)^{1/3}\\) adalah ….",
+  "options": [
+    "40",
+    "4",
+    "1",
+    "0"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": "Diketahui \\(p = 2^3 \\times 6^{-3}\\).<br><br>Berdasarkan informasi tersebut, manakah pernyataan berikut yang benar?<br><b>Jawaban benar lebih dari satu.</b>",
+  "options": [
+    "Nilai \\(p\\) adalah \\(\\tfrac{1}{27}\\).",
+    "Nilai \\(p\\) adalah \\(-\\tfrac{1}{27}\\).",
+    "Jika \\(q = 54p\\), maka nilai \\(q\\) adalah 2.",
+    "Jika \\(q = 54p\\), maka nilai \\(q\\) adalah 4."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc_multiple",
+  "text": "Saat ini selisih usia Kak Gunawan dan Reza adalah 9 tahun. Perbandingan usia mereka adalah 7 : 4.<br><br>Berdasarkan informasi tersebut, manakah pernyataan berikut yang benar?<br><b>Jawaban benar lebih dari satu.</b>",
+  "options": [
+    "Usia Reza adalah 12 tahun.",
+    "Usia Reza kurang dari 11 tahun.",
+    "Tahun depan usia Reza adalah 13 tahun.",
+    "Dua tahun lagi Reza berusia 15 tahun."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "true_false",
+  "text": "Sepuluh murid akan pergi ke museum. Mereka menyewa mobil dengan harga yang sudah ditentukan. Biaya sewa dibayar dengan cara iuran. Setiap murid membayar iuran sebesar Rp60.000,00. Sebelum berangkat, ada dua murid lagi yang bergabung ikut ke museum.<br><br>Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+  "statements": [
+    "Iuran tiap murid menjadi Rp50.000,00.",
+    "Iuran tiap murid bertambah sebanyak Rp10.000,00.",
+    "Iuran tiap murid berkurang sebanyak Rp10.000,00."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": "Nilai \\(x\\) yang memenuhi pertidaksamaan \\(\\dfrac{x+5}{2} + \\dfrac{6-2x}{3} \\ge 5\\) adalah ….",
+  "options": [
+    "x ≤ −3",
+    "x ≥ −3",
+    "x ≤ 3",
+    "x ≥ 3"
+  ],
+  "correct": 0
+},
+{
+  "type": "mc_multiple",
+  "text": "Setelah selesai tes sekolah, akan diadakan lomba antarkelas. Untuk itu, anggota OSIS mengumpulkan dana dari sekolah dan donatur. Setelah dana terkumpul, dana digunakan dengan alokasi sebagai berikut: \\(\\tfrac{1}{6}\\) bagian untuk membuat spanduk, \\(\\tfrac{1}{2}\\) bagian untuk membeli peralatan lomba dan hadiah, Rp150.000,00 untuk sewa tenda, dan sisanya Rp250.000,00 untuk konsumsi.<br><br>Berdasarkan informasi tersebut, manakah pernyataan berikut yang benar?<br><b>Jawaban benar lebih dari satu.</b>",
+  "options": [
+    "Total dana dari sekolah dan donatur adalah Rp1.200.000,00.",
+    "Total pengeluaran selain konsumsi adalah Rp1.050.000,00.",
+    "Biaya sewa tenda merupakan \\(\\tfrac{1}{10}\\) bagian dari total pengeluaran.",
+    "Biaya sewa tenda merupakan \\(\\tfrac{1}{8}\\) bagian dari total pengeluaran."
+  ],
+  "correct": [0, 3]
+},
+{
+  "type": "mc_multiple",
+  "text": "Enam tahun yang lalu, usia ayah tiga kali usia Hadar. Enam tahun yang akan datang, usia ayah dua kali usia Hadar.<br><br>Berdasarkan informasi tersebut, manakah pernyataan berikut yang benar?<br><b>Jawaban benar lebih dari satu.</b>",
+  "options": [
+    "Jumlah usia ayah sekarang dan usia Hadar sekarang adalah 50 tahun.",
+    "Jumlah usia ayah sekarang dan usia Hadar sekarang adalah 60 tahun.",
+    "Sepuluh tahun yang akan datang, Hadar berusia 28 tahun.",
+    "Sepuluh tahun yang akan datang, ayah Hadar berusia 60 tahun."
+  ],
+  "correct": [1, 2]
+},
+{
+  "type": "mc",
+  "text": "Hasil dari \\(\\dfrac{x^2 + x - 12}{x - 3}\\) adalah ….",
+  "options": [
+    "x + 4",
+    "x + 3",
+    "x − 2",
+    "x − 4"
+  ],
+  "correct": 0
+},
+{
+  "type": "mc_multiple",
+  "text": `<p><b>Perhatikan diagram panah fungsi f : A → B dengan f(x) = ax + b berikut!</b></p><img src="https://i.imgur.com/EU00MOd.png" alt="Gambar diagram panah fungsi" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br><br>Berdasarkan informasi tersebut, manakah pernyataan berikut yang benar?<br><b>Jawaban benar lebih dari satu.</b>`,
+  "options": [
+    "Persamaan fungsi adalah f(x) = 4x + 4.",
+    "Fungsi f(x) termasuk fungsi linear.",
+    "Untuk domain D = {x | −3 < x ≤ 2, x bilangan real}, daerah hasil fungsi adalah R = {y | −6 < y ≤ 14, y bilangan real}.",
+    "Untuk domain D = {x | −3 < x ≤ 2, x bilangan real}, daerah hasil fungsi adalah R = {y | −8 < y ≤ 12, y bilangan real}."
+  ],
+  "correct": [1, 2]
+},
+{
+  "type": "mc",
+  "text": "Rani menabung di rumah secara teratur setiap minggu. Uang yang ditabung Rani selalu lebih besar daripada minggu sebelumnya dengan selisih yang tetap. Jumlah seluruh tabungan Rani dalam 10 minggu pertama adalah Rp335.000,00. Jika jumlah seluruh tabungan Rani dalam 15 minggu pertama adalah Rp615.000,00.<br><br>Besar uang yang ditabung Rani pada minggu ke-20 adalah ….",
+  "options": [
+    "Rp74.000,00",
+    "Rp77.000,00",
+    "Rp80.000,00",
+    "Rp83.000,00"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": "Diketahui suatu deret geometri dengan besar suku ke-2 dan suku ke-5 berturut-turut adalah 6 dan 48.<br><br>Berdasarkan informasi tersebut, manakah pernyataan berikut yang benar?<br><b>Jawaban benar lebih dari satu.</b>",
+  "options": [
+    "Jumlah 3 suku pertama adalah 21.",
+    "Jumlah 5 suku pertama adalah 45.",
+    "Jumlah 8 suku pertama adalah 765.",
+    "Jumlah 10 suku pertama adalah 1.533."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "true_false",
+  "text": `Perhatikan gambar berikut.<br><img src="https://i.imgur.com/E4eMcWB.png" alt="Gambar garis sejajar" style="max-width:100%; height:auto; display:block; margin:12px auto;"><br>Diketahui besar sudut bernomor 1 adalah 116° dan besar sudut bernomor 5 adalah 124°.<br><br>Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!`,
+  "statements": [
+    "Sudut bernomor 2 besarnya 64°.",
+    "Jumlah besar sudut bernomor 3 dan 4 adalah 120°.",
+    "Besar sudut bernomor 4 adalah 60°."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": "Perhatikan beberapa kelompok bilangan berikut.<br><br>Kelompok bilangan manakah yang merupakan tripel Pythagoras?<br><b>Jawaban benar lebih dari satu.</b>",
+  "options": [
+    "20, 21, dan 29",
+    "15, 8, dan 17",
+    "14, 16, dan 25",
+    "6, 12, dan 13"
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "true_false",
+  "text": `<p><b>Perhatikan gambar berikut!</b></p><img src="https://i.imgur.com/VIMfKwN.png" style="max-width:100%; height:auto; display:block; margin:12px auto;"><p>Diketahui segitiga ABC <b>kongruen</b> dengan segitiga DEF.</p><br>Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!`,
+  "statements": [
+    "Panjang sisi AB adalah 9 cm.",
+    "Panjang sisi DE adalah 8 cm.",
+    "Besar ∠F sama dengan besar ∠E."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc_multiple",
+  "text": "Titik (-1, 2), (-3, 7), (-5, 12), dan (1, -3) dilalui oleh garis m. Garis m dicerminkan terhadap garis x = 3 sehingga menghasilkan garis m'.<br><br>Berdasarkan informasi tersebut, titik manakah yang dilalui oleh garis m'?<br><b>Jawaban benar lebih dari satu.</b>",
+  "options": [
+    "(-1, -2)",
+    "(9, 7)",
+    "(-5, -12)",
+    "(5, -3)"
+  ],
+  "correct": [1, 3]
+},
+{
+  "type": "mc_multiple",
+  "text": `<p><b>Pemagaran Lahan</b></p><p>Pak Yuda mempunyai lahan seperti denah berikut.</p><p><img src="https://i.imgur.com/C2N0oKe.png" style="max-width:100%; height:auto; display:block; margin:12px auto;"></p><p>Pak Yuda akan memasang pagar di sekeliling lahan tersebut. Pak Yuda mempunyai dua pilihan model pagar dengan biaya berbeda.</p><ul><li>Biaya pagar model A sebesar Rp20.000,00 per meter.</li><li>Biaya pagar model B sebesar Rp30.000,00 per meter.</li></ul><p>Pak Yuda memiliki uang sebesar <b>Rp2.500.000,00</b>.</p><br>Berdasarkan informasi tersebut, manakah pernyataan berikut yang benar?<br><b>Jawaban benar lebih dari satu.</b>`,
+  "options": [
+    "Biaya yang dikeluarkan Pak Yuda untuk memasang pagar model A lebih dari Rp1.500.000,00.",
+    "Biaya yang dikeluarkan Pak Yuda untuk memasang pagar model B kurang dari Rp2.500.000,00.",
+    "Jika lahan dipasangi pagar model A, uang Pak Yuda tersisa Rp680.000,00.",
+    "Jika lahan dipasangi pagar model B, uang Pak Yuda kurang Rp140.000,00."
+  ],
+  "correct": [0, 3]
+},
+{
+  "type": "mc",
+  "text": `<p><b>Pemagaran Lahan</b></p><p>Pak Yuda mempunyai lahan seperti denah berikut.</p><p><img src="https://i.imgur.com/C2N0oKe.png" style="max-width:100%; height:auto; display:block; margin:12px auto;"></p><p>Pak Yuda akan memasang pagar di sekeliling lahan tersebut. Pak Yuda mempunyai dua pilihan model pagar dengan biaya berbeda.</p><ul><li>Biaya pagar model A sebesar Rp20.000,00 per meter.</li><li>Biaya pagar model B sebesar Rp30.000,00 per meter.</li></ul><p>Pak Yuda memiliki uang sebesar <b>Rp2.500.000,00</b>.</p><br>Luas lahan milik Pak Yuda adalah ….`,
+  "options": [
+    "352 \\(\\text{m}^2\\)",
+    "304 \\(\\text{m}^2\\)",
+    "448 \\(\\text{m}^2\\)",
+    "480 \\(\\text{m}^2\\)"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `<p><b>Perhatikan gambar berikut!</b></p><p><img src="https://i.imgur.com/cCVzLSg.png" style="max-width:100%; height:auto; display:block; margin:12px auto;"></p><br>Tentukan volume limas tersebut!`,
+  "options": [
+    "100 cm³",
+    "110 cm³",
+    "120 cm³",
+    "130 cm³"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc_multiple",
+  "text": `<p><b>Perhatikan gabungan bangun ruang berikut!</b></p><p><img src="https://i.imgur.com/UE1apFC.png" style="max-width:100%; height:auto; display:block; margin:12px auto;"></p><br>Berdasarkan gambar di atas, manakah pernyataan berikut yang benar?<br><b>Jawaban benar lebih dari satu.</b>`,
+  "options": [
+    "Volume tabung adalah 2.310 cm³.",
+    "Volume setengah bola lebih dari 718 cm³.",
+    "Selisih volume tabung dan setengah bola adalah 1.591 \\(\\frac{1}{3}\\) cm³.",
+    "Volume bangun ruang gabungan adalah 3.028 \\(\\frac{1}{3}\\) cm³."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc",
+  "text": `<p><b>Perhatikan data panjang badan seorang bayi dari lahir sampai usia 6 bulan berikut!</b></p><p><img src="https://i.imgur.com/vkQ1OOk.png" style="max-width:100%; height:auto; display:block; margin:12px auto;"></p><br>Diagram garis yang benar untuk menyajikan data tersebut adalah ….`,
+  "options": [
+    "<img src='https://i.imgur.com/WT1XfFR.png' alt='Diagram garis 1' class='max-w-full my-2'>",
+    "<img src='https://i.imgur.com/e6vkyLs.png' alt='Diagram garis 2' class='max-w-full my-2'>",
+    "<img src='https://i.imgur.com/eLcIzt9.png' alt='Diagram garis 3' class='max-w-full my-2'>",
+    "<img src='https://i.imgur.com/qYs210x.png' alt='Diagram garis 4' class='max-w-full my-2'>"
+  ],
+  "correct": 0
+},
+{
+  "type": "true_false",
+  "text": `<p><b>Perhatikan data berat ikan hasil panen di kolam yang disajikan dalam bentuk diagram batang berikut!</b></p><p><img src="https://i.imgur.com/5lgLu4E.png" style="max-width:100%; height:auto; display:block; margin:12px auto;"></p><br>Berdasarkan diagram batang tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut!`,
+  "statements": [
+    "Rata-rata berat ikan adalah 14,6 ons.",
+    "Median data berat ikan adalah 14 ons.",
+    "Modus data berat ikan adalah 14 ons."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": "Sekelompok data tinggi badan terdiri atas sembilan bilangan ganjil berurutan.<br><br>Kuartil bawah data tersebut adalah 162 cm. Simpangan kuartil data tersebut adalah ….",
+  "options": [
+    "5 cm",
+    "5,25 cm",
+    "5,5 cm",
+    "5,75 cm"
+  ],
+  "correct": 0
+},
+{
+  "type": "true_false",
+  "text": "Di dalam sebuah kardus terdapat 5 bola merah, 5 bola biru, 6 bola putih, dan 5 bola hitam. Angga melakukan percobaan berulang-ulang mengambil sebuah bola dari dalam kardus, lalu dikembalikan.<br><br>Hasil percobaan dicatat dalam tabel berikut.<br><br><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse; text-align:center; width:60%;\"><tr style=\"background-color:#f2f2f2; font-weight:bold;\"><th>Warna Bola</th><th>Banyak Terambil</th></tr><tr><td>Merah</td><td>12</td></tr><tr><td>Biru</td><td>25</td></tr><tr><td>Putih</td><td>20</td></tr><tr><td>Hitam</td><td>18</td></tr><tr style=\"font-weight:bold; background-color:#fafafa;\"><td>Total</td><td>75</td></tr></table><br><br>Diketahui peluang empiris terambil bola merah adalah 0,16.<br><br>Berdasarkan informasi tersebut, tentukan Benar atau Salah untuk setiap pernyataan berikut tentang peluang empiris terambil bola selain merah!",
+  "statements": [
+    "Peluang empiris terambil bola biru adalah \\(\\frac{25}{75}\\).",
+    "Peluang empiris terambil bola putih adalah \\(\\frac{20}{75}\\).",
+    "Peluang empiris terambil bola hitam adalah \\(\\frac{18}{75}\\)."
+  ],
+  "correct": [true, true, true]
+}
+
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  return null;
+});
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk tipe mc_multiple
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', e => {
+        const val = parseInt(e.target.value);
+        if (e.target.checked) {
+          if (!answers[index].includes(val)) answers[index].push(val);
+        } else {
+          answers[index] = answers[index].filter(v => v !== val);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  // Hitung skor 0–100
+  const percentage = Math.round((score / questions.length) * 100);
+
+  // Tampilkan hanya skor akhir dalam bentuk nilai
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+// 🔥 KIRIM KE FIREBASE
+  simpanHasilFirebase(percentage);
+}
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+// Tampilkan tombol Kembali setelah submit
+const backBtn = document.createElement('button');
+backBtn.textContent = "Kembali ke Beranda";
+backBtn.style.padding = "10px 18px";
+backBtn.style.marginTop = "10px";
+backBtn.style.backgroundColor = "#1e88e5";
+backBtn.style.color = "white";
+backBtn.style.border = "none";
+backBtn.style.borderRadius = "6px";
+backBtn.style.fontWeight = "bold";
+backBtn.style.cursor = "pointer";
+backBtn.addEventListener('click', () => {
+    window.location.href = "https://kebunilmu.github.io/Kebun-Ilmu-TKA/";
+});
+document.querySelector('.right-panel .navigation').appendChild(backBtn);
+
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  timerRunning = true; // pastikan timer aktif
+
+  const interval = setInterval(() => {
+    if (!timerRunning) { 
+      clearInterval(interval); 
+      return; 
+    }
+
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+    if (timer <= 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+
+    timer--;
+  }, 1000);
+}
+
+
+// Auto submit saat keluar fullscreen
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement && timerRunning) {
+    alert("Anda keluar dari fullscreen. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah tab/window (desktop)
+window.addEventListener("blur", () => {
+  if (timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah app / tab (HP)
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// cek session saat halaman dimuat
+checkSession();
+
+  </script>
+<!-- FIREBASE SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
+    authDomain: "tryout-kebun-ilmu.firebaseapp.com",
+    projectId: "tryout-kebun-ilmu",
+    storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
+    messagingSenderId: "497636674894",
+    appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // supaya bisa dipakai di script lain
+  window.db = db;
+
+  // 🔥 INI YANG PALING PENTING
+  window.simpanHasilFirebase = async function (nilai) {
+    const { addDoc, collection, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+    );
+
+    await addDoc(collection(window.db, "hasil_ujian"), {
+  nik: window.dataPeserta.nik,
+  nama: window.dataPeserta.nama,
+  jk: window.dataPeserta.jk,
+  tglLahir: window.dataPeserta.tgl,
+  sekolah: window.dataPeserta.sekolah,
+  mapel: "Matematika SMP/MTs", // tambah field mapel
+  nilai: nilai,
+  waktu: new Date().toISOString()
+});
+
+
+    console.log("✅ HASIL UJIAN TERSIMPAN");
+  };
+</script>
+
+</body>
+</html>

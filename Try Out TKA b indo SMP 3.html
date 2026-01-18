@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Bahasa Indonesia - Kebun Ilmu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+* {
+  box-sizing: border-box;
+}
+  header {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  header h2 {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .menu-button, .timer {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+.container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #cfd8dc;
+  }
+
+  .right-panel {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .question-buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+#questionDisplay {
+    font-size: 14px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+.fullscreen-mode header {
+    padding: 6px 10px;
+    min-height: unset;
+  }
+
+  .fullscreen-mode header h2 {
+    font-size: 13px;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .fullscreen-mode .menu-button,
+  .fullscreen-mode .timer {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+  
+</style>
+</head>
+
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+<div id="pesertaForm" class="hidden" style="justify-content:center; align-items:center; height:100vh; background-color:#f4f9ff; padding:20px; box-sizing:border-box;">
+  <div style="background:white; padding:24px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:100%; max-width:400px;">
+
+    <h2 style="margin-bottom:14px; color:#1E88E5; text-align:center;">Data Peserta</h2>
+
+    <!-- NIK -->
+    <label for="nik" style="font-weight:600; display:block; margin-bottom:3px;">NIK</label>
+    <input id="nik" placeholder="Masukkan NIK"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Nama Peserta -->
+    <label for="namaPeserta" style="font-weight:600; display:block; margin-bottom:3px;">Nama Peserta</label>
+    <input id="namaPeserta" placeholder="Masukkan nama lengkap"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Jenis Kelamin -->
+    <label for="jk" style="font-weight:600; display:block; margin-bottom:3px;">Jenis Kelamin</label>
+    <select id="jk"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+      <option value="">-- Pilih Jenis Kelamin --</option>
+      <option value="L">Laki-laki</option>
+      <option value="P">Perempuan</option>
+    </select>
+
+    <!-- Tanggal Lahir -->
+    <label for="tglLahir" style="font-weight:600; display:block; margin-bottom:3px;">Tanggal Lahir</label>
+    <input id="tglLahir" type="date"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Sekolah -->
+    <label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">Nama Sekolah</label>
+    <input id="sekolah" placeholder="Nama sekolah"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Token -->
+    <label for="tokenUjian" style="font-weight:600; display:block; margin-bottom:3px;">Token Ujian</label>
+    <input id="tokenUjian" placeholder="Masukkan token ujian"
+      style="width:100%; padding:8px 10px; margin-bottom:14px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <button onclick="mulaiUjian()"
+      style="width:100%; padding:10px; background-color:#1E88E5; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:15px;"
+      onmouseover="this.style.backgroundColor='#1565C0';" 
+      onmouseout="this.style.backgroundColor='#1E88E5';">
+      Mulai Ujian
+    </button>
+
+    <p id="errorPeserta" style="margin-top:8px; font-size:13px; color:red; text-align:center;"></p>
+
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+<header>
+  <h2>Try Out TKA Bahasa Indonesia SMP/MTs - Kebun Ilmu</h2>
+  <div>
+        <span class="timer" id="timer">60:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+function getTokenSekarang() {
+  const now = new Date();
+  const jam = now.getHours();
+  const menit = now.getMinutes();
+
+  // batas waktu
+  if (jam < 7 || jam >= 22) return null;
+
+  // slot 10 menit (0–5)
+  const slot = Math.floor(menit / 10);
+
+  // ===== DEPAN ACAK TERKONTROL =====
+  const seed = jam * 100 + slot;   // angka unik tiap 10 menit
+  const depan = String.fromCharCode(65 + (seed * 7) % 26); // A–Z
+
+  // token akhir
+  return `${depan}${jam.toString().padStart(2,'0')}${slot}`;
+}
+function mulaiUjian() {
+  const nik = document.getElementById("nik").value.trim();
+  const nama = document.getElementById("namaPeserta").value.trim();
+  const jk = document.getElementById("jk").value;
+  const tgl = document.getElementById("tglLahir").value;
+  const sekolah = document.getElementById("sekolah").value.trim();
+  const token = document.getElementById("tokenUjian").value.trim();
+
+  if (!nik || !nama || !jk || !tgl || !sekolah || !token) {
+    document.getElementById("errorPeserta").innerText = "❌ Semua data wajib diisi";
+    return;
+  }
+
+  const tokenAktif = getTokenSekarang();
+
+if (!tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    "⏰ Ujian hanya bisa diakses pukul 07.00 – 17.00";
+  return;
+}
+
+if (token !== tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    `❌ Token salah. Tanya admin`;
+  return;
+}
+
+  // simpan data peserta sementara
+  window.dataPeserta = { nik, nama, jk, tgl, sekolah, token };
+
+ questions = shuffleArray(questions);
+answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  if (q.type === 'tepat_tidak') return Array(q.statements.length).fill(null);
+if (q.type === 'relevan_tidak') return Array(q.statements.length).fill(null);
+  if (q.type === 'dampak_jangka')
+    return Array(q.statements.length).fill(null);
+  return null;
+});
+
+  currentQuestion = 0;
+
+  // sembunyikan form peserta dan tampilkan konten try out
+  document.getElementById("pesertaForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+
+  // 🔥 Render soal dan start timer
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(60 * 60);
+
+  // AUTO FULLSCREEN
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.warn("Fullscreen gagal:", err);
+    });
+  }
+}
+
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "MANU9",  password: "2026",  expire: "2026-5-11T23:59:59" },
+  { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-7-30T23:59:59" },
+  { username: "MTSMH",   password: "2026", expire: "2026-7-30T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("pesertaForm").style.display = "flex";
+  
+}
+
+  let questions = [
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Fenomena Gerhana Bulan Total</strong></p>
+
+      Fenomena alam langka akan kembali menghiasi langit Indonesia. Akan ada gerhana bulan total. Fenomena ini bisa disaksikan mulai malam hingga dini hari. Gerhana bulan total dapat diamati dari seluruh wilayah Indonesia. Kita bisa mengamatinya tanpa bantuan alat khusus.<br><br>
+
+      Fenomena ini terjadi saat seluruh permukaan Bulan tertutup bayangan Bumi. Bayangan Bumi disebut juga dengan umbra. Pada fase puncaknya, Bulan akan tampak berwarna merah tembaga. Fase ini disebut <em>blood moon</em>. Peristiwa ini menjadi momen istimewa bagi para pengamat langit.<br><br>
+
+      Tahun 2025 menjadi momen menarik bagi pencinta astronomi. Pada tahun ini terjadi dua kali gerhana bulan. Gerhana bulan pertama terjadi pada 14 Maret 2025. Gerhana bulan kedua terjadi pada 7 September 2025. Gerhana bulan kedua dapat diamati di seluruh wilayah Indonesia.<br><br>
+
+      Gerhana bulan pertama terjadi di wilayah visibilitas yang mencakup Pasifik, Amerika, Eropa Barat, dan Afrika Barat. Saat itu, Bulan memasuki bayangan Bumi sehingga tampak memerah dan menciptakan pemandangan yang menakjubkan.<br><br>
+
+      Sementara itu, gerhana bulan kedua pada 7 September 2025, menurut Pusat Riset Antariksa BRIN, dapat disaksikan dari seluruh penjuru Indonesia. Gerhana bulan dimulai pukul 22.30 WIB hingga 03.30 WIB keesokan harinya.<br><br>
+
+      Kedua gerhana bulan tersebut merupakan pertunjukan alam yang langka dan memukau. Fenomena ini memperlihatkan keajaiban alam luar angkasa. Masyarakat pun diimbau untuk menyaksikan langsung peristiwa langit ini.<br><br>
+
+      <em>Sumber: Irma Budiarti/Detik (2025)</em><br><br>
+
+      <b>Question:</b> Manakah pernyataan berikut yang sesuai dengan makna isi teks "Fenomena Gerhana Bulan Total"?
+    </div>
+  `,
+  "options": [
+    "Gerhana bulan total terjadi karena cahaya Bulan tertutup oleh bayangan Bumi.",
+    "Gerhana bulan total dapat disaksikan di Indonesia hanya dengan bantuan teleskop.",
+    "Warna merah saat gerhana bulan total terjadi karena pantulan cahaya dari Bumi.",
+    "Pada 2025 terjadi dua kali gerhana bulan dan salah satunya dapat dilihat di Indonesia."
+  ],
+  "correct": 0
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Fenomena Gerhana Bulan Total</strong></p>
+
+      Fenomena alam langka akan kembali menghiasi langit Indonesia. Akan ada gerhana bulan total. Fenomena ini bisa disaksikan mulai malam hingga dini hari. Gerhana bulan total dapat diamati dari seluruh wilayah Indonesia. Kita bisa mengamatinya tanpa bantuan alat khusus.<br><br>
+
+      Fenomena ini terjadi saat seluruh permukaan Bulan tertutup bayangan Bumi. Bayangan Bumi disebut juga dengan umbra. Pada fase puncaknya, Bulan akan tampak berwarna merah tembaga. Fase ini disebut <em>blood moon</em>. Peristiwa ini menjadi momen istimewa bagi para pengamat langit.<br><br>
+
+      Tahun 2025 menjadi momen menarik bagi pencinta astronomi. Pada tahun ini terjadi dua kali gerhana bulan. Gerhana bulan pertama terjadi pada 14 Maret 2025. Gerhana bulan kedua terjadi pada 7 September 2025. Gerhana bulan kedua dapat diamati di seluruh wilayah Indonesia.<br><br>
+
+      Gerhana bulan pertama terjadi di wilayah visibilitas yang mencakup Pasifik, Amerika, Eropa Barat, dan Afrika Barat. Saat itu, Bulan memasuki bayangan Bumi sehingga tampak memerah dan menciptakan pemandangan yang menakjubkan.<br><br>
+
+      Sementara itu, gerhana bulan kedua pada 7 September 2025, menurut Pusat Riset Antariksa BRIN, dapat disaksikan dari seluruh penjuru Indonesia. Gerhana bulan dimulai pukul 22.30 WIB hingga 03.30 WIB keesokan harinya.<br><br>
+
+      Kedua gerhana bulan tersebut merupakan pertunjukan alam yang langka dan memukau. Fenomena ini memperlihatkan keajaiban alam luar angkasa. Masyarakat pun diimbau untuk menyaksikan langsung peristiwa langit ini.<br><br>
+
+      <em>Sumber: Irma Budiarti/Detik (2025)</em><br><br>
+
+      <b>Question:</b> Manakah pernyataan yang merupakan gagasan pendukung dalam teks "Fenomena Gerhana Bulan Total"?<br>
+      <i>Pilihlah jawaban yang benar! (Jawaban benar lebih dari satu)</i>
+    </div>
+  `,
+  "options": [
+    "Gerhana bulan total membuat malam tampak istimewa bagi pengamat langit.",
+    "Gerhana bulan total menyebabkan terjadinya hujan meteor di Indonesia.",
+    "Warna merah tembaga pada Bulan disebut dengan istilah blood moon.",
+    "Pada 2025 terjadi dua kali gerhana bulan yang dapat diamati."
+  ],
+  "correct": [0, 2, 3]
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Fenomena Gerhana Bulan Total</strong></p>
+
+      Fenomena alam langka akan kembali menghiasi langit Indonesia. Akan ada gerhana bulan total. Fenomena ini bisa disaksikan mulai malam hingga dini hari. Gerhana bulan total dapat diamati dari seluruh wilayah Indonesia. Kita bisa mengamatinya tanpa bantuan alat khusus.<br><br>
+
+      Fenomena ini terjadi saat seluruh permukaan Bulan tertutup bayangan Bumi. Bayangan Bumi disebut juga dengan umbra. Pada fase puncaknya, Bulan akan tampak berwarna merah tembaga. Fase ini disebut <em>blood moon</em>. Peristiwa ini menjadi momen istimewa bagi para pengamat langit.<br><br>
+
+      Tahun 2025 menjadi momen menarik bagi pencinta astronomi. Pada tahun ini terjadi dua kali gerhana bulan. Gerhana bulan pertama terjadi pada 14 Maret 2025. Gerhana bulan kedua terjadi pada 7 September 2025. Gerhana bulan kedua dapat diamati di seluruh wilayah Indonesia.<br><br>
+
+      Gerhana bulan pertama terjadi di wilayah visibilitas yang mencakup Pasifik, Amerika, Eropa Barat, dan Afrika Barat. Saat itu, Bulan memasuki bayangan Bumi sehingga tampak memerah dan menciptakan pemandangan yang menakjubkan.<br><br>
+
+      Sementara itu, gerhana bulan kedua pada 7 September 2025, menurut Pusat Riset Antariksa BRIN, dapat disaksikan dari seluruh penjuru Indonesia. Gerhana bulan dimulai pukul 22.30 WIB hingga 03.30 WIB keesokan harinya.<br><br>
+
+      Kedua gerhana bulan tersebut merupakan pertunjukan alam yang langka dan memukau. Fenomena ini memperlihatkan keajaiban alam luar angkasa. Masyarakat pun diimbau untuk menyaksikan langsung peristiwa langit ini.<br><br>
+
+      <em>Sumber: Irma Budiarti/Detik (2025)</em><br><br>
+
+      <b>Question:</b> Apakah hubungan sebab akibat dalam teks "Fenomena Gerhana Bulan Total" disampaikan secara logis?<br>
+      <i>Tentukan Benar atau Salah untuk setiap pernyataan berikut!</i>
+    </div>
+  `,
+  "statements": [
+    "Gerhana bulan total terjadi karena Bulan tertutup bayangan Bumi.",
+    "Blood moon terjadi karena cahaya Bulan hilang sepenuhnya saat gerhana.",
+    "Warna merah tembaga pada saat gerhana terjadi karena adanya umbra."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Amankah Memakai Lensa Kontak?</strong></p>
+
+      Lensa kontak aman dipakai jika dirawat dengan benar. Jagalah kebersihan dan ikuti aturan pemakaian yang benar. Jangan gunakan lensa kontak terlalu lama. Tindakan-tindakan tersebut untuk mencegah infeksi. Lensa kontak merupakan lapisan lensa tipis yang dikenakan di kornea mata. Fungsi lensa kontak untuk membantu mengatasi gangguan penglihatan. Ada dua jenis lensa kontak. Pertama, lensa kontak lunak (<em>soft contact lenses</em>). Kedua, lensa kontak keras (<em>rigid contact lenses</em>).<br><br>
+
+      Lensa kontak sering dipilih untuk mengoreksi gangguan penglihatan. Beberapa orang memilih lensa kontak daripada kacamata. <em>1) Lensa kontak menawarkan fleksibilitas dan tampilan yang lebih natural.</em> Namun, penggunaan lensa kontak juga memiliki risiko. <em>2) Jika disimpan sembarangan, lensa kontak justru bisa menyebabkan iritasi.</em> Penggunaan lensa kontak relatif aman jika mengikuti anjuran dokter. Selain itu, harus mengikuti instruksi pemakaian yang tepat. Ingatlah! <em>3) Lensa kontak merupakan benda asing yang ditempelkan di kornea mata.</em> <em>4) Cepat atau lambat, mata akan terganggu dengan pemakaian lensa kontak.</em> Apalagi dengan jangka waktu pemakaian yang lama (hampir seharian). Pemakaian yang lama akan mengganggu kesehatan mata. Kelopak mata dan kornea bisa mengalami masalah. Penggunaan lensa kontak terlalu lama juga mengganggu selaput konjungtiva.<br><br>
+
+      Apabila ingin menggunakan lensa kontak, konsultasikan dahulu dengan dokter spesialis mata. Tidak semua orang cocok untuk menggunakan lensa kontak. Jika mata nyeri, merah, atau penglihatan terganggu, hentikan pemakaian. Segeralah periksakan diri ke dokter mata untuk mendapatkan penanganan.<br><br>
+
+      <em>Sumber: Andrita Karamoy, dr. Sp.M / Rumah Sakit Pondok Indah (2025)</em><br><br>
+
+      <b>Question:</b> Perhatikan kalimat bercetak miring dalam teks. Manakah kalimat yang memiliki makna kiasan?
+    </div>
+  `,
+  "options": [
+    "1)",
+    "2)",
+    "3)",
+    "4)"
+  ],
+  "correct": 3
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Amankah Memakai Lensa Kontak?</strong></p>
+
+      Lensa kontak aman dipakai jika dirawat dengan benar. Jagalah kebersihan dan ikuti aturan pemakaian yang benar. Jangan gunakan lensa kontak terlalu lama. Tindakan-tindakan tersebut untuk mencegah infeksi. Lensa kontak merupakan lapisan lensa tipis yang dikenakan di kornea mata. Fungsi lensa kontak untuk membantu mengatasi gangguan penglihatan. Ada dua jenis lensa kontak. Pertama, lensa kontak lunak (<em>soft contact lenses</em>). Kedua, lensa kontak keras (<em>rigid contact lenses</em>).<br><br>
+
+      Lensa kontak sering dipilih untuk mengoreksi gangguan penglihatan. Beberapa orang memilih lensa kontak daripada kacamata. Lensa kontak menawarkan fleksibilitas dan tampilan yang lebih natural. Namun, penggunaan lensa kontak juga memiliki risiko. Jika disimpan sembarangan, lensa kontak justru bisa menyebabkan iritasi. Penggunaan lensa kontak relatif aman jika mengikuti anjuran dokter dan instruksi pemakaian yang tepat. Ingatlah, lensa kontak merupakan benda asing yang ditempelkan di kornea mata. Cepat atau lambat, mata akan terganggu dengan pemakaian lensa kontak, terutama jika digunakan terlalu lama.<br><br>
+
+      Apabila ingin menggunakan lensa kontak, konsultasikan dahulu dengan dokter spesialis mata. Tidak semua orang cocok untuk menggunakan lensa kontak. Jika mata nyeri, merah, atau penglihatan terganggu, hentikan pemakaian dan segera periksakan diri ke dokter mata.<br><br>
+
+      <em>Sumber: Andrita Karamoy, dr. Sp.M / Rumah Sakit Pondok Indah (2025)</em><br><br>
+
+      <b>Question:</b> Pernyataan manakah yang sesuai dengan informasi dalam teks "Amankah Memakai Lensa Kontak"?<br>
+      <i>Pilihlah jawaban yang benar! (Jawaban benar lebih dari satu)</i>
+    </div>
+  `,
+  "options": [
+    "Lensa kontak menyebabkan iritasi jika disimpan sembarangan.",
+    "Lensa kontak aman dipakai meskipun tidak dirawat dengan baik.",
+    "Konsultasi ke dokter mata penting sebelum memakai lensa kontak.",
+    "Semua orang cocok menggunakan lensa kontak untuk membantu penglihatan."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Amankah Memakai Lensa Kontak?</strong></p>
+
+      Lensa kontak aman dipakai jika dirawat dengan benar. Jagalah kebersihan dan ikuti aturan pemakaian yang benar. Jangan gunakan lensa kontak terlalu lama. Tindakan-tindakan tersebut untuk mencegah infeksi. Lensa kontak merupakan lapisan lensa tipis yang dikenakan di kornea mata. Fungsi lensa kontak untuk membantu mengatasi gangguan penglihatan. Ada dua jenis lensa kontak. Pertama, lensa kontak lunak (<em>soft contact lenses</em>). Kedua, lensa kontak keras (<em>rigid contact lenses</em>).<br><br>
+
+      Lensa kontak sering dipilih untuk mengoreksi gangguan penglihatan. Beberapa orang memilih lensa kontak daripada kacamata. Lensa kontak menawarkan fleksibilitas dan tampilan yang lebih natural. Namun, penggunaan lensa kontak juga memiliki risiko. Jika disimpan sembarangan, lensa kontak justru bisa menyebabkan iritasi. Penggunaan lensa kontak relatif aman jika mengikuti anjuran dokter dan instruksi pemakaian yang tepat. Ingatlah, lensa kontak merupakan benda asing yang ditempelkan di kornea mata. Cepat atau lambat, mata akan terganggu dengan pemakaian lensa kontak, terutama jika digunakan terlalu lama.<br><br>
+
+      Apabila ingin menggunakan lensa kontak, konsultasikan dahulu dengan dokter spesialis mata. Tidak semua orang cocok untuk menggunakan lensa kontak. Jika mata nyeri, merah, atau penglihatan terganggu, hentikan pemakaian dan segera periksakan diri ke dokter mata.<br><br>
+
+      <em>Sumber: Andrita Karamoy, dr. Sp.M / Rumah Sakit Pondok Indah (2025)</em><br><br>
+
+      <b>Question:</b> Kemungkinan apa yang terjadi jika seseorang memakai lensa kontak seharian penuh tanpa mengikuti anjuran dokter?
+    </div>
+  `,
+  "options": [
+    "Mata akan makin terbiasa memakai lensa kontak dalam jangka lama.",
+    "Lensa kontak menjadi lebih efektif dalam memperbaiki gangguan penglihatan.",
+    "Mata bisa mengalami gangguan, seperti iritasi atau kerusakan pada bagian mata.",
+    "Lensa kontak akan menempel lebih kuat di kornea dan meningkatkan kenyamanan."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>ADEGAN 4</strong></p>
+
+      <i>Musik masih berlanjut. Di rumah Mak Unah terjadi sesuatu.</i><br><br>
+
+      Mak Unah kena musibah. Barang-barangnya disita oleh pasukan tertib sehingga Mak Unah tidak bisa berjualan lagi. Karena belum bisa membayar kontrakan, Mak Unah pun diusir. Sejak saat itu, Mak Unah jatuh sakit.<br><br>
+
+      <b>Mak Unah:</b> Slik, sekarang keadaan saya begini. Rasa-rasanya aku sudah tidak bisa merawat kalian. Karena kamu yang paling besar, tentunya kamu sudah bisa hidup mandiri. <br><br>
+
+      <b>Muslik:</b> Jangan bilang begitu, Mak. Kami belum bisa hidup mandiri. Masih perlu bimbingan Emak. <br><br>
+
+      <b>Mak Unah:</b> Kamu tahu, Slik, tidak lama lagi kita sudah tidak tinggal di sini lagi. Kita harus pindah entah ke mana. <br><br>
+
+      <b>Koiron:</b> Lalu, kita ke mana, Mak? <br><br>
+
+      <b>Mak Unah:</b> Maka dari itu, aku sekarang sudah tidak bisa apa-apa. Untuk itu kalian harus lebih pandai. Ibadahnya ditingkatkan ya, Le. Salatnya jangan ditinggalkan, biar kelak menjadi anak-anak yang sukses. <br><br>
+
+      <b>Fiki:</b> Lalu Emak mau ke mana? <br><br>
+
+      <b>Mak Unah:</b> Setelah sembuh nanti, aku bermaksud pulang ke kampung halaman. Di sana Emak masih punya sanak famili. Tapi, tidak mungkin aku membawa kalian. <br><br>
+
+      <b>Muslik:</b> Tidak, Mak. Emak harus tetap tinggal di sini. <br><br>
+
+      <b>Mak Unah:</b> Lalu, kita harus hidup di mana? Sudah tidak punya apa-apa, Slik. <br><br>
+
+      <b>Muslik:</b> Kita tidak putus asa, Mak, asal Emak tetap mendampingi kita.<br><br>
+
+      <em>Sumber: Sukarjan, <i>Kumpulan Naskah Drama “Tertena”</i>, Tangerang: Indocamp, 2019.</em><br><br>
+
+      <b>Question:</b> Tentukan karakter tokoh Mak Unah berdasarkan cara menghadapi masalah!
+    </div>
+  `,
+  "options": [
+    "Tokoh Mak Unah bersikap tenang dan berusaha terus mengayomi anak-anak.",
+    "Tokoh Mak Unah menunjukkan sikap menghindar dari tanggung jawab dengan menyerah.",
+    "Tokoh Mak Unah menyerahkan seluruh keputusan kepada anak-anak dengan membimbing.",
+    "Tokoh Mak Unah tetap memikirkan masa depan anak-anak meskipun dalam keadaan terpuruk."
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>ADEGAN 4</strong></p>
+
+      <i>Musik masih berlanjut. Di rumah Mak Unah terjadi sesuatu.</i><br><br>
+
+      Mak Unah kena musibah. Barang-barangnya disita oleh pasukan tertib sehingga Mak Unah tidak bisa berjualan lagi. Karena belum bisa membayar kontrakan, Mak Unah pun diusir. Sejak saat itu, Mak Unah jatuh sakit.<br><br>
+
+      <b>Mak Unah:</b> Slik, sekarang keadaan saya begini. Rasa-rasanya aku sudah tidak bisa merawat kalian. Karena kamu yang paling besar, tentunya kamu sudah bisa hidup mandiri. <br><br>
+
+      <b>Muslik:</b> Jangan bilang begitu, Mak. Kami belum bisa hidup mandiri. Masih perlu bimbingan Emak. <br><br>
+
+      <b>Mak Unah:</b> Kamu tahu, Slik, tidak lama lagi kita sudah tidak tinggal di sini lagi. Kita harus pindah entah ke mana. <br><br>
+
+      <b>Koiron:</b> Lalu, kita ke mana, Mak? <br><br>
+
+      <b>Mak Unah:</b> Maka dari itu, aku sekarang sudah tidak bisa apa-apa. Untuk itu kalian harus lebih pandai. Ibadahnya ditingkatkan ya, Le. Salatnya jangan ditinggalkan, biar kelak menjadi anak-anak yang sukses. <br><br>
+
+      <b>Fiki:</b> Lalu Emak mau ke mana? <br><br>
+
+      <b>Mak Unah:</b> Setelah sembuh nanti, aku bermaksud pulang ke kampung halaman. Di sana Emak masih punya sanak famili. Tapi, tidak mungkin aku membawa kalian. <br><br>
+
+      <b>Muslik:</b> Tidak, Mak. Emak harus tetap tinggal di sini. <br><br>
+
+      <b>Mak Unah:</b> Lalu, kita harus hidup di mana? Sudah tidak punya apa-apa, Slik. <br><br>
+
+      <b>Muslik:</b> Kita tidak putus asa, Mak, asal Emak tetap mendampingi kita.<br><br>
+
+      <em>Sumber: Sukarjan, <i>Kumpulan Naskah Drama “Tertena”</i>, Tangerang: Indocamp, 2019.</em><br><br>
+
+      <b>Question:</b> Apa amanat yang dapat disimpulkan dari kutipan naskah drama tersebut?
+    </div>
+  `,
+  "options": [
+    "Setiap orang tua wajib mengorbankan apa saja demi anak.",
+    "Anak-anak harus hidup terpisah dari orang tua agar mandiri.",
+    "Keadaan ekonomi adalah takdir yang harus dijalani dengan ikhlas.",
+    "Dalam kondisi sulit, keluarga perlu saling menguatkan dan berdoa."
+  ],
+  "correct": 3
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>ADEGAN 4</strong></p>
+
+      <i>Musik masih berlanjut. Di rumah Mak Unah terjadi sesuatu.</i><br><br>
+
+      Mak Unah kena musibah. Barang-barangnya disita oleh pasukan tertib sehingga Mak Unah tidak bisa berjualan lagi. Karena belum bisa membayar kontrakan, Mak Unah pun diusir. Sejak saat itu, Mak Unah jatuh sakit.<br><br>
+
+      <b>Mak Unah:</b> Slik, sekarang keadaan saya begini. Rasa-rasanya aku sudah tidak bisa merawat kalian. Karena kamu yang paling besar, tentunya kamu sudah bisa hidup mandiri. <br><br>
+
+      <b>Muslik:</b> Jangan bilang begitu, Mak. Kami belum bisa hidup mandiri. Masih perlu bimbingan Emak. <br><br>
+
+      <b>Mak Unah:</b> Kamu tahu, Slik, tidak lama lagi kita sudah tidak tinggal di sini lagi. Kita harus pindah entah ke mana. <br><br>
+
+      <b>Koiron:</b> Lalu, kita ke mana, Mak? <br><br>
+
+      <b>Mak Unah:</b> Maka dari itu, aku sekarang sudah tidak bisa apa-apa. Untuk itu kalian harus lebih pandai. Ibadahnya ditingkatkan ya, Le. Salatnya jangan ditinggalkan, biar kelak menjadi anak-anak yang sukses. <br><br>
+
+      <b>Fiki:</b> Lalu Emak mau ke mana? <br><br>
+
+      <b>Mak Unah:</b> Setelah sembuh nanti, aku bermaksud pulang ke kampung halaman. Di sana Emak masih punya sanak famili. Tapi, tidak mungkin aku membawa kalian. <br><br>
+
+      <b>Muslik:</b> Tidak, Mak. Emak harus tetap tinggal di sini. <br><br>
+
+      <b>Mak Unah:</b> Lalu, kita harus hidup di mana? Sudah tidak punya apa-apa, Slik. <br><br>
+
+      <b>Muslik:</b> Kita tidak putus asa, Mak, asal Emak tetap mendampingi kita.<br><br>
+
+      <em>Sumber: Sukarjan, <i>Kumpulan Naskah Drama “Tertena”</i>, Tangerang: Indocamp, 2019.</em><br><br>
+
+      <b>Question:</b> Dari kutipan naskah drama tersebut, konflik batin apa yang dialami tokoh Mak Unah dan anak-anak? <br>
+      <i>Pilihlah jawaban yang benar! (Jawaban benar lebih dari satu)</i>
+    </div>
+  `,
+  "options": [
+    "Anak-anak belum siap mandiri, tetapi harus menerima kenyataan.",
+    "Tokoh Mak Unah meminta anak-anak sabar atas keadaan hidup yang sulit.",
+    "Tokoh Mak Unah ingin pulang ke kampung, tetapi berat meninggalkan anak-anak.",
+    "Anak-anak merasa kecewa karena tokoh Mak Unah ingin pulang ke kampung."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "relevan_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;"><strong>ADEGAN 4</strong></p>
+
+      <i>Musik masih berlanjut. Di rumah Mak Unah terjadi sesuatu.</i><br><br>
+
+      Mak Unah kena musibah. Barang-barangnya disita oleh pasukan tertib sehingga Mak Unah tidak bisa berjualan lagi. Karena belum bisa membayar kontrakan, Mak Unah pun diusir. Sejak saat itu, Mak Unah jatuh sakit.<br><br>
+
+      <b>Mak Unah:</b> Slik, sekarang keadaan saya begini. Rasa-rasanya aku sudah tidak bisa merawat kalian. Karena kamu yang paling besar, tentunya kamu sudah bisa hidup mandiri. <br><br>
+
+      <b>Muslik:</b> Jangan bilang begitu, Mak. Kami belum bisa hidup mandiri. Masih perlu bimbingan Emak. <br><br>
+
+      <b>Mak Unah:</b> Kamu tahu, Slik, tidak lama lagi kita sudah tidak tinggal di sini lagi. Kita harus pindah entah ke mana. <br><br>
+
+      <b>Koiron:</b> Lalu, kita ke mana, Mak? <br><br>
+
+      <b>Mak Unah:</b> Maka dari itu, aku sekarang sudah tidak bisa apa-apa. Untuk itu kalian harus lebih pandai. Ibadahnya ditingkatkan ya, Le. Salatnya jangan ditinggalkan, biar kelak menjadi anak-anak yang sukses. <br><br>
+
+      <b>Fiki:</b> Lalu Emak mau ke mana? <br><br>
+
+      <b>Mak Unah:</b> Setelah sembuh nanti, aku bermaksud pulang ke kampung halaman. Di sana Emak masih punya sanak famili. Tapi, tidak mungkin aku membawa kalian. <br><br>
+
+      <b>Muslik:</b> Tidak, Mak. Emak harus tetap tinggal di sini. <br><br>
+
+      <b>Mak Unah:</b> Lalu, kita harus hidup di mana? Sudah tidak punya apa-apa, Slik. <br><br>
+
+      <b>Muslik:</b> Kita tidak putus asa, Mak, asal Emak tetap mendampingi kita.<br><br>
+
+      <em>Sumber: Sukarjan, <i>Kumpulan Naskah Drama “Tertena”</i>, Tangerang: Indocamp, 2019.</em><br><br>
+
+      <b>Question:</b><br>
+      Peristiwa dalam kutipan naskah drama tersebut menggambarkan situasi nyata. Manakah pernyataan yang relevan dengan kehidupan masyarakat?<br>
+      <i>Tentukan Relevan atau Tidak Relevan untuk setiap pernyataan berikut!</i>
+    </div>
+  `,
+  "statements": [
+    "Setiap orang tua selalu memberikan tempat tinggal layak meskipun berada dalam kondisi ekonomi yang sulit.",
+    "Dalam kehidupan nyata, keluarga kurang mampu tetap bisa hidup mewah asal bekerja keras.",
+    "Kondisi ekonomi yang sulit memaksa orang tua berpisah dengan anak demi bertahan hidup."
+  ],
+  "correct": [
+    "tidak",
+    "tidak",
+    "relevan"
+  ]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Ancaman Tersembunyi Mikroplastik bagi Ekosistem Laut</strong></p>
+
+      Mikroplastik merupakan partikel plastik berukuran kurang dari 5 mm. Zat ini berasal dari plastik, kosmetik, dan tekstil. Indonesia juga mengalami pencemaran mikroplastik di laut. Efeknya terhadap manusia dan lingkungan sangat mengkhawatirkan. Namun, riset terhadap hewan laut masih terbatas.<br><br>
+
+      Penelitian tentang mikroplastik dilakukan di Pulau Biawak, Jawa Barat. Peneliti mengambil sampel dari tiga stasiun. Tim mengambil sedimen dan 15 ikan terumbu karang. Sampel dianalisis di laboratorium menggunakan mikroskop monokular. Tujuan analisis sampel adalah untuk mengetahui jenis dan jumlah mikroplastik. Prosedur dilakukan secara sistematis agar hasil mewakili kondisi lingkungan sekitar.<br><br>
+
+      Hasil penelitian menunjukkan perbedaan jumlah mikroplastik pada tiap stasiun. Ikan di Stasiun C justru memiliki partikel mikroplastik terbanyak, yaitu 1.670,42 partikel/kg. Jenis ikan dari famili Lutjanidae diduga lebih rentan menyerap mikroplastik karena aktif mencari makan.<br><br>
+
+      Dampak mikroplastik sangat serius bagi ekosistem laut. Mikroplastik dapat merusak sistem pencernaan ikan dan membawa racun berbahaya. Dampak ini memengaruhi rantai makanan dan kehidupan masyarakat pesisir. Oleh sebab itu, pengendalian mikroplastik menjadi sangat penting.<br><br>
+
+      <em>Sumber: Muhamad Amin, Universitas Airlangga (2024)</em><br><br>
+
+      <b>Question:</b> Teks tersebut disusun atas bagian-bagian penting. Manakah bagan yang sesuai dengan bagian-bagian tersebut?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "<img src='https://i.imgur.com/UJZXQj8.png' alt='Bagan struktur teks 1' class='max-w-full my-2'>",
+    "<img src='https://i.imgur.com/wTb8Ici.png' alt='Bagan struktur teks 2' class='max-w-full my-2'>",
+    "<img src='https://i.imgur.com/FQT9xI6.png' alt='Bagan struktur teks 3' class='max-w-full my-2'>",
+    "<img src='https://i.imgur.com/9EPahaF.png' alt='Bagan struktur teks 4' class='max-w-full my-2'>"
+  ],
+  "correct": [1, 3]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Ancaman Tersembunyi Mikroplastik bagi Ekosistem Laut</strong></p>
+
+      Mikroplastik merupakan partikel plastik berukuran kurang dari 5 mm. Zat ini berasal dari plastik, kosmetik, dan tekstil. Indonesia juga mengalami pencemaran mikroplastik di laut. Efeknya terhadap manusia dan lingkungan sangat mengkhawatirkan. Namun, riset terhadap hewan laut masih terbatas.<br><br>
+
+      Penelitian tentang mikroplastik dilakukan di Pulau Biawak, Jawa Barat. Peneliti mengambil sampel dari tiga stasiun. Tim mengambil sedimen dan 15 ikan terumbu karang. Sampel dianalisis di laboratorium menggunakan mikroskop monokular. Tujuan analisis sampel adalah untuk mengetahui jenis dan jumlah mikroplastik. Lokasi penelitian dipilih berdasarkan kondisi lingkungan sekitar. Prosedur dilakukan secara sistematis agar hasil penelitian mewakili kondisi sebenarnya.<br><br>
+
+      Hasil penelitian menunjukkan bahwa sedimen di Stasiun A mengandung 1.422 partikel/kg mikroplastik. Sedimen di Stasiun B memiliki 1.185 partikel/kg, sedangkan di Stasiun C hanya 59,8 partikel/kg. Sebaliknya, ikan di Stasiun C justru memiliki jumlah mikroplastik terbanyak, yaitu 1.670,42 partikel/kg. Ikan di Stasiun C berasal dari famili Lutjanidae. Jenis ikan ini diduga lebih rentan menyerap mikroplastik karena lebih aktif mencari makan sehingga paparan mikroplastik lebih besar.<br><br>
+
+      Dampak mikroplastik sangat serius bagi ekosistem laut. Mikroplastik dapat merusak sistem pencernaan ikan dan membawa racun berbahaya. Racun tersebut masuk ke rantai makanan dan berdampak luas. Selain itu, mutu hasil laut dapat menurun sehingga masyarakat pesisir yang bergantung pada hasil laut ikut terdampak. Oleh sebab itu, pengendalian mikroplastik menjadi sangat penting dan perlindungan lingkungan laut harus menjadi prioritas bersama.<br><br>
+
+      <em>Sumber: Muhamad Amin, Universitas Airlangga, 2024.</em><br><br>
+
+      <b>Question:</b> Manakah penggunaan kata serapan dalam teks yang mendukung kelogisan hubungan informasi ilmiah?
+    </div>
+  `,
+  "options": [
+    "Kata partikel menjelaskan ukuran besar mikroplastik di lautan.",
+    "Kata mikroskop menjelaskan alat untuk melihat objek sangat kecil.",
+    "Kata famili digunakan untuk menunjukkan hubungan kekeluargaan ikan.",
+    "Kata analisis digunakan untuk menyampaikan pendapat pribadi peneliti."
+  ],
+  "correct": 1
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Ancaman Tersembunyi Mikroplastik bagi Ekosistem Laut</strong></p>
+
+      Mikroplastik merupakan partikel plastik berukuran kurang dari 5 mm. Zat ini berasal dari plastik, kosmetik, dan tekstil. Indonesia juga mengalami pencemaran mikroplastik di laut. Efeknya terhadap manusia dan lingkungan sangat mengkhawatirkan. Namun, riset terhadap hewan laut masih terbatas.<br><br>
+
+      Penelitian tentang mikroplastik dilakukan di Pulau Biawak, Jawa Barat. Peneliti mengambil sampel dari tiga stasiun. Tim mengambil sedimen dan 15 ikan terumbu karang. Sampel dianalisis di laboratorium menggunakan mikroskop monokular. Tujuan analisis sampel adalah untuk mengetahui jenis dan jumlah mikroplastik. Lokasi penelitian dipilih berdasarkan kondisi lingkungan sekitar. Prosedur dilakukan secara sistematis agar hasil mewakili kondisi sebenarnya.<br><br>
+
+      Hasil penelitian menunjukkan bahwa sedimen di Stasiun A mengandung 1.422 partikel/kg mikroplastik. Sedimen di Stasiun B memiliki 1.185 partikel/kg, sedangkan di Stasiun C hanya 59,8 partikel/kg. Sebaliknya, ikan di Stasiun C justru memiliki jumlah mikroplastik terbanyak, yaitu 1.670,42 partikel/kg. Ikan di Stasiun C berasal dari famili Lutjanidae. Jenis ikan ini diduga lebih rentan menyerap mikroplastik karena lebih aktif mencari makan sehingga paparan mikroplastik lebih besar.<br><br>
+
+      Dampak mikroplastik sangat serius bagi ekosistem laut. Mikroplastik dapat merusak sistem pencernaan ikan dan membawa racun berbahaya. Racun tersebut masuk ke rantai makanan dan berdampak luas. Selain itu, mutu hasil laut dapat menurun sehingga masyarakat pesisir yang bergantung pada hasil laut ikut terdampak. Oleh sebab itu, pengendalian mikroplastik menjadi sangat penting dan perlindungan lingkungan laut harus menjadi prioritas bersama.<br><br>
+
+      <em>Sumber: Muhamad Amin, Universitas Airlangga, 2024.</em><br><br>
+
+      <b>Question:</b> Pernyataan berikut perlu dicermati dengan mengacu pada keakuratan informasi dalam teks tersebut.<br>
+      <i>Tentukan Benar atau Salah untuk setiap pernyataan berikut!</i>
+    </div>
+  `,
+  "statements": [
+    "Mikroplastik tersebar dari lokasi berbeda dengan jumlah yang tidak sama.",
+    "Peneliti meneliti ikan untuk mengetahui jenis racun yang masuk ke rantai makanan.",
+    "Dampak keberadaan mikroplastik di laut memberi risiko sosial dan ekonomi masyarakat."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Benteng Fort Rotterdam</strong></p>
+
+      Benteng Fort Rotterdam terletak di Makassar, Sulawesi Selatan. Bangunan ini merupakan peninggalan Kerajaan Gowa dan Belanda. Bentuknya menyerupai penyu yang sedang merangkak ke laut. Bentuk itu melambangkan kekuasaan Kerajaan Gowa di darat dan laut.<br><br>
+
+      Dahulu, benteng ini memiliki enam bastion. Tinggi temboknya tujuh meter. Paritnya sedalam dua meter mengelilingi bangunan. Kini hanya lima bastion yang terlihat. Bastion Bone berada di sisi barat, Bastion Bacan di barat daya, Bastion Buton di barat laut, Bastion Mandarsyah di timur laut, dan Bastion Amboina di tenggara. Bastion Ravelin tidak lagi tampak. Di beberapa bastion, meriam masih tersisa.<br><br>
+
+      Kompleks benteng dikelilingi tembok batu dan parit. Di dalamnya terdapat bangunan kolonial, pintu gerbang besar, dan sumur tua. Jumlah bangunan di dalam benteng ada tiga belas. Sebelas bangunan berasal dari abad ke-17, sedangkan dua bangunan lainnya dibangun pada masa pendudukan Jepang.<br><br>
+
+      Bagian utara benteng berdiri sejak tahun 1686. Di sana terdapat rumah gubernur, rumah saudagar, dan rumah kapten. Rumah gubernur yang dikenal sebagai Rumah Speelman kini difungsikan sebagai Museum La Galigo.<br><br>
+
+      Dahulu sisi selatan digunakan sebagai tempat penyimpanan. Sekarang area tersebut menjadi ruang pamer museum. Barak di bagian timur diubah menjadi perpustakaan kecil yang menyimpan buku-buku Belanda kuno, log kapal VOC, dan manuskrip lontar.<br><br>
+
+      Benteng Fort Rotterdam memberikan kesan kuat tentang kejayaan masa lampau. Letaknya di tepi pantai membuatnya mudah diakses. Saat ini, benteng tersebut menjadi objek wisata sekaligus pusat pembelajaran sejarah.<br><br>
+
+      <em>Sumber: Widya Lestari Ningsih dan Nibras Nada Nailufar/Kompas.com (2021)</em><br><br>
+
+      <b>Question:</b> Manakah pernyataan yang sesuai dengan isi teks tersebut?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Bentuk benteng menyerupai penyu yang merangkak ke laut.",
+    "Semua bastion masih berdiri lengkap seperti pada awalnya.",
+    "Kompleks benteng dikelilingi tembok batu dan parit.",
+    "Barak timur kini menjadi perpustakaan kecil."
+  ],
+  "correct": [0, 2, 3]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Benteng Fort Rotterdam</strong></p>
+
+      Benteng Fort Rotterdam terletak di Makassar, Sulawesi Selatan. Bangunan ini merupakan peninggalan Kerajaan Gowa dan Belanda. Bentuknya menyerupai penyu yang sedang merangkak ke laut. Bentuk itu melambangkan kekuasaan Kerajaan Gowa di darat dan laut.<br><br>
+
+      Dahulu, benteng ini memiliki enam bastion. Tinggi temboknya tujuh meter. Paritnya sedalam dua meter mengelilingi bangunan. Kini hanya lima bastion yang terlihat. Bastion Bone berada di sisi barat, Bastion Bacan di barat daya, Bastion Buton di barat laut, Bastion Mandarsyah di timur laut, dan Bastion Amboina di tenggara. Bastion Ravelin tidak lagi tampak. Di beberapa bastion, meriam masih tersisa.<br><br>
+
+      Kompleks benteng dikelilingi tembok batu dan parit. Di dalamnya terdapat bangunan kolonial, pintu gerbang besar, dan sumur tua. Jumlah bangunan di dalam benteng ada tiga belas.<br><br>
+
+      <em>Sumber: Widya Lestari Ningsih dan Nibras Nada Nailufar/Kompas.com (2021)</em><br><br>
+
+      <b>Question:</b> Apa gagasan pokok paragraf kedua teks tersebut?
+    </div>
+  `,
+  "options": [
+    "Dahulu benteng memiliki enam bastion, tetapi kini hanya lima yang masih ada.",
+    "Tembok setinggi tujuh meter dan parit sedalam dua meter mengelilingi benteng.",
+    "Bastion diberi nama sesuai arah dan letak geografis di sekitar benteng untuk pertahanan.",
+    "Beberapa bastion masih dilengkapi dengan meriam sebagai bagian pertahanan benteng."
+  ],
+  "correct": 0
+},
+
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Benteng Fort Rotterdam</strong></p>
+
+      Benteng Fort Rotterdam terletak di Makassar, Sulawesi Selatan. Bangunan ini merupakan peninggalan Kerajaan Gowa dan Belanda. Bentuknya menyerupai penyu yang sedang merangkak ke laut dan melambangkan kekuasaan Kerajaan Gowa di darat dan laut.<br><br>
+
+      Dahulu benteng ini memiliki enam bastion, namun kini hanya lima yang masih terlihat. Kompleks benteng dikelilingi tembok batu dan parit. Di dalamnya terdapat bangunan kolonial, pintu gerbang, dan sumur tua. Beberapa bagian benteng kini difungsikan sebagai museum, ruang pamer, dan perpustakaan.<br><br>
+
+      Benteng Fort Rotterdam kini menjadi objek wisata dan pusat pembelajaran sejarah yang mudah diakses masyarakat.<br><br>
+
+      <em>Sumber: Widya Lestari Ningsih dan Nibras Nada Nailufar/Kompas.com (2021)</em><br><br>
+
+      <b>Petunjuk:</b> Benteng Fort Rotterdam sebagai salah satu peninggalan sejarah mempunyai relevansi dengan kehidupan masa kini. Tentukan Tepat atau Tidak Tepat untuk setiap pernyataan berikut!
+    </div>
+  `,
+  "statements": [
+    "Pelestarian bangunan bersejarah, seperti Benteng Fort Rotterdam, membantu kita memahami nilai sejarah dan budaya.",
+    "Penggunaan bangunan benteng sebagai museum dan perpustakaan memudahkan masyarakat belajar tentang masa lalu.",
+    "Kondisi fisik benteng yang kuno tidak relevan dan tidak memberikan manfaat bagi masyarakat saat ini."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Pantun</strong></p>
+
+      <p><strong>Pantun I</strong>
+
+      Ke pasar pagi membelah subuh,
+      beli kelapa murah harganya.
+      Jaga lidah, elok bertutur sungguh,
+      tak makan hati marah tiada.</p>
+
+      <p><em>Sumber: Apriyanto/IPE (2025)</em></p>
+
+      <b>Question:</b> Manakah makna atau maksud yang sesuai dengan isi Pantun I?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Menjaga tutur kata agar tidak menyakiti orang lain.",
+    "Menjaga lisan agar tidak menimbulkan masalah.",
+    "Menjaga tutur kata agar tidak mudah sedih.",
+    "Menjaga lisan agar tidak mudah marah."
+  ],
+  "correct": [0, 1, 3]
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Pantun</strong></p>
+
+      <p><strong>Pantun I</strong>
+
+      Ke pasar pagi membelah subuh,
+      beli kelapa murah harganya.
+      Jaga lidah, elok bertutur sungguh,
+      tak makan hati marah tiada.</p>
+
+      <p><strong>Pantun II</strong>
+
+      Burung nuri hinggap di ranting,
+      terbang rendah melewati celah.
+      Berhati baja sangatlah penting,
+      tetap kuat walau datang masalah.</p>
+
+      <p><em>Sumber: Apriyanto/IPE (2025)</em></p>
+
+      <b>Question:</b> Kedua pantun menggunakan kata konotatif.<br>
+      <i>Tentukan Benar atau Salah untuk setiap pernyataan berikut!</i>
+    </div>
+  `,
+  "statements": [
+    "Frasa makan hati pada Pantun I bermakna konotatif sebagai rasa sakit hati atau tersinggung.",
+    "Frasa burung nuri pada Pantun I bermakna konotatif sebagai simbol kebebasan dan semangat hidup.",
+    "Frasa berhati baja pada Pantun II bermakna konotatif sebagai keteguhan hati menghadapi masalah."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Pantun</strong></p>
+
+      <<p><strong>Pantun I</strong>
+
+      Ke pasar pagi membelah subuh,
+      beli kelapa murah harganya.
+      Jaga lidah, elok bertutur sungguh,
+      tak makan hati marah tiada.</p>
+
+      <p><strong>Pantun II</strong>
+
+      Burung nuri hinggap di ranting,
+      terbang rendah melewati celah.
+      Berhati baja sangatlah penting,
+      tetap kuat walau datang masalah.</p>
+
+
+      <p><em>Sumber: Apriyanto/IPE (2025)</em></p>
+
+      <b>Question:</b> Berdasarkan kedua pantun, nilai baik apa saja yang dapat diteladani pembaca?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Menghormati orang lain dengan menjaga tutur kata.",
+    "Menjaga ucapan agar tidak menyakiti hati orang lain.",
+    "Menjaga semangat untuk keluar dari segala permasalahan.",
+    "Memperkuat keteguhan hati agar siap menghadapi masalah."
+  ],
+  "correct": [0, 1, 3]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Langkah Melaporkan Konten Merugikan di Media Sosial</strong></p>
+
+      Media sosial seharusnya menjadi ruang aman untuk semua. Namun, terkadang ada konten yang mengandung kekerasan, penipuan, atau ujaran kebencian. Jika itu terjadi, kamu perlu segera melaporkannya. Ikuti panduan berikut secara cermat.<br><br>
+
+      <b>Question:</b> Manakah urutan langkah 2), 3), 4), dan 5) yang tepat agar menjadi teks yang padu dan logis?
+    </div>
+  `,
+  "options": [
+    "2)–3)–5)–4)",
+    "4)–5)–2)–3)",
+    "5)–3)–4)–2)",
+    "5)–4)–3)–2"
+  ],
+  "correct": 3
+},
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Langkah Melaporkan Konten Merugikan di Media Sosial</strong></p>
+
+      Media sosial seharusnya menjadi ruang aman untuk semua. Namun, terkadang ada konten yang mengandung kekerasan, penipuan, atau ujaran kebencian. Jika itu terjadi, kamu perlu segera melaporkannya. Ikuti panduan berikut secara cermat.<br><br>
+
+      <b>Petunjuk:</b> Tentukan Tepat (T) atau Tidak Tepat (TT) untuk setiap pernyataan berikut yang berkaitan dengan informasi penting dalam teks!
+    </div>
+  `,
+  "statements": [
+    "Sebelum melaporkan konten, pengguna perlu memastikan koneksi internet stabil agar proses berjalan lancar.",
+    "Untuk melaporkan konten, pengguna harus memilih semua jenis pelanggaran agar laporan lebih cepat diproses.",
+    "Bukti berupa tangkapan layar dapat digunakan jika ingin melapor ke pihak berwenang."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Langkah Melaporkan Konten Merugikan di Media Sosial</strong></p>
+
+      Media sosial seharusnya menjadi ruang aman untuk semua. Namun, terkadang ada konten yang mengandung kekerasan. Ada pula konten yang mengandung penipuan atau ujaran kebencian. Jika itu terjadi, kamu perlu segera melaporkannya. Ikuti panduan berikut secara cermat.<br><br>
+
+      Melaporkan konten berbahaya adalah sebagai bentuk kepedulian. Dengan bertindak, kamu menjaga keamanan diri dan orang lain. Tindakanmu memberi dampak besar pada ruang digital bersama. Ayo, bersama-sama mencipta ruang digital yang aman dan nyaman!<br><br>
+
+      <em>Sumber: Anisa/IPE (2025)</em><br><br>
+
+      <b>Question:</b> Manakah pernyataan tepat mengenai penggunaan ejaan dalam paragraf penutup?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Kata mencipta tidak baku dan seharusnya diganti dengan menciptakan.",
+    "Kata sebagai dalam kalimat pertama dapat dihilangkan agar kalimat efektif dan sesuai kaidah.",
+    "Tanda koma setelah kata ayo pada kalimat terakhir tidak perlu dihilangkan karena sudah tepat.",
+    "Kata dampak tidak tepat karena lebih cocok digunakan dalam konteks bencana alam daripada ruang digital."
+  ],
+  "correct": [0, 1, 2]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Cerita di Dalam Busway</strong></p>
+
+      Di dalam busway, tiga manula duduk berjejer di kursi yang sama. Ketiganya naik dari halte yang berbeda. Salah satu manula itu adalah saya. Kami belum berkenalan, masih duduk diam dengan gurat wajah khas manusia menjelang uzur, wajah kami tampak keruh penuh kerutan. Entah itu akibat tekanan kehidupan atau perlakuan tak adil dari orang-orang terdekat kami, atau memang demikian wajah yang tertera ketika usia perlahan merenggut kecantikan dari raut muka.<br><br>
+
+      Satu manula di samping kanan saya membuka percakapan. Pertanyaan standar yang umum dan datar mulai terjadi.  
+      “Mau ke mana, Bu?” tanyanya.  
+
+      “Mau mengajar menulis atau lebih kerennya <em>creative writing</em>,” jawab saya, sama datarnya.  
+
+      “Oh, Ibu penulis?” tanya manula yang duduk di samping kiri saya, diam-diam ia mendengarkan obrolan kami.  
+
+      “Begitulah kata orang, Bu. Saya mencari uang dari menyusun kata-kata,” jawab saya dengan narasi sederhana yang mudah dimengerti.  
+
+      “Mau dong kisah saya ditulis jadi cerita, Bu,” ujar manula yang duduk di samping kiri saya itu. “Kalau saya minta tolong Ibu tuliskan perjalanan hidup yang saya alami, harus bayarkah, Bu?” tanyanya lagi.  
+
+      “Hm … begitulah Bu. Karena menulis itu butuh pengalaman, berpikir, dan memiliki kosakata bahasa Indonesia yang baik dan benar serta banyak agar saat menyusun kalimat tidak monoton dan itu-itu saja,” sahut saya.<br><br>
+
+      <p><em>Catatan: Manula = manusia lanjut usia</em></p>
+      <p><em>Sumber: Fanny J. Poyk/Kompas.id (2025)</em></p>
+
+      <b>Question:</b> Manakah makna kiasan yang terdapat dalam cerpen tersebut?<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Wajah kami tampak keruh penuh kerutan.",
+    "Saya mencari uang dari menyusun kata-kata.",
+    "Wajah yang tertera ketika usia perlahan merenggut.",
+    "Usia perlahan merenggut kecantikan dari raut muka."
+  ],
+  "correct": [0, 1, 3]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Cerita di Dalam Busway</strong></p>
+
+      Di dalam busway, tiga manula duduk berjejer di kursi yang sama. Ketiganya naik dari halte yang berbeda. Salah satu manula itu adalah saya. Kami belum berkenalan, masih duduk diam dengan gurat wajah khas manusia menjelang uzur, wajah kami tampak keruh penuh kerutan. Entah itu akibat tekanan kehidupan atau perlakuan tak adil dari orang-orang terdekat kami, atau memang demikian wajah yang tertera ketika usia perlahan merenggut kecantikan dari raut muka.<br><br>
+
+      Satu manula di samping kanan saya membuka percakapan. Pertanyaan standar yang umum dan datar mulai terjadi.  
+      “Mau ke mana, Bu?” tanyanya.  
+
+      “Mau mengajar menulis atau lebih kerennya <em>creative writing</em>,” jawab saya, sama datarnya.  
+
+      “Oh, Ibu penulis?” tanya manula yang duduk di samping kiri saya, diam-diam ia mendengarkan obrolan kami.  
+
+      “Begitulah kata orang, Bu. Saya mencari uang dari menyusun kata-kata,” jawab saya dengan narasi sederhana yang mudah dimengerti.  
+
+      “Mau dong kisah saya ditulis jadi cerita, Bu,” ujar manula yang duduk di samping kiri saya itu. “Kalau saya minta tolong Ibu tuliskan perjalanan hidup yang saya alami, harus bayarkah, Bu?” tanyanya lagi.  
+
+      “Hm … begitulah Bu. Karena menulis itu butuh pengalaman, berpikir, dan memiliki kosakata bahasa Indonesia yang baik dan benar serta banyak agar saat menyusun kalimat tidak monoton dan itu-itu saja,” sahut saya.<br><br>
+
+      <p><em>Catatan: Manula = manusia lanjut usia</em></p>
+      <p><em>Sumber: Fanny J. Poyk/Kompas.id (2025)</em></p>
+
+      <b>Question:</b> Tentukan respons emosional yang muncul dari cerpen tersebut!<br>
+      <i>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Ada harapan kisah hidupnya dikenang orang lain.",
+    "Ada kebanggaan terhadap profesi sebagai penulis.",
+    "Terlihat kemarahan tersembunyi terhadap masa tua.",
+    "Terdapat keinginan mendalam untuk saling menyendiri."
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Cerita di Dalam Busway</strong></p>
+
+      Di dalam busway, tiga manula duduk berjejer di kursi yang sama. Ketiganya naik dari halte yang berbeda. Salah satu manula itu adalah saya. Kami belum berkenalan, masih duduk diam dengan gurat wajah khas manusia menjelang uzur, wajah kami tampak keruh penuh kerutan.<br><br>
+
+      Satu manula di samping kanan saya membuka percakapan. Pertanyaan standar yang umum dan datar mulai terjadi.  
+      “Mau ke mana, Bu?” tanyanya.  
+
+      “Mau mengajar menulis atau lebih kerennya <em>creative writing</em>,” jawab saya, sama datarnya.  
+
+      “Oh, Ibu penulis?” tanya manula yang duduk di samping kiri saya, diam-diam ia mendengarkan obrolan kami.  
+
+      “Begitulah kata orang, Bu. Saya mencari uang dari menyusun kata-kata,” jawab saya dengan narasi sederhana yang mudah dimengerti.  
+
+      “Mau dong kisah saya ditulis jadi cerita, Bu,” ujar manula yang duduk di samping kiri saya itu.<br><br>
+
+      <p><em>Sumber: Fanny J. Poyk/Kompas.id (2025)</em></p>
+
+      <b>Question:</b> Penulis jarang berbicara dengan orang tidak dikenal. Manakah pernyataan yang paling relevan dengan kehidupan sehari-hari?
+    </div>
+  `,
+  "options": [
+    "Manula sering kali merasa kisahnya diabaikan.",
+    "Manula jarang bepergian naik kendaraan umum sendiri.",
+    "Penulis jarang berbicara dengan orang tidak dikenal.",
+    "Orang lanjut usia tidak tertarik berbagi pengalaman hidup."
+  ],
+  "correct": 0
+}
+
+
+
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  if (q.type === 'tepat_tidak') return Array(q.statements.length).fill(null);
+if (q.type === 'relevan_tidak') return Array(q.statements.length).fill(null);
+  if (q.type === 'dampak_jangka') return Array(q.statements.length).fill(null);
+  return null;
+});
+
+
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3>${q.text}`;
+
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+else if (q.type === 'relevan_tidak') {
+  html += `<table class="true-false">
+    <tr>
+      <th>Pernyataan</th>
+      <th>Relevan</th>
+      <th>Tidak Relevan</th>
+    </tr>`;
+
+  q.statements.forEach((stmt, i) => {
+    const relevanChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td>
+        <input type="radio" name="rt_${i}" value="true" ${relevanChecked}>
+      </td>
+      <td>
+        <input type="radio" name="rt_${i}" value="false" ${tidakChecked}>
+      </td>
+    </tr>`;
+  });
+
+  html += `</table>`;
+}
+
+else if (q.type === 'tepat_tidak') {
+  html += `<table class="true-false">
+    <tr>
+      <th>Pernyataan</th>
+      <th>Tepat</th>
+      <th>Tidak Tepat</th>
+    </tr>`;
+
+  q.statements.forEach((stmt, i) => {
+    const tepatChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td>
+        <input type="radio" name="tt_${i}" value="true" ${tepatChecked}>
+      </td>
+      <td>
+        <input type="radio" name="tt_${i}" value="false" ${tidakChecked}>
+      </td>
+    </tr>`;
+  });
+
+  html += `</table>`;
+}
+else if (q.type === 'dampak_jangka') {
+  html += `
+    <table class="true-false">
+      <tr>
+        <th>Pernyataan</th>
+        <th>Jangka Pendek</th>
+        <th>Jangka Panjang</th>
+      </tr>
+  `;
+
+  q.statements.forEach((stmt, i) => {
+    const pendekChecked = answers[index][i] === 'pendek' ? 'checked' : '';
+    const panjangChecked = answers[index][i] === 'panjang' ? 'checked' : '';
+
+    html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td>
+          <input type="radio" name="dj_${i}" value="pendek" ${pendekChecked}>
+        </td>
+        <td>
+          <input type="radio" name="dj_${i}" value="panjang" ${panjangChecked}>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += `</table>`;
+}
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk tipe tepat_tidak
+if (q.type === 'tepat_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="tt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+if (q.type === 'relevan_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="rt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+
+// Event listener dampak_jangka
+if (q.type === 'dampak_jangka') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="dj_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = e.target.value;
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'dampak_jangka' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual([...answers[i]].sort(), [...q.correct].sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+else if (q.type === 'relevan_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  const percentage = Math.round((score / questions.length) * 100);
+
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+
+// 🔥 KIRIM KE FIREBASE
+  simpanHasilFirebase(percentage);
+}
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+// Tampilkan tombol Kembali setelah submit
+const backBtn = document.createElement('button');
+backBtn.textContent = "Kembali ke Beranda";
+backBtn.style.padding = "10px 18px";
+backBtn.style.marginTop = "10px";
+backBtn.style.backgroundColor = "#1e88e5";
+backBtn.style.color = "white";
+backBtn.style.border = "none";
+backBtn.style.borderRadius = "6px";
+backBtn.style.fontWeight = "bold";
+backBtn.style.cursor = "pointer";
+backBtn.addEventListener('click', () => {
+    window.location.href = "https://kebunilmu.github.io/Kebun-Ilmu-TKA/";
+});
+document.querySelector('.right-panel .navigation').appendChild(backBtn);
+
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  timerRunning = true; // pastikan timer aktif
+
+  const interval = setInterval(() => {
+    if (!timerRunning) { 
+      clearInterval(interval); 
+      return; 
+    }
+
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+    if (timer <= 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+
+    timer--;
+  }, 1000);
+}
+
+
+// Auto submit saat keluar fullscreen
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement && timerRunning) {
+    alert("Anda keluar dari fullscreen. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah tab/window (desktop)
+window.addEventListener("blur", () => {
+  if (timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah app / tab (HP)
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// cek session saat halaman dimuat
+checkSession();
+
+  </script>
+<!-- FIREBASE SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
+    authDomain: "tryout-kebun-ilmu.firebaseapp.com",
+    projectId: "tryout-kebun-ilmu",
+    storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
+    messagingSenderId: "497636674894",
+    appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // supaya bisa dipakai di script lain
+  window.db = db;
+
+  // 🔥 INI YANG PALING PENTING
+  window.simpanHasilFirebase = async function (nilai) {
+    const { addDoc, collection, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+    );
+
+    await addDoc(collection(window.db, "hasil_ujian"), {
+  nik: window.dataPeserta.nik,
+  nama: window.dataPeserta.nama,
+  jk: window.dataPeserta.jk,
+  tglLahir: window.dataPeserta.tgl,
+  sekolah: window.dataPeserta.sekolah,
+  mapel: "Bahasa Indonesia SMP/MTs", // tambah field mapel
+  nilai: nilai,
+  waktu: new Date().toISOString()
+});
+
+
+    console.log("✅ HASIL UJIAN TERSIMPAN");
+  };
+</script>
+
+</body>
+</html>
