@@ -1538,6 +1538,21 @@ else if (q.type === 'dampak_jangka') {
       renderQuestionButtons();
     });
   });
+// ===== Event listener MC multiple =====
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    if (!Array.isArray(answers[index])) answers[index] = [];
+    checkboxes.forEach((checkbox, i) => {
+      checkbox.addEventListener('change', e => {
+        if (e.target.checked) {
+          if (!answers[index].includes(i)) answers[index].push(i);
+        } else {
+          answers[index] = answers[index].filter(v => v !== i);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
   // Event listener untuk tipe tepat_tidak
 if (q.type === 'tepat_tidak') {
   q.statements.forEach((_, i) => {
