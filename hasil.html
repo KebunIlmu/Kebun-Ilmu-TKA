@@ -150,35 +150,62 @@ input{
 
 /* ================= PRINT MODE ================= */
 @media print {
+
+  /* RESET MARGIN BAWAAN BROWSER */
+  @page {
+    margin: 10mm;
+  }
+
+  body {
+    margin: 0;
+  }
+
   body * {
     visibility: hidden;
   }
 
-  .print-area, .print-area * {
+  #printHeader,
+  #printHeader * {
+    visibility: visible;
+    display: flex;
+  }
+
+  .print-area,
+  .print-area * {
     visibility: visible;
   }
 
-  #printHeader, #printHeader * {
-    visibility: visible;
+  /* JANGAN PAKAI absolute */
+  .print-area {
+    position: static;
+    margin-top: 8px; /* kecil & stabil */
   }
 
-  #printHeader{
-    display:flex;
+  /* HEADER PRINT RAPET */
+  #printHeader {
+    margin: 0 0 6px 0;
+    padding: 0;
   }
 
-  .print-area{
-    position:absolute;
-    top:120px;
-    left:0;
-    width:100%;
+  #printHeader h2 {
+    margin: 0;
   }
 
-  header, input, button{
-    display:none !important;
+  #printHeader p {
+    margin: 2px 0 0;
   }
 
-  table{
-    font-size:12px;
+  header, input, button, label {
+    display: none !important;
+  }
+
+  table {
+    min-width: 100%;
+    font-size: 11px;
+  }
+
+  th, td {
+    padding: 6px;
   }
 }
 /* ===== LOGIN ===== */
@@ -234,25 +261,6 @@ input{
   margin-top:10px;
   color:red;
   font-size:14px;
-}
-@media print {
-  .print-area{
-    position: static;
-    margin-top: 20px;
-  }
-
-  table{
-    min-width: 100%;
-    font-size: 11px;
-  }
-
-  th, td{
-    padding: 6px;
-  }
-
-  input, button, label {
-    display: none !important;
-  }
 }
 </style>
 
