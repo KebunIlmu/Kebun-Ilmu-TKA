@@ -238,11 +238,17 @@ input{
 
 </style>
 
-<!-- ================= FIREBASE ================= -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+  getFirestore,
+  collection,
+  query,
+  orderBy,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+/* ================= FIREBASE CONFIG ================= */
 const firebaseConfig = {
   apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
   authDomain: "tryout-kebun-ilmu.firebaseapp.com",
@@ -255,14 +261,30 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-window.addEventListener("DOMContentLoaded", async ()=>{
+window.__rankingData = {};
+
+/* ================= REALTIME LISTENER ================= */
+window.addEventListener("DOMContentLoaded", ()=>{
+  const q = query(
+    collection(db,"hasil_ujian"),
+    orderBy("waktu","desc")
+  );
+
+  onSnapshot(q, (snap)=>{
+    renderSemuaData(snap);
+  });
+});
+
+/* ================= RENDER SEMUA DATA ================= */
+function renderSemuaData(snap){
   const tabelHasil = document.getElementById("tabelHasil");
   const rankingMapel = document.getElementById("rankingMapel");
 
-  const q = query(collection(db,"hasil_ujian"), orderBy("waktu","desc"));
-  const snap = await getDocs(q);
+  tabelHasil.innerHTML = "";
+  rankingMapel.innerHTML = "";
+  window.__rankingData = {};
 
-  /* ================= TABEL DATA ================= */
+  /* ===== TABEL UTAMA ===== */
   const table = document.createElement("table");
   const h = table.insertRow();
   ["No","NIK","Nama","JK","Tgl Lahir","Sekolah","Mapel","Nilai","Waktu"]
@@ -272,41 +294,43 @@ window.addEventListener("DOMContentLoaded", async ()=>{
       h.appendChild(th);
     });
 
-  let no=1;
-  const semua=[];
+  let no = 1;
+  const semua = [];
 
   snap.docs.forEach(doc=>{
-    const d=doc.data();
+    const d = doc.data();
     semua.push(d);
 
-    const r=table.insertRow();
-    r.insertCell().textContent=no++;
-    r.insertCell().textContent=d.nik||"";
-    r.insertCell().textContent=d.nama||"";
-    r.insertCell().textContent=d.jk||"";
-    r.insertCell().textContent=d.tglLahir||"";
-    r.insertCell().textContent=d.sekolah||"";
-    r.insertCell().textContent=d.mapel||"";
-    r.insertCell().textContent=d.nilai||"";
+    const r = table.insertRow();
+    r.insertCell().textContent = no++;
+    r.insertCell().textContent = d.nik || "";
+    r.insertCell().textContent = d.nama || "";
+    r.insertCell().textContent = d.jk || "";
+    r.insertCell().textContent = d.tglLahir || "";
+    r.insertCell().textContent = d.sekolah || "";
+    r.insertCell().textContent = d.mapel || "";
+    r.insertCell().textContent = d.nilai || "";
 
     let w="";
     if(d.waktu?.seconds){
-      w=new Date(d.waktu.seconds*1000).toLocaleString("id-ID");
+      w = new Date(d.waktu.seconds*1000).toLocaleString("id-ID");
     }
-    r.insertCell().textContent=w;
+    r.insertCell().textContent = w;
   });
 
   tabelHasil.appendChild(table);
 
-  /* ================= RANKING PER MAPEL ================= */
-  const grup={};
+  /* ===== RANKING PER MAPEL ===== */
+  const grup = {};
   semua.forEach(d=>{
-    if(!grup[d.mapel]) grup[d.mapel]=[];
+    if(!grup[d.mapel]) grup[d.mapel] = [];
     if(!isNaN(d.nilai)) grup[d.mapel].push(d);
   });
 
   Object.keys(grup).forEach(mapel=>{
-    const wrap=document.createElement("div");
+    window.__rankingData[mapel] = [...grup[mapel]];
+
+    const wrap = document.createElement("div");
     wrap.className="print-area";
     wrap.id="print-"+mapel.replace(/\s+/g,"_");
 
@@ -314,28 +338,52 @@ window.addEventListener("DOMContentLoaded", async ()=>{
     title.textContent="📘 "+mapel;
     wrap.appendChild(title);
 
-    const actions=document.createElement("div");
-    actions.style.display="flex";
-    actions.style.gap="10px";
-    actions.style.marginBottom="10px";
+    /* ===== CHECKBOX SEKOLAH ===== */
+    const sekolahWrap=document.createElement("div");
+    sekolahWrap.style.display="flex";
+    sekolahWrap.style.flexWrap="wrap";
+    sekolahWrap.style.gap="10px";
 
-    const btnPrint=document.createElement("button");
-    btnPrint.textContent="🖨 Print Mapel";
-    btnPrint.className="btn btn-outline";
-    btnPrint.onclick=()=>printMapel(wrap.id);
+    const sekolahUnik=[...new Set(grup[mapel].map(d=>d.sekolah))].sort();
 
-    const btnCSV=document.createElement("button");
-    btnCSV.textContent="⬇ Download CSV";
-    btnCSV.className="btn btn-outline";
-    btnCSV.onclick=()=>downloadMapelCSV(mapel);
+    sekolahUnik.forEach(sek=>{
+      const lbl=document.createElement("label");
+      lbl.style.display="flex";
+      lbl.style.gap="4px";
 
-    actions.appendChild(btnPrint);
-    actions.appendChild(btnCSV);
-    wrap.appendChild(actions);
+      const cb=document.createElement("input");
+      cb.type="checkbox";
+      cb.value=sek;
+      cb.checked=true;
+      cb.onchange=()=>renderMapel(mapel);
 
+      lbl.append(cb,document.createTextNode(sek));
+      sekolahWrap.appendChild(lbl);
+    });
+
+    wrap.appendChild(sekolahWrap);
+
+    /* ===== ACTION ===== */
+    const act=document.createElement("div");
+    act.style.display="flex";
+    act.style.gap="10px";
+
+    const p=document.createElement("button");
+    p.textContent="🖨 Print";
+    p.className="btn btn-outline";
+    p.onclick=()=>printMapel(wrap.id);
+
+    const c=document.createElement("button");
+    c.textContent="⬇ CSV";
+    c.className="btn btn-outline";
+    c.onclick=()=>downloadMapelCSV(mapel);
+
+    act.append(p,c);
+    wrap.appendChild(act);
+
+    /* ===== TABLE ===== */
     const t=document.createElement("table");
     t.id="table-mapel-"+mapel;
-
     const hh=t.insertRow();
     ["Rank","Nama","Sekolah","Nilai"].forEach(x=>{
       const th=document.createElement("th");
@@ -343,42 +391,36 @@ window.addEventListener("DOMContentLoaded", async ()=>{
       hh.appendChild(th);
     });
 
-    grup[mapel].sort((a,b)=>b.nilai-a.nilai)
-      .forEach((d,i)=>{
-        const r=t.insertRow();
-        r.insertCell().textContent=i+1;
-        r.insertCell().textContent=d.nama;
-        r.insertCell().textContent=d.sekolah;
-        r.insertCell().textContent=d.nilai;
-      });
-
     wrap.appendChild(t);
     rankingMapel.appendChild(wrap);
-  });
-});
 
-/* ================= UTIL ================= */
-window.filterTable=function(){
-  const f=document.getElementById("searchInput").value.toLowerCase();
-  document.querySelectorAll("#tabelHasil tr").forEach((r,i)=>{
-    if(i===0) return;
-    r.style.display=r.textContent.toLowerCase().includes(f)?"":"none";
+    renderMapel(mapel);
   });
 }
 
-window.downloadCSV=function(){
-  const rows=document.querySelectorAll("#tabelHasil tr");
-  let csv=[];
-  rows.forEach(r=>{
-    csv.push([...r.children].map(c=>`"${c.textContent}"`).join(","));
-  });
-  const blob=new Blob([csv.join("\n")],{type:"text/csv"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="hasil_tryout.csv";
-  a.click();
-}
+/* ================= RENDER MAPEL ================= */
+window.renderMapel=function(mapel){
+  const wrap=document.getElementById("print-"+mapel.replace(/\s+/g,"_"));
+  const table=document.getElementById("table-mapel-"+mapel);
 
+  const checked=[...wrap.querySelectorAll("input:checked")].map(x=>x.value);
+
+  const data=window.__rankingData[mapel]
+    .filter(d=>checked.includes(d.sekolah))
+    .sort((a,b)=>b.nilai-a.nilai);
+
+  [...table.querySelectorAll("tr")].slice(1).forEach(r=>r.remove());
+
+  data.forEach((d,i)=>{
+    const r=table.insertRow();
+    r.insertCell().textContent=i+1;
+    r.insertCell().textContent=d.nama;
+    r.insertCell().textContent=d.sekolah;
+    r.insertCell().textContent=d.nilai;
+  });
+};
+
+/* ================= CSV ================= */
 window.downloadMapelCSV=function(mapel){
   const table=document.getElementById("table-mapel-"+mapel);
   let csv=[];
@@ -390,16 +432,16 @@ window.downloadMapelCSV=function(mapel){
   a.href=URL.createObjectURL(blob);
   a.download="ranking_"+mapel+".csv";
   a.click();
-}
+};
 
+/* ================= PRINT ================= */
 window.printMapel=function(id){
   document.querySelectorAll(".print-area").forEach(el=>el.style.display="none");
   document.getElementById(id).style.display="block";
   window.print();
   document.querySelectorAll(".print-area").forEach(el=>el.style.display="block");
-}
-</script>
-</head>
+};
+</script></head>
 
 <body>
 <!-- ===== LOGIN SCREEN ===== -->
@@ -519,10 +561,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
 <script>
 const USERS = [
   { username:"admin", password:"admin123", expired:"2026-12-31" },
+{ username:"coba", password:"2026", expired:"2026-01-21" },
   { username:"zahwan", password:"132611", expired:"3026-06-30" },
   { username:"MANU9", password:"2026", expired:"2026-07-31" },
 { username:"MTSMH", password:"2026", expired:"2026-07-31" },
-  { username:"coba", password:"2026", expired:"2026-01-22" },
 
 
 ];
@@ -570,6 +612,3 @@ window.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
-
-
-
