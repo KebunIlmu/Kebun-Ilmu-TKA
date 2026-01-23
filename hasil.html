@@ -150,6 +150,7 @@ input{
 
 /* ================= PRINT MODE ================= */
 @media print {
+
   body * {
     visibility: hidden;
   }
@@ -608,6 +609,24 @@ window.addEventListener("DOMContentLoaded",()=>{
   loginForm.style.display="none";
   mainContent.style.display="block";
 });
+</script>
+<script>
+function filterTable(){
+  const input = document.getElementById("searchInput");
+  const filter = input.value.toLowerCase();
+
+  const table = document.querySelector("#tabelHasil table");
+  if(!table) return;
+
+  const rows = table.querySelectorAll("tr");
+
+  rows.forEach((row, i)=>{
+    if(i === 0) return; // skip header
+
+    const text = row.innerText.toLowerCase();
+    row.style.display = text.includes(filter) ? "" : "none";
+  });
+}
 </script>
 
 </body>
