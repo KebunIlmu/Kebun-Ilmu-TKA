@@ -235,7 +235,25 @@ input{
   color:red;
   font-size:14px;
 }
+@media print {
+  .print-area{
+    position: static;
+    margin-top: 20px;
+  }
 
+  table{
+    min-width: 100%;
+    font-size: 11px;
+  }
+
+  th, td{
+    padding: 6px;
+  }
+
+  input, button, label {
+    display: none !important;
+  }
+}
 </style>
 
 <script type="module">
