@@ -356,9 +356,22 @@ table.true-false tr:has(input[type="radio"]:checked) {
       style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
 
     <!-- Sekolah -->
-    <label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">Nama Sekolah</label>
-    <input id="sekolah" placeholder="Nama sekolah"
-      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+<label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">
+  Nama Sekolah
+</label>
+<select id="sekolah" required
+  style="width:100%; padding:8px 10px; margin-bottom:8px;
+         border:1.5px solid #90CAF9; border-radius:6px;
+         font-size:15px; box-sizing:border-box;">
+  <option value="">-- Pilih Sekolah --</option>
+  <option value="MI RAUDLATUL ISLAM KETANGGUNGAN">
+    MI RAUDLATUL ISLAM KETANGGUNGAN
+  </option>
+  <option value="lainnya">
+    lainnya
+  </option>
+</select>
+
 
     <!-- Token -->
     <label for="tokenUjian" style="font-weight:600; display:block; margin-bottom:3px;">Token Ujian</label>
@@ -1137,8 +1150,272 @@ function showContent() {
     "Merasa lega karena kedua tokoh menyelesaikan konflik tanpa mengorbankan rakyatnya kembali."
   ],
   "correct": [1, 2]
-}
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center;">
+        <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/77508_36a10478fd8e0bf00c591f52d79766ba.png"
+        alt="Ilustrasi katak dan anak lembu"
+        style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+      </p>
 
+      Di tengah padang rumput terdapat kolam. Kolam itu dihuni banyak katak.
+      Kenthus adalah anak katak yang paling besar dan kuat. Dia merasa tidak terkalahkan.<br><br>
+
+      Suatu pagi Kenthus melompat di padang rumput. Ada seekor anak lembu.
+      Ia sedang bermain dan berlari-lari. Anak lembu itu menjulurkan lidahnya untuk makan.
+      Lidahnya mengenai Kenthus.<br><br>
+
+      Kenthus melompat. “Berani makhluk ini mengusikku!” kata Kenthus sembari menuju ke tepi kolam.<br><br>
+
+      Kenthus sampai di tepi kolam.<br>
+      “Kenthus, mengapa kamu terengah-engah?” tanya Naka.<br>
+      “Wajahmu terlihat pucat,” kata Tata.<br><br>
+
+      “Lihatlah di padang rumput itu. Makhluk itu sangat sombong. Ia tadi hendak menelanku!”
+      kata Kenthus dengan napas terengah-engah.<br><br>
+
+      Koko, kakak Kenthus, menjelaskan.
+      “Makhluk itu anak lembu. Anak lembu tidak jahat. Lembu tidak makan katak.
+      Ia hanya makan rumput.”<br><br>
+
+      “Aku tidak percaya. Tadi, aku dikejarnya dan hampir ditendang olehnya,”
+      jawab Kenthus menggebu-gebu.<br><br>
+
+      Koko hanya diam mendengar adiknya berbicara.<br><br>
+
+      “Aku sebenarnya bisa melawannya dengan mengembungkan diriku,”
+      lanjut Kenthus dengan bangga.<br><br>
+
+      “Kamu tidak akan dapat menandingi lembu itu. Perbuatan kamu berbahaya,”
+      kata Koko.<br><br>
+
+      Kenthus mengembungkan tubuhnya. Perutnya membesar secara berlebihan.
+      Tiba-tiba ia jatuh lemas. Perutnya terasa sakit.
+      Perlahan-lahan ia mengempiskan tubuhnya.
+      Akhirnya tubuh Kenthus kembali ke ukuran semula.<br><br>
+
+      “Kenthus, kamu tidak apa-apa?” tanya Koko.<br>
+      “Aku baik-baik saja. Maafkan aku, Kak. Aku tidak mendengar kata-katamu,”
+      kata Kenthus sembari menunduk.<br><br>
+
+      <i>Sumber teks: https://ceritaanak.org/cerita-anak-anak-katak-anak-lembu/
+      (dengan penyesuaian)</i><br><br>
+
+      <b>Pertanyaan:</b> Apa yang dijelaskan Koko tentang anak lembu?<br>
+      <i>Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Makhluk itu sangat sombong.",
+    "Anak lembu tidak jahat.",
+    "Lembu tidak makan katak."
+  ],
+  "correct": [1, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Katak dan Anak Lembu</b><br><br>
+
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/77508_36a10478fd8e0bf00c591f52d79766ba.png"
+      style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;">
+<br>
+
+      Di tengah padang rumput terdapat kolam. Kolam itu dihuni banyak katak.
+      Kenthus adalah anak katak yang paling besar dan kuat. Dia merasa tidak terkalahkan.<br><br>
+
+      Suatu pagi Kenthus melompat di padang rumput. Ada seekor anak lembu.
+      Ia sedang bermain dan berlari-lari. Anak lembu itu menjulurkan lidahnya untuk makan.
+      Lidahnya mengenai Kenthus.<br><br>
+
+      Kenthus melompat. “Berani makhluk ini mengusikku!” kata Kenthus sembari menuju ke tepi kolam.<br><br>
+
+      Kenthus sampai di tepi kolam.
+      “Kenthus, mengapa kamu terengah-engah?” tanya Naka.
+      “Wajahmu terlihat pucat,” kata Tata.<br><br>
+
+      “Lihatlah di padang rumput itu. Makhluk itu sangat sombong. Ia tadi hendak menelanku!”
+      kata Kenthus dengan napas terengah-engah.<br><br>
+
+      Koko, kakak Kenthus, menjelaskan.
+      “Makhluk itu anak lembu. Anak lembu tidak jahat. Lembu tidak makan katak.
+      Ia hanya makan rumput.”<br><br>
+
+      “Aku tidak percaya. Tadi, aku dikejarnya dan hampir ditendang olehnya,”
+      jawab Kenthus menggebu-gebu.<br><br>
+
+      Koko hanya diam mendengar adiknya berbicara.<br><br>
+
+      “Aku sebenarnya bisa melawannya dengan mengembungkan diriku,”
+      lanjut Kenthus dengan bangga.<br><br>
+
+      “Kamu tidak akan dapat menandingi lembu itu. Perbuatan kamu berbahaya,”
+      kata Koko.<br><br>
+
+      Kenthus mengembungkan tubuhnya. Perutnya membesar secara berlebihan.
+      Tiba-tiba ia jatuh lemas. Perutnya terasa sakit.
+      Perlahan-lahan ia mengempiskan tubuhnya.
+      Akhirnya tubuh Kenthus kembali ke ukuran semula.<br><br>
+
+      “Kenthus, kamu tidak apa-apa?” tanya Koko.
+      “Aku baik-baik saja. Maafkan aku, Kak. Aku tidak mendengar kata-katamu,”
+      kata Kenthus sembari menunduk.<br><br>
+
+      <b>Question:</b> Apa kejadian yang membuat Kenthus merasa menyesal?
+    </div>
+  `,
+  "options": [
+    "Kenthus hendak ditelan anak lembu di padang rumput.",
+    "Kenthus berlari ke tepi kolam hingga terengah-engah.",
+    "Kenthus mengembang terlalu besar hingga jatuh lemas.",
+    "Kenthus dimarahi Koko karena terlalu menggebu-gebu."
+  ],
+  "correct": 2
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Katak dan Anak Lembu</b><br><br>
+
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/77508_36a10478fd8e0bf00c591f52d79766ba.png"
+      style="max-width:100%; height:auto; display:block; margin:auto;"><br>
+
+      Di tengah padang rumput terdapat kolam. Kolam itu dihuni banyak katak.
+      Kenthus adalah anak katak yang paling besar dan kuat. Dia merasa tidak terkalahkan.<br><br>
+
+      Suatu pagi Kenthus melompat di padang rumput. Ada seekor anak lembu.
+      Ia sedang bermain dan berlari-lari. Anak lembu itu menjulurkan lidahnya untuk makan.
+      Lidahnya mengenai Kenthus.<br><br>
+
+      Kenthus melompat. “Berani makhluk ini mengusikku!” kata Kenthus sembari menuju ke tepi kolam.<br><br>
+
+      Kenthus sampai di tepi kolam.
+      “Kenthus, mengapa kamu terengah-engah?” tanya Naka.
+      “Wajahmu terlihat pucat,” kata Tata.<br><br>
+
+      “Lihatlah di padang rumput itu. Makhluk itu sangat sombong. Ia tadi hendak menelanku!”
+      kata Kenthus dengan napas terengah-engah.<br><br>
+
+      Koko, kakak Kenthus, menjelaskan.
+      “Makhluk itu anak lembu. Anak lembu tidak jahat. Lembu tidak makan katak.
+      Ia hanya makan rumput.”<br><br>
+
+      “Aku tidak percaya. Tadi, aku dikejarnya dan hampir ditendang olehnya,”
+      jawab Kenthus menggebu-gebu.<br><br>
+
+      Koko hanya diam mendengar adiknya berbicara.<br><br>
+
+      “Aku sebenarnya bisa melawannya dengan mengembungkan diriku,”
+      lanjut Kenthus dengan bangga.<br><br>
+
+      “Kamu tidak akan dapat menandingi lembu itu. Perbuatan kamu berbahaya,”
+      kata Koko.<br><br>
+
+      Kenthus mengembungkan tubuhnya. Perutnya membesar secara berlebihan.
+      Tiba-tiba ia jatuh lemas. Perutnya terasa sakit.
+      Perlahan-lahan ia mengempiskan tubuhnya.
+      Akhirnya tubuh Kenthus kembali ke ukuran semula.<br><br>
+
+      “Kenthus, kamu tidak apa-apa?” tanya Koko.
+      “Aku baik-baik saja. Maafkan aku, Kak. Aku tidak mendengar kata-katamu,”
+      kata Kenthus sembari menunduk.<br><br>
+
+      <b>Petunjuk:</b> Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+    </div>
+  `,
+  "statements": [
+    "Terharu karena Kenthus mau mengakui kesalahannya.",
+    "Bahagia karena Kenthus berbaikan dengan anak lembu.",
+    "Antusias karena Kenthus bisa membuktikan kekuatannya."
+  ],
+  "correct": [true, false, false]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:right;">8 Agustus 1969</p>
+
+      Dear Sahabatku Jill Tarter,<br><br>
+
+      Saat kau membaca ini, aku sedang liburan bersama Lauren. Aku baru menyelesaikan rapat terakhir dengan tim pendaratan Apollo 11.
+      Seperti yang pernah kuceritakan kepadamu, aku memimpin tim penyusun kode pemrograman komputer untuk pesawat itu.
+      Pada 20 Juli lalu, Apollo 11 berhasil mendarat di bulan. Kamu pasti sudah tahu itu!<br><br>
+
+      Hari-hari itu sangat menegangkan. Komputer sempat mengirim pesan salah.
+      Itu terjadi saat para astronaut—Neil Armstrong dan Edwin Aldrin—hampir gagal mendarat di Bumi!
+      Untungnya, aku telah menyusun banyak kode komputer di pesawat itu agar mereka tetap fokus pada misi utama.
+      Empat hari kemudian, mereka kembali dengan selamat ke Samudra Pasifik.<br><br>
+
+      Neil sempat bercerita sebelum rapat. Bulan sangat dingin, lebih dari Kutub Utara.
+      Permukaannya penuh kawah, tanpa angin dan cuaca. Mereka membawa pulang pasir bulan untuk diteliti.
+      Tak ada makhluk yang mereka temui.<br><br>
+
+      Aku bersyukur kode-kodeku bisa mengantar manusia ke bulan.
+      Semoga suatu hari bisa juga ke Venus.
+      Lauren menitipkan salam untukmu, dia bilang matamu seperti bintang Polaris yang ia lihat lewat teleskop pemberianmu.<br><br>
+
+      Salam hangat,<br>
+      Margaret Hamilton<br><br>
+
+      <b>Question:</b><br>
+      Dalam teks, terdapat kalimat “Hari-hari itu sangat menegangkan.”
+      Makna kata <i>menegangkan</i> dalam kalimat tersebut adalah …
+    </div>
+  `,
+  "options": [
+    "membuat orang terus waspada dalam bekerja",
+    "menyebabkan orang kehilangan fokus saat bekerja",
+    "membuat suasana menjadi serius dan penuh ketakutan",
+    "menimbulkan rasa khawatir karena situasi yang genting"
+  ],
+  "correct": 3
+},
+
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:right;">8 Agustus 1969</p>
+
+      Dear Sahabatku Jill Tarter,<br><br>
+
+      Saat kau membaca ini, aku sedang liburan bersama Lauren. Aku baru menyelesaikan rapat terakhir dengan tim pendaratan Apollo 11.
+      Aku memimpin tim penyusun kode pemrograman komputer untuk pesawat itu.
+      Pada 20 Juli lalu, Apollo 11 berhasil mendarat di bulan.<br><br>
+
+      Hari-hari itu sangat menegangkan. Komputer sempat mengirim pesan salah.
+      Para astronaut—Neil Armstrong dan Edwin Aldrin—hampir gagal mendarat di Bumi.
+      Untungnya, aku telah menyusun banyak kode agar mereka tetap fokus pada misi utama.<br><br>
+
+      Empat hari kemudian, mereka kembali dengan selamat ke Samudra Pasifik.
+      Bulan sangat dingin, penuh kawah, tanpa angin dan cuaca.
+      Mereka membawa pulang pasir bulan untuk diteliti.<br><br>
+
+      Aku bersyukur kode-kodeku bisa mengantar manusia ke bulan.
+      Semoga suatu hari bisa juga ke Venus.<br><br>
+
+      Salam hangat,<br>
+      Margaret Hamilton<br><br>
+
+      <b>Question:</b><br>
+      Dalam teks, terdapat kalimat “Hari-hari itu sangat menegangkan.”
+      Makna kata <i>menegangkan</i> dalam kalimat tersebut adalah …
+    </div>
+  `,
+  "options": [
+    "membuat orang terus waspada dalam bekerja",
+    "menyebabkan orang kehilangan fokus saat bekerja",
+    "membuat suasana menjadi serius dan penuh ketakutan",
+    "menimbulkan rasa khawatir karena situasi yang genting"
+  ],
+  "correct": 3
+}
 
 
 
