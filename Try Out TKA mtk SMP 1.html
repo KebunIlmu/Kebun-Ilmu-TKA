@@ -355,10 +355,26 @@ table.true-false tr:has(input[type="radio"]:checked) {
     <input id="tglLahir" type="date"
       style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
 
-    <!-- Sekolah -->
-    <label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">Nama Sekolah</label>
-    <input id="sekolah" placeholder="Nama sekolah"
-      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+   <!-- Sekolah -->
+<label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">
+  Nama Sekolah
+</label>
+<select id="sekolah" required
+  style="width:100%; padding:8px 10px; margin-bottom:8px;
+         border:1.5px solid #90CAF9; border-radius:6px;
+         font-size:15px; box-sizing:border-box;">
+  <option value="">-- Pilih Sekolah --</option>
+  <option value="MTS MAFATIHUL HUDA PADAKATON">
+    MTS MAFATIHUL HUDA PADAKATON
+  </option>
+<option value="MTS MA'ARIF NU 09 PENDE">
+    MTS MA'ARIF NU 09 PENDE
+  </option>
+  <option value="lainnya">
+    lainnya
+  </option>
+</select>
+
 
     <!-- Token -->
     <label for="tokenUjian" style="font-weight:600; display:block; margin-bottom:3px;">Token Ujian</label>
@@ -492,7 +508,7 @@ const accounts = [
   { username: "MANU9",  password: "2026",  expire: "2026-4-11T23:59:59" },
   { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
   { username: "MTSMH",  password: "2026", expire: "2026-7-30T23:59:59" },
-  { username: "coba",   password: "2026", expire: "2026-01-22T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
   { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
 ];
 
@@ -1314,4 +1330,3 @@ checkSession();
 
 </body>
 </html>
-
