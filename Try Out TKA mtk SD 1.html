@@ -356,9 +356,22 @@ table.true-false tr:has(input[type="radio"]:checked) {
       style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
 
     <!-- Sekolah -->
-    <label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">Nama Sekolah</label>
-    <input id="sekolah" placeholder="Nama sekolah"
-      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+<label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">
+  Nama Sekolah
+</label>
+<select id="sekolah" required
+  style="width:100%; padding:8px 10px; margin-bottom:8px;
+         border:1.5px solid #90CAF9; border-radius:6px;
+         font-size:15px; box-sizing:border-box;">
+  <option value="">-- Pilih Sekolah --</option>
+  <option value="MI RAUDLATUL ISLAM KETANGGUNGAN">
+    MI RAUDLATUL ISLAM KETANGGUNGAN
+  </option>
+  <option value="lainnya">
+    lainnya
+  </option>
+</select>
+
 
     <!-- Token -->
     <label for="tokenUjian" style="font-weight:600; display:block; margin-bottom:3px;">Token Ujian</label>
@@ -491,7 +504,7 @@ const accounts = [
   { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
   { username: "MANU9",  password: "2026",  expire: "2026-4-11T23:59:59" },
   { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
-  { username: "coba",  password: "2026", expire: "2026-01-22T23:59:59" },
+  { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
   { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
   { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
 ];
@@ -1023,6 +1036,143 @@ function showContent() {
   ],
   correct: 2
 },
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Kotak Kubus Satuan</b><br><br>
+      Bu Guru menugaskan Doni untuk membawa sebuah kotak yang dapat menampung
+      <b>64 kubus satuan</b>. Kubus satuan adalah kubus yang mempunyai rusuk
+      <b>1 cm</b>.<br><br>
+      Di rumah, Doni memiliki beberapa macam kotak dengan berbagai ukuran.
+      Doni harus memilih kotak yang volumenya sama dengan 64 kubus satuan.<br><br>
+      <b>Question:</b> Di antara pilihan berikut, kotak manakah yang harus dibawa oleh Doni?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Kotak berukuran 8 cm × 2 cm × 4 cm",
+    "Kotak berukuran 4 cm × 4 cm × 4 cm",
+    "Kotak berukuran 4 cm × 3 cm × 5 cm"
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      <p>Nisa sedang mengunjungi kebun binatang. Dia ingin melihat Capybara yang letaknya di bagian timur kebun binatang. 
+      Setelah Nisa melewati gerbang kebun binatang, dia melihat papan petunjuk jalan sebagai berikut.</p>
+
+      <p style="text-align:center;">
+        <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/37419_54c7662ad3efb88986fc7df6c96fc96f.png" 
+        alt="Papan petunjuk kebun binatang" 
+        style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;">
+      </p>
+
+      <b>Petunjuk:</b> Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut:
+    </div>
+  `,
+  "statements": [
+    "Jarak kandang Zebra adalah 6.000 mm.",
+    "Jarak kandang Capybara dan Kanguru adalah 1.500 cm.",
+    "Jika Nisa melihat Jerapah, kemudian dia ingin melihat Kanguru, maka Nisa harus berjalan sejauh 0,11 km."
+  ],
+  "correct": [false, true, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Dio sedang membantu ayah memotong batang rotan untuk dijadikan stik pewangi ruangan.
+      Ayah mempunyai batang rotan dengan panjang <b>320 cm</b>.
+      Ayah ingin membuat stik pewangi ruangan sebanyak mungkin dengan panjang
+      masing-masing stik <b>15 cm</b>.<br><br>
+
+      <b>Question:</b> Sisa batang rotan yang tidak terpakai untuk membuat stik pewangi ruangan adalah sepanjang …
+    </div>
+  `,
+  "options": [
+    "4 cm",
+    "5 cm",
+    "6 cm",
+    "7 cm"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Dio sedang membantu ayah memotong batang rotan untuk dijadikan stik pewangi ruangan.
+      Ayah mempunyai batang rotan dengan panjang <b>320 cm</b>.
+      Ayah ingin membuat stik pewangi ruangan sebanyak mungkin dengan panjang
+      masing-masing stik <b>15 cm</b>.<br><br>
+
+      <b>Question:</b> Sisa batang rotan yang tidak terpakai untuk membuat stik pewangi ruangan adalah sepanjang …
+    </div>
+  `,
+  "options": [
+    "4 cm",
+    "5 cm",
+    "6 cm",
+    "7 cm"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      Murid-murid SD Cerdas, SD Pelita, dan SD Mentari melakukan kegiatan olahraga
+      di lapangan bola yang sama. Jadwal mereka melakukan kegiatan olahraga
+      tidak sama.<br><br>
+
+      Murid-murid SD Cerdas melakukan kegiatan olahraga setiap <b>2 minggu sekali</b>.<br>
+      Murid-murid SD Pelita melakukan kegiatan olahraga setiap <b>3 minggu sekali</b>.<br>
+      Murid-murid SD Mentari melakukan kegiatan olahraga setiap <b>4 minggu sekali</b>.<br><br>
+
+      Hari ini ketiga SD tersebut melakukan kegiatan olahraga secara bersamaan.<br><br>
+
+      <b>Question:</b> Setiap periode waktu berapakah murid ketiga SD tersebut akan
+      bertemu kembali dalam kegiatan olahraga di lapangan?
+    </div>
+  `,
+  "options": [
+    "4 minggu",
+    "6 minggu",
+    "12 minggu",
+    "18 minggu"
+  ],
+  "correct": 2
+},
+{
+  "type": "multiple_choice",
+  "text": `
+    <div style="text-align: justify;">
+      Diketahui nilai <b>a</b> dan <b>b</b> sebagai berikut:<br><br>
+
+      \\[
+        a = 5 - \\frac{7}{2}
+      \\]<br>
+
+      \\[
+        b = \\frac{3}{4} - \\frac{1}{2}
+      \\]<br><br>
+
+      <b>Question:</b> Nilai dari \\( a - 2b \\) adalah …
+    </div>
+  `,
+  "options": [
+    "1",
+    "1\\( \\frac{1}{4} \\)",
+    "2",
+    "2\\( \\frac{1}{4} \\)"
+  ],
+  "correct": 0
+},
+
+
 
 ];
 
@@ -1311,9 +1461,4 @@ checkSession();
 </script>
 
 </body>
-
 </html>
-
-
-
-
