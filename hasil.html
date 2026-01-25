@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kebun Ilmu — Hasil Try Out</title>
+<title>Kebun Ilmu — Pilih Sekolah</title>
 
 <style>
 :root{
@@ -24,7 +24,7 @@ body{
   color:var(--text);
 }
 
-/* ================= HEADER WEB ================= */
+/* ===== HEADER ===== */
 header{
   background:#fff;
   box-shadow:var(--shadow);
@@ -32,11 +32,9 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  flex-wrap:wrap;
-  gap:10px;
   position:sticky;
   top:0;
-  z-index:1000;
+  z-index:100;
 }
 .brand{
   display:flex;
@@ -53,582 +51,104 @@ header{
   font-weight:700;
   color:var(--primary);
 }
-nav{
-  display:flex;
-  gap:14px;
-}
 nav a{
-  padding:8px 14px;
-  border-radius:10px;
+  text-decoration:none;
   color:var(--muted);
+  font-weight:600;
 }
 nav a:hover{
-  background:var(--secondary);
-  color:#fff;
-}
-.btn{
-  padding:8px 14px;
-  border-radius:10px;
-  font-weight:600;
-  cursor:pointer;
-  border:none;
-}
-.btn-outline{
-  background:transparent;
-  border:2px solid var(--primary);
   color:var(--primary);
 }
 
-/* ================= CONTENT ================= */
+/* ===== CONTENT ===== */
 .container{
-  max-width:1200px;
+  max-width:900px;
   margin:auto;
-  padding:30px 16px;
+  padding:40px 16px;
 }
 .card{
   background:var(--card);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  padding:20px;
-  margin-bottom:30px;
+  padding:30px;
+  text-align:center;
 }
-h1,h2,h3{
+h1{
   color:var(--primary);
   margin-top:0;
 }
-
-/* ================= TABLE ================= */
-.table-wrapper{
-  overflow-x:auto;
-}
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:700px;
-  font-size:14px;
-}
-th,td{
-  padding:10px;
-  border-bottom:1px solid #e2e8f0;
-  white-space:nowrap;
-}
-th{
-  background:var(--primary);
-  color:#fff;
-}
-tr:nth-child(even){
-  background:#f8fafc;
-}
-
-/* ================= INPUT ================= */
-input{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:2px solid var(--primary);
-  margin-bottom:15px;
-}
-
-/* ================= PRINT HEADER ================= */
-#printHeader{
-  display:none;
-  align-items:center;
+.list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:16px;
-  margin-bottom:20px;
+  margin-top:30px;
 }
-#printHeader img{
-  width:80px;
-}
-.print-title h2{
-  margin:0;
-  font-size:22px;
-}
-.print-title p{
-  margin:4px 0 0;
-  font-size:14px;
-}
-
-/* ================= PRINT MODE ================= */
-@media print {
-
-  body * {
-    visibility: hidden;
-  }
-
-  .print-area, .print-area * {
-    visibility: visible;
-  }
-
-  #printHeader, #printHeader * {
-    visibility: visible;
-  }
-
-  #printHeader{
-    display:flex;
-  }
-
-  .print-area{
-    position:absolute;
-    top:120px;
-    left:0;
-    width:100%;
-  }
-
-  header, input, button{
-    display:none !important;
-  }
-
-  table{
-    font-size:12px;
-  }
-}
-/* ===== LOGIN ===== */
-#loginForm{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(135deg,#e0f2fe,#ccfbf1);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-
-.login-box{
-  background:#fff;
-  width:100%;
-  max-width:360px;
-  padding:26px;
+a.sekolah{
+  display:block;
+  padding:20px;
   border-radius:14px;
-  box-shadow:0 10px 30px rgba(0,0,0,.15);
-  text-align:center;
-}
-
-.login-box h2{
-  margin-top:0;
-  color:#0f766e;
-}
-
-.login-box input{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border-radius:10px;
-  border:1.5px solid #0f766e;
-}
-
-.login-box button{
-  width:100%;
-  padding:12px;
-  background:#0f766e;
-  color:#fff;
-  border:none;
-  border-radius:10px;
+  background:#fff;
+  box-shadow:var(--shadow);
+  text-decoration:none;
   font-weight:700;
-  cursor:pointer;
+  color:var(--primary);
+}
+a.sekolah:hover{
+  background:var(--secondary);
+  color:#fff;
 }
 
-.login-box button:hover{
-  background:#115e59;
-}
-
-#errorMsg{
-  margin-top:10px;
-  color:red;
+/* ===== FOOTER ===== */
+footer{
+  margin-top:60px;
+  padding:20px;
+  text-align:center;
+  color:var(--muted);
   font-size:14px;
 }
-
 </style>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  query,
-  orderBy,
-  onSnapshot
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-/* ================= FIREBASE CONFIG ================= */
-const firebaseConfig = {
-  apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
-  authDomain: "tryout-kebun-ilmu.firebaseapp.com",
-  projectId: "tryout-kebun-ilmu",
-  storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
-  messagingSenderId: "497636674894",
-  appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-window.__rankingData = {};
-
-/* ================= REALTIME LISTENER ================= */
-window.addEventListener("DOMContentLoaded", ()=>{
-  const q = query(
-    collection(db,"hasil_ujian"),
-    orderBy("waktu","desc")
-  );
-
-  onSnapshot(q, (snap)=>{
-    renderSemuaData(snap);
-  });
-});
-
-/* ================= RENDER SEMUA DATA ================= */
-function renderSemuaData(snap){
-  const tabelHasil = document.getElementById("tabelHasil");
-  const rankingMapel = document.getElementById("rankingMapel");
-
-  tabelHasil.innerHTML = "";
-  rankingMapel.innerHTML = "";
-  window.__rankingData = {};
-
-  /* ===== TABEL UTAMA ===== */
-  const table = document.createElement("table");
-  const h = table.insertRow();
-  ["No","NIK","Nama","JK","Tgl Lahir","Sekolah","Mapel","Nilai","Waktu"]
-    .forEach(x=>{
-      const th=document.createElement("th");
-      th.textContent=x;
-      h.appendChild(th);
-    });
-
-  let no = 1;
-  const semua = [];
-
-  snap.docs.forEach(doc=>{
-    const d = doc.data();
-    semua.push(d);
-
-    const r = table.insertRow();
-    r.insertCell().textContent = no++;
-    r.insertCell().textContent = d.nik || "";
-    r.insertCell().textContent = d.nama || "";
-    r.insertCell().textContent = d.jk || "";
-    r.insertCell().textContent = d.tglLahir || "";
-    r.insertCell().textContent = d.sekolah || "";
-    r.insertCell().textContent = d.mapel || "";
-    r.insertCell().textContent = d.nilai || "";
-
-    let w="";
-    if(d.waktu?.seconds){
-      w = new Date(d.waktu.seconds*1000).toLocaleString("id-ID");
-    }
-    r.insertCell().textContent = w;
-  });
-
-  tabelHasil.appendChild(table);
-
-  /* ===== RANKING PER MAPEL ===== */
-  const grup = {};
-  semua.forEach(d=>{
-    if(!grup[d.mapel]) grup[d.mapel] = [];
-    if(!isNaN(d.nilai)) grup[d.mapel].push(d);
-  });
-
-  Object.keys(grup).forEach(mapel=>{
-    window.__rankingData[mapel] = [...grup[mapel]];
-
-    const wrap = document.createElement("div");
-    wrap.className="print-area";
-    wrap.id="print-"+mapel.replace(/\s+/g,"_");
-
-    const title=document.createElement("h3");
-    title.textContent="📘 "+mapel;
-    wrap.appendChild(title);
-
-    /* ===== CHECKBOX SEKOLAH ===== */
-    const sekolahWrap=document.createElement("div");
-    sekolahWrap.style.display="flex";
-    sekolahWrap.style.flexWrap="wrap";
-    sekolahWrap.style.gap="10px";
-
-    const sekolahUnik=[...new Set(grup[mapel].map(d=>d.sekolah))].sort();
-
-    sekolahUnik.forEach(sek=>{
-      const lbl=document.createElement("label");
-      lbl.style.display="flex";
-      lbl.style.gap="4px";
-
-      const cb=document.createElement("input");
-      cb.type="checkbox";
-      cb.value=sek;
-      cb.checked=true;
-      cb.onchange=()=>renderMapel(mapel);
-
-      lbl.append(cb,document.createTextNode(sek));
-      sekolahWrap.appendChild(lbl);
-    });
-
-    wrap.appendChild(sekolahWrap);
-
-    /* ===== ACTION ===== */
-    const act=document.createElement("div");
-    act.style.display="flex";
-    act.style.gap="10px";
-
-    const p=document.createElement("button");
-    p.textContent="🖨 Print";
-    p.className="btn btn-outline";
-    p.onclick=()=>printMapel(wrap.id);
-
-    const c=document.createElement("button");
-    c.textContent="⬇ CSV";
-    c.className="btn btn-outline";
-    c.onclick=()=>downloadMapelCSV(mapel);
-
-    act.append(p,c);
-    wrap.appendChild(act);
-
-    /* ===== TABLE ===== */
-    const t=document.createElement("table");
-    t.id="table-mapel-"+mapel;
-    const hh=t.insertRow();
-    ["Rank","Nama","Sekolah","Nilai"].forEach(x=>{
-      const th=document.createElement("th");
-      th.textContent=x;
-      hh.appendChild(th);
-    });
-
-    wrap.appendChild(t);
-    rankingMapel.appendChild(wrap);
-
-    renderMapel(mapel);
-  });
-}
-
-/* ================= RENDER MAPEL ================= */
-window.renderMapel=function(mapel){
-  const wrap=document.getElementById("print-"+mapel.replace(/\s+/g,"_"));
-  const table=document.getElementById("table-mapel-"+mapel);
-
-  const checked=[...wrap.querySelectorAll("input:checked")].map(x=>x.value);
-
-  const data=window.__rankingData[mapel]
-    .filter(d=>checked.includes(d.sekolah))
-    .sort((a,b)=>b.nilai-a.nilai);
-
-  [...table.querySelectorAll("tr")].slice(1).forEach(r=>r.remove());
-
-  data.forEach((d,i)=>{
-    const r=table.insertRow();
-    r.insertCell().textContent=i+1;
-    r.insertCell().textContent=d.nama;
-    r.insertCell().textContent=d.sekolah;
-    r.insertCell().textContent=d.nilai;
-  });
-};
-
-/* ================= CSV ================= */
-window.downloadMapelCSV=function(mapel){
-  const table=document.getElementById("table-mapel-"+mapel);
-  let csv=[];
-  table.querySelectorAll("tr").forEach(r=>{
-    csv.push([...r.children].map(c=>`"${c.textContent}"`).join(","));
-  });
-  const blob=new Blob([csv.join("\n")],{type:"text/csv"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="ranking_"+mapel+".csv";
-  a.click();
-};
-
-/* ================= PRINT ================= */
-window.printMapel=function(id){
-  document.querySelectorAll(".print-area").forEach(el=>el.style.display="none");
-  document.getElementById(id).style.display="block";
-  window.print();
-  document.querySelectorAll(".print-area").forEach(el=>el.style.display="block");
-};
-</script></head>
+</head>
 
 <body>
-<!-- ===== LOGIN SCREEN ===== -->
-<div id="loginForm">
-  <div class="login-box">
-    <h2>Login Admin</h2>
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="login()">Masuk</button>
-    <p id="errorMsg"></p>
-  </div>
-</div>
 
-<div id="mainContent" style="display:none;"> 
-<!-- HEADER PRINT -->
-<div id="printHeader">
-  <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png">
-  <div class="print-title">
-    <h2>Kebun Ilmu</h2>
-    <p>Hasil Try Out & Ranking Per Mapel</p>
-  </div>
-</div>
-
+<!-- ===== HEADER ===== -->
 <header>
   <div class="brand">
     <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png">
     <span class="brand-name">Kebun Ilmu</span>
   </div>
   <nav>
-    <a href="https://kebunilmu.github.io/Kebun-Ilmu-TKA/home.html" target="_blank">Home</a>
+    <a href="https://kebunilmu.github.io/Kebun-Ilmu-TKA/home.html" target="_blank">
+      Home
+    </a>
   </nav>
-  <button class="btn btn-outline" onclick="downloadCSV()">Download Semua CSV</button>
 </header>
 
+<!-- ===== CONTENT ===== -->
 <div class="container">
-<div class="card">
-  <h2>🔑 Token Ujian Aktif</h2>
-
-  <div id="tokenAktif" style="
-    font-size:36px;
-    font-weight:800;
-    letter-spacing:6px;
-    text-align:center;
-    color:var(--primary);
-    margin:10px 0;
-  ">---</div>
-
-  <div id="info" style="
-    text-align:center;
-    color:var(--muted);
-    margin-bottom:15px;
-  "></div>
-
-  <div style="text-align:center;">
-    <button class="btn btn-outline" onclick="tampilkanToken()">
-      🔄 Refresh Token
-    </button>
-  </div>
-</div>
-
   <div class="card">
-    <h1>📊 Data Hasil Try Out</h1>
-    <input id="searchInput" placeholder="🔍 Cari NIK / Nama / Sekolah / Mapel..." onkeyup="filterTable()">
-    <div class="table-wrapper">
-      <div id="tabelHasil"></div>
-    </div>
-  </div>
+    <h1>🏫 Pilih Sekolah</h1>
 
-  <div class="card">
-    <h2>🏆 Ranking Per Mapel</h2>
-    <div class="table-wrapper">
-      <div id="rankingMapel"></div>
+    <div class="list">
+      <a class="sekolah" href="hasil - MANU9.html">
+        MTs Ma'arif NU 9 Pende
+      </a>
+
+      <a class="sekolah" href="hasil - MRI.html">
+        MI Raudlatul Islam Ketanggungan
+      </a>
+
+      <a class="sekolah" href="hasil - MTS MH.html">
+        MTs Mafatihul Huda Padakaton
+      </a>
     </div>
   </div>
 </div>
-</div>
 
-<script>
-/* ===== TOKEN DINAMIS 10 MENIT ===== */
-function getTokenSekarang() {
-  const now = new Date();
-  const jam = now.getHours();
-  const menit = now.getMinutes();
-
-  // Jam aktif ujian
-  if (jam < 7 || jam >= 22) return null;
-
-  const slot = Math.floor(menit / 10); // 0–5
-  const seed = jam * 100 + slot;
-
-  const depan = String.fromCharCode(65 + (seed * 7) % 26);
-
-  return `${depan}${jam.toString().padStart(2,'0')}${slot}`;
-}
-
-/* ===== TAMPILKAN TOKEN ===== */
-function tampilkanToken() {
-  const token = getTokenSekarang();
-  const el = document.getElementById("tokenAktif");
-  const info = document.getElementById("info");
-
-  if (!token) {
-    el.innerText = "⛔";
-    info.innerText = "Ujian belum dibuka (07.00 – 22.00)";
-  } else {
-    el.innerText = token;
-    info.innerText = "Token berlaku 10 menit";
-  }
-}
-
-/* auto load + refresh tiap menit */
-document.addEventListener("DOMContentLoaded", ()=>{
-  tampilkanToken();
-  setInterval(tampilkanToken, 60 * 1000);
-});
-</script>
-<script>
-const USERS = [
-  { username:"admin", password:"admin123", expired:"2026-12-31" },
-{ username:"coba", password:"2026", expired:"2026-01-21" },
-  { username:"zahwan", password:"132611", expired:"3026-06-30" },
-  { username:"MANU9", password:"2026", expired:"2026-07-31" },
-{ username:"gurummh", password:"2026", expired:"2026-07-31" },
-
-
-];
-
-function login(){
-  const u = username.value.trim();
-  const p = password.value;
-  const err = errorMsg;
-
-  const user = USERS.find(x => x.username===u && x.password===p);
-  if(!user){
-    err.innerText = "Username atau password salah";
-    return;
-  }
-
-  const today = new Date();
-  const exp = new Date(user.expired + "T23:59:59");
-  if(today > exp){
-    err.innerText = "Akun sudah kadaluarsa";
-    return;
-  }
-
-  localStorage.setItem("loginUser", user.username);
-  localStorage.setItem("loginExpired", user.expired);
-
-  loginForm.style.display = "none";
-  mainContent.style.display = "block";
-}
-
-/* AUTO LOGIN */
-window.addEventListener("DOMContentLoaded",()=>{
-  const u = localStorage.getItem("loginUser");
-  const e = localStorage.getItem("loginExpired");
-  if(!u || !e) return;
-
-  if(new Date() > new Date(e + "T23:59:59")){
-    localStorage.clear();
-    return;
-  }
-
-  loginForm.style.display="none";
-  mainContent.style.display="block";
-});
-</script>
-<script>
-function filterTable(){
-  const input = document.getElementById("searchInput");
-  const filter = input.value.toLowerCase();
-
-  const table = document.querySelector("#tabelHasil table");
-  if(!table) return;
-
-  const rows = table.querySelectorAll("tr");
-
-  rows.forEach((row, i)=>{
-    if(i === 0) return; // skip header
-
-    const text = row.innerText.toLowerCase();
-    row.style.display = text.includes(filter) ? "" : "none";
-  });
-}
-</script>
+<!-- ===== FOOTER ===== -->
+<footer>
+  © 2026 Kebun Ilmu · Sistem Try Out & Evaluasi Belajar
+</footer>
 
 </body>
 </html>
-
