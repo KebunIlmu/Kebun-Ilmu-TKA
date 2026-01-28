@@ -510,11 +510,11 @@ if (q.type === 'relevan_tidak') return Array(q.statements.length).fill(null);
 // ====== DATA AKUN + KADALUWARSA ======
 const accounts = [
   { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
-  { username: "MANU9",  password: "2026",  expire: "2026-5-11T23:59:59" },
+  { username: "MANU9",  password: "2026",  expire: "2026-05-11T23:59:59" },
   { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
   { username: "silva",  password: "sil345", expire: "2025-10-31T23:59:59" },
-  { username: "nisa",   password: "nis223", expire: "2025-7-30T23:59:59" },
-  { username: "MTSMH",   password: "2026", expire: "2026-7-30T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-07-30T23:59:59" },
+  { username: "MTSMH",   password: "2026", expire: "2026-07-30T23:59:59" },
 ];
 
 // ====== LOGIN FUNCTION ======
@@ -1377,6 +1377,147 @@ function showContent() {
   ],
   "correct": 1
 },
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Babirusa: Hewan Unik dari Sulawesi</strong></p>
+
+      <div style="text-align:center;">
+        <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/74064_a8fbfa96aeecd6f7de5e57ace5cf1fea.png" alt="Babirusa" style="max-width:100%; height:auto; display:block; margin:12px auto;">
+      </div>
+      <br>
+
+      Babirusa merupakan hewan unik yang hanya dapat ditemukan di Pulau Sulawesi dan sekitarnya.
+      Hewan ini hidup di hutan hujan dataran rendah. Babirusa memakan berbagai jenis tumbuhan,
+      seperti buah-buahan dan umbi-umbian. Umbi-umbian yang dimakan antara lain kalo dan tunas
+      tanaman. Selain itu, babirusa juga dapat memakan hewan kecil seperti ulat dan cacing.<br><br>
+
+      <b>Question:</b> Apa jenis umbi-umbian yang menjadi makanan babirusa?<br>
+      <i>Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Kalo",
+    "Rebung",
+    "Ulat",
+    "Tunas goba"
+  ],
+  "correct": [0, 1, 3]
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Babirusa: Hewan Unik dari Sulawesi</strong></p>
+
+      <div style="text-align:center;">
+        <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/74064_a8fbfa96aeecd6f7de5e57ace5cf1fea.png" alt="Babirusa" style="max-width:100%; height:auto; display:block; margin:12px auto;">
+      </div>
+      <br>
+
+      Babirusa merupakan hewan unik yang hanya dapat ditemukan di Pulau Sulawesi dan sekitarnya.
+      Hewan ini hidup di hutan hujan dataran rendah. Babirusa memiliki ciri khas berupa taring
+      melengkung pada jantan serta suara yang khas.<br><br>
+
+      <b>Question:</b> Pernyataan mana yang mendukung kalimat bahwa babirusa merupakan hewan unik
+      yang ditemukan di Pulau Sulawesi?<br>
+      <i>Tentukan benar atau salah setiap pernyataan berikut!</i>
+    </div>
+  `,
+  "statements": [
+    "Babirusa betina di Pulau Sulawesi memiliki taring seperti babirusa jantan.",
+    "Babirusa hidup di hutan hujan dataran rendah di Pulau Sulawesi.",
+    "Babirusa di Pulau Sulawesi memiliki suara yang sangat khas."
+  ],
+  "correct": [false, true, true]
+},
+
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Babirusa: Hewan Unik dari Sulawesi</strong></p>
+
+      <div style="text-align:center;">
+        <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/74064_a8fbfa96aeecd6f7de5e57ace5cf1fea.png" alt="Babirusa" style="max-width:100%; height:auto; display:block; margin:12px auto;">
+      </div>
+      <br>
+
+      Babirusa termasuk hewan yang terancam punah. Ancaman tersebut berasal dari perburuan
+      serta alih fungsi hutan menjadi lahan pertanian dan permukiman. Jika habitat babirusa
+      terus mengalami kerusakan, maka akan muncul berbagai dampak terhadap kehidupan satwa
+      dan lingkungan sekitarnya.<br><br>
+
+      <b>Question:</b> Apa dampak yang terjadi jika habitat babirusa terus terancam?<br>
+      <i>Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Populasi babirusa akan berkurang akibat aktivitas manusia.",
+    "Babirusa akan pindah ke dataran tinggi yang lebih aman.",
+    "Flora yang menjadi makanan utama babirusa bisa terpengaruh.",
+    "Terjadi peningkatan konflik antara manusia dan babirusa."
+  ],
+  "correct": [0, 2, 3]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Tas Tangan dari Kain Perca</strong></p>
+
+      <div style="text-align:center;">
+        <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/17742_eed6eceeb29093dcbedc6eb5ae3cad87.png" alt="Tas tangan dari kain perca" style="max-width:100%; height:auto; display:block; margin:12px auto;">
+      </div>
+      <br>
+
+      Kain perca adalah sisa-sisa kain dari pembuatan pakaian yang sering dianggap sebagai limbah.
+      Padahal, kain perca dapat diolah menjadi berbagai kerajinan tangan yang bermanfaat dan bernilai ekonomi.
+      Salah satu hasil kerajinan dari kain perca adalah tas tangan.<br><br>
+
+      Dalam proses pembuatannya dibutuhkan beberapa alat dan bahan seperti kertas, gunting,
+      kain perca, busa tipis, jarum dan benang, serta ritsleting.<br><br>
+
+      <b>Question:</b> Benda apa saja yang digunakan sebagai <b>alat</b> dalam teks tersebut?<br>
+      <i>Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Ritsleting",
+    "Gunting",
+    "Jarum",
+    "Busa tipis"
+  ],
+  "correct": [1, 2]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Tas Tangan dari Kain Perca</strong></p>
+
+      <div style="text-align:center;">
+        <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/17742_eed6eceeb29093dcbedc6eb5ae3cad87.png" alt="Tas tangan dari kain perca" style="max-width:100%; height:auto; display:block; margin:12px auto;">
+      </div>
+      <br>
+
+      Kain perca adalah sisa-sisa kain dari pembuatan pakaian yang sering dianggap sebagai limbah.
+      Padahal, kain perca dapat diolah menjadi berbagai kerajinan tangan yang <b>bermanfaat</b> dan
+      <b>bernilai ekonomi</b>.<br><br>
+
+      <b>Question:</b> Kata manakah yang menunjukkan bahwa kain perca masih bisa diolah?<br>
+      <i>Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Bermanfaat",
+    "Siap digunakan",
+    "Bernilai ekonomi",
+    "Lebih menarik"
+  ],
+  "correct": [0, 2]
+}
 
 
 
