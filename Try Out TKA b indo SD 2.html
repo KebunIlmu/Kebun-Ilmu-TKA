@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Bahasa Indonesia - Kebun Ilmu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+* {
+  box-sizing: border-box;
+}
+  header {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  header h2 {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .menu-button, .timer {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+.container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #cfd8dc;
+  }
+
+  .right-panel {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .question-buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+#questionDisplay {
+    font-size: 14px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+.fullscreen-mode header {
+    padding: 6px 10px;
+    min-height: unset;
+  }
+
+  .fullscreen-mode header h2 {
+    font-size: 13px;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .fullscreen-mode .menu-button,
+  .fullscreen-mode .timer {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+  
+</style>
+</head>
+
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+<div id="pesertaForm" class="hidden" style="justify-content:center; align-items:center; height:100vh; background-color:#f4f9ff; padding:20px; box-sizing:border-box;">
+  <div style="background:white; padding:24px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:100%; max-width:400px;">
+
+    <h2 style="margin-bottom:14px; color:#1E88E5; text-align:center;">Data Peserta</h2>
+
+    <!-- NIK -->
+    <label for="nik" style="font-weight:600; display:block; margin-bottom:3px;">NIK</label>
+    <input id="nik" placeholder="Masukkan NIK"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Nama Peserta -->
+    <label for="namaPeserta" style="font-weight:600; display:block; margin-bottom:3px;">Nama Peserta</label>
+    <input id="namaPeserta" placeholder="Masukkan nama lengkap"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Jenis Kelamin -->
+    <label for="jk" style="font-weight:600; display:block; margin-bottom:3px;">Jenis Kelamin</label>
+    <select id="jk"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+      <option value="">-- Pilih Jenis Kelamin --</option>
+      <option value="L">Laki-laki</option>
+      <option value="P">Perempuan</option>
+    </select>
+
+    <!-- Tanggal Lahir -->
+    <label for="tglLahir" style="font-weight:600; display:block; margin-bottom:3px;">Tanggal Lahir</label>
+    <input id="tglLahir" type="date"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Sekolah -->
+<label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">
+  Nama Sekolah
+</label>
+<select id="sekolah" required
+  style="width:100%; padding:8px 10px; margin-bottom:8px;
+         border:1.5px solid #90CAF9; border-radius:6px;
+         font-size:15px; box-sizing:border-box;">
+  <option value="">-- Pilih Sekolah --</option>
+  <option value="MI RAUDLATUL ISLAM KETANGGUNGAN">
+    MI RAUDLATUL ISLAM KETANGGUNGAN
+  </option>
+  <option value="lainnya">
+    lainnya
+  </option>
+</select>
+
+
+    <!-- Token -->
+    <label for="tokenUjian" style="font-weight:600; display:block; margin-bottom:3px;">Token Ujian</label>
+    <input id="tokenUjian" placeholder="Masukkan token ujian"
+      style="width:100%; padding:8px 10px; margin-bottom:14px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <button onclick="mulaiUjian()"
+      style="width:100%; padding:10px; background-color:#1E88E5; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:15px;"
+      onmouseover="this.style.backgroundColor='#1565C0';" 
+      onmouseout="this.style.backgroundColor='#1E88E5';">
+      Mulai Ujian
+    </button>
+
+    <p id="errorPeserta" style="margin-top:8px; font-size:13px; color:red; text-align:center;"></p>
+
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+<header>
+  <h2>Try Out TKA Bahasa Indonesia SD/MI - Kebun Ilmu</h2>
+  <div>
+        <span class="timer" id="timer">60:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+function getTokenSekarang() {
+  const now = new Date();
+  const jam = now.getHours();
+  const menit = now.getMinutes();
+
+  // batas waktu
+  if (jam < 7 || jam >= 24) return null;
+
+  // slot 10 menit (0–5)
+  const slot = Math.floor(menit / 10);
+
+  // ===== DEPAN ACAK TERKONTROL =====
+  const seed = jam * 100 + slot;   // angka unik tiap 10 menit
+  const depan = String.fromCharCode(65 + (seed * 7) % 26); // A–Z
+
+  // token akhir
+  return `${depan}${jam.toString().padStart(2,'0')}${slot}`;
+}
+function mulaiUjian() {
+  const nik = document.getElementById("nik").value.trim();
+  const nama = document.getElementById("namaPeserta").value.trim();
+  const jk = document.getElementById("jk").value;
+  const tgl = document.getElementById("tglLahir").value;
+  const sekolah = document.getElementById("sekolah").value.trim();
+  const token = document.getElementById("tokenUjian").value.trim();
+
+  if (!nik || !nama || !jk || !tgl || !sekolah || !token) {
+    document.getElementById("errorPeserta").innerText = "❌ Semua data wajib diisi";
+    return;
+  }
+
+  const tokenAktif = getTokenSekarang();
+
+if (!tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    "⏰ Ujian hanya bisa diakses pukul 07.00 – 17.00";
+  return;
+}
+
+if (token !== tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    `❌ Token salah. Tanya admin`;
+  return;
+}
+
+  // simpan data peserta sementara
+  window.dataPeserta = { nik, nama, jk, tgl, sekolah, token };
+ questions = shuffleArray(questions);
+answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  if (q.type === 'tepat_tidak') return Array(q.statements.length).fill(null);
+if (q.type === 'relevan_tidak') return Array(q.statements.length).fill(null);
+  if (q.type === 'dampak_jangka') return Array(q.statements.length).fill(null);
+   if (q.type === 'mendukung_tidak') return Array(q.statements.length).fill(null); 
+  return null;
+});
+
+
+  currentQuestion = 0;
+
+  // sembunyikan form peserta dan tampilkan konten try out
+  document.getElementById("pesertaForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+
+  // 🔥 Render soal dan start timer
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(60 * 60);
+
+  // AUTO FULLSCREEN
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.warn("Fullscreen gagal:", err);
+    });
+  }
+}
+
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "MANU9",  password: "2026",  expire: "2026-4-11T23:59:59" },
+  { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
+  { username: "coba",  password: "2026", expire: "2026-01-22T23:59:59" },
+  { username: "MRI",   password: "2026", expire: "2026-07-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("pesertaForm").style.display = "flex";
+  
+}
+
+  let questions = [
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Pasar Terapung di Banjarmasin</b><br><br>
+      Banjarmasin memiliki pasar terapung. Pasar unik ini sudah berusia lebih dari 400 tahun. Pasar terapung adalah pasar yang ada di atas sungai. Pasar terapung menjadi bukti kekayaan budaya Indonesia. Keunikan tersebut membuat pasar terapung berbeda dengan pasar lainnya.<br><br>
+
+      Proses transaksi pasar terapung dilakukan di atas jukung. Dalam bahasa Banjar, jukung adalah perahu. Di atas perahu kecil, proses jual beli terjadi. Penjual dan pembeli berinteraksi sambil menjaga keseimbangan. Pasar terapung menunjukkan pemanfaatan sungai oleh masyarakat.<br><br>
+
+      Ada beberapa istilah transaksi di pasar terapung. Pembelian tangan pertama atau penyedia barang disebut dukuh. Pembelian tangan kedua disebut penyambang. Tangan kedua membeli dari dukuh untuk dijual kembali. Ada pula barter antarpedagang. Dalam bahasa Banjar, barter disebut bapanduk. Istilah transaksi tersebut menunjukkan keunikan pasar terapung.<br><br>
+
+      Di pasar terapung pengunjung bisa naik perahu klotok. Sambil naik perahu, mereka bisa menikmati kopi dan kue khas Banjarmasin. Pemandangan rumah terapung menemani pengunjung. Keistimewaan pasar terapung memberikan sensasi berbeda. Oleh karena itu, pasar terapung juga difungsikan sebagai objek wisata.<br><br>
+
+      Pasar terapung tidak hanya menjadi tempat jual beli. Pasar terapung adalah warisan budaya dan wisata. Pasar terapung menjadi bagian penting masyarakat, terutama masyarakat di Sungai Barito. Oleh karena itu, perlu pelestarian dan penjagaan, baik dari masyarakat maupun pemerintah.<br><br>
+
+      <b>Question:</b> Apa kosakata yang menggambarkan kegiatan tradisional dalam teks?
+    </div>
+  `,
+  "options": [
+    "Warisan",
+    "Budaya",
+    "Wisata",
+    "Pasar"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Pasar Terapung di Banjarmasin</b><br><br>
+      Banjarmasin memiliki pasar terapung. Pasar unik ini sudah berusia lebih dari 400 tahun. Pasar terapung adalah pasar yang ada di atas sungai. Pasar terapung menjadi bukti kekayaan budaya Indonesia. Keunikan tersebut membuat pasar terapung berbeda dengan pasar lainnya.<br><br>
+
+      Proses transaksi pasar terapung dilakukan di atas jukung. Dalam bahasa Banjar, jukung adalah perahu. Di atas perahu kecil, proses jual beli terjadi. Penjual dan pembeli berinteraksi sambil menjaga keseimbangan. Pasar terapung menunjukkan pemanfaatan sungai oleh masyarakat.<br><br>
+
+      Ada beberapa istilah transaksi di pasar terapung. Pembelian tangan pertama atau penyedia barang disebut dukuh. Pembelian tangan kedua disebut penyambang. Tangan kedua membeli dari dukuh untuk dijual kembali. Ada pula barter antarpedagang. Dalam bahasa Banjar, barter disebut bapanduk. Istilah transaksi tersebut menunjukkan keunikan pasar terapung.<br><br>
+
+      Di pasar terapung pengunjung bisa naik perahu klotok. Sambil naik perahu, mereka bisa menikmati kopi dan kue khas Banjarmasin. Pemandangan rumah terapung menemani pengunjung. Keistimewaan pasar terapung memberikan sensasi berbeda. Oleh karena itu, pasar terapung juga difungsikan sebagai objek wisata.<br><br>
+
+      Pasar terapung tidak hanya menjadi tempat jual beli. Pasar terapung adalah warisan budaya dan wisata. Pasar terapung menjadi bagian penting masyarakat, terutama masyarakat di Sungai Barito. Oleh karena itu, perlu pelestarian dan penjagaan, baik dari masyarakat maupun pemerintah.<br><br>
+
+      <b>Question:</b> Manakah kata yang berantonim dalam teks tersebut?
+    </div>
+  `,
+  "options": [
+    "Pelestarian >< Penjagaan",
+    "Pertama >< Kedua",
+    "Pasar >< Rumah",
+    "Jual >< Beli"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <b>Pasar Terapung di Banjarmasin</b><br><br>
+      Banjarmasin memiliki pasar terapung. Pasar unik ini sudah berusia lebih dari 400 tahun. Pasar terapung adalah pasar yang ada di atas sungai. Pasar terapung menjadi bukti kekayaan budaya Indonesia. Keunikan tersebut membuat pasar terapung berbeda dengan pasar lainnya.<br><br>
+
+      Proses transaksi pasar terapung dilakukan di atas jukung. Dalam bahasa Banjar, jukung adalah perahu. Di atas perahu kecil, proses jual beli terjadi. Penjual dan pembeli berinteraksi sambil menjaga keseimbangan. Pasar terapung menunjukkan pemanfaatan sungai oleh masyarakat.<br><br>
+
+      Ada beberapa istilah transaksi di pasar terapung. Pembelian tangan pertama atau penyedia barang disebut dukuh. Pembelian tangan kedua disebut penyambang. Tangan kedua membeli dari dukuh untuk dijual kembali. Ada pula barter antarpedagang. Dalam bahasa Banjar, barter disebut bapanduk. Istilah transaksi tersebut menunjukkan keunikan pasar terapung.<br><br>
+
+      Di pasar terapung pengunjung bisa naik perahu klotok. Sambil naik perahu, mereka bisa menikmati kopi dan kue khas Banjarmasin. Pemandangan rumah terapung menemani pengunjung. Keistimewaan pasar terapung memberikan sensasi berbeda. Oleh karena itu, pasar terapung juga difungsikan sebagai objek wisata.<br><br>
+
+      Pasar terapung tidak hanya menjadi tempat jual beli. Pasar terapung adalah warisan budaya dan wisata. Pasar terapung menjadi bagian penting masyarakat, terutama masyarakat di Sungai Barito. Oleh karena itu, perlu pelestarian dan penjagaan, baik dari masyarakat maupun pemerintah.<br><br>
+
+      <b>Question:</b> Manakah kalimat utama pada teks tersebut?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Proses transaksi pasar terapung dilakukan di atas jukung.",
+    "Istilah transaksi tersebut menunjukkan keunikan pasar terapung.",
+    "Oleh karena itu, pasar terapung juga difungsikan sebagai objek wisata."
+  ],
+  "correct": [0, 1, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/28576_f0a5be5eb4cb47cada144fca8e7f9048.png" alt="Magnet Kulkas Mainan Hewan" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
+      <small>
+        Sumber: https://www.idntimes.com/life/diy/5-ide-diy-magnet-kulkas-unik-dan-mudah-dibuat-01-rqg9b-txx8zf
+        (dengan penyesuaian)
+      </small><br><br>
+
+      <b>Question:</b> Berdasarkan teks, benda yang umum digunakan dalam kerajinan adalah ….
+    </div>
+  `,
+  "options": [
+    "Mainan plastik",
+    "Cat semprot",
+    "Magnet",
+    "Gunting"
+  ],
+  "correct": 3
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/28576_f0a5be5eb4cb47cada144fca8e7f9048.png" alt="Magnet Kulkas Mainan Hewan" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
+      <small>
+        Sumber: https://www.idntimes.com/life/diy/5-ide-diy-magnet-kulkas-unik-dan-mudah-dibuat-01-rqg9b-txx8zf
+        (dengan penyesuaian)
+      </small><br><br>
+
+      <b>Question:</b> Langkah kedua mendukung tujuan utama teks karena ….<br>
+      <i>Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Membuat permukaan mainan tertutup rapi",
+    "Memudahkan anak mewarnai mainan hewan",
+    "Menutup lubang agar magnet bisa menempel"
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/28576_f0a5be5eb4cb47cada144fca8e7f9048.png" alt="Magnet Kulkas Mainan Hewan" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
+      <small>
+        Sumber: https://www.idntimes.com/life/diy/5-ide-diy-magnet-kulkas-unik-dan-mudah-dibuat-01-rqg9b-txx8zf
+        (dengan penyesuaian)
+      </small><br><br>
+
+      <b>Question:</b> Langkah kedua mendukung tujuan utama teks karena ….<br>
+      <i>Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.</i>
+    </div>
+  `,
+  "options": [
+    "Membuat permukaan mainan tertutup rapi",
+    "Memudahkan anak mewarnai mainan hewan",
+    "Menutup lubang agar magnet bisa menempel"
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Topi Baru Rio</strong></p>
+
+      Sepulang sekolah, Doni bermain ke rumah Rio. Rio hendak menunjukkan topi baru. Topi itu baru dibeli
+      Rio bersama ayahnya.<br><br>
+
+      Doni : Mana, Yo? (Penasaran)<br>
+      Rio : Sebentar, Don, aku ambil dulu di kamar.<br>
+      Doni : Oke, aku tunggu di sini ya.<br>
+      Rio : Ini, Don! Coba lihat, bagus kan? (Bangga menunjukkan topi miliknya)<br>
+      Doni : Wah, keren! Ada logo klubnya! Aku boleh coba pakai enggak, Yo?<br>
+      Rio : Silakan. Coba saja.<br><br>
+
+      Doni mencoba topi Rio.<br><br>
+
+      Doni : Aduh, kok enggak bisa masuk ya?<br>
+      Rio : Ah, kamu sih besar kepala! (Tampak Rio menahan tawa)<br>
+      Doni : Masa sih? (Sambil memegang kepala)<br>
+      Rio : Bercanda, Don. Itu kamu atur dulu ukurannya.<br>
+      Doni : Oh, aku belum pernah pakai topi seperti ini.<br>
+      Rio : Nih, kamu coba lagi. (Memberikan topi kepada Doni)<br>
+      Doni : Wah, iya sekarang pas. Aku mau titip beli dong, Yo.<br>
+      Rio : Boleh, nanti kalau aku pergi ke tokonya lagi, ya.<br><br>
+
+      <i>Sumber: Adinda/IPE (2025)</i><br><br>
+
+      <b>Question:</b> Dalam percakapan tersebut terdapat frasa <i>besar kepala</i>. Apa makna frasa tersebut?
+    </div>
+  `,
+  "options": [
+    "Doni tidak mau mendengarkan pendapat Rio.",
+    "Doni dianggap memiliki sikap sombong oleh Rio.",
+    "Doni memiliki ukuran kepala besar dibandingkan topi Rio.",
+    "Doni berambut tebal dan mengembang karena kepalanya besar."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Topi Baru Rio</strong></p>
+
+      Sepulang sekolah, Doni bermain ke rumah Rio. Rio hendak menunjukkan topi baru. Topi itu baru dibeli
+      Rio bersama ayahnya.<br><br>
+
+      Doni : Mana, Yo? (Penasaran)<br>
+      Rio : Sebentar, Don, aku ambil dulu di kamar.<br>
+      Doni : Oke, aku tunggu di sini ya.<br>
+      Rio : Ini, Don! Coba lihat, bagus kan? (Bangga menunjukkan topi miliknya)<br>
+      Doni : Wah, keren! Ada logo klubnya! Aku boleh coba pakai enggak, Yo?<br>
+      Rio : Silakan. Coba saja.<br><br>
+
+      Doni mencoba topi Rio.<br><br>
+
+      Doni : Aduh, kok enggak bisa masuk ya?<br>
+      Rio : Ah, kamu sih besar kepala! (Tampak Rio menahan tawa)<br>
+      Doni : Masa sih? (Sambil memegang kepala)<br>
+      Rio : Bercanda, Don. Itu kamu atur dulu ukurannya.<br>
+      Doni : Oh, aku belum pernah pakai topi seperti ini.<br>
+      Rio : Nih, kamu coba lagi. (Memberikan topi kepada Doni)<br>
+      Doni : Wah, iya sekarang pas. Aku mau titip beli dong, Yo.<br>
+      Rio : Boleh, nanti kalau aku pergi ke tokonya lagi, ya.<br><br>
+
+      <i>Sumber: Adinda/IPE (2025)</i><br><br>
+
+      <b>Question:</b> Manakah pernyataan berikut yang memuat ringkasan percakapan dengan tepat?
+    </div>
+  `,
+  "options": [
+    "Doni datang ke rumah Rio. Doni ingin mencoba topi baru Rio. Akan tetapi, ukuran topi Rio tidak pas untuk Doni. Akhirnya, Doni tidak jadi memakai topi Rio.",
+    "Rio menunjukkan topi barunya kepada Doni. Topi itu dibeli Rio bersama ayahnya. Doni tertarik melihat topi Rio. Doni ingin membeli topi yang sama.",
+    "Doni bermain ke rumah Rio. Doni membantu Rio menilai topi barunya. Topi itu sangat bagus. Doni ingin ikut membeli topi yang sama.",
+    "Rio datang ke rumah Doni. Rio ingin memperlihatkan topi barunya. Topi itu dibeli bersama ayahnya di toko topi. Terdapat stiker logo klub di topi itu."
+  ],
+  "correct": 2
+},
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Topi Baru Rio</strong></p>
+
+      Sepulang sekolah, Doni bermain ke rumah Rio. Rio hendak menunjukkan topi baru. Topi itu baru dibeli
+      Rio bersama ayahnya.<br><br>
+
+      Doni : Mana, Yo? (Penasaran)<br>
+      Rio : Sebentar, Don, aku ambil dulu di kamar.<br>
+      Doni : Oke, aku tunggu di sini ya.<br>
+      Rio : Ini, Don! Coba lihat, bagus kan? (Bangga menunjukkan topi miliknya)<br>
+      Doni : Wah, keren! Ada logo klubnya! Aku boleh coba pakai enggak, Yo?<br>
+      Rio : Silakan. Coba saja.<br><br>
+
+      Doni mencoba topi Rio.<br><br>
+
+      Doni : Aduh, kok enggak bisa masuk ya?<br>
+      Rio : Ah, kamu sih besar kepala! (Tampak Rio menahan tawa)<br>
+      Doni : Masa sih? (Sambil memegang kepala)<br>
+      Rio : Bercanda, Don. Itu kamu atur dulu ukurannya.<br>
+      Doni : Oh, aku belum pernah pakai topi seperti ini.<br>
+      Rio : Nih, kamu coba lagi. (Memberikan topi kepada Doni)<br>
+      Doni : Wah, iya sekarang pas. Aku mau titip beli dong, Yo.<br>
+      Rio : Boleh, nanti kalau aku pergi ke tokonya lagi, ya.<br><br>
+
+      <i>Sumber: Adinda/IPE (2025)</i><br><br>
+
+      <b>Petunjuk:</b> Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut:
+    </div>
+  `,
+  "statements": [
+    "Doni tidak bisa memakai topi karena ukuran topinya terlalu kecil.",
+    "Rio menganggap Doni anak yang sombong karena tidak menyetujui ucapannya.",
+    "Doni kesulitan memakai topi karena belum tahu cara mengaturnya."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Topi Baru Rio</strong></p>
+
+      Sepulang sekolah, Doni bermain ke rumah Rio. Rio hendak menunjukkan topi baru. Topi itu baru dibeli
+      Rio bersama ayahnya.<br><br>
+
+      Doni : Mana, Yo? (Penasaran)<br>
+      Rio : Sebentar, Don, aku ambil dulu di kamar.<br>
+      Doni : Oke, aku tunggu di sini ya.<br>
+      Rio : Ini, Don! Coba lihat, bagus kan? (Bangga menunjukkan topi miliknya)<br>
+      Doni : Wah, keren! Ada logo klubnya! Aku boleh coba pakai enggak, Yo?<br>
+      Rio : Silakan. Coba saja.<br><br>
+
+      Doni mencoba topi Rio.<br><br>
+
+      Doni : Aduh, kok enggak bisa masuk ya?<br>
+      Rio : Ah, kamu sih besar kepala! (Tampak Rio menahan tawa)<br>
+      Doni : Masa sih? (Sambil memegang kepala)<br>
+      Rio : Bercanda, Don. Itu kamu atur dulu ukurannya.<br>
+      Doni : Oh, aku belum pernah pakai topi seperti ini.<br>
+      Rio : Nih, kamu coba lagi. (Memberikan topi kepada Doni)<br>
+      Doni : Wah, iya sekarang pas. Aku mau titip beli dong, Yo.<br>
+      Rio : Boleh, nanti kalau aku pergi ke tokonya lagi, ya.<br><br>
+
+      <i>Sumber: Adinda/IPE (2025)</i><br><br>
+
+      <b>Question:</b> Berdasarkan percakapan, manakah peristiwa yang sesuai dengan kehidupan sehari-hari?<br>
+      <i>(Jawaban benar lebih dari satu.)</i>
+    </div>
+  `,
+  "options": [
+    "Seseorang kesulitan menggunakan barang baru karena belum tahu cara mengaturnya.",
+    "Seseorang yang ingin memiliki barang sama seperti orang lain karena barangnya bagus.",
+    "Seseorang memarahi orang lain karena tidak menggunakan barang dengan benar."
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Taekwondo Membantu Mengatur Diri</strong></p>
+
+      Kegiatan ekstrakurikuler di sekolah berperan penting. Ekstrakurikuler membantu anak untuk tetap aktif dan bersosialisasi. Ekstrakurikuler juga mengajarkan kemampuan pengaturan diri. Pengaturan diri adalah kemampuan mengelola emosi. Selain emosi, perilaku dan pikiran juga diatur.<br><br>
+
+      Kemampuan mengatur emosi memengaruhi kesehatan mental. Kesehatan mental yang baik memengaruhi keaktifan di sekolah. Salah satu ekstrakurikuler yang melatihnya adalah taekwondo. Faktanya, taekwondo bukan sekadar olahraga. Hasil penelitian terbaru menunjukkan banyak manfaat taekwondo. Taekwondo membantu meningkatkan keterampilan pengaturan diri. Penelitian tersebut dilakukan kepada anak sekolah dasar.<br><br>
+
+      Penelitian dilakukan pada dua kelompok anak. Satu kelompok mengambil kelas taekwondo. Kelompok lainnya mengikuti dua kelas olahraga umum. Hasil penelitian menunjukkan perbedaan tingkat fokus. Anak yang mengikuti taekwondo bisa lebih fokus. Mereka memiliki perhatian yang baik di kelas. Selain itu, kemampuan pengaturan dirinya juga meningkat.<br><br>
+
+      Itulah bukti taekwondo sangat berdampak bagi anak. Dengan demikian, tingkat fokus murid bisa meningkat. Pelajaran pun lebih mudah dilaksanakan.<br><br>
+
+      <i>Sumber: Gading Perkasa dan Glori K. Wadrianto/Kompas.com (2025)</i><br><br>
+
+      <b>Question:</b> Manakah kerangka yang paling sesuai dengan teks tersebut?
+    </div>
+  `,
+  "options": [
+    "Taekwondo menjadi olahraga favorit anak-anak → Taekwondo meningkatkan fokus dan pengaturan diri → Kegiatan ekstrakurikuler bermanfaat bagi anak.",
+    "Kegiatan ekstrakurikuler sangat bermanfaat bagi anak → Taekwondo terbukti melatih fokus dan pengaturan diri → Taekwondo sangat berdampak bagi perkembangan anak.",
+    "Hasil penelitian menunjukkan manfaat taekwondo → Taekwondo membantu mengelola emosi dan fokus belajar → Semua anak harus mengikuti ekstrakurikuler.",
+    "Anak perlu memiliki pengaturan diri dan fokus belajar → Taekwondo termasuk olahraga yang memiliki banyak manfaat → Semua jenis olahraga harus menjadi ekstrakurikuler."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Taekwondo Membantu Mengatur Diri</strong></p>
+
+      Kegiatan ekstrakurikuler di sekolah berperan penting. Ekstrakurikuler membantu anak untuk tetap aktif dan bersosialisasi. Ekstrakurikuler juga mengajarkan kemampuan pengaturan diri. Pengaturan diri adalah kemampuan mengelola emosi. Selain emosi, perilaku dan pikiran juga diatur.<br><br>
+
+      Kemampuan mengatur emosi memengaruhi kesehatan mental. Kesehatan mental yang baik memengaruhi keaktifan di sekolah. Salah satu ekstrakurikuler yang melatihnya adalah taekwondo. Faktanya, taekwondo bukan sekadar olahraga. Hasil penelitian terbaru menunjukkan banyak manfaat taekwondo. Taekwondo membantu meningkatkan keterampilan pengaturan diri. Penelitian tersebut dilakukan kepada anak sekolah dasar.<br><br>
+
+      Penelitian dilakukan pada dua kelompok anak. Satu kelompok mengambil kelas taekwondo. Kelompok lainnya mengikuti dua kelas olahraga umum. Hasil penelitian menunjukkan perbedaan tingkat fokus. Anak yang mengikuti taekwondo bisa lebih fokus. Mereka memiliki perhatian yang baik di kelas. Selain itu, kemampuan pengaturan dirinya juga meningkat.<br><br>
+
+      Itulah bukti taekwondo sangat berdampak bagi anak. Dengan demikian, tingkat fokus murid bisa meningkat. Pelajaran pun lebih mudah dilaksanakan.<br><br>
+
+      <i>Sumber: Gading Perkasa dan Glori K. Wadrianto/Kompas.com (2025)</i><br><br>
+
+      <b>Question:</b> Manakah kalimat berikut yang menunjukkan pendapat penulis dalam teks?<br>
+      <i>(Jawaban benar lebih dari satu.)</i>
+    </div>
+  `,
+  "options": [
+    "Kegiatan ekstrakurikuler di sekolah berperan penting.",
+    "Itulah bukti taekwondo sangat berdampak bagi anak.",
+    "Penelitian dilakukan kepada dua kelompok anak."
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Taekwondo Membantu Mengatur Diri</strong></p>
+
+      Kegiatan ekstrakurikuler di sekolah berperan penting. Ekstrakurikuler membantu anak untuk tetap aktif dan bersosialisasi. Ekstrakurikuler juga mengajarkan kemampuan pengaturan diri. Pengaturan diri adalah kemampuan mengelola emosi. Selain emosi, perilaku dan pikiran juga diatur.<br><br>
+
+      Kemampuan mengatur emosi memengaruhi kesehatan mental. Kesehatan mental yang baik memengaruhi keaktifan di sekolah. Salah satu ekstrakurikuler yang melatihnya adalah taekwondo. Faktanya, taekwondo bukan sekadar olahraga. Hasil penelitian terbaru menunjukkan banyak manfaat taekwondo. Taekwondo membantu meningkatkan keterampilan pengaturan diri. Penelitian tersebut dilakukan kepada anak sekolah dasar.<br><br>
+
+      Penelitian dilakukan pada dua kelompok anak. Satu kelompok mengambil kelas taekwondo. Kelompok lainnya mengikuti dua kelas olahraga umum. Hasil penelitian menunjukkan perbedaan tingkat fokus. Anak yang mengikuti taekwondo bisa lebih fokus. Mereka memiliki perhatian yang baik di kelas. Selain itu, kemampuan pengaturan dirinya juga meningkat.<br><br>
+
+      Itulah bukti taekwondo sangat berdampak bagi anak. Dengan demikian, tingkat fokus murid bisa meningkat. Pelajaran pun lebih mudah dilaksanakan.<br><br>
+
+      <i>Sumber: Gading Perkasa dan Glori K. Wadrianto/Kompas.com (2025)</i><br><br>
+
+      <b>Petunjuk:</b> Tentukan Tepat (T) atau Tidak Tepat (TT) untuk setiap peristiwa berikut:
+    </div>
+  `,
+  "statements": [
+    "A. Seorang murid yang mengikuti ekstrakurikuler olahraga merasa lebih tenang saat berbicara di depan kelas.",
+    "B. Sekolah mengirim perwakilan anggota ekstrakurikuler taekwondo untuk mengikuti perlombaan.",
+    "C. Murid yang sering berlatih taekwondo bisa bekerja kelompok dengan baik."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Kemegahan Istana Maimun</strong></p><br>
+
+      Di Kota Medan berdiri peninggalan sejarah yang terkenal. Bangunan itu bernama Istana Maimun. Istana Maimun merupakan warisan Kesultanan Deli. Bangunan ini dibangun pada 1888. Pembangunannya dilakukan oleh Sultan Ma'mun Al Rasyid Perkasa Alamsyah. Istana ini menyimbolkan masa kejayaan Kerajaan Melayu. Istana Maimun memiliki arsitektur yang memukau. Bangunannya didominasi warna kuning keemasan. Oleh karena itu, bangunan ini dijuluki "Istana Kuning".<br><br>
+
+      Arsitektur bangunannya terbilang unik. Gaya arsitekturnya memadukan budaya Melayu, Timur Tengah, India, dan Eropa. Di dalam istana, terdapat singgasana kerajaan yang masih terjaga dengan baik. Selain singgasana, terdapat pula benda-benda bersejarah seperti foto keluarga sultan, pakaian adat, dan senjata tradisional.<br><br>
+
+      Kini, Istana Maimun terbuka untuk umum dan digunakan sebagai tempat wisata sejarah. Banyak wisatawan datang untuk melihat keindahan bangunan dan mengenal sejarahnya. Pengunjung juga dapat menyewa pakaian adat Melayu untuk berfoto. Anak-anak sekolah sering berkunjung untuk belajar sambil berwisata.<br><br>
+
+      <i>Sumber: Tim Redaksi/Kumparan Travel (2018)</i><br><br>
+
+      <b>Question:</b> Bagaimana Istana Maimun mempertahankan daya tariknya hingga kini?
+    </div>
+  `,
+  "options": [
+    "Mengadakan acara adat kesultanan secara rutin setiap tahun.",
+    "Merawat bangunan, koleksi, dan menawarkan pengalaman budaya.",
+    "Melakukan modernisasi terhadap beberapa bangunan di area istana.",
+    "Mengadakan festival budaya Melayu secara rutin tiap tahunnya."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Kemegahan Istana Maimun</strong></p><br>
+
+      Di Kota Medan berdiri peninggalan sejarah yang terkenal. Bangunan itu bernama Istana Maimun. Istana Maimun merupakan warisan Kesultanan Deli. Bangunan ini dibangun pada 1888. Pembangunannya dilakukan oleh Sultan Ma'mun Al Rasyid Perkasa Alamsyah. Istana ini menyimbolkan masa kejayaan Kerajaan Melayu. Istana Maimun memiliki arsitektur yang memukau. Bangunannya didominasi warna kuning keemasan sehingga dijuluki "Istana Kuning".<br><br>
+
+      Arsitektur bangunannya terbilang unik karena memadukan budaya Melayu, Timur Tengah, India, dan Eropa. Di dalam istana terdapat singgasana kerajaan yang masih terjaga dengan baik. Selain itu, terdapat pula benda-benda bersejarah seperti foto keluarga sultan, pakaian adat, dan senjata tradisional.<br><br>
+
+      Kini, Istana Maimun terbuka untuk umum dan digunakan sebagai tempat wisata sejarah. Banyak wisatawan datang untuk melihat keindahan bangunan dan mengenal sejarahnya. Pengunjung juga dapat menyewa pakaian adat Melayu untuk berfoto. Anak-anak sekolah sering datang untuk belajar sambil berwisata.<br><br>
+
+      <i>Sumber: Tim Redaksi/Kumparan Travel (2018)</i><br><br>
+
+      <b>Question:</b> Manakah pernyataan berikut yang sesuai dengan ide pokok dalam teks?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Istana Maimun sekarang digunakan sebagai tempat tinggal sultan.",
+    "Istana Maimun memadukan gaya arsitektur berbagai budaya.",
+    "Pengunjung bisa memakai pakaian adat Melayu saat berwisata."
+  ],
+  "correct": [1, 2]
+},
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Kemegahan Istana Maimun</strong></p><br>
+
+      Di Kota Medan berdiri peninggalan sejarah yang terkenal. Bangunan itu bernama Istana Maimun. Istana Maimun merupakan warisan Kesultanan Deli. Bangunan ini dibangun pada 1888 oleh Sultan Ma'mun Al Rasyid Perkasa Alamsyah. Istana ini menyimbolkan masa kejayaan Kerajaan Melayu. Bangunannya didominasi warna kuning keemasan sehingga dijuluki "Istana Kuning".<br><br>
+
+      Arsitektur Istana Maimun terbilang unik karena memadukan budaya Melayu, Timur Tengah, India, dan Eropa. Di dalam istana terdapat singgasana kerajaan yang masih terjaga dengan baik. Selain itu, terdapat pula berbagai benda bersejarah seperti foto keluarga sultan, pakaian adat, dan senjata tradisional.<br><br>
+
+      Saat ini, Istana Maimun terbuka untuk umum dan dimanfaatkan sebagai tempat wisata sejarah. Banyak wisatawan datang untuk menikmati keindahan bangunan serta mempelajari sejarah. Pengunjung juga dapat menyewa pakaian adat Melayu untuk berfoto. Anak-anak sekolah sering berkunjung untuk belajar sambil berwisata.<br><br>
+
+      <i>Sumber: Tim Redaksi/Kumparan Travel (2018)</i><br><br>
+
+      <b>Petunjuk:</b> Tentukan Tepat (T) atau Tidak Tepat (TT) untuk setiap pernyataan berikut:
+    </div>
+  `,
+  "statements": [
+    "A. Kemegahan dan nilai sejarah istana menjadi daya tarik wisatawan.",
+    "B. Pengunjung dapat melihat langsung peninggalan sejarah di dalam istana.",
+    "C. Istana Maimun merupakan warisan budaya yang menonjolkan gaya arsitektur Melayu."
+  ],
+  "correct": [true, true, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Legenda Ular N'Daung</strong></p><br>
+
+      "Ibu kalian bisa disembuhkan. Obatnya ramuan yang dimasak di atas bara ajaib. Aku bisa membuat ramuannya. Namun, kalian harus mencari bara ajaibnya."<br><br>
+
+      Putri bungsu langsung bertanya, "Di mana kami bisa mendapatkan bara ajaib itu?"<br><br>
+
+      "Bara ajaib itu hanya ada di puncak gunung. Letaknya di sebelah utara desa kita. Namun, tempat itu dijaga oleh seekor ular. Ular itu besar dan kejam. Namanya Ular N'Daung. Rasanya, kalian tak akan berhasil."<br><br>
+
+      Ketiga gadis itu saling berpandangan. Putri sulung dan putri tengah menggelengkan kepalanya. Mereka menolak untuk pergi mencari bara ajaib. Akhirnya, putri bungsu yang <b>berhati baja</b> bertindak. Dengan tegas ia berkata, "Biar aku saja yang pergi ke gunung itu. Akan aku ambil bara api untuk Ibu."<br><br>
+
+      Sesampainya di puncak gunung, si Bungsu tertidur. Ular N'Daung muncul di hadapannya. Saat membuka mata, si Bungsu menjerit ketakutan. Ular N'Daung menanyakan maksud kedatangan si Bungsu. Setelah mendengar penjelasan, Ular N'Daung bersedia memberikan bara api dengan satu syarat: setelah ibunya sembuh, si Bungsu harus menemaninya.<br><br>
+
+      <i>Sumber: Diar K., 100 Cerita Rakyat Nusantara, Jakarta, Bhuana Ilmu Populer, 2014</i><br><br>
+
+      <b>Question:</b> Manakah makna yang tepat untuk ungkapan <i>"berhati baja"</i>?
+    </div>
+  `,
+  "options": [
+    "Memiliki semangat yang besar untuk mencapai keinginan.",
+    "Memiliki tekad dan keberanian kuat menghadapi bahaya.",
+    "Memiliki kemampuan untuk menguatkan tekad orang lain.",
+    "Memiliki keinginan mencapai angan-angan yang diinginkan."
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Legenda Ular N'Daung</strong></p><br>
+
+      "Ibu kalian bisa disembuhkan. Obatnya ramuan yang dimasak di atas bara ajaib. Aku bisa membuat ramuannya. Namun, kalian harus mencari bara ajaibnya."<br><br>
+
+      Putri bungsu bertanya, "Di mana kami bisa mendapatkan bara ajaib itu?"<br><br>
+
+      "Bara ajaib itu hanya ada di puncak gunung, di sebelah utara desa kita. Tempat itu dijaga oleh seekor ular besar dan kejam bernama Ular N'Daung. Rasanya, kalian tak akan berhasil."<br><br>
+
+      Ketiga gadis itu saling berpandangan. Putri sulung dan putri tengah menolak pergi. Akhirnya, putri bungsu yang berhati baja bertekad pergi sendiri demi kesembuhan ibunya.<br><br>
+
+      Sesampainya di puncak gunung, si Bungsu tertidur. Tak lama kemudian, Ular N'Daung muncul di hadapannya. Si Bungsu terkejut dan ketakutan. Setelah mendengar tujuan kedatangannya, Ular N'Daung bersedia memberikan bara api dengan satu syarat, yaitu si Bungsu harus menemaninya setelah ibunya sembuh.<br><br>
+
+      <i>Sumber: Diar K., 100 Cerita Rakyat Nusantara, Jakarta, Bhuana Ilmu Populer, 2014</i><br><br>
+
+      <b>Question:</b> Manakah pilihan berikut yang sesuai dengan latar cerita?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Cerita berlatar tempat di puncak gunung yang sepi.",
+    "Cerita berlatar waktu malam hari saat tokoh si Bungsu tertidur.",
+    "Cerita berlatar suasana menakutkan saat tokoh si Bungsu bertemu tokoh Ular N'Daung."
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "tepat_tidak",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Legenda Ular N'Daung</strong></p><br>
+
+      "Ibu kalian bisa disembuhkan. Obatnya ramuan yang dimasak di atas bara ajaib. Aku bisa membuat ramuannya. Namun, kalian harus mencari bara ajaibnya."<br><br>
+
+      Putri bungsu bertanya, "Di mana kami bisa mendapatkan bara ajaib itu?"<br><br>
+
+      "Bara ajaib itu hanya ada di puncak gunung di sebelah utara desa. Tempat itu dijaga oleh seekor ular besar dan kejam bernama Ular N'Daung."<br><br>
+
+      Putri sulung dan putri tengah menolak pergi mencari bara ajaib. Akhirnya, putri bungsu yang berhati baja berangkat seorang diri demi kesembuhan ibunya.<br><br>
+
+      Sesampainya di puncak gunung, si Bungsu tertidur. Ular N'Daung muncul dan berbicara dengannya. Setelah mengetahui tujuan kedatangan si Bungsu, Ular N'Daung bersedia memberikan bara api dengan satu syarat: si Bungsu harus menemaninya setelah ibunya sembuh.<br><br>
+
+      <i>Sumber: Diar K., 100 Cerita Rakyat Nusantara, Jakarta, Bhuana Ilmu Populer, 2014</i><br><br>
+
+      <b>Petunjuk:</b> Tentukan Tepat (T) atau Tidak Tepat (TT) untuk setiap pernyataan berikut:
+    </div>
+  `,
+  "statements": [
+    "A. Tokoh Ular N'Daung hidup di puncak gunung untuk menjaga bara ajaib.",
+    "B. Tokoh Ular N'Daung dikenal sebagai sosok yang jahat kepada manusia.",
+    "C. Tokoh Ular N'Daung ingin tokoh si Bungsu tinggal untuk menemaninya."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Mengapa Daun Berubah Warna?</strong></p><br>
+
+      Pernahkah kamu melihat daun berubah warna? Saat musim kemarau, daun hijau dapat berubah menjadi kuning, oranye, atau cokelat. Daun berwarna hijau karena adanya klorofil. Klorofil berperan dalam proses pembuatan makanan dengan bantuan sinar matahari. Proses tersebut disebut fotosintesis.<br><br>
+
+      Ketika musim kemarau datang, air menjadi langka sehingga pohon kesulitan memperoleh air. Untuk bertahan hidup, pohon menghemat air dan energi dengan mengurangi produksi klorofil. Akibatnya, warna hijau pada daun memudar.<br><br>
+
+      Saat klorofil berkurang, pigmen lain seperti karotenoid (kuning dan oranye) serta antosianin (merah) menjadi terlihat. Pigmen-pigmen tersebut sebenarnya selalu ada di daun, tetapi tertutup oleh klorofil.<br><br>
+
+      Perubahan warna daun membantu pohon bertahan hidup pada musim kering. Bahkan, beberapa pohon menggugurkan daunnya hingga habis. Setelah musim hujan datang kembali, daun hijau akan tumbuh lagi.<br><br>
+
+      <i>Sumber: Wiastuti/Poros Jakarta (2025)</i><br><br>
+
+      <b>Question:</b> Manakah kalimat tanya yang sesuai dengan isi teks?
+    </div>
+  `,
+  "options": [
+    "Apa saja pohon yang daunnya dapat berubah warna?",
+    "Bagaimana daun dapat berubah warna saat musim kemarau?",
+    "Bagaimana pohon dapat bertahan hidup di daerah sulit air?",
+    "Apa saja zat yang dibutuhkan daun untuk berubah warna?"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Mengapa Daun Berubah Warna?</strong></p><br>
+
+      Pernahkah kamu melihat daun berubah warna? Saat musim kemarau, daun hijau dapat berubah menjadi kuning, oranye, atau cokelat. Daun berwarna hijau karena adanya klorofil yang berfungsi membantu proses pembuatan makanan melalui fotosintesis.<br><br>
+
+      Ketika musim kemarau tiba, air menjadi langka sehingga pohon kesulitan memperoleh air. Untuk bertahan hidup, pohon mulai menghemat energi dan air. Salah satu caranya adalah dengan mengurangi produksi klorofil. Akibatnya, warna hijau pada daun menghilang.<br><br>
+
+      Saat klorofil berkurang, pigmen lain seperti karotenoid dan antosianin menjadi terlihat. Pigmen tersebut sebenarnya selalu ada, tetapi tertutup oleh warna hijau klorofil.<br><br>
+
+      Perubahan warna daun merupakan bentuk adaptasi pohon agar dapat bertahan hidup pada musim kering. Setelah hujan datang kembali, daun hijau akan tumbuh lagi.<br><br>
+
+      <i>Sumber: Wiastuti/Poros Jakarta (2025)</i><br><br>
+
+      <b>Question:</b> Berdasarkan isi teks, mengapa pohon mengurangi produksi klorofil saat musim kemarau?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Untuk menghemat energi.",
+    "Untuk mengurangi konsumsi air.",
+    "Untuk memperlihatkan pigmen warna lain."
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <p style="text-align:center"><strong>Mengapa Daun Berubah Warna?</strong></p><br>
+
+      Daun pada tumbuhan dapat mengalami perubahan warna, terutama saat musim kemarau. Warna hijau daun berasal dari klorofil yang berfungsi dalam proses fotosintesis. Ketika air mulai langka, pohon mengalami kesulitan mendapatkan air yang cukup.<br><br>
+
+      Untuk bertahan hidup, pohon melakukan penghematan energi dan air dengan mengurangi produksi klorofil. Akibatnya, warna hijau pada daun memudar. Pada saat yang sama, pigmen lain seperti karotenoid dan antosianin menjadi tampak jelas sehingga daun tampak kuning, oranye, atau cokelat.<br><br>
+
+      Perubahan warna daun merupakan bentuk adaptasi tumbuhan dalam menghadapi musim kering. Setelah musim hujan kembali, pohon akan menumbuhkan daun hijau yang baru.<br><br>
+
+      <i>Sumber: Wiastuti/Poros Jakarta (2025)</i><br><br>
+
+      <b>Question:</b> Manakah simpulan yang tepat mengenai perubahan objek dalam teks?<br>
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Pohon berubah dari boros menjadi hemat air.",
+    "Daun berubah dari hijau menjadi beragam warna.",
+    "Klorofil berubah dari sedikit menjadi banyak."
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <h3 style="text-align:center;">Air Putih atau Air Mineral?</h3><br>
+
+      Air merupakan kebutuhan penting bagi kehidupan sehari-hari. Setiap orang memerlukan air untuk menjaga kesehatan tubuh. Namun, tidak semua jenis air memiliki kandungan yang sama. Air mineral dan air putih ternyata memiliki perbedaan.<br><br>
+
+      Air mineral mengandung berbagai mineral alami, salah satunya elektrolit. Kandungan ini berperan penting dalam menjaga keseimbangan cairan tubuh, terutama saat tubuh kehilangan banyak cairan.<br><br>
+
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/28612_e829e9f98a6b521a4efb9e1b12d2a51f.png" 
+      alt="Perbedaan Air Putih dan Air Mineral" 
+      style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
+
+      <i>Sumber: indonesiabaik.id</i><br><br>
+
+      <b>Question:</b> Apa fungsi kandungan elektrolit yang dimiliki air mineral?
+    </div>
+  `,
+  "options": [
+    "Menjaga tekanan darah normal.",
+    "Meningkatkan fungsi jantung.",
+    "Membantu mencegah dehidrasi.",
+    "Mempermudah sistem metabolisme tubuh."
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <h3 style="text-align:center;">Air Putih atau Air Mineral?</h3><br>
+
+      Air merupakan kebutuhan utama bagi manusia. Setiap hari tubuh memerlukan asupan cairan agar tetap sehat. Meskipun sama-sama berupa air, air putih dan air mineral memiliki perbedaan kandungan serta fungsi.<br><br>
+
+      Air putih umumnya mudah diperoleh dari berbagai sumber dan dapat dikonsumsi kapan saja. Oleh karena itu, air putih sering menjadi pilihan utama untuk memenuhi kebutuhan cairan harian.<br><br>
+
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/28612_e829e9f98a6b521a4efb9e1b12d2a51f.png"
+      alt="Perbedaan Air Putih dan Air Mineral"
+      style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
+
+      <i>Sumber: indonesiabaik.id</i><br><br>
+
+      <b>Question:</b> Mengapa air putih lebih cocok untuk dikonsumsi setiap saat?
+    </div>
+  `,
+  "options": [
+    "Sumber air putih mudah ditemukan.",
+    "Kandungan air putih sangat banyak.",
+    "Pengolahan air putih melalui proses alami.",
+    "Kandungan pH dalam air putih lebih tinggi."
+  ],
+  "correct": 0
+},
+
+{
+  "type": "true_false",
+  "text": `
+    <div style="text-align: justify;">
+      <h3>Air Putih atau Air Mineral?</h3>
+      Air adalah kebutuhan penting bagi kehidupan sehari-hari. Setiap orang pasti meminumnya setiap hari untuk tetap sehat. 
+      Ternyata, air mineral dan air putih berbeda. Yuk, simak penjelasannya!<br><br>
+
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/28612_e829e9f98a6b521a4efb9e1b12d2a51f.png" 
+           alt="Perbedaan Air Putih dan Air Mineral" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br><br>
+
+      Sumber: https://indonesiabaik.id/infografis/beda-air-putih-dan-air-mineral<br><br>
+
+      <b>Petunjuk:</b> Klik benar (B) atau salah (S) untuk setiap pernyataan berdasarkan isi teks!
+    </div>
+  `,
+  "statements": [
+    "Menekankan pokok utama yang ingin disampaikan dalam infografis.",
+    "Menonjolkan informasi penting yang sedang dibahas dalam infografis.",
+    "Menyesuaikan warna yang mungkin akan disukai pembaca infografis."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <h3 style="text-align:center; font-weight:bold;">Antre, Dong!</h3>
+
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/41894_a25f0fb2673bbe0b04da356237452ba3.png" 
+           alt="Antre di Toko Buku" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br><br>
+
+      Tia dan Devi sedang berada di Toko Buku Gemar. Mereka mencari buku pelajaran. 
+      Setelah menemukan buku yang dicari, mereka menuju ke kasir. Mereka menempati urutan kelima dan keenam. 
+      Tak lama kemudian, ada orang yang mengantre di belakang mereka. Mereka sabar menunggu giliran membayar di kasir.<br><br>
+
+      Namun, tiba-tiba seorang pemuda berjalan ke antrean paling depan. Tentu saja, orang-orang yang sudah mengantre lebih dulu memprotes.<br><br>
+
+      “Tolong, antre, Dik,” kata seorang ibu yang berada di belakangnya.<br><br>
+
+      “Maaf, Bu, saya harus cepat-cepat. Ini juga hanya satu buku, pasti tidak akan lama. 
+      Tidak akan sampai lima menit,” kata pemuda itu.<br><br>
+
+      “Tidak boleh seperti itu, Nak. Kita harus membudayakan antre. 
+      Jika kamu harus cepat-cepat, bolehkah saya tahu alasannya?” ucap ibu itu.<br><br>
+
+      “Iya, Kak, kita harus antre. Semua yang ada di sini juga ingin cepat dilayani. 
+      Apa Kakak tidak malu melihat seorang ibu-ibu saja bersedia mengantre? 
+      Kakak yang muda justru bertingkah sebaliknya,” sahut Tia. 
+      Devi terlihat hanya diam dan mengangguk.<br><br>
+
+      Mendengar ada suara seperti keributan, Pak Satpam pun masuk. 
+      Dia menenangkan situasi. Pemuda itu harus tetap mengantre sesuai antrean.<br><br>
+
+      <b>Question:</b> Siapakah tokoh yang menyelesaikan keributan dalam cerita tersebut?
+    </div>
+  `,
+  "options": [
+    "Tia.",
+    "Devi.",
+    "Kasir.",
+    "Pak Satpam."
+  ],
+  "correct": 3
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <h3 style="text-align:center; font-weight:bold;">Antre, Dong!</h3>
+
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/41894_a25f0fb2673bbe0b04da356237452ba3.png" 
+           alt="Antre di Toko Buku" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br><br>
+
+      Tia dan Devi sedang berada di Toko Buku Gemar. Mereka mencari buku pelajaran. 
+      Setelah menemukan buku yang dicari, mereka menuju ke kasir. Mereka menempati urutan kelima dan keenam. 
+      Tak lama kemudian, ada orang yang mengantre di belakang mereka. Mereka sabar menunggu giliran membayar di kasir.<br><br>
+
+      Namun, tiba-tiba seorang pemuda berjalan ke antrean paling depan. Tentu saja, orang-orang yang sudah mengantre lebih dulu memprotes.<br><br>
+
+      “Tolong, antre, Dik,” kata seorang ibu yang berada di belakangnya.<br><br>
+
+      “Maaf, Bu, saya harus cepat-cepat. Ini juga hanya satu buku, pasti tidak akan lama. 
+      Tidak akan sampai lima menit,” kata pemuda itu.<br><br>
+
+      “Tidak boleh seperti itu, Nak. Kita harus membudayakan antre. 
+      Jika kamu harus cepat-cepat, bolehkah saya tahu alasannya?” ucap ibu itu.<br><br>
+
+      “Iya, Kak, kita harus antre. Semua yang ada di sini juga ingin cepat dilayani. 
+      Apa Kakak tidak malu melihat seorang ibu-ibu saja bersedia mengantre? 
+      Kakak yang muda justru bertingkah sebaliknya,” sahut Tia. Devi terlihat hanya diam dan mengangguk.<br><br>
+
+      Mendengar ada suara seperti keributan, Pak Satpam pun masuk. 
+      Dia menenangkan situasi. Pemuda itu harus tetap mengantre sesuai antrean.<br><br>
+
+      <b>Question:</b> Apa saja peristiwa yang dialami Tia dalam cerita? 
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Mencari dan membeli buku bersama Devi.",
+    "Dinasihati oleh seorang ibu untuk antre.",
+    "Ikut menegur pemuda yang menyerobot antrean."
+  ],
+  "correct": [0, 2]
+},
+{
+  type: 'mendukung_tidak',
+  text: `
+<div style="text-align: justify;">
+      <h3 style="text-align:center; font-weight:bold;">Antre, Dong!</h3>
+
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/41894_a25f0fb2673bbe0b04da356237452ba3.png" 
+           alt="Antre di Toko Buku" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br><br>
+
+      Tia dan Devi sedang berada di Toko Buku Gemar. Mereka mencari buku pelajaran. 
+      Setelah menemukan buku yang dicari, mereka menuju ke kasir. Mereka menempati urutan kelima dan keenam. 
+      Tak lama kemudian, ada orang yang mengantre di belakang mereka. Mereka sabar menunggu giliran membayar di kasir.<br><br>
+
+      Namun, tiba-tiba seorang pemuda berjalan ke antrean paling depan. Tentu saja, orang-orang yang sudah mengantre lebih dulu memprotes.<br><br>
+
+      “Tolong, antre, Dik,” kata seorang ibu yang berada di belakangnya.<br><br>
+
+      “Maaf, Bu, saya harus cepat-cepat. Ini juga hanya satu buku, pasti tidak akan lama. 
+      Tidak akan sampai lima menit,” kata pemuda itu.<br><br>
+
+      “Tidak boleh seperti itu, Nak. Kita harus membudayakan antre. 
+      Jika kamu harus cepat-cepat, bolehkah saya tahu alasannya?” ucap ibu itu.<br><br>
+
+      “Iya, Kak, kita harus antre. Semua yang ada di sini juga ingin cepat dilayani. 
+      Apa Kakak tidak malu melihat seorang ibu-ibu saja bersedia mengantre? 
+      Kakak yang muda justru bertingkah sebaliknya,” sahut Tia. Devi terlihat hanya diam dan mengangguk.<br><br>
+
+      Mendengar ada suara seperti keributan, Pak Satpam pun masuk. 
+      Dia menenangkan situasi. Pemuda itu harus tetap mengantre sesuai antrean.<br><br>
+Dalam cerita, seorang pemuda mengatakan, “hanya satu buku, pasti tidak akan lama.” Intan berpendapat bahwa perkataan tersebut tidak dapat dibenarkan. 
+<b>Question:</b> Pilih apakah alasan berikut mendukung atau tidak mendukung pendapat Intan:
+</div>
+`
+,
+  statements: [
+    "Semua orang yang mengantre juga ingin cepat dilayani.",
+    "Mengantre membutuhkan kesabaran setiap orang.",
+    "Aturan antrean harus dihormati oleh semua orang."
+  ],
+  correct: [true, false, true] // true = Mendukung, false = Tidak Mendukung
+},
+{
+  "type": "mc",
+  "text": `
+    <div style="text-align: justify;">
+      <h3 style="text-align:center; font-weight:bold;">Kenapa Kita Tidak Boleh Malas Menyikat Gigi?</h3>
+      Apakah kamu sering lupa menyikat gigi sebelum tidur?<br>
+      Kenapa kita tidak boleh malas menyikat gigi?<br>
+      Bayangkan jika kita tidak memiliki gigi.<br>
+      Kita hanya bisa makan makanan lunak saja, makanan yang tidak perlu digigit atau dikunyah.<br>
+      Oleh karena itu, kita harus merawat gigi.<br>
+      Faktanya, gigi kita terdiri dari banyak lapisan, lho.<br><br>
+
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/88656_15516356e68bbe52dac1a8ecf041009d.png" 
+           alt="Menyikat Gigi" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br><br>
+
+      Bayangkan jika kita tidak menyikat gigi!<br>
+      Bakteri jahat suka memakan sisa gula, misalnya sisa kue, keripik, roti, permen, dan makanan lainnya.<br>
+      Bakteri tersebut melepaskan asam yang membuat gigi kita berlubang.<br>
+      Mengerikan, ya!<br><br>
+
+      Yuk, rajin menyikat gigi sebelum tidur.<br>
+      Jangan lupa juga menyikat gigi setelah bangun tidur.<br><br>
+
+      <b>Question:</b> Apa penyebab gigi berlubang?
+    </div>
+  `,
+  "options": [
+    "Rusaknya enamel pada gigi.",
+    "Enamel gigi tidak sekuat tulang.",
+    "Pembuluh darah dan saraf sensitif.",
+    "Bakteri melepaskan zat asam pada gigi."
+  ],
+  "correct": 3
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <div style="text-align: justify;">
+      <h3 style="text-align:center; font-weight:bold;">Kenapa Kita Tidak Boleh Malas Menyikat Gigi?</h3>
+      Apakah kamu sering lupa menyikat gigi sebelum tidur?<br>
+      Kenapa kita tidak boleh malas menyikat gigi?<br>
+      Bayangkan jika kita tidak memiliki gigi.<br>
+      Kita hanya bisa makan makanan lunak saja, makanan yang tidak perlu digigit atau dikunyah.<br>
+      Oleh karena itu, kita harus merawat gigi.<br>
+      Faktanya, gigi kita terdiri dari banyak lapisan, lho.<br><br>
+
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/88656_15516356e68bbe52dac1a8ecf041009d.png" 
+           alt="Menyikat Gigi" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br><br>
+
+      Bayangkan jika kita tidak menyikat gigi!<br>
+      Bakteri jahat suka memakan sisa gula, misalnya sisa kue, keripik, roti, permen, dan makanan lainnya.<br>
+      Bakteri tersebut melepaskan asam yang membuat gigi kita berlubang.<br>
+      Mengerikan, ya!<br><br>
+
+      Yuk, rajin menyikat gigi sebelum tidur.<br>
+      Jangan lupa juga menyikat gigi setelah bangun tidur.<br><br>
+
+      <b>Question:</b> Apa yang terjadi pada gigi jika tidak dirawat dengan baik? 
+      <i>Pilih semua jawaban yang benar!</i>
+    </div>
+  `,
+  "options": [
+    "Gigi akan menjadi rusak dan bolong.",
+    "Gigi akan mengunyah makanan lebih lama.",
+    "Gigi akan ditumbuhi oleh bakteri sisa makanan."
+  ],
+  "correct": [0, 2]
+},
+
+
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  if (q.type === 'tepat_tidak') return Array(q.statements.length).fill(null);
+if (q.type === 'mendukung_tidak') return Array(q.statements.length).fill(null);
+  if (q.type === 'dampak_jangka') return Array(q.statements.length).fill(null);
+  return null;
+});
+
+
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3>${q.text}`;
+
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+else if (q.type === 'mendukung_tidak') {
+  html += `<table class="true-false">
+    <tr>
+      <th>Pernyataan</th>
+      <th>Mendukung</th>
+      <th>Tidak Mendukung</th>
+    </tr>`;
+
+  q.statements.forEach((stmt, i) => {
+    const mendukungChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td><input type="radio" name="mt_${i}" value="true" ${mendukungChecked}></td>
+      <td><input type="radio" name="mt_${i}" value="false" ${tidakChecked}></td>
+    </tr>`;
+  });
+
+  html += `</table>`;
+}
+
+else if (q.type === 'tepat_tidak') {
+  html += `<table class="true-false">
+    <tr>
+      <th>Pernyataan</th>
+      <th>Tepat</th>
+      <th>Tidak Tepat</th>
+    </tr>`;
+
+  q.statements.forEach((stmt, i) => {
+    const tepatChecked = answers[index][i] === true ? 'checked' : '';
+    const tidakChecked = answers[index][i] === false ? 'checked' : '';
+
+    html += `
+    <tr>
+      <td style="text-align:left;">${stmt}</td>
+      <td>
+        <input type="radio" name="tt_${i}" value="true" ${tepatChecked}>
+      </td>
+      <td>
+        <input type="radio" name="tt_${i}" value="false" ${tidakChecked}>
+      </td>
+    </tr>`;
+  });
+
+  html += `</table>`;
+}
+else if (q.type === 'dampak_jangka') {
+  html += `
+    <table class="true-false">
+      <tr>
+        <th>Pernyataan</th>
+        <th>Jangka Pendek</th>
+        <th>Jangka Panjang</th>
+      </tr>
+  `;
+
+  q.statements.forEach((stmt, i) => {
+    const pendekChecked = answers[index][i] === 'pendek' ? 'checked' : '';
+    const panjangChecked = answers[index][i] === 'panjang' ? 'checked' : '';
+
+    html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td>
+          <input type="radio" name="dj_${i}" value="pendek" ${pendekChecked}>
+        </td>
+        <td>
+          <input type="radio" name="dj_${i}" value="panjang" ${panjangChecked}>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += `</table>`;
+}
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+// ===== Event listener MC multiple =====
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    if (!Array.isArray(answers[index])) answers[index] = [];
+    checkboxes.forEach((checkbox, i) => {
+      checkbox.addEventListener('change', e => {
+        if (e.target.checked) {
+          if (!answers[index].includes(i)) answers[index].push(i);
+        } else {
+          answers[index] = answers[index].filter(v => v !== i);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe tepat_tidak
+if (q.type === 'tepat_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="tt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+// Event listener dampak_jangka
+if (q.type === 'dampak_jangka') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="dj_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = e.target.value;
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+if (q.type === 'mendukung_tidak') {
+  q.statements.forEach((_, i) => {
+    document.querySelectorAll(`input[name="mt_${i}"]`).forEach(radio => {
+      radio.addEventListener('change', e => {
+        answers[index][i] = (e.target.value === 'true');
+        renderQuestionButtons();
+      });
+    });
+  });
+}
+
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'dampak_jangka' && arraysEqual(answers[i], q.correct)) score++;
+else if (q.type === 'mendukung_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual([...answers[i]].sort(), [...q.correct].sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  const percentage = Math.round((score / questions.length) * 100);
+
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+
+// 🔥 KIRIM KE FIREBASE
+  simpanHasilFirebase(percentage);
+}
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+// Tampilkan tombol Kembali setelah submit
+const backBtn = document.createElement('button');
+backBtn.textContent = "Kembali ke Beranda";
+backBtn.style.padding = "10px 18px";
+backBtn.style.marginTop = "10px";
+backBtn.style.backgroundColor = "#1e88e5";
+backBtn.style.color = "white";
+backBtn.style.border = "none";
+backBtn.style.borderRadius = "6px";
+backBtn.style.fontWeight = "bold";
+backBtn.style.cursor = "pointer";
+backBtn.addEventListener('click', () => {
+    window.location.href = "https://kebunilmu.github.io/Kebun-Ilmu-TKA/";
+});
+document.querySelector('.right-panel .navigation').appendChild(backBtn);
+
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  timerRunning = true; // pastikan timer aktif
+
+  const interval = setInterval(() => {
+    if (!timerRunning) { 
+      clearInterval(interval); 
+      return; 
+    }
+
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+    if (timer <= 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+
+    timer--;
+  }, 1000);
+}
+
+
+// Auto submit saat keluar fullscreen
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement && timerRunning) {
+    alert("Anda keluar dari fullscreen. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah tab/window (desktop)
+window.addEventListener("blur", () => {
+  if (timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah app / tab (HP)
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// cek session saat halaman dimuat
+checkSession();
+
+  </script>
+<!-- FIREBASE SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
+    authDomain: "tryout-kebun-ilmu.firebaseapp.com",
+    projectId: "tryout-kebun-ilmu",
+    storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
+    messagingSenderId: "497636674894",
+    appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // supaya bisa dipakai di script lain
+  window.db = db;
+
+  // 🔥 INI YANG PALING PENTING
+  window.simpanHasilFirebase = async function (nilai) {
+    const { addDoc, collection, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+    );
+
+    await addDoc(collection(window.db, "hasil_ujian"), {
+  nik: window.dataPeserta.nik,
+  nama: window.dataPeserta.nama,
+  jk: window.dataPeserta.jk,
+  tglLahir: window.dataPeserta.tgl,
+  sekolah: window.dataPeserta.sekolah,
+  mapel: "Bahasa Indonesia SD/MI 2", // tambah field mapel
+  nilai: nilai,
+  waktu: new Date().toISOString()
+});
+
+
+    console.log("✅ HASIL UJIAN TERSIMPAN");
+  };
+</script>
+
+</body>
+</html>
