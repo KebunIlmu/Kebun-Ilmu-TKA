@@ -432,7 +432,7 @@ function getTokenSekarang() {
   const menit = now.getMinutes();
 
   // batas waktu
-  if (jam < 7 || jam >= 24) return null;
+  if (jam < 7 || jam >= 22) return null;
 
   // slot 10 menit (0–5)
   const slot = Math.floor(menit / 10);
@@ -682,25 +682,31 @@ function showContent() {
   "correct": [0, 2]
 },
 {
-  "type": "mc_multiple",
-  "text": `
+  type: "mc",
+  text: `
     <div style="text-align: justify;">
-      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/28576_f0a5be5eb4cb47cada144fca8e7f9048.png" alt="Magnet Kulkas Mainan Hewan" style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:12px;"><br>
-      <small>
-        Sumber: https://www.idntimes.com/life/diy/5-ide-diy-magnet-kulkas-unik-dan-mudah-dibuat-01-rqg9b-txx8zf
-        (dengan penyesuaian)
-      </small><br><br>
+      <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/28576_f0a5be5eb4cb47cada144fca8e7f9048.png" 
+           alt="Magnet Kulkas Mainan Hewan" 
+           style="display:block; margin:0 auto 15px auto; max-width:100%; border-radius:10px;">
 
-      <b>Question:</b> Langkah kedua mendukung tujuan utama teks karena ….<br>
-      <i>Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.</i>
+      <p>
+        Sumber: 
+        <a href="https://www.idntimes.com/life/diy/5-ide-diy-magnet-kulkas-unik-dan-mudah-dibuat-01-rqg9b-txx8zf" target="_blank">
+          idntimes.com
+        </a> (dengan penyesuaian)
+      </p>
+
+      <br>
+      <b>Question:</b> Mengapa mainan hewan dibagi menjadi dua bagian?
     </div>
   `,
-  "options": [
-    "Membuat permukaan mainan tertutup rapi",
-    "Memudahkan anak mewarnai mainan hewan",
-    "Menutup lubang agar magnet bisa menempel"
+  options: [
+    "Supaya ukuran mainan lebih besar dan menarik.",
+    "Agar mainan bisa menempel di permukaan kulkas.",
+    "Karena mainan perlu diwarnai menggunakan cat semprot.",
+    "Untuk memudahkan pemberian lem tembak pada mainan."
   ],
-  "correct": [0, 2]
+  correct: 1
 },
 {
   "type": "mc",
@@ -780,7 +786,7 @@ function showContent() {
     "Doni bermain ke rumah Rio. Doni membantu Rio menilai topi barunya. Topi itu sangat bagus. Doni ingin ikut membeli topi yang sama.",
     "Rio datang ke rumah Doni. Rio ingin memperlihatkan topi barunya. Topi itu dibeli bersama ayahnya di toko topi. Terdapat stiker logo klub di topi itu."
   ],
-  "correct": 2
+  "correct": 1
 },
 {
   "type": "true_false",
