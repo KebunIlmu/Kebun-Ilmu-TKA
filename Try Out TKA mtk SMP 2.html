@@ -505,9 +505,9 @@ if (token !== tokenAktif) {
 // ====== DATA AKUN + KADALUWARSA ======
 const accounts = [
   { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
-  { username: "MANU9",  password: "2026",  expire: "2026-4-11T23:59:59" },
+  { username: "MANU9",  password: "2026",  expire: "2026-04-11T23:59:59" },
   { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
-  { username: "MTSMH",  password: "2026", expire: "2026-7-30T23:59:59" },
+  { username: "MTSMH",  password: "2026", expire: "2026-07-30T23:59:59" },
   { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
   { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
 ];
@@ -860,6 +860,141 @@ function showContent() {
     "Peluang terambil bola bernomor bilangan prima adalah \\(\\frac{1}{3}\\)."
   ],
   "correct": [true, false, false]
+},
+{
+  "type": "mc",
+  "text": `
+    <h3 style="text-align:center; font-weight:bold;">Proyek Renovasi Gedung</h3>
+    <p>
+      Proyek renovasi suatu gedung sekolah harus diselesaikan paling lambat dalam waktu 60 hari sesuai kontrak.
+      Manajer proyek telah menghitung kebutuhan tenaga kerja dengan asumsi setiap pegawai memiliki kemampuan dan
+      produktivitas yang sama setiap harinya. Kemajuan proyek sangat tergantung pada jumlah pegawai; semakin banyak
+      pegawai yang bekerja, maka waktu pengerjaan akan semakin singkat.
+    </p>
+    <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/20223_281b35db564db5dfd13926f24bda9b72.png"
+        style="max-width:100%; height:auto; display:block; margin:12px auto;">
+    <p>
+      Berdasarkan perencanaan awal, renovasi gedung dapat diselesaikan oleh 12 pegawai dalam waktu 60 hari.
+      Jika manajer memutuskan untuk menambah jumlah pegawai menjadi 18 orang, maka waktu yang diperlukan untuk
+      menyelesaikan renovasi tersebut adalah …
+    </p>
+  `,
+  "options": [
+    "30 hari",
+    "40 hari",
+    "45 hari",
+    "90 hari"
+  ],
+  "correct": 1
+},
+{
+  "type": "true_false",
+  "text": `
+    <p>Sebuah taman kota berbentuk persegi panjang memiliki kolam berbentuk lingkaran yang terletak tepat di tengah-tengah taman, seperti terlihat pada gambar berikut:</p>
+    <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/41754_3e96bd988e2925fcd379670962febda5.png"
+         style="max-width:100%; height:auto; display:block; margin:12px auto;">
+    <p>Area taman lainnya (warna hijau pada gambar) akan ditanami rumput.</p>
+    <p>
+      Tentukan <b>Benar</b> atau <b>Salah</b> untuk setiap pernyataan berikut tentang luas area kolam
+      dan area yang ditanami rumput! (Gunakan \\(\\pi = \\frac{22}{7}\\))
+    </p>
+  `,
+  "statements": [
+    "Selisih antara luas taman dan luas kolam lebih dari 240 m².",
+    "Jika diameter kolam ditambah 1 m, luas kolam bertambah lebih dari 7 m².",
+    "Luas daerah yang ditanami rumput kurang dari 240 m²."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc",
+  "text": `
+    <p>
+      Sebuah usaha rumahan akan mengemas produk makanan menggunakan kemasan berbentuk
+      <b>prisma segitiga</b> yang dibuat dari karton. Setiap kemasan dibuat dari
+      satu jaring-jaring utuh.
+    </p>
+    <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/58237_497c00b98cd1c1ad2e0cda8697b0650b.png"
+        style="max-width:100%; height:auto; display:block; margin:12px auto;">
+    <p>
+      Karton yang tersedia untuk produksi hari itu memiliki ukuran
+      \\(50\\,\\text{cm} \\times 100\\,\\text{cm}\\).
+    </p>
+    <p>
+      Pemotongan karton dilakukan dengan rapi dan memperhatikan tata letak.
+      Jaring-jaring kemasan dibuat dengan kertas yang saling terhubung dan
+      bukan menggabungkan hasil potongan lain.
+    </p>
+    <p>
+      Banyak kemasan maksimum yang dapat dibuat adalah …
+    </p>
+  `,
+  "options": [
+    "4 kemasan",
+    "8 kemasan",
+    "9 kemasan",
+    "14 kemasan"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `
+    <p>Perhatikan posisi robot pembersih pada gambar berikut:</p>
+    <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/42272_51f00489b5aab38bdb3611652829e692.png"
+         style="max-width:100%; height:auto; display:block; margin:12px auto;">
+    <p>
+      Robot tersebut akan bergerak mengikuti translasi
+      \\(T(4, -2)\\).
+    </p>
+    <p>
+      Posisi robot setelah berpindah sesuai translasi tersebut adalah …
+    </p>
+  `,
+  "options": [
+    "titik A",
+    "titik B",
+    "titik C",
+    "titik D"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `
+    <p>
+      Dalam pembangunan sebuah monumen peringatan, kontraktor menggunakan bata ringan
+      untuk menyusun <b>bagian luar</b> monumen.
+    </p>
+    <p>Desain monumen ditunjukkan pada gambar berikut:</p>
+    <img src="https://pusmendik.kemdikbud.go.id/tka/cbt_images/75607_af88cccde0a1550f0d319003e64823e6.png"
+         style="max-width:100%; height:auto; display:block; margin:12px auto;">
+
+    <p>Monumen terdiri atas:</p>
+    <ul>
+      <li>Balok dengan alas \\(6\\,\\text{m} \\times 6\\,\\text{m}\\) dan tinggi \\(5\\,\\text{m}\\)</li>
+      <li>Limas segiempat di atasnya dengan alas sama dan tinggi \\(3\\,\\text{m}\\)</li>
+    </ul>
+
+    <p>
+      Bagian yang ditutup bata ringan hanya bagian luar monumen.
+      Alas bawah dan bidang pertemuan balok dan limas tidak dihitung.
+    </p>
+    <p>
+      Luas tampak satu buah bata ringan adalah
+      \\(0{,}01\\,\\text{m}^2\\).
+    </p>
+    <p>
+      Berapakah jumlah <b>minimal</b> bata ringan yang diperlukan untuk membangun monumen tersebut?
+    </p>
+  `,
+  "options": [
+    "16.800 buah",
+    "18.000 buah",
+    "19.200 buah",
+    "21.600 buah"
+  ],
+  "correct": 1
 }
 
 
