@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Try Out TKA Matematika - Kebun Ilmu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e88e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .menu-button, .timer {
+      background: white;
+      color: #1e88e5;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: default;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .left-panel {
+      width: 25%;
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-right: 1px solid #cfd8dc;
+      overflow-y: auto;
+    }
+
+    .right-panel {
+      width: 75%;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .question-buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .question-buttons button {
+      padding: 6px;
+      font-size: 13px;
+      background-color: white;
+      border: 1.5px solid #1e88e5;
+      border-radius: 6px;
+      color: #1e88e5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .question-buttons button:hover {
+      background-color: #bbdefb;
+    }
+
+    .question-buttons button.active {
+      background-color: #1565c0;
+      color: white;
+    }
+
+    .navigation {
+      margin-top: 30px;
+    }
+
+    .navigation button {
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .option {
+      display: block;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border: 1.5px solid #90caf9;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background-color: #e3f2fd;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    #scoreDisplay {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e88e5;
+      display: none;
+    }
+
+    #submitBtn {
+      padding: 10px 18px;
+      margin-top: 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #submitBtn:hover {
+      background-color: #388e3c;
+    }
+ /* tambahan style untuk tabel benar salah */
+    /* ===== Modern Friendly True-False Table ===== */
+table.true-false {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Header */
+table.true-false thead th {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  color: #0d47a1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #90caf9;
+}
+
+/* Sel isi */
+table.true-false td {
+  border-bottom: 1px solid #e3f2fd;
+  padding: 10px 12px;
+  text-align: center;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+/* Kolom pertama (pernyataan) */
+table.true-false td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Efek hover tiap baris */
+table.true-false tbody tr:hover {
+  background-color: #f7fbff;
+}
+
+/* Radio button modern */
+table.true-false input[type="radio"] {
+  transform: scale(1.2);
+  accent-color: #1e88e5; /* biru modern */
+  cursor: pointer;
+}
+
+/* Efek baris yang dipilih */
+table.true-false tr:has(input[type="radio"]:checked) {
+  background-color: #eaf3ff;
+  transition: background-color 0.2s ease;
+}
+/* Login Box */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3f2fd;
+}
+.login-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  text-align: center;
+}
+.login-box h2 {
+  color: #1565c0;
+  margin-bottom: 20px;
+}
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1.5px solid #90caf9;
+  border-radius: 6px;
+}
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#errorMsg {
+  color: red;
+  margin-top: 10px;
+}
+.hidden { display: none; }
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 768px) {
+* {
+  box-sizing: border-box;
+}
+  header {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  header h2 {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .menu-button, .timer {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+.container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #cfd8dc;
+  }
+
+  .right-panel {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .question-buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+#questionDisplay {
+    font-size: 14px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+.fullscreen-mode header {
+    padding: 6px 10px;
+    min-height: unset;
+  }
+
+  .fullscreen-mode header h2 {
+    font-size: 13px;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .fullscreen-mode .menu-button,
+  .fullscreen-mode .timer {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+  
+</style>
+</head>
+
+<body>
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginForm">
+  <div class="login-box">
+    <h2>Login Try Out</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Masuk</button>
+    <p id="errorMsg"></p>
+  </div>
+</div>
+<div id="pesertaForm" class="hidden" style="justify-content:center; align-items:center; height:100vh; background-color:#f4f9ff; padding:20px; box-sizing:border-box;">
+  <div style="background:white; padding:24px 20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:100%; max-width:400px;">
+
+    <h2 style="margin-bottom:14px; color:#1E88E5; text-align:center;">Data Peserta</h2>
+
+    <!-- NIK -->
+    <label for="nik" style="font-weight:600; display:block; margin-bottom:3px;">NIK</label>
+    <input id="nik" placeholder="Masukkan NIK"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Nama Peserta -->
+    <label for="namaPeserta" style="font-weight:600; display:block; margin-bottom:3px;">Nama Peserta</label>
+    <input id="namaPeserta" placeholder="Masukkan nama lengkap"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Jenis Kelamin -->
+    <label for="jk" style="font-weight:600; display:block; margin-bottom:3px;">Jenis Kelamin</label>
+    <select id="jk"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+      <option value="">-- Pilih Jenis Kelamin --</option>
+      <option value="L">Laki-laki</option>
+      <option value="P">Perempuan</option>
+    </select>
+
+    <!-- Tanggal Lahir -->
+    <label for="tglLahir" style="font-weight:600; display:block; margin-bottom:3px;">Tanggal Lahir</label>
+    <input id="tglLahir" type="date"
+      style="width:100%; padding:8px 10px; margin-bottom:8px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <!-- Sekolah -->
+<label for="sekolah" style="font-weight:600; display:block; margin-bottom:3px;">
+  Nama Sekolah
+</label>
+<select id="sekolah" required
+  style="width:100%; padding:8px 10px; margin-bottom:8px;
+         border:1.5px solid #90CAF9; border-radius:6px;
+         font-size:15px; box-sizing:border-box;">
+  <option value="">-- Pilih Sekolah --</option>
+  <option value="MI RAUDLATUL ISLAM KETANGGUNGAN">
+    MI RAUDLATUL ISLAM KETANGGUNGAN
+  </option>
+  <option value="lainnya">
+    lainnya
+  </option>
+</select>
+
+
+    <!-- Token -->
+    <label for="tokenUjian" style="font-weight:600; display:block; margin-bottom:3px;">Token Ujian</label>
+    <input id="tokenUjian" placeholder="Masukkan token ujian"
+      style="width:100%; padding:8px 10px; margin-bottom:14px; border:1.5px solid #90CAF9; border-radius:6px; font-size:15px; box-sizing:border-box;">
+
+    <button onclick="mulaiUjian()"
+      style="width:100%; padding:10px; background-color:#1E88E5; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:15px;"
+      onmouseover="this.style.backgroundColor='#1565C0';" 
+      onmouseout="this.style.backgroundColor='#1E88E5';">
+      Mulai Ujian
+    </button>
+
+    <p id="errorPeserta" style="margin-top:8px; font-size:13px; color:red; text-align:center;"></p>
+
+  </div>
+</div>
+
+<!-- ====== TRYOUT CONTENT ====== -->
+<div id="content22" class="hidden">
+<header>
+  <h2>Try Out TKA Matematika SD/MI - Kebun Ilmu</h2>
+  <div>
+        <span class="timer" id="timer">60:00</span>
+  </div>
+</header>
+
+<div class="container">
+  <div class="left-panel">
+    <h3>Soal</h3>
+    <div class="question-buttons" id="questionButtons"></div>
+    <div id="scoreDisplay"></div>
+  </div>
+
+  <div class="right-panel">
+    <div id="questionDisplay"></div>
+    <div class="navigation">
+      <button id="prevBtn">Sebelumnya</button>
+      <button id="nextBtn">Selanjutnya</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+function getTokenSekarang() {
+  const now = new Date();
+  const jam = now.getHours();
+  const menit = now.getMinutes();
+
+  // batas waktu
+  if (jam < 7 || jam >= 22) return null;
+
+  // slot 10 menit (0–5)
+  const slot = Math.floor(menit / 10);
+
+  // ===== DEPAN ACAK TERKONTROL =====
+  const seed = jam * 100 + slot;   // angka unik tiap 10 menit
+  const depan = String.fromCharCode(65 + (seed * 7) % 26); // A–Z
+
+  // token akhir
+  return `${depan}${jam.toString().padStart(2,'0')}${slot}`;
+}
+function mulaiUjian() {
+  const nik = document.getElementById("nik").value.trim();
+  const nama = document.getElementById("namaPeserta").value.trim();
+  const jk = document.getElementById("jk").value;
+  const tgl = document.getElementById("tglLahir").value;
+  const sekolah = document.getElementById("sekolah").value.trim();
+  const token = document.getElementById("tokenUjian").value.trim();
+
+  if (!nik || !nama || !jk || !tgl || !sekolah || !token) {
+    document.getElementById("errorPeserta").innerText = "❌ Semua data wajib diisi";
+    return;
+  }
+
+  const tokenAktif = getTokenSekarang();
+
+if (!tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    "⏰ Ujian hanya bisa diakses pukul 07.00 – 17.00";
+  return;
+}
+
+if (token !== tokenAktif) {
+  document.getElementById("errorPeserta").innerText =
+    `❌ Token salah. Tanya admin`;
+  return;
+}
+
+
+  // simpan data peserta sementara
+  window.dataPeserta = { nik, nama, jk, tgl, sekolah, token };
+
+ questions = shuffleArray(questions);
+  answers = questions.map(q => {
+    if (q.type === 'mc_multiple') return [];
+    if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+    return null;
+  });
+  currentQuestion = 0;
+
+  // sembunyikan form peserta dan tampilkan konten try out
+  document.getElementById("pesertaForm").style.display = "none";
+  document.getElementById("content22").classList.remove("hidden");
+
+  // 🔥 Render soal dan start timer
+  renderQuestionButtons();
+  renderQuestion(currentQuestion);
+  startTimer(60 * 60);
+
+  // AUTO FULLSCREEN
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.warn("Fullscreen gagal:", err);
+    });
+  }
+}
+
+// ====== DATA AKUN + KADALUWARSA ======
+const accounts = [
+  { username: "zahwan", password: "132611", expire: "3000-08-24T23:59:59" },
+  { username: "MANU9",  password: "2026",  expire: "2026-4-11T23:59:59" },
+  { username: "Kebunilmu", password: "2026", expire: "2026-10-30T23:59:59" },
+  { username: "MRI",  password: "2026", expire: "2026-07-30T23:59:59" },
+  { username: "nisa",   password: "nis223", expire: "2025-10-30T23:59:59" },
+  { username: "faiq",   password: "fa3456", expire: "2025-10-38T23:59:59" },
+];
+
+// ====== LOGIN FUNCTION ======
+function checkLogin() {
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
+
+  const found = accounts.find(acc => acc.username === user && acc.password === pass);
+  const errorMsg = document.getElementById("errorMsg");
+
+  if (!found) {
+    errorMsg.innerText = "❌ Username atau password salah!";
+    return;
+  }
+
+  const now = new Date();
+  const expireDate = new Date(found.expire);
+
+  if (now > expireDate) {
+    errorMsg.innerText = `⚠️ Akun ${user} sudah kadaluwarsa!`;
+    return;
+  }
+
+  localStorage.setItem('loggedInUser', JSON.stringify({ username: user }));
+  showContent();
+}
+
+// ====== CEK SESSION SAAT HALAMAN DIMUAT ======
+function checkSession() {
+  const data = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+  if (!data) return;
+  const acc = accounts.find(a => a.username === data.username);
+  if (!acc || new Date() > new Date(acc.expire)) {
+    localStorage.removeItem('loggedInUser');
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("content22").classList.add("hidden");
+    return;
+  }
+  showContent();
+}
+
+// ====== TAMPILKAN KONTEN DAN MULAI TRY OUT ======
+function showContent() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("pesertaForm").style.display = "flex";
+  
+}
+
+  let questions = [
+{
+  "type": "mc",
+  "text": "Hasil dari \\((120\\% - \\frac{1}{5}) \\times \\frac{3}{2} - 0,75\\) adalah …",
+  "options": [
+    "1",
+    "\\(\\frac{5}{4}\\)",
+    "\\(\\frac{3}{4}\\)",
+    "\\(\\frac{1}{2}\\)"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": "Dalam rangka promosi pembukaan cabang baru, Toko Alat Tulis Pintar memberikan diskon \\(20\\%\\) untuk semua barang. Diketahui harga penghapus adalah \\(\\frac{2}{3}\\) dari harga pulpen, sedangkan harga pensil adalah \\(0,5\\) kali harga pulpen. Harga pulpen sebelum diskon adalah Rp30.000,00. Jumlah harga penghapus dan pensil setelah dikenakan diskon adalah …",
+  "options": [
+    "Rp24.000,00",
+    "Rp28.000,00",
+    "Rp32.000,00",
+    "Rp36.000,00"
+  ],
+  "correct": 1
+},
+{
+  "type": "true_false",
+  "text": `
+    Pak Andi adalah seorang penjual susu kedelai. Suatu hari, Pak Andi memproduksi susu kedelai sebanyak
+    6 wadah, yang masing-masing berisi \\(4 \\frac{1}{2}\\) liter susu kedelai. Seluruh hasil produksi tersebut
+    akan dituangkan ke dalam 24 botol besar dengan isi yang sama banyak dan 12 botol kecil, dengan isi
+    setiap botol kecil adalah \\( \\frac{1}{2} \\) dari isi botol besar.<br><br>
+    Berdasarkan informasi tersebut, tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!
+  `,
+  "statements": [
+    "Pada hari itu Pak Andi memproduksi \\(27\\) liter susu kedelai.",
+    "Setiap botol besar diisi susu kedelai sebanyak \\( \\frac{3}{4} \\) liter.",
+    "Total susu kedelai yang dikemas dalam botol kecil adalah \\(4 \\frac{1}{2}\\) liter."
+  ],
+  "correct": [true, false, false]
+},
+{
+  "type": "mc",
+  "text": `Ani melempar sebuah kubus yang memiliki enam sisi yang masing-masing bertuliskan angka 1 sampai 6. Aturan pada kubus tersebut adalah jumlah angka pada dua sisi yang saling berhadapan selalu sama.<br><br><img src= "https://i.imgur.com/usykBX1.png" alt= "Kubus bernomor " style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;"><br><br>Jika angka yang tampak di sisi atas adalah 5, maka angka pada sisi bawah kubus tersebut adalah ….`,
+  "options": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "correct": 1
+},
+
+{
+  "type": "mc_multiple",
+  "text": `
+    Dalam rangka kegiatan peduli lingkungan, siswa SD Nusantara membagikan paket konsumsi
+    kepada para peserta. Setiap paket berisi 2,5 kg tepung terigu, 3 bungkus kacang hijau
+    dengan berat masing-masing 250 g, dan 4 botol minuman dengan isi setiap botol 330 ml.<br><br>
+    Pilihlah pernyataan yang benar! (Jawaban benar lebih dari satu)
+  `,
+  "options": [
+    "Total berat tepung terigu dan kacang hijau dalam satu paket adalah \\(3.250\\) gram.",
+    "Total berat kacang hijau dalam satu paket adalah \\(0{,}75\\) kilogram.",
+    "Total isi minuman dalam satu paket lebih dari \\(1{,}5\\) liter."
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "true_false",
+  "text": `
+    SD Nusantara mengadakan program Gerakan Literasi Sekolah. Setiap hari, petugas perpustakaan
+    mencatat jumlah siswa yang berkunjung ke perpustakaan selama lima hari berturut-turut.
+    Diagram berikut menunjukkan jumlah siswa yang berkunjung ke perpustakaan SD Nusantara
+    dari hari Senin sampai Jumat.<br><br>
+    <img src="https://i.imgur.com/VjGUBph.png" alt="Diagram Pengunjung Perpustakaan SD Nusantara" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;"><br><br>
+    Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!
+  `,
+  "statements": [
+    "Jumlah siswa yang berkunjung ke perpustakaan pada hari Selasa lebih sedikit daripada hari Kamis.",
+    "Total siswa yang berkunjung ke perpustakaan SD Nusantara selama lima hari adalah 100 siswa.",
+    "Jumlah pengunjung perpustakaan setiap hari selalu bertambah dibandingkan hari sebelumnya."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "true_false",
+  "text": `
+    SD Nusantara mengadakan program Gemar Membaca di Rumah. Selama satu minggu, beberapa siswa
+    diminta mencatat jumlah buku cerita yang mereka baca. Data tersebut disajikan dalam bentuk
+    piktogram seperti pada gambar berikut.<br><br>
+    <img src="https://i.imgur.com/lDlcR11.jpeg" alt="Piktogram Buku yang Dibaca Siswa" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;"><br><br>
+    Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!
+  `,
+  "statements": [
+    "Rani membaca 8 buku selama satu minggu.",
+    "Jumlah buku yang dibaca Budi lebih sedikit daripada Rani.",
+    "Sinta membaca 6 buku."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc",
+  "text": "<p>Pak Joko memiliki sebuah kebun seluas <b>3,6 hektar</b>. Dari kebun tersebut, <b>\\( \\frac{1}{6} \\)</b> bagian ditanami jagung, <b>\\( \\frac{1}{4} \\)</b> bagian ditanami kacang tanah, dan sisanya ditanami singkong.</p><br><br>Berapakah luas kebun yang ditanami <b>kacang tanah dan singkong</b>?",
+  "options": [
+    "1,8 hektar",
+    "2,1 hektar",
+    "2,7 hektar",
+    "3,0 hektar"
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": "<p>Sebuah <b>akuarium berbentuk balok</b> memiliki volume <b>9 m<sup>3</sup></b>. Akuarium tersebut akan diganti dengan akuarium baru.</p><p>Panjang akuarium baru menjadi <b>2 kali</b> panjang semula, lebarnya menjadi <b>\\( \\frac{1}{2} \\)</b> dari lebar semula, dan tingginya <b>tetap sama</b> seperti sebelumnya.</p><br>Volume akuarium yang baru adalah …",
+  "options": [
+    "4,5 m<sup>3</sup>",
+    "9 m<sup>3</sup>",
+    "18 m<sup>3</sup>",
+    "22,5 m<sup>3</sup>"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": "<p>Ibu Sari bersama anaknya berangkat dari <b>Kota Bandung</b> menuju <b>Kota Cirebon</b> untuk menghadiri acara keluarga.</p><p>Jarak Bandung–Cirebon adalah <b>120 km</b>. Mereka menggunakan mobil dengan kecepatan rata-rata <b>60 km/jam</b> dan berangkat pukul <b>07.30</b>.</p><p>Di tengah perjalanan, mereka berhenti selama <b>20 menit</b> untuk beristirahat.</p><br>Pukul berapakah Ibu Sari dan anaknya tiba di Cirebon?",
+  "options": [
+    "09.30",
+    "09.50",
+    "10.00",
+    "10.20"
+  ],
+  "correct": 1
+},
+{
+  "type": "true_false",
+  "text": `
+    <p>Rafi memiliki hari ulang tahun setiap tanggal <b>5 Agustus</b>. Tahun ini, Rafi akan berusia <b>15 tahun</b>.</p>
+    <p>Sekarang tanggal <b>10 Juni</b>.</p><br>
+    Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!
+  `,
+  "statements": [
+    "Rafi harus menunggu 56 hari lagi untuk merayakan ulang tahunnya.",
+    "Rafi harus menunggu 8 minggu untuk merayakan ulang tahunnya.",
+    "Rafi harus menunggu kurang dari dua bulan untuk merayakan ulang tahunnya."
+  ],
+  "correct": [true, true, true]
+},
+{
+  "type": "mc",
+  "text": "<p>Pak Andi membeli <b>2,8 kg ikan</b> di tempat pelelangan.</p><p>Di dalam kantong belanjaannya terdapat <b>2 ekor ikan kakap</b> dengan berat total <b>1,4 kg</b>, sedangkan sisanya adalah <b>7 ekor ikan kembung</b> dengan berat yang sama.</p><br>Berat satu ekor ikan kembung adalah ….",
+  "options": [
+    "0,15 kg",
+    "0,20 kg",
+    "0,25 kg",
+    "0,30 kg"
+  ],
+  "correct": 1
+},
+{
+  "type": "true_false",
+  "text": `
+    <p>Seorang <b>penjual minuman</b> memiliki sebuah <b>galon besar</b> berisi sirup sebanyak
+    <b>1,2 hektoliter</b>.</p>
+    <p>Sirup tersebut akan dituangkan ke dalam <b>botol-botol kecil</b> yang masing-masing
+    dapat menampung <b>30 liter</b> sirup.</p><br>
+    Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!
+  `,
+  "statements": [
+    "Volume sirup di dalam galon adalah 120 liter.",
+    "Galon tersebut dapat mengisi botol kecil sebanyak 4 botol hingga habis.",
+    "Jika satu botol digunakan untuk satu acara, maka penggunaan 2 botol akan mengurangi volume sirup menjadi setengah dari volume awal."
+  ],
+  "correct": [true, true, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <p>Pak Rudi ingin membuat <b>sebuah tembok kecil</b> menggunakan <b>batu bata mini berbentuk balok</b>.</p>
+    <p>Setiap batu bata memiliki ukuran <b>10 cm × 5 cm × 2 cm</b>. Untuk satu bagian tembok,
+    Pak Rudi membutuhkan <b>64 batu bata</b>. Sebelum disusun menjadi tembok, batu bata tersebut
+    akan dimasukkan ke dalam sebuah <b>peti penyimpanan</b>. Di gudang, tersedia beberapa peti
+    dengan ukuran sebagai berikut:</p><br>
+    Pilihlah peti yang dapat menampung seluruh batu bata tersebut!
+    (Jawaban benar lebih dari satu)
+  `,
+  "options": [
+    "Peti berukuran 80 cm × 20 cm × 20 cm",
+    "Peti berukuran 40 cm × 40 cm × 20 cm",
+    "Peti berukuran 60 cm × 30 cm × 10 cm"
+  ],
+  "correct": [0, 1]
+},
+{
+  "type": "true_false",
+  "text": `
+    <p>Dina sedang berkunjung ke <b>taman wisata edukasi</b>. Ia ingin menuju <b>Rumah Kupu-kupu</b>
+    yang berada di bagian timur taman.</p>
+    <p>Setelah melewati gerbang utama, Dina melihat papan petunjuk arah sebagai berikut:</p>
+    <img src="https://i.imgur.com/p5gaih5.png" alt="Papan petunjuk arah taman wisata" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;"><br>
+    Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!
+  `,
+  "statements": [
+    "Jarak menuju Rumah Reptil adalah 4.500 cm.",
+    "Jarak Kolam Burung adalah 0,12 km.",
+    "Jika Dina mengunjungi Perpustakaan Mini lalu menuju Rumah Kupu-kupu, maka Dina harus berjalan sejauh 235 m."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc",
+  "text": "<p>Rani sedang membantu ibunya menyiapkan <b>pita hias</b> untuk dekorasi kelas.</p><p>Ibu memiliki pita dengan panjang <b>350 cm</b>. Pita tersebut akan dipotong menjadi beberapa bagian dengan panjang <b>setiap potongan 18 cm</b>.</p><br>Sisa pita yang tidak terpakai adalah ….",
+  "options": [
+    "6 cm",
+    "8 cm",
+    "14 cm",
+    "26 cm"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": "<p>Tiga klub ekstrakurikuler di sebuah sekolah menggunakan <b>aula yang sama</b> untuk latihan. Jadwal latihan masing-masing klub berbeda-beda: Klub Tari berlatih setiap <b>2 minggu sekali</b>, Klub Paduan Suara berlatih setiap <b>3 minggu sekali</b>, dan Klub Teater berlatih setiap <b>4 minggu sekali</b>. Hari ini ketiga klub tersebut melakukan latihan secara bersamaan.</p><br>Setiap berapa minggu sekali ketiga klub tersebut akan kembali berlatih bersamaan di aula?",
+  "options": [
+    "4 minggu",
+    "6 minggu",
+    "12 minggu",
+    "18 minggu"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": "Diketahui dua bilangan sebagai berikut:<br>\\[a = 6 - \\frac{5}{2}\\]<br>\\[b = \\frac{3}{4} - \\frac{1}{4}\\]<br><br>Nilai dari \\(a - 2b\\) adalah ….",
+  "options": [
+    "1",
+    "1 \\(\\frac{1}{2}\\)",
+    "2",
+    "2 \\(\\frac{1}{4}\\)"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `<p>Seorang anak memesan <b>satu loyang pizza</b>. Pizza tersebut dipotong menjadi <b>12 bagian sama besar</b>. Sebanyak <b>2 potong pizza</b> diberi topping sosis, sedangkan potongan lainnya diberi topping keju.</p><img src= "https://i.imgur.com/4sJeFNB.png" alt= "Pizza 12 bagian" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;"><br>Berapa bagian pizza yang bertopping sosis dari keseluruhan pizza?`,
+  "options": [
+    "\\( \\frac{1}{12} \\)",
+    "\\( \\frac{1}{6} \\)",
+    "\\( \\frac{1}{4} \\)",
+    "\\( \\frac{1}{2} \\)"
+  ],
+  "correct": 1
+},
+{
+  "type": "mc",
+  "text": `<p><b>TAMAN BERBENTUK H</b></p><p>Sebuah taman berbentuk huruf <b>H</b> seperti pada gambar berikut.</p><img src= "https://mathcyber1997.com/wp-content/uploads/2020/11/luaskeliling4-e1606007212910.png" alt= "Taman berbentuk H" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;"><br>Tentukan luas taman tersebut!`,
+  "options": [
+    "48 satuan luas",
+    "56 satuan luas",
+    "62 satuan luas",
+    "80 satuan luas"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": "<p>Dalam rangka kegiatan <b>Gerakan Hidup Sehat</b>, OSIS SMP Harapan membagikan <b>botol minum</b> kepada para siswa kelas VII.</p><p>Jumlah siswa yang ikut kegiatan tersebut adalah:</p><table style=\"width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;\"><tr style=\"background-color:#f2f4f8;\"><th style=\"border:1px solid #ccc; padding:10px;\">Kelas</th><th style=\"border:1px solid #ccc; padding:10px;\">Jumlah Siswa</th></tr><tr><td style=\"border:1px solid #ccc; padding:10px; text-align:center;\">VII A</td><td style=\"border:1px solid #ccc; padding:10px; text-align:center;\"><b>30</b></td></tr><tr style=\"background-color:#fafafa;\"><td style=\"border:1px solid #ccc; padding:10px; text-align:center;\">VII B</td><td style=\"border:1px solid #ccc; padding:10px; text-align:center;\"><b>34</b></td></tr><tr><td style=\"border:1px solid #ccc; padding:10px; text-align:center;\">VII C</td><td style=\"border:1px solid #ccc; padding:10px; text-align:center;\"><b>26</b></td></tr></table><p>Setiap siswa mendapatkan <b>2 botol minum</b>. Botol minum tersebut dikemas dalam dus, dengan <b>1 dus berisi 20 botol</b>.</p><br>Berapakah jumlah dus botol minum yang diperlukan?",
+  "options": [
+    "6 dus",
+    "8 dus",
+    "9 dus",
+    "10 dus"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": "<p>Pada hari Minggu, <b>Rani, Sinta, Wawan, dan Fajar</b> mengikuti kegiatan <b>“Bersepeda Ceria”</b> mengelilingi jalur wisata. Panjang total jalur yang harus ditempuh adalah <b>20 km</b>. Setiap peserta menargetkan menyelesaikan jarak yang sama. Hingga pukul 09.00, diperoleh data sebagai berikut:</p><ul><li>Rani telah menempuh <b>0,3 bagian</b> dari total jarak.</li><li>Sinta telah menempuh <b>45%</b> dari total jarak.</li><li>Wawan telah menempuh <b>\\( \\frac{1}{2} \\)</b> bagian dari total jarak.</li><li>Fajar telah menempuh <b>12 km</b> dari total jarak.</li></ul><br>Siapakah yang telah menempuh jarak sebesar \\( \\frac{3}{5} \\) dari total jarak?",
+  "options": [
+    "Rani",
+    "Sinta",
+    "Wawan",
+    "Fajar"
+  ],
+  "correct": 3
+},
+{
+  "type": "mc",
+  "text": "<p>Sebuah bangun datar memiliki sifat-sifat sebagai berikut:</p><ul><li>Memiliki <b>satu pasang sisi sejajar</b>.</li><li>Dua sisi lainnya <b>tidak sejajar</b>.</li><li>Sudut-sudut yang berada pada satu kaki bangun tersebut jumlahnya <b>180°</b>.</li><li>Dapat memiliki <b>dua sisi sama panjang</b> (pada jenis tertentu).</li></ul><br>Berdasarkan sifat-sifat di atas, apakah nama bangun datar tersebut?",
+  "options": [
+    "Jajar genjang",
+    "Persegi panjang",
+    "Trapesium",
+    "Layang-layang"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": "<p>Pada hari Sabtu, <b>Dimas</b> mengikuti kegiatan <b>latihan futsal</b> di gedung olahraga.</p><ul><li>Dimas berangkat dari rumah pukul <b>08.10</b>.</li><li>Perjalanan menuju gedung olahraga memerlukan waktu <b>35 menit</b>.</li><li>Latihan futsal berlangsung selama <b>1 jam 20 menit</b>.</li><li>Setelah latihan selesai, Dimas <b>beristirahat 15 menit</b> sebelum pulang.</li></ul><br>Pukul berapakah Dimas meninggalkan gedung olahraga untuk pulang?",
+  "options": [
+    "10.05",
+    "10.10",
+    "10.20",
+    "10.30"
+  ],
+  "correct": 2
+},
+{
+  "type": "mc",
+  "text": `<p><b>AREA PERPUSTAKAAN</b></p><p>Perpustakaan daerah memiliki <b>area rak buku</b> berbentuk persegi panjang seperti pada denah berikut.</p><img src="https://i.imgur.com/jCIoGuf.png" alt="Denah area rak buku" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;"><p>Ukuran area rak buku adalah <b>6 meter × 4 meter</b>.</p><ul><li>Setiap <b>1 rak buku</b> membutuhkan area <b>2 meter × 1 meter</b>.</li><li>Pada awalnya, <b>seluruh area rak buku terisi penuh</b>.</li><li>Setelah beberapa rak dipindahkan untuk penataan ulang, <b>kondisi area saat ini</b> seperti pada gambar.</li><li>Jika <b>1 rak buku dipindahkan kembali</b> ke area tersebut.</li></ul><br>Berapa banyak rak buku yang ada di area perpustakaan setelah 1 rak buku dipindahkan kembali?`,
+  "options": [
+    "9",
+    "10",
+    "11",
+    "12"
+  ],
+  "correct": 1
+},
+{
+  "type": "true_false",
+  "text": `
+    <p><b>AREA PERPUSTAKAAN</b></p>
+    <p>Perpustakaan daerah memiliki <b>area rak buku</b> berbentuk persegi panjang seperti pada denah berikut.</p>
+    <img src="https://i.imgur.com/jCIoGuf.png" alt="Denah area rak buku" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;">
+    <p>Ukuran area rak buku adalah <b>6 meter × 4 meter</b>.</p>
+    <ul>
+      <li>Setiap <b>1 rak buku</b> membutuhkan area <b>2 meter × 1 meter</b>.</li>
+      <li>Pada awalnya, <b>seluruh area rak buku terisi penuh</b>.</li>
+      <li>Setelah beberapa rak dipindahkan untuk penataan ulang, <b>kondisi area saat ini</b> seperti pada gambar.</li>
+      <li>Jika <b>1 rak buku dipindahkan kembali</b> ke area tersebut.</li>
+    </ul>
+    <br>
+    Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!
+  `,
+  "statements": [
+    "Terdapat 2 rak buku yang telah dipindahkan dari area rak buku.",
+    "Sebelum 1 rak buku dipindahkan kembali, area rak buku terisi oleh 9 rak buku.",
+    "Setelah 1 rak buku dipindahkan kembali, jumlah rak buku di area menjadi 11."
+  ],
+  "correct": [true, true, false]
+},
+{
+  "type": "mc",
+  "text": `<p><b>PAKET SOAL MATEMATIKA</b></p><p>Rani, Bimo, dan Sinta gemar mengerjakan soal latihan matematika. Setiap minggu mereka akan mengerjakan satu dari tiga <b>paket soal</b> berikut. Paket soal yang dikerjakan setiap anak selalu berbeda setiap minggunya.</p><img src="https://i.imgur.com/ZBCcqBn.png" alt="Paket soal A, B, dan C" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;"><p>Pada minggu pertama:</p><ul><li>Rani mengerjakan paket soal <b>A</b></li><li>Bimo mengerjakan paket soal <b>B</b></li><li>Sinta mengerjakan paket soal <b>C</b></li></ul><p>Setiap hari Jumat, mereka mencatat banyak soal yang sudah dikerjakan. Berikut ini adalah informasi bagian paket soal yang telah dikerjakan sampai hari Jumat minggu pertama.</p><img src="https://i.imgur.com/bFrxIoR.png" alt="Anak dan pecahan soal yang dikerjakan" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;"><br>Berapa persen dari seluruh paket soal yang sudah diselesaikan oleh Sinta?`,
+  "options": [
+    "25%",
+    "50%",
+    "75%",
+    "100%"
+  ],
+  "correct": 2
+},
+{
+  "type": "true_false",
+  "text": `
+    <p><b>PAKET SOAL MATEMATIKA</b></p>
+    <p>Rani, Bimo, dan Sinta gemar mengerjakan soal latihan matematika. Setiap minggu mereka akan mengerjakan satu dari tiga <b>paket soal</b> berikut. Paket soal yang dikerjakan setiap anak selalu berbeda setiap minggunya.</p>
+    <img src="https://i.imgur.com/ZBCcqBn.png" alt="Paket soal A, B, dan C" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;">
+    <p>Pada minggu pertama:</p>
+    <ul>
+      <li>Rani mengerjakan paket soal <b>A</b></li>
+      <li>Bimo mengerjakan paket soal <b>B</b></li>
+      <li>Sinta mengerjakan paket soal <b>C</b></li>
+    </ul>
+    <p>Setiap hari Jumat, mereka mencatat banyak soal yang sudah dikerjakan. Berikut ini adalah informasi bagian paket soal yang telah dikerjakan sampai hari Jumat minggu pertama.</p>
+    <img src="https://i.imgur.com/bFrxIoR.png" alt="Anak dan pecahan soal yang dikerjakan" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;">
+    <br>
+    Tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!
+  `,
+  "statements": [
+    "Rani telah mengerjakan 15 soal dari paket soal A.",
+    "Bimo telah mengerjakan 10 soal dari paket soal B.",
+    "Sinta telah mengerjakan 12 soal dari paket soal C."
+  ],
+  "correct": [true, false, true]
+},
+{
+  "type": "mc_multiple",
+  "text": `
+    <p>Tahukah kamu bahwa <b>zat besi</b> dan <b>vitamin C</b> berperan penting dalam membantu pembentukan sel darah merah dan menjaga daya tahan tubuh? Kedua zat gizi ini sering ditemukan bersamaan dalam berbagai jenis makanan sehari-hari.</p>
+    <p>Berikut ini ditunjukkan informasi kandungan zat besi dan vitamin C pada beberapa jenis makanan.</p>
+    <img src="https://i.imgur.com/eXvbI9P.png" alt="Tabel kandungan zat besi dan vitamin C pada makanan" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;"><br>
+    Makanan manakah yang dapat memenuhi kebutuhan zat besi harian seorang anak usia 10–12 tahun?
+    <br><br>
+    (Jawaban benar lebih dari satu)
+  `,
+  "options": [
+    "Bayam",
+    "Daging ayam",
+    "Kacang merah"
+  ],
+  "correct": [0, 2]
+},
+{
+  "type": "true_false",
+  "text": `
+    <p>
+      Tahukah kamu bahwa <b>energi</b> sangat dibutuhkan tubuh untuk melakukan aktivitas sehari-hari
+      seperti belajar, bermain, dan berolahraga? Asupan energi yang cukup membantu tubuh tetap bugar
+      dan tidak mudah lelah. Energi dapat diperoleh dari berbagai jenis makanan ringan yang sering
+      dikonsumsi anak-anak.
+    </p>
+    <p>
+      Berikut ini ditunjukkan <b>diagram batang kandungan energi</b> pada beberapa makanan.
+    </p>
+    <img src="https://i.imgur.com/VsCV77M.png" alt="Diagram batang kandungan energi makanan" style="max-width:320px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.2); margin-top:8px;">
+    <p>
+      Seorang anak usia <b>10–12 tahun</b> membutuhkan energi tambahan <b>paling sedikit 300 kkal</b>
+      dari makanan selingan (snack) dalam sehari.
+    </p>
+    <br>
+    Berdasarkan informasi tersebut, tentukan Benar (B) atau Salah (S) untuk setiap pernyataan berikut!
+  `,
+  "statements": [
+    "Energi dari satu porsi roti gandum sudah cukup untuk memenuhi kebutuhan energi minimum makanan selingan.",
+    "Energi dari satu porsi susu UHT dan satu buah pisang jika dikonsumsi bersama dapat memenuhi kebutuhan energi minimum makanan selingan.",
+    "Jika seorang anak hanya mengonsumsi satu buah pisang, maka kebutuhan energi minimum makanan selingan sudah terpenuhi."
+  ],
+  "correct": [false, true, false]
+},
+
+
+
+];
+
+let answers = questions.map(q => {
+  if (q.type === 'mc_multiple') return [];
+  if (q.type === 'true_false') return Array(q.statements.length).fill(null);
+  return null;
+});
+let currentQuestion = 0;
+let timerRunning = true;
+
+const questionDisplay = document.getElementById('questionDisplay');
+const questionButtonsContainer = document.getElementById('questionButtons');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timer');
+
+function renderQuestionButtons() {
+  questionButtonsContainer.innerHTML = '';
+  questions.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i + 1;
+    if (i === currentQuestion) btn.classList.add('active');
+    if (answers[i] !== null && (Array.isArray(answers[i]) ? answers[i].some(v => v !== null) : true)) {
+      btn.style.backgroundColor = '#43a047';
+      btn.style.color = 'white';
+    }
+    btn.addEventListener('click', () => {
+      currentQuestion = i;
+      renderQuestion(currentQuestion);
+      updateNavButtons();
+    });
+    questionButtonsContainer.appendChild(btn);
+  });
+}
+
+function renderQuestion(index) {
+  const q = questions[index];
+  let html = `<h3>Soal ${index + 1}</h3><p>${q.text}</p>`;
+
+  if (q.type === 'mc') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index] === i ? 'checked' : '';
+      html += `<label class="option">
+        <input type="radio" name="option" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+  else if (q.type === 'mc_multiple') {
+    q.options.forEach((opt, i) => {
+      const checked = answers[index].includes(i) ? 'checked' : '';
+      html += `<label class="option">
+        <input type="checkbox" value="${i}" ${checked}> ${opt}
+      </label>`;
+    });
+  }
+
+  else if (q.type === 'true_false') {
+    html += `<table class="true-false">
+      <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>`;
+    q.statements.forEach((stmt, i) => {
+      const benarChecked = answers[index][i] === true ? 'checked' : '';
+      const salahChecked = answers[index][i] === false ? 'checked' : '';
+      html += `
+      <tr>
+        <td style="text-align:left;">${stmt}</td>
+        <td><input type="radio" name="tf_${i}" value="true" ${benarChecked}></td>
+        <td><input type="radio" name="tf_${i}" value="false" ${salahChecked}></td>
+      </tr>`;
+    });
+    html += `</table>`;
+  }
+
+  questionDisplay.innerHTML = html;
+  if (window.MathJax) MathJax.typesetPromise([questionDisplay]);
+
+  // Event listener untuk tipe mc
+  const options = document.querySelectorAll('input[name="option"]');
+  options.forEach(option => {
+    option.addEventListener('change', (e) => {
+      answers[index] = parseInt(e.target.value);
+      renderQuestionButtons();
+    });
+  });
+  // Event listener untuk tipe mc_multiple
+  if (q.type === 'mc_multiple') {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', e => {
+        const val = parseInt(e.target.value);
+        if (e.target.checked) {
+          if (!answers[index].includes(val)) answers[index].push(val);
+        } else {
+          answers[index] = answers[index].filter(v => v !== val);
+        }
+        renderQuestionButtons();
+      });
+    });
+  }
+
+  // Event listener untuk tipe benar-salah
+  if (q.type === 'true_false') {
+    q.statements.forEach((_, i) => {
+      document.querySelectorAll(`input[name="tf_${i}"]`).forEach(radio => {
+        radio.addEventListener('change', e => {
+          answers[index][i] = (e.target.value === 'true');
+          renderQuestionButtons();
+        });
+      });
+    });
+  }
+
+  updateButtons();
+  updateNavButtons();
+}
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('.question-buttons button');
+  buttons.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentQuestion);
+  });
+}
+
+function updateNavButtons() {
+  prevBtn.disabled = currentQuestion === 0;
+  nextBtn.disabled = currentQuestion === questions.length - 1;
+  submitBtn.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function arraysEqual(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b)) return false;
+  if (a.length !== b.length) return false;
+  return a.every((val, i) => val === b[i]);
+}
+
+function calculateScore() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    if (q.type === 'mc' && answers[i] === q.correct) score++;
+    else if (q.type === 'true_false' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'tepat_tidak' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'mc_multiple' && arraysEqual(answers[i].sort(), q.correct.sort())) score++;
+    else if (q.type === 'benefit_challenge' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'true_false_en' && arraysEqual(answers[i], q.correct)) score++;
+    else if (q.type === 'fact_opinion' && arraysEqual(answers[i], q.correct)) score++;
+  });
+
+  // Hitung skor 0–100
+  const percentage = Math.round((score / questions.length) * 100);
+
+  // Tampilkan hanya skor akhir dalam bentuk nilai
+  scoreDisplay.textContent = `Skor Anda: ${percentage}`;
+  scoreDisplay.style.display = 'block';
+// 🔥 KIRIM KE FIREBASE
+  simpanHasilFirebase(percentage);
+}
+function disableAll() {
+  document.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('input').forEach(inp => inp.disabled = true);
+}
+
+function endTryout() {
+  if (timerRunning) {
+    calculateScore();
+    disableAll();
+    timerRunning = false;
+// Tampilkan tombol Kembali setelah submit
+const backBtn = document.createElement('button');
+backBtn.textContent = "Kembali ke Beranda";
+backBtn.style.padding = "10px 18px";
+backBtn.style.marginTop = "10px";
+backBtn.style.backgroundColor = "#1e88e5";
+backBtn.style.color = "white";
+backBtn.style.border = "none";
+backBtn.style.borderRadius = "6px";
+backBtn.style.fontWeight = "bold";
+backBtn.style.cursor = "pointer";
+backBtn.addEventListener('click', () => {
+    window.location.href = "https://kebunilmu.github.io/Kebun-Ilmu-TKA/";
+});
+document.querySelector('.right-panel .navigation').appendChild(backBtn);
+
+  }
+}
+
+submitBtn.addEventListener('click', () => { endTryout(); submitBtn.disabled = true; });
+prevBtn.addEventListener('click', () => { if (currentQuestion > 0) { currentQuestion--; renderQuestion(currentQuestion); } });
+nextBtn.addEventListener('click', () => { if (currentQuestion < questions.length - 1) { currentQuestion++; renderQuestion(currentQuestion); } });
+
+function startTimer(duration) {
+  let timer = duration;
+  timerRunning = true; // pastikan timer aktif
+
+  const interval = setInterval(() => {
+    if (!timerRunning) { 
+      clearInterval(interval); 
+      return; 
+    }
+
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+    if (timer <= 0) {
+      clearInterval(interval);
+      endTryout();
+      alert("Waktu habis! Jawaban Anda telah disubmit.");
+    }
+
+    timer--;
+  }, 1000);
+}
+
+
+// Auto submit saat keluar fullscreen
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement && timerRunning) {
+    alert("Anda keluar dari fullscreen. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah tab/window (desktop)
+window.addEventListener("blur", () => {
+  if (timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// Auto submit saat pindah app / tab (HP)
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && timerRunning) {
+    alert("Anda pindah tab/layar. Jawaban otomatis disubmit!");
+    endTryout();
+  }
+});
+
+// cek session saat halaman dimuat
+checkSession();
+
+  </script>
+<!-- FIREBASE SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAY-bJOK6QLFhpi5lQMLGNxsxIe8JNUvpg",
+    authDomain: "tryout-kebun-ilmu.firebaseapp.com",
+    projectId: "tryout-kebun-ilmu",
+    storageBucket: "tryout-kebun-ilmu.firebasestorage.app",
+    messagingSenderId: "497636674894",
+    appId: "1:497636674894:web:82fb38cb615d8bf7b1a21f"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // supaya bisa dipakai di script lain
+  window.db = db;
+
+  // 🔥 INI YANG PALING PENTING
+  window.simpanHasilFirebase = async function (nilai) {
+    const { addDoc, collection, serverTimestamp } = await import(
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+    );
+
+    await addDoc(collection(window.db, "hasil_ujian"), {
+  nik: window.dataPeserta.nik,
+  nama: window.dataPeserta.nama,
+  jk: window.dataPeserta.jk,
+  tglLahir: window.dataPeserta.tgl,
+  sekolah: window.dataPeserta.sekolah,
+  mapel: "Matematika SD/MI 3", // tambah field mapel
+  nilai: nilai,
+  waktu: new Date().toISOString()
+});
+
+
+    console.log("✅ HASIL UJIAN TERSIMPAN");
+  };
+</script>
+
+</body>
+</html>
