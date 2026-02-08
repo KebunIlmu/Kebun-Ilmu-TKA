@@ -238,6 +238,12 @@ input{
 }
 
 </style>
+<script>
+  let currentPage = 1;
+  const pageSize = 10;
+  let allDataCache = [];
+  let filteredData = []; // ← TAMBAHKAN INI
+</script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -281,145 +287,91 @@ window.addEventListener("DOMContentLoaded", ()=>{
 const SEKOLAH_TARGET = "MTS MAFATIHUL HUDA PADAKATON";
 
 function renderSemuaData(snap){
-  const tabelHasil = document.getElementById("tabelHasil");
-  const rankingMapel = document.getElementById("rankingMapel");
+  allDataCache = [];
 
-  tabelHasil.innerHTML = "";
-  rankingMapel.innerHTML = "";
-  window.__rankingData = {};
+  snap.docs.forEach(docSnap=>{
+    const d = docSnap.data();
+    d._id = docSnap.id;
 
-  /* ===== TABEL UTAMA ===== */
-  const table = document.createElement("table");
-  const h = table.insertRow();
- // ===== HEADER CHECKBOX (PILIH SEMUA) =====
-const thCheck = document.createElement("th");
-const master = document.createElement("input");
-master.type = "checkbox";
-master.onclick = () => {
-  document.querySelectorAll(".row-check").forEach(c=>{
-    c.checked = master.checked;
-  });
-};
-thCheck.appendChild(master);
-h.appendChild(thCheck);
-
-// ===== HEADER LAIN =====
-["No","NIK","Nama","JK","Tgl Lahir","Sekolah","Mapel","Nilai","Waktu","Aksi"]
-.forEach(x=>{
-  const th=document.createElement("th");
-  th.textContent=x;
-  h.appendChild(th);
+    if(d.sekolah !== SEKOLAH_TARGET) return;
+    allDataCache.push(d);
 });
 
-
-  let no = 1;
-  const semua = [];
-
-  snap.docs.forEach(doc=>{
-    const d = doc.data();
-d._id = doc.id; // 🔑 SIMPAN ID FIRESTORE
+filteredData = [...allDataCache];
+currentPage = 1;
+renderPage();
 
 
-    // 🔴 FILTER SEKOLAH (INTI MASALAH)
-    if (d.sekolah !== SEKOLAH_TARGET) return;
+  currentPage = 1;
+  renderPage();
 
-    semua.push(d);
-
-   const r = table.insertRow();
-
-// checkbox
-const cb = document.createElement("input");
-cb.type = "checkbox";
-cb.className = "row-check";
-cb.dataset.id = d._id;
-
-const cbCell = r.insertCell();
-cbCell.appendChild(cb);
-
-// nomor
-r.insertCell().textContent = no++;
-
-    r.insertCell().textContent = d.nik || "";
-    r.insertCell().textContent = d.nama || "";
-    r.insertCell().textContent = d.jk || "";
-    r.insertCell().textContent = d.tglLahir || "";
-    r.insertCell().textContent = d.sekolah || "";
-    r.insertCell().textContent = d.mapel || "";
-    r.insertCell().textContent = d.nilai || "";
-
-    let w="";
-    if(d.waktu?.seconds){
-      w = new Date(d.waktu.seconds*1000).toLocaleString("id-ID");
-    }
-    r.insertCell().textContent = w;
-// ===== KOLOM AKSI =====
-const aksi = r.insertCell();
-
-const btnHapus = document.createElement("button");
-btnHapus.textContent = "🗑 Hapus";
-btnHapus.className = "btn btn-outline";
-
-btnHapus.onclick = () => hapusData(d._id, d.nama);
-
-// 🔐 opsional: hanya admin
-aksi.appendChild(btnHapus);
-
-  });
-
-  tabelHasil.appendChild(table);
-
-  /* ===== RANKING PER MAPEL ===== */
+  // Ranking per mapel
   const grup = {};
-  semua.forEach(d=>{
+  allDataCache.forEach(d=>{
     if(!grup[d.mapel]) grup[d.mapel] = [];
     if(!isNaN(d.nilai)) grup[d.mapel].push(d);
   });
 
-  Object.keys(grup).forEach(mapel=>{
-    window.__rankingData[mapel] = [...grup[mapel]];
+ rankingMapel.innerHTML = "";
 
-    const wrap = document.createElement("div");
-    wrap.className="print-area";
-    wrap.id="print-"+mapel.replace(/\s+/g,"_");
+const select = document.getElementById("pilihMapel");
+select.innerHTML = `<option value="">— Pilih Mapel untuk Ditampilkan —</option>`;
 
-    const title=document.createElement("h3");
-    title.textContent="📘 "+mapel;
-    wrap.appendChild(title);
+Object.keys(grup).forEach(mapel=>{
+  window.__rankingData[mapel] = [...grup[mapel]];
 
-    /* ===== ACTION (tanpa checkbox sekolah) ===== */
-    const act=document.createElement("div");
-    act.style.display="flex";
-    act.style.gap="10px";
-
-    const p=document.createElement("button");
-    p.textContent="🖨 Print";
-    p.className="btn btn-outline";
-    p.onclick=()=>printMapel(wrap.id);
-
-    const c=document.createElement("button");
-    c.textContent="⬇ CSV";
-    c.className="btn btn-outline";
-    c.onclick=()=>downloadMapelCSV(mapel);
-
-    act.append(p,c);
-    wrap.appendChild(act);
-
-    /* ===== TABLE ===== */
-    const t=document.createElement("table");
-    t.id="table-mapel-"+mapel;
-    const hh=t.insertRow();
-    ["Rank","Nama","Sekolah","Nilai"].forEach(x=>{
-      const th=document.createElement("th");
-      th.textContent=x;
-      hh.appendChild(th);
-    });
-
-    wrap.appendChild(t);
-    rankingMapel.appendChild(wrap);
-
-    renderMapel(mapel);
-  });
+  const opt = document.createElement("option");
+  opt.value = mapel;
+  opt.textContent = mapel;
+  select.appendChild(opt);
+});
 }
+window.tampilkanMapelTerpilih = function(){
+  const mapel = document.getElementById("pilihMapel").value;
+  rankingMapel.innerHTML = "";
+  if(!mapel) return;
+
+  const wrap = document.createElement("div");
+  wrap.className="print-area";
+  wrap.id="print-"+mapel.replace(/\s+/g,"_");
+
+  const title=document.createElement("h3");
+  title.textContent="📘 "+mapel;
+  wrap.appendChild(title);
+
+  const act=document.createElement("div");
+  act.style.display="flex";
+  act.style.gap="10px";
+  act.style.marginBottom="10px";
+
+  const p=document.createElement("button");
+  p.textContent="🖨 Print";
+  p.className="btn btn-outline";
+  p.onclick=()=>printMapel(wrap.id);
+
+  const c=document.createElement("button");
+  c.textContent="⬇ CSV";
+  c.className="btn btn-outline";
+  c.onclick=()=>downloadMapelCSV(mapel);
+
+  act.append(p,c);
+  wrap.appendChild(act);
+
+  const t=document.createElement("table");
+  t.id="table-mapel-"+mapel;
+
+  const hh=t.insertRow();
+  ["Rank","Nama","Sekolah","Nilai"].forEach(x=>{
+    const th=document.createElement("th");
+    th.textContent=x;
+    hh.appendChild(th);
+  });
+
+  wrap.appendChild(t);
+  rankingMapel.appendChild(wrap);
+
+  renderMapel(mapel);
+};
 
 /* ================= RENDER MAPEL ================= */
 window.renderMapel=function(mapel){
@@ -539,12 +491,63 @@ window.hapusData = async function(id, nama){
 </div>
 
   <div class="card">
-    <h1>📊 Data Hasil Try Out</h1>
-    <input id="searchInput" placeholder="🔍 Cari NIK / Nama / Sekolah / Mapel..." onkeyup="filterTable()">
-    <div class="table-wrapper">
-      <div id="tabelHasil"></div>
-    </div>
+  <h1>📊 Data Hasil Try Out</h1>
+
+  <input id="searchInput"
+         placeholder="🔍 Cari NIK / Nama / Sekolah / Mapel..."
+         onkeyup="filterTable()">
+
+  <div class="table-wrapper">
+    <div id="tabelHasil"></div>
   </div>
+
+  <!-- PAGINATION DI SINI -->
+  <div style="display:flex;justify-content:center;gap:12px;margin-top:16px;">
+    <button class="btn btn-outline" onclick="prevPage()">⬅ Prev</button>
+    <span id="pageInfo" style="padding:8px 14px;font-weight:600;"></span>
+    <button class="btn btn-outline" onclick="nextPage()">Next ➡</button>
+  </div>
+
+</div>
+
+<div style="margin-bottom:24px;max-width:340px;">
+  <label style="
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:8px;
+    font-weight:700;
+    font-size:14px;
+    color:var(--primary);
+    letter-spacing:.3px;
+  ">
+    <span style="font-size:18px;">📘</span>
+    Pilih Mata Pelajaran
+  </label>
+
+  <select id="pilihMapel" onchange="tampilkanMapelTerpilih()" style="
+    width:100%;
+    padding:14px 16px;
+    border-radius:18px;
+    border:2px solid transparent;
+    font-weight:600;
+    font-size:15px;
+    color:var(--text);
+    background:
+      linear-gradient(#fff,#fff) padding-box,
+      linear-gradient(135deg,var(--primary),var(--secondary)) border-box;
+    box-shadow:
+      0 12px 28px rgba(15,118,110,.18),
+      inset 0 1px 0 rgba(255,255,255,.8);
+    cursor:pointer;
+    transition:.2s;
+  "
+  onfocus="this.style.boxShadow='0 14px 34px rgba(15,118,110,.28)'"
+  onblur="this.style.boxShadow='0 12px 28px rgba(15,118,110,.18)'"
+  >
+    <option value="">— Pilih Mapel untuk Ditampilkan —</option>
+  </select>
+</div>
 
   <div class="card">
     <h2>🏆 Ranking Per Mapel</h2>
@@ -599,7 +602,7 @@ const USERS = [
   { username:"admin", password:"admin123", expired:"2026-12-31" },
 { username:"coba", password:"2026", expired:"2026-01-21" },
   { username:"zahwan", password:"132611", expired:"3026-06-30" },
-{ username:"gurummh", password:"2026", expired:"2026-07-31" },
+{ username:"gurumanu9", password:"2026", expired:"2026-07-31" },
 
 
 ];
@@ -645,61 +648,115 @@ window.addEventListener("DOMContentLoaded",()=>{
 });
 </script>
 <script>
-function filterTable(){
-  const input = document.getElementById("searchInput");
-  const filter = input.value.toLowerCase();
+function renderPage(){
+  const tabelHasil = document.getElementById("tabelHasil");
+  tabelHasil.innerHTML = "";
 
-  const table = document.querySelector("#tabelHasil table");
-  if(!table) return;
+  const start = (currentPage - 1) * pageSize;
+  const end = start + pageSize;
+const data = filteredData.slice(start, end);
 
-  const rows = table.querySelectorAll("tr");
+  const table = document.createElement("table");
+  const h = table.insertRow();
 
-  rows.forEach((row, i)=>{
-    if(i === 0) return; // skip header
+  const thCheck = document.createElement("th");
+  const master = document.createElement("input");
+  master.type = "checkbox";
+  master.onclick = () => {
+    document.querySelectorAll(".row-check").forEach(c=>{
+      c.checked = master.checked;
+    });
+  };
+  thCheck.appendChild(master);
+  h.appendChild(thCheck);
 
-    const text = row.innerText.toLowerCase();
-    row.style.display = text.includes(filter) ? "" : "none";
+  ["No","NIK","Nama","JK","Tgl Lahir","Sekolah","Mapel","Nilai","Waktu","Aksi"]
+  .forEach(x=>{
+    const th=document.createElement("th");
+    th.textContent=x;
+    h.appendChild(th);
   });
-// render ulang setelah login
-function filterTable(){
-  const input = document.getElementById("searchInput");
-  const filter = input.value.toLowerCase();
 
-  const table = document.querySelector("#tabelHasil table");
-  if(!table) return;
+  let no = start + 1;
 
-  const rows = table.querySelectorAll("tr");
+  data.forEach(d=>{
+    const r = table.insertRow();
 
-  rows.forEach((row, i)=>{
-    if(i === 0) return;
-    const text = row.innerText.toLowerCase();
-    row.style.display = text.includes(filter) ? "" : "none";
-  });
-}
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.className = "row-check";
+    cb.dataset.id = d._id;
+    r.insertCell().appendChild(cb);
 
-}
-window.hapusTerpilih = async function(){
-  const checks = document.querySelectorAll(".row-check:checked");
+    r.insertCell().textContent = no++;
+    r.insertCell().textContent = d.nik || "";
+    r.insertCell().textContent = d.nama || "";
+    r.insertCell().textContent = d.jk || "";
+    r.insertCell().textContent = d.tglLahir || "";
+    r.insertCell().textContent = d.sekolah || "";
+    r.insertCell().textContent = d.mapel || "";
+    r.insertCell().textContent = d.nilai || "";
 
-  if (checks.length === 0) {
-    alert("❗ Tidak ada data yang dipilih");
-    return;
-  }
-
-  if (!confirm(`Yakin hapus ${checks.length} data terpilih?`)) return;
-
-  try {
-    for (const cb of checks) {
-      const id = cb.dataset.id;
-      await deleteDoc(doc(db, "hasil_ujian", id));
+    let w="";
+    if(d.waktu?.seconds){
+      w = new Date(d.waktu.seconds*1000).toLocaleString("id-ID");
     }
-    alert("✅ Data terpilih berhasil dihapus");
-  } catch (err) {
-    console.error(err);
-    alert("❌ Gagal menghapus sebagian data");
-  }
-};
+    r.insertCell().textContent = w;
 
+    const aksi = r.insertCell();
+    const btn = document.createElement("button");
+    btn.textContent = "🗑 Hapus";
+    btn.className = "btn btn-outline";
+    btn.onclick = () => hapusData(d._id, d.nama);
+    aksi.appendChild(btn);
+  });
+
+  tabelHasil.appendChild(table);
+  renderPagination();
+}
+
+function renderPagination(){
+  const total = Math.ceil(filteredData.length / pageSize);
+  document.getElementById("pageInfo").innerText =
+    `Halaman ${currentPage} / ${total}`;
+}
+
+function nextPage(){
+  const total = Math.ceil(allDataCache.length / pageSize);
+  if(currentPage < total){
+    currentPage++;
+    renderPage();
+  }
+}
+
+function prevPage(){
+  if(currentPage > 1){
+    currentPage--;
+    renderPage();
+  }
+}
+</script>
+
+<script>
+// ================= SEARCH GLOBAL (SEMUA DATA) =================
+function filterTable(){
+  const keyword = document
+    .getElementById("searchInput")
+    .value
+    .toLowerCase();
+
+  filteredData = allDataCache.filter(d=>{
+    return (
+      (d.nik || "").toLowerCase().includes(keyword) ||
+      (d.nama || "").toLowerCase().includes(keyword) ||
+      (d.sekolah || "").toLowerCase().includes(keyword) ||
+      (d.mapel || "").toLowerCase().includes(keyword)
+    );
+  });
+
+  currentPage = 1;
+  renderPage();
+}
 </script>
 
 </body>
