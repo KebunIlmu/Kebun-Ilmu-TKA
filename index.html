@@ -3,289 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kebun Ilmu — Program TKA</title>
-<link rel="icon" type="image/png" href="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png">
-<link rel="apple-touch-icon" href="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png">
+<title>Kebun Ilmu — Try Out TKA</title>
+
+<link rel="icon" href="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --primary:#0f766e;
-  --bg:#f0fdfa;
-  --card:#ffffff;
-  --text:#1e293b;
+  --primary:#14b8a6;
+  --accent:#0ea5e9;
+  --orange:#f59e0b;
+  --dark:#0f172a;
   --muted:#64748b;
-  --radius:16px;
-  --shadow:0 8px 24px rgba(0,0,0,.08);
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-  font-family:Inter,Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(135deg,#ecfeff,#f0fdfa,#f8fafc);
+  color:var(--dark);
 }
 
-body.menu-open{
-  overflow:hidden;
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-/* ================= HEADER ================= */
+/* NAVBAR */
 header{
-  background:#fff;
-  padding:14px 20px;
-  box-shadow:var(--shadow);
-  position:sticky;
-  top:0;
-  z-index:1000;
-}
-
-.header-top{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:92%;
+  max-width:1200px;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(14px);
+  padding:14px 28px;
+  border-radius:50px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-}
-
-/* BRAND */
-.brand{
-  display:flex;
   align-items:center;
-  gap:10px;
+  box-shadow:0 10px 40px rgba(0,0,0,.08);
+  z-index:999;
 }
 
-.brand img{
-  width:44px;
-  border-radius:12px;
-}
-
-.brand h1{
-  font-size:20px;
-  color:var(--primary);
-}
-
-/* ===== DESKTOP NAV ===== */
-.nav-desktop{
+.brand{
   display:flex;
   align-items:center;
   gap:12px;
 }
 
-.nav-desktop a{
-  padding:8px 14px;
-  border-radius:10px;
-  font-weight:600;
-  color:var(--primary);
-}
-
-.nav-desktop a:hover{
-  background:#ccfbf1;
-}
-
-.nav-desktop a.daftar{
-  background:var(--primary);
-  color:#fff;
-}
-
-/* ===== HAMBURGER ===== */
-.menu-toggle{
-  display:none;
-  font-size:26px;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color:var(--primary);
-}
-
-/* ================= SIDEBAR MOBILE ================= */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.4);
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-  z-index:2000;
-}
-
-.sidebar{
-  position:fixed;
-  top:0;
-  right:-260px;
-  width:260px;
-  height:100%;
-  background:#fff;
-  box-shadow:-8px 0 24px rgba(0,0,0,.15);
-  padding:30px 20px;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  transition:.35s ease;
-  z-index:2001;
-}
-
-.sidebar a{
-  padding:12px;
+.brand img{
+  width:40px;
   border-radius:12px;
-  background:#ecfeff;
-  font-weight:600;
-  text-align:center;
 }
 
-.sidebar a.daftar{
+.brand h1{
+  font-size:18px;
+  font-weight:700;
+  color:var(--primary);
+}
+
+.nav-btn{
+  padding:10px 22px;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:600;
+  border:2px solid var(--primary);
+  background:white;
+  color:var(--primary);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.nav-btn:hover{
   background:var(--primary);
   color:white;
 }
 
-/* ACTIVE */
-.sidebar.show{
-  right:0;
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:80px;
+  padding:140px 20px 80px;
+  flex-wrap:wrap;
 }
 
-.overlay.show{
-  opacity:1;
-  pointer-events:auto;
+.hero-text{
+  max-width:560px;
 }
 
-/* ================= CONTENT ================= */
-.intro{
-  text-align:center;
-  padding:40px 20px;
+.hero-text h2{
+  font-size:48px;
+  font-weight:700;
+  margin-bottom:20px;
+  line-height:1.2;
 }
 
-.intro p{
+.hero-text span{
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero-text p{
+  font-size:18px;
   color:var(--muted);
+  margin-bottom:30px;
 }
 
-.container{
+.cta{
+  padding:14px 30px;
+  border:none;
+  border-radius:30px;
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:white;
+  box-shadow:0 15px 40px rgba(20,184,166,.35);
+  transition:.3s;
+}
+
+.cta:hover{transform:translateY(-5px);}
+
+.hero img{
+  width:450px;
+  max-width:100%;
+  border-radius:30px;
+  box-shadow:0 40px 80px rgba(0,0,0,.2);
+}
+
+/* SECTION */
+.section{
+  padding:120px 20px;
   max-width:1200px;
   margin:auto;
-  padding:20px 20px 60px;
 }
 
+.section-title{
+  text-align:center;
+  font-size:36px;
+  font-weight:700;
+  margin-bottom:70px;
+}
+
+/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:24px;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:40px;
 }
 
-/* ================= CARD ================= */
+/* CARD */
 .card{
-  background:var(--card);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  overflow:hidden;
-  transition:.25s;
+  padding:30px;
+  border-radius:30px;
+  background:white;
+  box-shadow:0 20px 50px rgba(0,0,0,.08);
+  transition:.3s;
 }
 
 .card:hover{
-  transform:translateY(-6px);
+  transform:translateY(-8px);
+  box-shadow:0 30px 60px rgba(0,0,0,.15);
 }
+
 
 .card img{
   width:100%;
-  height:180px;
-  object-fit:cover;
-}
-
-.card-content{
-  padding:20px;
+  height:auto;
+  border-radius:20px;
+  margin-bottom:20px;
+  display:block;
 }
 
 .card h3{
-  color:var(--primary);
+  font-size:22px;
+  margin-bottom:14px;
 }
 
 .card p{
   font-size:14px;
   color:var(--muted);
-  margin:10px 0;
+  margin-bottom:20px;
 }
 
-/* ================= BUTTON ================= */
 .btn{
   width:100%;
-  padding:10px;
-  border-radius:10px;
-  border:none;
+  padding:13px;
+  border-radius:20px;
   font-weight:600;
+  border:none;
   cursor:pointer;
-  margin-top:8px;
-}
-
-.btn-primary{
-  background:var(--primary);
-  color:white;
+  margin-top:10px;
+  transition:.3s;
 }
 
 .btn-outline{
-  background:transparent;
+  background:white;
   border:2px solid var(--primary);
   color:var(--primary);
 }
 
-/* ================= TRYOUT ================= */
+.btn-outline:hover{
+  background:var(--primary);
+  color:white;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:white;
+}
+
 .tryout{
-  max-height:0;
-  overflow:hidden;
-  transition:max-height .35s ease;
+  display:none;
+  margin-top:10px;
 }
 
 .tryout button{
-  background:#ecfeff;
-  color:var(--primary);
-  border:none;
-  padding:9px;
-  border-radius:8px;
   width:100%;
-  margin-top:6px;
-  font-weight:600;
+  padding:10px;
+  margin-top:8px;
+  border:none;
+  border-radius:14px;
   cursor:pointer;
+  background:#f1f5f9;
   transition:.25s;
 }
 
 .tryout button:hover{
-  background:var(--primary);
+  background:linear-gradient(135deg,var(--orange),#f97316);
   color:white;
-  transform:translateX(4px);
-  box-shadow:0 6px 16px rgba(0,0,0,.12);
 }
 
-.arrow{
-  float:right;
-  transition:.3s;
-}
-
-.rotate{
-  transform:rotate(180deg);
-}
-
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer{
-  background:var(--primary);
-  color:white;
   text-align:center;
-  padding:28px;
-  border-radius:24px 24px 0 0;
+  padding:60px 20px;
+  font-size:14px;
+  color:var(--muted);
 }
 
-/* ================= MOBILE ================= */
-@media (max-width:640px){
-  .nav-desktop{
-    display:none;
-  }
+@media(max-width:768px){
+  .hero-text h2{font-size:34px;}
+}
+.sub-menu{
+  display:none;
+  margin-top:5px;
+  padding-left:10px;
+}
 
-  .menu-toggle{
-    display:block;
-  }
+.sub-menu button{
+  background:#e2e8f0;
+}
+
+.sub-menu button:hover{
+  background:var(--primary);
+  color:white;
 }
 
 </style>
@@ -294,170 +269,182 @@ footer{
 <body>
 
 <header>
-  <div class="header-top">
-    <div class="brand">
-      <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png">
-      <h1>Kebun Ilmu</h1>
-    </div>
-
-    <!-- NAV DESKTOP -->
-    <nav class="nav-desktop">
-  <a href="home.html">Home</a>
-  <a href="hasil.html">Hasil Try Out</a>
-  <a href="https://forms.gle/Xaz7nYueVzNbevNv5" class="daftar" target="_blank">Daftar</a>
-</nav>
-
-
-    <!-- HAMBURGER -->
-    <button class="menu-toggle" id="menuToggle">☰</button>
+  <div class="brand">
+    <img src="https://zahwan93.github.io/Kebun-Ilmu-Matematika-SMP/logo.png">
+    <h1>Kebun Ilmu</h1>
   </div>
+  <button class="nav-btn" onclick="location.href='hasil.html'">
+    📊 Lihat Hasil Try Out
+  </button>
 </header>
 
-<!-- SIDEBAR MOBILE -->
-<div class="overlay" id="overlay"></div>
-<aside class="sidebar" id="sidebar">
-  <a href="home.html">🏠 Home</a>
-  <a href="hasil.html">📊 Hasil Try Out</a>
-  <a href="https://forms.gle/Xaz7nYueVzNbevNv5" class="daftar" target="_blank">📝 Daftar</a>
-</aside>
-<section class="intro">
-  <p>Pilih jenjang TKA. Tersedia <b>materi</b> dan <b>Try Out </b>.</p>
+<section class="hero">
+  <div class="hero-text">
+    <h2><span>Try Out TKA</span> Kebun Ilmu 🚀</h2>
+    <p>Latihan TKA modern untuk siswa SD, SMP, dan SMA agar siap menghadapi ujian dengan percaya diri.</p>
+    <button class="cta" onclick="window.scrollTo({top:window.innerHeight,behavior:'smooth'})">
+      Mulai Try Out
+    </button>
+  </div>
+  <img src="https://i.imgur.com/NvMp94M.png" alt="Hero">
 </section>
 
-<section class="container">
-<div class="grid">
+<section class="section">
+  <div class="section-title">Pilih Jenjang Pendidikan</div>
 
-<!-- SD -->
-<div class="card">
-  <img src="https://i.imgur.com/F22YC3Z.png">
-  <div class="card-content">
-    <h3>TKA SD</h3>
-    <p>Penguatan kemampuan akademik dasar siswa SD.</p>
+  <div class="grid">
 
-    <a href="TKA SD Wajib.html">
-      <button class="btn btn-outline">📘 Materi TKA SD</button>
-    </a>
+    <div class="card">
+  <img src="https://i.imgur.com/F22YC3Z.png" alt="TKA SD">
 
-    <button class="btn btn-primary try-btn">
-      📝 Try Out TKA SD <span class="arrow">▼</span>
-    </button>
+  <h3>📘 TKA SD</h3>
+  <p>Latihan dasar terstruktur untuk siswa SD.</p>
+   
+  <a href="TKA SD Wajib.html">
+  <button class="btn btn-outline">Materi TKA SD</button>
+  </a>
+  <button class="btn btn-primary toggle">Try Out SD</button>
 
-    <div class="tryout">
-      <button onclick="location.href='Try Out TKA mtk SD 1.html'">Try Out 1 – Matematika</button>
-      <button onclick="location.href='Try Out TKA b indo SD 1.html'">Try Out 1 – Bahasa Indonesia</button>
-      <button onclick="location.href='Try Out TKA mtk SD 2.html'">Try Out 2 – Matematika</button>
-      <button onclick="location.href='Try Out TKA b indo SD 2.html'">Try Out 2 – Bahasa Indonesia</button>
-      <button onclick="location.href='Try Out TKA mtk SD 3.html'">Try Out 3 – Matematika</button>
-      <button onclick="location.href='Try Out TKA b indo SD 3.html'">Try Out 3 – Bahasa Indonesia</button>
-      <button onclick="location.href='pembahasan Try Out TKA SD.html'">Pembahasan</button>
+  <!-- Level 1 -->
+  <div class="tryout">
+
+    <button class="sub-toggle">Try Out 1</button>
+    <div class="sub-menu">
+      <button onclick="location.href='Try Out TKA mtk SD 1.html'">Matematika</button>
+      <button onclick="location.href='Try Out TKA b indo SD 1.html'">Bahasa Indonesia</button>
     </div>
+
+    <button class="sub-toggle">Try Out 2</button>
+    <div class="sub-menu">
+      <button onclick="location.href='Try Out TKA mtk SD 2.html'">Matematika</button>
+      <button onclick="location.href='Try Out TKA b indo SD 2.html'">Bahasa Indonesia</button>
+    </div>
+
+    <button class="sub-toggle">Try Out 3</button>
+    <div class="sub-menu">
+      <button onclick="location.href='Try Out TKA mtk SD 3.html'">Matematika</button>
+      <button onclick="location.href='Try Out TKA b indo SD 3.html'">Bahasa Indonesia</button>
+    </div>
+
+<button class="sub-toggle">Pembahasan</button>
+    <div class="sub-menu">
+      <button onclick="location.href='pembahasan Try Out TKA SD.html'">Pembahasan TKA SD All</button>
+          </div>
   </div>
 </div>
 
-<!-- SMP -->
-<div class="card">
-  <img src="https://i.imgur.com/C2b3Dsm.png">
-  <div class="card-content">
-    <h3>TKA SMP</h3>
-    <p>Latihan soal dan evaluasi akademik siswa SMP.</p>
 
-    <a href="TKA SMP Wajib.html">
-      <button class="btn btn-outline">📘 Materi TKA SMP</button>
-    </a>
+    <div class="card">
+  <img src="https://i.imgur.com/C2b3Dsm.png" alt="TKA SMP">
 
-    <button class="btn btn-primary try-btn">
-      📝 Try Out TKA SMP <span class="arrow">▼</span>
-    </button>
+  <h3>📗 TKA SMP</h3>
+  <p>Persiapan akademik untuk siswa SMP.</p>
 
-    <div class="tryout">
-      <button onclick="location.href='Try Out TKA mtk SMP 1.html'">Try Out 1 – Matematika</button>
-      <button onclick="location.href='Try Out TKA b indo SMP 1.html'">Try Out 1 – Bahasa Indonesia</button>
-      <button onclick="location.href='Try Out TKA mtk SMP 2.html'">Try Out 2 – Matematika</button>
-      <button onclick="location.href='Try Out TKA b indo SMP 2.html'">Try Out 2 – Bahasa Indonesia</button>
-      <button onclick="location.href='Try Out TKA mtk SMP 3.html'">Try Out 3 – Matematika</button>
-      <button onclick="location.href='Try Out TKA b indo SMP 3.html'">Try Out 3 – Bahasa Indonesia</button>
-      <button onclick="location.href='pembahasan Try Out TKA SMP.html'">Pembahasan </button>
+  <button class="btn btn-outline">Materi TKA SMP</button>
+  <button class="btn btn-primary toggle">Try Out SMP</button>
+
+  <div class="tryout">
+
+    <button class="sub-toggle">Try Out 1</button>
+    <div class="sub-menu">
+      <button onclick="location.href='smp1-mtk.html'">Matematika</button>
+      <button onclick="location.href='smp1-bindo.html'">Bahasa Indonesia</button>
     </div>
+
+    <button class="sub-toggle">Try Out 2</button>
+    <div class="sub-menu">
+      <button onclick="location.href='smp2-mtk.html'">Matematika</button>
+      <button onclick="location.href='smp2-bindo.html'">Bahasa Indonesia</button>
+    </div>
+
+    <button class="sub-toggle">Try Out 3</button>
+    <div class="sub-menu">
+      <button onclick="location.href='smp3-mtk.html'">Matematika</button>
+      <button onclick="location.href='smp3-bindo.html'">Bahasa Indonesia</button>
+    </div>
+
   </div>
 </div>
 
-<!-- SMA -->
-<div class="card">
-  <img src="https://i.imgur.com/fIC1Upm.png">
-  <div class="card-content">
-    <h3>TKA SMA</h3>
-    <p>Persiapan akademik & try out TKA SMA.</p>
 
-    <a href="TKA SMA Wajib.html">
-      <button class="btn btn-outline">📘 Materi TKA SMA</button>
-    </a>
+    <div class="card">
+  <img src="https://i.imgur.com/fIC1Upm.png" alt="TKA SMA">
 
-    <button class="btn btn-primary try-btn">
-      📝 Try Out TKA SMA <span class="arrow">▼</span>
-    </button>
+  <h3>🎓 TKA SMA</h3>
+  <p>Simulasi lengkap untuk TKA SMA.</p>
 
-    <div class="tryout">
-      <button onclick="location.href='Try Out TKA SMA 1.html'">Try Out 1 – Semua Mapel</button>
-      <button onclick="location.href='Try Out TKA SMA 2.html'">Try Out 2 – Semua Mapel</button>
-      <button onclick="location.href='pembahasan Try Out TKA SMA.html'">Pembahasan</button>
+  <button class="btn btn-outline">Materi TKA SMA</button>
+  <button class="btn btn-primary toggle">Try Out SMA</button>
+
+  <div class="tryout">
+
+    <button class="sub-toggle">Try Out 1</button>
+    <div class="sub-menu">
+      <button onclick="location.href='sma1-mtk.html'">Matematika</button>
+      <button onclick="location.href='sma1-bindo.html'">Bahasa Indonesia</button>
     </div>
+
+    <button class="sub-toggle">Try Out 2</button>
+    <div class="sub-menu">
+      <button onclick="location.href='sma2-mtk.html'">Matematika</button>
+      <button onclick="location.href='sma2-bindo.html'">Bahasa Indonesia</button>
+    </div>
+
   </div>
 </div>
 
-</div>
+
+  </div>
 </section>
 
 <footer>
-  <p>© 2025 Kebun Ilmu • Belajar jadi lebih mudah</p>
+  © 2025 Kebun Ilmu • Belajar Lebih Terarah & Modern ✨
 </footer>
 
-<script>
-document.querySelectorAll('.try-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const card = btn.closest('.card');
-    const tryout = card.querySelector('.tryout');
-    const arrow = btn.querySelector('.arrow');
 
-    // Tutup tryout card lain
-    document.querySelectorAll('.tryout').forEach(t=>{
-      if(t !== tryout){
-        t.style.maxHeight = null;
-        const otherArrow = t.closest('.card').querySelector('.arrow');
-        if(otherArrow) otherArrow.classList.remove('rotate');
+<script>
+
+// Toggle utama (Try Out SD, SMP, SMA)
+document.querySelectorAll('.toggle').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+
+    const parentCard = btn.closest('.card');
+    const tryout = parentCard.querySelector('.tryout');
+
+    // Tutup semua tryout lain
+    document.querySelectorAll('.tryout').forEach(menu=>{
+      if(menu !== tryout){
+        menu.style.display = "none";
       }
     });
 
-    // Toggle current
-    if(tryout.style.maxHeight){
-      tryout.style.maxHeight = null;
-      arrow.classList.remove('rotate');
-    }else{
-      tryout.style.maxHeight = tryout.scrollHeight + "px";
-      arrow.classList.add('rotate');
-    }
+    // Toggle yang diklik
+    tryout.style.display =
+      tryout.style.display === "block" ? "none" : "block";
   });
 });
-</script>
-<script>
-const toggle = document.getElementById('menuToggle');
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
 
-toggle.onclick = () => {
-  sidebar.classList.add('show');
-  overlay.classList.add('show');
-};
 
-overlay.onclick = () => {
-  sidebar.classList.remove('show');
-  overlay.classList.remove('show');
-};
+// Toggle level 2 (Try Out 1,2,3)
+document.querySelectorAll('.sub-toggle').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+
+    const submenu = btn.nextElementSibling;
+
+    // Tutup submenu lain dalam card yang sama
+    const parentTryout = btn.closest('.tryout');
+    parentTryout.querySelectorAll('.sub-menu').forEach(menu=>{
+      if(menu !== submenu){
+        menu.style.display = "none";
+      }
+    });
+
+    submenu.style.display =
+      submenu.style.display === "block" ? "none" : "block";
+  });
+});
+
 </script>
 
 </body>
 </html>
-
-
-
-
-
